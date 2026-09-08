@@ -3,20 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#e5e5e3">
+  <meta name="theme-color" content="#0F223D">
   <title id="page-title">Concierge & Serviço de Quarto — Hotel Jardim Imperial</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #e5e5e3;
-      --card: #ffffff;
-      --card-muted: #f4f4f2;
-      --border: rgba(0, 0, 0, 0.08);
-      --text: #121212;
-      --text-muted: #666663;
-      --text-dim: #8e8e8a;
-      --radius: 16px;
+      --navy: #0F223D;
+      --navy-light: #162C46;
+      --leaf-green: #2E7D32;
+      --leaf-green-light: #E8F5E9;
+      --orange: #F97316;
+      --orange-light: #FFF7ED;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --border: #E2E8F0;
+      --radius: 18px;
       --radius-sm: 10px;
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * {
@@ -27,8 +39,8 @@
     }
 
     body {
-      font-family: var(--font);
-      background: var(--bg);
+      font-family: var(--font-body);
+      background-color: var(--bg-light);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -42,7 +54,8 @@
     .splash-screen {
       position: fixed;
       inset: 0;
-      background: var(--bg);
+      background: var(--navy);
+      color: var(--white);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,8 +73,8 @@
     .splash-icon {
       width: 54px;
       height: 54px;
-      border-radius: 16px;
-      background: #121212;
+      border-radius: 14px;
+      background: var(--leaf-green);
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -75,25 +88,19 @@
       50% { transform: scale(1.06); }
     }
 
-    .splash-text {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* Top Header */
+    /* Header */
     .header {
-      background: rgba(229, 229, 227, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 14px 20px;
+      padding: 12px 20px;
     }
 
     .header-inner {
-      max-width: 540px;
+      max-width: 560px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -110,30 +117,32 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: rgba(0, 0, 0, 0.05);
+      background: var(--bg-light);
       border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--navy);
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
     }
 
-    .hotel-meta h1 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -0.4px;
+    .meta-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
       line-height: 1.2;
     }
 
-    .hotel-meta p {
-      font-size: 0.75rem;
+    .meta-sub {
+      font-size: 0.72rem;
       color: var(--text-muted);
     }
 
     .room-badge {
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--font-heading);
       font-size: 0.75rem;
       font-weight: 700;
       padding: 6px 12px;
@@ -142,45 +151,112 @@
 
     /* Container */
     .container {
-      max-width: 540px;
+      max-width: 560px;
       width: 100%;
       margin: 0 auto;
-      padding: 20px;
+      padding: 16px 20px;
       flex: 1;
     }
 
-    /* Welcome Hero Card */
-    .welcome-card {
-      background: var(--card);
+    /* Guest Identification Banner */
+    .guest-auth-card {
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 16px;
       margin-bottom: 20px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(15, 34, 61, 0.04);
+    }
+
+    .guest-info-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .guest-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--leaf-green-light);
+      color: var(--leaf-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .guest-name {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .guest-status {
+      font-size: 0.75rem;
+      color: var(--leaf-green);
+      font-weight: 600;
+    }
+
+    .guest-status.unauth {
+      color: var(--orange);
+    }
+
+    .btn-auth-hotel {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-auth-hotel:hover {
+      background: var(--leaf-green);
+    }
+
+    /* Welcome Card */
+    .welcome-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(15, 34, 61, 0.03);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .welcome-text h2 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -0.4px;
-      margin-bottom: 4px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 2px;
     }
 
     .welcome-text p {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
     .wifi-chip {
-      background: var(--card-muted);
+      background: var(--bg-light);
       border: 1px solid var(--border);
       padding: 8px 12px;
       border-radius: 10px;
       font-size: 0.75rem;
-      color: var(--text);
+      color: var(--navy);
       font-weight: 600;
       cursor: pointer;
       display: flex;
@@ -190,40 +266,41 @@
 
     /* Service Grid */
     .section-title {
-      font-size: 0.75rem;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-muted);
+      color: var(--navy);
       margin-bottom: 12px;
     }
 
     .services-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 24px;
     }
 
     .service-tile {
-      background: var(--card);
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
       cursor: pointer;
       text-align: left;
       transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 6px rgba(15, 34, 61, 0.03);
     }
 
     .service-tile:hover {
-      border-color: rgba(0, 0, 0, 0.2);
+      border-color: var(--navy);
       transform: translateY(-2px);
     }
 
     .tile-image {
       width: 100%;
-      height: 100px;
+      height: 110px;
       object-fit: cover;
       display: block;
       background: #dfdfdc;
@@ -234,14 +311,15 @@
     }
 
     .tile-title {
+      font-family: var(--font-heading);
       font-size: 0.9rem;
       font-weight: 700;
-      color: var(--text);
+      color: var(--navy);
       margin-bottom: 2px;
     }
 
     .tile-desc {
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       line-height: 1.35;
     }
@@ -250,7 +328,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(18, 18, 18, 0.7);
+      background: rgba(15, 34, 61, 0.75);
       backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
@@ -268,12 +346,12 @@
     }
 
     .modal-card {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 24px;
-      max-width: 440px;
+      background: var(--white);
+      border-radius: 22px;
+      padding: 26px 22px;
+      max-width: 420px;
       width: 100%;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
       transform: scale(0.96);
       transition: transform 0.2s ease;
       max-height: 85vh;
@@ -294,8 +372,10 @@
     }
 
     .modal-header h3 {
+      font-family: var(--font-heading);
       font-size: 1.1rem;
-      font-weight: 800;
+      font-weight: 700;
+      color: var(--navy);
     }
 
     .btn-modal-x {
@@ -320,8 +400,8 @@
     }
 
     .rs-thumb {
-      width: 54px;
-      height: 54px;
+      width: 58px;
+      height: 58px;
       border-radius: 8px;
       object-fit: cover;
     }
@@ -331,37 +411,77 @@
     }
 
     .rs-name {
+      font-family: var(--font-heading);
       font-size: 0.85rem;
       font-weight: 700;
+      color: var(--navy);
     }
 
     .rs-price {
       font-size: 0.8rem;
-      color: var(--text-muted);
+      color: var(--leaf-green);
+      font-weight: 700;
     }
 
     .btn-add-item {
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
       border: none;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 8px;
+      font-family: var(--font-heading);
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
     }
 
+    .btn-add-item:hover {
+      background: var(--leaf-green);
+    }
+
     .btn-submit-order {
       width: 100%;
-      background: #121212;
-      color: #ffffff;
+      background: var(--leaf-green);
+      color: var(--white);
       border: none;
       border-radius: 12px;
-      padding: 14px;
+      padding: 12px;
+      font-family: var(--font-heading);
       font-weight: 600;
       font-size: 0.9rem;
-      margin-top: 16px;
+      margin-top: 14px;
       cursor: pointer;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--leaf-green);
+      background: var(--white);
     }
 
     /* Toast */
@@ -370,8 +490,8 @@
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
       padding: 12px 20px;
       border-radius: 100px;
       font-size: 0.85rem;
@@ -379,7 +499,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 24px rgba(15, 34, 61, 0.3);
       z-index: 10000;
       opacity: 0;
       visibility: hidden;
@@ -401,7 +521,7 @@
     <div class="splash-icon">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
     </div>
-    <div class="splash-text" id="splash-text">Conectando à Suíte...</div>
+    <div style="font-size:1.05rem; font-weight:700;" id="splash-text">Conectando ao Concierge da Suíte...</div>
   </div>
 
   <!-- Header -->
@@ -411,9 +531,9 @@
         <a href="../index.html" class="btn-back" aria-label="Voltar">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         </a>
-        <div class="hotel-meta">
-          <h1 id="hotel-name">Jardim Imperial Resort</h1>
-          <p>Hotel & Spa Boutique</p>
+        <div>
+          <h1 class="meta-title" id="hotel-name">Jardim Imperial Resort</h1>
+          <p class="meta-sub">Hotel & SPA Boutique</p>
         </div>
       </div>
       <div class="room-badge" id="room-badge">Suíte 412</div>
@@ -422,20 +542,32 @@
 
   <main class="container">
 
+    <!-- Guest Auth Banner -->
+    <div class="guest-auth-card">
+      <div class="guest-info-left">
+        <div class="guest-avatar" id="guest-avatar">?</div>
+        <div>
+          <div class="guest-name" id="guest-name">Hóspede não validado</div>
+          <div class="guest-status unauth" id="guest-status">Valide para pedir serviços na suíte</div>
+        </div>
+      </div>
+      <button class="btn-auth-hotel" id="btn-auth-guest" onclick="openGuestAuthModal()">Validar</button>
+    </div>
+
     <!-- Welcome Card -->
     <div class="welcome-card">
       <div class="welcome-text">
-        <h2 id="welcome-suite">Bem-vindo(a) à Suíte 412</h2>
-        <p>Como podemos tornar sua estadia impecável?</p>
+        <h2 id="welcome-suite">Suíte 412</h2>
+        <p>Serviços exclusivos para sua estadia.</p>
       </div>
       <button class="wifi-chip" onclick="showToast('Wi-Fi: Imperial_VIP | Senha: suite' + currentRoom)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
-        Wi-Fi
+        Wi-Fi VIP
       </button>
     </div>
 
     <!-- Services Grid -->
-    <div class="section-title">Serviços Disponíveis no Quarto</div>
+    <div class="section-title">Serviços no Quarto</div>
 
     <div class="services-grid">
 
@@ -453,7 +585,7 @@
         <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=400&q=80" alt="Café da Manhã" class="tile-image" loading="lazy">
         <div class="tile-body">
           <h4 class="tile-title">Café no Quarto</h4>
-          <p class="tile-desc">Agende seu café da manhã na suíte das 6h30 às 10h30.</p>
+          <p class="tile-desc">Agende a entrega do café colonial na suíte.</p>
         </div>
       </div>
 
@@ -461,23 +593,43 @@
       <div class="service-tile" onclick="openServiceModal('spa')">
         <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80" alt="SPA" class="tile-image" loading="lazy">
         <div class="tile-body">
-          <h4 class="tile-title">SPA & Relaxamento</h4>
-          <p class="tile-desc">Massagens terapêuticas e tratamentos faciais.</p>
+          <h4 class="tile-title">SPA & Massagem</h4>
+          <p class="tile-desc">Tratamentos corporais e relaxamento na suíte.</p>
         </div>
       </div>
 
-      <!-- 4. Governança / Arrumação -->
+      <!-- 4. Governança -->
       <div class="service-tile" onclick="openServiceModal('housekeeping')">
         <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80" alt="Arrumação" class="tile-image" loading="lazy">
         <div class="tile-body">
           <h4 class="tile-title">Arrumação & Toalhas</h4>
-          <p class="tile-desc">Troca de enxoval ou solicitação de amenidades extras.</p>
+          <p class="tile-desc">Troca de enxoval ou solicitação de amenities extras.</p>
         </div>
       </div>
 
     </div>
 
   </main>
+
+  <!-- Modal de Validação de Hóspede -->
+  <div class="modal-overlay" id="guest-auth-modal" onclick="closeGuestAuthModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 style="font-family:var(--font-heading); font-size:1.15rem; color:var(--navy); margin-bottom:4px;">Validação da Suíte</h3>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:18px;">Por segurança, informe seus dados de check-in para liberar os pedidos no quarto.</p>
+
+      <div class="form-group">
+        <label class="form-label">Nome do Hóspede Titular:</label>
+        <input type="text" id="guest-input-name" class="form-input" placeholder="Ex: Roberto Guimarães" value="Roberto Guimarães">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Telefone cadastrado no Check-in:</label>
+        <input type="tel" id="guest-input-phone" class="form-input" placeholder="(11) 99999-9999" value="(11) 98877-6655">
+      </div>
+
+      <button class="btn-submit-order" onclick="handleGuestAuth()">Validar Hóspede na Suíte</button>
+    </div>
+  </div>
 
   <!-- Service Modal -->
   <div class="modal-overlay" id="service-modal" onclick="closeServiceModal(event)">
@@ -494,21 +646,143 @@
 
   <!-- Toast -->
   <div class="toast-box" id="toast-hotel">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
     <span id="toast-hotel-msg"></span>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quartoParam = urlParams.get('quarto') || '412';
-    const hotelParam = urlParams.get('hotel');
     const currentRoom = quartoParam;
 
     document.getElementById('room-badge').textContent = `Suíte ${currentRoom}`;
-    document.getElementById('welcome-suite').textContent = `Bem-vindo(a) à Suíte ${currentRoom}`;
+    document.getElementById('welcome-suite').textContent = `Suíte ${currentRoom}`;
 
-    if (hotelParam) {
-      document.getElementById('hotel-name').textContent = decodeURIComponent(hotelParam);
+    // Guest state
+    let activeGuest = JSON.parse(localStorage.getItem(`nolei_hotel_guest_${currentRoom}`) || 'null');
+
+    function updateGuestUI() {
+      const nameEl = document.getElementById('guest-name');
+      const statusEl = document.getElementById('guest-status');
+      const avatarEl = document.getElementById('guest-avatar');
+      const authBtn = document.getElementById('btn-auth-guest');
+
+      if (activeGuest) {
+        nameEl.textContent = activeGuest.name;
+        statusEl.textContent = `Hóspede Validado • Check-out 14/09`;
+        statusEl.classList.remove('unauth');
+        avatarEl.textContent = activeGuest.name.charAt(0).toUpperCase();
+        authBtn.textContent = 'Trocar';
+      } else {
+        nameEl.textContent = 'Hóspede não validado';
+        statusEl.textContent = 'Valide para pedir serviços na suíte';
+        statusEl.classList.add('unauth');
+        avatarEl.textContent = '?';
+        authBtn.textContent = 'Validar';
+      }
+    }
+
+    function openGuestAuthModal() {
+      document.getElementById('guest-auth-modal').classList.add('open');
+    }
+
+    function closeGuestAuthModal() {
+      document.getElementById('guest-auth-modal').classList.remove('open');
+    }
+
+    function handleGuestAuth() {
+      const name = document.getElementById('guest-input-name').value.trim();
+      const phone = document.getElementById('guest-input-phone').value.trim();
+
+      if (!name) {
+        alert('Por favor, informe o nome do titular.');
+        return;
+      }
+
+      activeGuest = { name, phone };
+      localStorage.setItem(`nolei_hotel_guest_${currentRoom}`, JSON.stringify(activeGuest));
+      updateGuestUI();
+      closeGuestAuthModal();
+      showToast(`Hóspede validado com sucesso: ${name}! ✅`);
+    }
+
+    // Modal Service
+    function openServiceModal(type) {
+      if (!activeGuest) {
+        openGuestAuthModal();
+        showToast('Por favor, valide sua estadia para solicitar serviços.');
+        return;
+      }
+
+      const modal = document.getElementById('service-modal');
+      const title = document.getElementById('modal-service-title');
+      const content = document.getElementById('modal-service-content');
+
+      if (type === 'room-service') {
+        title.textContent = 'Room Service — Suíte ' + currentRoom;
+        content.innerHTML = `
+          <div class="room-service-item">
+            <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
+            <div class="rs-info">
+              <div class="rs-name">Club Sandwich Imperial</div>
+              <div class="rs-price">R$ 45,00</div>
+            </div>
+            <button class="btn-add-item" onclick="confirmOrder('Club Sandwich')">Pedir</button>
+          </div>
+          <div class="room-service-item">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
+            <div class="rs-info">
+              <div class="rs-name">Filé Mignon ao Madeira</div>
+              <div class="rs-price">R$ 89,00</div>
+            </div>
+            <button class="btn-add-item" onclick="confirmOrder('Filé Mignon')">Pedir</button>
+          </div>
+        `;
+      } else if (type === 'breakfast') {
+        title.textContent = 'Café da Manhã no Quarto';
+        content.innerHTML = `
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">Solicitante: <strong>${activeGuest.name}</strong> • Suíte ${currentRoom}</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+            <button class="wifi-chip" onclick="confirmOrder('Café no quarto às 07:30')">07:30</button>
+            <button class="wifi-chip" onclick="confirmOrder('Café no quarto às 08:30')">08:30</button>
+            <button class="wifi-chip" onclick="confirmOrder('Café no quarto às 09:30')">09:30</button>
+          </div>
+        `;
+      } else if (type === 'spa') {
+        title.textContent = 'SPA & Bem-Estar';
+        content.innerHTML = `
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">Massagem Relaxante com Aromaterapia (50 min) — R$ 180,00</p>
+          <button class="btn-submit-order" onclick="confirmOrder('Agendamento de Massagem SPA')">Confirmar Agendamento</button>
+        `;
+      } else if (type === 'housekeeping') {
+        title.textContent = 'Governança & Arrumação';
+        content.innerHTML = `
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <button class="btn-submit-order" onclick="confirmOrder('Arrumação Imediata')">Arrumar Quarto Agora</button>
+            <button class="btn-submit-order" style="background:var(--bg-light); color:var(--navy); border:1px solid var(--border);" onclick="confirmOrder('Toalhas Extras')">Solicitar Toalhas Adicionais</button>
+          </div>
+        `;
+      }
+
+      modal.classList.add('open');
+    }
+
+    function closeServiceModal() {
+      document.getElementById('service-modal').classList.remove('open');
+    }
+
+    function confirmOrder(item) {
+      closeServiceModal();
+      showToast(`Pedido registrado para ${activeGuest.name} (Suíte ${currentRoom}): ${item} ✅`);
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast-hotel');
+      document.getElementById('toast-hotel-msg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
     }
 
     // Splash
@@ -530,86 +804,8 @@
       }
     }
 
-    // Modal Content
-    function openServiceModal(type) {
-      const modal = document.getElementById('service-modal');
-      const title = document.getElementById('modal-service-title');
-      const content = document.getElementById('modal-service-content');
-
-      if (type === 'room-service') {
-        title.textContent = 'Room Service — Menu';
-        content.innerHTML = `
-          <div class="room-service-item">
-            <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
-            <div class="rs-info">
-              <div class="rs-name">Club Sandwich Imperial</div>
-              <div class="rs-price">R$ 45,00</div>
-            </div>
-            <button class="btn-add-item" onclick="confirmOrder('Club Sandwich')">Pedir</button>
-          </div>
-          <div class="room-service-item">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
-            <div class="rs-info">
-              <div class="rs-name">Filé Mignon ao Molho Madeira</div>
-              <div class="rs-price">R$ 89,00</div>
-            </div>
-            <button class="btn-add-item" onclick="confirmOrder('Filé Mignon')">Pedir</button>
-          </div>
-          <div class="room-service-item">
-            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
-            <div class="rs-info">
-              <div class="rs-name">Vinho Tinto Malbec Reserva</div>
-              <div class="rs-price">R$ 120,00 (Garrafa)</div>
-            </div>
-            <button class="btn-add-item" onclick="confirmOrder('Vinho Malbec')">Pedir</button>
-          </div>
-        `;
-      } else if (type === 'breakfast') {
-        title.textContent = 'Café da Manhã no Quarto';
-        content.innerHTML = `
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">Selecione o horário desejado para entrega na Suíte ${currentRoom}:</p>
-          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-            <button class="wifi-chip" onclick="confirmOrder('Café às 07:30')">07:30</button>
-            <button class="wifi-chip" onclick="confirmOrder('Café às 08:30')">08:30</button>
-            <button class="wifi-chip" onclick="confirmOrder('Café às 09:30')">09:30</button>
-          </div>
-        `;
-      } else if (type === 'spa') {
-        title.textContent = 'SPA & Bem-Estar';
-        content.innerHTML = `
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">Massagem Relaxante com Óleos Essenciais (50 min) — R$ 180,00</p>
-          <button class="btn-submit-order" onclick="confirmOrder('Agendamento SPA')">Agendar com a Recepção</button>
-        `;
-      } else if (type === 'housekeeping') {
-        title.textContent = 'Governança & Arrumação';
-        content.innerHTML = `
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <button class="btn-submit-order" onclick="confirmOrder('Arrumação imediata do quarto')">Solicitar arrumação agora</button>
-            <button class="btn-submit-order" style="background:#f4f4f2; color:#121212;" onclick="confirmOrder('Toalhas extras')">Pedir toalhas adicionais</button>
-          </div>
-        `;
-      }
-
-      modal.classList.add('open');
-    }
-
-    function closeServiceModal() {
-      document.getElementById('service-modal').classList.remove('open');
-    }
-
-    function confirmOrder(item) {
-      closeServiceModal();
-      showToast(`Solicitação recebida para a Suíte ${currentRoom}: ${item} ✅`);
-    }
-
-    let toastTimer;
-    function showToast(msg) {
-      const toast = document.getElementById('toast-hotel');
-      document.getElementById('toast-hotel-msg').textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
-    }
+    // Init
+    updateGuestUI();
   </script>
 </body>
 </html>

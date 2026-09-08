@@ -3,19 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#e5e5e3">
-  <title id="page-title">Cartão Fidelidade — Café Origem</title>
+  <meta name="theme-color" content="#0F223D">
+  <title id="page-title">Cartão Fidelidade Digital — Café Origem</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #e5e5e3;
-      --card: #ffffff;
-      --card-muted: #f4f4f2;
-      --border: rgba(0, 0, 0, 0.08);
-      --text: #121212;
-      --text-muted: #666663;
-      --text-dim: #8e8e8a;
-      --radius: 16px;
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --navy: #0F223D;
+      --navy-light: #162C46;
+      --leaf-green: #2E7D32;
+      --leaf-green-light: #E8F5E9;
+      --orange: #F97316;
+      --orange-light: #FFF7ED;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --border: #E2E8F0;
+      --radius: 18px;
+      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * {
@@ -26,8 +38,8 @@
     }
 
     body {
-      font-family: var(--font);
-      background: var(--bg);
+      font-family: var(--font-body);
+      background-color: var(--bg-light);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -41,7 +53,8 @@
     .splash-screen {
       position: fixed;
       inset: 0;
-      background: var(--bg);
+      background: var(--navy);
+      color: var(--white);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -59,8 +72,8 @@
     .splash-icon {
       width: 54px;
       height: 54px;
-      border-radius: 16px;
-      background: #121212;
+      border-radius: 14px;
+      background: var(--leaf-green);
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -74,25 +87,19 @@
       50% { transform: scale(1.06); }
     }
 
-    .splash-text {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
     /* Header */
     .header {
-      background: rgba(229, 229, 227, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 14px 20px;
+      padding: 12px 20px;
     }
 
     .header-inner {
-      max-width: 540px;
+      max-width: 560px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -109,9 +116,9 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: rgba(0, 0, 0, 0.05);
+      background: var(--bg-light);
       border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--navy);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -119,19 +126,22 @@
     }
 
     .store-meta h1 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -0.4px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
     }
 
     .store-meta p {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
     }
 
     .tier-badge {
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--font-heading);
       font-size: 0.75rem;
       font-weight: 700;
       padding: 6px 12px;
@@ -140,21 +150,100 @@
 
     /* Container */
     .container {
-      max-width: 540px;
+      max-width: 560px;
       width: 100%;
       margin: 0 auto;
-      padding: 20px;
+      padding: 16px 20px;
       flex: 1;
     }
 
-    /* Loyalty Card */
+    /* Unauthenticated Gate Card */
+    .unauth-gate-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 24px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(15, 34, 61, 0.05);
+      margin-bottom: 24px;
+    }
+
+    .gate-icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: var(--leaf-green-light);
+      color: var(--leaf-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .gate-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .gate-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .gate-buttons-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .btn-gate-login {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-gate-login:hover {
+      background: var(--leaf-green);
+    }
+
+    .btn-gate-register {
+      background: var(--bg-light);
+      color: var(--navy);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 12px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* Loyalty Dashboard (When Logged In) */
+    .loyalty-dashboard {
+      display: none;
+    }
+
     .loyalty-hero-card {
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
       border-radius: var(--radius);
       padding: 24px;
       margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 24px rgba(15, 34, 61, 0.2);
       position: relative;
       overflow: hidden;
     }
@@ -167,27 +256,30 @@
     }
 
     .member-name {
+      font-family: var(--font-heading);
       font-size: 1.25rem;
       font-weight: 800;
       letter-spacing: -0.4px;
     }
 
     .member-sub {
-      font-size: 0.8rem;
-      color: #8e8e8a;
+      font-size: 0.78rem;
+      color: #94A3B8;
     }
 
     .points-number {
-      font-size: 2.4rem;
-      font-weight: 900;
+      font-family: var(--font-heading);
+      font-size: 2.6rem;
+      font-weight: 800;
       letter-spacing: -1px;
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      color: var(--leaf-green-light);
     }
 
     .points-label {
       font-size: 0.75rem;
-      color: #8e8e8a;
+      color: #94A3B8;
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
@@ -203,8 +295,8 @@
     }
 
     .progress-fill {
-      background: #ffffff;
-      width: 70%;
+      background: var(--leaf-green-light);
+      width: 65%;
       height: 100%;
       border-radius: 10px;
     }
@@ -213,22 +305,24 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.72rem;
-      color: #8e8e8a;
+      color: #94A3B8;
     }
 
     /* Stamp Card */
     .stamps-section {
-      background: var(--card);
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 6px rgba(15, 34, 61, 0.03);
     }
 
     .stamps-title {
+      font-family: var(--font-heading);
       font-size: 0.95rem;
       font-weight: 700;
+      color: var(--navy);
       margin-bottom: 4px;
     }
 
@@ -254,28 +348,29 @@
       font-size: 0.75rem;
       font-weight: 700;
       color: var(--text-dim);
-      background: var(--card-muted);
+      background: var(--bg-light);
     }
 
     .stamp-slot.filled {
-      border: 2px solid #121212;
-      background: #121212;
-      color: #ffffff;
+      border: 2px solid var(--navy);
+      background: var(--navy);
+      color: var(--white);
     }
 
     .stamp-slot.filled svg {
       width: 18px;
       height: 18px;
-      stroke: #ffffff;
+      stroke: var(--white);
     }
 
     /* Rewards Section */
     .section-label {
-      font-size: 0.75rem;
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-muted);
+      color: var(--navy);
       margin-bottom: 12px;
     }
 
@@ -287,7 +382,7 @@
     }
 
     .reward-card {
-      background: var(--card);
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 14px 16px;
@@ -299,8 +394,10 @@
     }
 
     .reward-info h4 {
+      font-family: var(--font-heading);
       font-size: 0.9rem;
       font-weight: 700;
+      color: var(--navy);
       margin-bottom: 2px;
     }
 
@@ -310,20 +407,147 @@
     }
 
     .btn-redeem {
-      background: #121212;
-      color: #ffffff;
+      background: var(--leaf-green);
+      color: var(--white);
       border: none;
       padding: 8px 16px;
       border-radius: 8px;
+      font-family: var(--font-heading);
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
-      transition: opacity 0.15s;
+      transition: background 0.15s;
     }
 
     .btn-redeem:hover {
-      opacity: 0.9;
+      background: #256628;
+    }
+
+    /* Modal Auth */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 34, 61, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 28px 24px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      transform: scale(0.96);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .modal-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 16px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .auth-tab.active {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--leaf-green);
+      background: var(--white);
+    }
+
+    .btn-submit-auth {
+      width: 100%;
+      background: var(--leaf-green);
+      color: var(--white);
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .btn-submit-auth:hover {
+      background: #256628;
     }
 
     /* Toast */
@@ -332,8 +556,8 @@
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
       padding: 12px 20px;
       border-radius: 100px;
       font-size: 0.85rem;
@@ -341,7 +565,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 24px rgba(15, 34, 61, 0.3);
       z-index: 10000;
       opacity: 0;
       visibility: hidden;
@@ -363,7 +587,7 @@
     <div class="splash-icon">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
     </div>
-    <div class="splash-text" id="splash-text">Validando Cartão Fidelidade...</div>
+    <div style="font-size:1.05rem; font-weight:700;" id="splash-text">Validando Cartão Fidelidade...</div>
   </div>
 
   <!-- Header -->
@@ -375,118 +599,239 @@
         </a>
         <div class="store-meta">
           <h1 id="store-name">Café Origem</h1>
-          <p>Fidelidade & Recompensas</p>
+          <p>Clube Fidelidade & Recompensas</p>
         </div>
       </div>
-      <div class="tier-badge">Nível Prata</div>
+      <div class="tier-badge" id="tier-badge">Nível Prata</div>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- Loyalty Card -->
-    <div class="loyalty-hero-card">
-      <div class="card-top">
-        <div>
-          <div class="member-name" id="member-name">Olá, Maria!</div>
-          <div class="member-sub">Membro desde Outubro/2023</div>
-        </div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M17 7h.01M7 17h.01M17 17h.01"/></svg>
+    <!-- Unauthenticated Gate Card -->
+    <div class="unauth-gate-card" id="unauth-gate">
+      <div class="gate-icon-box">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
-
-      <div class="points-number">127</div>
-      <div class="points-label">Pontos Acumulados</div>
-
-      <div class="progress-track">
-        <div class="progress-fill"></div>
-      </div>
-      <div class="progress-info">
-        <span>Faltam 73 pts para Nível Ouro</span>
-        <span>127 / 200 pts</span>
+      <h2 class="gate-title">Acesse seu Cartão Fidelidade</h2>
+      <p class="gate-desc">Aproxime seu cartão físico NFC ou entre com seus dados para acumular selos e resgatar prêmios no balcão.</p>
+      
+      <div class="gate-buttons-row">
+        <button class="btn-gate-login" onclick="openLoyaltyAuthModal('login')">Já sou Cliente (Entrar)</button>
+        <button class="btn-gate-register" onclick="openLoyaltyAuthModal('register')">Cadastrar no Clube</button>
       </div>
     </div>
 
-    <!-- Stamps Card (7/10) -->
-    <div class="stamps-section">
-      <h3 class="stamps-title">Cartela de Selos do Mês</h3>
-      <p class="stamps-desc">A cada café consumido, você ganha 1 selo. Complete 10 para ganhar 1 café artesanal especial.</p>
-
-      <div class="stamps-grid">
-        <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stamp-slot">8</div>
-        <div class="stamp-slot">9</div>
-        <div class="stamp-slot">10</div>
+    <!-- Loyalty Dashboard (Visible when authenticated) -->
+    <div class="loyalty-dashboard" id="loyalty-dashboard">
+      
+      <!-- Top Member Status Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <span style="font-size:0.8rem; color:var(--text-muted);" id="member-phone-display">Membro Conectado</span>
+        <button style="background:none; border:none; color:var(--orange); font-size:0.75rem; font-weight:700; cursor:pointer;" onclick="logoutLoyalty()">Sair / Trocar</button>
       </div>
-    </div>
 
-    <!-- Rewards List -->
-    <div class="section-label">Recompensas Disponíveis para Resgate</div>
-
-    <div class="rewards-list">
-      <div class="reward-card">
-        <div class="reward-info">
-          <h4>Café Espresso ou Cappuccino</h4>
-          <p>50 pontos acumulados</p>
+      <!-- Loyalty Card -->
+      <div class="loyalty-hero-card">
+        <div class="card-top">
+          <div>
+            <div class="member-name" id="member-name">Olá, Maria!</div>
+            <div class="member-sub">Membro Ativo • Café Origem</div>
+          </div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M17 7h.01M7 17h.01M17 17h.01"/></svg>
         </div>
-        <button class="btn-redeem" onclick="redeemReward('Espresso ou Cappuccino')">Resgatar</button>
+
+        <div class="points-number" id="points-display">127</div>
+        <div class="points-label">Pontos Acumulados</div>
+
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="progress-info">
+          <span>Faltam 73 pts para Nível Ouro</span>
+          <span>127 / 200 pts</span>
+        </div>
       </div>
 
-      <div class="reward-card">
-        <div class="reward-info">
-          <h4>Fatia de Bolo Artesanal do Dia</h4>
-          <p>80 pontos acumulados</p>
+      <!-- Stamps Card (7/10) -->
+      <div class="stamps-section">
+        <h3 class="stamps-title">Cartela de Selos do Mês</h3>
+        <p class="stamps-desc">A cada café consumido, você ganha 1 selo ao aproximar o celular no balcão.</p>
+
+        <div class="stamps-grid">
+          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stamp-slot">8</div>
+          <div class="stamp-slot">9</div>
+          <div class="stamp-slot">10</div>
         </div>
-        <button class="btn-redeem" onclick="redeemReward('Bolo do Dia')">Resgatar</button>
       </div>
 
-      <div class="reward-card">
-        <div class="reward-info">
-          <h4>Pacote de Grãos Especiais (250g)</h4>
-          <p>150 pontos acumulados</p>
+      <!-- Rewards List -->
+      <div class="section-label">Prêmios Prontos para Resgate</div>
+
+      <div class="rewards-list">
+        <div class="reward-card">
+          <div class="reward-info">
+            <h4>Café Espresso ou Cappuccino</h4>
+            <p>50 pontos acumulados</p>
+          </div>
+          <button class="btn-redeem" onclick="redeemReward('Espresso ou Cappuccino')">Resgatar</button>
         </div>
-        <button class="btn-redeem" style="background:#dfdfdc; color:#8e8e8a; cursor:not-allowed;" onclick="showToast('Você precisa de mais 23 pontos para este item.')">Faltam 23 pts</button>
+
+        <div class="reward-card">
+          <div class="reward-info">
+            <h4>Fatia de Bolo Artesanal do Dia</h4>
+            <p>80 pontos acumulados</p>
+          </div>
+          <button class="btn-redeem" onclick="redeemReward('Bolo do Dia')">Resgatar</button>
+        </div>
+
+        <div class="reward-card">
+          <div class="reward-info">
+            <h4>Pacote de Grãos Especiais (250g)</h4>
+            <p>150 pontos acumulados</p>
+          </div>
+          <button class="btn-redeem" style="background:var(--bg-light); color:var(--text-dim); cursor:not-allowed;" onclick="showToast('Faltam 23 pontos para liberar este resgate.')">Faltam 23 pts</button>
+        </div>
       </div>
+
     </div>
 
   </main>
 
+  <!-- Modal Auth -->
+  <div class="modal-overlay" id="loyalty-modal" onclick="closeLoyaltyAuthModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 class="modal-title">Clube Fidelidade</h3>
+      <p class="modal-sub">Identifique-se para pontuar e resgatar.</p>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-loy-login" onclick="setLoyTab('login')">Já sou Cliente</button>
+        <button class="auth-tab" id="tab-loy-reg" onclick="setLoyTab('register')">Cadastrar</button>
+      </div>
+
+      <!-- Login -->
+      <div id="loy-login-box">
+        <div class="form-group">
+          <label class="form-label">Telefone ou CPF cadastrado:</label>
+          <input type="tel" id="loy-login-input" class="form-input" placeholder="(11) 99999-9999" value="(11) 98765-4321">
+        </div>
+        <button class="btn-submit-auth" onclick="handleLoyaltyLogin()">Entrar no Clube</button>
+      </div>
+
+      <!-- Cadastro -->
+      <div id="loy-reg-box" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Nome Completo:</label>
+          <input type="text" id="loy-reg-name" class="form-input" placeholder="Ex: Maria Santos">
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp:</label>
+          <input type="tel" id="loy-reg-phone" class="form-input" placeholder="(11) 99999-9999">
+        </div>
+        <button class="btn-submit-auth" onclick="handleLoyaltyRegister()">Criar Cartão e Entrar</button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast-loyalty" id="toast-loyalty">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
     <span id="toast-loyalty-msg"></span>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const nomeParam = urlParams.get('nome') || 'Maria';
     const lojaParam = urlParams.get('loja') || 'Café Origem';
-
-    document.getElementById('member-name').textContent = `Olá, ${decodeURIComponent(nomeParam)}!`;
     document.getElementById('store-name').textContent = decodeURIComponent(lojaParam);
 
-    // Splash
-    const source = urlParams.get('source');
-    const splashScreen = document.getElementById('splash-screen');
-    const splashText = document.getElementById('splash-text');
+    // Member state
+    let activeMember = JSON.parse(localStorage.getItem('nolei_loyalty_member') || 'null');
 
-    if (source === 'nfc' || source === 'qr') {
-      const sessionKey = `fidelidade_splash_${source}`;
-      if (!sessionStorage.getItem(sessionKey)) {
-        splashText.textContent = source === 'nfc'
-          ? `Cartão Validado via NFC • ${decodeURIComponent(nomeParam)}`
-          : `QR Code Reconhecido • ${decodeURIComponent(nomeParam)}`;
-        splashScreen.classList.remove('hidden');
-        setTimeout(() => {
-          splashScreen.classList.add('hidden');
-          sessionStorage.setItem(sessionKey, 'true');
-        }, 1100);
+    function updateLoyaltyUI() {
+      const gate = document.getElementById('unauth-gate');
+      const dashboard = document.getElementById('loyalty-dashboard');
+
+      if (activeMember) {
+        gate.style.display = 'none';
+        dashboard.style.display = 'block';
+
+        document.getElementById('member-name').textContent = `Olá, ${activeMember.name}!`;
+        document.getElementById('member-phone-display').textContent = `Membro: ${activeMember.phone}`;
+      } else {
+        gate.style.display = 'block';
+        dashboard.style.display = 'none';
       }
+    }
+
+    function openLoyaltyAuthModal(mode = 'login') {
+      setLoyTab(mode);
+      document.getElementById('loyalty-modal').classList.add('open');
+    }
+
+    function closeLoyaltyAuthModal() {
+      document.getElementById('loyalty-modal').classList.remove('open');
+    }
+
+    function setLoyTab(tab) {
+      document.getElementById('tab-loy-login').classList.toggle('active', tab === 'login');
+      document.getElementById('tab-loy-reg').classList.toggle('active', tab === 'register');
+      document.getElementById('loy-login-box').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('loy-reg-box').style.display = tab === 'register' ? 'block' : 'none';
+    }
+
+    function handleLoyaltyLogin() {
+      const input = document.getElementById('loy-login-input').value.trim();
+      if (!input) {
+        alert('Por favor, informe seu telefone.');
+        return;
+      }
+
+      activeMember = {
+        name: "Maria Santos",
+        phone: input,
+        points: 127
+      };
+
+      localStorage.setItem('nolei_loyalty_member', JSON.stringify(activeMember));
+      updateLoyaltyUI();
+      closeLoyaltyAuthModal();
+      showToast(`Cartão Fidelidade validado: ${activeMember.name}! ✨`);
+    }
+
+    function handleLoyaltyRegister() {
+      const name = document.getElementById('loy-reg-name').value.trim();
+      const phone = document.getElementById('loy-reg-phone').value.trim();
+
+      if (!name || !phone) {
+        alert('Por favor, informe seu nome e telefone.');
+        return;
+      }
+
+      activeMember = {
+        name,
+        phone,
+        points: 50 // welcome bonus
+      };
+
+      localStorage.setItem('nolei_loyalty_member', JSON.stringify(activeMember));
+      updateLoyaltyUI();
+      closeLoyaltyAuthModal();
+      showToast(`Bem-vindo(a) ao Clube, ${name}! Você ganhou 50 pontos de bônus! 🎉`);
+    }
+
+    function logoutLoyalty() {
+      activeMember = null;
+      localStorage.removeItem('nolei_loyalty_member');
+      updateLoyaltyUI();
+      showToast('Sessão encerrada.');
     }
 
     function redeemReward(item) {
@@ -501,6 +846,28 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
     }
+
+    // Splash
+    const source = urlParams.get('source');
+    const splashScreen = document.getElementById('splash-screen');
+    const splashText = document.getElementById('splash-text');
+
+    if (source === 'nfc' || source === 'qr') {
+      const sessionKey = `fidelidade_splash_${source}`;
+      if (!sessionStorage.getItem(sessionKey)) {
+        splashText.textContent = source === 'nfc'
+          ? `Cartão Validado via NFC`
+          : `QR Code Reconhecido`;
+        splashScreen.classList.remove('hidden');
+        setTimeout(() => {
+          splashScreen.classList.add('hidden');
+          sessionStorage.setItem(sessionKey, 'true');
+        }, 1100);
+      }
+    }
+
+    // Init
+    updateLoyaltyUI();
   </script>
 </body>
 </html>

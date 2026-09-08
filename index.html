@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0F223D">
-  <title>Nolei Creative — Soluções Físico-Digitais</title>
+  <title>Nolei Creative — Hardware & Software Físico-Digital (NFC & QR Code)</title>
   
   <!-- Google Fonts: Poppins & Roboto -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,7 +63,7 @@
     }
 
     .page {
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 auto;
       padding: 32px 20px 60px;
       width: 100%;
@@ -88,15 +88,15 @@
     }
 
     .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       background: var(--navy);
       color: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 10px rgba(15, 34, 61, 0.2);
+      box-shadow: 0 4px 12px rgba(15, 34, 61, 0.25);
     }
 
     .brand-title {
@@ -141,7 +141,7 @@
     }
 
     .hero-title {
-      font-size: 1.9rem;
+      font-size: 1.95rem;
       font-weight: 800;
       line-height: 1.2;
       letter-spacing: -0.6px;
@@ -195,7 +195,7 @@
       box-shadow: 0 2px 8px rgba(15, 34, 61, 0.25);
     }
 
-    /* Section Info */
+    /* Section Headers */
     .section-label-row {
       display: flex;
       align-items: center;
@@ -204,7 +204,7 @@
     }
 
     .section-label {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -221,7 +221,7 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
 
     .solution-card {
@@ -246,8 +246,8 @@
     }
 
     .card-photo-box {
-      width: 140px;
-      min-width: 140px;
+      width: 145px;
+      min-width: 145px;
       position: relative;
       overflow: hidden;
       background: #dfdfdc;
@@ -329,6 +329,82 @@
 
     .btn-qr-open:hover {
       background: var(--leaf-green);
+    }
+
+    /* SEÇÃO DE HARDWARE E EXEMPLOS REAIS */
+    .hardware-section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 16px rgba(15, 34, 61, 0.04);
+    }
+
+    .hardware-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 580px) {
+      .hardware-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hardware-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+
+    .hardware-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--navy-light);
+    }
+
+    .hardware-photo {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hardware-body {
+      padding: 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hardware-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    .hardware-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .hardware-spec {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
 
     /* Modal QR Code */
@@ -489,7 +565,7 @@
     <header class="brand-header">
       <a href="#" class="brand-logo">
         <div class="brand-mark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
         </div>
         <div class="brand-title">Nolei <span>Creative</span></div>
       </a>
@@ -500,7 +576,7 @@
     <div class="hero">
       <div class="hero-eyebrow">Experiências Físico-Digitais</div>
       <h1 class="hero-title">Aproxime o celular.<br>A experiência <span class="highlight">começa</span>.</h1>
-      <p class="hero-subtitle">Placas e totens inteligentes para captação de avaliações 5★, menus dinâmicos, hospitalidade e fidelização.</p>
+      <p class="hero-subtitle">Soluções integradas com placas inteligentes para captação de avaliações 5★, menus dinâmicos, hospitalidade e fidelização.</p>
     </div>
 
     <!-- Mode Selector -->
@@ -610,12 +686,88 @@
 
     </div>
 
+    <!-- SEÇÃO DE PEÇAS FÍSICAS & EXEMPLOS REAIS (HARDWARE NFC) -->
+    <section class="hardware-section">
+      <div class="section-label-row" style="margin-bottom: 6px;">
+        <span class="section-label" style="color:var(--orange);">Hardware & Displays Físicos</span>
+        <span class="section-desc">Acabamento Premium</span>
+      </div>
+      <h2 style="font-size: 1.35rem; margin-bottom: 6px;">Modelos Físicos de Apresentação</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+        Displays resistentes e sofisticados com chip NFC embutido de alta sensibilidade e gravação a laser.
+      </p>
+
+      <div class="hardware-grid">
+
+        <!-- 1. Display Acrílico L-Shape Menu -->
+        <div class="hardware-card">
+          <img src="assets/images/display-menu-acrilico.jpg" alt="Display Acrílico L-Shape Menu Digital" class="hardware-photo" loading="lazy">
+          <div class="hardware-body">
+            <div>
+              <span class="hardware-badge">Restaurantes & Bares</span>
+              <h4 class="hardware-title">Display L-Shape Black Piano</h4>
+              <p class="hardware-spec">Acrílico preto brilhante com NFC + QR gravados. Ideal para mesas e bancadas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Totem Google Reviews -->
+        <div class="hardware-card">
+          <img src="assets/images/totem-google-reviews.jpg" alt="Totem Google Reviews NFC" class="hardware-photo" loading="lazy">
+          <div class="hardware-body">
+            <div>
+              <span class="hardware-badge">Clínicas & Balcões</span>
+              <h4 class="hardware-title">Totem Google Avaliações</h4>
+              <p class="hardware-spec">Leitura por aproximação no topo + QR Code para captação imediata de 5 estrelas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Mini Cavalete de Madeira -->
+        <div class="hardware-card">
+          <img src="assets/images/cavalete-madeira-google.jpg" alt="Mini Cavalete em Madeira Nobre" class="hardware-photo" loading="lazy">
+          <div class="hardware-body">
+            <div>
+              <span class="hardware-badge">Cafés & Pousadas</span>
+              <h4 class="hardware-title">Cavalete em Madeira Nobre</h4>
+              <p class="hardware-spec">Design rústico e sofisticado para balcões de recepção e cafeterias artesanais.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Cartões Mini Fidelidade -->
+        <div class="hardware-card">
+          <img src="assets/images/cartoes-mini-fidelidade.jpg" alt="Cartões Mini Fidelidade" class="hardware-photo" loading="lazy">
+          <div class="hardware-body">
+            <div>
+              <span class="hardware-badge">Fidelização</span>
+              <h4 class="hardware-title">Cartão Mini Quadrado</h4>
+              <p class="hardware-spec">PVC com cantos arredondados, QR individual e NFC para clube de membros.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Disco Resinado de Mesa -->
+        <div class="hardware-card" style="grid-column: 1 / -1;">
+          <img src="assets/images/disco-resinado-mesa.jpg" alt="Disco Resinado de Mesa" class="hardware-photo" style="height: 200px;" loading="lazy">
+          <div class="hardware-body">
+            <div>
+              <span class="hardware-badge">Mesa & Piscina</span>
+              <h4 class="hardware-title">Disco Resinado "Peça na sua Mesa"</h4>
+              <p class="hardware-spec">Disco acrílico impermeável com resina automotiva e fita 3M. Ideal para áreas externas, quiosques e mesas.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Contact & Project Section -->
     <div class="contact-card">
-      <h3 class="contact-title">Projetos Sob Medida</h3>
-      <p class="contact-desc">Displays em acrílico, madeira nobre ou metal gravado a laser personalizados com a marca da sua empresa.</p>
+      <h3 class="contact-title">Quer produzir seus displays personalizados?</h3>
+      <p class="contact-desc">Desenvolvemos as peças com a identidade da sua marca, gravadas e programadas prontas para uso.</p>
       <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Visitei%20as%20demos%20da%20Nolei%20Creative%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta">
-        Falar com a Nolei Creative
+        Solicitar Orçamento no WhatsApp
       </a>
     </div>
 

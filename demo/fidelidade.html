@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fidelidade</title>
+    <style>
+        :root {
+            --bg-color: #0f1019;
+            --surface-color: #1a1b26;
+            --accent-color: #c2956a;
+            --accent-hover: #d4a377;
+            --text-main: #ffffff;
+            --text-secondary: #9aa0a6;
+            --success-color: #00f5a0;
+            --border-color: rgba(194, 149, 106, 0.2);
+            --danger-color: #ff5c5c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 80px;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+        
+        .splash-text {
+            color: var(--accent-color);
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            animation: pulse-splash 1s infinite alternate;
+        }
+        
+        @keyframes pulse-splash {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            transition: background 0.2s;
+        }
+
+        .header-content {
+            flex: 1;
+            text-align: center;
+            padding-top: 4px;
+        }
+
+        .header-content h1 {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .header-content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            background: linear-gradient(145deg, var(--surface-color), #14151e);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+        }
+
+        .points-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .points-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--text-main);
+            text-shadow: 0 0 20px rgba(0, 245, 160, 0.3);
+            line-height: 1.1;
+        }
+
+        .points-label {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .level-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(194, 149, 106, 0.15);
+            color: var(--accent-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            text-align: left;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .conversion-rate {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Stamp Card */
+        .stamp-card {
+            background: var(--surface-color);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .stamp-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stamp {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 2px solid rgba(194, 149, 106, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stamp.filled {
+            background: rgba(194, 149, 106, 0.1);
+            border-color: var(--accent-color);
+        }
+        
+        .stamp.pulsing {
+            animation: pulse 2s infinite;
+            border-color: var(--success-color);
+            box-shadow: 0 0 15px rgba(0, 245, 160, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .stamp-text {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Section Titles */
+        h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Rewards */
+        .rewards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .reward-item {
+            background: var(--surface-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .reward-item.available {
+            border-color: var(--border-color);
+        }
+
+        .reward-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(194, 149, 106, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .reward-info {
+            flex: 1;
+        }
+
+        .reward-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .reward-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .reward-action {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .reward-cost {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .btn-redeem {
+            background: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-redeem:active {
+            background: var(--accent-hover);
+        }
+
+        .btn-redeem:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+        }
+
+        /* Activity */
+        .activity-list {
+            background: var(--surface-color);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 32px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .activity-item:first-child {
+            padding-top: 0;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .activity-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .activity-pts {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pts-positive {
+            color: var(--success-color);
+        }
+
+        .pts-negative {
+            color: var(--danger-color);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--surface-color);
+            border-radius: 24px;
+            padding: 32px 24px;
+            text-align: center;
+            width: 100%;
+            max-width: 320px;
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            margin: 24px auto;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: 
+                linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
+                linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+        
+        .qr-inner {
+            width: 160px;
+            height: 160px;
+            background: white;
+            border: 10px solid black;
+            position: relative;
+        }
+        
+        .qr-inner::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            right: 20%;
+            bottom: 20%;
+            background: black;
+            border-radius: 4px;
+        }
+
+        .modal-code {
+            font-size: 24px;
+            font-family: monospace;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 24px;
+            background: rgba(194, 149, 106, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .btn-close {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 24px 0;
+            margin-top: 20px;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-text" id="splashText"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-button">←</a>
+            <div class="header-content">
+                <h1 id="storeName">☕ Café Origem</h1>
+                <h2 id="greeting">Olá, Maria! ☀️</h2>
+            </div>
+        </header>
+
+        <section class="dashboard">
+            <div class="level-badge">🥈 Nível Prata</div>
+            
+            <div class="points-wrapper">
+                <div class="points-number">127</div>
+                <div class="points-label">pontos disponíveis</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-text">
+                    <span>Progresso</span>
+                    <span>73 pontos para Ouro 🏆</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="conversion-rate">1 real gasto = 1 ponto</div>
+            </div>
+        </section>
+
+        <section class="stamp-card">
+            <div class="stamp-grid">
+                <!-- Row 1 -->
+                <div class="stamp filled">☕</div>
+                <div class="stamp filled">☕</div>
+                <div class="stamp filled">☕</div>
+                <div class="stamp filled">☕</div>
+                <div class="stamp filled">☕</div>
+                <!-- Row 2 -->
+                <div class="stamp filled">☕</div>
+                <div class="stamp filled pulsing">☕</div>
+                <div class="stamp"></div>
+                <div class="stamp"></div>
+                <div class="stamp"></div>
+            </div>
+            <div class="stamp-text">Mais 3 cafés e o próximo é grátis! 🎉</div>
+        </section>
+
+        <h3>🎁 Recompensas Disponíveis</h3>
+        <div class="rewards-list">
+            <!-- Reward 1 -->
+            <div class="reward-item available">
+                <div class="reward-icon">☕</div>
+                <div class="reward-info">
+                    <div class="reward-title">Café Grátis</div>
+                    <div class="reward-desc">Qualquer café até 300ml</div>
+                </div>
+                <div class="reward-action">
+                    <span class="reward-cost">50 pts</span>
+                    <button class="btn-redeem" onclick="redeem('Café Grátis')">Resgatar</button>
+                </div>
+            </div>
+            
+            <!-- Reward 2 -->
+            <div class="reward-item available">
+                <div class="reward-icon">🧁</div>
+                <div class="reward-info">
+                    <div class="reward-title">Bolo do Dia</div>
+                    <div class="reward-desc">Fatia de bolo artesanal</div>
+                </div>
+                <div class="reward-action">
+                    <span class="reward-cost">80 pts</span>
+                    <button class="btn-redeem" onclick="redeem('Bolo do Dia')">Resgatar</button>
+                </div>
+            </div>
+            
+            <!-- Reward 3 -->
+            <div class="reward-item available">
+                <div class="reward-icon">🥤</div>
+                <div class="reward-info">
+                    <div class="reward-title">Frappuccino</div>
+                    <div class="reward-desc">Qualquer frappe do menu</div>
+                </div>
+                <div class="reward-action">
+                    <span class="reward-cost">120 pts</span>
+                    <button class="btn-redeem" onclick="redeem('Frappuccino')">Resgatar</button>
+                </div>
+            </div>
+            
+            <!-- Reward 4 -->
+            <div class="reward-item">
+                <div class="reward-icon">⭐</div>
+                <div class="reward-info">
+                    <div class="reward-title">Desconto 15%</div>
+                    <div class="reward-desc">Em qualquer compra</div>
+                </div>
+                <div class="reward-action">
+                    <span class="reward-cost">150 pts</span>
+                    <button class="btn-redeem" disabled>Resgatar</button>
+                </div>
+            </div>
+
+            <!-- Reward 5 -->
+            <div class="reward-item">
+                <div class="reward-icon">🎂</div>
+                <div class="reward-info">
+                    <div class="reward-title">Bolo Inteiro</div>
+                    <div class="reward-desc">Bolo artesanal inteiro</div>
+                </div>
+                <div class="reward-action">
+                    <span class="reward-cost">300 pts</span>
+                    <button class="btn-redeem" disabled>Resgatar</button>
+                </div>
+            </div>
+        </div>
+
+        <h3>🕒 Atividade Recente</h3>
+        <div class="activity-list">
+            <div class="activity-item">
+                <div class="activity-details">
+                    <div class="activity-name">Cappuccino + Pão de queijo</div>
+                    <div class="activity-date">Hoje 09:41</div>
+                </div>
+                <div class="activity-pts pts-positive">+12 pts</div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-details">
+                    <div class="activity-name">Espresso Duplo</div>
+                    <div class="activity-date">Ontem 14:22</div>
+                </div>
+                <div class="activity-pts pts-positive">+8 pts</div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-details">
+                    <div class="activity-name">Café com Leite</div>
+                    <div class="activity-date">06/09 10:15</div>
+                </div>
+                <div class="activity-pts pts-positive">+10 pts</div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-details">
+                    <div class="activity-name">Frappuccino de Chocolate</div>
+                    <div class="activity-date">05/09 08:30</div>
+                </div>
+                <div class="activity-pts pts-positive">+15 pts</div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-details">
+                    <div class="activity-name">Bolo de Cenoura (Resgate)</div>
+                    <div class="activity-date">04/09 16:45</div>
+                </div>
+                <div class="activity-pts pts-negative">-80 pts</div>
+            </div>
+        </div>
+
+        <footer>
+            <a href="../index.html" class="footer-link">Powered by Nolei Creative</a>
+        </footer>
+    </div>
+
+    <!-- Redemption Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <h3 style="justify-content: center; margin-bottom: 8px;">Recompensa Resgatada!</h3>
+            <p style="color: var(--text-secondary); font-size: 14px;">Apresente este código ao barista</p>
+            
+            <div class="qr-placeholder">
+                <div class="qr-inner"></div>
+            </div>
+            
+            <div class="modal-code">CAFE-7X2K</div>
+            
+            <button class="btn-close" onclick="closeModal()">Concluir</button>
+        </div>
+    </div>
+
+    <script>
+        // Parse URL Parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const source = urlParams.get('source');
+        const nome = urlParams.get('nome') || 'Maria';
+        const loja = urlParams.get('loja') || 'Café Origem';
+        
+        // Apply parameterized values
+        document.getElementById('greeting').innerText = `Olá, ${nome}! ☀️`;
+        
+        // Add coffee emoji if loja doesn't start with one
+        const displayLoja = loja.trim();
+        document.getElementById('storeName').innerText = 
+            (displayLoja.startsWith('☕') ? '' : '☕ ') + displayLoja;
+
+        // Splash Screen Logic
+        if (source === 'nfc' || source === 'qr') {
+            const splashKey = `fidelidade_splash_${source}`;
+            if (!sessionStorage.getItem(splashKey)) {
+                sessionStorage.setItem(splashKey, 'true');
+                
+                const splash = document.getElementById('splashScreen');
+                const splashText = document.getElementById('splashText');
+                
+                splashText.innerText = source === 'nfc' ? "Experiência ativada por NFC ✨" : "QR Code escaneado ✨";
+                splash.style.display = 'flex';
+                
+                // Hide after 1.2s
+                setTimeout(() => {
+                    splash.style.opacity = '0';
+                    setTimeout(() => {
+                        splash.style.display = 'none';
+                    }, 300); // Wait for transition
+                }, 1200);
+            }
+        }
+
+        // Animate progress bar on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                // 127 points out of 200 (assuming Gold is 200) -> 63.5%
+                document.getElementById('progressBar').style.width = '63.5%';
+            }, 100);
+            
+            // Set dynamic page title
+            document.title = `${displayLoja} - Fidelidade`;
+        });
+
+        // Modal logic
+        const modal = document.getElementById('modal');
+        
+        function redeem(itemName) {
+            // In a real app we would deduct points here
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+    </script>
+</body>
+</html>

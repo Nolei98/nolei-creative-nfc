@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Hotel Jardim Imperial - Concierge</title>
+    <style>
+        :root {
+            --bg-base: #0c0d14;
+            --bg-surface: #171822;
+            --bg-surface-elevated: #242533;
+            --gold: #d4a853;
+            --gold-light: rgba(212, 168, 83, 0.15);
+            --gold-hover: #e0b764;
+            --text-primary: #f8f8fa;
+            --text-secondary: #a0a0b5;
+            --border: #2a2b3d;
+            --success: #4CAF50;
+            --success-light: rgba(76, 175, 80, 0.15);
+            --danger: #e53935;
+            
+            --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-base);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .splash-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            animation: pulse 1.2s infinite ease-in-out;
+        }
+        .splash-text {
+            font-size: 20px;
+            color: var(--gold);
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        /* App Status Bar Feel */
+        .status-bar-spacer {
+            height: 12px;
+            background: var(--bg-surface);
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px 16px;
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: env(safe-area-inset-top);
+            z-index: 100;
+        }
+
+        .back-btn {
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+            margin-left: -10px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        
+        .back-btn:active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .hotel-brand {
+            text-align: center;
+            flex: 1;
+        }
+
+        .hotel-name {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-primary);
+        }
+
+        .hotel-stars {
+            font-size: 10px;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        .room-badge {
+            background: var(--gold-light);
+            color: var(--gold);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Container */
+        .container {
+            padding: 24px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Greeting */
+        .greeting {
+            margin-bottom: 28px;
+        }
+        .greeting h1 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--gold);
+        }
+        .greeting p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+        }
+
+        .service-card:active {
+            transform: scale(0.97);
+            border-color: var(--gold);
+            background: var(--bg-surface-elevated);
+        }
+
+        .service-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .service-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        /* Views */
+        .view {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* View Header (Inner Back) */
+        .view-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .view-back {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 0;
+            font-weight: 500;
+        }
+        .view-back i {
+            font-style: normal;
+            font-size: 20px;
+            margin-top: -2px;
+        }
+
+        .view-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-left: 12px;
+            color: var(--gold);
+        }
+
+        /* Common UI Elements */
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            background: var(--gold);
+            color: var(--bg-base);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn:active {
+            background: var(--gold-hover);
+            transform: scale(0.98);
+        }
+        .btn-secondary {
+            background: var(--bg-surface-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .form-control {
+            width: 100%;
+            background: var(--bg-base);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23a0a0b5%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px top 50%;
+            background-size: 12px auto;
+        }
+
+        /* Room Service specifics */
+        .category-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .menu-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .menu-info {
+            flex: 1;
+        }
+        .menu-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .menu-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .menu-price {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            background: var(--bg-base);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .qty-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .qty-btn:active {
+            background: var(--bg-surface-elevated);
+        }
+        .qty-value {
+            font-size: 14px;
+            font-weight: 600;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* Cart Floating Button */
+        .cart-float {
+            position: fixed;
+            bottom: 60px;
+            left: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--bg-base);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(212, 168, 83, 0.25);
+            cursor: pointer;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 50;
+        }
+        .cart-float.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .cart-badge {
+            background: var(--bg-base);
+            color: var(--gold);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .cart-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Cart Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(12, 13, 20, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-content {
+            background: var(--bg-surface);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 24px;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 80vh;
+            overflow-y: auto;
+            border-top: 1px solid var(--border);
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .modal-close {
+            background: var(--bg-base);
+            border: none;
+            color: var(--text-primary);
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .cart-item-name { font-weight: 500; font-size: 15px; margin-bottom: 4px; }
+        .cart-item-price { color: var(--text-secondary); font-size: 14px; }
+        .cart-item-total { font-weight: 600; color: var(--gold); }
+        
+        .cart-summary {
+            margin-top: 24px;
+            margin-bottom: 24px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Success Message */
+        .success-box {
+            background: var(--success-light);
+            border: 1px solid var(--success);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            display: none;
+        }
+        .success-box.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        .success-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        .success-title {
+            color: var(--success);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .success-desc {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Wifi Card */
+        .wifi-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .wifi-icon { font-size: 48px; color: var(--gold); margin-bottom: 16px; }
+        .wifi-creds {
+            background: var(--bg-base);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 20px 0;
+            border: 1px dashed var(--border);
+        }
+        .wifi-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+        .wifi-row:first-child { border-bottom: 1px solid var(--border); }
+        .wifi-label { color: var(--text-secondary); font-size: 14px; }
+        .wifi-val { font-family: monospace; font-size: 16px; font-weight: 600; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            margin-top: auto;
+        }
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+        .footer img {
+            height: 16px;
+            opacity: 0.5;
+            filter: grayscale(1) invert(1);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: var(--bg-surface-elevated);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .treatment-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        .treatment-info h4 { margin-bottom: 4px; font-size: 16px; }
+        .treatment-info p { font-size: 13px; color: var(--text-secondary); }
+        .treatment-book {
+            background: var(--gold-light);
+            color: var(--gold);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .treatment-book:active { background: rgba(212, 168, 83, 0.25); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="hidden">
+        <div class="splash-icon" id="splash-icon">✨</div>
+        <div class="splash-text" id="splash-text">Experiência ativada</div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="status-bar-spacer"></div>
+    <header class="top-bar">
+        <a href="../index.html" class="back-btn">‹</a>
+        <div class="hotel-brand">
+            <div class="hotel-name">Jardim Imperial</div>
+            <div class="hotel-stars">★★★★★</div>
+        </div>
+        <div class="room-badge" id="room-badge-display">
+            🏨 Suíte 412
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- HOME VIEW -->
+        <div id="view-home" class="view active">
+            <div class="greeting">
+                <h1 id="greeting-display">Bem-vindo à Suíte 412</h1>
+                <p>Toque em um serviço para solicitações imediatas.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" onclick="openView('view-breakfast')">
+                    <span class="service-icon">🍳</span>
+                    <div class="service-title">Café da Manhã</div>
+                </div>
+                <div class="service-card" onclick="openView('view-roomservice')">
+                    <span class="service-icon">🛎️</span>
+                    <div class="service-title">Room Service</div>
+                </div>
+                <div class="service-card" onclick="openView('view-cleaning')">
+                    <span class="service-icon">🧹</span>
+                    <div class="service-title">Arrumação do Quarto</div>
+                </div>
+                <div class="service-card" onclick="openView('view-spa')">
+                    <span class="service-icon">🧖‍♀️</span>
+                    <div class="service-title">SPA & Bem-Estar</div>
+                </div>
+                <div class="service-card" onclick="openView('view-wifi')">
+                    <span class="service-icon">📶</span>
+                    <div class="service-title">Wi-Fi Premium</div>
+                </div>
+                <div class="service-card" onclick="openView('view-transfer')">
+                    <span class="service-icon">🚗</span>
+                    <div class="service-title">Transfer / Táxi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BREAKFAST VIEW -->
+        <div id="view-breakfast" class="view">
+            <div class="view-header">
+                <button class="view-back" onclick="openView('view-home')"><i>‹</i> Voltar</button>
+                <div class="view-title">Café da Manhã</div>
+            </div>
+            
+            <div class="card" style="text-align: center;">
+                <h3 style="margin-bottom: 8px; color: var(--gold);">Horário de Funcionamento</h3>
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">6h30 - 10h00</p>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Servido no restaurante principal (Térreo)</p>
+                
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+                
+                <h4 style="margin-bottom: 16px;">Solicitar no quarto</h4>
+                <div class="form-group" style="text-align: left;">
+                    <label class="form-label">Horário desejado:</label>
+                    <select class="form-control" id="breakfast-time">
+                        <option>07:00</option>
+                        <option>07:30</option>
+                        <option>08:00</option>
+                        <option>08:30</option>
+                        <option>09:00</option>
+                        <option>09:30</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="showToast('Solicitação de café da manhã enviada!')">Solicitar</button>
+            </div>
+        </div>
+
+        <!-- ROOM SERVICE VIEW -->
+        <div id="view-roomservice" class="view">
+            <div class="view-header">
+                <button class="view-back" onclick="openView('view-home')"><i>‹</i> Voltar</button>
+                <div class="view-title">Menu Room Service</div>
+            </div>
+
+            <div id="rs-success" class="success-box">
+                <div class="success-icon">✅</div>
+                <div class="success-title">Pedido Recebido!</div>
+                <div class="success-desc">Seu pedido está sendo preparado.<br>Previsão de entrega: <strong>25-35 min</strong></div>
+                <button class="btn btn-secondary" style="margin-top: 16px;" onclick="resetRoomService()">Fazer Novo Pedido</button>
+            </div>
+
+            <div id="rs-menu">
+                <div class="category-title">🥪 Lanches</div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">Club Sandwich</div>
+                        <div class="menu-desc">Frango grelhado, bacon, alface, tomate e maionese da casa</div>
+                        <div class="menu-price">R$ 45,00</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('item1', -1, 45, 'Club Sandwich')">−</button>
+                        <span class="qty-value" id="qty-item1">0</span>
+                        <button class="qty-btn" onclick="updateQty('item1', 1, 45, 'Club Sandwich')">+</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">Pizza Margherita</div>
+                        <div class="menu-desc">Molho de tomate San Marzano, muçarela e manjericão</div>
+                        <div class="menu-price">R$ 52,00</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('item2', -1, 52, 'Pizza Margherita')">−</button>
+                        <span class="qty-value" id="qty-item2">0</span>
+                        <button class="qty-btn" onclick="updateQty('item2', 1, 52, 'Pizza Margherita')">+</button>
+                    </div>
+                </div>
+
+                <div class="category-title">🍲 Pratos Quentes</div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">Filé Mignon Madeira</div>
+                        <div class="menu-desc">Com arroz de brócolis e batatas rústicas</div>
+                        <div class="menu-price">R$ 89,00</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('item3', -1, 89, 'Filé Mignon Madeira')">−</button>
+                        <span class="qty-value" id="qty-item3">0</span>
+                        <button class="qty-btn" onclick="updateQty('item3', 1, 89, 'Filé Mignon Madeira')">+</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">Massa ao Pesto</div>
+                        <div class="menu-desc">Fettuccine fresco com pesto genovês e tomate seco</div>
+                        <div class="menu-price">R$ 62,00</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('item4', -1, 62, 'Massa ao Pesto')">−</button>
+                        <span class="qty-value" id="qty-item4">0</span>
+                        <button class="qty-btn" onclick="updateQty('item4', 1, 62, 'Massa ao Pesto')">+</button>
+                    </div>
+                </div>
+
+                <div class="category-title">🍷 Bebidas</div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">Vinho Tinto Reserva</div>
+                        <div class="menu-desc">Taça de Malbec argentino</div>
+                        <div class="menu-price">R$ 35,00</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('item5', -1, 35, 'Vinho Tinto Reserva')">−</button>
+                        <span class="qty-value" id="qty-item5">0</span>
+                        <button class="qty-btn" onclick="updateQty('item5', 1, 35, 'Vinho Tinto Reserva')">+</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">Água Mineral</div>
+                        <div class="menu-desc">Sem gás / Com gás</div>
+                        <div class="menu-price">R$ 8,00</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('item6', -1, 8, 'Água Mineral')">−</button>
+                        <span class="qty-value" id="qty-item6">0</span>
+                        <button class="qty-btn" onclick="updateQty('item6', 1, 8, 'Água Mineral')">+</button>
+                    </div>
+                </div>
+
+                <div class="category-title">🍰 Sobremesas</div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">Sorvete Artesanal</div>
+                        <div class="menu-desc">2 bolas, escolha do sabor</div>
+                        <div class="menu-price">R$ 24,00</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('item7', -1, 24, 'Sorvete Artesanal')">−</button>
+                        <span class="qty-value" id="qty-item7">0</span>
+                        <button class="qty-btn" onclick="updateQty('item7', 1, 24, 'Sorvete Artesanal')">+</button>
+                    </div>
+                </div>
+                <div style="height: 100px;"></div> <!-- Spacer for floating button -->
+            </div>
+        </div>
+
+        <!-- CLEANING VIEW -->
+        <div id="view-cleaning" class="view">
+            <div class="view-header">
+                <button class="view-back" onclick="openView('view-home')"><i>‹</i> Voltar</button>
+                <div class="view-title">Arrumação</div>
+            </div>
+            
+            <div class="card">
+                <button class="btn" style="margin-bottom: 16px;" onclick="showToast('Solicitação enviada. A equipe irá ao seu quarto em breve.')">Arrumar Agora</button>
+                
+                <div style="margin: 24px 0;">
+                    <label class="form-label">Agendar arrumação para:</label>
+                    <div style="display: flex; gap: 12px;">
+                        <input type="time" class="form-control" value="14:00" id="clean-time">
+                        <button class="btn" style="width: auto; padding: 0 24px;" onclick="showToast('Arrumação agendada para ' + document.getElementById('clean-time').value)">Agendar</button>
+                    </div>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px 0;">
+                
+                <button class="btn btn-secondary" onclick="showToast('Modo Não Perturbe ativado. 🤫')">
+                    <span style="font-size: 20px;">🚫</span> Ativar "Não Perturbe"
+                </button>
+            </div>
+        </div>
+
+        <!-- SPA VIEW -->
+        <div id="view-spa" class="view">
+            <div class="view-header">
+                <button class="view-back" onclick="openView('view-home')"><i>‹</i> Voltar</button>
+                <div class="view-title">SPA & Bem-Estar</div>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 14px;">Relaxe com nossos tratamentos exclusivos. Horário: 09h às 21h.</p>
+            
+            <div class="treatment-card">
+                <div class="treatment-info">
+                    <h4>Massagem Relaxante</h4>
+                    <p>60 min • R$ 250,00</p>
+                </div>
+                <button class="treatment-book" onclick="showToast('Reserva solicitada! O SPA entrará em contato.')">Reservar</button>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-info">
+                    <h4>Pedras Quentes</h4>
+                    <p>90 min • R$ 320,00</p>
+                </div>
+                <button class="treatment-book" onclick="showToast('Reserva solicitada! O SPA entrará em contato.')">Reservar</button>
+            </div>
+            <div class="treatment-card">
+                <div class="treatment-info">
+                    <h4>Limpeza de Pele</h4>
+                    <p>50 min • R$ 180,00</p>
+                </div>
+                <button class="treatment-book" onclick="showToast('Reserva solicitada! O SPA entrará em contato.')">Reservar</button>
+            </div>
+        </div>
+
+        <!-- WIFI VIEW -->
+        <div id="view-wifi" class="view">
+            <div class="view-header">
+                <button class="view-back" onclick="openView('view-home')"><i>‹</i> Voltar</button>
+                <div class="view-title">Wi-Fi Premium</div>
+            </div>
+            
+            <div class="card wifi-card">
+                <div class="wifi-icon">📶</div>
+                <h3>Conexão de Alta Velocidade</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">Conecte-se à nossa rede exclusiva para hóspedes.</p>
+                
+                <div class="wifi-creds">
+                    <div class="wifi-row">
+                        <span class="wifi-label">Rede (SSID)</span>
+                        <span class="wifi-val">JardimImperial_VIP</span>
+                    </div>
+                    <div class="wifi-row">
+                        <span class="wifi-label">Senha</span>
+                        <span id="wifi-pass-display" class="wifi-val">suite412</span>
+                    </div>
+                </div>
+                
+                <button class="btn btn-secondary" onclick="copyWifi()">Copiar Senha</button>
+            </div>
+        </div>
+
+        <!-- TRANSFER VIEW -->
+        <div id="view-transfer" class="view">
+            <div class="view-header">
+                <button class="view-back" onclick="openView('view-home')"><i>‹</i> Voltar</button>
+                <div class="view-title">Solicitar Transfer</div>
+            </div>
+            
+            <div class="card">
+                <div class="form-group">
+                    <label class="form-label">Destino</label>
+                    <select class="form-control">
+                        <option>Aeroporto Internacional</option>
+                        <option>Centro da Cidade</option>
+                        <option>Shopping Center</option>
+                        <option>Outro (informar motorista)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Data e Hora</label>
+                    <input type="datetime-local" class="form-control" value="2026-09-09T10:00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Passageiros</label>
+                    <select class="form-control">
+                        <option>1 pessoa</option>
+                        <option>2 pessoas</option>
+                        <option>3 pessoas</option>
+                        <option>4+ pessoas (Van)</option>
+                    </select>
+                </div>
+                <button class="btn" style="margin-top: 24px;" onclick="showToast('Transfer solicitado com sucesso! A recepção confirmará em breve.')">Confirmar Solicitação</button>
+            </div>
+        </div>
+
+    </div> <!-- /Container -->
+
+    <!-- Cart Floating Button -->
+    <div class="cart-float" id="cart-float" onclick="openCart()">
+        <div class="cart-left">
+            <div class="cart-badge" id="cart-badge">0</div>
+            <span>Ver Pedido</span>
+        </div>
+        <div id="cart-total-float">R$ 0,00</div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Seu Pedido</div>
+                <button class="modal-close" onclick="closeCart()">✕</button>
+            </div>
+            
+            <div id="cart-items-container">
+                <!-- Items injected here by JS -->
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">R$ 0,00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Taxa de Serviço (10%)</span>
+                    <span id="cart-tax">R$ 0,00</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span id="cart-final-total">R$ 0,00</span>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="sendOrder()">Enviar para o Quarto</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Mensagem</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <a href="../index.html">Powered by Nolei Creative</a>
+    </footer>
+
+    <script>
+        // Initialization (URL Params & Splash)
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const quarto = urlParams.get('quarto') || '412';
+            const source = urlParams.get('source');
+
+            // Update UI with Room Number
+            document.getElementById('room-badge-display').innerHTML = `🏨 Suíte ${quarto}`;
+            document.getElementById('greeting-display').innerText = `Bem-vindo à Suíte ${quarto}`;
+            document.getElementById('wifi-pass-display').innerText = `suite${quarto}`;
+
+            // Handle Splash Screen
+            const splashScreen = document.getElementById('splash-screen');
+            if (source === 'nfc' || source === 'qr') {
+                const sessionKey = `hotel_splash_${source}`;
+                if (!sessionStorage.getItem(sessionKey)) {
+                    splashScreen.classList.remove('hidden');
+                    
+                    const splashIcon = document.getElementById('splash-icon');
+                    const splashText = document.getElementById('splash-text');
+                    
+                    if (source === 'nfc') {
+                        splashIcon.innerText = '✨';
+                        splashText.innerText = 'Experiência ativada por NFC ✨';
+                    } else if (source === 'qr') {
+                        splashIcon.innerText = '📱';
+                        splashText.innerText = 'QR Code escaneado ✨';
+                    }
+                    
+                    sessionStorage.setItem(sessionKey, 'true');
+                    
+                    setTimeout(() => {
+                        splashScreen.classList.add('hidden');
+                    }, 1200);
+                } else {
+                    splashScreen.style.display = 'none';
+                }
+            } else {
+                splashScreen.style.display = 'none';
+            }
+        });
+
+        // Navigation
+        function openView(id) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0, 0);
+            
+            // Manage cart visibility based on view
+            if (id === 'view-roomservice' && totalItems > 0 && !orderSent) {
+                document.getElementById('cart-float').classList.add('visible');
+            } else {
+                document.getElementById('cart-float').classList.remove('visible');
+            }
+        }
+
+        // Cart State
+        let cart = {};
+        let totalItems = 0;
+        let totalPrice = 0;
+        let orderSent = false;
+
+        function updateQty(itemId, change, price, name) {
+            if (!cart[itemId]) {
+                cart[itemId] = { qty: 0, price: price, name: name };
+            }
+            
+            let newQty = cart[itemId].qty + change;
+            if (newQty < 0) newQty = 0;
+            
+            cart[itemId].qty = newQty;
+            document.getElementById('qty-' + itemId).innerText = newQty;
+            
+            updateCartState();
+        }
+
+        function updateCartState() {
+            totalItems = 0;
+            totalPrice = 0;
+            
+            for (const key in cart) {
+                totalItems += cart[key].qty;
+                totalPrice += cart[key].qty * cart[key].price;
+            }
+            
+            const cartFloat = document.getElementById('cart-float');
+            
+            if (totalItems > 0 && !orderSent) {
+                document.getElementById('cart-badge').innerText = totalItems;
+                document.getElementById('cart-total-float').innerText = formatMoney(totalPrice);
+                cartFloat.classList.add('visible');
+            } else {
+                cartFloat.classList.remove('visible');
+            }
+        }
+
+        function formatMoney(amount) {
+            return 'R$ ' + amount.toFixed(2).replace('.', ',');
+        }
+
+        function openCart() {
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+            
+            for (const key in cart) {
+                if (cart[key].qty > 0) {
+                    const item = cart[key];
+                    const itemTotal = item.qty * item.price;
+                    
+                    container.innerHTML += `
+                        <div class="cart-item">
+                            <div>
+                                <div class="cart-item-name">${item.qty}x ${item.name}</div>
+                                <div class="cart-item-price">${formatMoney(item.price)} cada</div>
+                            </div>
+                            <div class="cart-item-total">${formatMoney(itemTotal)}</div>
+                        </div>
+                    `;
+                }
+            }
+            
+            const tax = totalPrice * 0.1;
+            const final = totalPrice + tax;
+            
+            document.getElementById('cart-subtotal').innerText = formatMoney(totalPrice);
+            document.getElementById('cart-tax').innerText = formatMoney(tax);
+            document.getElementById('cart-final-total').innerText = formatMoney(final);
+            
+            document.getElementById('cart-modal').classList.add('active');
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').classList.remove('active');
+        }
+
+        function sendOrder() {
+            closeCart();
+            orderSent = true;
+            document.getElementById('cart-float').classList.remove('visible');
+            document.getElementById('rs-menu').style.display = 'none';
+            document.getElementById('rs-success').classList.add('active');
+        }
+
+        function resetRoomService() {
+            orderSent = false;
+            cart = {};
+            totalItems = 0;
+            totalPrice = 0;
+            
+            // Reset qty displays
+            document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
+            
+            document.getElementById('rs-success').classList.remove('active');
+            document.getElementById('rs-menu').style.display = 'block';
+        }
+
+        // Utils
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function copyWifi() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const quarto = urlParams.get('quarto') || '412';
+            const pass = `suite${quarto}`;
+            
+            navigator.clipboard.writeText(pass).then(() => {
+                showToast('Senha copiada para a área de transferência!');
+            }).catch(() => {
+                showToast(`Senha: ${pass}`);
+            });
+        }
+    </script>
+</body>
+</html>

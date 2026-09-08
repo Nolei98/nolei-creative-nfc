@@ -3,23 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#e5e5e3">
+  <meta name="theme-color" content="#0F223D">
   <title>Nolei Creative — Soluções Físico-Digitais</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23121212' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
+  
+  <!-- Google Fonts: Poppins & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F223D' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
   
   <style>
     :root {
-      --bg: #e5e5e3;
-      --card: #ffffff;
-      --card-subtle: #f6f6f4;
-      --border: rgba(0, 0, 0, 0.07);
-      --border-hover: rgba(0, 0, 0, 0.2);
-      --text: #121212;
-      --text-muted: #666663;
-      --text-dim: #8e8e8a;
+      --navy: #0F223D;
+      --navy-light: #162C46;
+      --navy-dark: #0A1728;
+      --leaf-green: #2E7D32;
+      --leaf-green-accent: #22C55E;
+      --leaf-green-light: #E8F5E9;
+      --orange: #F97316;
+      --orange-accent: #EA580C;
+      --orange-light: #FFF7ED;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --border: #E2E8F0;
+      --border-hover: #CBD5E1;
       --radius: 18px;
       --radius-sm: 10px;
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * {
@@ -30,20 +45,27 @@
     }
 
     body {
-      font-family: var(--font);
-      background-color: var(--bg);
+      font-family: var(--font-body);
+      background-color: var(--bg-light);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.55;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      color: var(--navy);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
     .page {
-      max-width: 560px;
+      max-width: 580px;
       margin: 0 auto;
-      padding: 36px 20px 60px;
+      padding: 32px 20px 60px;
       width: 100%;
     }
 
@@ -53,41 +75,49 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
     }
 
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      color: var(--text);
+      color: var(--navy);
     }
 
     .brand-mark {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 10px;
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 10px rgba(15, 34, 61, 0.2);
     }
 
     .brand-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 800;
       letter-spacing: -0.5px;
+      color: var(--navy);
+    }
+
+    .brand-title span {
+      color: var(--leaf-green);
     }
 
     .brand-pill {
       font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.05);
+      font-weight: 700;
+      color: var(--leaf-green);
+      background: var(--leaf-green-light);
       padding: 5px 12px;
       border-radius: 20px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(46, 125, 50, 0.2);
     }
 
     /* Hero */
@@ -96,47 +126,59 @@
     }
 
     .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
+      color: var(--orange);
+      background: var(--orange-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
     }
 
     .hero-title {
-      font-size: 1.85rem;
+      font-size: 1.9rem;
       font-weight: 800;
       line-height: 1.2;
       letter-spacing: -0.6px;
-      color: var(--text);
+      color: var(--navy);
       margin-bottom: 8px;
+    }
+
+    .hero-title .highlight {
+      color: var(--leaf-green);
     }
 
     .hero-subtitle {
       font-size: 0.95rem;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     /* Mode Switcher */
     .channel-switch {
       display: flex;
-      background: rgba(0, 0, 0, 0.06);
-      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       padding: 4px;
       margin-bottom: 24px;
       gap: 4px;
+      box-shadow: 0 1px 3px rgba(15, 34, 61, 0.04);
     }
 
     .channel-btn {
       flex: 1;
       padding: 10px 14px;
-      border-radius: 9px;
+      border-radius: 10px;
       border: none;
       background: transparent;
       color: var(--text-muted);
-      font-family: inherit;
+      font-family: var(--font-heading);
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
@@ -148,9 +190,9 @@
     }
 
     .channel-btn.active {
-      background: #ffffff;
-      color: var(--text);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.25);
     }
 
     /* Section Info */
@@ -166,7 +208,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-muted);
+      color: var(--navy);
     }
 
     .section-desc {
@@ -174,7 +216,7 @@
       color: var(--text-dim);
     }
 
-    /* Solutions Cards */
+    /* Solutions Stack */
     .cards-stack {
       display: flex;
       flex-direction: column;
@@ -183,17 +225,17 @@
     }
 
     .solution-card {
-      background: var(--card);
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 6px rgba(15, 34, 61, 0.04);
       transition: all 0.2s ease;
     }
 
     .solution-card:hover {
-      border-color: var(--border-hover);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      border-color: var(--navy);
+      box-shadow: 0 8px 22px rgba(15, 34, 61, 0.08);
       transform: translateY(-2px);
     }
 
@@ -204,8 +246,8 @@
     }
 
     .card-photo-box {
-      width: 135px;
-      min-width: 135px;
+      width: 140px;
+      min-width: 140px;
       position: relative;
       overflow: hidden;
       background: #dfdfdc;
@@ -232,24 +274,24 @@
     }
 
     .card-category {
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--text-muted);
+      color: var(--leaf-green);
       margin-bottom: 4px;
     }
 
     .card-title {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--text);
+      color: var(--navy);
       line-height: 1.3;
       margin-bottom: 4px;
     }
 
     .card-desc {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       line-height: 1.45;
     }
@@ -259,7 +301,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 16px;
-      background: var(--card-subtle);
+      background: var(--bg-light);
       border-top: 1px solid var(--border);
     }
 
@@ -270,32 +312,30 @@
     }
 
     .btn-qr-open {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.75rem;
+      background: var(--navy);
+      border: none;
+      color: var(--white);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
       font-weight: 600;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.15s;
+      transition: background 0.2s;
     }
 
     .btn-qr-open:hover {
-      background: #121212;
-      color: #ffffff;
-      border-color: #121212;
+      background: var(--leaf-green);
     }
 
     /* Modal QR Code */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(18, 18, 18, 0.7);
+      background: rgba(15, 34, 61, 0.75);
       backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
@@ -319,7 +359,7 @@
       max-width: 360px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
       transform: scale(0.96);
       transition: transform 0.2s ease;
     }
@@ -331,7 +371,7 @@
     .modal-title {
       font-size: 1.15rem;
       font-weight: 700;
-      color: var(--text);
+      color: var(--navy);
       margin-bottom: 4px;
     }
 
@@ -348,7 +388,7 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 12px rgba(15, 34, 61, 0.06);
     }
 
     .qr-image-container img {
@@ -362,7 +402,7 @@
       font-family: ui-monospace, monospace;
       font-size: 0.72rem;
       color: var(--text-dim);
-      background: var(--card-subtle);
+      background: var(--bg-light);
       padding: 8px 12px;
       border-radius: 8px;
       word-break: break-all;
@@ -371,29 +411,37 @@
 
     .btn-modal-close {
       width: 100%;
-      background: #121212;
-      color: #ffffff;
+      background: var(--navy);
+      color: var(--white);
       border: none;
       border-radius: 12px;
       padding: 12px;
+      font-family: var(--font-heading);
       font-weight: 600;
       font-size: 0.9rem;
       cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-modal-close:hover {
+      background: var(--navy-light);
     }
 
     /* Bottom Contact */
     .contact-card {
-      background: var(--card);
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px 24px;
       text-align: center;
       margin-top: 10px;
+      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.04);
     }
 
     .contact-title {
       font-size: 1.15rem;
       font-weight: 700;
+      color: var(--navy);
       margin-bottom: 6px;
     }
 
@@ -408,18 +456,21 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #121212;
+      background: var(--leaf-green);
       color: #ffffff;
       text-decoration: none;
+      font-family: var(--font-heading);
       font-weight: 600;
       font-size: 0.9rem;
       padding: 14px 28px;
       border-radius: 100px;
-      transition: background 0.2s;
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+      transition: all 0.2s;
     }
 
     .btn-whatsapp-cta:hover {
-      background: #262626;
+      background: #256628;
+      transform: translateY(-2px);
     }
 
     .footer {
@@ -440,7 +491,7 @@
         <div class="brand-mark">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
         </div>
-        <span class="brand-title">Nolei Creative</span>
+        <div class="brand-title">Nolei <span>Creative</span></div>
       </a>
       <span class="brand-pill">Hardware & Software NFC</span>
     </header>
@@ -448,8 +499,8 @@
     <!-- Hero -->
     <div class="hero">
       <div class="hero-eyebrow">Experiências Físico-Digitais</div>
-      <h1 class="hero-title">Aproxime o celular.<br>A experiência começa.</h1>
-      <p class="hero-subtitle">Soluções integradas com placas inteligentes para captação de avaliações, menus dinâmicos, hospitalidade e fidelização.</p>
+      <h1 class="hero-title">Aproxime o celular.<br>A experiência <span class="highlight">começa</span>.</h1>
+      <p class="hero-subtitle">Placas e totens inteligentes para captação de avaliações 5★, menus dinâmicos, hospitalidade e fidelização.</p>
     </div>
 
     <!-- Mode Selector -->
@@ -466,7 +517,7 @@
 
     <!-- Section Header -->
     <div class="section-label-row">
-      <span class="section-label">Aplicações Prontas</span>
+      <span class="section-label">Aplicações Integradas</span>
       <span class="section-desc">Toque para abrir ou gere o QR</span>
     </div>
 
@@ -482,7 +533,7 @@
           <div class="card-details">
             <span class="card-category">Multi-setor • Clínicas & Lojas</span>
             <h3 class="card-title">Google Avaliações</h3>
-            <p class="card-desc">Captação oficial de avaliações 5★ no Google Maps com filtro e ouvidoria privada para notas baixas.</p>
+            <p class="card-desc">Captação de avaliações 5★ oficiais no Google Maps com filtro inteligente para notas baixas.</p>
           </div>
         </a>
         <div class="card-actions-row">
@@ -503,7 +554,7 @@
           <div class="card-details">
             <span class="card-category">Restaurantes • Pousadas • Bares</span>
             <h3 class="card-title">Cardápio & Menu Digital</h3>
-            <p class="card-desc">Menu com fotos de alta qualidade, chamada de garçom, senha de Wi-Fi e pedidos direto no WhatsApp.</p>
+            <p class="card-desc">Menu com fotos de alta resolução, chamada de garçom, senha de Wi-Fi e pedidos no WhatsApp.</p>
           </div>
         </a>
         <div class="card-actions-row">
@@ -562,7 +613,7 @@
     <!-- Contact & Project Section -->
     <div class="contact-card">
       <h3 class="contact-title">Projetos Sob Medida</h3>
-      <p class="contact-desc">Displays em acrílico, madeira nobre ou metal gravado a laser personalizados para o seu espaço.</p>
+      <p class="contact-desc">Displays em acrílico, madeira nobre ou metal gravado a laser personalizados com a marca da sua empresa.</p>
       <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Visitei%20as%20demos%20da%20Nolei%20Creative%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta">
         Falar com a Nolei Creative
       </a>
@@ -627,8 +678,8 @@
       modalTitle.textContent = title;
       modalUrl.textContent = fullTargetUrl;
 
-      // 100% reliable QR code generator URL
-      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(fullTargetUrl)}&color=12-12-12&bgcolor=ffffff&margin=0`;
+      // QR Code gerado em alta definição com a cor oficial Azul Marinho Profundo (#0F223D)
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(fullTargetUrl)}&color=15-34-61&bgcolor=ffffff&margin=0`;
       qrImg.src = qrApiUrl;
 
       modal.classList.add('open');

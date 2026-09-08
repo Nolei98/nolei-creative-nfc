@@ -3,38 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0F223D">
-  <title>Querência Nutrição & Nolei — Experiências Físico-Digitais</title>
+  <meta name="theme-color" content="#e5e5e3">
+  <title>Nolei Creative — Soluções Físico-Digitais</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23121212' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
   
-  <!-- Google Fonts: Poppins (Títulos) & Roboto (Texto) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- QRCode Engine -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-
   <style>
     :root {
-      --navy: #0F223D;
-      --navy-light: #162C46;
-      --navy-dark: #0A1728;
-      --leaf-green: #2E7D32;
-      --leaf-green-accent: #22C55E;
-      --leaf-green-light: #E8F5E9;
-      --orange: #F97316;
-      --orange-accent: #EA580C;
-      --orange-light: #FFF7ED;
-      --white: #FFFFFF;
-      --bg-light: #F8FAFC;
-      --text: #1E293B;
-      --text-muted: #64748B;
-      --text-dim: #94A3B8;
-      --border: #E2E8F0;
+      --bg: #e5e5e3;
+      --card: #ffffff;
+      --card-subtle: #f6f6f4;
+      --border: rgba(0, 0, 0, 0.07);
+      --border-hover: rgba(0, 0, 0, 0.2);
+      --text: #121212;
+      --text-muted: #666663;
+      --text-dim: #8e8e8a;
       --radius: 18px;
       --radius-sm: 10px;
-      --font-heading: 'Poppins', sans-serif;
-      --font-body: 'Roboto', sans-serif;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     * {
@@ -45,27 +30,20 @@
     }
 
     body {
-      font-family: var(--font-body);
-      background-color: var(--bg-light);
+      font-family: var(--font);
+      background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.6;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-heading);
-      color: var(--navy);
-      font-weight: 700;
-      line-height: 1.25;
-    }
-
     .page {
-      max-width: 680px;
+      max-width: 560px;
       margin: 0 auto;
-      padding: 24px 20px 60px;
+      padding: 36px 20px 60px;
       width: 100%;
     }
 
@@ -74,110 +52,91 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 0 24px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 28px;
-    }
-
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-    .brand-mascot-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--navy);
-      border: 2px solid var(--leaf-green-accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-size: 1.2rem;
-    }
-
-    .brand-name {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--navy);
-      letter-spacing: -0.4px;
-    }
-
-    .brand-name span {
-      color: var(--leaf-green);
-    }
-
-    .brand-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--leaf-green);
-      background: var(--leaf-green-light);
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(46, 125, 50, 0.2);
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
       margin-bottom: 32px;
     }
 
-    .hero-eyebrow {
-      display: inline-flex;
+    .brand-logo {
+      display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--orange);
-      background: var(--orange-light);
-      padding: 6px 14px;
-      border-radius: 20px;
-      margin-bottom: 12px;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
     }
 
-    .hero-title {
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      margin-bottom: 10px;
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #121212;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
       letter-spacing: -0.5px;
     }
 
-    .hero-title .highlight {
-      color: var(--leaf-green);
+    .brand-pill {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.05);
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.6px;
+      color: var(--text);
+      margin-bottom: 8px;
     }
 
     .hero-subtitle {
       font-size: 0.95rem;
       color: var(--text-muted);
-      max-width: 540px;
-      margin: 0 auto;
+      line-height: 1.5;
     }
 
-    /* Channel Switcher Tabs */
+    /* Mode Switcher */
     .channel-switch {
       display: flex;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
       padding: 4px;
       margin-bottom: 24px;
       gap: 4px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
 
     .channel-btn {
       flex: 1;
       padding: 10px 14px;
-      border-radius: 10px;
+      border-radius: 9px;
       border: none;
       background: transparent;
       color: var(--text-muted);
-      font-family: var(--font-heading);
+      font-family: inherit;
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
@@ -185,32 +144,38 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
 
     .channel-btn.active {
-      background: var(--navy);
-      color: var(--white);
-      box-shadow: 0 2px 6px rgba(15, 34, 61, 0.2);
+      background: #ffffff;
+      color: var(--text);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     }
 
-    /* Solutions List */
-    .section-header-row {
+    /* Section Info */
+    .section-label-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 14px;
     }
 
-    .section-title {
-      font-size: 0.8rem;
+    .section-label {
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--navy);
+      color: var(--text-muted);
     }
 
-    .solutions-grid {
+    .section-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* Solutions Cards */
+    .cards-stack {
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -218,297 +183,119 @@
     }
 
     .solution-card {
-      background: var(--white);
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(15, 34, 61, 0.04);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
       transition: all 0.2s ease;
     }
 
     .solution-card:hover {
-      border-color: var(--navy-light);
-      box-shadow: 0 6px 18px rgba(15, 34, 61, 0.08);
+      border-color: var(--border-hover);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
       transform: translateY(-2px);
     }
 
-    .card-top-link {
+    .card-link-area {
       display: flex;
       text-decoration: none;
       color: var(--text);
     }
 
-    .card-thumb-wrap {
-      width: 140px;
-      min-width: 140px;
+    .card-photo-box {
+      width: 135px;
+      min-width: 135px;
       position: relative;
-      background: var(--border);
+      overflow: hidden;
+      background: #dfdfdc;
     }
 
-    .card-thumb {
+    .card-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.3s ease;
     }
 
-    .card-body {
-      padding: 16px;
+    .solution-card:hover .card-photo {
+      transform: scale(1.04);
+    }
+
+    .card-details {
+      padding: 16px 16px;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .card-sector-tag {
-      font-size: 0.68rem;
+    .card-category {
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--leaf-green);
+      color: var(--text-muted);
       margin-bottom: 4px;
     }
 
-    .card-heading {
+    .card-title {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 4px;
+      color: var(--text);
       line-height: 1.3;
+      margin-bottom: 4px;
     }
 
     .card-desc {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       line-height: 1.45;
     }
 
-    .card-footer {
+    .card-actions-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 16px;
-      background: var(--bg-light);
+      background: var(--card-subtle);
       border-top: 1px solid var(--border);
-      gap: 10px;
     }
 
-    .card-url-param {
+    .card-param-text {
       font-family: ui-monospace, monospace;
       font-size: 0.72rem;
       color: var(--text-dim);
     }
 
-    .btn-action-qr {
-      background: var(--navy);
-      color: var(--white);
-      border: none;
-      font-family: var(--font-heading);
-      font-size: 0.78rem;
+    .btn-qr-open {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.75rem;
       font-weight: 600;
-      padding: 7px 14px;
+      padding: 6px 12px;
       border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: background 0.2s;
-    }
-
-    .btn-action-qr:hover {
-      background: var(--leaf-green);
-    }
-
-    /* MOTOR GERADOR DE QR CODE */
-    .qr-engine-section {
-      background: var(--white);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      padding: 30px 24px;
-      margin-bottom: 36px;
-      box-shadow: 0 4px 16px rgba(15, 34, 61, 0.05);
-    }
-
-    .engine-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .engine-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--orange-light);
-      color: var(--orange);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .engine-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .engine-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .engine-form-group {
-      margin-bottom: 16px;
-    }
-
-    .engine-label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-
-    .engine-input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      color: var(--text);
-      background: var(--bg-light);
-      transition: all 0.2s;
-    }
-
-    .engine-input:focus {
-      outline: none;
-      border-color: var(--leaf-green);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
-    }
-
-    .engine-quick-select {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 16px;
-    }
-    .engine-quick-select::-webkit-scrollbar { display: none; }
-
-    .quick-preset-btn {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      white-space: nowrap;
       transition: all 0.15s;
     }
 
-    .quick-preset-btn:hover {
-      background: var(--navy);
-      color: var(--white);
-      border-color: var(--navy);
+    .btn-qr-open:hover {
+      background: #121212;
+      color: #ffffff;
+      border-color: #121212;
     }
 
-    .color-options-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .color-swatch-radio {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: transform 0.15s;
-    }
-
-    .color-swatch-radio.selected {
-      transform: scale(1.15);
-      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--navy);
-    }
-
-    .qr-preview-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px 16px;
-      margin-top: 20px;
-    }
-
-    .qr-canvas-holder {
-      background: #ffffff;
-      padding: 12px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      margin-bottom: 16px;
-    }
-
-    .qr-canvas-holder canvas {
-      display: block;
-      width: 200px !important;
-      height: 200px !important;
-    }
-
-    .engine-actions-row {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-      max-width: 320px;
-    }
-
-    .btn-download-qr {
-      flex: 1;
-      background: var(--leaf-green);
-      color: var(--white);
-      border: none;
-      padding: 12px;
-      border-radius: 10px;
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: background 0.2s;
-    }
-
-    .btn-download-qr:hover {
-      background: #256628;
-    }
-
-    .btn-copy-url {
-      background: var(--white);
-      color: var(--navy);
-      border: 1px solid var(--border);
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    /* Modal QR Rápido */
+    /* Modal QR Code */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 34, 61, 0.7);
+      background: rgba(18, 18, 18, 0.7);
       backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
@@ -516,7 +303,7 @@
       z-index: 9999;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.2s ease;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
       padding: 20px;
     }
 
@@ -525,68 +312,120 @@
       visibility: visible;
     }
 
-    .modal-box {
+    .modal-card {
       background: #ffffff;
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 28px 24px;
       max-width: 360px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      transform: scale(0.95);
-      transition: transform 0.2s;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transform: scale(0.96);
+      transition: transform 0.2s ease;
     }
 
-    .modal-overlay.open .modal-box {
+    .modal-overlay.open .modal-card {
       transform: scale(1);
     }
 
     .modal-title {
       font-size: 1.15rem;
       font-weight: 700;
+      color: var(--text);
       margin-bottom: 4px;
-      color: var(--navy);
     }
 
-    .modal-sub {
+    .modal-desc {
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
-    .modal-qr-frame {
+    .qr-image-container {
       display: inline-block;
       padding: 12px;
       background: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      margin-bottom: 14px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
 
-    .modal-qr-frame canvas {
+    .qr-image-container img {
       display: block;
-      width: 190px !important;
-      height: 190px !important;
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+    }
+
+    .modal-url-display {
+      font-family: ui-monospace, monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      background: var(--card-subtle);
+      padding: 8px 12px;
+      border-radius: 8px;
+      word-break: break-all;
+      margin-bottom: 20px;
     }
 
     .btn-modal-close {
       width: 100%;
-      background: var(--navy);
-      color: var(--white);
+      background: #121212;
+      color: #ffffff;
       border: none;
+      border-radius: 12px;
       padding: 12px;
-      border-radius: 10px;
-      font-family: var(--font-heading);
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       cursor: pointer;
     }
 
-    /* Footer */
+    /* Bottom Contact */
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .contact-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .contact-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .btn-whatsapp-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #121212;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 14px 28px;
+      border-radius: 100px;
+      transition: background 0.2s;
+    }
+
+    .btn-whatsapp-cta:hover {
+      background: #262626;
+    }
+
     .footer {
       text-align: center;
-      padding-top: 32px;
-      font-size: 0.78rem;
+      padding-top: 36px;
+      font-size: 0.75rem;
       color: var(--text-dim);
     }
   </style>
@@ -595,349 +434,212 @@
 
   <div class="page">
 
-    <!-- Brand Header -->
+    <!-- Header -->
     <header class="brand-header">
-      <a href="demo/querencia-nutricao.html" class="brand-group">
-        <div class="brand-mascot-icon" title="Querência Nutrição">
-          🐾
+      <a href="#" class="brand-logo">
+        <div class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
         </div>
-        <div class="brand-name">Querência <span>Nutrição</span></div>
+        <span class="brand-title">Nolei Creative</span>
       </a>
-      <span class="brand-badge">Identidade Oficial</span>
+      <span class="brand-pill">Hardware & Software NFC</span>
     </header>
 
     <!-- Hero -->
     <div class="hero">
-      <div class="hero-eyebrow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        Plataforma Físico-Digital
-      </div>
-      <h1 class="hero-title">Conecte o mundo real ao digital <span class="highlight">com 1 toque</span>.</h1>
-      <p class="hero-subtitle">Tags NFC e QR Codes inteligentes com métricas, direcionamento estratégico e alta conversão.</p>
+      <div class="hero-eyebrow">Experiências Físico-Digitais</div>
+      <h1 class="hero-title">Aproxime o celular.<br>A experiência começa.</h1>
+      <p class="hero-subtitle">Soluções integradas com placas inteligentes para captação de avaliações, menus dinâmicos, hospitalidade e fidelização.</p>
     </div>
 
     <!-- Mode Selector -->
     <div class="channel-switch">
-      <button class="channel-btn active" id="btn-mode-nfc" onclick="setChannelMode('nfc')">
+      <button class="channel-btn active" id="btn-nfc" onclick="setMode('nfc')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
-        Modo NFC (Aproximação)
+        Tag NFC (Aproximação)
       </button>
-      <button class="channel-btn" id="btn-mode-qr" onclick="setChannelMode('qr')">
+      <button class="channel-btn" id="btn-qr" onclick="setMode('qr')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        Modo QR Code (Câmera)
+        QR Code (Câmera)
       </button>
     </div>
 
-    <!-- Solutions List -->
-    <div class="section-header-row">
-      <span class="section-title">Soluções Demonstrativas</span>
-      <span style="font-size:0.75rem; color:var(--text-muted);">Prontas para teste</span>
+    <!-- Section Header -->
+    <div class="section-label-row">
+      <span class="section-label">Aplicações Prontas</span>
+      <span class="section-desc">Toque para abrir ou gere o QR</span>
     </div>
 
-    <div class="solutions-grid">
+    <!-- Solutions Stack -->
+    <div class="cards-stack">
 
-      <!-- 1. Querência Nutrição (Site Completo & Institucional) -->
-      <div class="solution-card" style="border-left: 4px solid var(--orange);">
-        <a href="demo/querencia-nutricao.html" class="card-top-link">
-          <div class="card-thumb-wrap">
-            <img src="https://images.unsplash.com/photo-1594824813589-9a7444b05597?auto=format&fit=crop&w=350&q=80" alt="Querência Nutrição" class="card-thumb">
+      <!-- 1. Google Avaliações (Multi-setor) -->
+      <div class="solution-card">
+        <a href="demo/avaliacao.html?source=nfc" class="card-link-area" id="link-avaliacao">
+          <div class="card-photo-box">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=400&q=80" alt="Avaliações Google" class="card-photo" loading="lazy">
           </div>
-          <div class="card-body">
-            <span class="card-sector-tag" style="color:var(--orange);">Site & Identidade Visual</span>
-            <h3 class="card-heading">Querência Nutrição</h3>
-            <p class="card-desc">Layout completo com Checklist de Saúde, 3 Pilares, Agendamento, Avaliações e Mapa.</p>
+          <div class="card-details">
+            <span class="card-category">Multi-setor • Clínicas & Lojas</span>
+            <h3 class="card-title">Google Avaliações</h3>
+            <p class="card-desc">Captação oficial de avaliações 5★ no Google Maps com filtro e ouvidoria privada para notas baixas.</p>
           </div>
         </a>
-        <div class="card-footer">
-          <span class="card-url-param">demo/querencia-nutricao.html</span>
-          <button class="btn-action-qr" onclick="openQuickQr('Querência Nutrição', 'demo/querencia-nutricao.html')">
+        <div class="card-actions-row">
+          <span class="card-param-text" id="param-avaliacao">?source=nfc</span>
+          <button class="btn-qr-open" onclick="openQrCodeModal('Google Avaliações', 'demo/avaliacao.html')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar QR
+            Escanear QR
           </button>
         </div>
       </div>
 
-      <!-- 2. Google Avaliações -->
+      <!-- 2. Cardápio & Menu Digital -->
       <div class="solution-card">
-        <a href="demo/avaliacao.html?source=nfc" class="card-top-link" id="link-avaliacao">
-          <div class="card-thumb-wrap">
-            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=350&q=80" alt="Avaliação Google" class="card-thumb">
+        <a href="demo/cardapio.html?source=nfc&mesa=04" class="card-link-area" id="link-cardapio">
+          <div class="card-photo-box">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80" alt="Cardápio Digital" class="card-photo" loading="lazy">
           </div>
-          <div class="card-body">
-            <span class="card-sector-tag">Todas as Áreas • Clínicas & Lojas</span>
-            <h3 class="card-heading">Google Avaliações</h3>
-            <p class="card-desc">Captação oficial de 5★ no Google Maps com interceptação interna para notas baixas.</p>
+          <div class="card-details">
+            <span class="card-category">Restaurantes • Pousadas • Bares</span>
+            <h3 class="card-title">Cardápio & Menu Digital</h3>
+            <p class="card-desc">Menu com fotos de alta qualidade, chamada de garçom, senha de Wi-Fi e pedidos direto no WhatsApp.</p>
           </div>
         </a>
-        <div class="card-footer">
-          <span class="card-url-param" id="param-avaliacao">?source=nfc</span>
-          <button class="btn-action-qr" onclick="openQuickQr('Google Avaliações', 'demo/avaliacao.html')">
+        <div class="card-actions-row">
+          <span class="card-param-text" id="param-cardapio">?source=nfc&mesa=04</span>
+          <button class="btn-qr-open" onclick="openQrCodeModal('Cardápio Digital (Mesa 04)', 'demo/cardapio.html', 'mesa=04')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar QR
+            Escanear QR
           </button>
         </div>
       </div>
 
-      <!-- 3. Cardápio & Menu Digital -->
+      <!-- 3. Concierge & Quarto -->
       <div class="solution-card">
-        <a href="demo/cardapio.html?source=nfc&mesa=04" class="card-top-link" id="link-cardapio">
-          <div class="card-thumb-wrap">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=350&q=80" alt="Cardápio Digital" class="card-thumb">
+        <a href="demo/hotel.html?source=nfc&quarto=412" class="card-link-area" id="link-hotel">
+          <div class="card-photo-box">
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=400&q=80" alt="Concierge Hotel" class="card-photo" loading="lazy">
           </div>
-          <div class="card-body">
-            <span class="card-sector-tag">Restaurantes • Pousadas • Bares</span>
-            <h3 class="card-heading">Cardápio & Menu Digital</h3>
-            <p class="card-desc">Fotos apetitosas, chamada de garçom, senha de Wi-Fi e envio de pedido no WhatsApp.</p>
+          <div class="card-details">
+            <span class="card-category">Hotéis • Pousadas • Resorts</span>
+            <h3 class="card-title">Concierge & Quarto</h3>
+            <p class="card-desc">Room service no quarto, agendamento de café da manhã, SPA e governança por aproximação.</p>
           </div>
         </a>
-        <div class="card-footer">
-          <span class="card-url-param" id="param-cardapio">?source=nfc&mesa=04</span>
-          <button class="btn-action-qr" onclick="openQuickQr('Cardápio Digital (Mesa 04)', 'demo/cardapio.html', 'mesa=04')">
+        <div class="card-actions-row">
+          <span class="card-param-text" id="param-hotel">?source=nfc&quarto=412</span>
+          <button class="btn-qr-open" onclick="openQrCodeModal('Concierge & Quarto (Suíte 412)', 'demo/hotel.html', 'quarto=412')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar QR
+            Escanear QR
           </button>
         </div>
       </div>
 
-      <!-- 4. Hotel & Concierge -->
+      <!-- 4. Cartão Fidelidade -->
       <div class="solution-card">
-        <a href="demo/hotel.html?source=nfc&quarto=412" class="card-top-link" id="link-hotel">
-          <div class="card-thumb-wrap">
-            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=350&q=80" alt="Concierge Hotel" class="card-thumb">
+        <a href="demo/fidelidade.html?source=nfc&nome=Maria&loja=Caf%C3%A9%20Origem" class="card-link-area" id="link-fidelidade">
+          <div class="card-photo-box">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=400&q=80" alt="Cartão Fidelidade" class="card-photo" loading="lazy">
           </div>
-          <div class="card-body">
-            <span class="card-sector-tag">Hotéis • Pousadas • Resorts</span>
-            <h3 class="card-heading">Concierge & Quarto</h3>
-            <p class="card-desc">Room service no quarto, agendamento de SPA e café da manhã por aproximação.</p>
+          <div class="card-details">
+            <span class="card-category">Cafeterias • Comércios • Estética</span>
+            <h3 class="card-title">Cartão Fidelidade Digital</h3>
+            <p class="card-desc">Pontuação por aproximação no balcão, cartela de selos gamificada e resgate de recompensas.</p>
           </div>
         </a>
-        <div class="card-footer">
-          <span class="card-url-param" id="param-hotel">?source=nfc&quarto=412</span>
-          <button class="btn-action-qr" onclick="openQuickQr('Concierge & Suíte 412', 'demo/hotel.html', 'quarto=412')">
+        <div class="card-actions-row">
+          <span class="card-param-text" id="param-fidelidade">?source=nfc&nome=Maria</span>
+          <button class="btn-qr-open" onclick="openQrCodeModal('Cartão Fidelidade', 'demo/fidelidade.html', 'nome=Maria&loja=Café Origem')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar QR
-          </button>
-        </div>
-      </div>
-
-      <!-- 5. Cartão Fidelidade -->
-      <div class="solution-card">
-        <a href="demo/fidelidade.html?source=nfc&nome=Maria&loja=Caf%C3%A9%20Origem" class="card-top-link" id="link-fidelidade">
-          <div class="card-thumb-wrap">
-            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=350&q=80" alt="Cartão Fidelidade" class="card-thumb">
-          </div>
-          <div class="card-body">
-            <span class="card-sector-tag">Cafeterias • Comércios • Estética</span>
-            <h3 class="card-heading">Cartão Fidelidade Digital</h3>
-            <p class="card-desc">Pontuação por aproximação no balcão, cartela de selos gamificada e catálogo de prêmios.</p>
-          </div>
-        </a>
-        <div class="card-footer">
-          <span class="card-url-param" id="param-fidelidade">?source=nfc&nome=Maria</span>
-          <button class="btn-action-qr" onclick="openQuickQr('Cartão Fidelidade', 'demo/fidelidade.html', 'nome=Maria&loja=Café Origem')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar QR
+            Escanear QR
           </button>
         </div>
       </div>
 
     </div>
 
-    <!-- MOTOR GERADOR DE QR CODE INTERATIVO -->
-    <section class="qr-engine-section">
-      <div class="engine-header">
-        <div class="engine-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M7 17v.01M17 7v.01M7 7v.01"/></svg>
-        </div>
-        <div>
-          <h2 class="engine-title">Motor Gerador de QR Code</h2>
-          <p class="engine-desc">Gere, personalize e faça o download de QR Codes em alta definição.</p>
-        </div>
-      </div>
+    <!-- Contact & Project Section -->
+    <div class="contact-card">
+      <h3 class="contact-title">Projetos Sob Medida</h3>
+      <p class="contact-desc">Displays em acrílico, madeira nobre ou metal gravado a laser personalizados para o seu espaço.</p>
+      <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Visitei%20as%20demos%20da%20Nolei%20Creative%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta">
+        Falar com a Nolei Creative
+      </a>
+    </div>
 
-      <!-- Presets Rápidos -->
-      <label class="engine-label">Predefinições Rápidas:</label>
-      <div class="engine-quick-select">
-        <button class="quick-preset-btn" onclick="setEnginePreset('demo/querencia-nutricao.html')">Querência Nutrição</button>
-        <button class="quick-preset-btn" onclick="setEnginePreset('demo/avaliacao.html?source=qr')">Google Avaliações</button>
-        <button class="quick-preset-btn" onclick="setEnginePreset('demo/cardapio.html?source=qr&mesa=01')">Cardápio (Mesa 01)</button>
-        <button class="quick-preset-btn" onclick="setEnginePreset('demo/hotel.html?source=qr&quarto=302')">Hotel (Suíte 302)</button>
-      </div>
-
-      <!-- URL Input -->
-      <div class="engine-form-group">
-        <label class="engine-label" for="custom-qr-url">Link de Destino do QR Code:</label>
-        <input type="text" id="custom-qr-url" class="engine-input" placeholder="https://..." oninput="updateCustomQr()">
-      </div>
-
-      <!-- Escolha de Cor -->
-      <div class="engine-form-group">
-        <label class="engine-label">Cor do QR Code:</label>
-        <div class="color-options-row">
-          <div class="color-swatch-radio selected" style="background:#0F223D;" onclick="setQrColor('#0F223D', this)" title="Azul Marinho"></div>
-          <div class="color-swatch-radio" style="background:#2E7D32;" onclick="setQrColor('#2E7D32', this)" title="Verde Folha"></div>
-          <div class="color-swatch-radio" style="background:#F97316;" onclick="setQrColor('#F97316', this)" title="Laranja"></div>
-          <div class="color-swatch-radio" style="background:#121212;" onclick="setQrColor('#121212', this)" title="Preto Clássico"></div>
-        </div>
-      </div>
-
-      <!-- QR Preview & Download Area -->
-      <div class="qr-preview-area">
-        <div class="qr-canvas-holder">
-          <canvas id="engine-canvas"></canvas>
-        </div>
-        
-        <div class="engine-actions-row">
-          <button class="btn-download-qr" onclick="downloadQrCode()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Baixar Imagem PNG
-          </button>
-          <button class="btn-copy-url" onclick="copyEngineUrl()">Copiar Link</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="footer">
-      Querência Nutrição & Nolei Creative • Ecossistemas Físico-Digitais
+      © 2024 Nolei Creative • Ecossistemas Físico-Digitais
     </footer>
 
   </div>
 
-  <!-- Modal QR Rápido -->
-  <div class="modal-overlay" id="quick-modal" onclick="closeQuickModal(event)">
-    <div class="modal-box" onclick="event.stopPropagation()">
-      <h3 class="modal-title" id="quick-modal-title">Escanear com Smartphone</h3>
-      <p class="modal-sub">Aponte a câmera para abrir instantaneamente.</p>
-      
-      <div class="modal-qr-frame">
-        <canvas id="quick-canvas"></canvas>
+  <!-- Modal QR Code -->
+  <div class="modal-overlay" id="modal-qr" onclick="closeQrModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 class="modal-title" id="modal-title">Escanear QR Code</h3>
+      <p class="modal-desc">Aponte a câmera do seu smartphone para testar ao vivo.</p>
+
+      <div class="qr-image-container">
+        <img id="qr-image-tag" src="" alt="QR Code" loading="eager">
       </div>
 
-      <button class="btn-modal-close" onclick="closeQuickModal()">Fechar</button>
+      <div class="modal-url-display" id="modal-url"></div>
+
+      <button class="btn-modal-close" onclick="closeQrModal()">Fechar</button>
     </div>
   </div>
 
   <script>
-    let activeChannel = 'nfc';
-    let selectedQrColor = '#0F223D';
+    let currentMode = 'nfc';
 
-    const solutions = {
+    const solutionsConfig = {
       avaliacao: { path: 'demo/avaliacao.html', params: { nfc: 'source=nfc', qr: 'source=qr' } },
       cardapio: { path: 'demo/cardapio.html', params: { nfc: 'source=nfc&mesa=04', qr: 'source=qr&mesa=04' } },
       hotel: { path: 'demo/hotel.html', params: { nfc: 'source=nfc&quarto=412', qr: 'source=qr&quarto=412' } },
       fidelidade: { path: 'demo/fidelidade.html', params: { nfc: 'source=nfc&nome=Maria&loja=Caf%C3%A9%20Origem', qr: 'source=qr&nome=Maria&loja=Caf%C3%A9%20Origem' } }
     };
 
-    function setChannelMode(mode) {
-      activeChannel = mode;
-      document.getElementById('btn-mode-nfc').classList.toggle('active', mode === 'nfc');
-      document.getElementById('btn-mode-qr').classList.toggle('active', mode === 'qr');
+    function setMode(mode) {
+      currentMode = mode;
+      document.getElementById('btn-nfc').classList.toggle('active', mode === 'nfc');
+      document.getElementById('btn-qr').classList.toggle('active', mode === 'qr');
 
-      Object.entries(solutions).forEach(([k, conf]) => {
-        const link = document.getElementById('link-' + k);
-        const param = document.getElementById('param-' + k);
-        if (link) link.href = `${conf.path}?${conf.params[mode]}`;
-        if (param) param.textContent = `?${conf.params[mode]}`;
+      Object.entries(solutionsConfig).forEach(([key, cfg]) => {
+        const linkEl = document.getElementById('link-' + key);
+        const paramEl = document.getElementById('param-' + key);
+        if (linkEl) linkEl.href = `${cfg.path}?${cfg.params[mode]}`;
+        if (paramEl) paramEl.textContent = `?${cfg.params[mode]}`;
       });
     }
 
-    // Modal de QR Rápido
-    function openQuickQr(title, path, extra = '') {
-      const modal = document.getElementById('quick-modal');
-      const modalTitle = document.getElementById('quick-modal-title');
-      const canvas = document.getElementById('quick-canvas');
+    function openQrCodeModal(title, targetPath, extraParams = '') {
+      const modal = document.getElementById('modal-qr');
+      const modalTitle = document.getElementById('modal-title');
+      const modalUrl = document.getElementById('modal-url');
+      const qrImg = document.getElementById('qr-image-tag');
 
-      const fullParam = `source=qr` + (extra ? `&${extra}` : '');
+      const fullParam = `source=qr` + (extraParams ? `&${extraParams}` : '');
       const origin = window.location.origin;
       const currentDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-      const targetUrl = `${origin}${currentDir}${path}?${fullParam}`;
+      const fullTargetUrl = `${origin}${currentDir}${targetPath}?${fullParam}`;
 
       modalTitle.textContent = title;
+      modalUrl.textContent = fullTargetUrl;
 
-      if (window.QRCode) {
-        QRCode.toCanvas(canvas, targetUrl, {
-          width: 190,
-          margin: 0,
-          color: {
-            dark: '#0F223D',
-            light: '#ffffff'
-          }
-        });
-      }
+      // 100% reliable QR code generator URL
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(fullTargetUrl)}&color=12-12-12&bgcolor=ffffff&margin=0`;
+      qrImg.src = qrApiUrl;
 
       modal.classList.add('open');
     }
 
-    function closeQuickModal() {
-      document.getElementById('quick-modal').classList.remove('open');
+    function closeQrModal() {
+      document.getElementById('modal-qr').classList.remove('open');
     }
-
-    // Motor de QR Code Interativo
-    function getFullBaseUrl(relativePath) {
-      const origin = window.location.origin;
-      const currentDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-      return `${origin}${currentDir}${relativePath}`;
-    }
-
-    function setEnginePreset(path) {
-      const input = document.getElementById('custom-qr-url');
-      input.value = getFullBaseUrl(path);
-      updateCustomQr();
-    }
-
-    function setQrColor(color, el) {
-      selectedQrColor = color;
-      document.querySelectorAll('.color-swatch-radio').forEach(s => s.classList.remove('selected'));
-      el.classList.add('selected');
-      updateCustomQr();
-    }
-
-    function updateCustomQr() {
-      const input = document.getElementById('custom-qr-url');
-      const canvas = document.getElementById('engine-canvas');
-      let text = input.value.trim();
-
-      if (!text) {
-        text = getFullBaseUrl('demo/querencia-nutricao.html');
-      }
-
-      if (window.QRCode) {
-        QRCode.toCanvas(canvas, text, {
-          width: 200,
-          margin: 0,
-          color: {
-            dark: selectedQrColor,
-            light: '#ffffff'
-          }
-        });
-      }
-    }
-
-    function downloadQrCode() {
-      const canvas = document.getElementById('engine-canvas');
-      const image = canvas.toDataURL("image/png");
-      const link = document.createElement('a');
-      link.download = 'qrcode-querencia-nutricao.png';
-      link.href = image;
-      link.click();
-    }
-
-    function copyEngineUrl() {
-      const input = document.getElementById('custom-qr-url');
-      let text = input.value.trim() || getFullBaseUrl('demo/querencia-nutricao.html');
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Link copiado para a área de transferência!');
-      });
-    }
-
-    // Initialize Motor QR
-    window.addEventListener('DOMContentLoaded', () => {
-      setEnginePreset('demo/querencia-nutricao.html');
-    });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeQuickModal();
+      if (e.key === 'Escape') closeQrModal();
     });
   </script>
 </body>

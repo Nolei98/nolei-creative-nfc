@@ -13,17 +13,17 @@
 
  <style>
  :root {
- --navy: #1F1A15;
- --navy-light: #162C46;
- --leaf-green: #2E7D32;
- --leaf-green-light: #E8F5E9;
- --orange: #F97316;
- --orange-light: #FFF7ED;
+ --navy: #F2EADF;
+ --navy-light: #2A231C;
+ --leaf-green: #C15D30;
+ --leaf-green-light: rgba(193, 93, 48, 0.12);
+ --orange: #C15D30;
+ --orange-light: rgba(193, 93, 48, 0.12);
  --white: #FFFFFF;
  --bg-light: #141210;
  --text: #F2EADF;
  --text-muted: #A2937E;
- --text-dim: #94A3B8;
+ --text-dim: #786B5A;
  --border: rgba(242, 234, 223, 0.08);
  --radius: 18px;
  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -53,7 +53,7 @@
  .splash-screen {
  position: fixed;
  inset: 0;
- background: var(--navy);
+ background: #2A231C;
  color: var(--white);
  display: flex;
  flex-direction: column;
@@ -89,7 +89,7 @@
 
  /* Header */
  .header {
- background: rgba(255, 255, 255, 0.95);
+ background: rgba(20, 18, 16, 0.92);
  backdrop-filter: blur(12px);
  border-bottom: 1px solid var(--border);
  position: sticky;
@@ -116,9 +116,9 @@
  width: 36px;
  height: 36px;
  border-radius: 10px;
- background: var(--bg-light);
+ background: #141210;
  border: 1px solid var(--border);
- color: var(--navy);
+ color: #F2EADF;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -129,7 +129,7 @@
  font-family: var(--font-heading);
  font-size: 1.05rem;
  font-weight: 700;
- color: var(--navy);
+ color: #F2EADF;
  line-height: 1.2;
  }
 
@@ -139,7 +139,7 @@
  }
 
  .tier-badge {
- background: var(--navy);
+ background: #2A231C;
  color: var(--white);
  font-family: var(--font-heading);
  font-size: 0.75rem;
@@ -184,7 +184,7 @@
  font-family: var(--font-heading);
  font-size: 1.3rem;
  font-weight: 700;
- color: var(--navy);
+ color: #F2EADF;
  margin-bottom: 6px;
  }
 
@@ -204,7 +204,7 @@
  }
 
  .btn-gate-login {
- background: var(--navy);
+ background: #2A231C;
  color: var(--white);
  border: none;
  padding: 14px;
@@ -221,8 +221,8 @@
  }
 
  .btn-gate-register {
- background: var(--bg-light);
- color: var(--navy);
+ background: #141210;
+ color: #F2EADF;
  border: 1px solid var(--border);
  padding: 14px;
  border-radius: 12px;
@@ -238,7 +238,7 @@
  }
 
  .loyalty-hero-card {
- background: var(--navy);
+ background: #2A231C;
  color: var(--white);
  border-radius: var(--radius);
  padding: 24px;
@@ -264,7 +264,7 @@
 
  .member-sub {
  font-size: 0.78rem;
- color: #94A3B8;
+ color: #A2937E;
  }
 
  .points-number {
@@ -279,7 +279,7 @@
 
  .points-label {
  font-size: 0.75rem;
- color: #94A3B8;
+ color: #A2937E;
  text-transform: uppercase;
  letter-spacing: 0.1em;
  }
@@ -305,7 +305,7 @@
  display: flex;
  justify-content: space-between;
  font-size: 0.72rem;
- color: #94A3B8;
+ color: #A2937E;
  }
 
  /* Stamp Card */
@@ -322,7 +322,7 @@
  font-family: var(--font-heading);
  font-size: 0.95rem;
  font-weight: 700;
- color: var(--navy);
+ color: #F2EADF;
  margin-bottom: 4px;
  }
 
@@ -348,12 +348,12 @@
  font-size: 0.75rem;
  font-weight: 700;
  color: var(--text-dim);
- background: var(--bg-light);
+ background: #141210;
  }
 
  .stamp-slot.filled {
  border: 2px solid var(--navy);
- background: var(--navy);
+ background: #2A231C;
  color: var(--white);
  }
 
@@ -370,7 +370,7 @@
  font-weight: 700;
  text-transform: uppercase;
  letter-spacing: 0.1em;
- color: var(--navy);
+ color: #F2EADF;
  margin-bottom: 12px;
  }
 
@@ -397,7 +397,7 @@
  font-family: var(--font-heading);
  font-size: 0.9rem;
  font-weight: 700;
- color: var(--navy);
+ color: #F2EADF;
  margin-bottom: 2px;
  }
 
@@ -464,7 +464,7 @@
  font-family: var(--font-heading);
  font-size: 1.2rem;
  font-weight: 700;
- color: var(--navy);
+ color: #F2EADF;
  margin-bottom: 4px;
  }
 
@@ -476,7 +476,7 @@
 
  .auth-tabs {
  display: flex;
- background: var(--bg-light);
+ background: #141210;
  border: 1px solid var(--border);
  border-radius: 10px;
  padding: 3px;
@@ -498,7 +498,7 @@
 
  .auth-tab.active {
  background: #1F1A15;
- color: var(--navy);
+ color: #F2EADF;
  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
  }
 
@@ -511,7 +511,7 @@
  display: block;
  font-size: 0.78rem;
  font-weight: 600;
- color: var(--navy);
+ color: #F2EADF;
  margin-bottom: 4px;
  }
 
@@ -522,7 +522,7 @@
  border-radius: 10px;
  font-family: inherit;
  font-size: 0.88rem;
- background: var(--bg-light);
+ background: #141210;
  color: var(--text);
  }
 
@@ -556,7 +556,7 @@
  bottom: 30px;
  left: 50%;
  transform: translateX(-50%) translateY(20px);
- background: var(--navy);
+ background: #2A231C;
  color: var(--white);
  padding: 12px 20px;
  border-radius: 100px;
@@ -680,9 +680,9 @@
  </main>
 
  <!-- Footer -->
- <footer class="footer" style="text-align:center; padding:28px 16px 36px; color:var(--text-muted, #94A3B8); font-size:0.78rem; border-top:1px solid var(--border, #E2E8F0); margin-top:36px; background:var(--white, #FFFFFF);">
-    <div>Desenvolvido por Nolei Creative</div>
-  </footer>
+ <footer class="footer" style="text-align:center; padding:28px 16px 36px; color:#786B5A; font-size:0.78rem; border-top:1px solid rgba(242, 234, 223, 0.08); margin-top:36px; background:#0E0D0C;">
+  <div>Desenvolvido por Nolei Creative</div>
+</footer>
 
  <!-- Modal Auth -->
  <div class="modal-overlay" id="loyalty-modal" onclick="closeLoyaltyAuthModal(event)">
@@ -729,7 +729,7 @@
  <h3 class="modal-title" style="margin-bottom:4px;">Cupom de Resgate Gerado</h3>
  <p class="modal-sub" id="voucher-reward-name">Café Espresso ou Cappuccino</p>
 
- <div style="background:var(--bg-light); border:2px dashed var(--border); border-radius:14px; padding:18px; margin:16px 0;">
+ <div style="background: #141210; border:2px dashed var(--border); border-radius:14px; padding:18px; margin:16px 0;">
  <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Apresente este código no caixa:</div>
  <div style="font-size:1.6rem; font-weight:800; font-family:monospace; color:var(--leaf-green); margin:8px 0;" id="voucher-code-display">ORIGEM-7429</div>
  <div style="font-size:0.72rem; color:var(--text-muted);">Válido por 30 minutos na loja física</div>
@@ -865,7 +865,7 @@
  </span>
  </div>
  <div class="reward-info" style="flex:1;">
- <h4 style="font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:2px;">${r.title}</h4>
+ <h4 style="font-size:0.9rem; font-weight:700; color: #F2EADF; margin-bottom:2px;">${r.title}</h4>
  <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">${r.desc}</p>
  <span style="font-size:0.75rem; font-weight:700; color:var(--leaf-green);">${r.points} pontos exigidos</span>
  </div>
@@ -873,7 +873,7 @@
  ${canRedeem ? `
  <button class="btn-redeem" onclick="redeemReward('${r.id}')">Resgatar</button>
  ` : `
- <button class="btn-redeem" style="background:var(--bg-light); color:var(--text-dim); cursor:not-allowed; border:1px solid var(--border);" onclick="showToast('Faltam ${missing} pontos para liberar este resgate.')">
+ <button class="btn-redeem" style="background: #141210; color:var(--text-dim); cursor:not-allowed; border:1px solid var(--border);" onclick="showToast('Faltam ${missing} pontos para liberar este resgate.')">
  Faltam ${missing} pts
  </button>
  `}

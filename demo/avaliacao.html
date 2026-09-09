@@ -5,514 +5,418 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
  <title id="page-title">Google Avaliações — Clínica Dra. Sofia Santos</title>
  <style>
- :root {
- --google-blue: #1a73e8;
- --google-blue-hover: #1557b0;
- --google-yellow: #fbbc04;
- --google-yellow-dark: #f29900;
- --google-green: #34a853;
- --google-red: #ea4335;
- --google-gray-bg: #f8f9fa;
- --google-card-bg: #ffffff;
- --google-text-primary: #202124;
- --google-text-secondary: #5f6368;
- --google-border: #dadce0;
- --google-chip-bg: #f1f3f4;
- --google-chip-hover: #e8eaed;
- --google-chip-selected: #e8f0fe;
- --google-chip-selected-text: #1967d2;
- --font-family: 'Google Sans', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
- }
+    :root {
+      --bg-dark: #141210;
+      --panel-dark: #1F1A15;
+      --panel-elevated: #2A231C;
+      --text-primary: #F2EADF;
+      --text-secondary: #A2937E;
+      --text-dim: #786B5A;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --border: rgba(242, 234, 223, 0.08);
+      --border-hover: rgba(193, 93, 48, 0.4);
+      --gold: #FBBC04;
+      --google-blue: #C15D30;
+      --google-blue-hover: #93401F;
+      --google-yellow: #FBBC04;
+      --google-card-bg: #1F1A15;
+      --google-text-primary: #F2EADF;
+      --google-text-secondary: #A2937E;
+      --google-border: rgba(242, 234, 223, 0.08);
+      --google-chip-bg: #2A231C;
+      --google-chip-hover: #352C23;
+      --google-chip-selected: rgba(193, 93, 48, 0.2);
+      --google-chip-selected-text: #C15D30;
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
- * {
- box-sizing: border-box;
- margin: 0;
- padding: 0;
- -webkit-tap-highlight-color: transparent;
- }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
 
- body {
- font-family: var(--font-family);
- background-color: #f1f3f4;
- color: var(--google-text-primary);
- min-height: 100vh;
- display: flex;
- flex-direction: column;
- line-height: 1.5;
- -webkit-font-smoothing: antialiased;
- }
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
 
- /* Splash Screen */
- .splash-screen {
- position: fixed;
- inset: 0;
- background: #1F1A15;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- z-index: 1000;
- transition: opacity 0.35s ease, visibility 0.35s ease;
- }
+    /* Splash Screen */
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
 
- .splash-screen.hidden {
- opacity: 0;
- visibility: hidden;
- pointer-events: none;
- }
+    .splash-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
- .splash-g-logo {
- width: 56px;
- height: 56px;
- margin-bottom: 20px;
- animation: pulseGoogle 1.6s infinite ease-in-out;
- }
+    .splash-g-logo {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 20px;
+    }
 
- @keyframes pulseGoogle {
- 0%, 100% { transform: scale(1); opacity: 0.9; }
- 50% { transform: scale(1.08); opacity: 1; }
- }
+    .splash-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
- .splash-text {
- font-size: 1.05rem;
- font-weight: 500;
- color: var(--google-text-primary);
- display: flex;
- align-items: center;
- gap: 8px;
- }
+    /* Top Bar */
+    .top-bar {
+      background: rgba(20, 18, 16, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
- /* Top Bar */
- .top-bar {
- background: #1F1A15;
- border-bottom: 1px solid var(--google-border);
- padding: 12px 16px;
- display: flex;
- align-items: center;
- justify-content: space-between;
- position: sticky;
- top: 0;
- z-index: 100;
- }
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
- .top-left {
- display: flex;
- align-items: center;
- gap: 12px;
- }
+    .back-link {
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
 
- .back-link {
- display: flex;
- align-items: center;
- justify-content: center;
- width: 36px;
- height: 36px;
- border-radius: 50%;
- color: var(--google-text-secondary);
- text-decoration: none;
- transition: background 0.2s;
- }
+    .back-link:hover {
+      color: var(--text-primary);
+      border-color: var(--accent);
+    }
 
- .back-link:hover {
- background: var(--google-chip-bg);
- color: var(--google-text-primary);
- }
+    .google-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
- .google-brand {
- display: flex;
- align-items: center;
- gap: 6px;
- font-size: 1.1rem;
- font-weight: 500;
- color: var(--google-text-secondary);
- }
+    .google-brand svg {
+      width: 24px;
+      height: 24px;
+    }
 
- .google-brand svg {
- width: 22px;
- height: 22px;
- }
+    .google-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
 
- .verified-badge {
- display: inline-flex;
- align-items: center;
- gap: 4px;
- font-size: 0.75rem;
- color: #137333;
- background: #e6f4ea;
- padding: 4px 8px;
- border-radius: 12px;
- font-weight: 500;
- }
+    /* Main Container */
+    .main-container {
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+      flex: 1;
+    }
 
- /* Main Container */
- .container {
- max-width: 520px;
- width: 100%;
- margin: 0 auto;
- padding: 16px;
- flex: 1;
- }
+    /* Business Header Card */
+    .business-card {
+      background: var(--panel-dark);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
 
- /* Business Profile Card */
- .business-card {
- background: #1F1A15;
- border-radius: 16px;
- border: 1px solid var(--google-border);
- padding: 20px;
- box-shadow: 0 1px 3px rgba(60,64,67,0.08), 0 4px 8px rgba(60,64,67,0.04);
- margin-bottom: 16px;
- }
+    .business-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: var(--panel-elevated);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.8rem;
+    }
 
- .business-header {
- display: flex;
- align-items: flex-start;
- gap: 14px;
- margin-bottom: 14px;
- }
+    .business-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
 
- .business-logo {
- width: 52px;
- height: 52px;
- border-radius: 12px;
- background: linear-gradient(135deg, #1a73e8, #8ab4f8);
- color: #ffffff;
- display: flex;
- align-items: center;
- justify-content: center;
- font-size: 1.4rem;
- font-weight: 700;
- flex-shrink: 0;
- box-shadow: 0 2px 6px rgba(26,115,232,0.25);
- }
+    .business-category {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
 
- .business-details h1 {
- font-size: 1.15rem;
- font-weight: 600;
- color: var(--google-text-primary);
- line-height: 1.3;
- }
+    .google-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono, monospace);
+    }
 
- .business-category {
- font-size: 0.85rem;
- color: var(--google-text-secondary);
- margin-top: 2px;
- }
+    /* Rating Card */
+    .rating-card {
+      background: var(--panel-dark);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
 
- .business-rating-row {
- display: flex;
- align-items: center;
- gap: 6px;
- margin-top: 4px;
- font-size: 0.85rem;
- }
+    .rating-prompt {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
 
- .rating-score {
- font-weight: 700;
- color: var(--google-text-primary);
- }
+    .rating-sub {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+    }
 
- .rating-stars-summary {
- color: var(--google-yellow-dark);
- display: flex;
- gap: 2px;
- }
+    .stars-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
 
- .rating-count {
- color: var(--google-text-secondary);
- }
+    .star-btn {
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-dim);
+      transition: all 0.2s ease;
+    }
 
- .business-address {
- font-size: 0.8rem;
- color: var(--google-text-secondary);
- display: flex;
- align-items: center;
- gap: 4px;
- border-top: 1px solid #f1f3f4;
- padding-top: 10px;
- margin-top: 10px;
- }
+    .star-btn svg {
+      width: 30px;
+      height: 30px;
+      fill: currentColor;
+    }
 
- /* Review Interactive Box */
- .review-box {
- background: #1F1A15;
- border-radius: 16px;
- border: 1px solid var(--google-border);
- padding: 24px 20px;
- box-shadow: 0 1px 3px rgba(60,64,67,0.08), 0 4px 8px rgba(60,64,67,0.04);
- text-align: center;
- }
+    .star-btn.active, .star-btn:hover {
+      background: rgba(251, 188, 4, 0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: scale(1.08);
+    }
 
- .user-preview {
- display: flex;
- align-items: center;
- gap: 10px;
- background: #f8f9fa;
- border-radius: 24px;
- padding: 6px 12px;
- width: fit-content;
- margin: 0 auto 18px;
- border: 1px solid #e8eaed;
- }
+    /* High Rating Flow (4-5 stars) */
+    .high-rating-box {
+      background: var(--panel-elevated);
+      border: 1px solid rgba(193, 93, 48, 0.3);
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 16px;
+      animation: fadeIn 0.3s ease;
+    }
 
- .user-avatar {
- width: 24px;
- height: 24px;
- border-radius: 50%;
- background: #e37400;
- color: white;
- font-size: 0.75rem;
- font-weight: 600;
- display: flex;
- align-items: center;
- justify-content: center;
- }
+    .high-rating-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
 
- .user-name {
- font-size: 0.78rem;
- color: var(--google-text-secondary);
- }
+    .high-rating-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
 
- .review-prompt {
- font-size: 1.1rem;
- font-weight: 500;
- color: var(--google-text-primary);
- margin-bottom: 8px;
- }
+    .btn-google-action {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 13px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(193, 93, 48, 0.4);
+      transition: all 0.2s;
+    }
 
- .review-subprompt {
- font-size: 0.85rem;
- color: var(--google-text-secondary);
- margin-bottom: 20px;
- }
+    .btn-google-action:hover {
+      background: var(--accent-deep);
+      transform: translateY(-2px);
+    }
 
- /* Google Stars */
- .stars-interactive {
- display: flex;
- justify-content: center;
- gap: 10px;
- margin-bottom: 20px;
- direction: rtl; /* Allows sibling hover */
- }
+    /* Low Rating Flow (1-3 stars) */
+    .low-rating-box {
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 16px;
+      text-align: left;
+      animation: fadeIn 0.3s ease;
+    }
 
- .star-btn {
- background: none;
- border: none;
- cursor: pointer;
- padding: 4px;
- color: #dadce0;
- transition: transform 0.15s ease, color 0.15s ease;
- display: flex;
- align-items: center;
- justify-content: center;
- }
+    .low-rating-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
 
- .star-btn svg {
- width: 42px;
- height: 42px;
- fill: currentColor;
- }
+    .low-rating-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
 
- .star-btn:hover,
- .star-btn:hover ~ .star-btn,
- .star-btn.active,
- .star-btn.active ~ .star-btn {
- color: var(--google-yellow);
- transform: scale(1.12);
- }
+    .feedback-textarea {
+      width: 100%;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.85rem;
+      resize: vertical;
+      min-height: 90px;
+      margin-bottom: 12px;
+      outline: none;
+    }
 
- /* Review Form Dynamic Container */
- .review-form-container {
- display: none;
- text-align: left;
- margin-top: 16px;
- animation: fadeIn 0.3s ease;
- }
+    .feedback-textarea:focus {
+      border-color: var(--accent);
+    }
 
- @keyframes fadeIn {
- from { opacity: 0; transform: translateY(6px); }
- to { opacity: 1; transform: translateY(0); }
- }
+    .btn-send-feedback {
+      background: var(--panel-dark);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
 
- /* Chips / Topics */
- .chips-title {
- font-size: 0.85rem;
- font-weight: 500;
- color: var(--google-text-secondary);
- margin-bottom: 8px;
- }
+    .btn-send-feedback:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
 
- .chips-container {
- display: flex;
- flex-wrap: wrap;
- gap: 8px;
- margin-bottom: 16px;
- }
+    /* Chips Container */
+    .chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
 
- .chip {
- background: var(--google-chip-bg);
- border: 1px solid var(--google-border);
- border-radius: 16px;
- padding: 6px 12px;
- font-size: 0.8rem;
- color: var(--google-text-primary);
- cursor: pointer;
- transition: all 0.15s;
- user-select: none;
- }
+    .chip-btn {
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
 
- .chip:hover {
- background: var(--google-chip-hover);
- }
+    .chip-btn.selected, .chip-btn:hover {
+      background: rgba(193, 93, 48, 0.18);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
- .chip.selected {
- background: var(--google-chip-selected);
- border-color: #aecbfa;
- color: var(--google-chip-selected-text);
- font-weight: 500;
- }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
- /* Review Textarea */
- .review-textarea {
- width: 100%;
- border: 1px solid var(--google-border);
- border-radius: 12px;
- padding: 12px 14px;
- font-family: inherit;
- font-size: 0.9rem;
- color: var(--google-text-primary);
- background: #1F1A15;
- resize: none;
- min-height: 90px;
- margin-bottom: 16px;
- transition: border-color 0.2s, box-shadow 0.2s;
- }
+    #confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
 
- .review-textarea:focus {
- outline: none;
- border-color: var(--google-blue);
- box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
- }
+    .footer {
+      text-align: center;
+      padding: 28px 16px 36px;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+      margin-top: 36px;
+      background: #0E0D0C;
+    }
 
- /* Post Action Button */
- .btn-post-google {
- display: flex;
- align-items: center;
- justify-content: center;
- gap: 8px;
- width: 100%;
- background: var(--google-blue);
- color: #ffffff;
- border: none;
- border-radius: 24px;
- padding: 14px 20px;
- font-size: 0.95rem;
- font-weight: 600;
- cursor: pointer;
- transition: background 0.2s, box-shadow 0.2s;
- box-shadow: 0 2px 6px rgba(26,115,232,0.3);
- text-decoration: none;
- }
-
- .btn-post-google:hover {
- background: var(--google-blue-hover);
- box-shadow: 0 4px 10px rgba(26,115,232,0.4);
- }
-
- .post-note {
- text-align: center;
- font-size: 0.75rem;
- color: var(--google-text-secondary);
- margin-top: 10px;
- }
-
- /* Private Feedback Form (1-3 stars) */
- .private-feedback-card {
- background: #fef7e0;
- border: 1px solid #fce8b2;
- border-radius: 12px;
- padding: 14px;
- margin-bottom: 14px;
- display: flex;
- gap: 10px;
- align-items: flex-start;
- }
-
- .private-icon {
- color: #b06000;
- flex-shrink: 0;
- margin-top: 2px;
- }
-
- .private-text {
- font-size: 0.8rem;
- color: #7a4100;
- line-height: 1.4;
- }
-
- .btn-private-submit {
- width: 100%;
- background: #1a73e8;
- color: #ffffff;
- border: none;
- border-radius: 24px;
- padding: 12px;
- font-size: 0.9rem;
- font-weight: 600;
- cursor: pointer;
- }
-
- /* Success screen */
- .success-box {
- display: none;
- padding: 24px 10px;
- text-align: center;
- }
-
- .success-icon {
- width: 52px;
- height: 52px;
- background: #e6f4ea;
- color: #137333;
- border-radius: 50%;
- display: flex;
- align-items: center;
- justify-content: center;
- margin: 0 auto 12px;
- }
-
- .success-title {
- font-size: 1.1rem;
- font-weight: 600;
- color: var(--google-text-primary);
- margin-bottom: 6px;
- }
-
- .success-desc {
- font-size: 0.85rem;
- color: var(--google-text-secondary);
- }
-
- /* Canvas Confetti */
- canvas#confetti {
- position: fixed;
- inset: 0;
- pointer-events: none;
- z-index: 999;
- }
-
- /* Footer */
- .footer {
- text-align: center;
- padding: 16px;
- font-size: 0.75rem;
- color: var(--google-text-secondary);
- }
-
- .footer a {
- color: var(--google-text-secondary);
- text-decoration: none;
- }
- </style>
+  </style>
 </head>
 <body>
 
@@ -670,7 +574,7 @@
  </div>
 
  <!-- Google Business Profile Helper Banner for Business Owners -->
- <div class="helper-banner" style="background: #1F1A15; border:1px solid #dadce0; border-radius:12px; padding:16px; margin-top:20px; text-align:center;">
+ <div class="helper-banner" style="background: #1F1A15; border: 1px solid var(--border); border-radius:12px; padding:16px; margin-top:20px; text-align:center;">
  <div style="font-size:0.85rem; font-weight:600; color:#202124; margin-bottom:4px;">
  Quer essa tecnologia de avaliação 5 estrelas no seu estabelecimento?
  </div>
@@ -678,11 +582,11 @@
  Ainda não tem ficha no Google Meu Negócio ou quer o display NFC com seu link?
  </div>
  <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
- <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; font-weight:600; color:#1a73e8; background:#e8f0fe; border:1px solid #aecbfa; border-radius:20px; padding:6px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+ <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; font-weight:600; color:#1a73e8; background: var(--panel-elevated); border: 1px solid var(--border); border-radius:20px; padding:6px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
  Criar Perfil no Google
  </a>
- <a href="../index.html" style="font-size:0.78rem; font-weight:600; color:#1F1A15; background:#f1f3f4; border:1px solid #dadce0; border-radius:20px; padding:6px 14px; text-decoration:none;">
+ <a href="../index.html" style="font-size:0.78rem; font-weight:600; color: var(--text-primary); background: var(--panel-elevated); border: 1px solid var(--border); border-radius:20px; padding:6px 14px; text-decoration:none;">
  Ver Displays & Modelos Físicos
  </a>
  </div>

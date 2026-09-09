@@ -301,43 +301,43 @@
       margin: 0 auto;
     }
 
-    /* MODE SELECTOR */
+    /* DUAL TECH BADGES (NON-CLICKABLE) */
     .channel-switch-wrapper {
-      max-width: 440px;
+      max-width: 480px;
       margin: 0 auto 36px;
     }
 
-    .channel-switch {
-      display: flex;
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 4px;
-      gap: 4px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .channel-btn {
-      flex: 1;
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-family: var(--font-heading);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
+    .tech-badge-bar {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: all 0.2s ease;
+      background: var(--white);
+      border: 1px solid var(--border-subtle);
+      border-radius: 30px;
+      padding: 10px 24px;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+      user-select: none;
+      pointer-events: none;
     }
 
-    .channel-btn.active {
-      background: var(--navy);
-      color: var(--white);
+    .tech-badge-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .tech-badge-item svg {
+      color: var(--gold);
+    }
+
+    .tech-badge-dot {
+      color: var(--text-dim);
+      font-size: 0.75rem;
     }
 
     /* SECTION LABEL */
@@ -864,17 +864,18 @@
       <p class="hero-subtitle">Soluções integradas com placas inteligentes para captação de avaliações, cardápios dinâmicos, concierge hoteleiro e clubes de fidelização.</p>
     </div>
 
-    <!-- Mode Selector -->
+    <!-- Dual Technology Indicators (Non-clickable) -->
     <div class="channel-switch-wrapper" id="solucoes">
-      <div class="channel-switch">
-        <button class="channel-btn active" id="btn-nfc" onclick="setMode('nfc')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
-          Tag NFC (Aproximação)
-        </button>
-        <button class="channel-btn" id="btn-qr" onclick="setMode('qr')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          QR Code (Câmera)
-        </button>
+      <div class="tech-badge-bar">
+        <div class="tech-badge-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
+          <span>Tag NFC (Aproximação)</span>
+        </div>
+        <span class="tech-badge-dot">•</span>
+        <div class="tech-badge-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>QR Code (Câmera)</span>
+        </div>
       </div>
     </div>
 
@@ -1158,35 +1159,7 @@
   </button>
 
   <script>
-    let currentMode = 'nfc';
 
-    function setMode(mode) {
-      currentMode = mode;
-      const btnNfc = document.getElementById('btn-nfc');
-      const btnQr = document.getElementById('btn-qr');
-      
-      btnNfc.classList.toggle('active', mode === 'nfc');
-      btnQr.classList.toggle('active', mode === 'qr');
-
-      document.querySelectorAll('.solution-card').forEach(card => {
-        const demo = card.getAttribute('data-demo');
-        const extra = card.getAttribute('data-extra');
-        const title = card.getAttribute('data-title');
-        
-        let targetUrl = 'demo/' + demo + '.html?source=' + mode;
-        if (extra) targetUrl += '&' + extra;
-        card.setAttribute('href', targetUrl);
-
-        if (mode === 'qr') {
-          card.onclick = function(e) {
-            e.preventDefault();
-            openQrCodeModal(title, 'demo/' + demo + '.html', extra || '');
-          };
-        } else {
-          card.onclick = null;
-        }
-      });
-    }
 
     function toggleMobileMenu() {
       const drawer = document.getElementById('mobile-drawer');

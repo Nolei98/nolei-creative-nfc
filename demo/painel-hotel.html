@@ -147,24 +147,7 @@
     </div>
   </header>
 
-  <div class="operator-bar">
-    <div class="operator-inner">
-      <div class="operator-current">
-        <span>Visão Operacional:</span>
-        <span class="operator-badge" id="currentRoleLabel">Concierge Geral</span>
-        <span style="font-size: 0.75rem; color: #64748B;">Recepção, Room Service e Governança da Pousada</span>
-      </div>
-      <div class="operator-switch-box">
-        <label style="font-size: 0.75rem; color: #94A3B8;">Alternar Posto:</label>
-        <select class="operator-select" id="roleSelector" onchange="switchOperatorRole(this.value)">
-          <option value="concierge">Concierge Geral (Todas as Áreas)</option>
-          <option value="room_service">Cozinha / Room Service</option>
-          <option value="governanca">Governança & Limpeza</option>
-          <option value="recepcao">Recepção & Hospedagem</option>
-        </select>
-      </div>
-    </div>
-  </div>
+
 
   <main class="container">
     <div class="page-header">
@@ -383,23 +366,7 @@
       });
     }
 
-    function switchOperatorRole(role) {
-      var label = document.getElementById('currentRoleLabel');
-      if (role === 'concierge') {
-        label.innerText = 'Concierge Geral';
-        setTab('concierge');
-      } else if (role === 'room_service') {
-        label.innerText = 'Cozinha / Room Service';
-        setTab('room_service');
-      } else if (role === 'governanca') {
-        label.innerText = 'Governança & SPA';
-        setTab('governanca');
-      } else if (role === 'recepcao') {
-        label.innerText = 'Recepção & Hospedagem';
-        setTab('hospedes');
-      }
-      showToast('Visão operacional alterada para: ' + label.innerText);
-    }
+
 
     function renderConcierge() {
       var grid = document.getElementById('conciergeCardsGrid');

@@ -1007,6 +1007,71 @@
       }
     }
 
+
+    /* LUXURY ENTRANCE & SCROLL REVEAL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered children container */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: calc(var(--stagger-i, 0) * 110ms);
+      will-change: opacity, transform;
+    }
+
+    .reveal-stagger.is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero entrance on page load */
+    @keyframes heroFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-eyebrow {
+      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+
+    .hero-title {
+      animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+    }
+
+    .hero-subtitle {
+      animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+    }
+
+    .channel-switch-wrapper {
+      animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-stagger > *, .hero-eyebrow, .hero-title, .hero-subtitle, .channel-switch-wrapper {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1100,13 +1165,13 @@
     </div>
 
     <!-- Section Header -->
-    <div class="section-label-row">
+    <div class="section-label-row reveal">
       <span class="section-label">Aplicações Integradas</span>
       <span style="font-size: 0.8rem; color: var(--text-muted);">Clique no card para testar a demonstração</span>
     </div>
 
     <!-- Solutions Grid (KISS, DRY, LUXURY) -->
-    <div class="solutions-grid">
+    <div class="solutions-grid reveal-stagger">
 
       <!-- 1. Google Avaliações -->
       <a href="demo/avaliacao.html?source=nfc" class="solution-card" id="link-avaliacao" data-demo="avaliacao" data-title="Google Avaliações">
@@ -1183,7 +1248,7 @@
     </div>
 
     <!-- SEÇÃO DE PEÇAS FÍSICAS & HARDWARE -->
-    <section class="hardware-section" id="hardware">
+    <section class="hardware-section reveal" id="hardware">
       <div class="section-label-row" style="margin-bottom: 6px;">
         <span class="section-label" style="color:var(--gold);">Hardware & Displays Físicos</span>
         <span style="font-size: 0.8rem; color: var(--text-muted);">Acabamento Premium em Acrílico & Madeira</span>
@@ -1193,7 +1258,7 @@
         Displays resistentes e sofisticados com chip NFC embutido de alta sensibilidade e gravação com a sua marca.
       </p>
 
-      <div class="hardware-grid">
+      <div class="hardware-grid reveal-stagger">
 
         <!-- 1. Display Acrílico L-Shape Menu -->
         <div class="hardware-card">
@@ -1259,7 +1324,7 @@
     </section>
 
     <!-- Contact Section -->
-    <div class="contact-card" id="contato">
+    <div class="contact-card reveal" id="contato">
       <h3 class="contact-title">Quer produzir seus displays personalizados?</h3>
       <p class="contact-desc">Desenvolvemos as peças com a identidade da sua marca, gravadas e programadas prontas para uso no seu estabelecimento.</p>
       <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Visitei%20o%20site%20da%20Nolei%20Creative%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta">
@@ -1268,7 +1333,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer reveal">
       <div class="footer-grid">
         <div>
           <div class="footer-brand-title">Nolei <span>Creative</span></div>
@@ -1473,6 +1538,30 @@
       document.getElementById('custom-google-direct-link').href = target;
       document.getElementById('custom-google-preview').style.display = 'block';
     }
+
+
+    // Modern Scroll Reveal Observer
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
+    });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => {
+      if (el.classList.contains('reveal-stagger')) {
+        Array.from(el.children).forEach((child, index) => {
+          child.style.setProperty('--stagger-i', index);
+        });
+      }
+      revealObserver.observe(el);
+    });
 
     // Scroll to Top visibility
     window.addEventListener('scroll', () => {

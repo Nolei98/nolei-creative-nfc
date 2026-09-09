@@ -1,1408 +1,1408 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0F223D">
-  <title>Painel do Restaurante & Cozinha — Nolei Gastronomia</title>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --navy: #0F223D;
-      --navy-light: #162C46;
-      --leaf-green: #2E7D32;
-      --leaf-green-accent: #22C55E;
-      --leaf-green-light: #E8F5E9;
-      --orange: #F97316;
-      --orange-accent: #EA580C;
-      --orange-light: #FFF7ED;
-      --amber: #F59E0B;
-      --amber-light: #FEF3C7;
-      --red: #EF4444;
-      --red-light: #FEE2E2;
-      --white: #FFFFFF;
-      --bg-light: #F8FAFC;
-      --text: #1E293B;
-      --text-muted: #64748B;
-      --text-dim: #94A3B8;
-      --border: #E2E8F0;
-      --radius: 14px;
-      --radius-sm: 8px;
-      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background-color: var(--bg-light);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-heading);
-      color: var(--navy);
-      font-weight: 700;
-      line-height: 1.25;
-    }
-
-    /* Top Bar */
-    .top-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 12px 20px;
-    }
-
-    .top-bar-inner {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .top-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .brand-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--navy);
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .brand-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--navy);
-    }
-
-    .brand-title span {
-      color: var(--leaf-green);
-    }
-
-    .top-nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .btn-top-action {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      color: var(--navy);
-      font-family: var(--font-heading);
-      font-size: 0.76rem;
-      font-weight: 600;
-      padding: 7px 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s;
-      cursor: pointer;
-    }
-
-    .btn-top-action:hover {
-      background: var(--navy);
-      color: var(--white);
-      border-color: var(--navy);
-    }
-
-    .btn-top-action.highlight {
-      background: var(--leaf-green-light);
-      color: var(--leaf-green);
-      border-color: rgba(46, 125, 50, 0.3);
-      font-weight: 700;
-    }
-
-    .btn-top-action.highlight:hover {
-      background: var(--leaf-green);
-      color: #FFFFFF;
-    }
-
-    /* Operator Switcher Bar */
-    .operator-bar {
-      background: #0A1728;
-      color: #94A3B8;
-      border-bottom: 1px solid #1E293B;
-      padding: 10px 20px;
-    }
-
-    .operator-inner {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .operator-current {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .operator-badge {
-      background: #162C46;
-      color: #38BDF8;
-      font-family: var(--font-heading);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-
-    .operator-tables-badge {
-      background: rgba(46, 125, 50, 0.2);
-      color: #4ADE80;
-      font-family: var(--font-heading);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(74, 222, 128, 0.3);
-    }
-
-    .operator-switch-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .operator-select {
-      background: #162C46;
-      border: 1px solid #334155;
-      color: #F8FAFC;
-      font-family: var(--font-heading);
-      font-size: 0.76rem;
-      padding: 6px 12px;
-      border-radius: 6px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    /* Container */
-    .container {
-      max-width: 1240px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 24px 20px 60px;
-      flex: 1;
-    }
-
-    /* Page Header */
-    .page-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .page-title {
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: var(--navy);
-    }
-
-    .page-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* Navigation Tabs */
-    .nav-tabs-bar {
-      display: flex;
-      gap: 8px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-
-    .tab-btn {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-bottom: none;
-      color: var(--text-muted);
-      font-family: var(--font-heading);
-      font-size: 0.84rem;
-      font-weight: 600;
-      padding: 10px 18px;
-      border-radius: 10px 10px 0 0;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .tab-btn.active {
-      background: var(--navy);
-      color: var(--white);
-      border-color: var(--navy);
-    }
-
-    .tab-pill {
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 10px;
-      background: var(--bg-light);
-      color: var(--navy);
-    }
-
-    .tab-btn.active .tab-pill {
-      background: var(--leaf-green-accent);
-      color: #0A1728;
-    }
-
-    /* Alerts Container (Service calls) */
-    .alerts-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .service-alert-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      border-radius: var(--radius);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-      animation: alertPulse 2s infinite ease-in-out;
-    }
-
-    @keyframes alertPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.006); }
-    }
-
-    .service-alert-box.garcom {
-      background: #FFF7ED;
-      border: 2px solid #F97316;
-      color: #9A3412;
-    }
-
-    .service-alert-box.conta {
-      background: #ECFDF5;
-      border: 2px solid #10B981;
-      color: #065F46;
-    }
-
-    .alert-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .alert-tag-table {
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-transform: uppercase;
-    }
-
-    .service-alert-box.garcom .alert-tag-table {
-      background: #EA580C;
-      color: #FFFFFF;
-    }
-
-    .service-alert-box.conta .alert-tag-table {
-      background: #059669;
-      color: #FFFFFF;
-    }
-
-    .btn-resolve-alert {
-      font-family: var(--font-heading);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 7px 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      color: #FFFFFF;
-      background: var(--navy);
-      transition: all 0.15s;
-    }
-
-    .btn-resolve-alert:hover {
-      background: #000000;
-    }
-
-    /* Tables Grid (KDS) */
-    .kds-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
-    .table-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.04);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: all 0.2s;
-    }
-
-    .table-card:hover {
-      border-color: var(--navy);
-      box-shadow: 0 6px 20px rgba(15, 34, 61, 0.08);
-    }
-
-    .table-card-header {
-      padding: 14px 18px;
-      background: #FAF8F5;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .table-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--navy);
-    }
-
-    .table-waiter-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--navy);
-      background: #E2E8F0;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-
-    .table-order-items {
-      padding: 14px 18px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .order-item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 8px;
-      border-bottom: 1px dashed var(--border);
-      gap: 8px;
-    }
-
-    .order-item-row:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .order-item-info strong {
-      font-size: 0.88rem;
-      color: var(--navy);
-      display: block;
-    }
-
-    .order-item-meta {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .status-badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 12px;
-      text-transform: uppercase;
-    }
-
-    .status-badge.preparo {
-      background: var(--amber-light);
-      color: #B45309;
-      border: 1px solid #FCD34D;
-    }
-
-    .status-badge.entregue {
-      background: var(--leaf-green-light);
-      color: #15803D;
-      border: 1px solid #86EFAC;
-    }
-
-    .table-card-footer {
-      padding: 12px 18px;
-      background: var(--bg-light);
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .table-total {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--navy);
-    }
-
-    .btn-finish-table {
-      background: var(--leaf-green);
-      color: #FFFFFF;
-      font-family: var(--font-heading);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .btn-finish-table:hover {
-      background: #166534;
-    }
-
-    /* CRUD Tables */
-    .crud-box {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.04);
-    }
-
-    .crud-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .search-input {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 0.84rem;
-      color: var(--text);
-      outline: none;
-      width: 280px;
-    }
-
-    .btn-add-primary {
-      background: var(--navy);
-      color: var(--white);
-      font-family: var(--font-heading);
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.15s;
-    }
-
-    .btn-add-primary:hover {
-      background: var(--leaf-green);
-    }
-
-    .table-responsive {
-      overflow-x: auto;
-    }
-
-    .custom-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-    }
-
-    .custom-table th {
-      text-align: left;
-      padding: 10px 14px;
-      background: var(--bg-light);
-      color: var(--text-muted);
-      font-weight: 700;
-      font-family: var(--font-heading);
-      border-bottom: 1px solid var(--border);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-    }
-
-    .custom-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-
-    .custom-table tr:hover td {
-      background: #FAF8F5;
-    }
-
-    /* Modal */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 34, 61, 0.65);
-      backdrop-filter: blur(6px);
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s;
-    }
-
-    .modal-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      max-width: 520px;
-      width: 100%;
-      padding: 24px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--navy);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 9px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: var(--text);
-      outline: none;
-    }
-
-    .form-control:focus {
-      border-color: var(--navy);
-    }
-
-    /* Toast */
-    .toast-box {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--navy);
-      color: var(--white);
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-      z-index: 1000;
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .toast-box.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    /* Scroll to Top */
-    .btn-scroll-top {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--navy);
-      color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(15, 34, 61, 0.25);
-      z-index: 990;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s ease;
-    }
-
-    .btn-scroll-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .btn-scroll-top:hover {
-      background: var(--leaf-green);
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 32px 16px 40px;
-      color: var(--text-muted);
-      font-size: 0.78rem;
-      border-top: 1px solid var(--border);
-      background: var(--white);
-      margin-top: auto;
-    }
-  </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="theme-color" content="#0F223D">
+ <title>Painel do Restaurante & Cozinha — Nolei Gastronomia</title>
+ 
+ <!-- Google Fonts -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+ <style>
+ :root {
+ --navy: #0F223D;
+ --navy-light: #162C46;
+ --leaf-green: #2E7D32;
+ --leaf-green-accent: #22C55E;
+ --leaf-green-light: #E8F5E9;
+ --orange: #F97316;
+ --orange-accent: #EA580C;
+ --orange-light: #FFF7ED;
+ --amber: #F59E0B;
+ --amber-light: #FEF3C7;
+ --red: #EF4444;
+ --red-light: #FEE2E2;
+ --white: #FFFFFF;
+ --bg-light: #F8FAFC;
+ --text: #1E293B;
+ --text-muted: #64748B;
+ --text-dim: #94A3B8;
+ --border: #E2E8F0;
+ --radius: 14px;
+ --radius-sm: 8px;
+ --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+ --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+ }
+
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ -webkit-tap-highlight-color: transparent;
+ }
+
+ body {
+ font-family: var(--font-body);
+ background-color: var(--bg-light);
+ color: var(--text);
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ line-height: 1.5;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ h1, h2, h3, h4, h5, h6 {
+ font-family: var(--font-heading);
+ color: var(--navy);
+ font-weight: 700;
+ line-height: 1.25;
+ }
+
+ /* Top Bar */
+ .top-bar {
+ background: var(--white);
+ border-bottom: 1px solid var(--border);
+ position: sticky;
+ top: 0;
+ z-index: 100;
+ padding: 12px 20px;
+ }
+
+ .top-bar-inner {
+ max-width: 1240px;
+ margin: 0 auto;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ gap: 12px;
+ }
+
+ .top-brand {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ text-decoration: none;
+ }
+
+ .brand-mark {
+ width: 36px;
+ height: 36px;
+ border-radius: 10px;
+ background: var(--navy);
+ color: var(--white);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0;
+ }
+
+ .brand-title {
+ font-size: 1.05rem;
+ font-weight: 800;
+ color: var(--navy);
+ }
+
+ .brand-title span {
+ color: var(--leaf-green);
+ }
+
+ .top-nav-actions {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ flex-wrap: wrap;
+ }
+
+ .btn-top-action {
+ background: var(--bg-light);
+ border: 1px solid var(--border);
+ color: var(--navy);
+ font-family: var(--font-heading);
+ font-size: 0.76rem;
+ font-weight: 600;
+ padding: 7px 14px;
+ border-radius: 8px;
+ text-decoration: none;
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ transition: all 0.15s;
+ cursor: pointer;
+ }
+
+ .btn-top-action:hover {
+ background: var(--navy);
+ color: var(--white);
+ border-color: var(--navy);
+ }
+
+ .btn-top-action.highlight {
+ background: var(--leaf-green-light);
+ color: var(--leaf-green);
+ border-color: rgba(46, 125, 50, 0.3);
+ font-weight: 700;
+ }
+
+ .btn-top-action.highlight:hover {
+ background: var(--leaf-green);
+ color: #FFFFFF;
+ }
+
+ /* Operator Switcher Bar */
+ .operator-bar {
+ background: #0A1728;
+ color: #94A3B8;
+ border-bottom: 1px solid #1E293B;
+ padding: 10px 20px;
+ }
+
+ .operator-inner {
+ max-width: 1240px;
+ margin: 0 auto;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ gap: 12px;
+ }
+
+ .operator-current {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ flex-wrap: wrap;
+ }
+
+ .operator-badge {
+ background: #162C46;
+ color: #38BDF8;
+ font-family: var(--font-heading);
+ font-size: 0.75rem;
+ font-weight: 700;
+ padding: 4px 10px;
+ border-radius: 6px;
+ border: 1px solid rgba(56, 189, 248, 0.25);
+ }
+
+ .operator-tables-badge {
+ background: rgba(46, 125, 50, 0.2);
+ color: #4ADE80;
+ font-family: var(--font-heading);
+ font-size: 0.72rem;
+ font-weight: 600;
+ padding: 3px 8px;
+ border-radius: 4px;
+ border: 1px solid rgba(74, 222, 128, 0.3);
+ }
+
+ .operator-switch-box {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ }
+
+ .operator-select {
+ background: #162C46;
+ border: 1px solid #334155;
+ color: #F8FAFC;
+ font-family: var(--font-heading);
+ font-size: 0.76rem;
+ padding: 6px 12px;
+ border-radius: 6px;
+ outline: none;
+ cursor: pointer;
+ }
+
+ /* Container */
+ .container {
+ max-width: 1240px;
+ width: 100%;
+ margin: 0 auto;
+ padding: 24px 20px 60px;
+ flex: 1;
+ }
+
+ /* Page Header */
+ .page-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ gap: 16px;
+ margin-bottom: 20px;
+ }
+
+ .page-title {
+ font-size: 1.55rem;
+ font-weight: 800;
+ color: var(--navy);
+ }
+
+ .page-desc {
+ font-size: 0.85rem;
+ color: var(--text-muted);
+ margin-top: 2px;
+ }
+
+ /* Navigation Tabs */
+ .nav-tabs-bar {
+ display: flex;
+ gap: 8px;
+ border-bottom: 1px solid var(--border);
+ margin-bottom: 24px;
+ overflow-x: auto;
+ padding-bottom: 2px;
+ }
+
+ .tab-btn {
+ background: var(--white);
+ border: 1px solid var(--border);
+ border-bottom: none;
+ color: var(--text-muted);
+ font-family: var(--font-heading);
+ font-size: 0.84rem;
+ font-weight: 600;
+ padding: 10px 18px;
+ border-radius: 10px 10px 0 0;
+ cursor: pointer;
+ display: inline-flex;
+ align-items: center;
+ gap: 8px;
+ transition: all 0.2s;
+ white-space: nowrap;
+ }
+
+ .tab-btn.active {
+ background: var(--navy);
+ color: var(--white);
+ border-color: var(--navy);
+ }
+
+ .tab-pill {
+ font-size: 0.68rem;
+ font-weight: 700;
+ padding: 2px 7px;
+ border-radius: 10px;
+ background: var(--bg-light);
+ color: var(--navy);
+ }
+
+ .tab-btn.active .tab-pill {
+ background: var(--leaf-green-accent);
+ color: #0A1728;
+ }
+
+ /* Alerts Container (Service calls) */
+ .alerts-container {
+ display: flex;
+ flex-direction: column;
+ gap: 12px;
+ margin-bottom: 24px;
+ }
+
+ .service-alert-box {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 14px 18px;
+ border-radius: var(--radius);
+ box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+ animation: alertPulse 2s infinite ease-in-out;
+ }
+
+ @keyframes alertPulse {
+ 0%, 100% { transform: scale(1); }
+ 50% { transform: scale(1.006); }
+ }
+
+ .service-alert-box.garcom {
+ background: #FFF7ED;
+ border: 2px solid #F97316;
+ color: #9A3412;
+ }
+
+ .service-alert-box.conta {
+ background: #ECFDF5;
+ border: 2px solid #10B981;
+ color: #065F46;
+ }
+
+ .alert-left {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ }
+
+ .alert-tag-table {
+ font-family: var(--font-heading);
+ font-size: 0.85rem;
+ font-weight: 800;
+ padding: 4px 10px;
+ border-radius: 6px;
+ text-transform: uppercase;
+ }
+
+ .service-alert-box.garcom .alert-tag-table {
+ background: #EA580C;
+ color: #FFFFFF;
+ }
+
+ .service-alert-box.conta .alert-tag-table {
+ background: #059669;
+ color: #FFFFFF;
+ }
+
+ .btn-resolve-alert {
+ font-family: var(--font-heading);
+ font-size: 0.78rem;
+ font-weight: 700;
+ padding: 7px 16px;
+ border-radius: 8px;
+ border: none;
+ cursor: pointer;
+ color: #FFFFFF;
+ background: var(--navy);
+ transition: all 0.15s;
+ }
+
+ .btn-resolve-alert:hover {
+ background: #000000;
+ }
+
+ /* Tables Grid (KDS) */
+ .kds-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+ gap: 20px;
+ }
+
+ .table-card {
+ background: var(--white);
+ border: 1px solid var(--border);
+ border-radius: var(--radius);
+ box-shadow: 0 2px 8px rgba(15, 34, 61, 0.04);
+ display: flex;
+ flex-direction: column;
+ overflow: hidden;
+ transition: all 0.2s;
+ }
+
+ .table-card:hover {
+ border-color: var(--navy);
+ box-shadow: 0 6px 20px rgba(15, 34, 61, 0.08);
+ }
+
+ .table-card-header {
+ padding: 14px 18px;
+ background: #FAF8F5;
+ border-bottom: 1px solid var(--border);
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ }
+
+ .table-title {
+ font-size: 1.05rem;
+ font-weight: 800;
+ color: var(--navy);
+ }
+
+ .table-waiter-badge {
+ font-size: 0.72rem;
+ font-weight: 700;
+ color: var(--navy);
+ background: #E2E8F0;
+ padding: 3px 8px;
+ border-radius: 6px;
+ }
+
+ .table-order-items {
+ padding: 14px 18px;
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ }
+
+ .order-item-row {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding-bottom: 8px;
+ border-bottom: 1px dashed var(--border);
+ gap: 8px;
+ }
+
+ .order-item-row:last-child {
+ border-bottom: none;
+ padding-bottom: 0;
+ }
+
+ .order-item-info strong {
+ font-size: 0.88rem;
+ color: var(--navy);
+ display: block;
+ }
+
+ .order-item-meta {
+ font-size: 0.72rem;
+ color: var(--text-muted);
+ }
+
+ .status-badge {
+ font-size: 0.7rem;
+ font-weight: 700;
+ padding: 3px 8px;
+ border-radius: 12px;
+ text-transform: uppercase;
+ }
+
+ .status-badge.preparo {
+ background: var(--amber-light);
+ color: #B45309;
+ border: 1px solid #FCD34D;
+ }
+
+ .status-badge.entregue {
+ background: var(--leaf-green-light);
+ color: #15803D;
+ border: 1px solid #86EFAC;
+ }
+
+ .table-card-footer {
+ padding: 12px 18px;
+ background: var(--bg-light);
+ border-top: 1px solid var(--border);
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 8px;
+ }
+
+ .table-total {
+ font-size: 1.05rem;
+ font-weight: 800;
+ color: var(--navy);
+ }
+
+ .btn-finish-table {
+ background: var(--leaf-green);
+ color: #FFFFFF;
+ font-family: var(--font-heading);
+ font-size: 0.75rem;
+ font-weight: 700;
+ padding: 6px 14px;
+ border-radius: 6px;
+ border: none;
+ cursor: pointer;
+ transition: background 0.15s;
+ }
+
+ .btn-finish-table:hover {
+ background: #166534;
+ }
+
+ /* CRUD Tables */
+ .crud-box {
+ background: var(--white);
+ border: 1px solid var(--border);
+ border-radius: var(--radius);
+ padding: 20px;
+ box-shadow: 0 2px 8px rgba(15, 34, 61, 0.04);
+ }
+
+ .crud-header-row {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ gap: 12px;
+ margin-bottom: 18px;
+ }
+
+ .search-input {
+ background: var(--bg-light);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ padding: 8px 14px;
+ font-size: 0.84rem;
+ color: var(--text);
+ outline: none;
+ width: 280px;
+ }
+
+ .btn-add-primary {
+ background: var(--navy);
+ color: var(--white);
+ font-family: var(--font-heading);
+ font-size: 0.8rem;
+ font-weight: 700;
+ padding: 8px 16px;
+ border-radius: 8px;
+ border: none;
+ cursor: pointer;
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ transition: background 0.15s;
+ }
+
+ .btn-add-primary:hover {
+ background: var(--leaf-green);
+ }
+
+ .table-responsive {
+ overflow-x: auto;
+ }
+
+ .custom-table {
+ width: 100%;
+ border-collapse: collapse;
+ font-size: 0.85rem;
+ }
+
+ .custom-table th {
+ text-align: left;
+ padding: 10px 14px;
+ background: var(--bg-light);
+ color: var(--text-muted);
+ font-weight: 700;
+ font-family: var(--font-heading);
+ border-bottom: 1px solid var(--border);
+ font-size: 0.75rem;
+ text-transform: uppercase;
+ }
+
+ .custom-table td {
+ padding: 12px 14px;
+ border-bottom: 1px solid var(--border);
+ vertical-align: middle;
+ }
+
+ .custom-table tr:hover td {
+ background: #FAF8F5;
+ }
+
+ /* Modal */
+ .modal-overlay {
+ position: fixed;
+ inset: 0;
+ background: rgba(15, 34, 61, 0.65);
+ backdrop-filter: blur(6px);
+ z-index: 999;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+ opacity: 0;
+ visibility: hidden;
+ transition: all 0.25s;
+ }
+
+ .modal-overlay.open {
+ opacity: 1;
+ visibility: visible;
+ }
+
+ .modal-card {
+ background: var(--white);
+ border-radius: var(--radius);
+ max-width: 520px;
+ width: 100%;
+ padding: 24px;
+ box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+ }
+
+ .modal-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-bottom: 18px;
+ }
+
+ .form-group {
+ margin-bottom: 14px;
+ }
+
+ .form-label {
+ font-size: 0.78rem;
+ font-weight: 700;
+ color: var(--navy);
+ display: block;
+ margin-bottom: 4px;
+ }
+
+ .form-control {
+ width: 100%;
+ padding: 9px 12px;
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ font-size: 0.85rem;
+ color: var(--text);
+ outline: none;
+ }
+
+ .form-control:focus {
+ border-color: var(--navy);
+ }
+
+ /* Toast */
+ .toast-box {
+ position: fixed;
+ bottom: 24px;
+ left: 50%;
+ transform: translateX(-50%) translateY(100px);
+ background: var(--navy);
+ color: var(--white);
+ padding: 10px 20px;
+ border-radius: 30px;
+ font-size: 0.82rem;
+ font-weight: 600;
+ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+ z-index: 1000;
+ opacity: 0;
+ transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+ }
+
+ .toast-box.show {
+ transform: translateX(-50%) translateY(0);
+ opacity: 1;
+ }
+
+ /* Scroll to Top */
+ .btn-scroll-top {
+ position: fixed;
+ bottom: 24px;
+ right: 24px;
+ width: 44px;
+ height: 44px;
+ border-radius: 50%;
+ background: var(--navy);
+ color: var(--white);
+ border: 1px solid rgba(255, 255, 255, 0.15);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ cursor: pointer;
+ box-shadow: 0 4px 14px rgba(15, 34, 61, 0.25);
+ z-index: 990;
+ opacity: 0;
+ visibility: hidden;
+ transition: all 0.25s ease;
+ }
+
+ .btn-scroll-top.visible {
+ opacity: 1;
+ visibility: visible;
+ }
+
+ .btn-scroll-top:hover {
+ background: var(--leaf-green);
+ transform: translateY(-2px);
+ }
+
+ /* Footer */
+ .footer {
+ text-align: center;
+ padding: 32px 16px 40px;
+ color: var(--text-muted);
+ font-size: 0.78rem;
+ border-top: 1px solid var(--border);
+ background: var(--white);
+ margin-top: auto;
+ }
+ </style>
 </head>
 <body>
 
-  <!-- Top Bar -->
-  <header class="top-bar">
-    <div class="top-bar-inner">
-      <a href="../index.html" class="top-brand">
-        <div class="brand-mark">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
-        </div>
-        <div class="brand-title">Nolei <span>Gastronomia & Cozinha</span></div>
-      </a>
-
-      <div class="top-nav-actions">
-        <a href="cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top-action highlight">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
-          Abrir Cardápio Mesa 04 ↗
-        </a>
-        <a href="dashboard-restaurante.html" class="btn-top-action">
-          Métricas & ROI
-        </a>
-        <a href="../docs.html#restaurante" class="btn-top-action">
-          Manual do Restaurante
-        </a>
-        <a href="../index.html" class="btn-top-action">
-          Hub Principal
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Operator / Active Waiter Switcher -->
-  <div class="operator-bar">
-    <div class="operator-inner">
-      <div class="operator-current">
-        <span class="operator-badge" id="operator-badge-display">Operador: Administrador do Restaurante</span>
-        <span class="operator-tables-badge" id="operator-tables-display">Salão Total: Todas as Mesas</span>
-      </div>
-
-      <div class="operator-switch-box">
-        <span style="font-size:0.75rem; color:#94A3B8;">Visão do Garçom:</span>
-        <select id="operator-select-dropdown" class="operator-select" onchange="changeActiveOperator(this.value)">
-          <option value="admin">Administrador Geral (Total)</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <main class="container">
-
-    <!-- Page Header -->
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Painel do Restaurante & Cozinha</h1>
-        <p class="page-desc">Controle de comandas por mesa, chamados de garçons, fila de preparo e cardápio digital.</p>
-      </div>
-      <div>
-        <button class="btn-add-primary" onclick="openNewProductModal()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          Novo Item no Cardápio
-        </button>
-      </div>
-    </div>
-
-    <!-- Navigation Tabs (Restaurante Only) -->
-    <div class="nav-tabs-bar">
-      <button class="tab-btn active" id="tab-btn-kds" onclick="switchTab('kds')">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-        Salão & Cozinha
-        <span class="tab-pill" id="badge-kds-count">3 Mesas</span>
-      </button>
-      <button class="tab-btn" id="tab-btn-products" onclick="switchTab('products')">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
-        Cardápio & Produtos
-        <span class="tab-pill" id="badge-products-count">8 Itens</span>
-      </button>
-      <button class="tab-btn" id="tab-btn-waiters" onclick="switchTab('waiters')">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Garçons & Mesas
-        <span class="tab-pill" id="badge-waiters-count">3 Garçons</span>
-      </button>
-      <button class="tab-btn" id="tab-btn-users" onclick="switchTab('users')">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        Clientes do Salão
-      </button>
-    </div>
-
-    <!-- SECTION 1: SALÃO & COZINHA -->
-    <section id="sec-kds">
-      <!-- Active Alerts (Garçom / Conta) -->
-      <div class="alerts-container" id="alerts-container"></div>
-
-      <!-- KDS Grid (Tables) -->
-      <div class="kds-grid" id="kds-grid"></div>
-    </section>
-
-    <!-- SECTION 2: CARDÁPIO & PRODUTOS (CRUD) -->
-    <section id="sec-products" style="display:none;">
-      <div class="crud-box">
-        <div class="crud-header-row">
-          <input type="text" id="product-search" class="search-input" placeholder="Buscar prato ou bebida..." oninput="filterProducts()">
-          <button class="btn-add-primary" onclick="openNewProductModal()">+ Cadastrar Prato</button>
-        </div>
-        <div class="table-responsive">
-          <table class="custom-table">
-            <thead>
-              <tr>
-                <th>Foto</th>
-                <th>Nome do Item</th>
-                <th>Categoria</th>
-                <th>Preço</th>
-                <th>Descrição</th>
-                <th style="text-align:right;">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="products-table-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: GARÇONS & MESAS -->
-    <section id="sec-waiters" style="display:none;">
-      <div class="crud-box">
-        <div class="crud-header-row">
-          <input type="text" id="waiter-search" class="search-input" placeholder="Buscar garçom..." oninput="filterWaiters()">
-          <button class="btn-add-primary" onclick="openNewWaiterModal()">+ Cadastrar Garçom</button>
-        </div>
-        <div class="table-responsive">
-          <table class="custom-table">
-            <thead>
-              <tr>
-                <th>Nome do Garçom</th>
-                <th>Turno</th>
-                <th>Mesas Atribuídas</th>
-                <th>Nota Média</th>
-                <th>Status</th>
-                <th style="text-align:right;">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="waiters-table-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: CLIENTES DO SALÃO -->
-    <section id="sec-users" style="display:none;">
-      <div class="crud-box">
-        <div class="crud-header-row">
-          <input type="text" id="user-search" class="search-input" placeholder="Buscar cliente por telefone ou nome..." oninput="filterUsers()">
-        </div>
-        <div class="table-responsive">
-          <table class="custom-table">
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>WhatsApp</th>
-                <th>Última Mesa</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="users-table-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div style="margin-bottom:10px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-      <a href="../docs.html#restaurante" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação do Restaurante</a>
-      <a href="cardapio.html?source=nfc&mesa=04" target="_blank" style="color:var(--leaf-green); font-weight:700; text-decoration:none;">Abrir Cardápio da Mesa 04 ↗</a>
-      <a href="dashboard-restaurante.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Métricas de Vendas & ROI</a>
-      <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
-    </div>
-    <p>© 2026 Nolei Creative — Painel Especializado de Gastronomia, Mesas & Cozinha.</p>
-  </footer>
-
-  <!-- Modal Produto -->
-  <div class="modal-overlay" id="modal-product" onclick="closeProductModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <h3 id="modal-product-title">Item do Cardápio</h3>
-        <button onclick="closeProductModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
-      </div>
-      <input type="hidden" id="edit-prod-id">
-      <div class="form-group">
-        <label class="form-label">Nome do Prato/Bebida:</label>
-        <input type="text" id="prod-name" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Categoria:</label>
-        <select id="prod-cat" class="form-control">
-          <option value="entradas">Entradas & Petiscos</option>
-          <option value="principais">Pratos Principais</option>
-          <option value="bebidas">Bebidas & Drinks</option>
-          <option value="sobremesas">Sobremesas</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Preço (R$):</label>
-        <input type="number" step="0.50" id="prod-price" class="form-control" placeholder="28.90" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Descrição / Ingredientes:</label>
-        <textarea id="prod-desc" class="form-control" rows="2"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">URL da Imagem:</label>
-        <input type="text" id="prod-img" class="form-control" placeholder="https://images.unsplash.com/...">
-      </div>
-      <button class="btn-add-primary" style="width:100%; justify-content:center;" onclick="saveProduct()">Salvar no Cardápio</button>
-    </div>
-  </div>
-
-  <!-- Modal Garçom -->
-  <div class="modal-overlay" id="modal-waiter" onclick="closeWaiterModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <h3 id="modal-waiter-title">Cadastrar Garçom</h3>
-        <button onclick="closeWaiterModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
-      </div>
-      <input type="hidden" id="edit-waiter-id">
-      <div class="form-group">
-        <label class="form-label">Nome do Garçom:</label>
-        <input type="text" id="waiter-name" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">WhatsApp:</label>
-        <input type="tel" id="waiter-phone" class="form-control" placeholder="(11) 99999-9999">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Turno:</label>
-        <select id="waiter-shift" class="form-control">
-          <option value="Manhã / Almoço">Manhã / Almoço</option>
-          <option value="Noite / Jantar">Noite / Jantar</option>
-          <option value="Integral">Integral</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Mesas Atribuídas (separadas por vírgula):</label>
-        <input type="text" id="waiter-tables" class="form-control" placeholder="Ex: mesa 01, mesa 02, mesa 04" value="mesa 01, mesa 04">
-      </div>
-      <button class="btn-add-primary" style="width:100%; justify-content:center;" onclick="saveWaiter()">Salvar Garçom</button>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="toast-box" id="toast-box"></div>
-
-  <!-- Scroll to Top -->
-  <button type="button" class="btn-scroll-top" id="btn-scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Voltar ao Topo">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-  </button>
-
-  <script>
-    // Tab switching
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('tab-btn-' + tabId).classList.add('active');
-
-      document.getElementById('sec-kds').style.display = tabId === 'kds' ? 'block' : 'none';
-      document.getElementById('sec-products').style.display = tabId === 'products' ? 'block' : 'none';
-      document.getElementById('sec-waiters').style.display = tabId === 'waiters' ? 'block' : 'none';
-      document.getElementById('sec-users').style.display = tabId === 'users' ? 'block' : 'none';
-    }
-
-    // Default Products Database
-    const defaultMenu = {
-      entradas: [
-        { id: "e1", name: "Bruschetta Caprese", priceVal: 28.90, desc: "Tomate cereja confit, muçarela de búfala fresca, manjericão e redução balsâmica.", tags: ["Vegetariano"], image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=400&q=80" },
-        { id: "e2", name: "Carpaccio de Abobrinha", priceVal: 32.00, desc: "Lâminas finas grelhadas com pesto de rúcula, raspas de limão siciliano e parmesão 24 meses.", tags: ["Vegano"], image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" }
-      ],
-      principais: [
-        { id: "p1", name: "Risoto de Funghi Porcini", priceVal: 58.90, desc: "Arroz arbóreo italiano com cogumelos frescos, azeite trufado e queijo grana padano.", tags: ["Vegetariano"], image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80" },
-        { id: "p2", name: "Salmão Grelhado na Brasa", priceVal: 72.00, desc: "Filé de salmão fresco com purê de batata-doce roxa, aspargos verdes salteados e molho de maracujá.", tags: ["Sem Glúten"], image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80" },
-        { id: "p3", name: "Burger Botânico Artesanal", priceVal: 45.90, desc: "Blend 180g angus, queijo gruyère derretido, cebola caramelizada e aioli de ervas no brioche.", tags: ["Artesanal"], image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80" }
-      ],
-      bebidas: [
-        { id: "b1", name: "Limonada Siciliana com Hortelã", priceVal: 18.90, desc: "Limão siciliano fresco batido com folhas de hortelã orgânica e água com gás.", tags: ["Sem Açúcar"], image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80" },
-        { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, desc: "Gin artesanal infusionado, tônica premium, pepino japonês, zimbro e ramo de alecrim tostado.", tags: ["Drink"], image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=400&q=80" }
-      ],
-      sobremesas: [
-        { id: "s1", name: "Petit Gâteau Belga", priceVal: 32.00, desc: "Bolo quente com recheio cremoso de chocolate belga 70% acompanhado de sorvete de fava de baunilha.", tags: ["Sobremesa"], image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80" }
-      ]
-    };
-
-    function getStoredMenu() {
-      let menu = JSON.parse(localStorage.getItem('nolei_menu_custom') || 'null');
-      if (!menu) {
-        menu = defaultMenu;
-        localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
-      }
-      return menu;
-    }
-
-    // Default Waiters
-    const defaultWaiters = [
-      { id: "w1", name: "Carlos Eduardo", phone: "(11) 98111-2233", shift: "Manhã / Almoço", tables: ["mesa 01", "mesa 02", "mesa 03", "mesa 04"], rating: 4.9, active: true },
-      { id: "w2", name: "Mariana Souza", phone: "(11) 98222-3344", shift: "Noite / Jantar", tables: ["mesa 05", "mesa 06", "mesa 07"], rating: 4.8, active: true },
-      { id: "w3", name: "Lucas Ferreira", phone: "(11) 98333-4455", shift: "Integral", tables: ["mesa 08", "mesa 09", "mesa 10"], rating: 5.0, active: true }
-    ];
-
-    function getStoredWaiters() {
-      let w = JSON.parse(localStorage.getItem('nolei_waiters') || 'null');
-      if (!w) {
-        w = defaultWaiters;
-        localStorage.setItem('nolei_waiters', JSON.stringify(w));
-      }
-      return w;
-    }
-
-    // Active Operator (Waiter Profile)
-    let activeOperatorId = 'admin';
-
-    function initOperatorDropdown() {
-      const select = document.getElementById('operator-select-dropdown');
-      const waiters = getStoredWaiters();
-      let html = `<option value="admin">Administrador Geral (Total)</option>`;
-      waiters.forEach(w => {
-        html += `<option value="${w.id}">Garçom: ${w.name} (${w.tables.join(', ')})</option>`;
-      });
-      select.innerHTML = html;
-      select.value = activeOperatorId;
-    }
-
-    function changeActiveOperator(val) {
-      activeOperatorId = val;
-      const badge = document.getElementById('operator-badge-display');
-      const tablesBadge = document.getElementById('operator-tables-display');
-      const waiters = getStoredWaiters();
-
-      if (val === 'admin') {
-        badge.textContent = 'Operador: Administrador do Restaurante';
-        tablesBadge.textContent = 'Salão Total: Todas as Mesas';
-      } else {
-        const op = waiters.find(w => w.id === val);
-        if (op) {
-          badge.textContent = `Garçom: ${op.name}`;
-          tablesBadge.textContent = `Mesas: ${op.tables.join(', ')}`;
-        }
-      }
-      renderKDS();
-      renderAlerts();
-    }
-
-    // Live KDS & Alerts Logic
-    let kdsTables = [
-      {
-        table: "mesa 04",
-        waiter: "Carlos Eduardo",
-        items: [
-          { name: "Bruschetta Caprese", priceVal: 28.90, orderedBy: "João Silva", time: "12:15", status: "entregue" },
-          { name: "Risoto de Funghi Porcini", priceVal: 58.90, orderedBy: "João Silva", time: "12:18", status: "preparo" },
-          { name: "Limonada Siciliana", priceVal: 18.90, orderedBy: "Ana Beatriz", time: "12:20", status: "preparo" }
-        ]
-      },
-      {
-        table: "mesa 02",
-        waiter: "Carlos Eduardo",
-        items: [
-          { name: "Burger Botânico Artesanal", priceVal: 45.90, orderedBy: "Lucas Ribeiro", time: "12:05", status: "entregue" },
-          { name: "Gin Tônica Botânica", priceVal: 38.00, orderedBy: "Lucas Ribeiro", time: "12:06", status: "entregue" }
-        ]
-      },
-      {
-        table: "mesa 07",
-        waiter: "Mariana Souza",
-        items: [
-          { name: "Salmão Grelhado na Brasa", priceVal: 72.00, orderedBy: "Patrícia Mendes", time: "12:25", status: "preparo" }
-        ]
-      }
-    ];
-
-    function renderAlerts() {
-      const container = document.getElementById('alerts-container');
-      const alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
-      const waiters = getStoredWaiters();
-
-      // Filter by active waiter if not admin
-      let filtered = alerts;
-      if (activeOperatorId !== 'admin') {
-        const op = waiters.find(w => w.id === activeOperatorId);
-        if (op) {
-          filtered = alerts.filter(a => op.tables.includes(a.table.toLowerCase()));
-        }
-      }
-
-      if (filtered.length === 0) {
-        container.innerHTML = '';
-        return;
-      }
-
-      container.innerHTML = filtered.map(a => `
-        <div class="service-alert-box ${a.type}">
-          <div class="alert-left">
-            <span class="alert-tag-table">${a.table.toUpperCase()}</span>
-            <div>
-              <strong>${a.type === 'garcom' ? 'Garçom Chamado na Mesa' : 'Solicitação de Fechamento de Conta'}</strong>
-              <div style="font-size:0.75rem; opacity:0.85;">Registrado: ${a.time || 'Agora'}</div>
-            </div>
-          </div>
-          <button class="btn-resolve-alert" onclick="resolveAlert('${a.id}')">Atender Chamado</button>
-        </div>
-      `).join('');
-    }
-
-    function resolveAlert(alertId) {
-      let alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
-      alerts = alerts.filter(a => a.id !== alertId);
-      localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
-      renderAlerts();
-      showToast('Chamado atendido e finalizado com sucesso.');
-    }
-
-    function renderKDS() {
-      const grid = document.getElementById('kds-grid');
-      const waiters = getStoredWaiters();
-
-      // Sync mesa 04 live orders from customer
-      const mesa04Stored = JSON.parse(localStorage.getItem('nolei_table_orders_mesa04') || 'null');
-      if (mesa04Stored && mesa04Stored.length > 0) {
-        kdsTables[0].items = mesa04Stored;
-      }
-
-      let filtered = kdsTables;
-      if (activeOperatorId !== 'admin') {
-        const op = waiters.find(w => w.id === activeOperatorId);
-        if (op) {
-          filtered = kdsTables.filter(t => op.tables.includes(t.table.toLowerCase()));
-        }
-      }
-
-      document.getElementById('badge-kds-count').textContent = `${filtered.length} Mesas`;
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-muted);">Nenhuma mesa com pedidos ativos sob sua responsabilidade.</div>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map((t, tIdx) => {
-        let total = 0;
-        t.items.forEach(i => total += (i.priceVal || 0));
-
-        return `
-          <div class="table-card">
-            <div class="table-card-header">
-              <span class="table-title">${t.table.toUpperCase()}</span>
-              <span class="table-waiter-badge">Garçom: ${t.waiter}</span>
-            </div>
-            <div class="table-order-items">
-              ${t.items.map((item, iIdx) => `
-                <div class="order-item-row">
-                  <div class="order-item-info">
-                    <strong>${item.name}</strong>
-                    <span class="order-item-meta">${item.orderedBy} • ${item.time || '12:00'}</span>
-                  </div>
-                  <button class="status-badge ${item.status}" style="border:none; cursor:pointer;" onclick="toggleItemStatus(${tIdx}, ${iIdx})">
-                    ${item.status === 'entregue' ? 'Entregue' : 'Em Preparo'}
-                  </button>
-                </div>
-              `).join('')}
-            </div>
-            <div class="table-card-footer">
-              <div>
-                <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">Subtotal da Mesa:</div>
-                <div class="table-total">R$ ${total.toFixed(2).replace('.', ',')}</div>
-              </div>
-              <button class="btn-finish-table" onclick="finishTable('${t.table}')">Encerrar Mesa</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function toggleItemStatus(tIdx, iIdx) {
-      const item = kdsTables[tIdx].items[iIdx];
-      item.status = item.status === 'entregue' ? 'preparo' : 'entregue';
-      if (kdsTables[tIdx].table.toLowerCase() === 'mesa 04') {
-        localStorage.setItem('nolei_table_orders_mesa04', JSON.stringify(kdsTables[tIdx].items));
-      }
-      renderKDS();
-      showToast(`Status atualizado para: ${item.status === 'entregue' ? 'Entregue na Mesa' : 'Em Preparo'}`);
-    }
-
-    function finishTable(tableName) {
-      if (tableName.toLowerCase() === 'mesa 04') {
-        localStorage.removeItem('nolei_table_orders_mesa04');
-        kdsTables[0].items = [];
-      }
-      renderKDS();
-      showToast(`Comanda da ${tableName.toUpperCase()} encerrada com sucesso.`);
-    }
-
-    // CRUD Products
-    function renderProducts() {
-      const menu = getStoredMenu();
-      const tbody = document.getElementById('products-table-body');
-      let all = [];
-      Object.keys(menu).forEach(cat => {
-        menu[cat].forEach(item => all.push({ ...item, catKey: cat }));
-      });
-
-      document.getElementById('badge-products-count').textContent = `${all.length} Itens`;
-
-      tbody.innerHTML = all.map(p => `
-        <tr>
-          <td><img src="${p.image}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"></td>
-          <td><strong>${p.name}</strong></td>
-          <td><span style="font-size:0.72rem; background:var(--bg-light); padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase;">${p.catKey}</span></td>
-          <td style="color:var(--leaf-green); font-weight:700;">R$ ${Number(p.priceVal).toFixed(2).replace('.', ',')}</td>
-          <td style="color:var(--text-muted); font-size:0.75rem; max-width:260px;">${p.desc}</td>
-          <td style="text-align:right;">
-            <button onclick="editProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color:var(--navy); font-weight:700; cursor:pointer; margin-right:8px;">Editar</button>
-            <button onclick="deleteProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color:var(--red); font-weight:700; cursor:pointer;">Excluir</button>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    function openNewProductModal() {
-      document.getElementById('edit-prod-id').value = '';
-      document.getElementById('modal-product-title').textContent = 'Novo Item no Cardápio';
-      document.getElementById('prod-name').value = '';
-      document.getElementById('prod-price').value = '';
-      document.getElementById('prod-desc').value = '';
-      document.getElementById('prod-img').value = '';
-      document.getElementById('modal-product').classList.add('open');
-    }
-
-    function closeProductModal() {
-      document.getElementById('modal-product').classList.remove('open');
-    }
-
-    function saveProduct() {
-      const id = document.getElementById('edit-prod-id').value || 'p_' + Date.now();
-      const name = document.getElementById('prod-name').value.trim();
-      const cat = document.getElementById('prod-cat').value;
-      const priceVal = parseFloat(document.getElementById('prod-price').value);
-      const desc = document.getElementById('prod-desc').value.trim();
-      const image = document.getElementById('prod-img').value.trim() || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80';
-
-      if (!name || isNaN(priceVal)) {
-        alert('Preencha nome e preço válido.');
-        return;
-      }
-
-      const menu = getStoredMenu();
-      Object.keys(menu).forEach(c => {
-        menu[c] = menu[c].filter(i => i.id !== id);
-      });
-
-      menu[cat].push({ id, name, priceVal, desc, image, tags: ["Especial"] });
-      localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
-      closeProductModal();
-      renderProducts();
-      showToast(`Prato "${name}" salvo com sucesso.`);
-    }
-
-    function deleteProduct(cat, id) {
-      if (!confirm('Deseja excluir este item do cardápio?')) return;
-      const menu = getStoredMenu();
-      menu[cat] = menu[cat].filter(i => i.id !== id);
-      localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
-      renderProducts();
-      showToast('Item removido do cardápio.');
-    }
-
-    // CRUD Waiters
-    function renderWaiters() {
-      const waiters = getStoredWaiters();
-      const tbody = document.getElementById('waiters-table-body');
-      document.getElementById('badge-waiters-count').textContent = `${waiters.length} Garçons`;
-
-      tbody.innerHTML = waiters.map(w => `
-        <tr>
-          <td><strong>${w.name}</strong><br><span style="font-size:0.72rem; color:var(--text-muted);">${w.phone}</span></td>
-          <td>${w.shift}</td>
-          <td><span style="font-weight:700; color:var(--leaf-green);">${w.tables.join(', ')}</span></td>
-          <td><span style="font-weight:700;">${w.rating.toFixed(1)} / 5.0</span></td>
-          <td><span style="font-size:0.7rem; font-weight:700; background:var(--leaf-green-light); color:var(--leaf-green); padding:2px 6px; border-radius:4px;">Ativo</span></td>
-          <td style="text-align:right;">
-            <button onclick="deleteWaiter('${w.id}')" style="background:none; border:none; color:var(--red); font-weight:700; cursor:pointer;">Remover</button>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    function openNewWaiterModal() {
-      document.getElementById('waiter-name').value = '';
-      document.getElementById('waiter-phone').value = '';
-      document.getElementById('modal-waiter').classList.add('open');
-    }
-
-    function closeWaiterModal() {
-      document.getElementById('modal-waiter').classList.remove('open');
-    }
-
-    function saveWaiter() {
-      const name = document.getElementById('waiter-name').value.trim();
-      const phone = document.getElementById('waiter-phone').value.trim();
-      const shift = document.getElementById('waiter-shift').value;
-      const tablesStr = document.getElementById('waiter-tables').value.trim();
-
-      if (!name) {
-        alert('Informe o nome do garçom.');
-        return;
-      }
-
-      const tables = tablesStr.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
-      const waiters = getStoredWaiters();
-      waiters.push({
-        id: 'w_' + Date.now(),
-        name,
-        phone: phone || '(11) 99999-9999',
-        shift,
-        tables: tables.length ? tables : ['mesa 01'],
-        rating: 5.0,
-        active: true
-      });
-      localStorage.setItem('nolei_waiters', JSON.stringify(waiters));
-      closeWaiterModal();
-      renderWaiters();
-      initOperatorDropdown();
-      showToast(`Garçom "${name}" cadastrado.`);
-    }
-
-    function deleteWaiter(id) {
-      if (!confirm('Deseja remover este garçom?')) return;
-      let waiters = getStoredWaiters();
-      waiters = waiters.filter(w => w.id !== id);
-      localStorage.setItem('nolei_waiters', JSON.stringify(waiters));
-      renderWaiters();
-      initOperatorDropdown();
-      showToast('Garçom removido com sucesso.');
-    }
-
-    // Users
-    function renderUsers() {
-      const tbody = document.getElementById('users-table-body');
-      const users = [
-        { name: "João Silva", phone: "(11) 98765-4321", table: "Mesa 04", status: "Em Atendimento" },
-        { name: "Lucas Ribeiro", phone: "(11) 97654-3210", table: "Mesa 02", status: "Conta Paga" },
-        { name: "Patrícia Mendes", phone: "(11) 96543-2109", table: "Mesa 07", status: "Aguardando Prato" }
-      ];
-
-      tbody.innerHTML = users.map(u => `
-        <tr>
-          <td><strong>${u.name}</strong></td>
-          <td>${u.phone}</td>
-          <td><span style="font-weight:700; color:var(--navy);">${u.table}</span></td>
-          <td><span style="font-size:0.72rem; font-weight:700; background:var(--bg-light); padding:2px 8px; border-radius:4px;">${u.status}</span></td>
-        </tr>
-      `).join('');
-    }
-
-    // Toast & Scroll
-    let toastTimer;
-    function showToast(msg) {
-      const toast = document.getElementById('toast-box');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
-    }
-
-    window.addEventListener('scroll', () => {
-      const btn = document.getElementById('btn-scroll-top');
-      if (btn) btn.classList.toggle('visible', window.scrollY > 300);
-    });
-
-    // Live Sync Polling
-    initOperatorDropdown();
-    renderKDS();
-    renderAlerts();
-    renderProducts();
-    renderWaiters();
-    renderUsers();
-
-    setInterval(() => {
-      renderKDS();
-      renderAlerts();
-    }, 2000);
-  </script>
+ <!-- Top Bar -->
+ <header class="top-bar">
+ <div class="top-bar-inner">
+ <a href="../index.html" class="top-brand">
+ <div class="brand-mark">
+ <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+ </div>
+ <div class="brand-title">Nolei <span>Gastronomia & Cozinha</span></div>
+ </a>
+
+ <div class="top-nav-actions">
+ <a href="cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top-action highlight">
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+ Abrir Cardápio Mesa 04 
+ </a>
+ <a href="dashboard-restaurante.html" class="btn-top-action">
+ Métricas & ROI
+ </a>
+ <a href="../docs.html#restaurante" class="btn-top-action">
+ Manual do Restaurante
+ </a>
+ <a href="../index.html" class="btn-top-action">
+ Hub Principal
+ </a>
+ </div>
+ </div>
+ </header>
+
+ <!-- Operator / Active Waiter Switcher -->
+ <div class="operator-bar">
+ <div class="operator-inner">
+ <div class="operator-current">
+ <span class="operator-badge" id="operator-badge-display">Operador: Administrador do Restaurante</span>
+ <span class="operator-tables-badge" id="operator-tables-display">Salão Total: Todas as Mesas</span>
+ </div>
+
+ <div class="operator-switch-box">
+ <span style="font-size:0.75rem; color:#94A3B8;">Visão do Garçom:</span>
+ <select id="operator-select-dropdown" class="operator-select" onchange="changeActiveOperator(this.value)">
+ <option value="admin">Administrador Geral (Total)</option>
+ </select>
+ </div>
+ </div>
+ </div>
+
+ <main class="container">
+
+ <!-- Page Header -->
+ <div class="page-header">
+ <div>
+ <h1 class="page-title">Painel do Restaurante & Cozinha</h1>
+ <p class="page-desc">Controle de comandas por mesa, chamados de garçons, fila de preparo e cardápio digital.</p>
+ </div>
+ <div>
+ <button class="btn-add-primary" onclick="openNewProductModal()">
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+ Novo Item no Cardápio
+ </button>
+ </div>
+ </div>
+
+ <!-- Navigation Tabs (Restaurante Only) -->
+ <div class="nav-tabs-bar">
+ <button class="tab-btn active" id="tab-btn-kds" onclick="switchTab('kds')">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+ Salão & Cozinha
+ <span class="tab-pill" id="badge-kds-count">3 Mesas</span>
+ </button>
+ <button class="tab-btn" id="tab-btn-products" onclick="switchTab('products')">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+ Cardápio & Produtos
+ <span class="tab-pill" id="badge-products-count">8 Itens</span>
+ </button>
+ <button class="tab-btn" id="tab-btn-waiters" onclick="switchTab('waiters')">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+ Garçons & Mesas
+ <span class="tab-pill" id="badge-waiters-count">3 Garçons</span>
+ </button>
+ <button class="tab-btn" id="tab-btn-users" onclick="switchTab('users')">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+ Clientes do Salão
+ </button>
+ </div>
+
+ <!-- SECTION 1: SALÃO & COZINHA -->
+ <section id="sec-kds">
+ <!-- Active Alerts (Garçom / Conta) -->
+ <div class="alerts-container" id="alerts-container"></div>
+
+ <!-- KDS Grid (Tables) -->
+ <div class="kds-grid" id="kds-grid"></div>
+ </section>
+
+ <!-- SECTION 2: CARDÁPIO & PRODUTOS (CRUD) -->
+ <section id="sec-products" style="display:none;">
+ <div class="crud-box">
+ <div class="crud-header-row">
+ <input type="text" id="product-search" class="search-input" placeholder="Buscar prato ou bebida..." oninput="filterProducts()">
+ <button class="btn-add-primary" onclick="openNewProductModal()">+ Cadastrar Prato</button>
+ </div>
+ <div class="table-responsive">
+ <table class="custom-table">
+ <thead>
+ <tr>
+ <th>Foto</th>
+ <th>Nome do Item</th>
+ <th>Categoria</th>
+ <th>Preço</th>
+ <th>Descrição</th>
+ <th style="text-align:right;">Ações</th>
+ </tr>
+ </thead>
+ <tbody id="products-table-body"></tbody>
+ </table>
+ </div>
+ </div>
+ </section>
+
+ <!-- SECTION 3: GARÇONS & MESAS -->
+ <section id="sec-waiters" style="display:none;">
+ <div class="crud-box">
+ <div class="crud-header-row">
+ <input type="text" id="waiter-search" class="search-input" placeholder="Buscar garçom..." oninput="filterWaiters()">
+ <button class="btn-add-primary" onclick="openNewWaiterModal()">+ Cadastrar Garçom</button>
+ </div>
+ <div class="table-responsive">
+ <table class="custom-table">
+ <thead>
+ <tr>
+ <th>Nome do Garçom</th>
+ <th>Turno</th>
+ <th>Mesas Atribuídas</th>
+ <th>Nota Média</th>
+ <th>Status</th>
+ <th style="text-align:right;">Ações</th>
+ </tr>
+ </thead>
+ <tbody id="waiters-table-body"></tbody>
+ </table>
+ </div>
+ </div>
+ </section>
+
+ <!-- SECTION 4: CLIENTES DO SALÃO -->
+ <section id="sec-users" style="display:none;">
+ <div class="crud-box">
+ <div class="crud-header-row">
+ <input type="text" id="user-search" class="search-input" placeholder="Buscar cliente por telefone ou nome..." oninput="filterUsers()">
+ </div>
+ <div class="table-responsive">
+ <table class="custom-table">
+ <thead>
+ <tr>
+ <th>Cliente</th>
+ <th>WhatsApp</th>
+ <th>Última Mesa</th>
+ <th>Status</th>
+ </tr>
+ </thead>
+ <tbody id="users-table-body"></tbody>
+ </table>
+ </div>
+ </div>
+ </section>
+
+ </main>
+
+ <!-- Footer -->
+ <footer class="footer">
+ <div style="margin-bottom:10px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+ <a href="../docs.html#restaurante" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação do Restaurante</a>
+ <a href="cardapio.html?source=nfc&mesa=04" target="_blank" style="color:var(--leaf-green); font-weight:700; text-decoration:none;">Abrir Cardápio da Mesa 04 </a>
+ <a href="dashboard-restaurante.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Métricas de Vendas & ROI</a>
+ <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
+ </div>
+ <p>© 2026 Nolei Creative — Painel Especializado de Gastronomia, Mesas & Cozinha.</p>
+ </footer>
+
+ <!-- Modal Produto -->
+ <div class="modal-overlay" id="modal-product" onclick="closeProductModal(event)">
+ <div class="modal-card" onclick="event.stopPropagation()">
+ <div class="modal-header">
+ <h3 id="modal-product-title">Item do Cardápio</h3>
+ <button onclick="closeProductModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
+ </div>
+ <input type="hidden" id="edit-prod-id">
+ <div class="form-group">
+ <label class="form-label">Nome do Prato/Bebida:</label>
+ <input type="text" id="prod-name" class="form-control" required>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Categoria:</label>
+ <select id="prod-cat" class="form-control">
+ <option value="entradas">Entradas & Petiscos</option>
+ <option value="principais">Pratos Principais</option>
+ <option value="bebidas">Bebidas & Drinks</option>
+ <option value="sobremesas">Sobremesas</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Preço (R$):</label>
+ <input type="number" step="0.50" id="prod-price" class="form-control" placeholder="28.90" required>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Descrição / Ingredientes:</label>
+ <textarea id="prod-desc" class="form-control" rows="2"></textarea>
+ </div>
+ <div class="form-group">
+ <label class="form-label">URL da Imagem:</label>
+ <input type="text" id="prod-img" class="form-control" placeholder="https://images.unsplash.com/...">
+ </div>
+ <button class="btn-add-primary" style="width:100%; justify-content:center;" onclick="saveProduct()">Salvar no Cardápio</button>
+ </div>
+ </div>
+
+ <!-- Modal Garçom -->
+ <div class="modal-overlay" id="modal-waiter" onclick="closeWaiterModal(event)">
+ <div class="modal-card" onclick="event.stopPropagation()">
+ <div class="modal-header">
+ <h3 id="modal-waiter-title">Cadastrar Garçom</h3>
+ <button onclick="closeWaiterModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
+ </div>
+ <input type="hidden" id="edit-waiter-id">
+ <div class="form-group">
+ <label class="form-label">Nome do Garçom:</label>
+ <input type="text" id="waiter-name" class="form-control" required>
+ </div>
+ <div class="form-group">
+ <label class="form-label">WhatsApp:</label>
+ <input type="tel" id="waiter-phone" class="form-control" placeholder="(11) 99999-9999">
+ </div>
+ <div class="form-group">
+ <label class="form-label">Turno:</label>
+ <select id="waiter-shift" class="form-control">
+ <option value="Manhã / Almoço">Manhã / Almoço</option>
+ <option value="Noite / Jantar">Noite / Jantar</option>
+ <option value="Integral">Integral</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Mesas Atribuídas (separadas por vírgula):</label>
+ <input type="text" id="waiter-tables" class="form-control" placeholder="Ex: mesa 01, mesa 02, mesa 04" value="mesa 01, mesa 04">
+ </div>
+ <button class="btn-add-primary" style="width:100%; justify-content:center;" onclick="saveWaiter()">Salvar Garçom</button>
+ </div>
+ </div>
+
+ <!-- Toast -->
+ <div class="toast-box" id="toast-box"></div>
+
+ <!-- Scroll to Top -->
+ <button type="button" class="btn-scroll-top" id="btn-scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Voltar ao Topo">
+ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+ </button>
+
+ <script>
+ // Tab switching
+ function switchTab(tabId) {
+ document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+ document.getElementById('tab-btn-' + tabId).classList.add('active');
+
+ document.getElementById('sec-kds').style.display = tabId === 'kds' ? 'block' : 'none';
+ document.getElementById('sec-products').style.display = tabId === 'products' ? 'block' : 'none';
+ document.getElementById('sec-waiters').style.display = tabId === 'waiters' ? 'block' : 'none';
+ document.getElementById('sec-users').style.display = tabId === 'users' ? 'block' : 'none';
+ }
+
+ // Default Products Database
+ const defaultMenu = {
+ entradas: [
+ { id: "e1", name: "Bruschetta Caprese", priceVal: 28.90, desc: "Tomate cereja confit, muçarela de búfala fresca, manjericão e redução balsâmica.", tags: ["Vegetariano"], image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=400&q=80" },
+ { id: "e2", name: "Carpaccio de Abobrinha", priceVal: 32.00, desc: "Lâminas finas grelhadas com pesto de rúcula, raspas de limão siciliano e parmesão 24 meses.", tags: ["Vegano"], image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" }
+ ],
+ principais: [
+ { id: "p1", name: "Risoto de Funghi Porcini", priceVal: 58.90, desc: "Arroz arbóreo italiano com cogumelos frescos, azeite trufado e queijo grana padano.", tags: ["Vegetariano"], image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80" },
+ { id: "p2", name: "Salmão Grelhado na Brasa", priceVal: 72.00, desc: "Filé de salmão fresco com purê de batata-doce roxa, aspargos verdes salteados e molho de maracujá.", tags: ["Sem Glúten"], image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80" },
+ { id: "p3", name: "Burger Botânico Artesanal", priceVal: 45.90, desc: "Blend 180g angus, queijo gruyère derretido, cebola caramelizada e aioli de ervas no brioche.", tags: ["Artesanal"], image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80" }
+ ],
+ bebidas: [
+ { id: "b1", name: "Limonada Siciliana com Hortelã", priceVal: 18.90, desc: "Limão siciliano fresco batido com folhas de hortelã orgânica e água com gás.", tags: ["Sem Açúcar"], image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80" },
+ { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, desc: "Gin artesanal infusionado, tônica premium, pepino japonês, zimbro e ramo de alecrim tostado.", tags: ["Drink"], image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=400&q=80" }
+ ],
+ sobremesas: [
+ { id: "s1", name: "Petit Gâteau Belga", priceVal: 32.00, desc: "Bolo quente com recheio cremoso de chocolate belga 70% acompanhado de sorvete de fava de baunilha.", tags: ["Sobremesa"], image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80" }
+ ]
+ };
+
+ function getStoredMenu() {
+ let menu = JSON.parse(localStorage.getItem('nolei_menu_custom') || 'null');
+ if (!menu) {
+ menu = defaultMenu;
+ localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+ }
+ return menu;
+ }
+
+ // Default Waiters
+ const defaultWaiters = [
+ { id: "w1", name: "Carlos Eduardo", phone: "(11) 98111-2233", shift: "Manhã / Almoço", tables: ["mesa 01", "mesa 02", "mesa 03", "mesa 04"], rating: 4.9, active: true },
+ { id: "w2", name: "Mariana Souza", phone: "(11) 98222-3344", shift: "Noite / Jantar", tables: ["mesa 05", "mesa 06", "mesa 07"], rating: 4.8, active: true },
+ { id: "w3", name: "Lucas Ferreira", phone: "(11) 98333-4455", shift: "Integral", tables: ["mesa 08", "mesa 09", "mesa 10"], rating: 5.0, active: true }
+ ];
+
+ function getStoredWaiters() {
+ let w = JSON.parse(localStorage.getItem('nolei_waiters') || 'null');
+ if (!w) {
+ w = defaultWaiters;
+ localStorage.setItem('nolei_waiters', JSON.stringify(w));
+ }
+ return w;
+ }
+
+ // Active Operator (Waiter Profile)
+ let activeOperatorId = 'admin';
+
+ function initOperatorDropdown() {
+ const select = document.getElementById('operator-select-dropdown');
+ const waiters = getStoredWaiters();
+ let html = `<option value="admin">Administrador Geral (Total)</option>`;
+ waiters.forEach(w => {
+ html += `<option value="${w.id}">Garçom: ${w.name} (${w.tables.join(', ')})</option>`;
+ });
+ select.innerHTML = html;
+ select.value = activeOperatorId;
+ }
+
+ function changeActiveOperator(val) {
+ activeOperatorId = val;
+ const badge = document.getElementById('operator-badge-display');
+ const tablesBadge = document.getElementById('operator-tables-display');
+ const waiters = getStoredWaiters();
+
+ if (val === 'admin') {
+ badge.textContent = 'Operador: Administrador do Restaurante';
+ tablesBadge.textContent = 'Salão Total: Todas as Mesas';
+ } else {
+ const op = waiters.find(w => w.id === val);
+ if (op) {
+ badge.textContent = `Garçom: ${op.name}`;
+ tablesBadge.textContent = `Mesas: ${op.tables.join(', ')}`;
+ }
+ }
+ renderKDS();
+ renderAlerts();
+ }
+
+ // Live KDS & Alerts Logic
+ let kdsTables = [
+ {
+ table: "mesa 04",
+ waiter: "Carlos Eduardo",
+ items: [
+ { name: "Bruschetta Caprese", priceVal: 28.90, orderedBy: "João Silva", time: "12:15", status: "entregue" },
+ { name: "Risoto de Funghi Porcini", priceVal: 58.90, orderedBy: "João Silva", time: "12:18", status: "preparo" },
+ { name: "Limonada Siciliana", priceVal: 18.90, orderedBy: "Ana Beatriz", time: "12:20", status: "preparo" }
+ ]
+ },
+ {
+ table: "mesa 02",
+ waiter: "Carlos Eduardo",
+ items: [
+ { name: "Burger Botânico Artesanal", priceVal: 45.90, orderedBy: "Lucas Ribeiro", time: "12:05", status: "entregue" },
+ { name: "Gin Tônica Botânica", priceVal: 38.00, orderedBy: "Lucas Ribeiro", time: "12:06", status: "entregue" }
+ ]
+ },
+ {
+ table: "mesa 07",
+ waiter: "Mariana Souza",
+ items: [
+ { name: "Salmão Grelhado na Brasa", priceVal: 72.00, orderedBy: "Patrícia Mendes", time: "12:25", status: "preparo" }
+ ]
+ }
+ ];
+
+ function renderAlerts() {
+ const container = document.getElementById('alerts-container');
+ const alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+ const waiters = getStoredWaiters();
+
+ // Filter by active waiter if not admin
+ let filtered = alerts;
+ if (activeOperatorId !== 'admin') {
+ const op = waiters.find(w => w.id === activeOperatorId);
+ if (op) {
+ filtered = alerts.filter(a => op.tables.includes(a.table.toLowerCase()));
+ }
+ }
+
+ if (filtered.length === 0) {
+ container.innerHTML = '';
+ return;
+ }
+
+ container.innerHTML = filtered.map(a => `
+ <div class="service-alert-box ${a.type}">
+ <div class="alert-left">
+ <span class="alert-tag-table">${a.table.toUpperCase()}</span>
+ <div>
+ <strong>${a.type === 'garcom' ? 'Garçom Chamado na Mesa' : 'Solicitação de Fechamento de Conta'}</strong>
+ <div style="font-size:0.75rem; opacity:0.85;">Registrado: ${a.time || 'Agora'}</div>
+ </div>
+ </div>
+ <button class="btn-resolve-alert" onclick="resolveAlert('${a.id}')">Atender Chamado</button>
+ </div>
+ `).join('');
+ }
+
+ function resolveAlert(alertId) {
+ let alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+ alerts = alerts.filter(a => a.id !== alertId);
+ localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
+ renderAlerts();
+ showToast('Chamado atendido e finalizado com sucesso.');
+ }
+
+ function renderKDS() {
+ const grid = document.getElementById('kds-grid');
+ const waiters = getStoredWaiters();
+
+ // Sync mesa 04 live orders from customer
+ const mesa04Stored = JSON.parse(localStorage.getItem('nolei_table_orders_mesa04') || 'null');
+ if (mesa04Stored && mesa04Stored.length > 0) {
+ kdsTables[0].items = mesa04Stored;
+ }
+
+ let filtered = kdsTables;
+ if (activeOperatorId !== 'admin') {
+ const op = waiters.find(w => w.id === activeOperatorId);
+ if (op) {
+ filtered = kdsTables.filter(t => op.tables.includes(t.table.toLowerCase()));
+ }
+ }
+
+ document.getElementById('badge-kds-count').textContent = `${filtered.length} Mesas`;
+
+ if (filtered.length === 0) {
+ grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-muted);">Nenhuma mesa com pedidos ativos sob sua responsabilidade.</div>';
+ return;
+ }
+
+ grid.innerHTML = filtered.map((t, tIdx) => {
+ let total = 0;
+ t.items.forEach(i => total += (i.priceVal || 0));
+
+ return `
+ <div class="table-card">
+ <div class="table-card-header">
+ <span class="table-title">${t.table.toUpperCase()}</span>
+ <span class="table-waiter-badge">Garçom: ${t.waiter}</span>
+ </div>
+ <div class="table-order-items">
+ ${t.items.map((item, iIdx) => `
+ <div class="order-item-row">
+ <div class="order-item-info">
+ <strong>${item.name}</strong>
+ <span class="order-item-meta">${item.orderedBy} • ${item.time || '12:00'}</span>
+ </div>
+ <button class="status-badge ${item.status}" style="border:none; cursor:pointer;" onclick="toggleItemStatus(${tIdx}, ${iIdx})">
+ ${item.status === 'entregue' ? 'Entregue' : 'Em Preparo'}
+ </button>
+ </div>
+ `).join('')}
+ </div>
+ <div class="table-card-footer">
+ <div>
+ <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">Subtotal da Mesa:</div>
+ <div class="table-total">R$ ${total.toFixed(2).replace('.', ',')}</div>
+ </div>
+ <button class="btn-finish-table" onclick="finishTable('${t.table}')">Encerrar Mesa</button>
+ </div>
+ </div>
+ `;
+ }).join('');
+ }
+
+ function toggleItemStatus(tIdx, iIdx) {
+ const item = kdsTables[tIdx].items[iIdx];
+ item.status = item.status === 'entregue' ? 'preparo' : 'entregue';
+ if (kdsTables[tIdx].table.toLowerCase() === 'mesa 04') {
+ localStorage.setItem('nolei_table_orders_mesa04', JSON.stringify(kdsTables[tIdx].items));
+ }
+ renderKDS();
+ showToast(`Status atualizado para: ${item.status === 'entregue' ? 'Entregue na Mesa' : 'Em Preparo'}`);
+ }
+
+ function finishTable(tableName) {
+ if (tableName.toLowerCase() === 'mesa 04') {
+ localStorage.removeItem('nolei_table_orders_mesa04');
+ kdsTables[0].items = [];
+ }
+ renderKDS();
+ showToast(`Comanda da ${tableName.toUpperCase()} encerrada com sucesso.`);
+ }
+
+ // CRUD Products
+ function renderProducts() {
+ const menu = getStoredMenu();
+ const tbody = document.getElementById('products-table-body');
+ let all = [];
+ Object.keys(menu).forEach(cat => {
+ menu[cat].forEach(item => all.push({ ...item, catKey: cat }));
+ });
+
+ document.getElementById('badge-products-count').textContent = `${all.length} Itens`;
+
+ tbody.innerHTML = all.map(p => `
+ <tr>
+ <td><img src="${p.image}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"></td>
+ <td><strong>${p.name}</strong></td>
+ <td><span style="font-size:0.72rem; background:var(--bg-light); padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase;">${p.catKey}</span></td>
+ <td style="color:var(--leaf-green); font-weight:700;">R$ ${Number(p.priceVal).toFixed(2).replace('.', ',')}</td>
+ <td style="color:var(--text-muted); font-size:0.75rem; max-width:260px;">${p.desc}</td>
+ <td style="text-align:right;">
+ <button onclick="editProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color:var(--navy); font-weight:700; cursor:pointer; margin-right:8px;">Editar</button>
+ <button onclick="deleteProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color:var(--red); font-weight:700; cursor:pointer;">Excluir</button>
+ </td>
+ </tr>
+ `).join('');
+ }
+
+ function openNewProductModal() {
+ document.getElementById('edit-prod-id').value = '';
+ document.getElementById('modal-product-title').textContent = 'Novo Item no Cardápio';
+ document.getElementById('prod-name').value = '';
+ document.getElementById('prod-price').value = '';
+ document.getElementById('prod-desc').value = '';
+ document.getElementById('prod-img').value = '';
+ document.getElementById('modal-product').classList.add('open');
+ }
+
+ function closeProductModal() {
+ document.getElementById('modal-product').classList.remove('open');
+ }
+
+ function saveProduct() {
+ const id = document.getElementById('edit-prod-id').value || 'p_' + Date.now();
+ const name = document.getElementById('prod-name').value.trim();
+ const cat = document.getElementById('prod-cat').value;
+ const priceVal = parseFloat(document.getElementById('prod-price').value);
+ const desc = document.getElementById('prod-desc').value.trim();
+ const image = document.getElementById('prod-img').value.trim() || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80';
+
+ if (!name || isNaN(priceVal)) {
+ alert('Preencha nome e preço válido.');
+ return;
+ }
+
+ const menu = getStoredMenu();
+ Object.keys(menu).forEach(c => {
+ menu[c] = menu[c].filter(i => i.id !== id);
+ });
+
+ menu[cat].push({ id, name, priceVal, desc, image, tags: ["Especial"] });
+ localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+ closeProductModal();
+ renderProducts();
+ showToast(`Prato "${name}" salvo com sucesso.`);
+ }
+
+ function deleteProduct(cat, id) {
+ if (!confirm('Deseja excluir este item do cardápio?')) return;
+ const menu = getStoredMenu();
+ menu[cat] = menu[cat].filter(i => i.id !== id);
+ localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+ renderProducts();
+ showToast('Item removido do cardápio.');
+ }
+
+ // CRUD Waiters
+ function renderWaiters() {
+ const waiters = getStoredWaiters();
+ const tbody = document.getElementById('waiters-table-body');
+ document.getElementById('badge-waiters-count').textContent = `${waiters.length} Garçons`;
+
+ tbody.innerHTML = waiters.map(w => `
+ <tr>
+ <td><strong>${w.name}</strong><br><span style="font-size:0.72rem; color:var(--text-muted);">${w.phone}</span></td>
+ <td>${w.shift}</td>
+ <td><span style="font-weight:700; color:var(--leaf-green);">${w.tables.join(', ')}</span></td>
+ <td><span style="font-weight:700;">${w.rating.toFixed(1)} / 5.0</span></td>
+ <td><span style="font-size:0.7rem; font-weight:700; background:var(--leaf-green-light); color:var(--leaf-green); padding:2px 6px; border-radius:4px;">Ativo</span></td>
+ <td style="text-align:right;">
+ <button onclick="deleteWaiter('${w.id}')" style="background:none; border:none; color:var(--red); font-weight:700; cursor:pointer;">Remover</button>
+ </td>
+ </tr>
+ `).join('');
+ }
+
+ function openNewWaiterModal() {
+ document.getElementById('waiter-name').value = '';
+ document.getElementById('waiter-phone').value = '';
+ document.getElementById('modal-waiter').classList.add('open');
+ }
+
+ function closeWaiterModal() {
+ document.getElementById('modal-waiter').classList.remove('open');
+ }
+
+ function saveWaiter() {
+ const name = document.getElementById('waiter-name').value.trim();
+ const phone = document.getElementById('waiter-phone').value.trim();
+ const shift = document.getElementById('waiter-shift').value;
+ const tablesStr = document.getElementById('waiter-tables').value.trim();
+
+ if (!name) {
+ alert('Informe o nome do garçom.');
+ return;
+ }
+
+ const tables = tablesStr.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+ const waiters = getStoredWaiters();
+ waiters.push({
+ id: 'w_' + Date.now(),
+ name,
+ phone: phone || '(11) 99999-9999',
+ shift,
+ tables: tables.length ? tables : ['mesa 01'],
+ rating: 5.0,
+ active: true
+ });
+ localStorage.setItem('nolei_waiters', JSON.stringify(waiters));
+ closeWaiterModal();
+ renderWaiters();
+ initOperatorDropdown();
+ showToast(`Garçom "${name}" cadastrado.`);
+ }
+
+ function deleteWaiter(id) {
+ if (!confirm('Deseja remover este garçom?')) return;
+ let waiters = getStoredWaiters();
+ waiters = waiters.filter(w => w.id !== id);
+ localStorage.setItem('nolei_waiters', JSON.stringify(waiters));
+ renderWaiters();
+ initOperatorDropdown();
+ showToast('Garçom removido com sucesso.');
+ }
+
+ // Users
+ function renderUsers() {
+ const tbody = document.getElementById('users-table-body');
+ const users = [
+ { name: "João Silva", phone: "(11) 98765-4321", table: "Mesa 04", status: "Em Atendimento" },
+ { name: "Lucas Ribeiro", phone: "(11) 97654-3210", table: "Mesa 02", status: "Conta Paga" },
+ { name: "Patrícia Mendes", phone: "(11) 96543-2109", table: "Mesa 07", status: "Aguardando Prato" }
+ ];
+
+ tbody.innerHTML = users.map(u => `
+ <tr>
+ <td><strong>${u.name}</strong></td>
+ <td>${u.phone}</td>
+ <td><span style="font-weight:700; color:var(--navy);">${u.table}</span></td>
+ <td><span style="font-size:0.72rem; font-weight:700; background:var(--bg-light); padding:2px 8px; border-radius:4px;">${u.status}</span></td>
+ </tr>
+ `).join('');
+ }
+
+ // Toast & Scroll
+ let toastTimer;
+ function showToast(msg) {
+ const toast = document.getElementById('toast-box');
+ toast.textContent = msg;
+ toast.classList.add('show');
+ clearTimeout(toastTimer);
+ toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+ }
+
+ window.addEventListener('scroll', () => {
+ const btn = document.getElementById('btn-scroll-top');
+ if (btn) btn.classList.toggle('visible', window.scrollY > 300);
+ });
+
+ // Live Sync Polling
+ initOperatorDropdown();
+ renderKDS();
+ renderAlerts();
+ renderProducts();
+ renderWaiters();
+ renderUsers();
+
+ setInterval(() => {
+ renderKDS();
+ renderAlerts();
+ }, 2000);
+ </script>
 </body>
 </html>

@@ -1,859 +1,859 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title id="page-title">Google Avaliações — Clínica Dra. Sofia Santos</title>
-    <style>
-        :root {
-            --google-blue: #1a73e8;
-            --google-blue-hover: #1557b0;
-            --google-yellow: #fbbc04;
-            --google-yellow-dark: #f29900;
-            --google-green: #34a853;
-            --google-red: #ea4335;
-            --google-gray-bg: #f8f9fa;
-            --google-card-bg: #ffffff;
-            --google-text-primary: #202124;
-            --google-text-secondary: #5f6368;
-            --google-border: #dadce0;
-            --google-chip-bg: #f1f3f4;
-            --google-chip-hover: #e8eaed;
-            --google-chip-selected: #e8f0fe;
-            --google-chip-selected-text: #1967d2;
-            --font-family: 'Google Sans', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <title id="page-title">Google Avaliações — Clínica Dra. Sofia Santos</title>
+ <style>
+ :root {
+ --google-blue: #1a73e8;
+ --google-blue-hover: #1557b0;
+ --google-yellow: #fbbc04;
+ --google-yellow-dark: #f29900;
+ --google-green: #34a853;
+ --google-red: #ea4335;
+ --google-gray-bg: #f8f9fa;
+ --google-card-bg: #ffffff;
+ --google-text-primary: #202124;
+ --google-text-secondary: #5f6368;
+ --google-border: #dadce0;
+ --google-chip-bg: #f1f3f4;
+ --google-chip-hover: #e8eaed;
+ --google-chip-selected: #e8f0fe;
+ --google-chip-selected-text: #1967d2;
+ --font-family: 'Google Sans', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+ }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ -webkit-tap-highlight-color: transparent;
+ }
 
-        body {
-            font-family: var(--font-family);
-            background-color: #f1f3f4;
-            color: var(--google-text-primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
+ body {
+ font-family: var(--font-family);
+ background-color: #f1f3f4;
+ color: var(--google-text-primary);
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ line-height: 1.5;
+ -webkit-font-smoothing: antialiased;
+ }
 
-        /* Splash Screen */
-        .splash-screen {
-            position: fixed;
-            inset: 0;
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            transition: opacity 0.35s ease, visibility 0.35s ease;
-        }
+ /* Splash Screen */
+ .splash-screen {
+ position: fixed;
+ inset: 0;
+ background: #ffffff;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ z-index: 1000;
+ transition: opacity 0.35s ease, visibility 0.35s ease;
+ }
 
-        .splash-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+ .splash-screen.hidden {
+ opacity: 0;
+ visibility: hidden;
+ pointer-events: none;
+ }
 
-        .splash-g-logo {
-            width: 56px;
-            height: 56px;
-            margin-bottom: 20px;
-            animation: pulseGoogle 1.6s infinite ease-in-out;
-        }
+ .splash-g-logo {
+ width: 56px;
+ height: 56px;
+ margin-bottom: 20px;
+ animation: pulseGoogle 1.6s infinite ease-in-out;
+ }
 
-        @keyframes pulseGoogle {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.08); opacity: 1; }
-        }
+ @keyframes pulseGoogle {
+ 0%, 100% { transform: scale(1); opacity: 0.9; }
+ 50% { transform: scale(1.08); opacity: 1; }
+ }
 
-        .splash-text {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--google-text-primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+ .splash-text {
+ font-size: 1.05rem;
+ font-weight: 500;
+ color: var(--google-text-primary);
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ }
 
-        /* Top Bar */
-        .top-bar {
-            background: #ffffff;
-            border-bottom: 1px solid var(--google-border);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+ /* Top Bar */
+ .top-bar {
+ background: #ffffff;
+ border-bottom: 1px solid var(--google-border);
+ padding: 12px 16px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ position: sticky;
+ top: 0;
+ z-index: 100;
+ }
 
-        .top-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+ .top-left {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ }
 
-        .back-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            color: var(--google-text-secondary);
-            text-decoration: none;
-            transition: background 0.2s;
-        }
+ .back-link {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ width: 36px;
+ height: 36px;
+ border-radius: 50%;
+ color: var(--google-text-secondary);
+ text-decoration: none;
+ transition: background 0.2s;
+ }
 
-        .back-link:hover {
-            background: var(--google-chip-bg);
-            color: var(--google-text-primary);
-        }
+ .back-link:hover {
+ background: var(--google-chip-bg);
+ color: var(--google-text-primary);
+ }
 
-        .google-brand {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--google-text-secondary);
-        }
+ .google-brand {
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ font-size: 1.1rem;
+ font-weight: 500;
+ color: var(--google-text-secondary);
+ }
 
-        .google-brand svg {
-            width: 22px;
-            height: 22px;
-        }
+ .google-brand svg {
+ width: 22px;
+ height: 22px;
+ }
 
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.75rem;
-            color: #137333;
-            background: #e6f4ea;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 500;
-        }
+ .verified-badge {
+ display: inline-flex;
+ align-items: center;
+ gap: 4px;
+ font-size: 0.75rem;
+ color: #137333;
+ background: #e6f4ea;
+ padding: 4px 8px;
+ border-radius: 12px;
+ font-weight: 500;
+ }
 
-        /* Main Container */
-        .container {
-            max-width: 520px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 16px;
-            flex: 1;
-        }
+ /* Main Container */
+ .container {
+ max-width: 520px;
+ width: 100%;
+ margin: 0 auto;
+ padding: 16px;
+ flex: 1;
+ }
 
-        /* Business Profile Card */
-        .business-card {
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid var(--google-border);
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(60,64,67,0.08), 0 4px 8px rgba(60,64,67,0.04);
-            margin-bottom: 16px;
-        }
+ /* Business Profile Card */
+ .business-card {
+ background: #ffffff;
+ border-radius: 16px;
+ border: 1px solid var(--google-border);
+ padding: 20px;
+ box-shadow: 0 1px 3px rgba(60,64,67,0.08), 0 4px 8px rgba(60,64,67,0.04);
+ margin-bottom: 16px;
+ }
 
-        .business-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
+ .business-header {
+ display: flex;
+ align-items: flex-start;
+ gap: 14px;
+ margin-bottom: 14px;
+ }
 
-        .business-logo {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #1a73e8, #8ab4f8);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            font-weight: 700;
-            flex-shrink: 0;
-            box-shadow: 0 2px 6px rgba(26,115,232,0.25);
-        }
+ .business-logo {
+ width: 52px;
+ height: 52px;
+ border-radius: 12px;
+ background: linear-gradient(135deg, #1a73e8, #8ab4f8);
+ color: #ffffff;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 1.4rem;
+ font-weight: 700;
+ flex-shrink: 0;
+ box-shadow: 0 2px 6px rgba(26,115,232,0.25);
+ }
 
-        .business-details h1 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--google-text-primary);
-            line-height: 1.3;
-        }
+ .business-details h1 {
+ font-size: 1.15rem;
+ font-weight: 600;
+ color: var(--google-text-primary);
+ line-height: 1.3;
+ }
 
-        .business-category {
-            font-size: 0.85rem;
-            color: var(--google-text-secondary);
-            margin-top: 2px;
-        }
+ .business-category {
+ font-size: 0.85rem;
+ color: var(--google-text-secondary);
+ margin-top: 2px;
+ }
 
-        .business-rating-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 4px;
-            font-size: 0.85rem;
-        }
+ .business-rating-row {
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ margin-top: 4px;
+ font-size: 0.85rem;
+ }
 
-        .rating-score {
-            font-weight: 700;
-            color: var(--google-text-primary);
-        }
+ .rating-score {
+ font-weight: 700;
+ color: var(--google-text-primary);
+ }
 
-        .rating-stars-summary {
-            color: var(--google-yellow-dark);
-            display: flex;
-            gap: 2px;
-        }
+ .rating-stars-summary {
+ color: var(--google-yellow-dark);
+ display: flex;
+ gap: 2px;
+ }
 
-        .rating-count {
-            color: var(--google-text-secondary);
-        }
+ .rating-count {
+ color: var(--google-text-secondary);
+ }
 
-        .business-address {
-            font-size: 0.8rem;
-            color: var(--google-text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            border-top: 1px solid #f1f3f4;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
+ .business-address {
+ font-size: 0.8rem;
+ color: var(--google-text-secondary);
+ display: flex;
+ align-items: center;
+ gap: 4px;
+ border-top: 1px solid #f1f3f4;
+ padding-top: 10px;
+ margin-top: 10px;
+ }
 
-        /* Review Interactive Box */
-        .review-box {
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid var(--google-border);
-            padding: 24px 20px;
-            box-shadow: 0 1px 3px rgba(60,64,67,0.08), 0 4px 8px rgba(60,64,67,0.04);
-            text-align: center;
-        }
+ /* Review Interactive Box */
+ .review-box {
+ background: #ffffff;
+ border-radius: 16px;
+ border: 1px solid var(--google-border);
+ padding: 24px 20px;
+ box-shadow: 0 1px 3px rgba(60,64,67,0.08), 0 4px 8px rgba(60,64,67,0.04);
+ text-align: center;
+ }
 
-        .user-preview {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f8f9fa;
-            border-radius: 24px;
-            padding: 6px 12px;
-            width: fit-content;
-            margin: 0 auto 18px;
-            border: 1px solid #e8eaed;
-        }
+ .user-preview {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ background: #f8f9fa;
+ border-radius: 24px;
+ padding: 6px 12px;
+ width: fit-content;
+ margin: 0 auto 18px;
+ border: 1px solid #e8eaed;
+ }
 
-        .user-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #e37400;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+ .user-avatar {
+ width: 24px;
+ height: 24px;
+ border-radius: 50%;
+ background: #e37400;
+ color: white;
+ font-size: 0.75rem;
+ font-weight: 600;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ }
 
-        .user-name {
-            font-size: 0.78rem;
-            color: var(--google-text-secondary);
-        }
+ .user-name {
+ font-size: 0.78rem;
+ color: var(--google-text-secondary);
+ }
 
-        .review-prompt {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--google-text-primary);
-            margin-bottom: 8px;
-        }
+ .review-prompt {
+ font-size: 1.1rem;
+ font-weight: 500;
+ color: var(--google-text-primary);
+ margin-bottom: 8px;
+ }
 
-        .review-subprompt {
-            font-size: 0.85rem;
-            color: var(--google-text-secondary);
-            margin-bottom: 20px;
-        }
+ .review-subprompt {
+ font-size: 0.85rem;
+ color: var(--google-text-secondary);
+ margin-bottom: 20px;
+ }
 
-        /* Google Stars */
-        .stars-interactive {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            direction: rtl; /* Allows sibling hover */
-        }
+ /* Google Stars */
+ .stars-interactive {
+ display: flex;
+ justify-content: center;
+ gap: 10px;
+ margin-bottom: 20px;
+ direction: rtl; /* Allows sibling hover */
+ }
 
-        .star-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            color: #dadce0;
-            transition: transform 0.15s ease, color 0.15s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+ .star-btn {
+ background: none;
+ border: none;
+ cursor: pointer;
+ padding: 4px;
+ color: #dadce0;
+ transition: transform 0.15s ease, color 0.15s ease;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ }
 
-        .star-btn svg {
-            width: 42px;
-            height: 42px;
-            fill: currentColor;
-        }
+ .star-btn svg {
+ width: 42px;
+ height: 42px;
+ fill: currentColor;
+ }
 
-        .star-btn:hover,
-        .star-btn:hover ~ .star-btn,
-        .star-btn.active,
-        .star-btn.active ~ .star-btn {
-            color: var(--google-yellow);
-            transform: scale(1.12);
-        }
+ .star-btn:hover,
+ .star-btn:hover ~ .star-btn,
+ .star-btn.active,
+ .star-btn.active ~ .star-btn {
+ color: var(--google-yellow);
+ transform: scale(1.12);
+ }
 
-        /* Review Form Dynamic Container */
-        .review-form-container {
-            display: none;
-            text-align: left;
-            margin-top: 16px;
-            animation: fadeIn 0.3s ease;
-        }
+ /* Review Form Dynamic Container */
+ .review-form-container {
+ display: none;
+ text-align: left;
+ margin-top: 16px;
+ animation: fadeIn 0.3s ease;
+ }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+ @keyframes fadeIn {
+ from { opacity: 0; transform: translateY(6px); }
+ to { opacity: 1; transform: translateY(0); }
+ }
 
-        /* Chips / Topics */
-        .chips-title {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--google-text-secondary);
-            margin-bottom: 8px;
-        }
+ /* Chips / Topics */
+ .chips-title {
+ font-size: 0.85rem;
+ font-weight: 500;
+ color: var(--google-text-secondary);
+ margin-bottom: 8px;
+ }
 
-        .chips-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
+ .chips-container {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 8px;
+ margin-bottom: 16px;
+ }
 
-        .chip {
-            background: var(--google-chip-bg);
-            border: 1px solid var(--google-border);
-            border-radius: 16px;
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            color: var(--google-text-primary);
-            cursor: pointer;
-            transition: all 0.15s;
-            user-select: none;
-        }
+ .chip {
+ background: var(--google-chip-bg);
+ border: 1px solid var(--google-border);
+ border-radius: 16px;
+ padding: 6px 12px;
+ font-size: 0.8rem;
+ color: var(--google-text-primary);
+ cursor: pointer;
+ transition: all 0.15s;
+ user-select: none;
+ }
 
-        .chip:hover {
-            background: var(--google-chip-hover);
-        }
+ .chip:hover {
+ background: var(--google-chip-hover);
+ }
 
-        .chip.selected {
-            background: var(--google-chip-selected);
-            border-color: #aecbfa;
-            color: var(--google-chip-selected-text);
-            font-weight: 500;
-        }
+ .chip.selected {
+ background: var(--google-chip-selected);
+ border-color: #aecbfa;
+ color: var(--google-chip-selected-text);
+ font-weight: 500;
+ }
 
-        /* Review Textarea */
-        .review-textarea {
-            width: 100%;
-            border: 1px solid var(--google-border);
-            border-radius: 12px;
-            padding: 12px 14px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            color: var(--google-text-primary);
-            background: #ffffff;
-            resize: none;
-            min-height: 90px;
-            margin-bottom: 16px;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
+ /* Review Textarea */
+ .review-textarea {
+ width: 100%;
+ border: 1px solid var(--google-border);
+ border-radius: 12px;
+ padding: 12px 14px;
+ font-family: inherit;
+ font-size: 0.9rem;
+ color: var(--google-text-primary);
+ background: #ffffff;
+ resize: none;
+ min-height: 90px;
+ margin-bottom: 16px;
+ transition: border-color 0.2s, box-shadow 0.2s;
+ }
 
-        .review-textarea:focus {
-            outline: none;
-            border-color: var(--google-blue);
-            box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
-        }
+ .review-textarea:focus {
+ outline: none;
+ border-color: var(--google-blue);
+ box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+ }
 
-        /* Post Action Button */
-        .btn-post-google {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            background: var(--google-blue);
-            color: #ffffff;
-            border: none;
-            border-radius: 24px;
-            padding: 14px 20px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 6px rgba(26,115,232,0.3);
-            text-decoration: none;
-        }
+ /* Post Action Button */
+ .btn-post-google {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 8px;
+ width: 100%;
+ background: var(--google-blue);
+ color: #ffffff;
+ border: none;
+ border-radius: 24px;
+ padding: 14px 20px;
+ font-size: 0.95rem;
+ font-weight: 600;
+ cursor: pointer;
+ transition: background 0.2s, box-shadow 0.2s;
+ box-shadow: 0 2px 6px rgba(26,115,232,0.3);
+ text-decoration: none;
+ }
 
-        .btn-post-google:hover {
-            background: var(--google-blue-hover);
-            box-shadow: 0 4px 10px rgba(26,115,232,0.4);
-        }
+ .btn-post-google:hover {
+ background: var(--google-blue-hover);
+ box-shadow: 0 4px 10px rgba(26,115,232,0.4);
+ }
 
-        .post-note {
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--google-text-secondary);
-            margin-top: 10px;
-        }
+ .post-note {
+ text-align: center;
+ font-size: 0.75rem;
+ color: var(--google-text-secondary);
+ margin-top: 10px;
+ }
 
-        /* Private Feedback Form (1-3 stars) */
-        .private-feedback-card {
-            background: #fef7e0;
-            border: 1px solid #fce8b2;
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 14px;
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
+ /* Private Feedback Form (1-3 stars) */
+ .private-feedback-card {
+ background: #fef7e0;
+ border: 1px solid #fce8b2;
+ border-radius: 12px;
+ padding: 14px;
+ margin-bottom: 14px;
+ display: flex;
+ gap: 10px;
+ align-items: flex-start;
+ }
 
-        .private-icon {
-            color: #b06000;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
+ .private-icon {
+ color: #b06000;
+ flex-shrink: 0;
+ margin-top: 2px;
+ }
 
-        .private-text {
-            font-size: 0.8rem;
-            color: #7a4100;
-            line-height: 1.4;
-        }
+ .private-text {
+ font-size: 0.8rem;
+ color: #7a4100;
+ line-height: 1.4;
+ }
 
-        .btn-private-submit {
-            width: 100%;
-            background: #1a73e8;
-            color: #ffffff;
-            border: none;
-            border-radius: 24px;
-            padding: 12px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
+ .btn-private-submit {
+ width: 100%;
+ background: #1a73e8;
+ color: #ffffff;
+ border: none;
+ border-radius: 24px;
+ padding: 12px;
+ font-size: 0.9rem;
+ font-weight: 600;
+ cursor: pointer;
+ }
 
-        /* Success screen */
-        .success-box {
-            display: none;
-            padding: 24px 10px;
-            text-align: center;
-        }
+ /* Success screen */
+ .success-box {
+ display: none;
+ padding: 24px 10px;
+ text-align: center;
+ }
 
-        .success-icon {
-            width: 52px;
-            height: 52px;
-            background: #e6f4ea;
-            color: #137333;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-        }
+ .success-icon {
+ width: 52px;
+ height: 52px;
+ background: #e6f4ea;
+ color: #137333;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin: 0 auto 12px;
+ }
 
-        .success-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--google-text-primary);
-            margin-bottom: 6px;
-        }
+ .success-title {
+ font-size: 1.1rem;
+ font-weight: 600;
+ color: var(--google-text-primary);
+ margin-bottom: 6px;
+ }
 
-        .success-desc {
-            font-size: 0.85rem;
-            color: var(--google-text-secondary);
-        }
+ .success-desc {
+ font-size: 0.85rem;
+ color: var(--google-text-secondary);
+ }
 
-        /* Canvas Confetti */
-        canvas#confetti {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 999;
-        }
+ /* Canvas Confetti */
+ canvas#confetti {
+ position: fixed;
+ inset: 0;
+ pointer-events: none;
+ z-index: 999;
+ }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 16px;
-            font-size: 0.75rem;
-            color: var(--google-text-secondary);
-        }
+ /* Footer */
+ .footer {
+ text-align: center;
+ padding: 16px;
+ font-size: 0.75rem;
+ color: var(--google-text-secondary);
+ }
 
-        .footer a {
-            color: var(--google-text-secondary);
-            text-decoration: none;
-        }
-    </style>
+ .footer a {
+ color: var(--google-text-secondary);
+ text-decoration: none;
+ }
+ </style>
 </head>
 <body>
 
-    <!-- Splash Screen -->
-    <div id="splash-screen" class="splash-screen hidden">
-        <svg class="splash-g-logo" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.4 7.34 24 12 24z"/>
-            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.99 0 12s.45 3.84 1.24 5.42l4.04-3.15z"/>
-            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.6 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-        </svg>
-        <div id="splash-text" class="splash-text">
-            Conectando com Google Avaliações...
-        </div>
-    </div>
+ <!-- Splash Screen -->
+ <div id="splash-screen" class="splash-screen hidden">
+ <svg class="splash-g-logo" viewBox="0 0 24 24">
+ <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+ <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.4 7.34 24 12 24z"/>
+ <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.99 0 12s.45 3.84 1.24 5.42l4.04-3.15z"/>
+ <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.6 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+ </svg>
+ <div id="splash-text" class="splash-text">
+ Conectando com Google Avaliações...
+ </div>
+ </div>
 
-    <canvas id="confetti"></canvas>
+ <canvas id="confetti"></canvas>
 
-    <!-- Context Perspective Bar -->
-    <div style="background:#0F223D; color:#94A3B8; font-size:0.75rem; padding:8px 20px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-        <div style="display:flex; align-items:center; gap:8px;">
-            <span style="background:rgba(59,130,246,0.25); color:#60a5fa; border:1px solid rgba(96,165,250,0.4); padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase; font-size:0.68rem; letter-spacing:0.5px;">Visão: Cliente / Paciente</span>
-            <span style="color:#E2E8F0; font-weight:500;">Experiência de Avaliação Google no Balcão</span>
-        </div>
-        <a href="dashboard.html" target="_blank" style="color:#F97316; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:0.75rem;">
-            Ver Dashboard ROI ↗
-        </a>
-    </div>
+ <!-- Context Perspective Bar -->
+ <div style="background:#0F223D; color:#94A3B8; font-size:0.75rem; padding:8px 20px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+ <div style="display:flex; align-items:center; gap:8px;">
+ <span style="background:rgba(59,130,246,0.25); color:#60a5fa; border:1px solid rgba(96,165,250,0.4); padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase; font-size:0.68rem; letter-spacing:0.5px;">Visão: Cliente / Paciente</span>
+ <span style="color:#E2E8F0; font-weight:500;">Experiência de Avaliação Google no Balcão</span>
+ </div>
+ <a href="dashboard.html" target="_blank" style="color:#F97316; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:0.75rem;">
+ Ver Dashboard ROI 
+ </a>
+ </div>
 
-    <!-- Top Bar -->
-    <header class="top-bar">
-        <div class="top-left">
-            <a href="../index.html" class="back-link" aria-label="Voltar para o menu">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-            </a>
-            <div class="google-brand">
-                <svg viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.4 7.34 24 12 24z"/>
-                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.99 0 12s.45 3.84 1.24 5.42l4.04-3.15z"/>
-                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.6 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-                </svg>
-                <span>Avaliações</span>
-            </div>
-        </div>
-        <div class="verified-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Perfil Verificado
-        </div>
-    </header>
+ <!-- Top Bar -->
+ <header class="top-bar">
+ <div class="top-left">
+ <a href="../index.html" class="back-link" aria-label="Voltar para o menu">
+ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+ <line x1="19" y1="12" x2="5" y2="12"></line>
+ <polyline points="12 19 5 12 12 5"></polyline>
+ </svg>
+ </a>
+ <div class="google-brand">
+ <svg viewBox="0 0 24 24">
+ <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+ <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.4 7.34 24 12 24z"/>
+ <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.99 0 12s.45 3.84 1.24 5.42l4.04-3.15z"/>
+ <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.6 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+ </svg>
+ <span>Avaliações</span>
+ </div>
+ </div>
+ <div class="verified-badge">
+ <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+ Perfil Verificado
+ </div>
+ </header>
 
-    <main class="container">
+ <main class="container">
 
-        <!-- Business Card -->
-        <div class="business-card">
-            <div class="business-header">
-                <div class="business-logo" id="business-logo">C</div>
-                <div class="business-details">
-                    <h1 id="clinic-name">Clínica Dra. Sofia Santos</h1>
-                    <div class="business-category" id="business-category">Dermatologia & Estética Avançada</div>
-                    <div class="business-rating-row">
-                        <span class="rating-score">4.9</span>
-                        <div class="rating-stars-summary">
-                            <span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span>
-                        </div>
-                        <span class="rating-count">(184 avaliações)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="business-address">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                <span>Av. Paulista, 1000 — Jardins, São Paulo - SP</span>
-            </div>
-        </div>
+ <!-- Business Card -->
+ <div class="business-card">
+ <div class="business-header">
+ <div class="business-logo" id="business-logo">C</div>
+ <div class="business-details">
+ <h1 id="clinic-name">Clínica Dra. Sofia Santos</h1>
+ <div class="business-category" id="business-category">Dermatologia & Estética Avançada</div>
+ <div class="business-rating-row">
+ <span class="rating-score">4.9</span>
+ <div class="rating-stars-summary">
+ <span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span>
+ </div>
+ <span class="rating-count">(184 avaliações)</span>
+ </div>
+ </div>
+ </div>
+ <div class="business-address">
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+ <span>Av. Paulista, 1000 — Jardins, São Paulo - SP</span>
+ </div>
+ </div>
 
-        <!-- Review Interactive Box -->
-        <div class="review-box" id="review-box">
-            <div class="user-preview">
-                <div class="user-avatar">P</div>
-                <span class="user-name">Avaliando publicamente no Google</span>
-            </div>
+ <!-- Review Interactive Box -->
+ <div class="review-box" id="review-box">
+ <div class="user-preview">
+ <div class="user-avatar">P</div>
+ <span class="user-name">Avaliando publicamente no Google</span>
+ </div>
 
-            <div class="review-prompt">Como foi seu atendimento hoje?</div>
-            <div class="review-subprompt">Toque nas estrelas para avaliar</div>
+ <div class="review-prompt">Como foi seu atendimento hoje?</div>
+ <div class="review-subprompt">Toque nas estrelas para avaliar</div>
 
-            <!-- 5 Interactive Stars -->
-            <div class="stars-interactive" id="stars-container">
-                <button class="star-btn" data-star="5" aria-label="5 estrelas">
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                </button>
-                <button class="star-btn" data-star="4" aria-label="4 estrelas">
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                </button>
-                <button class="star-btn" data-star="3" aria-label="3 estrelas">
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                </button>
-                <button class="star-btn" data-star="2" aria-label="2 estrelas">
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                </button>
-                <button class="star-btn" data-star="1" aria-label="1 estrela">
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                </button>
-            </div>
+ <!-- 5 Interactive Stars -->
+ <div class="stars-interactive" id="stars-container">
+ <button class="star-btn" data-star="5" aria-label="5 estrelas">
+ <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+ </button>
+ <button class="star-btn" data-star="4" aria-label="4 estrelas">
+ <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+ </button>
+ <button class="star-btn" data-star="3" aria-label="3 estrelas">
+ <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+ </button>
+ <button class="star-btn" data-star="2" aria-label="2 estrelas">
+ <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+ </button>
+ <button class="star-btn" data-star="1" aria-label="1 estrela">
+ <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+ </button>
+ </div>
 
-            <!-- Form Container (Appears after rating) -->
-            <div class="review-form-container" id="review-form-container">
-                
-                <!-- Good Rating Branch (4-5 Stars) -->
-                <div id="good-branch" style="display: none;">
-                    <div class="chips-title">O que você mais gostou?</div>
-                    <div class="chips-container" id="chips-container">
-                        <div class="chip" onclick="toggleChip(this)">Atendimento impecável</div>
-                        <div class="chip" onclick="toggleChip(this)">Pontualidade no horário</div>
-                        <div class="chip" onclick="toggleChip(this)">Ambiente limpo e agradável</div>
-                        <div class="chip" onclick="toggleChip(this)">Profissionalismo e clareza</div>
-                        <div class="chip" onclick="toggleChip(this)">Recomendo com confiança</div>
-                    </div>
+ <!-- Form Container (Appears after rating) -->
+ <div class="review-form-container" id="review-form-container">
+ 
+ <!-- Good Rating Branch (4-5 Stars) -->
+ <div id="good-branch" style="display: none;">
+ <div class="chips-title">O que você mais gostou?</div>
+ <div class="chips-container" id="chips-container">
+ <div class="chip" onclick="toggleChip(this)">Atendimento impecável</div>
+ <div class="chip" onclick="toggleChip(this)">Pontualidade no horário</div>
+ <div class="chip" onclick="toggleChip(this)">Ambiente limpo e agradável</div>
+ <div class="chip" onclick="toggleChip(this)">Profissionalismo e clareza</div>
+ <div class="chip" onclick="toggleChip(this)">Recomendo com confiança</div>
+ </div>
 
-                    <textarea class="review-textarea" id="review-text" placeholder="Escreva seu depoimento para o Google Maps (opcional)..."></textarea>
+ <textarea class="review-textarea" id="review-text" placeholder="Escreva seu depoimento para o Google Maps (opcional)..."></textarea>
 
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4" target="_blank" class="btn-post-google" id="btn-post-google">
-                        <svg width="18" height="18" viewBox="0 0 24 24">
-                            <path fill="#ffffff" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-                            <path fill="#ffffff" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.4 7.34 24 12 24z"/>
-                            <path fill="#ffffff" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.99 0 12s.45 3.84 1.24 5.42l4.04-3.15z"/>
-                            <path fill="#ffffff" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.6 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-                        </svg>
-                        Publicar Avaliação no Google
-                    </a>
-                    <div class="post-note" id="countdown-note">Sua avaliação 5 estrelas ajuda outros pacientes a nos encontrarem.</div>
-                </div>
+ <a href="https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4" target="_blank" class="btn-post-google" id="btn-post-google">
+ <svg width="18" height="18" viewBox="0 0 24 24">
+ <path fill="#ffffff" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+ <path fill="#ffffff" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.4 7.34 24 12 24z"/>
+ <path fill="#ffffff" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.99 0 12s.45 3.84 1.24 5.42l4.04-3.15z"/>
+ <path fill="#ffffff" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.6 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+ </svg>
+ Publicar Avaliação no Google
+ </a>
+ <div class="post-note" id="countdown-note">Sua avaliação 5 estrelas ajuda outros pacientes a nos encontrarem.</div>
+ </div>
 
-                <!-- Neutral / Bad Rating Branch (1-3 Stars) -->
-                <div id="bad-branch" style="display: none;">
-                    <div class="private-feedback-card">
-                        <svg class="private-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                        <div class="private-text">
-                            <strong>Canal Direto de Melhoria</strong><br>
-                            Sua opinião é confidencial e será enviada diretamente à diretoria para corrigirmos qualquer falha imediatamente.
-                        </div>
-                    </div>
+ <!-- Neutral / Bad Rating Branch (1-3 Stars) -->
+ <div id="bad-branch" style="display: none;">
+ <div class="private-feedback-card">
+ <svg class="private-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+ <div class="private-text">
+ <strong>Canal Direto de Melhoria</strong><br>
+ Sua opinião é confidencial e será enviada diretamente à diretoria para corrigirmos qualquer falha imediatamente.
+ </div>
+ </div>
 
-                    <textarea class="review-textarea" id="private-feedback-text" placeholder="Por favor, conte-nos com detalhes o que aconteceu..."></textarea>
-                    
-                    <button class="btn-private-submit" onclick="submitPrivateFeedback()">
-                        Enviar feedback confidencial à gerência
-                    </button>
-                </div>
+ <textarea class="review-textarea" id="private-feedback-text" placeholder="Por favor, conte-nos com detalhes o que aconteceu..."></textarea>
+ 
+ <button class="btn-private-submit" onclick="submitPrivateFeedback()">
+ Enviar feedback confidencial à gerência
+ </button>
+ </div>
 
-            </div>
+ </div>
 
-            <!-- Success State -->
-            <div class="success-box" id="success-box">
-                <div class="success-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="success-title">Mensagem enviada com sucesso!</div>
-                <div class="success-desc">Agradecemos sinceramente pela sua sinceridade. Nossa coordenação entrará em contato se necessário.</div>
-            </div>
+ <!-- Success State -->
+ <div class="success-box" id="success-box">
+ <div class="success-icon">
+ <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+ </div>
+ <div class="success-title">Mensagem enviada com sucesso!</div>
+ <div class="success-desc">Agradecemos sinceramente pela sua sinceridade. Nossa coordenação entrará em contato se necessário.</div>
+ </div>
 
-        </div>
+ </div>
 
-        <!-- Google Business Profile Helper Banner for Business Owners -->
-        <div class="helper-banner" style="background:#ffffff; border:1px solid #dadce0; border-radius:12px; padding:16px; margin-top:20px; text-align:center;">
-            <div style="font-size:0.85rem; font-weight:600; color:#202124; margin-bottom:4px;">
-                Quer essa tecnologia de avaliação 5 estrelas no seu estabelecimento?
-            </div>
-            <div style="font-size:0.78rem; color:#5f6368; margin-bottom:12px;">
-                Ainda não tem ficha no Google Meu Negócio ou quer o display NFC com seu link?
-            </div>
-            <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
-                <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; font-weight:600; color:#1a73e8; background:#e8f0fe; border:1px solid #aecbfa; border-radius:20px; padding:6px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    Criar Perfil no Google
-                </a>
-                <a href="../index.html" style="font-size:0.78rem; font-weight:600; color:#0f223d; background:#f1f3f4; border:1px solid #dadce0; border-radius:20px; padding:6px 14px; text-decoration:none;">
-                    Ver Displays & Modelos Físicos
-                </a>
-            </div>
-        </div>
+ <!-- Google Business Profile Helper Banner for Business Owners -->
+ <div class="helper-banner" style="background:#ffffff; border:1px solid #dadce0; border-radius:12px; padding:16px; margin-top:20px; text-align:center;">
+ <div style="font-size:0.85rem; font-weight:600; color:#202124; margin-bottom:4px;">
+ Quer essa tecnologia de avaliação 5 estrelas no seu estabelecimento?
+ </div>
+ <div style="font-size:0.78rem; color:#5f6368; margin-bottom:12px;">
+ Ainda não tem ficha no Google Meu Negócio ou quer o display NFC com seu link?
+ </div>
+ <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+ <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; font-weight:600; color:#1a73e8; background:#e8f0fe; border:1px solid #aecbfa; border-radius:20px; padding:6px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+ <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+ Criar Perfil no Google
+ </a>
+ <a href="../index.html" style="font-size:0.78rem; font-weight:600; color:#0f223d; background:#f1f3f4; border:1px solid #dadce0; border-radius:20px; padding:6px 14px; text-decoration:none;">
+ Ver Displays & Modelos Físicos
+ </a>
+ </div>
+ </div>
 
-    </main>
+ </main>
 
-    <footer class="footer" style="display:flex; flex-direction:column; gap:8px; align-items:center;">
-        <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-            <a href="../docs.html#google" style="color:#0f223d; font-weight:700; text-decoration:none;">Documentação de Avaliações</a>
-            <a href="dashboard.html?setor=google" style="color:#0f223d; font-weight:600; text-decoration:none;">Dashboard de Reputação Google</a>
-            <a href="../index.html" style="color:#0f223d; font-weight:600; text-decoration:none;">Hub Principal</a>
-        </div>
-        <p style="margin:0; font-size:0.75rem; color:#64748b;">Powered by Nolei Creative • Módulo Google Avaliações Inteligente</p>
-    </footer>
+ <footer class="footer" style="display:flex; flex-direction:column; gap:8px; align-items:center;">
+ <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+ <a href="../docs.html#google" style="color:#0f223d; font-weight:700; text-decoration:none;">Documentação de Avaliações</a>
+ <a href="dashboard.html?setor=google" style="color:#0f223d; font-weight:600; text-decoration:none;">Dashboard de Reputação Google</a>
+ <a href="../index.html" style="color:#0f223d; font-weight:600; text-decoration:none;">Hub Principal</a>
+ </div>
+ <p style="margin:0; font-size:0.75rem; color:#64748b;">Powered by Nolei Creative • Módulo Google Avaliações Inteligente</p>
+ </footer>
 
-    <script>
-        // Read URL query parameters
-        const urlParams = new URLSearchParams(window.location.search);
+ <script>
+ // Read URL query parameters
+ const urlParams = new URLSearchParams(window.location.search);
 
-        // 1. Dynamic Clinic / Business Name
-        const clinicParam = urlParams.get('clinica') || urlParams.get('nome');
-        if (clinicParam) {
-            const decoded = decodeURIComponent(clinicParam);
-            document.getElementById('clinic-name').textContent = decoded;
-            document.getElementById('business-logo').textContent = decoded.charAt(0).toUpperCase();
-            document.getElementById('page-title').textContent = `Google Avaliações — ${decoded}`;
-        }
+ // 1. Dynamic Clinic / Business Name
+ const clinicParam = urlParams.get('clinica') || urlParams.get('nome');
+ if (clinicParam) {
+ const decoded = decodeURIComponent(clinicParam);
+ document.getElementById('clinic-name').textContent = decoded;
+ document.getElementById('business-logo').textContent = decoded.charAt(0).toUpperCase();
+ document.getElementById('page-title').textContent = `Google Avaliações — ${decoded}`;
+ }
 
-        // 2. Splash Screen for NFC / QR
-        const source = urlParams.get('source');
-        const splashScreen = document.getElementById('splash-screen');
-        const splashText = document.getElementById('splash-text');
+ // 2. Splash Screen for NFC / QR
+ const source = urlParams.get('source');
+ const splashScreen = document.getElementById('splash-screen');
+ const splashText = document.getElementById('splash-text');
 
-        if (source === 'nfc' || source === 'qr') {
-            const sessionKey = `avaliacao_splash_${source}`;
-            if (!sessionStorage.getItem(sessionKey)) {
-                if (source === 'nfc') {
-                    splashText.textContent = "Conectado via NFC • Google Avaliações";
-                } else if (source === 'qr') {
-                    splashText.textContent = "QR Code Verificado • Google Avaliações";
-                }
-                splashScreen.classList.remove('hidden');
-                setTimeout(() => {
-                    splashScreen.classList.add('hidden');
-                    sessionStorage.setItem(sessionKey, 'true');
-                }, 1100);
-            }
-        }
+ if (source === 'nfc' || source === 'qr') {
+ const sessionKey = `avaliacao_splash_${source}`;
+ if (!sessionStorage.getItem(sessionKey)) {
+ if (source === 'nfc') {
+ splashText.textContent = "Conectado via NFC • Google Avaliações";
+ } else if (source === 'qr') {
+ splashText.textContent = "QR Code Verificado • Google Avaliações";
+ }
+ splashScreen.classList.remove('hidden');
+ setTimeout(() => {
+ splashScreen.classList.add('hidden');
+ sessionStorage.setItem(sessionKey, 'true');
+ }, 1100);
+ }
+ }
 
-        // 3. Star selection logic
-        const starButtons = document.querySelectorAll('.star-btn');
-        const formContainer = document.getElementById('review-form-container');
-        const goodBranch = document.getElementById('good-branch');
-        const badBranch = document.getElementById('bad-branch');
-        const successBox = document.getElementById('success-box');
+ // 3. Star selection logic
+ const starButtons = document.querySelectorAll('.star-btn');
+ const formContainer = document.getElementById('review-form-container');
+ const goodBranch = document.getElementById('good-branch');
+ const badBranch = document.getElementById('bad-branch');
+ const successBox = document.getElementById('success-box');
 
-        starButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const starVal = parseInt(btn.getAttribute('data-star'));
+ starButtons.forEach(btn => {
+ btn.addEventListener('click', () => {
+ const starVal = parseInt(btn.getAttribute('data-star'));
 
-                // Highlight clicked stars
-                starButtons.forEach(s => {
-                    const sVal = parseInt(s.getAttribute('data-star'));
-                    if (sVal <= starVal) {
-                        s.classList.add('active');
-                    } else {
-                        s.classList.remove('active');
-                    }
-                });
+ // Highlight clicked stars
+ starButtons.forEach(s => {
+ const sVal = parseInt(s.getAttribute('data-star'));
+ if (sVal <= starVal) {
+ s.classList.add('active');
+ } else {
+ s.classList.remove('active');
+ }
+ });
 
-                formContainer.style.display = 'block';
-                successBox.style.display = 'none';
+ formContainer.style.display = 'block';
+ successBox.style.display = 'none';
 
-                if (starVal >= 4) {
-                    goodBranch.style.display = 'block';
-                    badBranch.style.display = 'none';
-                    triggerConfetti();
-                } else {
-                    goodBranch.style.display = 'none';
-                    badBranch.style.display = 'block';
-                }
-            });
-        });
+ if (starVal >= 4) {
+ goodBranch.style.display = 'block';
+ badBranch.style.display = 'none';
+ triggerConfetti();
+ } else {
+ goodBranch.style.display = 'none';
+ badBranch.style.display = 'block';
+ }
+ });
+ });
 
-        // 4. Chip selection toggle
-        function toggleChip(element) {
-            element.classList.toggle('selected');
-            const selectedChips = Array.from(document.querySelectorAll('.chip.selected')).map(c => c.textContent.trim());
-            const textarea = document.getElementById('review-text');
-            if (selectedChips.length > 0 && textarea.value === '') {
-                textarea.value = selectedChips.join(' | ') + ' - Excelente atendimento!';
-            }
-        }
+ // 4. Chip selection toggle
+ function toggleChip(element) {
+ element.classList.toggle('selected');
+ const selectedChips = Array.from(document.querySelectorAll('.chip.selected')).map(c => c.textContent.trim());
+ const textarea = document.getElementById('review-text');
+ if (selectedChips.length > 0 && textarea.value === '') {
+ textarea.value = selectedChips.join(' | ') + ' - Excelente atendimento!';
+ }
+ }
 
-        // 5. Private feedback submission
-        function submitPrivateFeedback() {
-            badBranch.style.display = 'none';
-            successBox.style.display = 'block';
-        }
+ // 5. Private feedback submission
+ function submitPrivateFeedback() {
+ badBranch.style.display = 'none';
+ successBox.style.display = 'block';
+ }
 
-        // 6. Realistic Confetti Animation
-        const canvas = document.getElementById('confetti');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+ // 6. Realistic Confetti Animation
+ const canvas = document.getElementById('confetti');
+ const ctx = canvas.getContext('2d');
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+ window.addEventListener('resize', () => {
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
+ });
 
-        let particles = [];
-        let animId = null;
+ let particles = [];
+ let animId = null;
 
-        function triggerConfetti() {
-            particles = [];
-            const colors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853', '#1a73e8'];
-            for (let i = 0; i < 70; i++) {
-                particles.push({
-                    x: canvas.width / 2,
-                    y: canvas.height / 2,
-                    vx: (Math.random() - 0.5) * 16,
-                    vy: (Math.random() - 1) * 16 - 3,
-                    size: Math.random() * 6 + 4,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    rotation: Math.random() * 360,
-                    spin: (Math.random() - 0.5) * 8,
-                    gravity: 0.45,
-                    opacity: 1
-                });
-            }
+ function triggerConfetti() {
+ particles = [];
+ const colors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853', '#1a73e8'];
+ for (let i = 0; i < 70; i++) {
+ particles.push({
+ x: canvas.width / 2,
+ y: canvas.height / 2,
+ vx: (Math.random() - 0.5) * 16,
+ vy: (Math.random() - 1) * 16 - 3,
+ size: Math.random() * 6 + 4,
+ color: colors[Math.floor(Math.random() * colors.length)],
+ rotation: Math.random() * 360,
+ spin: (Math.random() - 0.5) * 8,
+ gravity: 0.45,
+ opacity: 1
+ });
+ }
 
-            if (animId) cancelAnimationFrame(animId);
+ if (animId) cancelAnimationFrame(animId);
 
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                let alive = 0;
-                particles.forEach(p => {
-                    p.vy += p.gravity;
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.rotation += p.spin;
-                    if (p.y > canvas.height - 80) p.opacity -= 0.02;
+ function draw() {
+ ctx.clearRect(0, 0, canvas.width, canvas.height);
+ let alive = 0;
+ particles.forEach(p => {
+ p.vy += p.gravity;
+ p.x += p.vx;
+ p.y += p.vy;
+ p.rotation += p.spin;
+ if (p.y > canvas.height - 80) p.opacity -= 0.02;
 
-                    if (p.opacity > 0 && p.y < canvas.height + 40) {
-                        ctx.save();
-                        ctx.translate(p.x, p.y);
-                        ctx.rotate(p.rotation * Math.PI / 180);
-                        ctx.globalAlpha = Math.max(0, p.opacity);
-                        ctx.fillStyle = p.color;
-                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-                        ctx.restore();
-                        alive++;
-                    }
-                });
+ if (p.opacity > 0 && p.y < canvas.height + 40) {
+ ctx.save();
+ ctx.translate(p.x, p.y);
+ ctx.rotate(p.rotation * Math.PI / 180);
+ ctx.globalAlpha = Math.max(0, p.opacity);
+ ctx.fillStyle = p.color;
+ ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+ ctx.restore();
+ alive++;
+ }
+ });
 
-                if (alive > 0) animId = requestAnimationFrame(draw);
-                else ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-            draw();
-        }
-    </script>
+ if (alive > 0) animId = requestAnimationFrame(draw);
+ else ctx.clearRect(0, 0, canvas.width, canvas.height);
+ }
+ draw();
+ }
+ </script>
 </body>
 </html>

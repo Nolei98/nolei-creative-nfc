@@ -539,6 +539,39 @@
         font-size: 1.6rem;
       }
     }
+  
+    /* Scroll to Top Button */
+    .btn-scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--navy, #0F223D);
+      color: #FFFFFF;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(15, 34, 61, 0.25);
+      z-index: 990;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .btn-scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .btn-scroll-top:hover {
+      background: var(--leaf-green, #2E7D32);
+      transform: translateY(-2px);
+    }
+
   </style>
 </head>
 <body>
@@ -558,7 +591,7 @@
           ← Início
         </a>
         <a href="demo/gestao.html" class="btn-top-link">
-          Painel Gestão (KDS)
+          Painel Gestão (Cozinha & Salão)
         </a>
         <a href="demo/dashboard.html" class="btn-top-link">
           Métricas ROI
@@ -662,7 +695,7 @@
           </div>
           <div class="feature-card">
             <div style="font-size:0.72rem; font-weight:700; color:var(--orange-accent); text-transform:uppercase; margin-bottom:4px;">Visão da Cozinha & Garçom</div>
-            <div class="feature-card-title">Monitor de Cozinha (KDS)</div>
+            <div class="feature-card-title">Monitor da Cozinha (Preparo de Pedidos)</div>
             <p class="feature-card-desc">Os pedidos chegam ordenados por horário com cronômetro. A cozinha marca "Em Preparo" e "Entregue na Mesa" com 1 clique.</p>
           </div>
           <div class="feature-card">
@@ -677,7 +710,7 @@
             Testar Cardápio (Visão: Cliente) ↗
           </a>
           <a href="demo/gestao.html" target="_blank" class="doc-cta-btn" style="background:var(--orange-accent);">
-            Abrir Monitor KDS (Visão: Cozinha/Garçom) ↗
+            Abrir Monitor da Cozinha (Visão: Cozinha/Garçom) ↗
           </a>
         </div>
       </section>
@@ -843,7 +876,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>Monitor de Cozinha (KDS)</strong></td>
+              <td><strong>Monitor da Cozinha (Preparo de Pedidos)</strong></td>
               <td>Cozinheiros & Garçons</td>
               <td>Zero pedidos perdidos ou esquecidos, com baixa em tempo real.</td>
               <td><a href="demo/gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
@@ -955,6 +988,12 @@
       </div>
     </div>
   </footer>
+
+
+  <!-- Scroll to Top Button -->
+  <button type="button" class="btn-scroll-top" id="btn-scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Voltar ao Topo" title="Voltar ao Topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
 
 </body>
 </html>

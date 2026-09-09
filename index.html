@@ -527,6 +527,50 @@
       background: var(--leaf-green);
     }
 
+    
+    .btn-card-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--leaf-green);
+      background: var(--leaf-green-light);
+      border: 1px solid rgba(46, 125, 50, 0.25);
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-top: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .solution-card:hover .btn-card-launch {
+      background: var(--leaf-green);
+      color: #FFFFFF;
+      border-color: var(--leaf-green);
+      transform: translateX(3px);
+    }
+
+    .btn-card-qr-action {
+      background: var(--navy);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s;
+    }
+
+    .btn-card-qr-action:hover {
+      background: var(--leaf-green);
+    }
+
     /* HARDWARE SHOWCASE SECTION */
     .hardware-section {
       background: var(--white);
@@ -841,6 +885,66 @@
         padding: 20px 14px;
       }
     }
+  
+    /* Floating WhatsApp Button (Bottom-Left - Home Only) */
+    .floating-whatsapp-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: #25D366;
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+      z-index: 990;
+      transition: all 0.25s ease;
+    }
+
+    .floating-whatsapp-btn:hover {
+      background: #20BA56;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    }
+
+    /* Scroll to Top Button */
+    .btn-scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(15, 34, 61, 0.25);
+      z-index: 990;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .btn-scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .btn-scroll-top:hover {
+      background: var(--leaf-green);
+      transform: translateY(-2px);
+    }
+
   </style>
 </head>
 <body>
@@ -860,7 +964,7 @@
         <a href="#solucoes" class="nav-link">Soluções & Demos</a>
         <a href="demo/gestao.html" class="nav-link">
           Painel Gestão
-          <span class="nav-pill-badge">KDS & Hotel</span>
+          <span class="nav-pill-badge">Salão & Hotel</span>
         </a>
         <a href="demo/dashboard.html" class="nav-link">Métricas & ROI</a>
         <a href="#hardware" class="nav-link">Modelos Físicos</a>
@@ -869,10 +973,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Google Perfil
         </button>
-        <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado%20com%20NFC%20e%20QR%20Code." target="_blank" class="btn-header-cta">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          Orçamento WhatsApp
-        </a>
+        
       </nav>
 
       <!-- Hamburger Button (Mobile) -->
@@ -889,7 +990,7 @@
         Demos NFC & QR Code
       </a>
       <a href="demo/gestao.html" class="mobile-nav-link" style="background:#FFF7ED; color:#EA580C; border-color:#FDBA74;" onclick="closeMobileMenu()">
-        Painel Restaurante, KDS & Hotel
+        Painel Restaurante, Cozinha & Hotel
       </a>
       <a href="#hardware" class="mobile-nav-link" onclick="closeMobileMenu()">
         Modelos & Displays Físicos
@@ -903,9 +1004,7 @@
       <button type="button" class="mobile-nav-link" style="border:1px solid #AECBFA; background:#E8F0FE; color:#1A73E8; width:100%; font-family:inherit; cursor:pointer;" onclick="closeMobileMenu(); openGoogleHelperModal();">
         Assistente Google Meu Negócio
       </button>
-      <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-modal-open-link" style="margin-top:8px;" onclick="closeMobileMenu()">
-        Solicitar Orçamento no WhatsApp ↗
-      </a>
+      
     </div>
   </div>
 
@@ -935,7 +1034,7 @@
     <!-- Section Header -->
     <div class="section-label-row">
       <span class="section-label">Aplicações Integradas</span>
-      <span class="section-desc">Toque no card para abrir ou gere o QR direto</span>
+      <span class="section-desc" style="color:var(--orange); font-weight:600;">Clique no card para abrir e testar a demonstração interativa ao vivo ↗</span>
     </div>
 
     <!-- Solutions Stack (2 Columns on Desktop) -->
@@ -954,13 +1053,14 @@
             </div>
             <h3 class="card-title">Google Avaliações</h3>
             <p class="card-desc">Captação de avaliações 5 estrelas oficiais no Google Maps com filtro inteligente para feedbacks privados.</p>
+              <div class="btn-card-launch">Abrir Demonstração ao Vivo ↗</div>
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-avaliacao">?source=nfc</span>
-          <button class="btn-qr-open" onclick="openQrCodeModal('Google Avaliações', 'demo/avaliacao.html')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar Link QR
+          <span class="card-param-text" id="param-avaliacao">Simulação: Aproximação NFC</span>
+          <button class="btn-card-qr-action" id="qr-action-avaliacao" onclick="openQrCodeModal('Google Avaliações', 'demo/avaliacao.html')" style="display:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Escanear QR Code
           </button>
         </div>
       </div>
@@ -978,13 +1078,14 @@
             </div>
             <h3 class="card-title">Cardápio & Menu Digital</h3>
             <p class="card-desc">Comanda coletiva por mesa, chamada de garçom, senha de Wi-Fi e sincronização com a cozinha.</p>
+              <div class="btn-card-launch">Abrir Demonstração ao Vivo ↗</div>
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-cardapio">?source=nfc&mesa=04</span>
-          <button class="btn-qr-open" onclick="openQrCodeModal('Cardápio Digital (Mesa 04)', 'demo/cardapio.html', 'mesa=04')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar Link QR
+          <span class="card-param-text" id="param-cardapio">Simulação: Aproximação NFC</span>
+          <button class="btn-card-qr-action" id="qr-action-cardapio" onclick="openQrCodeModal('Cardápio Digital (Mesa 04)', 'demo/cardapio.html', 'mesa=04')" style="display:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Escanear QR Code
           </button>
         </div>
       </div>
@@ -1002,13 +1103,14 @@
             </div>
             <h3 class="card-title">Concierge & Quarto</h3>
             <p class="card-desc">Room service no quarto, agendamento de café da manhã, SPA e governança por aproximação.</p>
+              <div class="btn-card-launch">Abrir Demonstração ao Vivo ↗</div>
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-hotel">?source=nfc&quarto=412</span>
-          <button class="btn-qr-open" onclick="openQrCodeModal('Concierge & Quarto (Suíte 412)', 'demo/hotel.html', 'quarto=412')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar Link QR
+          <span class="card-param-text" id="param-hotel">Simulação: Aproximação NFC</span>
+          <button class="btn-card-qr-action" id="qr-action-hotel" onclick="openQrCodeModal('Concierge & Quarto (Suíte 412)', 'demo/hotel.html', 'quarto=412')" style="display:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Escanear QR Code
           </button>
         </div>
       </div>
@@ -1026,13 +1128,14 @@
             </div>
             <h3 class="card-title">Cartão Fidelidade Digital</h3>
             <p class="card-desc">Pontuação por aproximação no balcão, cartela de selos gamificada e resgate de recompensas.</p>
+              <div class="btn-card-launch">Abrir Demonstração ao Vivo ↗</div>
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-fidelidade">?source=nfc&nome=Maria</span>
-          <button class="btn-qr-open" onclick="openQrCodeModal('Cartão Fidelidade', 'demo/fidelidade.html', 'nome=Maria&loja=Café Origem')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Gerar Link QR
+          <span class="card-param-text" id="param-fidelidade">Simulação: Aproximação NFC</span>
+          <button class="btn-card-qr-action" id="qr-action-fidelidade" onclick="openQrCodeModal('Cartão Fidelidade', 'demo/fidelidade.html', 'nome=Maria&loja=Café Origem')" style="display:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Escanear QR Code
           </button>
         </div>
       </div>
@@ -1132,7 +1235,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Documentação Técnica & Manual
         </a>
-        <a href="demo/gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; padding:8px 12px;">Painel Gestão & KDS</a>
+        <a href="demo/gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; padding:8px 12px;">Painel Gestão & Cozinha</a>
         <a href="demo/dashboard.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none; padding:8px 12px;">Dashboard ROI</a>
       </div>
       <div>© 2024 Nolei Creative • Ecossistemas Inteligentes de Hardware & Software</div>
@@ -1246,6 +1349,7 @@
       fidelidade: { path: 'demo/fidelidade.html', params: { nfc: 'source=nfc&nome=Maria&loja=Caf%C3%A9%20Origem', qr: 'source=qr&nome=Maria&loja=Caf%C3%A9%20Origem' } }
     };
 
+    
     function setMode(mode) {
       currentMode = mode;
       document.getElementById('btn-nfc').classList.toggle('active', mode === 'nfc');
@@ -1254,107 +1358,31 @@
       Object.entries(solutionsConfig).forEach(([key, cfg]) => {
         const linkEl = document.getElementById('link-' + key);
         const paramEl = document.getElementById('param-' + key);
+        const qrBtn = document.getElementById('qr-action-' + key);
+
         if (linkEl) linkEl.href = `${cfg.path}?${cfg.params[mode]}`;
-        if (paramEl) paramEl.textContent = `?${cfg.params[mode]}`;
+        if (paramEl) {
+          paramEl.textContent = mode === 'nfc' ? 'Simulação: Aproximação NFC' : 'Simulação: Leitura QR Code';
+        }
+        if (qrBtn) {
+          qrBtn.style.display = mode === 'qr' ? 'inline-flex' : 'none';
+        }
       });
     }
+);
 
-    function getBaseUrl() {
-      // If deployed or on web server
-      if (window.location.protocol.startsWith('http')) {
-        const origin = window.location.origin;
-        const pathname = window.location.pathname;
-        const currentDir = pathname.substring(0, pathname.lastIndexOf('/') + 1);
-        return `${origin}${currentDir}`;
-      }
-      // Fallback for file:// or offline testing
-      return 'https://nolei-creative-nfc.vercel.app/';
-    }
-
-    function openQrCodeModal(title, targetPath, extraParams = '') {
-      const modal = document.getElementById('modal-qr');
-      const modalTitle = document.getElementById('modal-title');
-      const modalUrl = document.getElementById('modal-url');
-      const directLink = document.getElementById('modal-direct-link');
-      const qrImg = document.getElementById('qr-image-tag');
-
-      const fullParam = `source=qr` + (extraParams ? `&${extraParams}` : '');
-      const baseUrl = getBaseUrl();
-      const fullTargetUrl = `${baseUrl}${targetPath}?${fullParam}`;
-
-      modalTitle.textContent = title;
-      modalUrl.textContent = fullTargetUrl;
-      directLink.href = fullTargetUrl;
-
-      // QR Code encode direct valid URL for instant camera scan
-      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(fullTargetUrl)}&color=15-34-61&bgcolor=ffffff&margin=0`;
-      qrImg.src = qrApiUrl;
-
-      modal.classList.add('open');
-    }
-
-    function closeQrModal() {
-      document.getElementById('modal-qr').classList.remove('open');
-    }
-
-    function copyModalUrl() {
-      const urlText = document.getElementById('modal-url').textContent;
-      navigator.clipboard.writeText(urlText).then(() => {
-        alert('Link copiado para a área de transferência!');
-      }).catch(() => {
-        prompt('Copie o link manualmente:', urlText);
-      });
-    }
-
-    // Mobile Drawer Menu
-    function toggleMobileMenu() {
-      document.getElementById('mobile-drawer').classList.toggle('open');
-    }
-
-    function closeMobileMenu() {
-      document.getElementById('mobile-drawer').classList.remove('open');
-    }
-
-    // Google Profile Assistant
-    function openGoogleHelperModal() {
-      document.getElementById('modal-google-helper').classList.add('open');
-    }
-
-    function closeGoogleHelperModal() {
-      document.getElementById('modal-google-helper').classList.remove('open');
-    }
-
-    function generateCustomGoogleQr() {
-      const input = document.getElementById('custom-google-input');
-      const val = input.value.trim();
-      if (!val) {
-        alert('Digite o link ou o nome do seu estabelecimento no Google.');
-        return;
-      }
-
-      let target = val;
-      if (!val.startsWith('http://') && !val.startsWith('https://')) {
-        target = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(val)}`;
-      }
-
-      const previewBox = document.getElementById('custom-google-preview');
-      const img = document.getElementById('custom-google-qr-img');
-      const text = document.getElementById('custom-google-qr-text');
-      const link = document.getElementById('custom-google-direct-link');
-
-      img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(target)}&color=15-34-61&bgcolor=ffffff&margin=0`;
-      text.textContent = target;
-      link.href = target;
-      previewBox.style.display = 'block';
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeQrModal();
-        closeGoogleHelperModal();
-        closeMobileMenu();
-      }
-    });
   </script>
+
+  <!-- Floating WhatsApp Button (Bottom-Left, Home Only) -->
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado%20com%20NFC%20e%20QR%20Code." target="_blank" class="floating-whatsapp-btn" aria-label="Falar no WhatsApp" title="Falar no WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+    <span>Orçamento WhatsApp</span>
+  </a>
+
+  <!-- Scroll to Top Button -->
+  <button type="button" class="btn-scroll-top" id="btn-scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Voltar ao Topo" title="Voltar ao Topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
 </body>
 </html>

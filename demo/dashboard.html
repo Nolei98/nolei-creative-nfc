@@ -10,7 +10,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+    // Scroll to Top visibility
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('btn-scroll-top');
+      if (btn) {
+        if (window.scrollY > 300) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      }
+    });
+
+  </script>
 
   <style>
     :root {
@@ -444,6 +457,39 @@
       font-size: 0.78rem;
       color: var(--text-dim);
     }
+  
+    /* Scroll to Top Button */
+    .btn-scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--navy, #0F223D);
+      color: #FFFFFF;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(15, 34, 61, 0.25);
+      z-index: 990;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .btn-scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .btn-scroll-top:hover {
+      background: var(--leaf-green, #2E7D32);
+      transform: translateY(-2px);
+    }
+
   </style>
 </head>
 <body>
@@ -455,7 +501,7 @@
       <span style="color:#E2E8F0; font-weight:500;">Métricas Consolidadas & ROI Operacional</span>
     </div>
     <a href="gestao.html" style="color:#22C55E; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:0.75rem;">
-      Abrir Painel Operacional (KDS / Salão / Hotel) ↗
+      Abrir Painel Operacional (Salão, Cozinha & Hotel) ↗
     </a>
   </div>
 
@@ -471,7 +517,7 @@
       <div style="display:flex; align-items:center; gap:8px;">
         <a href="gestao.html" class="btn-back-hub" style="background:var(--orange-light); color:var(--orange-accent); border-color:rgba(249,115,22,0.3);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
-          Painel Gestão & KDS
+          Painel Gestão & Cozinha
         </a>
         <a href="../index.html" class="btn-back-hub">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -583,7 +629,7 @@
     <footer class="footer">
       <div style="margin-bottom:8px;">
         <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none; margin-right:14px;">Manual & Documentação</a>
-        <a href="gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; margin-right:14px;">Painel Gestão & KDS</a>
+        <a href="gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; margin-right:14px;">Painel Gestão & Cozinha</a>
         <a href="../index.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none;">Hub de Demos</a>
       </div>
       <div>© 2024 Nolei Creative • Ecossistemas Inteligentes de Hardware & Software</div>
@@ -826,5 +872,11 @@
       switchDashboard('geral', document.querySelector('.sys-tab.active'));
     });
   </script>
+
+  <!-- Scroll to Top Button -->
+  <button type="button" class="btn-scroll-top" id="btn-scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Voltar ao Topo" title="Voltar ao Topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
 </body>
 </html>

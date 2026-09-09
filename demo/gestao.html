@@ -971,6 +971,14 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
           Cardápio Mesa 04 ↗
         </a>
+        <a href="hotel.html?source=nfc&quarto=412" target="_blank" class="btn-top-action highlight" style="background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
+          Suíte 412 Hotel ↗
+        </a>
+        <a href="fidelidade.html?source=nfc" target="_blank" class="btn-top-action highlight" style="background:#FEF3C7; color:#B45309; border-color:#FDE68A;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M17 7h.01M7 17h.01M17 17h.01"/></svg>
+          Fidelidade ↗
+        </a>
         <a href="dashboard.html" class="btn-top-action">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           Dashboard ROI
@@ -1008,8 +1016,8 @@
     <!-- Subheader -->
     <div class="page-header">
       <div>
-        <h1 class="page-title" id="main-page-title">Central de Gestão do Restaurante</h1>
-        <p class="page-desc" id="main-page-desc">Controle de comandas ativas, chamados do salão, cadastro de produtos e equipe.</p>
+        <h1 class="page-title" id="main-page-title">Central Integrada de Gestão</h1>
+        <p class="page-desc" id="main-page-desc">Controle de salão & KDS, hotel & concierge, cardápio digital e programa de fidelidade.</p>
       </div>
       <div id="header-action-btn-box">
         <button class="btn-new-item" onclick="openNewProductModal()">
@@ -1027,6 +1035,16 @@
           Monitor de Salão & KDS
           <span class="tab-badge" id="badge-active-orders">3 Mesas</span>
         </button>
+        <button class="main-tab" id="tab-hotel" onclick="switchSection('hotel')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
+          Hotel & Concierge
+          <span class="tab-badge" id="badge-total-hotel-orders" style="background:#EFF6FF; color:#1D4ED8;">3 Pedidos</span>
+        </button>
+        <button class="main-tab" id="tab-loyalty" onclick="switchSection('loyalty')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M17 7h.01M7 17h.01M17 17h.01"/></svg>
+          Prêmios & Bônus
+          <span class="tab-badge" id="badge-total-rewards" style="background:#FEF3C7; color:#B45309;">5 Prêmios</span>
+        </button>
         <button class="main-tab" id="tab-products" onclick="switchSection('products')">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           Cardápio & Produtos
@@ -1039,7 +1057,7 @@
         </button>
         <button class="main-tab" id="tab-users" onclick="switchSection('users')">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Clientes & Fidelidade
+          Clientes & Membros
           <span class="tab-badge" id="badge-total-users">6 Clientes</span>
         </button>
       </div>
@@ -1056,6 +1074,137 @@
       <!-- KDS Cards Grid (Filtered by Active Waiter / Admin) -->
       <div class="kds-grid" id="kds-grid">
         <!-- Injected by JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- SECTION: HOTEL & CONCIERGE (ROOM SERVICE & GOVERNANÇA) -->
+    <section id="section-hotel" style="display:none;">
+      
+      <!-- Hotel Metrics Summary -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:16px;">
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--blue);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🛎️ Solicitações Ativas</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-active">3 chamados</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--leaf-green);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🏨 Suítes com Hóspedes</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-rooms">8 Suítes</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--orange);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🍔 Room Service Pendente</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-rs">1 pedido</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--amber);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🧹 Arrumações & SPA</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-hk">2 agendados</div>
+        </div>
+      </div>
+
+      <div class="crud-header-bar">
+        <div class="search-filter-box">
+          <input type="text" id="hotel-search" class="search-input" placeholder="Buscar por suíte ou hóspede..." oninput="filterHotelOrders()">
+          <select id="hotel-category-filter" class="search-input" style="max-width:180px;" onchange="filterHotelOrders()">
+            <option value="all">Todas Categorias</option>
+            <option value="Room Service">Room Service</option>
+            <option value="Café no Quarto">Café no Quarto</option>
+            <option value="SPA">SPA & Massagem</option>
+            <option value="Governança">Governança & Toalhas</option>
+            <option value="Concierge">Concierge & Táxi</option>
+            <option value="Check-out">Check-out</option>
+          </select>
+          <select id="hotel-status-filter" class="search-input" style="max-width:160px;" onchange="filterHotelOrders()">
+            <option value="all">Todos Status</option>
+            <option value="solicitado">⏳ Solicitado</option>
+            <option value="preparo">🛎️ Em Atendimento</option>
+            <option value="entregue">✓ Concluído</option>
+          </select>
+        </div>
+        <button class="btn-new-item" onclick="openNewHotelOrderModal()" style="background:var(--blue);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Novo Pedido no Quarto
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th>Suíte</th>
+              <th>Hóspede</th>
+              <th>Categoria & Serviço</th>
+              <th>Detalhes / Observação</th>
+              <th>Valor (R$)</th>
+              <th>Horário</th>
+              <th>Status</th>
+              <th style="text-align:right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="hotel-orders-table-body">
+            <!-- Injected by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- SECTION: PRÊMIOS & FIDELIDADE (CRUD DE BÔNUS E RECOMPENSAS) -->
+    <section id="section-loyalty" style="display:none;">
+      
+      <!-- Loyalty Metrics & Program Rules -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:16px;">
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--amber);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🎁 Prêmios Ativos</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-loyalty-rewards">5 Prêmios</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--leaf-green);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">👥 Membros Fidelidade</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-loyalty-members">6 Clientes</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--blue);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">⭐ Pontos em Circulação</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;">960 pts</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--orange);">
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🎉 Bônus de Boas-Vindas</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;">+50 pts / cadastro</div>
+        </div>
+      </div>
+
+      <!-- Config Banner -->
+      <div style="background:#FFFBEB; border:1px solid #FCD34D; border-radius:var(--radius-sm); padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="font-size:0.82rem; color:#92400E;">
+          <strong>⚙️ Regras do Programa:</strong> R$ 1,00 gasto = 1 Ponto acumulado • Bônus no Cadastro = 50 pontos automáticos • Validade dos pontos = 12 meses.
+        </div>
+        <button class="btn-top-action" onclick="showToast('Regras do programa atualizadas!')" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A; font-weight:700; font-size:0.75rem;">Editar Parâmetros ⚙️</button>
+      </div>
+
+      <div class="crud-header-bar">
+        <div class="search-filter-box">
+          <input type="text" id="reward-search" class="search-input" placeholder="Buscar prêmio no catálogo..." oninput="filterLoyaltyRewards()">
+        </div>
+        <button class="btn-new-item" onclick="openNewRewardModal()" style="background:#D97706;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Cadastrar Novo Prêmio
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th style="width:50px;">Ícone</th>
+              <th>Título do Prêmio</th>
+              <th>Pontos Exigidos</th>
+              <th>Descrição & Regra de Uso</th>
+              <th>Status</th>
+              <th style="text-align:right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="rewards-table-body">
+            <!-- Injected by JavaScript -->
+          </tbody>
+        </table>
       </div>
 
     </section>
@@ -1347,6 +1496,121 @@
     </div>
   </div>
 
+  <!-- Modal CRUD Hotel / Quarto Order -->
+  <div class="modal-overlay" id="modal-hotel-order" onclick="closeHotelOrderModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-hotel-title" style="font-size:1.1rem;">Nova Solicitação de Quarto</h3>
+        <button onclick="closeHotelOrderModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+      </div>
+
+      <form id="hotel-order-form" onsubmit="saveHotelOrder(event)">
+        <input type="hidden" id="hotel-order-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Número da Suíte / Quarto:</label>
+            <input type="text" id="hotel-room" class="form-control" placeholder="Ex: 412" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Nome do Hóspede:</label>
+            <input type="text" id="hotel-guest-name" class="form-control" placeholder="Ex: Roberto Guimarães" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Categoria de Serviço:</label>
+            <select id="hotel-category" class="form-control" required>
+              <option value="Room Service">🍔 Room Service</option>
+              <option value="Café no Quarto">🍳 Café no Quarto</option>
+              <option value="SPA">🧖 SPA & Massagem</option>
+              <option value="Governança">🧹 Governança & Toalhas</option>
+              <option value="Concierge">🚗 Concierge & Táxi</option>
+              <option value="Check-out">💳 Fechamento de Conta</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Valor do Serviço (R$):</label>
+            <input type="number" step="0.01" id="hotel-price" class="form-control" placeholder="0.00" value="0.00">
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Item / Título do Serviço:</label>
+            <input type="text" id="hotel-service" class="form-control" placeholder="Ex: Filé Mignon ao Molho Madeira" required>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Detalhes / Observações:</label>
+            <textarea id="hotel-details" class="form-control" rows="2" placeholder="Ex: Ponto da carne ao ponto, entregar às 20:30"></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Status da Solicitação:</label>
+            <select id="hotel-status" class="form-control">
+              <option value="solicitado">⏳ Solicitado (Aguardando Recepção)</option>
+              <option value="preparo">🛎️ Em Atendimento / Preparo</option>
+              <option value="entregue">✓ Concluído / Entregue na Suíte</option>
+              <option value="cancelado">✕ Cancelado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeHotelOrderModal()">Cancelar</button>
+          <button type="submit" class="btn-primary" style="background:var(--blue);">Salvar Pedido</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal CRUD Recompensa Fidelidade (Admin) -->
+  <div class="modal-overlay" id="modal-reward" onclick="closeRewardModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-reward-title" style="font-size:1.1rem;">Cadastrar Prêmio no Catálogo</h3>
+        <button onclick="closeRewardModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+      </div>
+
+      <form id="reward-form" onsubmit="saveReward(event)">
+        <input type="hidden" id="reward-id">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">Título do Prêmio / Recompensa:</label>
+            <input type="text" id="reward-title" class="form-control" placeholder="Ex: Café Espresso ou Cappuccino" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Pontos Exigidos para Resgate:</label>
+            <input type="number" id="reward-points" class="form-control" placeholder="50" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Ícone / Emoji:</label>
+            <input type="text" id="reward-icon" class="form-control" placeholder="☕" value="🎁" required>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Descrição & Regras de Uso:</label>
+            <textarea id="reward-desc" class="form-control" rows="2" placeholder="Ex: Válido para qualquer café especial até 300ml no balcão." required></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Status no Catálogo:</label>
+            <select id="reward-active" class="form-control">
+              <option value="true">● Ativo (Visível aos clientes)</option>
+              <option value="false">○ Pausado (Oculto temporariamente)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeRewardModal()">Cancelar</button>
+          <button type="submit" class="btn-primary" style="background:#D97706;">Salvar Prêmio</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast-box" id="toast">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -1492,22 +1756,118 @@
     }
 
     // 3. Initial Users State
-    const initialUsers = [
-      { id: "u1", name: "Carlos Menezes", phone: "(11) 98765-4321", cpf: "342.567.890-09", table: "Mesa 04", points: 120, status: "Ativo" },
-      { id: "u2", name: "Fernanda Lima", phone: "(11) 99123-4567", cpf: "451.238.901-12", table: "Mesa 04", points: 85, status: "Ativo" },
-      { id: "u3", name: "João Silva", phone: "(11) 98888-7777", cpf: "219.873.456-78", table: "Mesa 04", points: 210, status: "Ativo" },
-      { id: "u4", name: "Mariana Costa", phone: "(11) 97777-6666", cpf: "189.432.765-43", table: "Mesa 02", points: 45, status: "Ativo" },
-      { id: "u5", name: "Rodrigo Almeida", phone: "(11) 96666-5555", cpf: "512.984.321-65", table: "Mesa 07", points: 150, status: "Ativo" },
-      { id: "u6", name: "Camila Ribeiro", phone: "(11) 95555-4444", cpf: "389.123.654-87", table: "Suíte 412", points: 340, status: "VIP" }
+    const defaultUsers = [
+      { id: "u1", name: "João Silva", phone: "(11) 99999-1111", cpf: "342.***.***-09", table: "Mesa 04", points: 120, status: "Ativo" },
+      { id: "u2", name: "Maria Santos", phone: "(11) 98765-4321", cpf: "111.***.***-22", table: "Mesa 02", points: 127, status: "Ativo" },
+      { id: "u3", name: "Roberto Guimarães", phone: "(11) 98877-6655", cpf: "554.***.***-88", table: "Suíte 412", points: 280, status: "Ativo" },
+      { id: "u4", name: "Ana Beatriz", phone: "(11) 97777-8888", cpf: "889.***.***-11", table: "Mesa 04", points: 45, status: "Ativo" },
+      { id: "u5", name: "Lucas Barbosa", phone: "(11) 96666-5555", cpf: "443.***.***-33", table: "Mesa 01", points: 90, status: "Ativo" },
+      { id: "u6", name: "Fernanda Lima", phone: "(11) 99123-4567", cpf: "776.***.***-44", table: "Suíte 204", points: 310, status: "Ativo" }
     ];
 
     let users = JSON.parse(localStorage.getItem('nolei_users_list') || 'null');
     if (!users) {
-      users = initialUsers;
+      users = defaultUsers;
       localStorage.setItem('nolei_users_list', JSON.stringify(users));
     }
 
-    // 4. Live Service Calls (Garçom / Conta)
+    // 4. Initial Hotel Orders State
+    const defaultHotelOrders = [
+      {
+        id: "ho_1",
+        room: "412",
+        guestName: "Roberto Guimarães",
+        category: "Room Service",
+        service: "Club Sandwich Imperial",
+        details: "1x Com batatas rústicas • Sem cebola",
+        priceVal: 45.00,
+        status: "entregue",
+        time: "12:40",
+        date: "Hoje"
+      },
+      {
+        id: "ho_2",
+        room: "412",
+        guestName: "Roberto Guimarães",
+        category: "Café no Quarto",
+        service: "Café da Manhã Colonial",
+        details: "Agendado para 08:30 • 2 Pessoas",
+        priceVal: 0.00,
+        status: "preparo",
+        time: "08:15",
+        date: "Hoje"
+      },
+      {
+        id: "ho_3",
+        room: "204",
+        guestName: "Fernanda Lima",
+        category: "Governança",
+        service: "Arrumação de Quarto & Toalhas Extras",
+        details: "Troca completa de enxoval",
+        priceVal: 0.00,
+        status: "solicitado",
+        time: "14:10",
+        date: "Hoje"
+      }
+    ];
+
+    let hotelOrders = JSON.parse(localStorage.getItem('nolei_hotel_orders') || 'null');
+    if (!hotelOrders) {
+      hotelOrders = defaultHotelOrders;
+      localStorage.setItem('nolei_hotel_orders', JSON.stringify(hotelOrders));
+    }
+
+    // 5. Initial Loyalty Rewards Catalog State
+    const defaultLoyaltyRewards = [
+      {
+        id: "lr_1",
+        title: "Café Espresso ou Cappuccino",
+        points: 50,
+        icon: "☕",
+        desc: "Válido para qualquer café clássico ou cappuccino até 300ml no balcão.",
+        active: true
+      },
+      {
+        id: "lr_2",
+        title: "Fatia de Bolo Artesanal do Dia",
+        points: 80,
+        icon: "🍰",
+        desc: "Fatia generosa de bolo de cenoura com chocolate, fubá cremoso ou red velvet.",
+        active: true
+      },
+      {
+        id: "lr_3",
+        title: "Frappuccino Especial com Chantilly",
+        points: 120,
+        icon: "🥤",
+        desc: "Frappuccino artesanal com calda de caramelo salgado ou chocolate belga.",
+        active: true
+      },
+      {
+        id: "lr_4",
+        title: "15% de Desconto na Conta Total",
+        points: 150,
+        icon: "⭐",
+        desc: "Desconto aplicado diretamente no fechamento da comanda da mesa ou suíte.",
+        active: true
+      },
+      {
+        id: "lr_5",
+        title: "Almoço Executivo / Brunch Completo",
+        points: 300,
+        icon: "🍽️",
+        desc: "Prato principal + bebida natural + sobremesa à escolha no cardápio.",
+        active: true
+      }
+    ];
+
+    let loyaltyRewards = JSON.parse(localStorage.getItem('nolei_loyalty_rewards') || 'null');
+    if (!loyaltyRewards) {
+      loyaltyRewards = defaultLoyaltyRewards;
+      localStorage.setItem('nolei_loyalty_rewards', JSON.stringify(loyaltyRewards));
+    }
+
+    // 6. Live Service Calls (Garçom / Conta)
     let serviceAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || 'null');
     if (!serviceAlerts) {
       serviceAlerts = [
@@ -1517,7 +1877,7 @@
       localStorage.setItem('nolei_service_alerts', JSON.stringify(serviceAlerts));
     }
 
-    // 5. KDS Tables Orders State
+    // 7. KDS Tables Orders State
     let kdsTables = [
       {
         table: "Mesa 04",
@@ -1597,6 +1957,8 @@
       renderProducts();
       renderWaiters();
       renderUsers();
+      renderHotelOrders();
+      renderLoyaltyRewards();
     }
 
     function changeActiveOperator(val) {
@@ -1610,12 +1972,76 @@
     // Navigation Switch
     function switchSection(sec) {
       document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(`tab-${sec}`).classList.add('active');
+      const activeTab = document.getElementById(`tab-${sec}`);
+      if (activeTab) activeTab.classList.add('active');
 
       document.getElementById('section-kds').style.display = sec === 'kds' ? 'block' : 'none';
+      document.getElementById('section-hotel').style.display = sec === 'hotel' ? 'block' : 'none';
+      document.getElementById('section-loyalty').style.display = sec === 'loyalty' ? 'block' : 'none';
       document.getElementById('section-products').style.display = sec === 'products' ? 'block' : 'none';
       document.getElementById('section-waiters').style.display = sec === 'waiters' ? 'block' : 'none';
       document.getElementById('section-users').style.display = sec === 'users' ? 'block' : 'none';
+
+      // Update Subheader texts
+      const titleEl = document.getElementById('main-page-title');
+      const descEl = document.getElementById('main-page-desc');
+      const actionBox = document.getElementById('header-action-btn-box');
+
+      if (sec === 'hotel') {
+        titleEl.textContent = 'Gestão de Suítes & Concierge 24h';
+        descEl.textContent = 'Monitoramento em tempo real de chamados de quarto, room service, café da manhã e governança.';
+        actionBox.innerHTML = `
+          <button class="btn-new-item" onclick="openNewHotelOrderModal()" style="background:var(--blue);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Novo Pedido de Quarto
+          </button>
+        `;
+      } else if (sec === 'loyalty') {
+        titleEl.textContent = 'Gestão do Programa de Fidelidade & Bônus';
+        descEl.textContent = 'Catálogo de prêmios para resgate, regras de pontuação e acompanhamento de cupons.';
+        actionBox.innerHTML = `
+          <button class="btn-new-item" onclick="openNewRewardModal()" style="background:#D97706;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Cadastrar Prêmio
+          </button>
+        `;
+      } else if (sec === 'products') {
+        titleEl.textContent = 'Cardápio Digital & Itens';
+        descEl.textContent = 'Cadastro, fotos, preços e controle de disponibilidade dos pratos e bebidas.';
+        actionBox.innerHTML = `
+          <button class="btn-new-item" onclick="openNewProductModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Novo Item no Cardápio
+          </button>
+        `;
+      } else if (sec === 'waiters') {
+        titleEl.textContent = 'Equipe de Atendimento & Garçons';
+        descEl.textContent = 'Cadastro de garçons, códigos PIN, turnos de atendimento e métricas de satisfação.';
+        actionBox.innerHTML = `
+          <button class="btn-new-item" onclick="openNewWaiterModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            Cadastrar Garçom
+          </button>
+        `;
+      } else if (sec === 'users') {
+        titleEl.textContent = 'Base de Clientes & Membros';
+        descEl.textContent = 'Gestão de usuários validados, histórico de consumo e saldo de pontos.';
+        actionBox.innerHTML = `
+          <button class="btn-new-item" onclick="openNewUserModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            Cadastrar Cliente
+          </button>
+        `;
+      } else {
+        titleEl.textContent = 'Monitor de Salão & KDS';
+        descEl.textContent = 'Comandas ativas, status de preparo dos pratos e chamados em tempo real.';
+        actionBox.innerHTML = `
+          <button class="btn-new-item" onclick="openNewProductModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Novo Item no Cardápio
+          </button>
+        `;
+      }
     }
 
     // Render Alerts with Highlighted Table Tag
@@ -1776,6 +2202,298 @@
         }
         renderKDS();
         showToast(`Comanda da ${tableName} encerrada e mesa liberada! 💳`);
+      }
+    }
+
+    // ==========================================
+    // HOTEL & CONCIERGE MANAGEMENT LOGIC
+    // ==========================================
+    function renderHotelOrders(list = hotelOrders) {
+      const tbody = document.getElementById('hotel-orders-table-body');
+      if (!tbody) return;
+
+      const activeCount = hotelOrders.filter(o => o.status !== 'entregue' && o.status !== 'cancelado').length;
+      document.getElementById('badge-total-hotel-orders').textContent = `${activeCount} ${activeCount === 1 ? 'Pedido' : 'Pedidos'}`;
+      document.getElementById('kpi-hotel-active').textContent = `${activeCount} chamados`;
+
+      const categoryIcons = {
+        'Room Service': '🍔',
+        'Café no Quarto': '🍳',
+        'SPA': '🧖',
+        'Governança': '🧹',
+        'Concierge': '🚗',
+        'Check-out': '💳'
+      };
+
+      const statusLabels = {
+        'solicitado': '<span class="status-badge preparo" style="background:#FFFBEB; color:#B45309; border-color:#FCD34D;">⏳ Solicitado</span>',
+        'preparo': '<span class="status-badge preparo" style="background:#EFF6FF; color:#1D4ED8; border-color:#93C5FD;">🛎️ Em Atendimento</span>',
+        'entregue': '<span class="status-badge entregue">✓ Concluído / Entregue</span>',
+        'cancelado': '<span class="status-badge preparo" style="background:#FEF2F2; color:#B91C1C; border-color:#FCA5A5;">✕ Cancelado</span>'
+      };
+
+      tbody.innerHTML = list.map(o => `
+        <tr>
+          <td>
+            <span class="category-chip" style="background:#EFF6FF; color:#1E40AF; border-color:#BFDBFE; font-weight:700;">
+              📍 Suíte ${o.room}
+            </span>
+          </td>
+          <td>
+            <strong style="color:var(--navy); font-size:0.88rem;">${o.guestName}</strong>
+          </td>
+          <td>
+            <div style="font-weight:700; color:var(--navy); font-size:0.86rem; display:flex; align-items:center; gap:6px;">
+              <span>${categoryIcons[o.category] || '🛎️'}</span>
+              <span>${o.service}</span>
+            </div>
+            <span class="category-chip" style="font-size:0.7rem; margin-top:2px;">${o.category}</span>
+          </td>
+          <td>
+            <span style="font-size:0.8rem; color:var(--text);">${o.details || 'Sem observações'}</span>
+          </td>
+          <td>
+            <strong style="color:var(--leaf-green);">${o.priceVal > 0 ? `R$ ${Number(o.priceVal).toFixed(2).replace('.', ',')}` : 'Incluso'}</strong>
+          </td>
+          <td><span style="font-size:0.78rem; color:var(--text-muted);">${o.time}</span></td>
+          <td>
+            ${statusLabels[o.status] || o.status}
+          </td>
+          <td style="text-align:right;">
+            <div class="action-btn-group" style="justify-content:flex-end; gap:4px;">
+              ${o.status === 'solicitado' ? `
+                <button class="btn-table-action" style="font-size:0.72rem; padding:4px 8px; background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;" title="Iniciar Preparo/Atendimento" onclick="updateHotelOrderStatus('${o.id}', 'preparo')">
+                  Atender 🛎️
+                </button>
+              ` : ''}
+              ${o.status === 'preparo' || o.status === 'solicitado' ? `
+                <button class="btn-table-action" style="font-size:0.72rem; padding:4px 8px; background:#ECFDF5; color:#047857; border-color:#A7F3D0;" title="Marcar Entregue no Quarto" onclick="updateHotelOrderStatus('${o.id}', 'entregue')">
+                  Entregue ✓
+                </button>
+              ` : ''}
+              <button class="btn-action-icon" title="Editar" onclick="editHotelOrder('${o.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button class="btn-action-icon delete" title="Excluir" onclick="deleteHotelOrder('${o.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterHotelOrders() {
+      const search = document.getElementById('hotel-search').value.toLowerCase();
+      const cat = document.getElementById('hotel-category-filter').value;
+      const status = document.getElementById('hotel-status-filter').value;
+
+      const filtered = hotelOrders.filter(o => {
+        const matchesSearch = o.room.toLowerCase().includes(search) || o.guestName.toLowerCase().includes(search) || o.service.toLowerCase().includes(search);
+        const matchesCat = cat === 'all' || o.category === cat;
+        const matchesStatus = status === 'all' || o.status === status;
+        return matchesSearch && matchesCat && matchesStatus;
+      });
+
+      renderHotelOrders(filtered);
+    }
+
+    function openNewHotelOrderModal() {
+      document.getElementById('modal-hotel-title').textContent = 'Nova Solicitação de Quarto';
+      document.getElementById('hotel-order-form').reset();
+      document.getElementById('hotel-order-id').value = '';
+      document.getElementById('modal-hotel-order').classList.add('open');
+    }
+
+    function editHotelOrder(id) {
+      const o = hotelOrders.find(i => i.id === id);
+      if (!o) return;
+
+      document.getElementById('modal-hotel-title').textContent = 'Editar Solicitação da Suíte ' + o.room;
+      document.getElementById('hotel-order-id').value = o.id;
+      document.getElementById('hotel-room').value = o.room;
+      document.getElementById('hotel-guest-name').value = o.guestName;
+      document.getElementById('hotel-category').value = o.category;
+      document.getElementById('hotel-service').value = o.service;
+      document.getElementById('hotel-details').value = o.details || '';
+      document.getElementById('hotel-price').value = o.priceVal || 0;
+      document.getElementById('hotel-status').value = o.status;
+
+      document.getElementById('modal-hotel-order').classList.add('open');
+    }
+
+    function closeHotelOrderModal() {
+      document.getElementById('modal-hotel-order').classList.remove('open');
+    }
+
+    function saveHotelOrder(e) {
+      e.preventDefault();
+      const id = document.getElementById('hotel-order-id').value;
+      const room = document.getElementById('hotel-room').value.trim();
+      const guestName = document.getElementById('hotel-guest-name').value.trim();
+      const category = document.getElementById('hotel-category').value;
+      const service = document.getElementById('hotel-service').value.trim();
+      const details = document.getElementById('hotel-details').value.trim();
+      const priceVal = parseFloat(document.getElementById('hotel-price').value) || 0;
+      const status = document.getElementById('hotel-status').value;
+
+      const now = new Date();
+      const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      if (id) {
+        const idx = hotelOrders.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          hotelOrders[idx] = { ...hotelOrders[idx], room, guestName, category, service, details, priceVal, status };
+        }
+      } else {
+        const newId = 'ho_' + Date.now();
+        hotelOrders.unshift({ id: newId, room, guestName, category, service, details, priceVal, status, time, date: 'Hoje' });
+      }
+
+      localStorage.setItem('nolei_hotel_orders', JSON.stringify(hotelOrders));
+      renderHotelOrders();
+      closeHotelOrderModal();
+      showToast(`Solicitação da Suíte ${room} salva com sucesso! 🛎️`);
+    }
+
+    function updateHotelOrderStatus(id, newStatus) {
+      const o = hotelOrders.find(i => i.id === id);
+      if (!o) return;
+      o.status = newStatus;
+      localStorage.setItem('nolei_hotel_orders', JSON.stringify(hotelOrders));
+      renderHotelOrders();
+      showToast(`Suíte ${o.room}: Status atualizado para "${newStatus === 'entregue' ? 'Entregue / Concluído ✅' : 'Em Atendimento 🛎️'}"`);
+    }
+
+    function deleteHotelOrder(id) {
+      const o = hotelOrders.find(i => i.id === id);
+      if (confirm(`Remover solicitação "${o.service}" da Suíte ${o.room}?`)) {
+        hotelOrders = hotelOrders.filter(i => i.id !== id);
+        localStorage.setItem('nolei_hotel_orders', JSON.stringify(hotelOrders));
+        renderHotelOrders();
+        showToast('Solicitação removida.');
+      }
+    }
+
+    // ==========================================
+    // LOYALTY REWARDS CRUD LOGIC (ADMIN)
+    // ==========================================
+    function renderLoyaltyRewards(list = loyaltyRewards) {
+      const tbody = document.getElementById('rewards-table-body');
+      if (!tbody) return;
+
+      const activeRewards = loyaltyRewards.filter(r => r.active !== false).length;
+      document.getElementById('badge-total-rewards').textContent = `${activeRewards} Prêmios`;
+      document.getElementById('kpi-loyalty-rewards').textContent = `${activeRewards} Prêmios`;
+
+      tbody.innerHTML = list.map(r => `
+        <tr>
+          <td style="font-size:1.6rem; text-align:center;">
+            ${r.icon || '🎁'}
+          </td>
+          <td>
+            <strong style="color:var(--navy); font-size:0.92rem;">${r.title}</strong>
+          </td>
+          <td>
+            <span class="category-chip" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A; font-weight:700; font-size:0.85rem;">
+              ⭐ ${r.points} Pontos
+            </span>
+          </td>
+          <td>
+            <span style="font-size:0.82rem; color:var(--text);">${r.desc}</span>
+          </td>
+          <td>
+            <span class="status-badge ${r.active !== false ? 'entregue' : 'preparo'}" style="cursor:pointer;" onclick="toggleRewardActive('${r.id}')">
+              ${r.active !== false ? '● Disponível' : '○ Pausado'}
+            </span>
+          </td>
+          <td style="text-align:right;">
+            <div class="action-btn-group" style="justify-content:flex-end;">
+              <button class="btn-action-icon" title="Editar Prêmio" onclick="editReward('${r.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button class="btn-action-icon delete" title="Excluir Prêmio" onclick="deleteReward('${r.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterLoyaltyRewards() {
+      const search = document.getElementById('reward-search').value.toLowerCase();
+      const filtered = loyaltyRewards.filter(r => r.title.toLowerCase().includes(search) || r.desc.toLowerCase().includes(search));
+      renderLoyaltyRewards(filtered);
+    }
+
+    function openNewRewardModal() {
+      document.getElementById('modal-reward-title').textContent = 'Cadastrar Novo Prêmio no Catálogo';
+      document.getElementById('reward-form').reset();
+      document.getElementById('reward-id').value = '';
+      document.getElementById('modal-reward').classList.add('open');
+    }
+
+    function editReward(id) {
+      const r = loyaltyRewards.find(i => i.id === id);
+      if (!r) return;
+
+      document.getElementById('modal-reward-title').textContent = 'Editar Prêmio do Catálogo';
+      document.getElementById('reward-id').value = r.id;
+      document.getElementById('reward-title').value = r.title;
+      document.getElementById('reward-points').value = r.points;
+      document.getElementById('reward-icon').value = r.icon || '🎁';
+      document.getElementById('reward-desc').value = r.desc;
+      document.getElementById('reward-active').value = r.active !== false ? 'true' : 'false';
+
+      document.getElementById('modal-reward').classList.add('open');
+    }
+
+    function closeRewardModal() {
+      document.getElementById('modal-reward').classList.remove('open');
+    }
+
+    function saveReward(e) {
+      e.preventDefault();
+      const id = document.getElementById('reward-id').value;
+      const title = document.getElementById('reward-title').value.trim();
+      const points = parseInt(document.getElementById('reward-points').value) || 50;
+      const icon = document.getElementById('reward-icon').value.trim() || '🎁';
+      const desc = document.getElementById('reward-desc').value.trim();
+      const active = document.getElementById('reward-active').value === 'true';
+
+      if (id) {
+        const idx = loyaltyRewards.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          loyaltyRewards[idx] = { ...loyaltyRewards[idx], title, points, icon, desc, active };
+        }
+      } else {
+        const newId = 'lr_' + Date.now();
+        loyaltyRewards.push({ id: newId, title, points, icon, desc, active });
+      }
+
+      localStorage.setItem('nolei_loyalty_rewards', JSON.stringify(loyaltyRewards));
+      renderLoyaltyRewards();
+      closeRewardModal();
+      showToast(`Prêmio "${title}" salvo no catálogo! 🎉`);
+    }
+
+    function toggleRewardActive(id) {
+      const r = loyaltyRewards.find(i => i.id === id);
+      if (!r) return;
+      r.active = r.active === false ? true : false;
+      localStorage.setItem('nolei_loyalty_rewards', JSON.stringify(loyaltyRewards));
+      renderLoyaltyRewards();
+      showToast(`Prêmio "${r.title}" agora está ${r.active ? 'Disponível' : 'Pausado'}.`);
+    }
+
+    function deleteReward(id) {
+      const r = loyaltyRewards.find(i => i.id === id);
+      if (confirm(`Excluir o prêmio "${r.title}" do catálogo de fidelidade?`)) {
+        loyaltyRewards = loyaltyRewards.filter(i => i.id !== id);
+        localStorage.setItem('nolei_loyalty_rewards', JSON.stringify(loyaltyRewards));
+        renderLoyaltyRewards();
+        showToast('Prêmio excluído com sucesso.');
       }
     }
 
@@ -2156,7 +2874,15 @@
     // Initial Execution
     updateOperatorUI();
 
-    // Auto-refresh KDS & Alerts every 2.5s
+    // Check URL hash on load (e.g. #hotel or #fidelidade)
+    if (window.location.hash) {
+      const h = window.location.hash.replace('#', '');
+      if (h === 'hotel' || h === 'fidelidade' || h === 'loyalty') {
+        switchSection(h === 'hotel' ? 'hotel' : 'loyalty');
+      }
+    }
+
+    // Auto-refresh KDS, Alerts, Hotel Orders & Loyalty every 2.5s
     setInterval(() => {
       const latestMesa04 = JSON.parse(localStorage.getItem('nolei_table_orders_04') || 'null');
       if (latestMesa04 && latestMesa04.length !== kdsTables[0].items.length) {
@@ -2172,6 +2898,18 @@
         serviceAlerts = latestAlerts;
         renderAlerts();
       }
+
+      const latestHotelOrders = JSON.parse(localStorage.getItem('nolei_hotel_orders') || 'null');
+      if (latestHotelOrders && JSON.stringify(latestHotelOrders) !== JSON.stringify(hotelOrders)) {
+        hotelOrders = latestHotelOrders;
+        renderHotelOrders();
+      }
+
+      const latestLoyalty = JSON.parse(localStorage.getItem('nolei_loyalty_rewards') || 'null');
+      if (latestLoyalty && JSON.stringify(latestLoyalty) !== JSON.stringify(loyaltyRewards)) {
+        loyaltyRewards = latestLoyalty;
+        renderLoyaltyRewards();
+      }
     }, 2500);
 
     document.addEventListener('keydown', (e) => {
@@ -2179,6 +2917,8 @@
         closeProductModal();
         closeWaiterModal();
         closeUserModal();
+        closeHotelOrderModal();
+        closeRewardModal();
       }
     });
   </script>

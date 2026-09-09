@@ -484,33 +484,149 @@
       background: var(--white);
     }
 
-    /* Toast */
-    .toast-box {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: var(--navy);
-      color: var(--white);
-      padding: 12px 20px;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 600;
+    /* Guest Orders & Requests Card */
+    .guest-orders-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      margin-top: 24px;
+      box-shadow: 0 4px 16px rgba(15, 34, 61, 0.04);
+    }
+
+    .guest-orders-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .guest-orders-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 8px 24px rgba(15, 34, 61, 0.3);
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .badge-orders-count {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: var(--leaf-green-light);
+      color: var(--leaf-green);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .guest-orders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .guest-order-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .guest-order-item:hover {
+      border-color: rgba(15, 34, 61, 0.2);
+    }
+
+    .guest-order-info {
+      flex: 1;
+    }
+
+    .guest-order-name {
+      font-family: var(--font-heading);
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .guest-order-meta {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .order-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
       white-space: nowrap;
     }
 
-    .toast-box.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
+    .order-status-badge.solicitado {
+      background: #FFFBEB;
+      color: #B45309;
+      border: 1px solid #FCD34D;
+    }
+
+    .order-status-badge.preparo {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #93C5FD;
+    }
+
+    .order-status-badge.entregue {
+      background: #ECFDF5;
+      color: #047857;
+      border: 1px solid #6EE7B7;
+    }
+
+    .order-status-badge.cancelado {
+      background: #FEF2F2;
+      color: #B91C1C;
+      border: 1px solid #FCA5A5;
+    }
+
+    .empty-orders-hotel {
+      text-align: center;
+      padding: 24px 10px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .btn-top-hotel-gestao {
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--orange-accent);
+      background: var(--orange-light);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      padding: 5px 10px;
+      border-radius: 20px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .btn-top-hotel-gestao:hover {
+      background: var(--orange-accent);
+      color: #fff;
     }
   </style>
 </head>
@@ -536,7 +652,12 @@
           <p class="meta-sub">Hotel & SPA Boutique</p>
         </div>
       </div>
-      <div class="room-badge" id="room-badge">Suíte 412</div>
+      <div style="display:flex; align-items:center; gap:6px;">
+        <a href="gestao.html" target="_blank" class="btn-top-hotel-gestao" title="Painel da Recepção / Governança">
+          Painel Hotel ↗
+        </a>
+        <div class="room-badge" id="room-badge">Suíte 412</div>
+      </div>
     </div>
   </header>
 
@@ -558,7 +679,7 @@
     <div class="welcome-card">
       <div class="welcome-text">
         <h2 id="welcome-suite">Suíte 412</h2>
-        <p>Serviços exclusivos para sua estadia.</p>
+        <p>Serviços exclusivos para sua estadia com atendimento 24h.</p>
       </div>
       <button class="wifi-chip" onclick="showToast('Wi-Fi: Imperial_VIP | Senha: suite' + currentRoom)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
@@ -575,8 +696,8 @@
       <div class="service-tile" onclick="openServiceModal('room-service')">
         <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80" alt="Room Service" class="tile-image" loading="lazy">
         <div class="tile-body">
-          <h4 class="tile-title">Room Service</h4>
-          <p class="tile-desc">Pratos quentes, lanches artesanais e vinhos.</p>
+          <h4 class="tile-title">🍔 Room Service</h4>
+          <p class="tile-desc">Pratos quentes, lanches artesanais, massas e vinhos.</p>
         </div>
       </div>
 
@@ -584,8 +705,8 @@
       <div class="service-tile" onclick="openServiceModal('breakfast')">
         <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=400&q=80" alt="Café da Manhã" class="tile-image" loading="lazy">
         <div class="tile-body">
-          <h4 class="tile-title">Café no Quarto</h4>
-          <p class="tile-desc">Agende a entrega do café colonial na suíte.</p>
+          <h4 class="tile-title">🍳 Café no Quarto</h4>
+          <p class="tile-desc">Agende a entrega do café da manhã colonial na suíte.</p>
         </div>
       </div>
 
@@ -593,8 +714,8 @@
       <div class="service-tile" onclick="openServiceModal('spa')">
         <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80" alt="SPA" class="tile-image" loading="lazy">
         <div class="tile-body">
-          <h4 class="tile-title">SPA & Massagem</h4>
-          <p class="tile-desc">Tratamentos corporais e relaxamento na suíte.</p>
+          <h4 class="tile-title">🧖 SPA & Massagem</h4>
+          <p class="tile-desc">Massagens relaxantes e terapias na sua suíte.</p>
         </div>
       </div>
 
@@ -602,10 +723,44 @@
       <div class="service-tile" onclick="openServiceModal('housekeeping')">
         <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80" alt="Arrumação" class="tile-image" loading="lazy">
         <div class="tile-body">
-          <h4 class="tile-title">Arrumação & Toalhas</h4>
-          <p class="tile-desc">Troca de enxoval ou solicitação de amenities extras.</p>
+          <h4 class="tile-title">🧹 Governança & Toalhas</h4>
+          <p class="tile-desc">Arrumação, toalhas extras e reposição de amenities.</p>
+        </div>
       </div>
 
+      <!-- 5. Concierge Express -->
+      <div class="service-tile" onclick="openServiceModal('concierge')">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80" alt="Concierge" class="tile-image" loading="lazy">
+        <div class="tile-body">
+          <h4 class="tile-title">🚗 Concierge & Táxi</h4>
+          <p class="tile-desc">Transfer, bagagens, frigobar e atendimento recepção.</p>
+        </div>
+      </div>
+
+      <!-- 6. Fechamento de Conta -->
+      <div class="service-tile" onclick="openServiceModal('checkout')">
+        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80" alt="Check-out" class="tile-image" loading="lazy">
+        <div class="tile-body">
+          <h4 class="tile-title">💳 Extrato & Check-out</h4>
+          <p class="tile-desc">Consulte despesas e solicite o fechamento da suíte.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIVE GUEST ORDERS & REQUESTS LIST -->
+    <div class="guest-orders-card">
+      <div class="guest-orders-header">
+        <div class="guest-orders-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Minhas Solicitações na <span id="orders-suite-label">Suíte 412</span>
+        </div>
+        <span class="badge-orders-count" id="guest-orders-count-badge">0 solicitações</span>
+      </div>
+
+      <div class="guest-orders-list" id="guest-orders-list">
+        <!-- Injected by JavaScript -->
+      </div>
     </div>
 
   </main>
@@ -614,6 +769,7 @@
   <footer style="text-align:center; padding:32px 20px; color:var(--text-muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; background:var(--white);">
     <div style="margin-bottom:10px; display:flex; justify-content:center; gap:18px; flex-wrap:wrap;">
       <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">📖 Documentação & Manual</a>
+      <a href="gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:700; text-decoration:none;">🖥️ Painel Hotel / Recepção ↗</a>
       <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">📊 Dashboard</a>
       <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">🏠 Hub Principal</a>
     </div>
@@ -666,9 +822,61 @@
 
     document.getElementById('room-badge').textContent = `Suíte ${currentRoom}`;
     document.getElementById('welcome-suite').textContent = `Suíte ${currentRoom}`;
+    document.getElementById('orders-suite-label').textContent = `Suíte ${currentRoom}`;
 
     // Guest state
     let activeGuest = JSON.parse(localStorage.getItem(`nolei_hotel_guest_${currentRoom}`) || 'null');
+    if (!activeGuest) {
+      activeGuest = { name: "Roberto Guimarães", phone: "(11) 98877-6655" };
+      localStorage.setItem(`nolei_hotel_guest_${currentRoom}`, JSON.stringify(activeGuest));
+    }
+
+    // Default hotel requests if empty
+    function getStoredHotelOrders() {
+      let orders = JSON.parse(localStorage.getItem('nolei_hotel_orders') || 'null');
+      if (!orders) {
+        orders = [
+          {
+            id: "ho_1",
+            room: "412",
+            guestName: "Roberto Guimarães",
+            category: "Room Service",
+            service: "Club Sandwich Imperial",
+            details: "1x Com batatas rústicas • Sem cebola",
+            priceVal: 45.00,
+            status: "entregue",
+            time: "12:40",
+            date: "Hoje"
+          },
+          {
+            id: "ho_2",
+            room: "412",
+            guestName: "Roberto Guimarães",
+            category: "Café no Quarto",
+            service: "Café da Manhã Colonial",
+            details: "Agendado para 08:30 • 2 Pessoas",
+            priceVal: 0.00,
+            status: "preparo",
+            time: "08:15",
+            date: "Hoje"
+          },
+          {
+            id: "ho_3",
+            room: "204",
+            guestName: "Fernanda Lima",
+            category: "Governança",
+            service: "Arrumação de Quarto & Toalhas Extras",
+            details: "Troca completa de enxoval",
+            priceVal: 0.00,
+            status: "solicitado",
+            time: "14:10",
+            date: "Hoje"
+          }
+        ];
+        localStorage.setItem('nolei_hotel_orders', JSON.stringify(orders));
+      }
+      return orders;
+    }
 
     function updateGuestUI() {
       const nameEl = document.getElementById('guest-name');
@@ -689,6 +897,59 @@
         avatarEl.textContent = '?';
         authBtn.textContent = 'Validar';
       }
+    }
+
+    function renderGuestOrders() {
+      const allOrders = getStoredHotelOrders();
+      const myOrders = allOrders.filter(o => o.room === currentRoom);
+      const container = document.getElementById('guest-orders-list');
+      const badge = document.getElementById('guest-orders-count-badge');
+
+      badge.textContent = `${myOrders.length} ${myOrders.length === 1 ? 'solicitação' : 'solicitações'}`;
+
+      if (myOrders.length === 0) {
+        container.innerHTML = `
+          <div class="empty-orders-hotel">
+            Nenhuma solicitação ativa para a Suíte ${currentRoom}. Escolha um dos serviços acima! 🛎️
+          </div>
+        `;
+        return;
+      }
+
+      const statusLabels = {
+        'solicitado': '⏳ Solicitado (Aguardando)',
+        'preparo': '🛎️ Em Atendimento',
+        'entregue': '✓ Concluído / Entregue',
+        'cancelado': '✕ Cancelado'
+      };
+
+      const categoryIcons = {
+        'Room Service': '🍔',
+        'Café no Quarto': '🍳',
+        'SPA': '🧖',
+        'Governança': '🧹',
+        'Concierge': '🚗',
+        'Check-out': '💳'
+      };
+
+      container.innerHTML = myOrders.map(o => `
+        <div class="guest-order-item">
+          <div style="font-size:1.4rem; padding:4px;">${categoryIcons[o.category] || '🛎️'}</div>
+          <div class="guest-order-info">
+            <div class="guest-order-name">${o.service}</div>
+            <div class="guest-order-meta">
+              <span>${o.details || o.category}</span>
+              ${o.priceVal > 0 ? `• <strong style="color:var(--leaf-green);">R$ ${o.priceVal.toFixed(2).replace('.', ',')}</strong>` : ''}
+              • <span>🕒 ${o.time}</span>
+            </div>
+          </div>
+          <div>
+            <span class="order-status-badge ${o.status}">
+              ${statusLabels[o.status] || o.status}
+            </span>
+          </div>
+        </div>
+      `).join('');
     }
 
     function openGuestAuthModal() {
@@ -715,7 +976,7 @@
       showToast(`Hóspede validado com sucesso: ${name}! ✅`);
     }
 
-    // Modal Service
+    // Modal Service Options
     function openServiceModal(type) {
       if (!activeGuest) {
         openGuestAuthModal();
@@ -728,61 +989,180 @@
       const content = document.getElementById('modal-service-content');
 
       if (type === 'room-service') {
-        title.textContent = 'Room Service — Suíte ' + currentRoom;
+        title.textContent = '🍔 Room Service — Suíte ' + currentRoom;
         content.innerHTML = `
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">Selecione o prato para entrega imediata na suíte:</p>
+          
           <div class="room-service-item">
             <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
             <div class="rs-info">
               <div class="rs-name">Club Sandwich Imperial</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Frango, bacon crocante, queijo e fritas</div>
               <div class="rs-price">R$ 45,00</div>
             </div>
-            <button class="btn-add-item" onclick="confirmOrder('Club Sandwich')">Pedir</button>
+            <button class="btn-add-item" onclick="submitHotelOrder('Room Service', 'Club Sandwich Imperial', 45.00, 'Acompanha batatas rústicas')">Pedir</button>
           </div>
+
           <div class="room-service-item">
             <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
             <div class="rs-info">
-              <div class="rs-name">Filé Mignon ao Madeira</div>
+              <div class="rs-name">Filé Mignon ao Molho Madeira</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Com risoto de parmesão trufado</div>
               <div class="rs-price">R$ 89,00</div>
             </div>
-            <button class="btn-add-item" onclick="confirmOrder('Filé Mignon')">Pedir</button>
+            <button class="btn-add-item" onclick="submitHotelOrder('Room Service', 'Filé Mignon ao Madeira', 89.00, 'Ponto da carne: Ao ponto')">Pedir</button>
+          </div>
+
+          <div class="room-service-item">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
+            <div class="rs-info">
+              <div class="rs-name">Pizza Artesanal Margherita</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Massa fermentação natural 4 fatias</div>
+              <div class="rs-price">R$ 52,00</div>
+            </div>
+            <button class="btn-add-item" onclick="submitHotelOrder('Room Service', 'Pizza Margherita Artesanal', 52.00, '4 fatias individuais')">Pedir</button>
+          </div>
+
+          <div class="room-service-item">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=150&q=80" class="rs-thumb">
+            <div class="rs-info">
+              <div class="rs-name">Taça Vinho Tinto Reserva</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Malbec argentino selecionado</div>
+              <div class="rs-price">R$ 35,00</div>
+            </div>
+            <button class="btn-add-item" onclick="submitHotelOrder('Room Service', 'Taça Vinho Reserva Malbec', 35.00, 'Servido na taça de cristal')">Pedir</button>
           </div>
         `;
       } else if (type === 'breakfast') {
-        title.textContent = 'Café da Manhã no Quarto';
+        title.textContent = '🍳 Café da Manhã na Suíte';
         content.innerHTML = `
-          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">Solicitante: <strong>${activeGuest.name}</strong> • Suíte ${currentRoom}</p>
-          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-            <button class="wifi-chip" onclick="confirmOrder('Café no quarto às 07:30')">07:30</button>
-            <button class="wifi-chip" onclick="confirmOrder('Café no quarto às 08:30')">08:30</button>
-            <button class="wifi-chip" onclick="confirmOrder('Café no quarto às 09:30')">09:30</button>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">Hóspede: <strong>${activeGuest.name}</strong> • Suíte ${currentRoom}</p>
+          
+          <div class="form-group">
+            <label class="form-label">Escolha o horário de entrega:</label>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+              <button type="button" class="wifi-chip" onclick="selectBreakfastTime(this, '07:30')">07:30</button>
+              <button type="button" class="wifi-chip" style="background:var(--navy); color:#fff;" onclick="selectBreakfastTime(this, '08:30')">08:30</button>
+              <button type="button" class="wifi-chip" onclick="selectBreakfastTime(this, '09:30')">09:30</button>
+              <button type="button" class="wifi-chip" onclick="selectBreakfastTime(this, '10:00')">10:00</button>
+            </div>
           </div>
+
+          <div class="form-group">
+            <label class="form-label">Opção do Menu:</label>
+            <select id="bf-type" class="form-input">
+              <option value="Café Colonial Completo (Pães, queijos nobres, frutas, ovos mexidos, suco e café)">Café Colonial Completo</option>
+              <option value="Opção Fitness & Frutas (Iogurte grego, granola artesanal, frutas vermelhas, ovos)">Opção Fitness & Frutas</option>
+              <option value="Opção Sem Glúten & Sem Lactose">Opção Sem Glúten & Sem Lactose</option>
+            </select>
+          </div>
+
+          <button class="btn-submit-order" onclick="submitBreakfastOrder()">Confirmar Café da Manhã no Quarto</button>
         `;
       } else if (type === 'spa') {
-        title.textContent = 'SPA & Bem-Estar';
+        title.textContent = '🧖 SPA & Tratamentos';
         content.innerHTML = `
-          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">Massagem Relaxante com Aromaterapia (50 min) — R$ 180,00</p>
-          <button class="btn-submit-order" onclick="confirmOrder('Agendamento de Massagem SPA')">Confirmar Agendamento</button>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">Atendimento exclusivo na sua suíte ou nas salas do SPA:</p>
+          
+          <div class="room-service-item">
+            <div class="rs-info">
+              <div class="rs-name">Massagem Relaxante com Aromaterapia</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Duração: 50 minutos com óleos essenciais</div>
+              <div class="rs-price">R$ 180,00</div>
+            </div>
+            <button class="btn-add-item" onclick="submitHotelOrder('SPA', 'Massagem Relaxante Aromaterapia', 180.00, 'Duração: 50 min • Na Suíte')">Agendar</button>
+          </div>
+
+          <div class="room-service-item">
+            <div class="rs-info">
+              <div class="rs-name">Drenagem Linfática Premium</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Duração: 60 minutos relaxante e desintoxicante</div>
+              <div class="rs-price">R$ 220,00</div>
+            </div>
+            <button class="btn-add-item" onclick="submitHotelOrder('SPA', 'Drenagem Linfática Premium', 220.00, 'Duração: 60 min')">Agendar</button>
+          </div>
         `;
       } else if (type === 'housekeeping') {
-        title.textContent = 'Governança & Arrumação';
+        title.textContent = '🧹 Governança & Governança';
         content.innerHTML = `
           <div style="display:flex; flex-direction:column; gap:10px;">
-            <button class="btn-submit-order" onclick="confirmOrder('Arrumação Imediata')">Arrumar Quarto Agora</button>
-            <button class="btn-submit-order" style="background:var(--bg-light); color:var(--navy); border:1px solid var(--border);" onclick="confirmOrder('Toalhas Extras')">Solicitar Toalhas Adicionais</button>
+            <button class="btn-submit-order" style="background:var(--navy);" onclick="submitHotelOrder('Governança', 'Arrumação Imediata da Suíte', 0.00, 'Troca de toalhas e lençóis')">Arrumar Quarto Agora 🧹</button>
+            <button class="btn-submit-order" style="background:var(--bg-light); color:var(--navy); border:1px solid var(--border);" onclick="submitHotelOrder('Governança', 'Kit Toalhas Extras & Roupão', 0.00, '2x Toalhas de Banho + 1x Roupão')">Solicitar Toalhas Extras 🧖</button>
+            <button class="btn-submit-order" style="background:var(--bg-light); color:var(--navy); border:1px solid var(--border);" onclick="submitHotelOrder('Governança', 'Reposição de Amenities', 0.00, 'Shampoo, condicionador e sabonetes L Occitane')">Reposição de Amenities 🧴</button>
           </div>
+        `;
+      } else if (type === 'concierge') {
+        title.textContent = '🚗 Concierge & Transporte';
+        content.innerHTML = `
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <button class="btn-submit-order" style="background:var(--navy);" onclick="submitHotelOrder('Concierge', 'Solicitação de Táxi / Transfer', 0.00, 'Transfer Executivo para Aeroporto')">Chamar Táxi / Transfer Executivo 🚕</button>
+            <button class="btn-submit-order" style="background:var(--bg-light); color:var(--navy); border:1px solid var(--border);" onclick="submitHotelOrder('Concierge', 'Reposição Completa do Frigobar', 0.00, 'Águas, refrigerantes e snacks')">Reposição de Frigobar 🥤</button>
+            <button class="btn-submit-order" style="background:var(--bg-light); color:var(--navy); border:1px solid var(--border);" onclick="submitHotelOrder('Concierge', 'Atendimento Recepção no Quarto', 0.00, 'Dúvidas e assistência')">Solicitar Atendente na Recepção 🛎️</button>
+          </div>
+        `;
+      } else if (type === 'checkout') {
+        const allOrders = getStoredHotelOrders().filter(o => o.room === currentRoom);
+        let total = 0;
+        allOrders.forEach(o => total += (o.priceVal || 0));
+
+        title.textContent = '💳 Extrato da Suíte & Check-out';
+        content.innerHTML = `
+          <div style="margin-bottom:14px; background:var(--bg-light); padding:12px; border-radius:12px;">
+            <div style="font-size:0.78rem; color:var(--text-muted);">Total de Consumo na Suíte ${currentRoom}:</div>
+            <div style="font-size:1.3rem; font-weight:700; color:var(--navy);">R$ ${total.toFixed(2).replace('.', ',')}</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">(Quarto + Room Service + SPA)</div>
+          </div>
+          <button class="btn-submit-order" style="background:#15803D;" onclick="submitHotelOrder('Check-out', 'Solicitação de Fechamento de Conta', total, 'Pagamento na saída')">Solicitar Pré-Fechamento da Conta 💳</button>
         `;
       }
 
       modal.classList.add('open');
     }
 
-    function closeServiceModal() {
-      document.getElementById('service-modal').classList.remove('open');
+    let selectedTimeBf = '08:30';
+    function selectBreakfastTime(btn, time) {
+      selectedTimeBf = time;
+      document.querySelectorAll('#modal-service-content .wifi-chip').forEach(b => {
+        b.style.background = 'var(--bg-light)';
+        b.style.color = 'var(--navy)';
+      });
+      btn.style.background = 'var(--navy)';
+      btn.style.color = '#fff';
     }
 
-    function confirmOrder(item) {
+    function submitBreakfastOrder() {
+      const type = document.getElementById('bf-type').value;
+      submitHotelOrder('Café no Quarto', 'Café da Manhã no Quarto', 0.00, `Horário: ${selectedTimeBf} • ${type}`);
+    }
+
+    function submitHotelOrder(category, service, priceVal, details) {
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      const newOrder = {
+        id: 'ho_' + Date.now(),
+        room: currentRoom,
+        guestName: activeGuest ? activeGuest.name : "Hóspede Suíte " + currentRoom,
+        category,
+        service,
+        details,
+        priceVal: priceVal || 0,
+        status: 'solicitado',
+        time: timeStr,
+        date: 'Hoje'
+      };
+
+      const orders = getStoredHotelOrders();
+      orders.unshift(newOrder);
+      localStorage.setItem('nolei_hotel_orders', JSON.stringify(orders));
+
       closeServiceModal();
-      showToast(`Pedido registrado para ${activeGuest.name} (Suíte ${currentRoom}): ${item} ✅`);
+      renderGuestOrders();
+      showToast(`Solicitação registrada para a Suíte ${currentRoom}: ${service}! 🛎️`);
+    }
+
+    function closeServiceModal() {
+      document.getElementById('service-modal').classList.remove('open');
     }
 
     let toastTimer;
@@ -791,7 +1171,7 @@
       document.getElementById('toast-hotel-msg').textContent = msg;
       toast.classList.add('show');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
     // Splash
@@ -813,8 +1193,20 @@
       }
     }
 
-    // Init
+    // Init & Live Sync polling
     updateGuestUI();
+    renderGuestOrders();
+
+    setInterval(() => {
+      renderGuestOrders();
+    }, 2000);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeGuestAuthModal();
+        closeServiceModal();
+      }
+    });
   </script>
 </body>
 </html>

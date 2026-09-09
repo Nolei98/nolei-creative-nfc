@@ -599,26 +599,30 @@
         </a>
         <div class="store-meta">
           <h1 id="store-name">Café Origem</h1>
-          <p>Clube Fidelidade & Recompensas</p>
+          <p>Programa de Fidelidade & Recompensas</p>
         </div>
       </div>
-      <div class="tier-badge" id="tier-badge">Nível Prata</div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <a href="gestao.html#loyalty" target="_blank" style="font-family:var(--font-heading); font-size:0.72rem; font-weight:700; color:var(--orange); background:var(--orange-light); border:1px solid rgba(249,115,22,0.3); padding:5px 10px; border-radius:20px; text-decoration:none;">
+          Painel Gestão ↗
+        </a>
+      </div>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- Unauthenticated Gate Card -->
-    <div class="unauth-gate-card" id="unauth-gate">
-      <div class="gate-icon-box">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <!-- Unauthenticated Banner Gate -->
+    <div class="unauth-gate" id="unauth-gate">
+      <div class="gate-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
-      <h2 class="gate-title">Acesse seu Cartão Fidelidade</h2>
-      <p class="gate-desc">Aproxime seu cartão físico NFC ou entre com seus dados para acumular selos e resgatar prêmios no balcão.</p>
-      
-      <div class="gate-buttons-row">
+      <h3 class="gate-title">Identifique seu Cartão Fidelidade</h3>
+      <p class="gate-sub">Acesse seus pontos acumulados, selos do mês e resgate prêmios exclusivos no balcão.</p>
+
+      <div class="gate-actions">
         <button class="btn-gate-login" onclick="openLoyaltyAuthModal('login')">Já sou Cliente (Entrar)</button>
-        <button class="btn-gate-register" onclick="openLoyaltyAuthModal('register')">Cadastrar no Clube</button>
+        <button class="btn-gate-register" onclick="openLoyaltyAuthModal('register')">Cadastrar no Clube (+50 pts)</button>
       </div>
     </div>
 
@@ -645,59 +649,29 @@
         <div class="points-label">Pontos Acumulados</div>
 
         <div class="progress-track">
-          <div class="progress-fill"></div>
+          <div class="progress-fill" id="progress-fill-bar"></div>
         </div>
         <div class="progress-info">
-          <span>Faltam 73 pts para Nível Ouro</span>
-          <span>127 / 200 pts</span>
+          <span id="level-next-text">Faltam 73 pts para Nível Ouro 🏆</span>
+          <span id="points-ratio-text">127 / 200 pts</span>
         </div>
       </div>
 
-      <!-- Stamps Card (7/10) -->
+      <!-- Stamps Card -->
       <div class="stamps-section">
-        <h3 class="stamps-title">Cartela de Selos do Mês</h3>
-        <p class="stamps-desc">A cada café consumido, você ganha 1 selo ao aproximar o celular no balcão.</p>
+        <h3 class="stamps-title">Cartela de Selos do Mês ☕</h3>
+        <p class="stamps-desc">A cada café consumido, você ganha 1 selo ao aproximar o celular na tag NFC do balcão.</p>
 
-        <div class="stamps-grid">
-          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="stamp-slot">8</div>
-          <div class="stamp-slot">9</div>
-          <div class="stamp-slot">10</div>
+        <div class="stamps-grid" id="stamps-grid-box">
+          <!-- Injected via JavaScript -->
         </div>
       </div>
 
-      <!-- Rewards List -->
-      <div class="section-label">Prêmios Prontos para Resgate</div>
+      <!-- Rewards List (Dynamic from CRUD) -->
+      <div class="section-label">Catálogo de Prêmios para Resgate</div>
 
-      <div class="rewards-list">
-        <div class="reward-card">
-          <div class="reward-info">
-            <h4>Café Espresso ou Cappuccino</h4>
-            <p>50 pontos acumulados</p>
-          </div>
-          <button class="btn-redeem" onclick="redeemReward('Espresso ou Cappuccino')">Resgatar</button>
-        </div>
-
-        <div class="reward-card">
-          <div class="reward-info">
-            <h4>Fatia de Bolo Artesanal do Dia</h4>
-            <p>80 pontos acumulados</p>
-          </div>
-          <button class="btn-redeem" onclick="redeemReward('Bolo do Dia')">Resgatar</button>
-        </div>
-
-        <div class="reward-card">
-          <div class="reward-info">
-            <h4>Pacote de Grãos Especiais (250g)</h4>
-            <p>150 pontos acumulados</p>
-          </div>
-          <button class="btn-redeem" style="background:var(--bg-light); color:var(--text-dim); cursor:not-allowed;" onclick="showToast('Faltam 23 pontos para liberar este resgate.')">Faltam 23 pts</button>
+      <div class="rewards-list" id="rewards-container">
+        <!-- Injected via JavaScript -->
       </div>
 
     </div>
@@ -708,6 +682,7 @@
   <footer style="text-align:center; padding:32px 20px 40px; color:var(--text-muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:30px; background:var(--white);">
     <div style="margin-bottom:10px; display:flex; justify-content:center; gap:18px; flex-wrap:wrap;">
       <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">📖 Documentação & Manual</a>
+      <a href="gestao.html#loyalty" target="_blank" style="color:var(--orange); font-weight:700; text-decoration:none;">🖥️ Painel Fidelidade (Admin) ↗</a>
       <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">📊 Dashboard ROI</a>
       <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">🏠 Hub Principal</a>
     </div>
@@ -718,7 +693,7 @@
   <div class="modal-overlay" id="loyalty-modal" onclick="closeLoyaltyAuthModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 class="modal-title">Clube Fidelidade</h3>
-      <p class="modal-sub">Identifique-se para pontuar e resgatar.</p>
+      <p class="modal-sub">Identifique-se para pontuar e resgatar prêmios.</p>
 
       <div class="auth-tabs">
         <button class="auth-tab active" id="tab-loy-login" onclick="setLoyTab('login')">Já sou Cliente</button>
@@ -744,9 +719,26 @@
           <label class="form-label">WhatsApp:</label>
           <input type="tel" id="loy-reg-phone" class="form-input" placeholder="(11) 99999-9999">
         </div>
-        <button class="btn-submit-auth" onclick="handleLoyaltyRegister()">Criar Cartão e Entrar</button>
+        <button class="btn-submit-auth" onclick="handleLoyaltyRegister()">Criar Cartão e Ganhar 50 Pontos</button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Modal Voucher de Resgate -->
+  <div class="modal-overlay" id="voucher-modal" onclick="closeVoucherModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()" style="text-align:center;">
+      <div style="font-size:2.5rem; margin-bottom:8px;">🎉</div>
+      <h3 class="modal-title" style="margin-bottom:4px;">Cupom de Resgate Gerado!</h3>
+      <p class="modal-sub" id="voucher-reward-name">Café Espresso ou Cappuccino</p>
+
+      <div style="background:var(--bg-light); border:2px dashed var(--border); border-radius:14px; padding:18px; margin:16px 0;">
+        <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Apresente este código no caixa:</div>
+        <div style="font-size:1.6rem; font-weight:800; font-family:monospace; color:var(--leaf-green); margin:8px 0;" id="voucher-code-display">ORIGEM-7429</div>
+        <div style="font-size:0.72rem; color:var(--text-muted);">Válido por 30 minutos na loja física</div>
+      </div>
+
+      <button class="btn-submit-auth" onclick="closeVoucherModal()" style="background:var(--leaf-green);">Entendi, vou resgatar no balcão 👍</button>
     </div>
   </div>
 
@@ -763,6 +755,67 @@
 
     // Member state
     let activeMember = JSON.parse(localStorage.getItem('nolei_loyalty_member') || 'null');
+    if (!activeMember) {
+      activeMember = {
+        name: "Maria Santos",
+        phone: "(11) 98765-4321",
+        points: 127
+      };
+      localStorage.setItem('nolei_loyalty_member', JSON.stringify(activeMember));
+    }
+
+    // Default Loyalty Rewards Catalog
+    const defaultRewards = [
+      {
+        id: "lr_1",
+        title: "Café Espresso ou Cappuccino",
+        points: 50,
+        icon: "☕",
+        desc: "Válido para qualquer café clássico ou cappuccino até 300ml no balcão.",
+        active: true
+      },
+      {
+        id: "lr_2",
+        title: "Fatia de Bolo Artesanal do Dia",
+        points: 80,
+        icon: "🍰",
+        desc: "Fatia generosa de bolo de cenoura com chocolate, fubá cremoso ou red velvet.",
+        active: true
+      },
+      {
+        id: "lr_3",
+        title: "Frappuccino Especial com Chantilly",
+        points: 120,
+        icon: "🥤",
+        desc: "Frappuccino artesanal com calda de caramelo salgado ou chocolate belga.",
+        active: true
+      },
+      {
+        id: "lr_4",
+        title: "15% de Desconto na Conta Total",
+        points: 150,
+        icon: "⭐",
+        desc: "Desconto aplicado diretamente no fechamento da comanda da mesa ou suíte.",
+        active: true
+      },
+      {
+        id: "lr_5",
+        title: "Almoço Executivo / Brunch Completo",
+        points: 300,
+        icon: "🍽️",
+        desc: "Prato principal + bebida natural + sobremesa à escolha no cardápio.",
+        active: true
+      }
+    ];
+
+    function getStoredRewards() {
+      let r = JSON.parse(localStorage.getItem('nolei_loyalty_rewards') || 'null');
+      if (!r) {
+        r = defaultRewards;
+        localStorage.setItem('nolei_loyalty_rewards', JSON.stringify(r));
+      }
+      return r;
+    }
 
     function updateLoyaltyUI() {
       const gate = document.getElementById('unauth-gate');
@@ -774,6 +827,62 @@
 
         document.getElementById('member-name').textContent = `Olá, ${activeMember.name}!`;
         document.getElementById('member-phone-display').textContent = `Membro: ${activeMember.phone}`;
+        document.getElementById('points-display').textContent = activeMember.points;
+
+        // Progress bar calculation
+        const target = 200;
+        const pct = Math.min(100, Math.round((activeMember.points / target) * 100));
+        document.getElementById('progress-fill-bar').style.width = pct + '%';
+        document.getElementById('points-ratio-text').textContent = `${activeMember.points} / ${target} pts`;
+        const diff = Math.max(0, target - activeMember.points);
+        document.getElementById('level-next-text').textContent = diff > 0 
+          ? `Faltam ${diff} pts para Nível Ouro 🏆` 
+          : `🎉 Você é Nível Ouro VIP!`;
+
+        // Render Stamps (10 slots)
+        const filledStamps = Math.min(10, Math.floor(activeMember.points / 15));
+        const stampsContainer = document.getElementById('stamps-grid-box');
+        let stampsHtml = '';
+        for (let i = 1; i <= 10; i++) {
+          if (i <= filledStamps) {
+            stampsHtml += `<div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>`;
+          } else {
+            stampsHtml += `<div class="stamp-slot">${i}</div>`;
+          }
+        }
+        stampsContainer.innerHTML = stampsHtml;
+
+        // Render Rewards from Catalog
+        const rewards = getStoredRewards().filter(r => r.active !== false);
+        const container = document.getElementById('rewards-container');
+
+        container.innerHTML = rewards.map(r => {
+          const canRedeem = activeMember.points >= r.points;
+          const missing = r.points - activeMember.points;
+
+          return `
+            <div class="reward-card">
+              <div style="font-size:1.8rem; margin-right:12px; display:flex; align-items:center;">
+                ${r.icon || '🎁'}
+              </div>
+              <div class="reward-info" style="flex:1;">
+                <h4 style="font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:2px;">${r.title}</h4>
+                <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">${r.desc}</p>
+                <span style="font-size:0.75rem; font-weight:700; color:var(--leaf-green);">${r.points} pontos exigidos</span>
+              </div>
+              <div>
+                ${canRedeem ? `
+                  <button class="btn-redeem" onclick="redeemReward('${r.id}')">Resgatar</button>
+                ` : `
+                  <button class="btn-redeem" style="background:var(--bg-light); color:var(--text-dim); cursor:not-allowed; border:1px solid var(--border);" onclick="showToast('Faltam ${missing} pontos para liberar este resgate.')">
+                    Faltam ${missing} pts
+                  </button>
+                `}
+              </div>
+            </div>
+          `;
+        }).join('');
+
       } else {
         gate.style.display = 'block';
         dashboard.style.display = 'none';
@@ -843,8 +952,46 @@
       showToast('Sessão encerrada.');
     }
 
-    function redeemReward(item) {
-      showToast(`Código gerado: ORIGEM-${Math.floor(1000 + Math.random() * 9000)} • Apresente no caixa!`);
+    function redeemReward(rewardId) {
+      const rewards = getStoredRewards();
+      const r = rewards.find(i => i.id === rewardId);
+      if (!r) return;
+
+      if (activeMember.points < r.points) {
+        showToast(`Pontos insuficientes. Você tem ${activeMember.points} pts.`);
+        return;
+      }
+
+      // Deduct points
+      activeMember.points -= r.points;
+      localStorage.setItem('nolei_loyalty_member', JSON.stringify(activeMember));
+
+      // Generate verified voucher
+      const code = `ORIGEM-${Math.floor(1000 + Math.random() * 9000)}`;
+      const redemptionLog = JSON.parse(localStorage.getItem('nolei_loyalty_redemptions') || '[]');
+      redemptionLog.unshift({
+        id: 'red_' + Date.now(),
+        memberName: activeMember.name,
+        phone: activeMember.phone,
+        rewardTitle: r.title,
+        pointsCost: r.points,
+        code,
+        time: new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'}),
+        date: new Date().toLocaleDateString('pt-BR')
+      });
+      localStorage.setItem('nolei_loyalty_redemptions', JSON.stringify(redemptionLog));
+
+      // Open voucher modal
+      document.getElementById('voucher-reward-name').textContent = r.title;
+      document.getElementById('voucher-code-display').textContent = code;
+      document.getElementById('voucher-modal').classList.add('open');
+
+      updateLoyaltyUI();
+    }
+
+    function closeVoucherModal(e) {
+      if (e && e.target && e.target !== document.getElementById('voucher-modal') && e.type === 'click') return;
+      document.getElementById('voucher-modal').classList.remove('open');
     }
 
     let toastTimer;
@@ -875,8 +1022,22 @@
       }
     }
 
-    // Init
+    // Init & Live sync polling
     updateLoyaltyUI();
+
+    setInterval(() => {
+      const updatedRewards = JSON.parse(localStorage.getItem('nolei_loyalty_rewards') || 'null');
+      if (updatedRewards) {
+        updateLoyaltyUI();
+      }
+    }, 2000);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLoyaltyAuthModal();
+        closeVoucherModal();
+      }
+    });
   </script>
 </body>
 </html>

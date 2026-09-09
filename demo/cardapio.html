@@ -949,7 +949,7 @@
         <span style="background:var(--leaf-green); color:#fff; font-weight:700; padding:2px 8px; border-radius:12px; font-size:0.68rem; text-transform:uppercase;">Visão: Cliente</span>
         <span style="color:#CBD5E1; font-size:0.72rem;">Mesa 04 (Autoatendimento)</span>
       </div>
-      <a href="gestao.html" style="color:#FDBA74; text-decoration:none; font-weight:600; font-size:0.72rem;">Ver Visão: Garçom / Cozinha →</a>
+      <a href="gestao.html?setor=restaurante" style="color:#FDBA74; text-decoration:none; font-weight:600; font-size:0.72rem;">Ver Visão: Garçom / Cozinha →</a>
     </div>
   </div>
 
@@ -974,7 +974,7 @@
         </div>
       </div>
       <div style="display:flex; align-items:center; gap:6px;">
-        <a href="gestao.html" target="_blank" class="btn-top-gestao" title="Abrir painel do restaurante/garçom">
+        <a href="gestao.html?setor=restaurante" target="_blank" class="btn-top-gestao" title="Abrir painel do restaurante/garçom">
           Painel Gestão ↗
         </a>
         <div class="table-tag" id="table-badge">Mesa 04</div>
@@ -1044,7 +1044,7 @@
     <footer style="text-align:center; padding:24px 10px 90px; color:var(--text-muted); font-size:0.78rem;">
       <div style="margin-bottom:8px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
         <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">Manual & Docs</a>
-        <a href="gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:700; text-decoration:none;">Painel de Gestão da Cozinha ↗</a>
+        <a href="gestao.html?setor=restaurante" target="_blank" style="color:var(--orange-accent); font-weight:700; text-decoration:none;">Painel de Gestão da Cozinha ↗</a>
         <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Dashboard ROI</a>
         <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Nolei</a>
       </div>
@@ -1542,6 +1542,9 @@
     }
 
     // Call Waiter & Ask Bill with persistent Dark Green State
+    let lastWaiterCallTimestamp = 0;
+    let lastBillCallTimestamp = 0;
+
     function updateServiceButtonsUI() {
       const alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
       const btnGarcom = document.getElementById('btn-action-garcom');
@@ -1554,9 +1557,15 @@
 
       if (hasGarcom) {
         btnGarcom.classList.add('active-pinned');
-        btnGarcom.innerHTML = `<span class="pulse-dot-pinned"></span> <span id="btn-garcom-label">Garçom Chamado (Aguardando)</span>`;
+        btnGarcom.title = "Toque para desmarcar o chamado do garçom";
+        btnGarcom.innerHTML = `
+          <span class="pulse-dot-pinned"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="btn-garcom-label">Garçom Notificado • [Desmarcar]</span>
+        `;
       } else {
         btnGarcom.classList.remove('active-pinned');
+        btnGarcom.title = "Chamar garçom na mesa";
         btnGarcom.innerHTML = `
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
           <span id="btn-garcom-label">Chamar Garçom</span>
@@ -1565,9 +1574,15 @@
 
       if (hasConta) {
         btnConta.classList.add('active-pinned');
-        btnConta.innerHTML = `<span class="pulse-dot-pinned"></span> <span id="btn-conta-label">Conta Solicitada (Aguardando)</span>`;
+        btnConta.title = "Toque para desmarcar a solicitação da conta";
+        btnConta.innerHTML = `
+          <span class="pulse-dot-pinned"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="btn-conta-label">Conta Solicitada • [Desmarcar]</span>
+        `;
       } else {
         btnConta.classList.remove('active-pinned');
+        btnConta.title = "Solicitar fechamento de conta na mesa";
         btnConta.innerHTML = `
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
           <span id="btn-conta-label">Pedir a Conta</span>
@@ -1576,14 +1591,27 @@
     }
 
     function chamarGarcom() {
-      const existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
-      const alreadyCalled = existingAlerts.some(a => a.table === tableName && a.type === 'garcom');
+      const now = Date.now();
+      let existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+      const activeIdx = existingAlerts.findIndex(a => a.table === tableName && a.type === 'garcom');
 
-      if (alreadyCalled) {
-        showToast(`Garçom já solicitado para a ${tableName}! Aguarde.`);
+      // Se já foi chamado, clicar desmarca/cancela o chamado!
+      if (activeIdx !== -1) {
+        existingAlerts.splice(activeIdx, 1);
+        localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
+        updateServiceButtonsUI();
+        showToast('Chamado do garçom desmarcado com sucesso.');
         return;
       }
 
+      // Limitador de frequência (evita spam de chamados em sequência)
+      if (now - lastWaiterCallTimestamp < 15000) {
+        const remaining = Math.ceil((15000 - (now - lastWaiterCallTimestamp)) / 1000);
+        showToast(`Aguarde ${remaining}s antes de enviar um novo chamado.`);
+        return;
+      }
+
+      lastWaiterCallTimestamp = now;
       existingAlerts.unshift({
         id: 'sa_' + Date.now(),
         type: 'garcom',
@@ -1593,21 +1621,33 @@
       });
       localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
       updateServiceButtonsUI();
-
-      showToast(`Garçom notificado para a ${tableName}! Aguarde um momento.`);
+      showToast(`Garçom notificado para a ${tableName}! Toque novamente se desejar cancelar.`);
     }
 
     function pedirConta() {
-      let total = 0;
-      tableOrders.forEach(i => total += i.priceVal);
+      const now = Date.now();
+      let existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+      const activeIdx = existingAlerts.findIndex(a => a.table === tableName && a.type === 'conta');
 
-      const existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
-      const alreadyAsked = existingAlerts.some(a => a.table === tableName && a.type === 'conta');
-
-      if (alreadyAsked) {
-        showToast(`Conta já solicitada para a ${tableName}! O garçom está a caminho.`);
+      // Se a conta já foi pedida, clicar desmarca/cancela!
+      if (activeIdx !== -1) {
+        existingAlerts.splice(activeIdx, 1);
+        localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
+        updateServiceButtonsUI();
+        showToast('Solicitação de conta desmarcada com sucesso.');
         return;
       }
+
+      // Limitador de frequência
+      if (now - lastBillCallTimestamp < 15000) {
+        const remaining = Math.ceil((15000 - (now - lastBillCallTimestamp)) / 1000);
+        showToast(`Aguarde ${remaining}s antes de pedir a conta novamente.`);
+        return;
+      }
+
+      lastBillCallTimestamp = now;
+      let total = 0;
+      tableOrders.forEach(i => total += i.priceVal);
 
       existingAlerts.unshift({
         id: 'sa_' + Date.now(),
@@ -1618,8 +1658,7 @@
       });
       localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
       updateServiceButtonsUI();
-
-      showToast(`Conta da ${tableName} solicitada! O garçom está a caminho.`);
+      showToast(`Conta da ${tableName} solicitada! Toque novamente se desejar desmarcar.`);
 
       // Convite para avaliar o garçom
       setTimeout(() => {

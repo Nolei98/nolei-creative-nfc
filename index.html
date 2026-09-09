@@ -960,20 +960,21 @@
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="desktop-nav" aria-label="Navegação Institucional">
-        <a href="#solucoes" class="nav-link">Soluções & Demos</a>
-        <a href="demo/gestao.html" class="nav-link">
-          Painel Gestão
-          <span class="nav-pill-badge">Salão & Hotel</span>
+      <!-- Desktop Nav Organized by Sector -->
+      <nav class="desktop-nav" aria-label="Navegação por Setor">
+        <a href="#solucoes" class="nav-link">Demos por Setor</a>
+        <a href="demo/gestao.html?setor=restaurante" class="nav-link">
+          Restaurante & Cozinha
+        </a>
+        <a href="demo/gestao.html?setor=hotel" class="nav-link">
+          Hotel & Suítes
         </a>
         <a href="demo/dashboard.html" class="nav-link">Métricas & ROI</a>
-        <a href="#hardware" class="nav-link">Modelos Físicos</a>
         <a href="docs.html" class="nav-link">Documentação</a>
         <button type="button" class="nav-google-btn" onclick="openGoogleHelperModal()" title="Assistente Google Meu Negócio">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Google Perfil
         </button>
-        
       </nav>
 
       <!-- Hamburger Button (Mobile) -->
@@ -986,16 +987,21 @@
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer" id="mobile-drawer" onclick="closeMobileMenu()">
     <div class="mobile-drawer-content" onclick="event.stopPropagation()">
+      <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; padding-left:4px;">Segmentos de Negócio</div>
+      <a href="demo/gestao.html?setor=restaurante" class="mobile-nav-link" style="background:#ECFDF5; color:#047857; border-color:#A7F3D0;" onclick="closeMobileMenu()">
+        Painel Restaurante & Cozinha ↗
+      </a>
+      <a href="demo/gestao.html?setor=hotel" class="mobile-nav-link" style="background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;" onclick="closeMobileMenu()">
+        Painel Hotel & Concierge ↗
+      </a>
+      <a href="demo/gestao.html?setor=fidelidade" class="mobile-nav-link" style="background:#FAF5FF; color:#7E22CE; border-color:#E9D5FF;" onclick="closeMobileMenu()">
+        Painel Fidelidade & Bônus ↗
+      </a>
+      <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:8px 0 4px; padding-left:4px;">Navegação Geral</div>
       <a href="#solucoes" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Demos NFC & QR Code
+        Demos Interativas (NFC / QR)
       </a>
-      <a href="demo/gestao.html" class="mobile-nav-link" style="background:#FFF7ED; color:#EA580C; border-color:#FDBA74;" onclick="closeMobileMenu()">
-        Painel Restaurante, Cozinha & Hotel
-      </a>
-      <a href="#hardware" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Modelos & Displays Físicos
-      </a>
-      <a href="demo/dashboard.html" class="mobile-nav-link" style="background:#E8F5E9; color:#166534; border-color:#86EFAC;" onclick="closeMobileMenu()">
+      <a href="demo/dashboard.html" class="mobile-nav-link" onclick="closeMobileMenu()">
         Dashboard Métricas & ROI
       </a>
       <a href="docs.html" class="mobile-nav-link" onclick="closeMobileMenu()">
@@ -1004,7 +1010,6 @@
       <button type="button" class="mobile-nav-link" style="border:1px solid #AECBFA; background:#E8F0FE; color:#1A73E8; width:100%; font-family:inherit; cursor:pointer;" onclick="closeMobileMenu(); openGoogleHelperModal();">
         Assistente Google Meu Negócio
       </button>
-      
     </div>
   </div>
 
@@ -1057,7 +1062,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-avaliacao">Simulação: Aproximação NFC</span>
+          <a href="demo/dashboard.html?setor=google" class="card-param-text" style="color:var(--navy); font-weight:600; text-decoration:underline;">Ver Métricas de Reputação ↗</a>
           <button class="btn-card-qr-action" id="qr-action-avaliacao" onclick="openQrCodeModal('Google Avaliações', 'demo/avaliacao.html')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code
@@ -1082,7 +1087,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-cardapio">Simulação: Aproximação NFC</span>
+          <a href="demo/gestao.html?setor=restaurante" class="card-param-text" style="color:var(--leaf-green); font-weight:700; text-decoration:underline;">Abrir Painel Restaurante & Cozinha ↗</a>
           <button class="btn-card-qr-action" id="qr-action-cardapio" onclick="openQrCodeModal('Cardápio Digital (Mesa 04)', 'demo/cardapio.html', 'mesa=04')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code
@@ -1107,7 +1112,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-hotel">Simulação: Aproximação NFC</span>
+          <a href="demo/gestao.html?setor=hotel" class="card-param-text" style="color:var(--blue); font-weight:700; text-decoration:underline;">Abrir Painel Hotel & Suítes ↗</a>
           <button class="btn-card-qr-action" id="qr-action-hotel" onclick="openQrCodeModal('Concierge & Quarto (Suíte 412)', 'demo/hotel.html', 'quarto=412')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code
@@ -1132,7 +1137,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <span class="card-param-text" id="param-fidelidade">Simulação: Aproximação NFC</span>
+          <a href="demo/gestao.html?setor=fidelidade" class="card-param-text" style="color:#7E22CE; font-weight:700; text-decoration:underline;">Abrir Painel Fidelidade & Bônus ↗</a>
           <button class="btn-card-qr-action" id="qr-action-fidelidade" onclick="openQrCodeModal('Cartão Fidelidade', 'demo/fidelidade.html', 'nome=Maria&loja=Café Origem')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code

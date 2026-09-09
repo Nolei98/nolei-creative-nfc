@@ -639,7 +639,7 @@
         <span style="background:var(--leaf-green); color:#fff; font-weight:700; padding:2px 8px; border-radius:12px; font-size:0.68rem; text-transform:uppercase;">Visão: Hóspede</span>
         <span style="color:#CBD5E1; font-size:0.72rem;">Suíte 412 (Concierge 24h)</span>
       </div>
-      <a href="gestao.html#hotel" style="color:#FDBA74; text-decoration:none; font-weight:600; font-size:0.72rem;">Ver Visão: Recepção / Hotel →</a>
+      <a href="gestao.html?setor=hotel" style="color:#FDBA74; text-decoration:none; font-weight:600; font-size:0.72rem;">Ver Visão: Recepção / Hotel →</a>
     </div>
   </div>
 
@@ -664,7 +664,7 @@
         </div>
       </div>
       <div style="display:flex; align-items:center; gap:6px;">
-        <a href="gestao.html#hotel" target="_blank" class="btn-top-hotel-gestao" title="Painel da Recepção / Governança">
+        <a href="gestao.html?setor=hotel" target="_blank" class="btn-top-hotel-gestao" title="Painel da Recepção / Governança">
           Painel Hotel ↗
         </a>
         <div class="room-badge" id="room-badge">Suíte 412</div>
@@ -780,7 +780,7 @@
   <footer style="text-align:center; padding:32px 20px; color:var(--text-muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; background:var(--white);">
     <div style="margin-bottom:10px; display:flex; justify-content:center; gap:18px; flex-wrap:wrap;">
       <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação & Manual</a>
-      <a href="gestao.html#hotel" target="_blank" style="color:var(--orange-accent); font-weight:700; text-decoration:none;">Painel Hotel / Recepção ↗</a>
+      <a href="gestao.html?setor=hotel" target="_blank" style="color:var(--orange-accent); font-weight:700; text-decoration:none;">Painel Hotel / Recepção ↗</a>
       <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Dashboard</a>
       <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
     </div>
@@ -910,6 +910,17 @@
       }
     }
 
+    function cancelGuestOrder(orderId) {
+      const orders = getStoredHotelOrders();
+      const o = orders.find(item => item.id === orderId);
+      if (o) {
+        o.status = 'cancelado';
+        localStorage.setItem('nolei_hotel_orders', JSON.stringify(orders));
+        renderGuestOrders();
+        showToast('Solicitação desmarcada/cancelada com sucesso.');
+      }
+    }
+
     function renderGuestOrders() {
       const allOrders = getStoredHotelOrders();
       const myOrders = allOrders.filter(o => o.room === currentRoom);
@@ -940,14 +951,19 @@
             <div class="guest-order-name">${o.service}</div>
             <div class="guest-order-meta">
               <span>${o.details || o.category}</span>
-              ${o.priceVal > 0 ? `• <strong style="color:var(--leaf-green);">R$ ${o.priceVal.toFixed(2).replace('.', ',')}</strong>` : ''}
+              ${o.priceVal > 0 ? `• <strong style="color:var(--leaf-green);">R$ ${Number(o.priceVal).toFixed(2).replace('.', ',')}</strong>` : ''}
               • <span>${o.time}</span>
             </div>
           </div>
-          <div>
+          <div style="display:flex; align-items:center; gap:6px;">
             <span class="order-status-badge ${o.status}">
               ${statusLabels[o.status] || o.status}
             </span>
+            ${o.status === 'solicitado' ? `
+              <button onclick="cancelGuestOrder('${o.id}')" style="background:#FEF2F2; border:1px solid #FCA5A5; color:#B91C1C; font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:6px; cursor:pointer;" title="Desmarcar solicitação">
+                Desmarcar
+              </button>
+            ` : ''}
           </div>
         </div>
       `).join('');

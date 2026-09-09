@@ -770,11 +770,11 @@
  <!-- Page Header -->
  <div class="page-header">
  <div>
- <h1 class="page-title">Painel do Restaurante & Cozinha</h1>
- <p class="page-desc">Controle de comandas por mesa, chamados de garçons, fila de preparo e cardápio digital.</p>
+ <h1 class="page-title" id="panel-page-title">Painel do Restaurante & Cozinha</h1>
+ <p class="page-desc" id="panel-page-desc">Controle de comandas por mesa, chamados de garçons, fila de preparo e cardápio digital.</p>
  </div>
  <div>
- <button class="btn-add-primary" onclick="openNewProductModal()">
+ <button class="btn-add-primary" id="btn-header-new-product" onclick="openNewProductModal()">
  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
  Novo Item no Cardápio
  </button>
@@ -785,12 +785,12 @@
  <div class="nav-tabs-bar">
  <button class="tab-btn active" id="tab-btn-kds" onclick="switchTab('kds')">
  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
- Salão & Cozinha
+        <span id="tab-label-kds">Salão & Cozinha</span>
  <span class="tab-pill" id="badge-kds-count">3 Mesas</span>
  </button>
  <button class="tab-btn" id="tab-btn-products" onclick="switchTab('products')">
  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
- Cardápio & Produtos
+        <span id="tab-label-products">Cardápio & Produtos</span>
  <span class="tab-pill" id="badge-products-count">8 Itens</span>
  </button>
  <button class="tab-btn" id="tab-btn-waiters" onclick="switchTab('waiters')">
@@ -818,7 +818,7 @@
  <div class="crud-box">
  <div class="crud-header-row">
  <input type="text" id="product-search" class="search-input" placeholder="Buscar prato ou bebida..." oninput="filterProducts()">
- <button class="btn-add-primary" onclick="openNewProductModal()">+ Cadastrar Prato</button>
+ <button class="btn-add-primary" id="btn-crud-new-product" onclick="openNewProductModal()">+ Cadastrar Prato</button>
  </div>
  <div class="table-responsive">
  <table class="custom-table">
@@ -829,7 +829,7 @@
  <th>Categoria</th>
  <th>Preço</th>
  <th>Descrição</th>
- <th style="text-align:right;">Ações</th>
+ <th style="text-align:right;" id="th-products-actions">Ações</th>
  </tr>
  </thead>
  <tbody id="products-table-body"></tbody>
@@ -1041,24 +1041,62 @@
  }
 
  function changeActiveOperator(val) {
- activeOperatorId = val;
- const badge = document.getElementById('operator-badge-display');
- const tablesBadge = document.getElementById('operator-tables-display');
- const waiters = getStoredWaiters();
+    activeOperatorId = val;
+    const badge = document.getElementById('operator-badge-display');
+    const tablesBadge = document.getElementById('operator-tables-display');
+    const waiters = getStoredWaiters();
 
- if (val === 'admin') {
- badge.textContent = 'Operador: Administrador do Restaurante';
- tablesBadge.textContent = 'Salão Total: Todas as Mesas';
- } else {
- const op = waiters.find(w => w.id === val);
- if (op) {
- badge.textContent = `Garçom: ${op.name}`;
- tablesBadge.textContent = `Mesas: ${op.tables.join(', ')}`;
- }
- }
- renderKDS();
- renderAlerts();
- }
+    const tabWaiters = document.getElementById('tab-btn-waiters');
+    const tabUsers = document.getElementById('tab-btn-users');
+    const btnHeaderNewProd = document.getElementById('btn-header-new-product');
+    const btnCrudNewProd = document.getElementById('btn-crud-new-product');
+    const thActions = document.getElementById('th-products-actions');
+    const pageTitle = document.getElementById('panel-page-title');
+    const pageDesc = document.getElementById('panel-page-desc');
+    const tabLabelKds = document.getElementById('tab-label-kds');
+    const tabLabelProducts = document.getElementById('tab-label-products');
+
+    if (val === 'admin') {
+      badge.textContent = 'Operador: Administrador do Restaurante';
+      tablesBadge.textContent = 'Salão Total: Todas as Mesas';
+      
+      if (pageTitle) pageTitle.textContent = 'Painel do Restaurante & Cozinha';
+      if (pageDesc) pageDesc.textContent = 'Controle de comandas por mesa, chamados de garçons, fila de preparo e cardápio digital.';
+      if (tabLabelKds) tabLabelKds.textContent = 'Salão & Cozinha';
+      if (tabLabelProducts) tabLabelProducts.textContent = 'Cardápio & Produtos';
+      
+      if (tabWaiters) tabWaiters.style.display = 'inline-flex';
+      if (tabUsers) tabUsers.style.display = 'inline-flex';
+      if (btnHeaderNewProd) btnHeaderNewProd.style.display = 'inline-flex';
+      if (btnCrudNewProd) btnCrudNewProd.style.display = 'inline-flex';
+      if (thActions) thActions.style.display = 'table-cell';
+    } else {
+      const op = waiters.find(w => w.id === val);
+      if (op) {
+        badge.textContent = `Garçom: ${op.name}`;
+        tablesBadge.textContent = `Minhas Mesas: ${op.tables.join(', ')}`;
+      }
+      if (pageTitle) pageTitle.textContent = 'Painel do Garçom • Atendimento';
+      if (pageDesc) pageDesc.textContent = 'Acompanhe apenas suas mesas atribuídas, status de pedidos e consulte o cardápio.';
+      if (tabLabelKds) tabLabelKds.textContent = 'Minhas Mesas & Salão';
+      if (tabLabelProducts) tabLabelProducts.textContent = 'Consultar Cardápio';
+
+      if (tabWaiters) tabWaiters.style.display = 'none';
+      if (tabUsers) tabUsers.style.display = 'none';
+      if (btnHeaderNewProd) btnHeaderNewProd.style.display = 'none';
+      if (btnCrudNewProd) btnCrudNewProd.style.display = 'none';
+      if (thActions) thActions.style.display = 'none';
+
+      // If currently on waiters or users tab, switch to kds
+      const currentActiveTab = document.querySelector('.tab-btn.active');
+      if (currentActiveTab && (currentActiveTab.id === 'tab-btn-waiters' || currentActiveTab.id === 'tab-btn-users')) {
+        switchTab('kds');
+      }
+    }
+    renderKDS();
+    renderAlerts();
+    renderProducts();
+  }
 
  // Live KDS & Alerts Logic
  let kdsTables = [
@@ -1209,32 +1247,77 @@
  }
 
  // CRUD Products
- function renderProducts() {
- const menu = getStoredMenu();
- const tbody = document.getElementById('products-table-body');
- let all = [];
- Object.keys(menu).forEach(cat => {
- menu[cat].forEach(item => all.push({ ...item, catKey: cat }));
- });
+  function renderProducts() {
+    const menu = getStoredMenu();
+    const tbody = document.getElementById('products-table-body');
+    let all = [];
+    Object.keys(menu).forEach(cat => {
+      menu[cat].forEach(item => all.push({ ...item, catKey: cat }));
+    });
 
- document.getElementById('badge-products-count').textContent = `${all.length} Itens`;
+    const badge = document.getElementById('badge-products-count');
+    if (badge) badge.textContent = `${all.length} Itens`;
 
- tbody.innerHTML = all.map(p => `
- <tr>
- <td><img src="${p.image}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"></td>
- <td><strong>${p.name}</strong></td>
- <td><span style="font-size:0.72rem; background: #141210; padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase;">${p.catKey}</span></td>
- <td style="color:var(--leaf-green); font-weight:700;">R$ ${Number(p.priceVal).toFixed(2).replace('.', ',')}</td>
- <td style="color:var(--text-muted); font-size:0.75rem; max-width:260px;">${p.desc}</td>
- <td style="text-align:right;">
- <button onclick="editProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color: #F2EADF; font-weight:700; cursor:pointer; margin-right:8px;">Editar</button>
- <button onclick="deleteProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color:var(--red); font-weight:700; cursor:pointer;">Excluir</button>
- </td>
- </tr>
- `).join('');
- }
+    const isAdmin = activeOperatorId === 'admin';
 
- function openNewProductModal() {
+    tbody.innerHTML = all.map(p => `
+      <tr>
+        <td><img src="${p.image}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"></td>
+        <td><strong>${p.name}</strong></td>
+        <td><span style="font-size:0.72rem; background: #141210; padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase;">${p.catKey}</span></td>
+        <td style="color:var(--leaf-green); font-weight:700;">R$ ${Number(p.priceVal).toFixed(2).replace('.', ',')}</td>
+        <td style="color:var(--text-muted); font-size:0.75rem; max-width:260px;">${p.desc}</td>
+        ${isAdmin ? `
+        <td style="text-align:right;">
+          <button onclick="editProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color: #F2EADF; font-weight:700; cursor:pointer; margin-right:8px;">Editar</button>
+          <button onclick="deleteProduct('${p.catKey}', '${p.id}')" style="background:none; border:none; color:var(--red); font-weight:700; cursor:pointer;">Excluir</button>
+        </td>` : ''}
+      </tr>
+    `).join('');
+  }
+
+  function editProduct(cat, id) {
+    const menu = getStoredMenu();
+    const item = menu[cat] ? menu[cat].find(i => i.id === id) : null;
+    if (!item) return;
+    document.getElementById('edit-prod-id').value = item.id;
+    document.getElementById('modal-product-title').textContent = 'Editar Item do Cardápio';
+    document.getElementById('prod-name').value = item.name;
+    document.getElementById('prod-cat').value = cat;
+    document.getElementById('prod-price').value = item.priceVal;
+    document.getElementById('prod-desc').value = item.desc || '';
+    document.getElementById('prod-img').value = item.image || '';
+    document.getElementById('modal-product').classList.add('open');
+  }
+
+  function filterProducts() {
+    const query = (document.getElementById('product-search').value || '').toLowerCase();
+    const rows = document.querySelectorAll('#products-table-body tr');
+    rows.forEach(r => {
+      const text = r.textContent.toLowerCase();
+      r.style.display = text.includes(query) ? '' : 'none';
+    });
+  }
+
+  function filterWaiters() {
+    const query = (document.getElementById('waiter-search').value || '').toLowerCase();
+    const rows = document.querySelectorAll('#waiters-table-body tr');
+    rows.forEach(r => {
+      const text = r.textContent.toLowerCase();
+      r.style.display = text.includes(query) ? '' : 'none';
+    });
+  }
+
+  function filterUsers() {
+    const query = (document.getElementById('user-search').value || '').toLowerCase();
+    const rows = document.querySelectorAll('#users-table-body tr');
+    rows.forEach(r => {
+      const text = r.textContent.toLowerCase();
+      r.style.display = text.includes(query) ? '' : 'none';
+    });
+  }
+
+  function openNewProductModal() {
  document.getElementById('edit-prod-id').value = '';
  document.getElementById('modal-product-title').textContent = 'Novo Item no Cardápio';
  document.getElementById('prod-name').value = '';

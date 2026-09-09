@@ -1030,15 +1030,9 @@
  </div>
 
  <!-- Footer Links -->
- <footer style="text-align:center; padding:32px 16px 40px; color:var(--text-muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:30px; background:var(--white);">
- <div style="margin-bottom:10px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
- <a href="../docs.html#restaurante" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação do Restaurante</a>
- <a href="gestao.html?setor=restaurante" target="_blank" style="color:var(--orange-accent); font-weight:700; text-decoration:none;">Painel Salão & Cozinha </a>
- <a href="dashboard.html?setor=cardapio" style="color:var(--navy); font-weight:600; text-decoration:none;">Métricas de Vendas</a>
- <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
- </div>
- <p style="margin:0;">© 2026 Nolei Creative • Módulo Gastronomia, Cardápio Digital & Comanda de Mesa</p>
- </footer>
+ <footer class="footer" style="text-align:center; padding:28px 16px 36px; color:var(--text-muted, #94A3B8); font-size:0.78rem; border-top:1px solid var(--border, #E2E8F0); margin-top:36px; background:var(--white, #FFFFFF);">
+    <div>Desenvolvido por Nolei Creative</div>
+  </footer>
 
  </main>
 
@@ -1443,7 +1437,7 @@
  let total = 0;
  tableOrders.forEach(i => total += i.priceVal);
  const summaryText = `Olá! Gostaria de fechar o pedido da ${tableName}. Total: R$ ${total.toFixed(2).replace('.', ',')}`;
- window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(summaryText)}`, '_blank');
+ window.open(`https://wa.me/5587999099937?text=${encodeURIComponent(summaryText)}`, '_blank');
  }
 
  // Waiter Rating System State

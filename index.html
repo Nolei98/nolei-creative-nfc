@@ -224,66 +224,165 @@
       border-color: var(--accent);
     }
 
-    /* HAMBURGER BUTTON (MOBILE ONLY) */
+        /* HAMBURGER BUTTON (MOBILE ONLY) */
     .btn-hamburger {
       display: none;
-      background: var(--bg-panel);
+      background: var(--bg-panel-elevated);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-hamburger:hover, .btn-hamburger:active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-panel);
     }
 
     /* MOBILE DRAWER MENU */
     .mobile-drawer {
       display: none;
       position: fixed;
-      top: 65px;
-      left: 0;
-      right: 0;
-      background: rgba(20, 18, 16, 0.98);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 20px 24px;
-      z-index: 490;
-      transform: translateY(-120%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
     }
 
     .mobile-drawer.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-drawer-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #191410;
+      border-bottom: 1px solid var(--accent-badge-border);
+      padding: 24px 20px 28px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85);
+      transform: translateY(-100%);
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .mobile-drawer.open .mobile-drawer-content {
       transform: translateY(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .drawer-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .btn-drawer-close {
+      background: var(--bg-panel-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-drawer-close:hover {
+      color: var(--text-main);
+      border-color: var(--accent);
     }
 
     .drawer-menu-links {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .drawer-link {
       font-family: var(--font-heading);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--text-main);
       text-decoration: none;
-      padding: 12px 16px;
-      border-radius: 8px;
+      padding: 14px 16px;
+      border-radius: 10px;
       background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: all 0.2s ease;
+      cursor: pointer;
     }
 
-    .drawer-link:hover {
+    .drawer-link svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .drawer-link:hover, .drawer-link:active {
+      background: var(--bg-panel-elevated);
       border-color: var(--accent);
       color: var(--accent);
+    }
+
+    .drawer-btn-google {
+      width: 100%;
+      text-align: left;
+    }
+
+    .drawer-footer {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .drawer-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 13px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(193, 93, 48, 0.4);
+      transition: background 0.2s ease;
+    }
+
+    .drawer-cta-btn:hover {
+      background: var(--accent-deep);
     }
 
     /* CONTAINER */
@@ -931,22 +1030,39 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu (Mobile Only) -->
+    <!-- Mobile Drawer Menu (Mobile Only) -->
   <div class="mobile-drawer" id="mobile-drawer" onclick="closeMobileMenu()">
     <div class="mobile-drawer-content" onclick="event.stopPropagation()">
-      <a href="#solucoes" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Demonstrações Interativas
-      </a>
-      <a href="#hardware" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Hardware & Displays Físicos
-      </a>
-      <a href="docs.html" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Documentação & Guia Técnico
-      </a>
-      <button type="button" class="mobile-nav-link" style="border: 1px solid var(--border-subtle); background: var(--bg-panel-elevated); color: var(--text-main); border: 1px solid var(--border-subtle); width:100%; font-family:inherit; cursor:pointer;" onclick="closeMobileMenu(); openGoogleHelperModal();">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Assistente Google Meu Negócio
-      </button>
+      <div class="drawer-header">
+        <span class="drawer-label">Navegação Principal</span>
+        <button type="button" class="btn-drawer-close" onclick="closeMobileMenu()" aria-label="Fechar Menu">&times;</button>
+      </div>
+      <div class="drawer-menu-links">
+        <a href="#solucoes" class="drawer-link" onclick="closeMobileMenu()">
+          <span>Demonstrações Interativas</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a href="#hardware" class="drawer-link" onclick="closeMobileMenu()">
+          <span>Hardware & Displays Físicos</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a href="docs.html" class="drawer-link" onclick="closeMobileMenu()">
+          <span>Documentação & Guia Técnico</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <button type="button" class="drawer-link drawer-btn-google" onclick="closeMobileMenu(); openGoogleHelperModal();">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Assistente Google Meu Negócio</span>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="drawer-footer">
+        <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="drawer-cta-btn">
+          Solicitar Orçamento no WhatsApp
+        </a>
+      </div>
     </div>
   </div>
 

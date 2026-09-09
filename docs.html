@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0F223D">
+  <title>Documentação Técnica & Guia do Ecossistema — Nolei Creative</title>
+  
+  <!-- Google Fonts: Poppins & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F223D' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
+  
+  <style>
+    :root {
+      --navy: #0F223D;
+      --navy-light: #162C46;
+      --navy-dark: #0A1728;
+      --leaf-green: #2E7D32;
+      --leaf-green-accent: #22C55E;
+      --leaf-green-light: #E8F5E9;
+      --orange: #F97316;
+      --orange-accent: #EA580C;
+      --orange-light: #FFF7ED;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --border: #E2E8F0;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-light);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      color: var(--navy);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    /* Top Navigation Header */
+    .top-bar {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      padding: 12px 20px;
+    }
+
+    .top-bar-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .top-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .brand-title span {
+      color: var(--leaf-green);
+    }
+
+    .top-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-top-link {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      color: var(--navy);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .btn-top-link:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    /* Documentation Layout (Sidebar + Main Article) */
+    .docs-wrapper {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 36px;
+      flex: 1;
+    }
+
+    /* Sidebar Navigation */
+    .docs-sidebar {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+
+    .sidebar-heading {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-link {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-link:hover {
+      color: var(--navy);
+      background: var(--bg-light);
+    }
+
+    /* Main Article Content */
+    .docs-content {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.03);
+    }
+
+    .docs-header {
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .docs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--leaf-green);
+      background: var(--leaf-green-light);
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(46, 125, 50, 0.25);
+      margin-bottom: 12px;
+    }
+
+    .docs-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .docs-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Document Sections */
+    .doc-section {
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .doc-p {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    /* Cards Grid in Docs */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .feature-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .feature-card-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .feature-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Tables in Docs */
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.85rem;
+    }
+
+    .doc-table th {
+      background: var(--bg-light);
+      padding: 10px 14px;
+      text-align: left;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    .doc-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      color: #334155;
+    }
+
+    /* Callout Alert */
+    .callout {
+      background: #FFF7ED;
+      border-left: 4px solid var(--orange);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+      font-size: 0.85rem;
+      color: #9A3412;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    @media (max-width: 860px) {
+      .docs-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .docs-sidebar {
+        position: static;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="index.html" class="top-brand">
+        <div class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
+        </div>
+        <div class="brand-title">Nolei <span>Documentação</span></div>
+      </a>
+
+      <div class="top-nav-links">
+        <a href="index.html" class="btn-top-link">
+          ← Voltar ao Hub Principal
+        </a>
+        <a href="demo/gestao.html" class="btn-top-link">
+          Painel Gestão & KDS
+        </a>
+        <a href="demo/dashboard.html" class="btn-top-link">
+          Dashboard ROI
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="docs-wrapper">
+
+    <!-- Sidebar Menu -->
+    <aside class="docs-sidebar">
+      <span class="sidebar-heading">Índice da Documentação</span>
+      <ul class="sidebar-menu">
+        <li><a href="#visao-geral" class="sidebar-link">1. Visão Geral da Arquitetura</a></li>
+        <li><a href="#como-funciona" class="sidebar-link">2. Como Funciona a Tecnologia</a></li>
+        <li><a href="#modulos-sistema" class="sidebar-link">3. Módulos & Demos Interativas</a></li>
+        <li><a href="#hardware-nfc" class="sidebar-link">4. Especificações de Hardware</a></li>
+        <li><a href="#gestao-kds" class="sidebar-link">5. Central de Gestão & KDS</a></li>
+        <li><a href="#implantacao" class="sidebar-link">6. Guia de Implantação</a></li>
+        <li><a href="#faq" class="sidebar-link">7. Perguntas Frequentes</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+
+      <!-- Header -->
+      <div class="docs-header">
+        <div class="docs-badge">Documentação Oficial • v2.4</div>
+        <h1 class="docs-title">Manual do Ecossistema Físico-Digital</h1>
+        <p class="docs-sub">Guia completo de integração de placas inteligentes NFC, QR Codes dinâmicos e sistemas web para restaurantes, clínicas, pousadas e comércios.</p>
+      </div>
+
+      <!-- Section 1: Visão Geral -->
+      <section id="visao-geral" class="doc-section">
+        <h2 class="section-title">1. Visão Geral da Arquitetura</h2>
+        <p class="doc-p">
+          A plataforma <strong>Nolei Creative</strong> conecta o mundo físico ao digital eliminando barreiras de entrada. Diferente de aplicativos tradicionais, o usuário <strong>não precisa baixar nenhum aplicativo na App Store ou Google Play</strong> nem realizar logins complexos.
+        </p>
+        <p class="doc-p">
+          Ao aproximar o celular da peça com chip NFC ou apontar a câmera para o QR Code em alta resolução, o smartphone abre instantaneamente a aplicação web dedicada (Progressive Web Experience) vinculada àquele ponto de contato (Mesa, Balcão, Suíte ou Totem de Saída).
+        </p>
+      </section>
+
+      <!-- Section 2: Como Funciona -->
+      <section id="como-funciona" class="doc-section">
+        <h2 class="section-title">2. Como Funciona a Tecnologia</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-title">📡 Chip NFC de Alta Frequência</div>
+            <p class="feature-card-desc">Transmissão por indução em 13.56 MHz (ISO 14443A) com leitura ultrarrápida a até 4 cm de distância.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title">📷 QR Code com Redundância</div>
+            <p class="feature-card-desc">Garantia de 100% de compatibilidade para qualquer aparelho sem NFC através de leitura de câmera nativa.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title">⚡ Web App Zero Instalação</div>
+            <p class="feature-card-desc">Carregamento instantâneo via browser em menos de 0.8s, com cache inteligente e visual corporativo responsivo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Módulos do Sistema -->
+      <section id="modulos-sistema" class="doc-section">
+        <h2 class="section-title">3. Módulos & Aplicações Integradas</h2>
+        
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Módulo</th>
+              <th>Público Alvo</th>
+              <th>Objetivo Principal</th>
+              <th>Acesso Direto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Google Avaliações 5★</strong></td>
+              <td>Clínicas & Estabelecimentos</td>
+              <td>Captação direta de notas 5 estrelas no Google Maps e retenção privada de feedbacks negativos.</td>
+              <td><a href="demo/avaliacao.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+            </tr>
+            <tr>
+              <td><strong>Cardápio & Comanda</strong></td>
+              <td>Restaurantes, Bares e Cafés</td>
+              <td>Comanda compartilhada por mesa com atribuição por nome/CPF, chamada de garçom e senha Wi-Fi.</td>
+              <td><a href="demo/cardapio.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+            </tr>
+            <tr>
+              <td><strong>Concierge de Quarto</strong></td>
+              <td>Hotéis, Pousadas e Resorts</td>
+              <td>Room service, agendamento de café da manhã, SPA e governança sem necessidade de interfone.</td>
+              <td><a href="demo/hotel.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+            </tr>
+            <tr>
+              <td><strong>Cartão Fidelidade</strong></td>
+              <td>Comércios & Cafeterias</td>
+              <td>Pontuação gamificada por aproximação, cartela de 10 selos e resgate de recompensas.</td>
+              <td><a href="demo/fidelidade.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+            </tr>
+            <tr>
+              <td><strong>Central de Gestão (KDS)</strong></td>
+              <td>Cozinha & Gerência</td>
+              <td>Monitor de pedidos em tempo real, status de entrega, chamados de garçom e CRUD de produtos.</td>
+              <td><a href="demo/gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:600;">Acessar ↗</a></td>
+            </tr>
+            <tr>
+              <td><strong>Dashboard Executivo</strong></td>
+              <td>Diretoria & Gestores</td>
+              <td>Métricas de engajamento, análise Antes vs. Depois e simulador de ROI financeiro.</td>
+              <td><a href="demo/dashboard.html" target="_blank" style="color:var(--navy); font-weight:600;">Ver Métricas ↗</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Section 4: Hardware NFC -->
+      <section id="hardware-nfc" class="doc-section">
+        <h2 class="section-title">4. Especificações de Hardware & Displays Físicos</h2>
+        <p class="doc-p">
+          Todas as peças são fabricadas com materiais nobres de alta durabilidade para suportar limpeza diária, álcool 70% e exposição solar:
+        </p>
+        <ul style="padding-left:20px; font-size:0.88rem; color:#334155; line-height:1.7;">
+          <li><strong>Display L-Shape Black Piano:</strong> Acrílico virgem de 3mm cortado a laser com gravação UV e chip embutido.</li>
+          <li><strong>Totem Google Reviews Balcão:</strong> Formato vertical com símbolo de aproximação no topo e QR Code frontal.</li>
+          <li><strong>Mini Cavalete em Madeira Nobre:</strong> Madeira tratada com gravação a laser em baixo relevo para estética rústica/artesanal.</li>
+          <li><strong>Disco Resinado de Mesa:</strong> Acrílico impermeabilizado com resina automotiva e fita dupla-face 3M de alta fixação externa.</li>
+        </ul>
+      </section>
+
+      <!-- Section 5: Gestão & KDS -->
+      <section id="gestao-kds" class="doc-section">
+        <h2 class="section-title">5. Central de Gestão & Monitor de Cozinha (KDS)</h2>
+        <p class="doc-p">
+          O painel de gestão centraliza os pedidos de todas as mesas e quartos com atualização automática a cada 2.5 segundos:
+        </p>
+        <div class="callout">
+          <div class="callout-title">Dica Operacional:</div>
+          Posicione um Tablet com suporte ou tela de computador na bancada da cozinha e recepção com o <code>demo/gestao.html</code> aberto para a equipe acompanhar e alterar os status para <strong>"✓ Entregue na Mesa"</strong> em tempo real.
+        </div>
+      </section>
+
+      <!-- Section 6: Implantação -->
+      <section id="implantacao" class="doc-section">
+        <h2 class="section-title">6. Guia de Implantação em 3 Passos</h2>
+        <ol style="padding-left:20px; font-size:0.88rem; color:#334155; line-height:1.7;">
+          <li><strong>Mapeamento dos Pontos:</strong> Defina quantas mesas, quartos ou balcões receberão os displays.</li>
+          <li><strong>Personalização da Identidade:</strong> Inserção do logotipo da sua empresa, cores oficiais e dados do cardápio/perfil no Google.</li>
+          <li><strong>Gravação & Entrega Pronta:</strong> Os displays são gravados e enviados configurados para uso plug-and-play imediato.</li>
+        </ol>
+      </section>
+
+      <!-- Section 7: FAQ -->
+      <section id="faq" class="doc-section">
+        <h2 class="section-title">7. Perguntas Frequentes (FAQ)</h2>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+          <div class="feature-card">
+            <strong style="color:var(--navy); font-size:0.88rem;">O cliente precisa ter internet no celular?</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Sim. O NFC ou QR Code abre a página web. Para isso, você pode disponibilizar a senha do Wi-Fi na própria tela do cardápio.</p>
+          </div>
+          <div class="feature-card">
+            <strong style="color:var(--navy); font-size:0.88rem;">Funciona no iPhone e no Android?</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Sim! No iPhone (iPhone 7 ao mais recente) e em 100% dos aparelhos Android com leitor NFC e câmera nativa.</p>
+          </div>
+          <div class="feature-card">
+            <strong style="color:var(--navy); font-size:0.88rem;">Como solicitar peças adicionais ou alterar o cardápio?</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Alterações de cardápio e produtos podem ser feitas a qualquer momento no Painel de Gestão (CRUD), sem necessidade de trocar as placas físicas.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div style="max-width:1140px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <div>
+        © 2024 Nolei Creative • Ecossistemas Inteligentes de Hardware & Software
+      </div>
+      <div>
+        <a href="index.html" style="color:var(--navy); font-weight:600; text-decoration:none; margin-right:14px;">Hub Principal</a>
+        <a href="demo/gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; margin-right:14px;">Painel Gestão</a>
+        <a href="demo/dashboard.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none;">Dashboard ROI</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

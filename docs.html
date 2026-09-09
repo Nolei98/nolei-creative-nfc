@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0F223D">
-  <title>Documentação Técnica & Guia do Ecossistema — Nolei Creative</title>
+  <title>Documentação Descomplicada & Guia dos Setores — Nolei Creative</title>
   
   <!-- Google Fonts: Poppins & Roboto -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,8 @@
       --orange: #F97316;
       --orange-accent: #EA580C;
       --orange-light: #FFF7ED;
+      --blue: #1A73E8;
+      --blue-light: #E8F0FE;
       --white: #FFFFFF;
       --bg-light: #F8FAFC;
       --text: #1E293B;
@@ -126,7 +128,7 @@
       border: 1px solid var(--border);
       color: var(--navy);
       font-family: var(--font-heading);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 600;
       padding: 7px 14px;
       border-radius: 8px;
@@ -143,14 +145,33 @@
       border-color: var(--navy);
     }
 
-    /* Documentation Layout (Sidebar + Main Article) */
+    .btn-top-cta {
+      background: var(--leaf-green);
+      color: var(--white);
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .btn-top-cta:hover {
+      background: #256628;
+    }
+
+    /* Documentation Layout */
     .docs-wrapper {
       max-width: 1140px;
       margin: 0 auto;
       padding: 32px 20px 80px;
       width: 100%;
       display: grid;
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 270px 1fr;
       gap: 36px;
       flex: 1;
     }
@@ -163,19 +184,20 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 20px 16px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.02);
       max-height: calc(100vh - 100px);
       overflow-y: auto;
     }
 
     .sidebar-heading {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--navy);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      padding-left: 8px;
       display: block;
     }
 
@@ -191,17 +213,18 @@
       font-weight: 500;
       color: var(--text-muted);
       text-decoration: none;
-      padding: 6px 10px;
-      border-radius: 6px;
+      padding: 8px 10px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       transition: all 0.15s ease;
+      line-height: 1.35;
     }
 
     .sidebar-link:hover {
       color: var(--navy);
-      background: var(--bg-light);
+      background: #F1F5F9;
     }
 
     /* Main Article Content */
@@ -209,13 +232,13 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 36px 32px;
+      padding: 40px 36px;
       box-shadow: 0 2px 8px rgba(15, 34, 61, 0.03);
     }
 
     .docs-header {
-      margin-bottom: 32px;
-      padding-bottom: 20px;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -223,36 +246,36 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: var(--leaf-green);
       background: var(--leaf-green-light);
-      padding: 5px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
       border: 1px solid rgba(46, 125, 50, 0.25);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .docs-title {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       letter-spacing: -0.6px;
       color: var(--navy);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .docs-sub {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     /* Document Sections */
     .doc-section {
-      margin-bottom: 40px;
-      padding-bottom: 28px;
+      margin-bottom: 48px;
+      padding-bottom: 36px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -262,92 +285,231 @@
       padding-bottom: 0;
     }
 
-    .section-title {
-      font-size: 1.35rem;
+    .section-tag {
+      display: inline-block;
+      font-size: 0.72rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .tag-nfc { background: #EEF2FF; color: #4F46E5; }
+    .tag-restaurant { background: var(--orange-light); color: var(--orange-accent); }
+    .tag-hotel { background: #FEF3C7; color: #B45309; }
+    .tag-loyalty { background: #ECFDF5; color: #047857; }
+    .tag-google { background: var(--blue-light); color: var(--blue); }
+    .tag-admin { background: #F1F5F9; color: var(--navy); }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 800;
       color: var(--navy);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .doc-p {
-      font-size: 0.9rem;
+      font-size: 0.93rem;
       color: #334155;
-      line-height: 1.65;
+      line-height: 1.7;
       margin-bottom: 16px;
     }
 
     /* Cards Grid in Docs */
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
-      margin: 18px 0;
+      margin: 20px 0;
     }
 
     .feature-card {
       background: var(--bg-light);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 18px;
+      transition: all 0.15s;
+    }
+
+    .feature-card:hover {
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
+    }
+
+    .feature-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      display: inline-block;
     }
 
     .feature-card-title {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--navy);
       margin-bottom: 6px;
+    }
+
+    .feature-card-desc {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Step-by-Step Flow */
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .flow-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #ffffff;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-body h4 {
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .step-body p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .callout-orange {
+      background: var(--orange-light);
+      border-left: 4px solid var(--orange);
+      color: #9A3412;
+    }
+
+    .callout-green {
+      background: var(--leaf-green-light);
+      border-left: 4px solid var(--leaf-green);
+      color: #166534;
+    }
+
+    .callout-blue {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      color: #1E40AF;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-family: var(--font-heading);
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .feature-card-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.45;
+    /* Demo Action Link Pill */
+    .doc-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--white);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      transition: all 0.2s;
     }
 
-    /* Tables in Docs */
+    .doc-cta-btn:hover {
+      background: var(--leaf-green);
+      transform: translateY(-1px);
+    }
+
+    /* Tables */
     .doc-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 16px 0;
-      font-size: 0.85rem;
+      margin: 18px 0;
+      font-size: 0.86rem;
     }
 
     .doc-table th {
       background: var(--bg-light);
-      padding: 10px 14px;
+      padding: 11px 14px;
       text-align: left;
       font-family: var(--font-heading);
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: var(--navy);
       border: 1px solid var(--border);
     }
 
     .doc-table td {
-      padding: 10px 14px;
+      padding: 11px 14px;
       border: 1px solid var(--border);
       color: #334155;
     }
 
-    /* Callout Alert */
-    .callout {
-      background: #FFF7ED;
-      border-left: 4px solid var(--orange);
-      padding: 14px 18px;
-      border-radius: 0 8px 8px 0;
-      margin: 20px 0;
-      font-size: 0.85rem;
-      color: #9A3412;
+    /* FAQ Accordion Item */
+    .faq-box {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
     }
 
-    .callout-title {
+    .faq-q {
+      font-size: 0.95rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq-a {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
     /* Footer */
@@ -360,13 +522,21 @@
       background: var(--white);
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 880px) {
       .docs-wrapper {
         grid-template-columns: 1fr;
+        padding-top: 16px;
       }
       .docs-sidebar {
         position: static;
         max-height: none;
+        margin-bottom: 20px;
+      }
+      .docs-content {
+        padding: 24px 20px;
+      }
+      .docs-title {
+        font-size: 1.6rem;
       }
     }
   </style>
@@ -385,13 +555,16 @@
 
       <div class="top-nav-links">
         <a href="index.html" class="btn-top-link">
-          ← Voltar ao Hub Principal
+          ← Início
         </a>
         <a href="demo/gestao.html" class="btn-top-link">
-          Painel Gestão & KDS
+          Painel Gestão (KDS)
         </a>
         <a href="demo/dashboard.html" class="btn-top-link">
-          Dashboard ROI
+          Métricas ROI
+        </a>
+        <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Li%20a%20documenta%C3%A7%C3%A3o%20e%20gostaria%20de%20um%20projeto." target="_blank" class="btn-top-cta">
+          Orçamento WhatsApp ↗
         </a>
       </div>
     </div>
@@ -401,15 +574,16 @@
 
     <!-- Sidebar Menu -->
     <aside class="docs-sidebar">
-      <span class="sidebar-heading">Índice da Documentação</span>
+      <span class="sidebar-heading">Índice dos Setores</span>
       <ul class="sidebar-menu">
-        <li><a href="#visao-geral" class="sidebar-link">1. Visão Geral da Arquitetura</a></li>
-        <li><a href="#como-funciona" class="sidebar-link">2. Como Funciona a Tecnologia</a></li>
-        <li><a href="#modulos-sistema" class="sidebar-link">3. Módulos & Demos Interativas</a></li>
-        <li><a href="#hardware-nfc" class="sidebar-link">4. Especificações de Hardware</a></li>
-        <li><a href="#gestao-kds" class="sidebar-link">5. Central de Gestão & KDS</a></li>
-        <li><a href="#implantacao" class="sidebar-link">6. Guia de Implantação</a></li>
-        <li><a href="#faq" class="sidebar-link">7. Perguntas Frequentes</a></li>
+        <li><a href="#como-funciona" class="sidebar-link">💡 1. Como Funciona (Sem App)</a></li>
+        <li><a href="#gastronomia" class="sidebar-link">🍽️ 2. Restaurantes & Bares</a></li>
+        <li><a href="#hotelaria" class="sidebar-link">🏨 3. Hotéis, Pousadas & Suítes</a></li>
+        <li><a href="#fidelidade" class="sidebar-link">☕ 4. Fidelidade & Varejo</a></li>
+        <li><a href="#google-reviews" class="sidebar-link">⭐ 5. Google 5★ & Clínicas</a></li>
+        <li><a href="#painel-gestao" class="sidebar-link">📊 6. Painel Central & ROI</a></li>
+        <li><a href="#hardware-modelos" class="sidebar-link">💎 7. Displays & Modelos Físicos</a></li>
+        <li><a href="#faq" class="sidebar-link">❓ 8. Dúvidas Frequentes (FAQ)</a></li>
       </ul>
     </aside>
 
@@ -418,147 +592,345 @@
 
       <!-- Header -->
       <div class="docs-header">
-        <div class="docs-badge">Documentação Oficial • v2.4</div>
+        <div class="docs-badge">Guia Prático • Para Proprietários e Gerentes</div>
         <h1 class="docs-title">Manual do Ecossistema Físico-Digital</h1>
-        <p class="docs-sub">Guia completo de integração de placas inteligentes NFC, QR Codes dinâmicos e sistemas web para restaurantes, clínicas, pousadas e comércios.</p>
+        <p class="docs-sub">Entenda como transformar mesas, balcões e suítes do seu estabelecimento em canais rápidos de vendas, atendimento e fidelização, sem exigir que o cliente instale nada.</p>
       </div>
 
-      <!-- Section 1: Visão Geral -->
-      <section id="visao-geral" class="doc-section">
-        <h2 class="section-title">1. Visão Geral da Arquitetura</h2>
-        <p class="doc-p">
-          A plataforma <strong>Nolei Creative</strong> conecta o mundo físico ao digital eliminando barreiras de entrada. Diferente de aplicativos tradicionais, o usuário <strong>não precisa baixar nenhum aplicativo na App Store ou Google Play</strong> nem realizar logins complexos.
-        </p>
-        <p class="doc-p">
-          Ao aproximar o celular da peça com chip NFC ou apontar a câmera para o QR Code em alta resolução, o smartphone abre instantaneamente a aplicação web dedicada (Progressive Web Experience) vinculada àquele ponto de contato (Mesa, Balcão, Suíte ou Totem de Saída).
-        </p>
-      </section>
-
-      <!-- Section 2: Como Funciona -->
+      <!-- Section 1: Como Funciona -->
       <section id="como-funciona" class="doc-section">
-        <h2 class="section-title">2. Como Funciona a Tecnologia</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-card-title">📡 Chip NFC de Alta Frequência</div>
-            <p class="feature-card-desc">Transmissão por indução em 13.56 MHz (ISO 14443A) com leitura ultrarrápida a até 4 cm de distância.</p>
+        <span class="section-tag tag-nfc">Tecnologia Sem Aplicativo</span>
+        <h2 class="section-title">💡 1. Como Funciona a Experiência Sem Aplicativo</h2>
+        <p class="doc-p">
+          O maior motivo de clientes não usarem cardápios digitais ou clubes de pontos antigos é a <strong>barreira de ter que baixar um aplicativo na App Store ou Google Play</strong>, criar senha e esperar confirmação por e-mail.
+        </p>
+        <p class="doc-p">
+          Com as soluções da <strong>Nolei Creative</strong>, essa barreira é 100% eliminada:
+        </p>
+
+        <div class="flow-steps">
+          <div class="flow-step-item">
+            <div class="step-number">1</div>
+            <div class="step-body">
+              <h4>O Cliente Encosta o Celular (NFC) ou Abre a Câmera (QR Code)</h4>
+              <p>Ao aproximar qualquer smartphone moderno da peça inteligente (a até 4 cm) ou apontar a câmera, o aparelho reconhece o sinal instantaneamente.</p>
+            </div>
           </div>
-          <div class="feature-card">
-            <div class="feature-card-title">📷 QR Code com Redundância</div>
-            <p class="feature-card-desc">Garantia de 100% de compatibilidade para qualquer aparelho sem NFC através de leitura de câmera nativa.</p>
+          <div class="flow-step-item">
+            <div class="step-number">2</div>
+            <div class="step-body">
+              <h4>A Página Abre em Menos de 1 Segundo no Navegador</h4>
+              <p>A tela já abre personalizada para aquele ponto exato (exemplo: <em>Mesa 04</em>, <em>Suíte 412</em> ou <em>Balcão Principal</em>).</p>
+            </div>
           </div>
-          <div class="feature-card">
-            <div class="feature-card-title">⚡ Web App Zero Instalação</div>
-            <p class="feature-card-desc">Carregamento instantâneo via browser em menos de 0.8s, com cache inteligente e visual corporativo responsivo.</p>
+          <div class="flow-step-item">
+            <div class="step-number">3</div>
+            <div class="step-body">
+              <h4>Ação Imediata e Comunicação Direta</h4>
+              <p>O cliente faz o pedido, pede a conta, resgata pontos ou avalia no Google. A sua equipe recebe na hora na tela da cozinha ou balcão.</p>
+            </div>
           </div>
+        </div>
+
+        <div class="callout callout-green">
+          <div class="callout-title">✓ Vantagem Financeira Comprovada:</div>
+          Sem custos de reimpressão gráfica a cada mudança de preço ou prato do cardápio, mais rapidez no giro de mesas e zero resistência do cliente em usar.
         </div>
       </section>
 
-      <!-- Section 3: Módulos do Sistema -->
-      <section id="modulos-sistema" class="doc-section">
-        <h2 class="section-title">3. Módulos & Aplicações Integradas</h2>
-        
+      <!-- Section 2: Restaurantes & Gastronomia -->
+      <section id="gastronomia" class="doc-section">
+        <span class="section-tag tag-restaurant">Setor de Gastronomia</span>
+        <h2 class="section-title">🍽️ 2. Restaurantes, Bares, Cafés & Bistrôs</h2>
+        <p class="doc-p">
+          Desenvolvido para acelerar o atendimento nas mesas, acabar com a demora para chamar garçons e evitar erros de pedidos nos horários de pico.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-icon">📖</div>
+            <div class="feature-card-title">Cardápio & Comanda Individual</div>
+            <p class="feature-card-desc">Várias pessoas na mesma mesa podem adicionar itens com seus nomes (ou CPF). Cada cliente visualiza o subtotal individual e o total da mesa.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">🔔</div>
+            <div class="feature-card-title">Botão Chamar Garçom & Pedir Conta</div>
+            <p class="feature-card-desc">O cliente toca no botão e a chamada acende no painel. O botão na tela do cliente fica destacado até o garçom atender e dar baixa.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">🍳</div>
+            <div class="feature-card-title">Tela de Cozinha (Monitor KDS)</div>
+            <p class="feature-card-desc">Os pedidos chegam ordenados por horário com cronômetro. A cozinha marca "Em Preparo" e "✓ Entregue na Mesa" com 1 clique.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">⭐</div>
+            <div class="feature-card-title">Avaliação do Garçom ao Final</div>
+            <p class="feature-card-desc">Ao solicitar o fechamento da conta, o cliente pode atribuir uma nota de 1 a 5 estrelas ao garçom que o atendeu, gerando ranking de qualidade.</p>
+          </div>
+        </div>
+
+        <p class="doc-p">
+          <strong>Como o Gerente Controla:</strong> Pelo <code>Painel de Gestão</code>, o gerente pode cadastrar novos produtos, alterar valores, inativar itens que acabaram no estoque e cadastrar garçons autorizados.
+        </p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+          <a href="demo/cardapio.html" target="_blank" class="doc-cta-btn">
+            📱 Testar Cardápio da Mesa ↗
+          </a>
+          <a href="demo/gestao.html" target="_blank" class="doc-cta-btn" style="background:var(--orange-accent);">
+            🍳 Abrir Monitor de Cozinha (KDS) ↗
+          </a>
+        </div>
+      </section>
+
+      <!-- Section 3: Hotéis & Hotelaria -->
+      <section id="hotelaria" class="doc-section">
+        <span class="section-tag tag-hotel">Setor de Hotelaria</span>
+        <h2 class="section-title">🏨 3. Hotéis, Pousadas, Resorts & Suítes</h2>
+        <p class="doc-p">
+          Substitua livretos de papel desgastados na cabeceira da cama e interfones que não atendem por um <strong>Concierge Digital 24 horas</strong> na ponta dos dedos do hóspede.
+        </p>
+
+        <div class="flow-steps">
+          <div class="flow-step-item">
+            <div class="step-number">🛎️</div>
+            <div class="step-body">
+              <h4>Room Service Completo no Quarto</h4>
+              <p>O hóspede escolhe lanches, pratos executivos, vinhos e sobremesas, adiciona observações (ex: "sem cebola") e envia direto para a cozinha.</p>
+            </div>
+          </div>
+          <div class="flow-step-item">
+            <div class="step-number">☕</div>
+            <div class="step-body">
+              <h4>Agendamento de Café no Quarto</h4>
+              <p>O hóspede escolhe o horário desejado (ex: 7h30, 8h00, 8h30) para o café ser servido na suíte, sem fila na recepção.</p>
+            </div>
+          </div>
+          <div class="flow-step-item">
+            <div class="step-number">🧹</div>
+            <div class="step-body">
+              <h4>Governança, Toalhas Extras & Não Perturbe</h4>
+              <p>Com 1 toque o hóspede solicita limpeza imediata, toalhas adicionais ou ativa o aviso digital de "Não Perturbe".</p>
+            </div>
+          </div>
+          <div class="flow-step-item">
+            <div class="step-number">📱</div>
+            <div class="step-body">
+              <h4>Acompanhamento ao Vivo na Tela do Hóspede</h4>
+              <p>O hóspede visualiza o status em tempo real da solicitação: <code>⏳ Solicitado</code> → <code>🛎️ Em Atendimento</code> → <code>✓ Concluído / Entregue</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="doc-p">
+          <strong>Na Recepção e Governança:</strong> O hotel tem uma aba dedicada <em>Hotel & Concierge</em> no Painel de Gestão que apita e lista todas as solicitações por número de quarto com botão de baixa rápida.
+        </p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+          <a href="demo/hotel.html" target="_blank" class="doc-cta-btn">
+            🛎️ Testar Concierge da Suíte 412 ↗
+          </a>
+          <a href="demo/gestao.html#hotel" target="_blank" class="doc-cta-btn" style="background:#B45309;">
+            🏨 Abrir Painel Recepção/Hotel ↗
+          </a>
+        </div>
+      </section>
+
+      <!-- Section 4: Cartão Fidelidade & Varejo -->
+      <section id="fidelidade" class="doc-section">
+        <span class="section-tag tag-loyalty">Setor de Varejo & Fidelização</span>
+        <h2 class="section-title">☕ 4. Cartão Fidelidade, Cafeterias & Comércio</h2>
+        <p class="doc-p">
+          Cartões de papel carimbados são perdidos ou esquecidos na carteira. O <strong>Cartão Fidelidade por Aproximação</strong> mantém o cliente engajado com pontuação gamificada no próprio smartphone.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-icon">🎯</div>
+            <div class="feature-card-title">Cartela com 10 Selos Visuais</div>
+            <p class="feature-card-desc">Mostra exatamente quantos selos faltam para o próximo brinde (ex: "Mais 3 cafés e o próximo é grátis!").</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">🎁</div>
+            <div class="feature-card-title">Catálogo Dinâmico de Recompensas</div>
+            <p class="feature-card-desc">Exibe os prêmios disponíveis (Café Grátis, Bolo do Dia, Desconto 15%) com botão "Resgatar" que só habilita se houver saldo suficiente.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">🏷️</div>
+            <div class="feature-card-title">Código Verificador Anti-Fraude</div>
+            <p class="feature-card-desc">Ao resgatar, o sistema desconta os pontos na hora e gera um código de cupom único (ex: <code>ORIGEM-4829</code>) para mostrar no balcão.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">⚙️</div>
+            <div class="feature-card-title">Controle Total no Painel do Gerente</div>
+            <p class="feature-card-desc">O administrador cria, edita e remove prêmios do catálogo, altera a regra de pontos (ex: R$ 1 = 1 ponto) e visualiza o histórico de resgates.</p>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+          <a href="demo/fidelidade.html" target="_blank" class="doc-cta-btn">
+            ☕ Testar Cartão Fidelidade do Cliente ↗
+          </a>
+          <a href="demo/gestao.html#loyalty" target="_blank" class="doc-cta-btn" style="background:#047857;">
+            🎁 Abrir Gestão de Bônus & Prêmios ↗
+          </a>
+        </div>
+      </section>
+
+      <!-- Section 5: Google 5 Estrelas & Clínicas -->
+      <section id="google-reviews" class="doc-section">
+        <span class="section-tag tag-google">Setor de Clínicas, Consultórios & Serviços</span>
+        <h2 class="section-title">⭐ 5. Google 5 Estrelas & Filtro Inteligente de Avaliações</h2>
+        <p class="doc-p">
+          Mais de 90% das pessoas escolhem clínicas, consultórios médicos e comércios locais olhando a nota no Google Maps. Porém, clientes insatisfeitos tendem a reclamar publicamente, enquanto clientes satisfeitos esquecem de avaliar.
+        </p>
+
+        <p class="doc-p">
+          O <strong>Display Inteligente de Avaliação Nolei</strong> resolve esse problema com um filtro ético e automático:
+        </p>
+
+        <div class="flow-steps">
+          <div class="flow-step-item" style="border-left: 4px solid var(--leaf-green);">
+            <div class="step-number" style="background:var(--leaf-green);">5★</div>
+            <div class="step-body">
+              <h4>Cliente Satisfeito (Notas 4 ou 5 Estrelas) → Google Maps Oficial</h4>
+              <p>A tela solta chuva de confetes comemorativos e direciona o cliente em 1 toque direto para a caixa de 5 estrelas do seu perfil no Google Maps. Sua nota sobe e atrai mais clientes.</p>
+            </div>
+          </div>
+          <div class="flow-step-item" style="border-left: 4px solid var(--orange);">
+            <div class="step-number" style="background:var(--orange);">1-3★</div>
+            <div class="step-body">
+              <h4>Cliente Insatisfeito (Notas 1 a 3 Estrelas) → Canal Privado da Gerência</h4>
+              <p>Ao invés de postar no Google, a tela abre um formulário discreto de ouvidoria interna. A reclamação chega somente ao gerente para correção do problema, protegendo a reputação pública do negócio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-blue">
+          <div class="callout-title">📍 Não tem perfil no Google ainda?</div>
+          Use nosso <strong>Assistente Google Perfil</strong> no topo do site para criar sua conta gratuita no Google Meu Negócio e gerar o link exato de avaliação 5 estrelas.
+        </div>
+
+        <a href="demo/avaliacao.html" target="_blank" class="doc-cta-btn" style="background:var(--blue);">
+          ⭐ Testar Coletor de Avaliações 5★ ↗
+        </a>
+      </section>
+
+      <!-- Section 6: Painel Central & ROI -->
+      <section id="painel-gestao" class="doc-section">
+        <span class="section-tag tag-admin">Administração & Rentabilidade</span>
+        <h2 class="section-title">📊 6. Central de Gestão & Indicadores de Retorno (ROI)</h2>
+        <p class="doc-p">
+          O sistema não é apenas uma tela bonita para o cliente: ele entrega <strong>controle operacional total</strong> para a equipe e <strong>visão financeira clara</strong> para o investidor ou proprietário.
+        </p>
+
         <table class="doc-table">
           <thead>
             <tr>
-              <th>Módulo</th>
-              <th>Público Alvo</th>
-              <th>Objetivo Principal</th>
-              <th>Acesso Direto</th>
+              <th>Ferramenta</th>
+              <th>Quem Utiliza</th>
+              <th>Principal Benefício</th>
+              <th>Acesso</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Google Avaliações 5★</strong></td>
-              <td>Clínicas & Estabelecimentos</td>
-              <td>Captação direta de notas 5 estrelas no Google Maps e retenção privada de feedbacks negativos.</td>
-              <td><a href="demo/avaliacao.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+              <td><strong>Monitor de Cozinha (KDS)</strong></td>
+              <td>Cozinheiros & Garçons</td>
+              <td>Zero pedidos perdidos ou esquecidos, com baixa em tempo real.</td>
+              <td><a href="demo/gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
             </tr>
             <tr>
-              <td><strong>Cardápio & Comanda</strong></td>
-              <td>Restaurantes, Bares e Cafés</td>
-              <td>Comanda compartilhada por mesa com atribuição por nome/CPF, chamada de garçom e senha Wi-Fi.</td>
-              <td><a href="demo/cardapio.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+              <td><strong>Painel de Hotelaria</strong></td>
+              <td>Recepção & Governança</td>
+              <td>Gestão de café no quarto, room service e solicitações de limpeza.</td>
+              <td><a href="demo/gestao.html#hotel" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
             </tr>
             <tr>
-              <td><strong>Concierge de Quarto</strong></td>
-              <td>Hotéis, Pousadas e Resorts</td>
-              <td>Room service, agendamento de café da manhã, SPA e governança sem necessidade de interfone.</td>
-              <td><a href="demo/hotel.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+              <td><strong>Catálogo de Fidelidade</strong></td>
+              <td>Gerente de Loja</td>
+              <td>Cadastro de novos prêmios, regras de pontos e registro de resgates.</td>
+              <td><a href="demo/gestao.html#loyalty" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
             </tr>
             <tr>
-              <td><strong>Cartão Fidelidade</strong></td>
-              <td>Comércios & Cafeterias</td>
-              <td>Pontuação gamificada por aproximação, cartela de 10 selos e resgate de recompensas.</td>
-              <td><a href="demo/fidelidade.html" target="_blank" style="color:var(--leaf-green); font-weight:600;">Ver Demo ↗</a></td>
+              <td><strong>CRUD de Produtos</strong></td>
+              <td>Gerência Geral</td>
+              <td>Edição de preços, descrições e fotos instantaneamente.</td>
+              <td><a href="demo/gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
             </tr>
             <tr>
-              <td><strong>Central de Gestão (KDS)</strong></td>
-              <td>Cozinha & Gerência</td>
-              <td>Monitor de pedidos em tempo real, status de entrega, chamados de garçom e CRUD de produtos.</td>
-              <td><a href="demo/gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:600;">Acessar ↗</a></td>
-            </tr>
-            <tr>
-              <td><strong>Dashboard Executivo</strong></td>
-              <td>Diretoria & Gestores</td>
-              <td>Métricas de engajamento, análise Antes vs. Depois e simulador de ROI financeiro.</td>
-              <td><a href="demo/dashboard.html" target="_blank" style="color:var(--navy); font-weight:600;">Ver Métricas ↗</a></td>
+              <td><strong>Dashboard Executivo de ROI</strong></td>
+              <td>Diretoria & Sócios</td>
+              <td>Comparativo Antes vs. Depois, economia com gráficas e ganho de faturamento.</td>
+              <td><a href="demo/dashboard.html" target="_blank" style="color:var(--leaf-green); font-weight:700;">Acessar ↗</a></td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <!-- Section 4: Hardware NFC -->
-      <section id="hardware-nfc" class="doc-section">
-        <h2 class="section-title">4. Especificações de Hardware & Displays Físicos</h2>
+      <!-- Section 7: Hardware & Modelos Físicos -->
+      <section id="hardware-modelos" class="doc-section">
+        <span class="section-tag tag-admin">Peças Físicas</span>
+        <h2 class="section-title">💎 7. Displays Físicos & Especificações</h2>
         <p class="doc-p">
-          Todas as peças são fabricadas com materiais nobres de alta durabilidade para suportar limpeza diária, álcool 70% e exposição solar:
+          Todas as peças são produzidas sob medida para o seu estabelecimento, já com a sua marca gravada e chips NFC/QR Code programados e protegidos contra água e sol:
         </p>
-        <ul style="padding-left:20px; font-size:0.88rem; color:#334155; line-height:1.7;">
-          <li><strong>Display L-Shape Black Piano:</strong> Acrílico virgem de 3mm cortado a laser com gravação UV e chip embutido.</li>
-          <li><strong>Totem Google Reviews Balcão:</strong> Formato vertical com símbolo de aproximação no topo e QR Code frontal.</li>
-          <li><strong>Mini Cavalete em Madeira Nobre:</strong> Madeira tratada com gravação a laser em baixo relevo para estética rústica/artesanal.</li>
-          <li><strong>Disco Resinado de Mesa:</strong> Acrílico impermeabilizado com resina automotiva e fita dupla-face 3M de alta fixação externa.</li>
-        </ul>
-      </section>
 
-      <!-- Section 5: Gestão & KDS -->
-      <section id="gestao-kds" class="doc-section">
-        <h2 class="section-title">5. Central de Gestão & Monitor de Cozinha (KDS)</h2>
-        <p class="doc-p">
-          O painel de gestão centraliza os pedidos de todas as mesas e quartos com atualização automática a cada 2.5 segundos:
-        </p>
-        <div class="callout">
-          <div class="callout-title">Dica Operacional:</div>
-          Posicione um Tablet com suporte ou tela de computador na bancada da cozinha e recepção com o <code>demo/gestao.html</code> aberto para a equipe acompanhar e alterar os status para <strong>"✓ Entregue na Mesa"</strong> em tempo real.
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-icon">🖤</div>
+            <div class="feature-card-title">Display L-Shape Black Piano</div>
+            <p class="feature-card-desc">Acrílico nobre 3mm com acabamento espelhado. Ideal para mesas de restaurantes finos e balcões executivos.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">📍</div>
+            <div class="feature-card-title">Totem Google Reviews de Balcão</div>
+            <p class="feature-card-desc">Formato vertical com QR Code frontal e símbolo de aproximação no topo para recepção de clínicas e caixas.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">🪵</div>
+            <div class="feature-card-title">Mini Cavalete em Madeira Nobre</div>
+            <p class="feature-card-desc">Madeira tratada com gravação a laser em baixo relevo. Perfeito para cafeterias artesanais e pousadas rústicas.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-icon">🛡️</div>
+            <div class="feature-card-title">Disco Resinado de Mesa</div>
+            <p class="feature-card-desc">Acrílico impermeabilizado com resina automotiva e fita 3M. Resiste a chuvas, piscinas, cerveja derramada e limpeza pesada.</p>
+          </div>
         </div>
       </section>
 
-      <!-- Section 6: Implantação -->
-      <section id="implantacao" class="doc-section">
-        <h2 class="section-title">6. Guia de Implantação em 3 Passos</h2>
-        <ol style="padding-left:20px; font-size:0.88rem; color:#334155; line-height:1.7;">
-          <li><strong>Mapeamento dos Pontos:</strong> Defina quantas mesas, quartos ou balcões receberão os displays.</li>
-          <li><strong>Personalização da Identidade:</strong> Inserção do logotipo da sua empresa, cores oficiais e dados do cardápio/perfil no Google.</li>
-          <li><strong>Gravação & Entrega Pronta:</strong> Os displays são gravados e enviados configurados para uso plug-and-play imediato.</li>
-        </ol>
-      </section>
-
-      <!-- Section 7: FAQ -->
+      <!-- Section 8: FAQ -->
       <section id="faq" class="doc-section">
-        <h2 class="section-title">7. Perguntas Frequentes (FAQ)</h2>
-        <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
-          <div class="feature-card">
-            <strong style="color:var(--navy); font-size:0.88rem;">O cliente precisa ter internet no celular?</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Sim. O NFC ou QR Code abre a página web. Para isso, você pode disponibilizar a senha do Wi-Fi na própria tela do cardápio.</p>
-          </div>
-          <div class="feature-card">
-            <strong style="color:var(--navy); font-size:0.88rem;">Funciona no iPhone e no Android?</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Sim! No iPhone (iPhone 7 ao mais recente) e em 100% dos aparelhos Android com leitor NFC e câmera nativa.</p>
-          </div>
-          <div class="feature-card">
-            <strong style="color:var(--navy); font-size:0.88rem;">Como solicitar peças adicionais ou alterar o cardápio?</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Alterações de cardápio e produtos podem ser feitas a qualquer momento no Painel de Gestão (CRUD), sem necessidade de trocar as placas físicas.</p>
-          </div>
+        <span class="section-tag tag-nfc">Tire Suas Dúvidas</span>
+        <h2 class="section-title">❓ 8. Perguntas Frequentes (FAQ Descomplicado)</h2>
+
+        <div class="faq-box">
+          <div class="faq-q">O cliente precisa ter internet no celular?</div>
+          <div class="faq-a">Sim. A Tag NFC ou QR Code abre uma página web segura. Para comodidade do cliente, o próprio cardápio digital tem um botão que já exibe o nome e a senha do Wi-Fi do estabelecimento.</div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-q">Funciona em celulares iPhone e Android?</div>
+          <div class="faq-a">Sim! No iPhone (a partir do iPhone 7 até os mais novos) e em 100% dos celulares Android modernos com NFC ou qualquer celular com câmera para o QR Code.</div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-q">Se eu mudar um preço ou prato, preciso trocar a placa física?</div>
+          <div class="faq-a">Não! A placa física é permanente. Qualquer alteração de preços, fotos ou pratos novos é feita direto no Painel de Gestão e entra em vigor na mesma hora nas mesas.</div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-q">Como é feita a instalação no meu estabelecimento?</div>
+          <div class="faq-a">É 100% Plug & Play. As peças já chegam programadas e gravadas com a sua logo. Basta colocar em cima das mesas ou balcões e começar a usar imediatamente.</div>
+        </div>
+
+        <div class="callout callout-green" style="margin-top:24px; text-align:center;">
+          <h4 style="font-size:1.05rem; margin-bottom:6px;">Pronto para modernizar seu estabelecimento?</h4>
+          <p style="font-size:0.88rem; margin-bottom:12px;">Nossa equipe desenvolve o projeto visual e os módulos digitais personalizados para sua marca.</p>
+          <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Li%20a%20documenta%C3%A7%C3%A3o%20e%20gostaria%20de%20um%20or%C3%A7amento%20personalizado." target="_blank" class="doc-cta-btn" style="background:var(--leaf-green);">
+            Conversar com Especialista no WhatsApp ↗
+          </a>
         </div>
       </section>
 

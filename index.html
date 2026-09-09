@@ -77,6 +77,8 @@
       margin-bottom: 32px;
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .brand-logo {
@@ -118,6 +120,69 @@
       padding: 5px 12px;
       border-radius: 20px;
       border: 1px solid rgba(46, 125, 50, 0.2);
+    }
+
+    /* Main Navigation Bar */
+    .main-nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 0 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: none;
+    }
+    .main-nav-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-item-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      color: var(--navy);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 24px;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(15, 34, 61, 0.04);
+    }
+
+    .nav-item-btn:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+      transform: translateY(-1px);
+    }
+
+    .nav-item-btn.highlight-nav {
+      background: var(--leaf-green-light);
+      color: var(--leaf-green);
+      border-color: rgba(46, 125, 50, 0.3);
+    }
+
+    .nav-item-btn.highlight-nav:hover {
+      background: var(--leaf-green);
+      color: var(--white);
+    }
+
+    .nav-item-btn.google-nav {
+      background: #E8F0FE;
+      color: #1A73E8;
+      border-color: #AECBFA;
+    }
+
+    .nav-item-btn.google-nav:hover {
+      background: #1A73E8;
+      color: var(--white);
     }
 
     /* Hero */
@@ -570,13 +635,29 @@
         <div class="brand-title">Nolei <span>Creative</span></div>
       </a>
       <div style="display:flex; align-items:center; gap:8px;">
-        <a href="demo/dashboard.html" style="font-family:var(--font-heading); font-size:0.75rem; font-weight:700; color:var(--navy); background:var(--white); border:1px solid var(--border); padding:6px 12px; border-radius:20px; text-decoration:none; display:flex; align-items:center; gap:5px; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Métricas & ROI
-        </a>
         <span class="brand-pill">Hardware & Software NFC</span>
       </div>
     </header>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav-bar" aria-label="Navegação Principal">
+      <a href="#solucoes" class="nav-item-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
+        Demos NFC & QR
+      </a>
+      <a href="#hardware" class="nav-item-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        Modelos & Displays
+      </a>
+      <a href="demo/dashboard.html" class="nav-item-btn highlight-nav">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Métricas & ROI
+      </a>
+      <button type="button" class="nav-item-btn google-nav" onclick="openGoogleHelperModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Criar Perfil Google
+      </button>
+    </nav>
 
     <!-- Hero -->
     <div class="hero">
@@ -586,7 +667,7 @@
     </div>
 
     <!-- Mode Selector -->
-    <div class="channel-switch">
+    <div class="channel-switch" id="solucoes">
       <button class="channel-btn active" id="btn-nfc" onclick="setMode('nfc')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
         Tag NFC (Aproximação)
@@ -613,7 +694,7 @@
             <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=400&q=80" alt="Avaliações Google" class="card-photo" loading="lazy">
           </div>
           <div class="card-details">
-            <span class="card-category">Multi-setor • Clínicas & Lojas</span>
+            <span class="card-category">Multi-setor • Clínicas & Estabelecimentos</span>
             <h3 class="card-title">Google Avaliações</h3>
             <p class="card-desc">Captação de avaliações 5★ oficiais no Google Maps com filtro inteligente para notas baixas.</p>
           </div>
@@ -693,7 +774,7 @@
     </div>
 
     <!-- SEÇÃO DE PEÇAS FÍSICAS & EXEMPLOS REAIS (HARDWARE NFC) -->
-    <section class="hardware-section">
+    <section class="hardware-section" id="hardware">
       <div class="section-label-row" style="margin-bottom: 6px;">
         <span class="section-label" style="color:var(--orange);">Hardware & Displays Físicos</span>
         <span class="section-desc">Acabamento Premium</span>
@@ -799,6 +880,74 @@
     </div>
   </div>
 
+  <!-- Modal Google Business Profile Helper -->
+  <div class="modal-overlay" id="modal-google-helper" onclick="closeGoogleHelperModal(event)">
+    <div class="modal-card" style="max-width: 480px; text-align: left; max-height: 85vh; overflow-y: auto;" onclick="event.stopPropagation()">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="width:34px; height:34px; border-radius:10px; background:#E8F0FE; display:flex; align-items:center; justify-content:center; color:#1A73E8;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="modal-title" style="margin-bottom:0; font-size:1.15rem;">Assistente Google Perfil</h3>
+        </div>
+        <button onclick="closeGoogleHelperModal()" style="background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:1.2rem; line-height:1;">✕</button>
+      </div>
+      
+      <p class="modal-desc" style="margin-bottom:16px;">
+        Se sua empresa ainda não está no Google ou você precisa do link de avaliação 5 estrelas para gravar na sua Tag NFC/QR Code:
+      </p>
+
+      <!-- Step 1: Create Profile -->
+      <div style="background:var(--bg-light); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+          <span style="background:#1A73E8; color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">1</span>
+          <strong style="color:var(--navy); font-size:0.9rem;">Ainda não tem perfil no Google?</strong>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; line-height:1.4;">
+          Cadastre seu estabelecimento gratuitamente no Google Maps para começar a receber clientes locais.
+        </p>
+        <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#1A73E8; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.82rem; font-weight:600;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Criar Perfil Oficial no Google
+        </a>
+      </div>
+
+      <!-- Step 2: Extract Review Link -->
+      <div style="background:var(--bg-light); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+          <span style="background:var(--leaf-green); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
+          <strong style="color:var(--navy); font-size:0.9rem;">Como pegar seu link de avaliação 5★:</strong>
+        </div>
+        <ol style="font-size:0.8rem; color:var(--text-muted); padding-left:18px; margin-bottom:6px; line-height:1.5;">
+          <li>Acesse sua conta no <strong>Google Meu Negócio</strong>.</li>
+          <li>No painel principal, clique em <strong>"Solicitar avaliações"</strong>.</li>
+          <li>Copie o seu link curto (exemplo: <code style="background:#e2e8f0; padding:2px 4px; border-radius:4px; font-size:0.75rem;">g.page/r/SuaEmpresa/review</code>).</li>
+        </ol>
+      </div>
+
+      <!-- Step 3: Test & Generate Custom QR -->
+      <div style="background:#FFF7ED; border:1px solid #FFEDD5; border-radius:12px; padding:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+          <span style="background:var(--orange); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
+          <strong style="color:var(--navy); font-size:0.9rem;">Testador de Link / Gerador de QR:</strong>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">
+          Cole seu link ou digite o nome do estabelecimento para gerar o QR Code de teste imediato:
+        </p>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <input type="text" id="custom-google-input" placeholder="https://g.page/r/... ou Nome do Estabelecimento" style="flex:1; border:1px solid var(--border); border-radius:8px; padding:8px 10px; font-size:0.82rem; font-family:inherit;">
+          <button type="button" onclick="generateCustomGoogleQr()" style="background:var(--navy); color:#fff; border:none; border-radius:8px; padding:8px 12px; font-size:0.8rem; font-weight:600; cursor:pointer; white-space:nowrap;">Gerar QR</button>
+        </div>
+        <div id="custom-google-preview" style="display:none; text-align:center; padding:10px; background:#fff; border-radius:10px; border:1px solid var(--border);">
+          <img id="custom-google-qr-img" src="" alt="QR Gerado" style="width:140px; height:140px; display:inline-block; margin-bottom:6px;">
+          <div id="custom-google-qr-text" style="font-size:0.75rem; color:var(--text-muted); word-break:break-all;"></div>
+        </div>
+      </div>
+
+      <button class="btn-modal-close" onclick="closeGoogleHelperModal()">Entendido, fechar</button>
+    </div>
+  </div>
+
   <script>
     let currentMode = 'nfc';
 
@@ -847,8 +996,41 @@
       document.getElementById('modal-qr').classList.remove('open');
     }
 
+    function openGoogleHelperModal() {
+      document.getElementById('modal-google-helper').classList.add('open');
+    }
+
+    function closeGoogleHelperModal() {
+      document.getElementById('modal-google-helper').classList.remove('open');
+    }
+
+    function generateCustomGoogleQr() {
+      const input = document.getElementById('custom-google-input');
+      const val = input.value.trim();
+      if (!val) {
+        alert('Digite o link ou o nome do seu estabelecimento no Google.');
+        return;
+      }
+
+      let target = val;
+      if (!val.startsWith('http://') && !val.startsWith('https://')) {
+        target = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(val)}`;
+      }
+
+      const previewBox = document.getElementById('custom-google-preview');
+      const img = document.getElementById('custom-google-qr-img');
+      const text = document.getElementById('custom-google-qr-text');
+
+      img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(target)}&color=15-34-61&bgcolor=ffffff&margin=0`;
+      text.textContent = target;
+      previewBox.style.display = 'block';
+    }
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeQrModal();
+      if (e.key === 'Escape') {
+        closeQrModal();
+        closeGoogleHelperModal();
+      }
     });
   </script>
 </body>

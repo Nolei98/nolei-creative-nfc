@@ -3,43 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0B132B">
+  <meta name="theme-color" content="#141210">
   <title>Nolei Creative — Ecossistema Físico-Digital (NFC, QR Code & Gestão)</title>
   
   <!-- Google Fonts: Poppins & Roboto -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B132B' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C15D30' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
   
   <style>
     /* =========================================
-       LUXURY & CLEAN DESIGN SYSTEM (KISS & DRY)
+       WARM OBSIDIAN / TERRACOTTA / IVORY THEME
+       Inspired by portfolio-jr-lilac.vercel.app
        ========================================= */
     :root {
-      --navy: #0B132B;
-      --navy-light: #1C2541;
-      --navy-dark: #070B19;
-      --gold: #C5A059;
-      --gold-light: #FDFBF7;
-      --gold-border: rgba(197, 160, 89, 0.35);
-      --emerald: #059669;
-      --emerald-light: #ECFDF5;
-      --orange: #EA580C;
-      --orange-light: #FFF7ED;
-      --white: #FFFFFF;
-      --bg-canvas: #F8FAFC;
-      --text-main: #0F172A;
-      --text-muted: #64748B;
-      --text-dim: #94A3B8;
-      --border-subtle: #E2E8F0;
+      --bg-canvas: #141210;
+      --bg-panel: #1F1A15;
+      --bg-panel-elevated: #2A231C;
+      --bg-panel-glass: rgba(31, 26, 21, 0.75);
+      
+      --text-main: #F2EADF;
+      --text-muted: #A2937E;
+      --text-dim: #786B5A;
+      
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --accent-glow: rgba(193, 93, 48, 0.25);
+      --accent-badge-bg: rgba(193, 93, 48, 0.12);
+      --accent-badge-border: rgba(193, 93, 48, 0.3);
+      
+      --border-subtle: rgba(242, 234, 223, 0.08);
+      --border-hover: rgba(193, 93, 48, 0.45);
+      
       --radius-card: 16px;
       --radius-sm: 8px;
-      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
-      --shadow-sm: 0 2px 8px rgba(11, 19, 43, 0.04);
-      --shadow-hover: 0 12px 32px rgba(11, 19, 43, 0.08);
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      
+      --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-hover: 0 16px 36px rgba(0, 0, 0, 0.5);
     }
 
     * {
@@ -62,25 +67,43 @@
       flex-direction: column;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Custom Warm Dark Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-canvas);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2A231C;
+      border: 2px solid var(--bg-canvas);
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
     }
 
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-heading);
-      color: var(--navy);
+      color: var(--text-main);
       font-weight: 700;
       line-height: 1.25;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
     }
 
     /* TOP INSTITUTIONAL HEADER */
     .site-header {
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(20, 18, 16, 0.88);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
       z-index: 500;
-      padding: 12px 24px;
+      padding: 14px 24px;
     }
 
     .header-inner {
@@ -103,27 +126,29 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: var(--navy);
-      color: var(--gold);
+      background: var(--bg-panel-elevated);
+      color: var(--accent);
+      border: 1px solid var(--accent-badge-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .brand-logo:hover .brand-mark {
-      transform: scale(1.04);
+      transform: scale(1.05);
+      border-color: var(--accent);
     }
 
     .brand-title {
       font-size: 1.15rem;
       font-weight: 800;
-      color: var(--navy);
+      color: var(--text-main);
       letter-spacing: -0.03em;
     }
 
     .brand-title span {
-      color: var(--gold);
+      color: var(--accent);
       font-weight: 600;
     }
 
@@ -145,14 +170,14 @@
     }
 
     .nav-link:hover {
-      color: var(--navy);
-      background: #F1F5F9;
+      color: var(--text-main);
+      background: var(--bg-panel-elevated);
     }
 
     .nav-google-btn {
-      background: transparent;
+      background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
-      color: var(--navy);
+      color: var(--text-main);
       font-family: var(--font-heading);
       font-size: 0.78rem;
       font-weight: 600;
@@ -166,29 +191,23 @@
     }
 
     .nav-google-btn:hover {
-      background: var(--navy);
-      color: var(--white);
-      border-color: var(--navy);
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
     }
 
-    /* HAMBURGER BUTTON (MOBILE ONLY - HIDDEN ON DESKTOP) */
+    /* HAMBURGER BUTTON (MOBILE ONLY) */
     .btn-hamburger {
       display: none;
-      background: var(--bg-canvas);
+      background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
-      color: var(--navy);
+      color: var(--text-main);
       width: 40px;
       height: 40px;
-      border-radius: 10px;
+      border-radius: 8px;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-hamburger:hover {
-      background: var(--navy);
-      color: var(--white);
     }
 
     /* MOBILE DRAWER MENU */
@@ -198,61 +217,52 @@
       top: 65px;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: rgba(11, 19, 43, 0.6);
-      backdrop-filter: blur(8px);
+      background: rgba(20, 18, 16, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 20px 24px;
       z-index: 490;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s ease;
+      transform: translateY(-120%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
     }
 
     .mobile-drawer.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .mobile-drawer-content {
-      background: var(--white);
-      padding: 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      transform: translateY(-20px);
-      transition: transform 0.25s ease;
-    }
-
-    .mobile-drawer.open .mobile-drawer-content {
       transform: translateY(0);
     }
 
-    .mobile-nav-link {
-      font-family: var(--font-heading);
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--navy);
-      text-decoration: none;
-      padding: 12px 14px;
-      border-radius: 10px;
+    .drawer-menu-links {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--bg-canvas);
-      border: 1px solid var(--border-subtle);
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .mobile-nav-link:active {
-      background: var(--navy);
-      color: var(--white);
+    .drawer-link {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     /* CONTAINER */
     .page-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 44px 24px 80px;
+      padding: 48px 24px 80px;
       width: 100%;
       flex: 1;
     }
@@ -268,35 +278,36 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--gold);
-      background: var(--gold-light);
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      background: var(--accent-badge-bg);
       padding: 6px 16px;
       border-radius: 30px;
-      margin-bottom: 14px;
-      border: 1px solid var(--gold-border);
+      margin-bottom: 16px;
+      border: 1px solid var(--accent-badge-border);
     }
 
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.04em;
-      color: var(--navy);
-      margin-bottom: 14px;
+      color: var(--text-main);
+      margin-bottom: 16px;
     }
 
     .hero-title .highlight {
-      color: var(--gold);
+      color: var(--accent);
     }
 
     .hero-subtitle {
       font-size: 1.02rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
       max-width: 620px;
       margin: 0 auto;
     }
@@ -311,7 +322,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--white);
+      background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
       border-radius: 30px;
       padding: 10px 24px;
@@ -325,14 +336,15 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: var(--navy);
-      font-family: var(--font-heading);
-      font-size: 0.82rem;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       font-weight: 600;
+      letter-spacing: 0.04em;
     }
 
     .tech-badge-item svg {
-      color: var(--gold);
+      color: var(--accent);
     }
 
     .tech-badge-dot {
@@ -351,40 +363,39 @@
     }
 
     .section-label {
-      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--navy);
+      letter-spacing: 0.14em;
+      color: var(--accent);
     }
 
-    /* SOLUTIONS GRID (2 COLS DESKTOP, 1 COL MOBILE) */
+    /* SOLUTIONS GRID */
     .solutions-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
-      margin-bottom: 56px;
+      margin-bottom: 60px;
     }
 
-    /* LUXURY SOLUTION CARD */
     .solution-card {
-      background: var(--white);
+      background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-card);
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.25s ease;
       display: flex;
       flex-direction: row;
       text-decoration: none;
       color: inherit;
-      position: relative;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
     }
 
     .solution-card:hover {
-      border-color: rgba(11, 19, 43, 0.3);
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
       box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
     }
 
     .card-photo-box {
@@ -392,7 +403,7 @@
       min-width: 170px;
       position: relative;
       overflow: hidden;
-      background: #E2E8F0;
+      background: #000000;
     }
 
     .card-photo {
@@ -400,70 +411,73 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease;
+      opacity: 0.85;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
     .solution-card:hover .card-photo {
-      transform: scale(1.05);
+      transform: scale(1.06);
+      opacity: 1;
     }
 
     .card-details {
-      padding: 22px 20px;
-      flex: 1;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-width: 0;
+      flex: 1;
     }
 
     .card-meta {
-      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      margin-bottom: 4px;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 6px;
     }
 
     .card-title {
-      font-size: 1.18rem;
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 6px;
-      line-height: 1.3;
+      color: var(--text-main);
+      margin-bottom: 8px;
     }
 
     .card-desc {
-      font-size: 0.84rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 14px;
+      line-height: 1.55;
+      margin-bottom: 18px;
     }
 
     .card-action-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-family: var(--font-heading);
-      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
       font-weight: 700;
-      color: var(--navy);
-      transition: color 0.15s ease, transform 0.15s ease;
+      color: var(--text-main);
+      background: var(--bg-panel-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 14px;
+      border-radius: 8px;
+      width: fit-content;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
     }
 
     .solution-card:hover .card-action-link {
-      color: var(--gold);
-      transform: translateX(3px);
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
     }
 
     /* HARDWARE SECTION */
     .hardware-section {
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-card);
-      padding: 36px 30px;
-      margin-bottom: 56px;
-      box-shadow: var(--shadow-sm);
+      margin-bottom: 60px;
     }
 
     .hardware-grid {
@@ -474,19 +488,19 @@
     }
 
     .hardware-card {
-      background: var(--bg-canvas);
+      background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
 
     .hardware-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(11, 19, 43, 0.2);
-      box-shadow: var(--shadow-sm);
+      transform: translateY(-3px);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-hover);
     }
 
     .hardware-photo {
@@ -494,10 +508,16 @@
       height: 180px;
       object-fit: cover;
       display: block;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    .hardware-card:hover .hardware-photo {
+      opacity: 1;
     }
 
     .hardware-body {
-      padding: 18px;
+      padding: 20px;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -505,222 +525,265 @@
     }
 
     .hardware-badge {
+      font-family: var(--font-mono);
       font-size: 0.68rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gold);
+      letter-spacing: 0.14em;
+      color: var(--accent);
       margin-bottom: 4px;
     }
 
     .hardware-title {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--navy);
+      color: var(--text-main);
       margin-bottom: 6px;
     }
 
-    .hardware-spec {
+    .hardware-desc {
       font-size: 0.82rem;
       color: var(--text-muted);
-      line-height: 1.45;
+      line-height: 1.5;
+      margin-bottom: 14px;
     }
 
-    /* CONTACT SECTION */
+    .hardware-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .spec-pill {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: var(--bg-panel-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* CONTACT / WHATSAPP BANNER */
     .contact-card {
-      background: var(--navy);
-      color: var(--white);
+      background: var(--bg-panel);
+      border: 1px solid var(--accent-badge-border);
       border-radius: var(--radius-card);
-      padding: 40px 32px;
-      margin-bottom: 56px;
+      padding: 40px;
       text-align: center;
-      box-shadow: var(--shadow-hover);
+      margin-bottom: 60px;
+      box-shadow: var(--shadow-sm);
     }
 
     .contact-title {
-      color: var(--white);
       font-size: 1.55rem;
-      margin-bottom: 8px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
     }
 
     .contact-desc {
-      color: #94A3B8;
       font-size: 0.95rem;
+      color: var(--text-muted);
       max-width: 580px;
       margin: 0 auto 24px;
-      line-height: 1.6;
     }
 
     .btn-whatsapp-cta {
-      background: #25D366;
+      background: var(--accent);
       color: #FFFFFF;
-      font-family: var(--font-heading);
-      font-size: 0.88rem;
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
       font-weight: 700;
-      text-decoration: none;
-      padding: 12px 26px;
+      letter-spacing: 0.04em;
+      padding: 13px 28px;
       border-radius: 30px;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+      box-shadow: 0 4px 16px rgba(193, 93, 48, 0.35);
     }
 
     .btn-whatsapp-cta:hover {
-      background: #20BA56;
+      background: var(--accent-deep);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+      box-shadow: 0 6px 20px rgba(193, 93, 48, 0.5);
     }
 
     /* FOOTER */
     .footer {
-      background: var(--white);
+      background: #0E0D0C;
       border-top: 1px solid var(--border-subtle);
-      padding: 32px 24px;
-      text-align: center;
-      font-size: 0.82rem;
+      padding: 44px 24px 32px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto 36px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .footer-brand-title span {
+      color: var(--accent);
+    }
+
+    .footer-brand-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-width: 360px;
       color: var(--text-muted);
     }
 
+    .footer-heading {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
     .footer-links {
+      list-style: none;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .footer-link {
-      color: var(--navy);
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: all 0.15s;
+      font-size: 0.85rem;
+      transition: color 0.15s ease;
     }
 
     .footer-link:hover {
-      color: var(--gold);
-      background: #F1F5F9;
+      color: var(--text-main);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
     }
 
     /* MODAL */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(11, 19, 43, 0.65);
-      backdrop-filter: blur(6px);
-      z-index: 999;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
+      z-index: 1000;
       padding: 20px;
     }
 
-    .modal-card {
-      background: var(--white);
+    .modal-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--accent-badge-border);
       border-radius: var(--radius-card);
-      width: 100%;
       max-width: 440px;
+      width: 100%;
       padding: 28px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      position: relative;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--bg-panel-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .modal-close:hover {
+      color: var(--text-main);
+      border-color: var(--accent);
     }
 
     .modal-title {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
       margin-bottom: 8px;
     }
 
     .modal-desc {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      line-height: 1.5;
     }
 
-    .qr-image-container {
-      background: #F8FAFC;
+    .modal-input {
+      width: 100%;
+      background: var(--bg-panel-elevated);
       border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 16px;
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-
-    .qr-image-container img {
-      width: 170px;
-      height: 170px;
-      display: block;
-    }
-
-    .btn-modal-open-link {
-      display: block;
-      background: var(--navy);
-      color: var(--white);
-      text-decoration: none;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 11px 20px;
+      color: var(--text-main);
+      padding: 10px 14px;
       border-radius: 8px;
-      margin-bottom: 12px;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .modal-input:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-modal-action {
+      background: var(--accent);
+      color: #FFFFFF;
+      border: none;
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
       transition: background 0.15s;
     }
 
-    .btn-modal-open-link:hover {
-      background: var(--navy-light);
-    }
-
-    .modal-url-row {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .modal-url-display {
-      flex: 1;
-      background: #F1F5F9;
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      padding: 8px 10px;
-      font-size: 0.75rem;
-      font-family: monospace;
-      color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: left;
-    }
-
-    .btn-copy-url {
-      background: #E2E8F0;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--navy);
-    }
-
-    .btn-modal-close {
-      background: transparent;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-family: var(--font-heading);
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .btn-modal-close:hover {
-      background: #F1F5F9;
-      color: var(--text-main);
+    .btn-modal-action:hover {
+      background: var(--accent-deep);
     }
 
     /* FLOATING WHATSAPP & SCROLL TOP */
@@ -744,7 +807,7 @@
 
     .floating-whatsapp-btn:hover {
       background: #20BA56;
-      transform: translateY(-2px) scale(1.02);
+      transform: translateY(-2px) scale(1.05);
       box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
     }
 
@@ -755,14 +818,14 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      background: var(--navy);
-      color: var(--white);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: var(--bg-panel-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(11, 19, 43, 0.25);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
       z-index: 990;
       opacity: 0;
       visibility: hidden;
@@ -775,8 +838,9 @@
     }
 
     .btn-scroll-top:hover {
-      background: var(--gold);
-      color: var(--navy);
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
       transform: translateY(-2px);
     }
 
@@ -801,7 +865,12 @@
       .mobile-drawer {
         display: block;
       }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
     }
+
   </style>
 </head>
 <body>
@@ -1047,74 +1116,92 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-links">
-        <a href="docs.html" class="footer-link">Documentação Técnica</a>
-        <a href="demo/painel-restaurante.html" class="footer-link">Painel Restaurante</a>
-        <a href="demo/painel-hotel.html" class="footer-link">Painel Hotel</a>
-        <a href="demo/painel-fidelidade.html" class="footer-link">Painel Fidelidade</a>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">Nolei <span>Creative</span></div>
+          <p class="footer-brand-desc">Ecossistemas inteligentes com hardware sob medida, tecnologia NFC de alta performance e aplicações web projetadas para máxima retenção e vendas.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="#solucoes" class="footer-link">Demonstrações Interativas</a></li>
+            <li><a href="#hardware" class="footer-link">Displays & Peças Físicas</a></li>
+            <li><a href="docs.html" class="footer-link">Documentação Técnica</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Contato & Projetos</div>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="footer-link">WhatsApp Comercial</a></li>
+            <li><a href="docs.html#termos-lgpd" class="footer-link">Termos de Uso & LGPD</a></li>
+          </ul>
+        </div>
       </div>
-      <div>© 2024 Nolei Creative • Ecossistemas Inteligentes de Hardware & Software</div>
+      <div class="footer-bottom">
+        <div>© 2024 Nolei Creative • Ecossistemas Inteligentes de Hardware & Software</div>
+        <div>Tecnologia NFC & QR Code de Alta Sensibilidade</div>
+      </div>
     </footer>
 
   </div>
 
   <!-- MODAL QR CODE INTERATIVO -->
   <div class="modal-overlay" id="modal-qr" onclick="closeQrModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <h3 class="modal-title" id="modal-title">Escanear QR Code</h3>
-      <p class="modal-desc">Aponte a câmera do seu smartphone para abrir a experiência instantaneamente.</p>
+    <div class="modal-card" style="background: var(--bg-panel); border: 1px solid var(--accent-badge-border); border-radius: var(--radius-card); padding: 28px; text-align:center; box-shadow: 0 20px 48px rgba(0,0,0,0.7);" onclick="event.stopPropagation()">
+      <h3 class="modal-title" id="modal-title" style="color:var(--text-main); margin-bottom:8px;">Escanear QR Code</h3>
+      <p class="modal-desc" style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;">Aponte a câmera do seu smartphone para abrir a experiência instantaneamente.</p>
 
-      <div class="qr-image-container">
-        <img id="qr-image-tag" src="" alt="QR Code Link" loading="eager">
+      <div class="qr-image-container" style="background:#FFFFFF; border-radius:12px; padding:16px; display:inline-block; margin-bottom:16px;">
+        <img id="qr-image-tag" src="" alt="QR Code Link" loading="eager" style="width:170px; height:170px; display:block;">
       </div>
 
-      <a id="modal-direct-link" href="#" target="_blank" class="btn-modal-open-link">
+      <a id="modal-direct-link" href="#" target="_blank" style="display:block; background:var(--accent); color:#FFFFFF; text-decoration:none; font-family:var(--font-heading); font-size:0.85rem; font-weight:700; padding:11px 20px; border-radius:8px; margin-bottom:12px;">
         Abrir Link no Navegador
       </a>
 
-      <div class="modal-url-row">
-        <div class="modal-url-display" id="modal-url"></div>
-        <button type="button" class="btn-copy-url" onclick="copyModalUrl()">Copiar</button>
+      <div class="modal-url-row" style="display:flex; gap:6px; margin-bottom:16px;">
+        <div class="modal-url-display" id="modal-url" style="flex:1; background:var(--bg-panel-elevated); border:1px solid var(--border-subtle); border-radius:6px; padding:8px 10px; font-size:0.75rem; font-family:var(--font-mono); color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left;"></div>
+        <button type="button" onclick="copyModalUrl()" style="background:var(--bg-panel-elevated); border:1px solid var(--border-subtle); border-radius:6px; padding:8px 12px; font-size:0.75rem; font-weight:700; cursor:pointer; color:var(--text-main);">Copiar</button>
       </div>
 
-      <button class="btn-modal-close" onclick="closeQrModal()">Fechar</button>
+      <button onclick="closeQrModal()" style="width:100%; background:transparent; border:1px solid var(--border-subtle); color:var(--text-muted); font-family:var(--font-heading); font-size:0.8rem; font-weight:600; padding:8px 16px; border-radius:6px; cursor:pointer;">Fechar</button>
     </div>
   </div>
 
   <!-- Modal Google Business Profile Helper -->
   <div class="modal-overlay" id="modal-google-helper" onclick="closeGoogleHelperModal(event)">
-    <div class="modal-card" style="max-width: 480px; text-align: left; max-height: 85vh; overflow-y: auto;" onclick="event.stopPropagation()">
+    <div class="modal-card" style="max-width: 480px; text-align: left; max-height: 85vh; overflow-y: auto; background: var(--bg-panel); border: 1px solid var(--accent-badge-border); border-radius: var(--radius-card); padding: 28px; box-shadow: 0 20px 48px rgba(0,0,0,0.7);" onclick="event.stopPropagation()">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
         <div style="display:flex; align-items:center; gap:8px;">
-          <div style="width:34px; height:34px; border-radius:10px; background:#E8F0FE; display:flex; align-items:center; justify-content:center; color:#1A73E8;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div style="width:34px; height:34px; border-radius:10px; background:var(--accent-badge-bg); display:flex; align-items:center; justify-content:center; color:var(--accent); border: 1px solid var(--accent-badge-border);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <h3 class="modal-title" style="margin-bottom:0; font-size:1.15rem;">Assistente Google Perfil</h3>
+          <h3 class="modal-title" style="margin-bottom:0; font-size:1.15rem; color:var(--text-main);">Assistente Google Perfil</h3>
         </div>
-        <button onclick="closeGoogleHelperModal()" style="background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:1.2rem; line-height:1;">&times;</button>
+        <button onclick="closeGoogleHelperModal()" style="background:var(--bg-panel-elevated); border:1px solid var(--border-subtle); color:var(--text-muted); cursor:pointer; font-size:1.2rem; line-height:1; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">&times;</button>
       </div>
       
-      <p class="modal-desc" style="margin-bottom:16px;">
+      <p class="modal-desc" style="margin-bottom:16px; color:var(--text-muted);">
         Se sua empresa ainda não está no Google ou você precisa do link de avaliação 5 estrelas para gravar na sua Tag NFC/QR Code:
       </p>
 
-      <div style="background:var(--bg-canvas); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; margin-bottom:12px;">
+      <div style="background:var(--bg-panel-elevated); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; margin-bottom:12px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-          <span style="background:#1A73E8; color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">1</span>
-          <strong style="color:var(--navy); font-size:0.9rem;">Ainda não tem perfil no Google?</strong>
+          <span style="background:var(--accent); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">1</span>
+          <strong style="color:var(--text-main); font-size:0.9rem;">Ainda não tem perfil no Google?</strong>
         </div>
         <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; line-height:1.4;">
           Cadastre seu estabelecimento gratuitamente no Google Maps para começar a receber clientes locais.
         </p>
-        <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#1A73E8; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.82rem; font-weight:600;">
+        <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:var(--accent); color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.82rem; font-weight:600;">
           Criar Perfil Oficial no Google
         </a>
       </div>
 
-      <div style="background:var(--bg-canvas); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; margin-bottom:12px;">
+      <div style="background:var(--bg-panel-elevated); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; margin-bottom:12px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-          <span style="background:var(--emerald); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
-          <strong style="color:var(--navy); font-size:0.9rem;">Como pegar seu link de avaliação 5 Estrelas:</strong>
+          <span style="background:var(--accent); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
+          <strong style="color:var(--text-main); font-size:0.9rem;">Como pegar seu link de avaliação 5 Estrelas:</strong>
         </div>
         <ol style="font-size:0.8rem; color:var(--text-muted); padding-left:18px; margin-bottom:6px; line-height:1.5;">
           <li>Acesse sua conta no <strong>Google Meu Negócio</strong>.</li>
@@ -1123,23 +1210,26 @@
         </ol>
       </div>
 
-      <div style="background:#FFF7ED; border:1px solid #FFEDD5; border-radius:12px; padding:14px; margin-bottom:16px;">
+      <div style="background:var(--bg-panel-elevated); border:1px solid var(--accent-badge-border); border-radius:12px; padding:14px; margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-          <span style="background:var(--orange); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
-          <strong style="color:var(--navy); font-size:0.9rem;">Testador de Link / Gerador de QR:</strong>
+          <span style="background:var(--accent); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
+          <strong style="color:var(--text-main); font-size:0.9rem;">Testador de Link / Gerador de QR:</strong>
         </div>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
-          <input type="text" id="custom-google-input" placeholder="Cole o link ou nome" style="flex:1; border:1px solid var(--border-subtle); border-radius:8px; padding:8px 10px; font-size:0.82rem; font-family:inherit;">
-          <button type="button" onclick="generateCustomGoogleQr()" style="background:var(--navy); color:#fff; border:none; border-radius:8px; padding:8px 12px; font-size:0.8rem; font-weight:600; cursor:pointer;">Gerar QR</button>
+          <input type="text" id="custom-google-input" placeholder="Cole o link ou nome" style="flex:1; border:1px solid var(--border-subtle); background:var(--bg-canvas); color:var(--text-main); border-radius:8px; padding:8px 10px; font-size:0.82rem; font-family:inherit;">
+          <button type="button" onclick="generateCustomGoogleQr()" style="background:var(--accent); color:#fff; border:none; border-radius:8px; padding:8px 12px; font-size:0.8rem; font-weight:600; cursor:pointer;">Gerar QR</button>
         </div>
-        <div id="custom-google-preview" style="display:none; text-align:center; padding:10px; background:#fff; border-radius:10px; border:1px solid var(--border-subtle);">
+        <div id="custom-google-preview" style="display:none; text-align:center; padding:10px; background:var(--bg-canvas); border-radius:10px; border:1px solid var(--border-subtle);">
           <img id="custom-google-qr-img" src="" alt="QR Gerado" style="width:140px; height:140px; display:inline-block; margin-bottom:6px;">
           <div id="custom-google-qr-text" style="font-size:0.75rem; color:var(--text-muted); word-break:break-all; margin-bottom:8px;"></div>
-          <a id="custom-google-direct-link" href="#" target="_blank" class="btn-modal-open-link" style="font-size:0.8rem; padding:8px 12px;">
+          <a id="custom-google-direct-link" href="#" target="_blank" style="font-size:0.8rem; padding:8px 12px; background:var(--accent); color:#fff; text-decoration:none; border-radius:6px; display:inline-block;">
             Testar Acesso Direto
           </a>
         </div>
       </div>
+
+      <button onclick="closeGoogleHelperModal()" style="width:100%; background:var(--bg-panel-elevated); border:1px solid var(--border-subtle); color:var(--text-muted); padding:10px; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer;">Entendido, fechar</button>
+    </div>
 
       <button class="btn-modal-close" onclick="closeGoogleHelperModal()">Entendido, fechar</button>
     </div>

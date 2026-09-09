@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0B132B">
+  <meta name="theme-color" content="#141210">
   <title>Dashboard Hotel & Pousada — Métricas de Hospedagem Nolei</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,24 +12,24 @@
 
   <style>
     :root {
-      --gold-deep: #0B132B;
+      --gold-deep: #141210;
       --gold-accent: #D4A853;
-      --gold-light: #FBF7EE;
+      --gold-light: rgba(193, 93, 48, 0.12);
       --leaf-green: #15803D;
       --white: #FFFFFF;
-      --bg-light: #F8FAFC;
-      --text: #0F172A;
-      --text-muted: #64748B;
-      --border: #E2E8F0;
+      --bg-light: #141210;
+      --text: #F2EADF;
+      --text-muted: #A2937E;
+      --border: rgba(242, 234, 223, 0.08);
       --radius: 14px;
-      --font-heading: 'Poppins', sans-serif;
-      --font-body: 'Roboto', sans-serif;
+      --font-heading: 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
     h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--gold-deep); }
 
-    .top-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+    .top-bar { background: #1F1A15; border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
     .top-bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .top-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; color: var(--gold-deep); font-size: 1.05rem; }
     .top-brand span { color: var(--gold-accent); }
@@ -43,13 +43,13 @@
     .page-title { font-size: 1.55rem; font-weight: 800; }
 
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
-    .kpi-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .kpi-card { background: #1F1A15; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     .kpi-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
     .kpi-val { font-size: 1.85rem; font-family: var(--font-heading); font-weight: 800; color: var(--gold-deep); margin-top: 4px; }
     .kpi-sub { font-size: 0.75rem; color: var(--leaf-green); font-weight: 600; margin-top: 4px; }
 
     .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
-    .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .chart-card { background: #1F1A15; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     .chart-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
 
     .ranking-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0F223D">
+  <meta name="theme-color" content="#0B132B">
   <title>Nolei Creative — Ecossistema Físico-Digital (NFC, QR Code & Gestão)</title>
   
   <!-- Google Fonts: Poppins & Roboto -->
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F223D' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B132B' stroke-width='2.2'><path d='M6 8.32a7.43 7.43 0 0 1 0 7.36'/><path d='M9.46 6.21a11.76 11.76 0 0 1 0 11.58'/><path d='M12.91 4.1a16.1 16.1 0 0 1 0 15.8'/></svg>">
   
   <style>
     /* =========================================
@@ -23,9 +23,11 @@
       --navy-dark: #070B19;
       --gold: #C5A059;
       --gold-light: #FDFBF7;
-      --gold-border: rgba(197, 160, 89, 0.3);
+      --gold-border: rgba(197, 160, 89, 0.35);
       --emerald: #059669;
       --emerald-light: #ECFDF5;
+      --orange: #EA580C;
+      --orange-light: #FFF7ED;
       --white: #FFFFFF;
       --bg-canvas: #F8FAFC;
       --text-main: #0F172A;
@@ -45,6 +47,10 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -68,13 +74,13 @@
 
     /* TOP INSTITUTIONAL HEADER */
     .site-header {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
       z-index: 500;
-      padding: 14px 24px;
+      padding: 12px 24px;
     }
 
     .header-inner {
@@ -165,11 +171,88 @@
       border-color: var(--navy);
     }
 
+    /* HAMBURGER BUTTON (MOBILE ONLY - HIDDEN ON DESKTOP) */
+    .btn-hamburger {
+      display: none;
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+      color: var(--navy);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-hamburger:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* MOBILE DRAWER MENU */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 65px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(11, 19, 43, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 490;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .mobile-drawer.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-drawer-content {
+      background: var(--white);
+      padding: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      transform: translateY(-20px);
+      transition: transform 0.25s ease;
+    }
+
+    .mobile-drawer.open .mobile-drawer-content {
+      transform: translateY(0);
+    }
+
+    .mobile-nav-link {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .mobile-nav-link:active {
+      background: var(--navy);
+      color: var(--white);
+    }
+
     /* CONTAINER */
     .page-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 48px 24px 80px;
+      padding: 44px 24px 80px;
       width: 100%;
       flex: 1;
     }
@@ -178,7 +261,7 @@
     .hero {
       text-align: center;
       max-width: 800px;
-      margin: 0 auto 40px;
+      margin: 0 auto 36px;
     }
 
     .hero-eyebrow {
@@ -193,12 +276,12 @@
       background: var(--gold-light);
       padding: 6px 16px;
       border-radius: 30px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       border: 1px solid var(--gold-border);
     }
 
     .hero-title {
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.04em;
@@ -211,7 +294,7 @@
     }
 
     .hero-subtitle {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: var(--text-muted);
       line-height: 1.6;
       max-width: 620px;
@@ -262,7 +345,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 10px;
     }
@@ -385,7 +468,7 @@
 
     .hardware-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
       margin-top: 24px;
     }
@@ -443,8 +526,55 @@
       line-height: 1.45;
     }
 
+    /* CONTACT SECTION */
+    .contact-card {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius-card);
+      padding: 40px 32px;
+      margin-bottom: 56px;
+      text-align: center;
+      box-shadow: var(--shadow-hover);
+    }
+
+    .contact-title {
+      color: var(--white);
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-desc {
+      color: #94A3B8;
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    .btn-whatsapp-cta {
+      background: #25D366;
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-whatsapp-cta:hover {
+      background: #20BA56;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    }
+
     /* FOOTER */
-    .site-footer {
+    .footer {
       background: var(--white);
       border-top: 1px solid var(--border-subtle);
       padding: 32px 24px;
@@ -455,24 +585,204 @@
 
     .footer-links {
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 12px;
+      gap: 12px;
       flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
     .footer-link {
       color: var(--navy);
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.15s;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.15s;
     }
 
     .footer-link:hover {
       color: var(--gold);
+      background: #F1F5F9;
     }
 
-    /* RESPONSIVE */
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 19, 43, 0.65);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      width: 100%;
+      max-width: 440px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .qr-image-container {
+      background: #F8FAFC;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .qr-image-container img {
+      width: 170px;
+      height: 170px;
+      display: block;
+    }
+
+    .btn-modal-open-link {
+      display: block;
+      background: var(--navy);
+      color: var(--white);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 11px 20px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: background 0.15s;
+    }
+
+    .btn-modal-open-link:hover {
+      background: var(--navy-light);
+    }
+
+    .modal-url-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .modal-url-display {
+      flex: 1;
+      background: #F1F5F9;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .btn-copy-url {
+      background: #E2E8F0;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--navy);
+    }
+
+    .btn-modal-close {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-modal-close:hover {
+      background: #F1F5F9;
+      color: var(--text-main);
+    }
+
+    /* FLOATING WHATSAPP & SCROLL TOP */
+    .floating-whatsapp-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: #25D366;
+      color: #FFFFFF;
+      padding: 11px 18px;
+      border-radius: 30px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+      z-index: 990;
+      transition: all 0.25s ease;
+    }
+
+    .floating-whatsapp-btn:hover {
+      background: #20BA56;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    }
+
+    .btn-scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(11, 19, 43, 0.25);
+      z-index: 990;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .btn-scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .btn-scroll-top:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
     @media (max-width: 860px) {
       .solutions-grid {
         grid-template-columns: 1fr;
@@ -482,16 +792,18 @@
       }
       .card-photo-box {
         width: 100%;
-        height: 160px;
+        height: 180px;
       }
       .desktop-nav {
-        display: none;
+        display: none !important;
       }
       .btn-hamburger {
         display: flex !important;
       }
+      .mobile-drawer {
+        display: block;
+      }
     }
-
   </style>
 </head>
 <body>
@@ -507,8 +819,6 @@
       </a>
 
       <!-- Desktop Nav -->
-      <!-- Desktop Nav Organized by Sector -->
-      <!-- Desktop Nav (KISS, CLEAN, LUXURY) -->
       <nav class="desktop-nav" aria-label="Navegação Principal">
         <a href="#solucoes" class="nav-link">Demonstrações</a>
         <a href="#hardware" class="nav-link">Hardware & Displays</a>
@@ -519,14 +829,14 @@
         </button>
       </nav>
 
-      <!-- Hamburger Button (Mobile) -->
+      <!-- Hamburger Button (Mobile Only) -->
       <button class="btn-hamburger" id="btn-hamburger" aria-label="Abrir Menu" onclick="toggleMobileMenu()">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu (KISS, CLEAN, LUXURY) -->
+  <!-- Mobile Drawer Menu (Mobile Only) -->
   <div class="mobile-drawer" id="mobile-drawer" onclick="closeMobileMenu()">
     <div class="mobile-drawer-content" onclick="event.stopPropagation()">
       <a href="#solucoes" class="mobile-nav-link" onclick="closeMobileMenu()">
@@ -571,10 +881,10 @@
     <!-- Section Header -->
     <div class="section-label-row">
       <span class="section-label">Aplicações Integradas</span>
-      <span class="section-desc" style="color:var(--orange); font-weight:600;">Clique no card para abrir e testar a demonstração interativa ao vivo </span>
+      <span style="font-size: 0.8rem; color: var(--text-muted);">Clique no card para testar a demonstração</span>
     </div>
 
-    <!-- Solutions Stack (2 Columns on Desktop) -->
+    <!-- Solutions Grid (KISS, DRY, LUXURY) -->
     <div class="solutions-grid">
 
       <!-- 1. Google Avaliações -->
@@ -651,11 +961,11 @@
 
     </div>
 
-    <!-- SEÇÃO DE PEÇAS FÍSICAS & EXEMPLOS REAIS (HARDWARE NFC) -->
+    <!-- SEÇÃO DE PEÇAS FÍSICAS & HARDWARE -->
     <section class="hardware-section" id="hardware">
       <div class="section-label-row" style="margin-bottom: 6px;">
-        <span class="section-label" style="color:var(--orange);">Hardware & Displays Físicos</span>
-        <span class="section-desc">Acabamento Premium em Acrílico & Madeira</span>
+        <span class="section-label" style="color:var(--gold);">Hardware & Displays Físicos</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Acabamento Premium em Acrílico & Madeira</span>
       </div>
       <h2 style="font-size: 1.45rem; margin-bottom: 6px;">Modelos Físicos de Apresentação</h2>
       <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
@@ -718,7 +1028,7 @@
           <div class="hardware-body">
             <div>
               <span class="hardware-badge">Mesa & Piscina</span>
-              <h4 class="hardware-title">Disco Resinado "Peça na sua Mesa"</h4>
+              <h4 class="hardware-title">Disco Resinado Auto-Adesivo</h4>
               <p class="hardware-spec">Disco acrílico impermeável com resina automotiva e fita 3M. Ideal para áreas externas e quiosques.</p>
             </div>
           </div>
@@ -727,45 +1037,42 @@
       </div>
     </section>
 
-    <!-- Contact & Project Section -->
+    <!-- Contact Section -->
     <div class="contact-card" id="contato">
       <h3 class="contact-title">Quer produzir seus displays personalizados?</h3>
       <p class="contact-desc">Desenvolvemos as peças com a identidade da sua marca, gravadas e programadas prontas para uso no seu estabelecimento.</p>
       <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Visitei%20o%20site%20da%20Nolei%20Creative%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta">
-        Solicitar Orçamento no WhatsApp 
+        Solicitar Orçamento no WhatsApp
       </a>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
-      <div style="display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
-        <a href="docs.html" style="color:var(--navy); font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--white); border:1px solid var(--border); padding:8px 16px; border-radius:20px; box-shadow:0 1px 3px rgba(0,0,0,0.03);">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Documentação Técnica & Manual
-        </a>
-        <a href="demo/painel-restaurante.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; padding:8px 12px;">Painel Gestão & Cozinha</a>
-        <a href="demo/dashboard-restaurante.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none; padding:8px 12px;">Dashboard ROI</a>
+      <div class="footer-links">
+        <a href="docs.html" class="footer-link">Documentação Técnica</a>
+        <a href="demo/painel-restaurante.html" class="footer-link">Painel Restaurante</a>
+        <a href="demo/painel-hotel.html" class="footer-link">Painel Hotel</a>
+        <a href="demo/painel-fidelidade.html" class="footer-link">Painel Fidelidade</a>
       </div>
       <div>© 2024 Nolei Creative • Ecossistemas Inteligentes de Hardware & Software</div>
     </footer>
 
   </div>
 
-  <!-- MODAL QR CODE INTERATIVO (LINK DIRETO + ESCANEAR) -->
+  <!-- MODAL QR CODE INTERATIVO -->
   <div class="modal-overlay" id="modal-qr" onclick="closeQrModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 class="modal-title" id="modal-title">Escanear QR Code</h3>
-      <p class="modal-desc">Aponte a câmera do seu smartphone para abrir o link da página instantaneamente.</p>
+      <p class="modal-desc">Aponte a câmera do seu smartphone para abrir a experiência instantaneamente.</p>
 
       <div class="qr-image-container">
         <img id="qr-image-tag" src="" alt="QR Code Link" loading="eager">
       </div>
 
-      <!-- Direct Action Button to Open Link -->
       <a id="modal-direct-link" href="#" target="_blank" class="btn-modal-open-link">
-        Abrir Link no Navegador 
+        Abrir Link no Navegador
       </a>
 
-      <!-- URL display & copy option -->
       <div class="modal-url-row">
         <div class="modal-url-display" id="modal-url"></div>
         <button type="button" class="btn-copy-url" onclick="copyModalUrl()">Copiar</button>
@@ -792,8 +1099,7 @@
         Se sua empresa ainda não está no Google ou você precisa do link de avaliação 5 estrelas para gravar na sua Tag NFC/QR Code:
       </p>
 
-      <!-- Step 1: Create Profile -->
-      <div style="background:var(--bg-light); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:12px;">
+      <div style="background:var(--bg-canvas); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; margin-bottom:12px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
           <span style="background:#1A73E8; color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">1</span>
           <strong style="color:var(--navy); font-size:0.9rem;">Ainda não tem perfil no Google?</strong>
@@ -802,42 +1108,36 @@
           Cadastre seu estabelecimento gratuitamente no Google Maps para começar a receber clientes locais.
         </p>
         <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#1A73E8; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.82rem; font-weight:600;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Criar Perfil Oficial no Google
         </a>
       </div>
 
-      <!-- Step 2: Extract Review Link -->
-      <div style="background:var(--bg-light); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:12px;">
+      <div style="background:var(--bg-canvas); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; margin-bottom:12px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-          <span style="background:var(--leaf-green); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
+          <span style="background:var(--emerald); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
           <strong style="color:var(--navy); font-size:0.9rem;">Como pegar seu link de avaliação 5 Estrelas:</strong>
         </div>
         <ol style="font-size:0.8rem; color:var(--text-muted); padding-left:18px; margin-bottom:6px; line-height:1.5;">
           <li>Acesse sua conta no <strong>Google Meu Negócio</strong>.</li>
           <li>No painel principal, clique em <strong>"Solicitar avaliações"</strong>.</li>
-          <li>Copie o seu link curto (exemplo: <code style="background:#e2e8f0; padding:2px 4px; border-radius:4px; font-size:0.75rem;">g.page/r/SuaEmpresa/review</code>).</li>
+          <li>Copie o seu link curto oficial.</li>
         </ol>
       </div>
 
-      <!-- Step 3: Test & Generate Custom QR -->
       <div style="background:#FFF7ED; border:1px solid #FFEDD5; border-radius:12px; padding:14px; margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
           <span style="background:var(--orange); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
           <strong style="color:var(--navy); font-size:0.9rem;">Testador de Link / Gerador de QR:</strong>
         </div>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">
-          Cole seu link ou digite o nome do estabelecimento para gerar o QR Code de teste imediato:
-        </p>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
-          <input type="text" id="custom-google-input" placeholder="https://g.page/r/... ou Nome do Estabelecimento" style="flex:1; border:1px solid var(--border); border-radius:8px; padding:8px 10px; font-size:0.82rem; font-family:inherit;">
-          <button type="button" onclick="generateCustomGoogleQr()" style="background:var(--navy); color:#fff; border:none; border-radius:8px; padding:8px 12px; font-size:0.8rem; font-weight:600; cursor:pointer; white-space:nowrap;">Gerar QR</button>
+          <input type="text" id="custom-google-input" placeholder="Cole o link ou nome" style="flex:1; border:1px solid var(--border-subtle); border-radius:8px; padding:8px 10px; font-size:0.82rem; font-family:inherit;">
+          <button type="button" onclick="generateCustomGoogleQr()" style="background:var(--navy); color:#fff; border:none; border-radius:8px; padding:8px 12px; font-size:0.8rem; font-weight:600; cursor:pointer;">Gerar QR</button>
         </div>
-        <div id="custom-google-preview" style="display:none; text-align:center; padding:10px; background:#fff; border-radius:10px; border:1px solid var(--border);">
+        <div id="custom-google-preview" style="display:none; text-align:center; padding:10px; background:#fff; border-radius:10px; border:1px solid var(--border-subtle);">
           <img id="custom-google-qr-img" src="" alt="QR Gerado" style="width:140px; height:140px; display:inline-block; margin-bottom:6px;">
           <div id="custom-google-qr-text" style="font-size:0.75rem; color:var(--text-muted); word-break:break-all; margin-bottom:8px;"></div>
           <a id="custom-google-direct-link" href="#" target="_blank" class="btn-modal-open-link" style="font-size:0.8rem; padding:8px 12px;">
-            Testar Acesso Direto 
+            Testar Acesso Direto
           </a>
         </div>
       </div>
@@ -845,40 +1145,6 @@
       <button class="btn-modal-close" onclick="closeGoogleHelperModal()">Entendido, fechar</button>
     </div>
   </div>
-
-  <script>
-    let currentMode = 'nfc';
-
-    const solutionsConfig = {
-      avaliacao: { path: 'demo/avaliacao.html', params: { nfc: 'source=nfc', qr: 'source=qr' } },
-      cardapio: { path: 'demo/cardapio.html', params: { nfc: 'source=nfc&mesa=04', qr: 'source=qr&mesa=04' } },
-      hotel: { path: 'demo/hotel.html', params: { nfc: 'source=nfc&quarto=412', qr: 'source=qr&quarto=412' } },
-      fidelidade: { path: 'demo/fidelidade.html', params: { nfc: 'source=nfc&nome=Maria&loja=Caf%C3%A9%20Origem', qr: 'source=qr&nome=Maria&loja=Caf%C3%A9%20Origem' } }
-    };
-
-    
-    function setMode(mode) {
-      currentMode = mode;
-      document.getElementById('btn-nfc').classList.toggle('active', mode === 'nfc');
-      document.getElementById('btn-qr').classList.toggle('active', mode === 'qr');
-
-      Object.entries(solutionsConfig).forEach(([key, cfg]) => {
-        const linkEl = document.getElementById('link-' + key);
-        const paramEl = document.getElementById('param-' + key);
-        const qrBtn = document.getElementById('qr-action-' + key);
-
-        if (linkEl) linkEl.href = `${cfg.path}?${cfg.params[mode]}`;
-        if (paramEl) {
-          paramEl.textContent = mode === 'nfc' ? 'Simulação: Aproximação NFC' : 'Simulação: Leitura QR Code';
-        }
-        if (qrBtn) {
-          qrBtn.style.display = mode === 'qr' ? 'inline-flex' : 'none';
-        }
-      });
-    }
-);
-
-  </script>
 
   <!-- Floating WhatsApp Button (Bottom-Left, Home Only) -->
   <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado%20com%20NFC%20e%20QR%20Code." target="_blank" class="floating-whatsapp-btn" aria-label="Falar no WhatsApp" title="Falar no WhatsApp">
@@ -891,5 +1157,115 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
   </button>
 
+  <script>
+    let currentMode = 'nfc';
+
+    function setMode(mode) {
+      currentMode = mode;
+      const btnNfc = document.getElementById('btn-nfc');
+      const btnQr = document.getElementById('btn-qr');
+      
+      btnNfc.classList.toggle('active', mode === 'nfc');
+      btnQr.classList.toggle('active', mode === 'qr');
+
+      document.querySelectorAll('.solution-card').forEach(card => {
+        const demo = card.getAttribute('data-demo');
+        const extra = card.getAttribute('data-extra');
+        const title = card.getAttribute('data-title');
+        
+        let targetUrl = 'demo/' + demo + '.html?source=' + mode;
+        if (extra) targetUrl += '&' + extra;
+        card.setAttribute('href', targetUrl);
+
+        if (mode === 'qr') {
+          card.onclick = function(e) {
+            e.preventDefault();
+            openQrCodeModal(title, 'demo/' + demo + '.html', extra || '');
+          };
+        } else {
+          card.onclick = null;
+        }
+      });
+    }
+
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      drawer.classList.toggle('open');
+    }
+
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      if (drawer) drawer.classList.remove('open');
+    }
+
+    function openQrCodeModal(title, relativePath, extraParams) {
+      const modal = document.getElementById('modal-qr');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDirectLink = document.getElementById('modal-direct-link');
+      const modalUrlDisplay = document.getElementById('modal-url');
+      const qrImageTag = document.getElementById('qr-image-tag');
+
+      const origin = window.location.origin;
+      const pathname = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+      let fullUrl = origin + pathname + relativePath + '?source=qr';
+      if (extraParams) fullUrl += '&' + extraParams;
+
+      modalTitle.innerText = 'Escanear: ' + title;
+      modalDirectLink.href = fullUrl;
+      modalUrlDisplay.innerText = fullUrl;
+
+      const qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&format=png&data=' + encodeURIComponent(fullUrl);
+      qrImageTag.src = qrApiUrl;
+
+      modal.style.display = 'flex';
+    }
+
+    function closeQrModal(e) {
+      if (!e || e.target === document.getElementById('modal-qr') || e.target.classList.contains('btn-modal-close')) {
+        document.getElementById('modal-qr').style.display = 'none';
+      }
+    }
+
+    function copyModalUrl() {
+      const urlText = document.getElementById('modal-url').innerText;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(urlText).then(() => {
+          alert('Link copiado para a área de transferência!');
+        });
+      }
+    }
+
+    function openGoogleHelperModal() {
+      document.getElementById('modal-google-helper').style.display = 'flex';
+    }
+
+    function closeGoogleHelperModal(e) {
+      if (!e || e.target === document.getElementById('modal-google-helper') || e.target.classList.contains('btn-modal-close')) {
+        document.getElementById('modal-google-helper').style.display = 'none';
+      }
+    }
+
+    function generateCustomGoogleQr() {
+      const input = document.getElementById('custom-google-input').value.trim();
+      if (!input) return;
+      let target = input;
+      if (!target.startsWith('http://') && !target.startsWith('https://')) {
+        target = 'https://search.google.com/local/writereview?placeid=' + encodeURIComponent(target);
+      }
+      const qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&format=png&data=' + encodeURIComponent(target);
+      document.getElementById('custom-google-qr-img').src = qrApiUrl;
+      document.getElementById('custom-google-qr-text').innerText = target;
+      document.getElementById('custom-google-direct-link').href = target;
+      document.getElementById('custom-google-preview').style.display = 'block';
+    }
+
+    // Scroll to Top visibility
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('btn-scroll-top');
+      if (btn) {
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }
+    });
+  </script>
 </body>
 </html>

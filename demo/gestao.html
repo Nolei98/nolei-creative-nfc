@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0F223D">
+  <title>Painel de Gestão do Restaurante, Pedidos & Cardápio — Nolei Creative</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0F223D;
+      --navy-light: #162C46;
+      --navy-dark: #0A1728;
+      --leaf-green: #2E7D32;
+      --leaf-green-accent: #22C55E;
+      --leaf-green-light: #E8F5E9;
+      --orange: #F97316;
+      --orange-accent: #EA580C;
+      --orange-light: #FFF7ED;
+      --amber: #F59E0B;
+      --amber-light: #FEF3C7;
+      --red: #EF4444;
+      --red-light: #FEE2E2;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --border: #E2E8F0;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-light);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      color: var(--navy);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .top-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .brand-title span {
+      color: var(--leaf-green);
+    }
+
+    .top-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--leaf-green);
+      background: var(--leaf-green-light);
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(46, 125, 50, 0.2);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--leaf-green-accent);
+      animation: pulseDot 1.5s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+    }
+
+    .top-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-top-action {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      color: var(--navy);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-top-action:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .btn-top-action.highlight {
+      background: var(--orange-light);
+      color: var(--orange-accent);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-top-action.highlight:hover {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Subheader & Section Tabs */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .page-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    .page-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Tabs Bar */
+    .main-tabs {
+      display: flex;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      overflow-x: auto;
+    }
+
+    .main-tab {
+      flex: 1;
+      min-width: 160px;
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.84rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .main-tab.active {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.2);
+    }
+
+    .tab-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+    }
+
+    .main-tab:not(.active) .tab-badge {
+      background: var(--bg-light);
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    /* Live Service Call Alert Banner (Garçom / Conta) */
+    .alerts-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .service-alert-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      animation: slideInDown 0.3s ease;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @keyframes slideInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .service-alert-card.garcom {
+      background: #FFF7ED;
+      border: 1px solid #FDBA74;
+      color: #9A3412;
+    }
+
+    .service-alert-card.conta {
+      background: #E8F5E9;
+      border: 1px solid #86EFAC;
+      color: #166534;
+    }
+
+    .alert-info-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .alert-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .garcom .alert-icon-box {
+      background: #FFEDD5;
+      color: #EA580C;
+    }
+
+    .conta .alert-icon-box {
+      background: #DCFCE7;
+      color: #16A34A;
+    }
+
+    .btn-dismiss-alert {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn-dismiss-alert:hover {
+      background: var(--navy-light);
+    }
+
+    /* KDS Grid / Tables Orders Grid */
+    .kds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    .kds-table-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .kds-table-card:hover {
+      box-shadow: 0 6px 18px rgba(15, 34, 61, 0.08);
+    }
+
+    .kds-card-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kds-table-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kds-order-items {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .kds-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #F1F5F9;
+      gap: 8px;
+    }
+
+    .kds-item-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kds-item-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .kds-item-meta {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    /* Status Badges & Buttons */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .status-badge.preparo {
+      background: #FFF7ED;
+      color: #EA580C;
+      border: 1px solid #FDBA74;
+    }
+
+    .status-badge.preparo:hover {
+      background: #FFEDD5;
+      transform: scale(1.03);
+    }
+
+    .status-badge.entregue {
+      background: #DCFCE7;
+      color: #15803D;
+      border: 1px solid #86EFAC;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.25);
+    }
+
+    .status-badge.entregue:hover {
+      background: #BBF7D0;
+      transform: scale(1.03);
+    }
+
+    .kds-card-footer {
+      background: #F8FAFC;
+      border-top: 1px solid var(--border);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kds-total-val {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .btn-table-action {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--navy);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-table-action:hover {
+      background: var(--leaf-green);
+      color: var(--white);
+      border-color: var(--leaf-green);
+    }
+
+    /* CRUD SECTION (Produtos & Cardápio) */
+    .crud-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .search-filter-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      max-width: 480px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: var(--white);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--navy);
+    }
+
+    .btn-new-item {
+      background: var(--leaf-green);
+      color: var(--white);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(46, 125, 50, 0.25);
+      transition: background 0.15s;
+    }
+
+    .btn-new-item:hover {
+      background: #256628;
+    }
+
+    /* Products Table */
+    .table-responsive {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow-x: auto;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .crud-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .crud-table th {
+      background: #F8FAFC;
+      padding: 12px 16px;
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .crud-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .crud-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .crud-table tr:hover {
+      background: #FDFEFE;
+    }
+
+    .product-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .product-name-bold {
+      font-weight: 700;
+      color: var(--navy);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .product-desc-sm {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      max-width: 280px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .category-chip {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: var(--navy);
+    }
+
+    .action-btn-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-action-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-action-icon:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .btn-action-icon.delete:hover {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red);
+    }
+
+    /* Modal Form */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 34, 61, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .form-control {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: var(--bg-light);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--leaf-green);
+      background: var(--white);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-secondary {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--leaf-green);
+      color: var(--white);
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #15803D;
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(21, 128, 61, 0.4);
+      z-index: 99999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+
+    .toast-box.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../index.html" class="top-brand">
+        <div class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
+        </div>
+        <div class="brand-title">Nolei <span>Gestão & KDS</span></div>
+      </a>
+
+      <div class="top-status-badge">
+        <span class="live-dot"></span>
+        Salão Aberto • Monitor em Tempo Real
+      </div>
+
+      <div class="top-nav-actions">
+        <a href="cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top-action highlight">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+          Abrir Cardápio da Mesa ↗
+        </a>
+        <a href="dashboard.html" class="btn-top-action">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Dashboard ROI
+        </a>
+        <a href="../index.html" class="btn-top-action">
+          Hub Principal
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Subheader -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Central de Gestão do Restaurante</h1>
+        <p class="page-desc">Controle de comandas ativas, chamados do salão, cadastro de produtos e base de clientes.</p>
+      </div>
+      <div>
+        <button class="btn-new-item" onclick="openNewProductModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Novo Item no Cardápio
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <div class="main-tabs">
+      <button class="main-tab active" id="tab-kds" onclick="switchSection('kds')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Monitor de Pedidos & Salão
+        <span class="tab-badge" id="badge-active-orders">3 Mesas</span>
+      </button>
+      <button class="main-tab" id="tab-products" onclick="switchSection('products')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Cardápio & Produtos (CRUD)
+        <span class="tab-badge" id="badge-total-products">8 itens</span>
+      </button>
+      <button class="main-tab" id="tab-users" onclick="switchSection('users')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clientes & Usuários
+        <span class="tab-badge" id="badge-total-users">6 Clientes</span>
+      </button>
+    </div>
+
+    <!-- SECTION 1: KDS & PEDIDOS AO VIVO -->
+    <section id="section-kds">
+      
+      <!-- Live Service Alerts (Garçom / Conta) -->
+      <div class="alerts-container" id="alerts-container">
+        <!-- Injected by JavaScript -->
+      </div>
+
+      <!-- KDS Cards Grid -->
+      <div class="kds-grid" id="kds-grid">
+        <!-- Injected by JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- SECTION 2: CRUD DE PRODUTOS / CARDÁPIO -->
+    <section id="section-products" style="display:none;">
+      
+      <div class="crud-header-bar">
+        <div class="search-filter-box">
+          <input type="text" id="product-search" class="search-input" placeholder="Buscar produto por nome..." oninput="filterProducts()">
+          <select id="product-category-filter" class="search-input" style="max-width:160px;" onchange="filterProducts()">
+            <option value="all">Todas Categorias</option>
+            <option value="entradas">Entradas</option>
+            <option value="principais">Principais</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="sobremesas">Sobremesas</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th style="width: 70px;">Foto</th>
+              <th>Produto & Descrição</th>
+              <th>Categoria</th>
+              <th>Preço</th>
+              <th>Tags / Dieta</th>
+              <th>Status</th>
+              <th style="text-align:right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="products-table-body">
+            <!-- Injected by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- SECTION 3: GESTÃO DE USUÁRIOS & CLIENTES -->
+    <section id="section-users" style="display:none;">
+      
+      <div class="crud-header-bar">
+        <div class="search-filter-box">
+          <input type="text" id="user-search" class="search-input" placeholder="Buscar cliente por nome ou telefone..." oninput="filterUsers()">
+        </div>
+        <button class="btn-new-item" onclick="openNewUserModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          Cadastrar Cliente
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th>Nome Completo</th>
+              <th>WhatsApp / Telefone</th>
+              <th>CPF</th>
+              <th>Mesa Atual / Histórico</th>
+              <th>Pontos Fidelidade</th>
+              <th>Status</th>
+              <th style="text-align:right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body">
+            <!-- Injected by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Modal CRUD Produto (Criar / Editar) -->
+  <div class="modal-overlay" id="modal-product" onclick="closeProductModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-product-title" style="font-size:1.15rem;">Novo Item no Cardápio</h3>
+        <button onclick="closeProductModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+      </div>
+
+      <form id="product-form" onsubmit="saveProduct(event)">
+        <input type="hidden" id="prod-id">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">Nome do Prato / Bebida:</label>
+            <input type="text" id="prod-name" class="form-control" placeholder="Ex: Risoto de Cogumelos" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Categoria:</label>
+            <select id="prod-category" class="form-control" required>
+              <option value="entradas">Entradas</option>
+              <option value="principais">Principais</option>
+              <option value="bebidas">Bebidas</option>
+              <option value="sobremesas">Sobremesas</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Preço de Venda (R$):</label>
+            <input type="number" step="0.01" id="prod-price" class="form-control" placeholder="45.90" required>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Descrição dos Ingredientes:</label>
+            <textarea id="prod-desc" class="form-control" rows="2" placeholder="Tomates cereja confitados, muçarela de búfala e pesto fresco..." required></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">URL da Fotografia (HD):</label>
+            <input type="url" id="prod-image" class="form-control" placeholder="https://images.unsplash.com/..." required>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Tags / Selos Nutricionais (separados por vírgula):</label>
+            <input type="text" id="prod-tags" class="form-control" placeholder="Vegetariano, Sem Glúten, Artesanal">
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeProductModal()">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Produto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal CRUD Usuário -->
+  <div class="modal-overlay" id="modal-user" onclick="closeUserModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-user-title" style="font-size:1.15rem;">Cadastrar Novo Cliente</h3>
+        <button onclick="closeUserModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+      </div>
+
+      <form id="user-form" onsubmit="saveUser(event)">
+        <input type="hidden" id="user-id">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">Nome Completo:</label>
+            <input type="text" id="user-name" class="form-control" placeholder="Ex: Lucas Barbosa" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Telefone / WhatsApp:</label>
+            <input type="tel" id="user-phone" class="form-control" placeholder="(11) 98765-4321" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">CPF (Para Nota):</label>
+            <input type="text" id="user-cpf" class="form-control" placeholder="123.456.789-00">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Mesa Atual / Quarto:</label>
+            <input type="text" id="user-table" class="form-control" placeholder="Mesa 04">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Pontos de Fidelidade:</label>
+            <input type="number" id="user-points" class="form-control" value="50">
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeUserModal()">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Cliente</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-box" id="toast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-msg">Operação realizada com sucesso!</span>
+  </div>
+
+  <script>
+    // 1. Initial Products State (Pre-seeded & localStorage)
+    const initialProducts = [
+      {
+        id: "e1",
+        name: "Bruschetta Caprese",
+        category: "entradas",
+        priceVal: 28.90,
+        desc: "Pão rústico artesanal, tomates cereja confitados, muçarela de búfala e pesto de manjericão.",
+        tags: ["Vegetariano"],
+        image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=300&q=80",
+        active: true
+      },
+      {
+        id: "e2",
+        name: "Carpaccio Bovino Trufado",
+        category: "entradas",
+        priceVal: 38.00,
+        desc: "Lâminas de filé mignon, azeite trufado, Grana Padano e alcaparras crocantes.",
+        tags: ["Sem Glúten"],
+        image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80",
+        active: true
+      },
+      {
+        id: "p1",
+        name: "Risoto de Cogumelos Selvagens",
+        category: "principais",
+        priceVal: 58.90,
+        desc: "Arroz carnaroli com mix de shimeji, shiitake e Paris com manteiga trufada.",
+        tags: ["Vegetariano", "Sem Glúten"],
+        image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=300&q=80",
+        active: true
+      },
+      {
+        id: "p2",
+        name: "Salmão Grelhado na Brasa",
+        category: "principais",
+        priceVal: 72.00,
+        desc: "Posta de salmão com crosta de ervas, mousseline de mandioquinha e aspargos.",
+        tags: ["Sem Glúten"],
+        image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=300&q=80",
+        active: true
+      },
+      {
+        id: "p3",
+        name: "Bife Ancho Prime Angus",
+        category: "principais",
+        priceVal: 84.00,
+        desc: "Corte nobre com chimichurri fresco e batatas rústicas com alecrim.",
+        tags: ["300g"],
+        image: "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=300&q=80",
+        active: true
+      },
+      {
+        id: "b1",
+        name: "Limonada Siciliana com Hortelã",
+        category: "bebidas",
+        priceVal: 18.90,
+        desc: "Limão siciliano natural prensado, água mineral com gás e hortelã fresca.",
+        tags: ["Sem Açúcar"],
+        image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300&q=80",
+        active: true
+      },
+      {
+        id: "b2",
+        name: "Gin Tônica Botânica",
+        category: "bebidas",
+        priceVal: 38.00,
+        desc: "Gin artesanal, tônica premium, zimbro, pepino japonês e ramo de alecrim.",
+        tags: ["Coquetel"],
+        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80",
+        active: true
+      },
+      {
+        id: "s1",
+        name: "Petit Gâteau Chocolate Belga",
+        category: "sobremesas",
+        priceVal: 32.00,
+        desc: "Bolo quente com recheio cremoso 70% e sorvete artesanal de baunilha Bourbon.",
+        tags: ["Artesanal"],
+        image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=300&q=80",
+        active: true
+      }
+    ];
+
+    let products = JSON.parse(localStorage.getItem('nolei_menu_products') || 'null');
+    if (!products) {
+      products = initialProducts;
+      localStorage.setItem('nolei_menu_products', JSON.stringify(products));
+    }
+
+    // 2. Initial Users State
+    const initialUsers = [
+      { id: "u1", name: "Carlos Menezes", phone: "(11) 98765-4321", cpf: "342.567.890-09", table: "Mesa 04", points: 120, status: "Ativo" },
+      { id: "u2", name: "Fernanda Lima", phone: "(11) 99123-4567", cpf: "451.238.901-12", table: "Mesa 04", points: 85, status: "Ativo" },
+      { id: "u3", name: "João Silva", phone: "(11) 98888-7777", cpf: "219.873.456-78", table: "Mesa 04", points: 210, status: "Ativo" },
+      { id: "u4", name: "Mariana Costa", phone: "(11) 97777-6666", cpf: "189.432.765-43", table: "Mesa 02", points: 45, status: "Ativo" },
+      { id: "u5", name: "Rodrigo Almeida", phone: "(11) 96666-5555", cpf: "512.984.321-65", table: "Mesa 07", points: 150, status: "Ativo" },
+      { id: "u6", name: "Camila Ribeiro", phone: "(11) 95555-4444", cpf: "389.123.654-87", table: "Suíte 412", points: 340, status: "VIP" }
+    ];
+
+    let users = JSON.parse(localStorage.getItem('nolei_users_list') || 'null');
+    if (!users) {
+      users = initialUsers;
+      localStorage.setItem('nolei_users_list', JSON.stringify(users));
+    }
+
+    // 3. Live Service Calls (Garçom / Conta)
+    let serviceAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || 'null');
+    if (!serviceAlerts) {
+      serviceAlerts = [
+        { id: "sa1", type: "garcom", table: "Mesa 04", msg: "Garçom chamado para a Mesa 04", time: "Há 2 min" },
+        { id: "sa2", type: "conta", table: "Mesa 02", msg: "Solicitou o fechamento da conta (R$ 142,50)", time: "Há 4 min" }
+      ];
+      localStorage.setItem('nolei_service_alerts', JSON.stringify(serviceAlerts));
+    }
+
+    // 4. KDS Tables Orders State
+    let kdsTables = [
+      {
+        table: "Mesa 04",
+        clientMain: "Carlos Menezes",
+        timeStarted: "19:40",
+        items: [
+          { id: "e1", name: "Bruschetta Caprese", price: "R$ 28,90", priceVal: 28.90, orderedBy: "Carlos Menezes", time: "19:42", status: "entregue" },
+          { id: "b2", name: "Gin Tônica Botânica", price: "R$ 38,00", priceVal: 38.00, orderedBy: "Fernanda Lima", time: "19:44", status: "entregue" },
+          { id: "p1", name: "Risoto de Cogumelos Selvagens", price: "R$ 58,90", priceVal: 58.90, orderedBy: "João Silva", time: "19:50", status: "preparo" }
+        ]
+      },
+      {
+        table: "Mesa 02",
+        clientMain: "Mariana Costa",
+        timeStarted: "19:25",
+        items: [
+          { id: "e2", name: "Carpaccio Bovino Trufado", price: "R$ 38,00", priceVal: 38.00, orderedBy: "Mariana Costa", time: "19:28", status: "entregue" },
+          { id: "p2", name: "Salmão Grelhado na Brasa", price: "R$ 72,00", priceVal: 72.00, orderedBy: "Mariana Costa", time: "19:35", status: "entregue" },
+          { id: "b1", name: "Limonada Siciliana", price: "R$ 18,90", priceVal: 18.90, orderedBy: "Mariana Costa", time: "19:30", status: "entregue" }
+        ]
+      },
+      {
+        table: "Mesa 07",
+        clientMain: "Rodrigo Almeida",
+        timeStarted: "20:05",
+        items: [
+          { id: "p3", name: "Bife Ancho Prime Angus", price: "R$ 84,00", priceVal: 84.00, orderedBy: "Rodrigo Almeida", time: "20:08", status: "preparo" },
+          { id: "b2", name: "Gin Tônica Botânica", price: "R$ 38,00", priceVal: 38.00, orderedBy: "Rodrigo Almeida", time: "20:08", status: "preparo" }
+        ]
+      }
+    ];
+
+    // Read any local additions from mesa 04
+    const mesa04Stored = JSON.parse(localStorage.getItem('nolei_table_orders_04') || 'null');
+    if (mesa04Stored && mesa04Stored.length > 0) {
+      kdsTables[0].items = mesa04Stored.map((item, idx) => ({
+        ...item,
+        status: item.status || (idx < 2 ? 'entregue' : 'preparo')
+      }));
+    }
+
+    // Navigation Switch
+    function switchSection(sec) {
+      document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(`tab-${sec}`).classList.add('active');
+
+      document.getElementById('section-kds').style.display = sec === 'kds' ? 'block' : 'none';
+      document.getElementById('section-products').style.display = sec === 'products' ? 'block' : 'none';
+      document.getElementById('section-users').style.display = sec === 'users' ? 'block' : 'none';
+    }
+
+    // Render KDS & Alerts
+    function renderAlerts() {
+      const container = document.getElementById('alerts-container');
+      if (serviceAlerts.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = serviceAlerts.map(alert => `
+        <div class="service-alert-card ${alert.type}">
+          <div class="alert-info-left">
+            <div class="alert-icon-box">
+              ${alert.type === 'garcom' ? '🔔' : '💳'}
+            </div>
+            <div>
+              <strong style="font-size:0.92rem;">${alert.msg}</strong>
+              <div style="font-size:0.75rem; opacity:0.8;">Solicitado às ${alert.time}</div>
+            </div>
+          </div>
+          <button class="btn-dismiss-alert" onclick="dismissAlert('${alert.id}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Marcar Atendido
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function dismissAlert(id) {
+      serviceAlerts = serviceAlerts.filter(a => a.id !== id);
+      localStorage.setItem('nolei_service_alerts', JSON.stringify(serviceAlerts));
+      renderAlerts();
+      showToast('Chamado atendido e finalizado! ✅');
+    }
+
+    function renderKDS() {
+      const grid = document.getElementById('kds-grid');
+      document.getElementById('badge-active-orders').textContent = `${kdsTables.length} Mesas`;
+
+      grid.innerHTML = kdsTables.map((t, tableIdx) => {
+        let total = 0;
+        t.items.forEach(i => total += (i.priceVal || 0));
+
+        const allDelivered = t.items.length > 0 && t.items.every(i => i.status === 'entregue');
+
+        return `
+          <div class="kds-table-card">
+            <div class="kds-card-header" style="${allDelivered ? 'background:#15803D;' : ''}">
+              <div class="kds-table-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+                ${t.table}
+              </div>
+              <span style="font-size:0.75rem; opacity:0.9;">Início: ${t.timeStarted}</span>
+            </div>
+
+            <div class="kds-order-items">
+              ${t.items.map((item, itemIdx) => `
+                <div class="kds-item-row">
+                  <div>
+                    <div class="kds-item-name">${item.name}</div>
+                    <div class="kds-item-meta">
+                      <span>👤 ${item.orderedBy}</span> • <span>🕒 ${item.time}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span class="status-badge ${item.status === 'entregue' ? 'entregue' : 'preparo'}" onclick="toggleItemStatus(${tableIdx}, ${itemIdx})">
+                      ${item.status === 'entregue' ? '✓ Entregue na Mesa' : '⏳ Em Preparo'}
+                    </span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="kds-card-footer">
+              <div>
+                <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Total Acumulado:</span>
+                <span class="kds-total-val">R$ ${total.toFixed(2).replace('.', ',')}</span>
+              </div>
+              <div style="display:flex; gap:6px;">
+                <button class="btn-table-action" onclick="markAllTableDelivered(${tableIdx})">Todos Entregues</button>
+                <button class="btn-table-action" style="background:#FEE2E2; color:#B91C1C; border-color:#FECACA;" onclick="closeTableComanda(${tableIdx})">Fechar Mesa</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleItemStatus(tableIdx, itemIdx) {
+      const current = kdsTables[tableIdx].items[itemIdx].status;
+      const next = current === 'entregue' ? 'preparo' : 'entregue';
+      kdsTables[tableIdx].items[itemIdx].status = next;
+
+      // sync mesa 04 if applicable
+      if (kdsTables[tableIdx].table === "Mesa 04") {
+        localStorage.setItem('nolei_table_orders_04', JSON.stringify(kdsTables[tableIdx].items));
+      }
+
+      renderKDS();
+      showToast(`Status atualizado para: ${next === 'entregue' ? 'Entregue na Mesa ✅' : 'Em Preparo ⏳'}`);
+    }
+
+    function markAllTableDelivered(tableIdx) {
+      kdsTables[tableIdx].items.forEach(i => i.status = 'entregue');
+      if (kdsTables[tableIdx].table === "Mesa 04") {
+        localStorage.setItem('nolei_table_orders_04', JSON.stringify(kdsTables[tableIdx].items));
+      }
+      renderKDS();
+      showToast(`Todos os pedidos da ${kdsTables[tableIdx].table} marcados como Entregues! 🍽️`);
+    }
+
+    function closeTableComanda(tableIdx) {
+      const tableName = kdsTables[tableIdx].table;
+      if (confirm(`Deseja encerrar e liberar a ${tableName}?`)) {
+        kdsTables.splice(tableIdx, 1);
+        if (tableName === "Mesa 04") {
+          localStorage.removeItem('nolei_table_orders_04');
+        }
+        renderKDS();
+        showToast(`Comanda da ${tableName} encerrada com sucesso! 💳`);
+      }
+    }
+
+    // CRUD PRODUCTS LOGIC
+    function renderProducts(list = products) {
+      const tbody = document.getElementById('products-table-body');
+      document.getElementById('badge-total-products').textContent = `${products.length} itens`;
+
+      tbody.innerHTML = list.map(p => `
+        <tr>
+          <td>
+            <img src="${p.image}" alt="${p.name}" class="product-thumb">
+          </td>
+          <td>
+            <span class="product-name-bold">${p.name}</span>
+            <span class="product-desc-sm">${p.desc}</span>
+          </td>
+          <td>
+            <span class="category-chip">${p.category.toUpperCase()}</span>
+          </td>
+          <td>
+            <strong style="color:var(--navy);">R$ ${Number(p.priceVal).toFixed(2).replace('.', ',')}</strong>
+          </td>
+          <td>
+            ${(p.tags || []).map(t => `<span class="category-chip" style="background:#E8F5E9; color:#166534; border-color:#86EFAC;">${t}</span>`).join(' ')}
+          </td>
+          <td>
+            <span class="status-badge ${p.active !== false ? 'entregue' : 'preparo'}" onclick="toggleProductActive('${p.id}')">
+              ${p.active !== false ? '● Disponível' : '○ Pausado'}
+            </span>
+          </td>
+          <td style="text-align:right;">
+            <div class="action-btn-group" style="justify-content:flex-end;">
+              <button class="btn-action-icon" title="Editar" onclick="editProduct('${p.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button class="btn-action-icon delete" title="Excluir" onclick="deleteProduct('${p.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterProducts() {
+      const search = document.getElementById('product-search').value.toLowerCase();
+      const cat = document.getElementById('product-category-filter').value;
+
+      const filtered = products.filter(p => {
+        const matchesName = p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search);
+        const matchesCat = cat === 'all' || p.category === cat;
+        return matchesName && matchesCat;
+      });
+
+      renderProducts(filtered);
+    }
+
+    function openNewProductModal() {
+      document.getElementById('modal-product-title').textContent = 'Novo Item no Cardápio';
+      document.getElementById('product-form').reset();
+      document.getElementById('prod-id').value = '';
+      document.getElementById('modal-product').classList.add('open');
+    }
+
+    function editProduct(id) {
+      const p = products.find(i => i.id === id);
+      if (!p) return;
+
+      document.getElementById('modal-product-title').textContent = 'Editar Item do Cardápio';
+      document.getElementById('prod-id').value = p.id;
+      document.getElementById('prod-name').value = p.name;
+      document.getElementById('prod-category').value = p.category;
+      document.getElementById('prod-price').value = p.priceVal;
+      document.getElementById('prod-desc').value = p.desc;
+      document.getElementById('prod-image').value = p.image;
+      document.getElementById('prod-tags').value = (p.tags || []).join(', ');
+
+      document.getElementById('modal-product').classList.add('open');
+    }
+
+    function closeProductModal() {
+      document.getElementById('modal-product').classList.remove('open');
+    }
+
+    function saveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById('prod-id').value;
+      const name = document.getElementById('prod-name').value.trim();
+      const category = document.getElementById('prod-category').value;
+      const priceVal = parseFloat(document.getElementById('prod-price').value);
+      const desc = document.getElementById('prod-desc').value.trim();
+      const image = document.getElementById('prod-image').value.trim();
+      const tagsStr = document.getElementById('prod-tags').value.trim();
+      const tags = tagsStr ? tagsStr.split(',').map(t => t.trim()) : [];
+
+      if (id) {
+        // Edit existing
+        const idx = products.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          products[idx] = { ...products[idx], name, category, priceVal, desc, image, tags };
+        }
+      } else {
+        // Create new
+        const newId = 'item_' + Date.now();
+        products.push({ id: newId, name, category, priceVal, desc, image, tags, active: true });
+      }
+
+      localStorage.setItem('nolei_menu_products', JSON.stringify(products));
+      renderProducts();
+      closeProductModal();
+      showToast(`Item "${name}" salvo com sucesso no cardápio! 🎉`);
+    }
+
+    function toggleProductActive(id) {
+      const p = products.find(i => i.id === id);
+      if (!p) return;
+      p.active = p.active === false ? true : false;
+      localStorage.setItem('nolei_menu_products', JSON.stringify(products));
+      renderProducts();
+      showToast(`Item "${p.name}" agora está ${p.active ? 'Disponível' : 'Pausado'}.`);
+    }
+
+    function deleteProduct(id) {
+      const p = products.find(i => i.id === id);
+      if (confirm(`Tem certeza que deseja excluir "${p.name}" do cardápio?`)) {
+        products = products.filter(i => i.id !== id);
+        localStorage.setItem('nolei_menu_products', JSON.stringify(products));
+        renderProducts();
+        showToast('Item excluído do cardápio!');
+      }
+    }
+
+    // CRUD USERS LOGIC
+    function renderUsers(list = users) {
+      const tbody = document.getElementById('users-table-body');
+      document.getElementById('badge-total-users').textContent = `${users.length} Clientes`;
+
+      tbody.innerHTML = list.map(u => `
+        <tr>
+          <td>
+            <strong style="color:var(--navy);">${u.name}</strong>
+          </td>
+          <td>${u.phone}</td>
+          <td><span style="font-family:monospace; font-size:0.8rem; color:var(--text-muted);">${u.cpf || 'Não informado'}</span></td>
+          <td><span class="category-chip" style="background:#EFF6FF; color:#1E40AF; border-color:#BFDBFE;">${u.table || 'Salão'}</span></td>
+          <td><strong style="color:var(--leaf-green);">${u.points || 0} pts</strong></td>
+          <td>
+            <span class="category-chip" style="background:#E8F5E9; color:#166534; border-color:#86EFAC;">${u.status}</span>
+          </td>
+          <td style="text-align:right;">
+            <div class="action-btn-group" style="justify-content:flex-end;">
+              <button class="btn-action-icon" title="Editar" onclick="editUser('${u.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button class="btn-action-icon delete" title="Excluir" onclick="deleteUser('${u.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterUsers() {
+      const search = document.getElementById('user-search').value.toLowerCase();
+      const filtered = users.filter(u => u.name.toLowerCase().includes(search) || u.phone.includes(search));
+      renderUsers(filtered);
+    }
+
+    function openNewUserModal() {
+      document.getElementById('modal-user-title').textContent = 'Cadastrar Novo Cliente';
+      document.getElementById('user-form').reset();
+      document.getElementById('user-id').value = '';
+      document.getElementById('modal-user').classList.add('open');
+    }
+
+    function editUser(id) {
+      const u = users.find(i => i.id === id);
+      if (!u) return;
+
+      document.getElementById('modal-user-title').textContent = 'Editar Cliente';
+      document.getElementById('user-id').value = u.id;
+      document.getElementById('user-name').value = u.name;
+      document.getElementById('user-phone').value = u.phone;
+      document.getElementById('user-cpf').value = u.cpf || '';
+      document.getElementById('user-table').value = u.table || '';
+      document.getElementById('user-points').value = u.points || 0;
+
+      document.getElementById('modal-user').classList.add('open');
+    }
+
+    function closeUserModal() {
+      document.getElementById('modal-user').classList.remove('open');
+    }
+
+    function saveUser(e) {
+      e.preventDefault();
+      const id = document.getElementById('user-id').value;
+      const name = document.getElementById('user-name').value.trim();
+      const phone = document.getElementById('user-phone').value.trim();
+      const cpf = document.getElementById('user-cpf').value.trim();
+      const table = document.getElementById('user-table').value.trim();
+      const points = parseInt(document.getElementById('user-points').value) || 0;
+
+      if (id) {
+        const idx = users.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          users[idx] = { ...users[idx], name, phone, cpf, table, points };
+        }
+      } else {
+        const newId = 'u_' + Date.now();
+        users.push({ id: newId, name, phone, cpf, table, points, status: 'Ativo' });
+      }
+
+      localStorage.setItem('nolei_users_list', JSON.stringify(users));
+      renderUsers();
+      closeUserModal();
+      showToast(`Cliente "${name}" cadastrado com sucesso!`);
+    }
+
+    function deleteUser(id) {
+      const u = users.find(i => i.id === id);
+      if (confirm(`Excluir cliente "${u.name}" da base?`)) {
+        users = users.filter(i => i.id !== id);
+        localStorage.setItem('nolei_users_list', JSON.stringify(users));
+        renderUsers();
+        showToast('Cliente excluído!');
+      }
+    }
+
+    // Toast
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Initial Execution
+    renderAlerts();
+    renderKDS();
+    renderProducts();
+    renderUsers();
+
+    // Auto-refresh KDS every 3s to pick up live orders from demo/cardapio.html
+    setInterval(() => {
+      const latestMesa04 = JSON.parse(localStorage.getItem('nolei_table_orders_04') || 'null');
+      if (latestMesa04 && latestMesa04.length !== kdsTables[0].items.length) {
+        kdsTables[0].items = latestMesa04.map((item, idx) => ({
+          ...item,
+          status: item.status || (idx < 2 ? 'entregue' : 'preparo')
+        }));
+        renderKDS();
+      }
+
+      const latestAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || 'null');
+      if (latestAlerts && latestAlerts.length !== serviceAlerts.length) {
+        serviceAlerts = latestAlerts;
+        renderAlerts();
+      }
+    }, 2500);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeProductModal();
+        closeUserModal();
+      }
+    });
+  </script>
+</body>
+</html>

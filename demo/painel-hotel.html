@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B132B">
+  <title>Painel Hotel & Pousada — Concierge e Governança Nolei</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-deep: #0B132B;
+      --gold-dark: #1C2541;
+      --gold-accent: #D4A853;
+      --gold-light: #FBF7EE;
+      --gold-border: rgba(212, 168, 83, 0.35);
+      --teal: #0D9488;
+      --teal-light: #CCFBF1;
+      --leaf-green: #15803D;
+      --leaf-green-accent: #22C55E;
+      --leaf-green-light: #DCFCE7;
+      --orange: #EA580C;
+      --orange-light: #FFEDD5;
+      --red: #E11D48;
+      --red-light: #FFE4E6;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --border: #E2E8F0;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); color: var(--gold-deep); font-weight: 700; line-height: 1.25; }
+
+    .top-bar { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 12px 20px; }
+    .top-bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .top-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: var(--gold-deep); color: var(--gold-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .brand-title { font-size: 1.05rem; font-weight: 800; color: var(--gold-deep); }
+    .brand-title span { color: var(--gold-accent); }
+
+    .top-nav-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn-top-action { background: var(--bg-light); border: 1px solid var(--border); color: var(--gold-deep); font-family: var(--font-heading); font-size: 0.76rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s; cursor: pointer; }
+    .btn-top-action:hover { background: var(--gold-deep); color: var(--white); border-color: var(--gold-deep); }
+    .btn-top-action.highlight { background: var(--gold-light); color: var(--gold-dark); border-color: var(--gold-border); font-weight: 700; }
+    .btn-top-action.highlight:hover { background: var(--gold-accent); color: var(--gold-deep); }
+
+    .operator-bar { background: #090E1F; color: #94A3B8; border-bottom: 1px solid #1E293B; padding: 10px 20px; }
+    .operator-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .operator-current { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .operator-badge { background: #1C2541; color: #F8FAFC; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(212, 168, 83, 0.3); }
+    .operator-switch-box { display: flex; align-items: center; gap: 8px; }
+    .operator-select { background: #1C2541; border: 1px solid #334155; color: #F8FAFC; font-family: var(--font-heading); font-size: 0.76rem; padding: 6px 12px; border-radius: 6px; outline: none; cursor: pointer; }
+
+    .container { max-width: 1240px; width: 100%; margin: 0 auto; padding: 24px 20px 60px; flex: 1; }
+    .page-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+    .page-title { font-size: 1.55rem; font-weight: 800; color: var(--gold-deep); }
+    .page-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+
+    .nav-tabs-bar { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: 24px; overflow-x: auto; padding-bottom: 2px; }
+    .tab-btn { background: var(--white); border: 1px solid var(--border); border-bottom: none; color: var(--text-muted); font-family: var(--font-heading); font-size: 0.84rem; font-weight: 600; padding: 10px 18px; border-radius: 10px 10px 0 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn.active { background: var(--gold-deep); color: var(--white); border-color: var(--gold-deep); }
+    .tab-pill { font-size: 0.68rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; background: var(--bg-light); color: var(--gold-deep); }
+    .tab-btn.active .tab-pill { background: var(--gold-accent); color: var(--gold-deep); }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+    .panel-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 14px; transition: all 0.2s ease; }
+    .panel-card:hover { border-color: rgba(212, 168, 83, 0.4); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06); }
+    .card-header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .room-badge { background: var(--gold-light); color: var(--gold-dark); border: 1px solid var(--gold-border); font-family: var(--font-heading); font-size: 0.82rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; }
+    .status-badge { font-family: var(--font-heading); font-size: 0.72rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px; }
+    .status-badge.pending { background: var(--orange-light); color: var(--orange); border: 1px solid rgba(234, 88, 12, 0.3); }
+    .status-badge.preparing { background: #EFF6FF; color: #2563EB; border: 1px solid rgba(37, 99, 235, 0.3); }
+    .status-badge.delivered { background: var(--leaf-green-light); color: var(--leaf-green); border: 1px solid rgba(21, 128, 61, 0.3); }
+
+    .order-items-box { background: var(--bg-light); border-radius: var(--radius-sm); padding: 12px; font-size: 0.85rem; }
+    .order-item-line { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .order-item-line:last-child { margin-bottom: 0; }
+    .card-actions { display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; }
+    .btn-action { flex: 1; padding: 8px 12px; border-radius: 8px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s; }
+    .btn-action.success { background: var(--leaf-green); color: var(--white); }
+    .btn-action.success:hover { background: #166534; }
+    .btn-action.secondary { background: var(--bg-light); border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-action.secondary:hover { background: var(--border); color: var(--text); }
+    .btn-action.danger { background: var(--red-light); color: var(--red); border: 1px solid rgba(225, 29, 72, 0.2); }
+    .btn-action.danger:hover { background: var(--red); color: var(--white); }
+
+    .data-table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
+    .data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.84rem; }
+    .data-table th { background: #F1F5F9; padding: 12px 16px; font-family: var(--font-heading); font-weight: 700; color: var(--gold-deep); border-bottom: 1px solid var(--border); }
+    .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+
+    .toast-msg { position: fixed; bottom: 24px; right: 24px; background: var(--gold-deep); color: var(--white); padding: 12px 20px; border-radius: 10px; font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); z-index: 1000; display: none; align-items: center; gap: 10px; border: 1px solid var(--gold-border); }
+
+    .modal-overlay { position: fixed; inset: 0; background: rgba(11, 19, 43, 0.6); backdrop-filter: blur(4px); z-index: 999; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: var(--white); border-radius: var(--radius); width: 100%; max-width: 500px; padding: 24px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+    .modal-title { font-size: 1.15rem; margin-bottom: 16px; }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+    .form-input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; transition: border-color 0.15s; }
+    .form-input:focus { border-color: var(--gold-accent); }
+    .modal-btns { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+
+    .btn-back-to-top { position: fixed; bottom: 24px; left: 24px; width: 42px; height: 42px; border-radius: 50%; background: var(--gold-deep); color: var(--white); border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.2s; z-index: 90; }
+    .btn-back-to-top:hover { background: var(--gold-dark); transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../index.html" class="top-brand">
+        <div class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div class="brand-title">Hotel & Pousada <span>Painel</span></div>
+          <div style="font-size: 0.72rem; color: var(--text-muted);">Concierge & Governança Integrados</div>
+        </div>
+      </a>
+
+      <div class="top-nav-actions">
+        <a href="hotel.html" class="btn-top-action highlight">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Abrir Cardápio Quarto 412
+        </a>
+        <a href="dashboard-hotel.html" class="btn-top-action">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Dashboard Hotel
+        </a>
+        <a href="../index.html" class="btn-top-action">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Início
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="operator-bar">
+    <div class="operator-inner">
+      <div class="operator-current">
+        <span>Visão Operacional:</span>
+        <span class="operator-badge" id="currentRoleLabel">Concierge Geral</span>
+        <span style="font-size: 0.75rem; color: #64748B;">Recepção, Room Service e Governança da Pousada</span>
+      </div>
+      <div class="operator-switch-box">
+        <label style="font-size: 0.75rem; color: #94A3B8;">Alternar Posto:</label>
+        <select class="operator-select" id="roleSelector" onchange="switchOperatorRole(this.value)">
+          <option value="concierge">Concierge Geral (Todas as Áreas)</option>
+          <option value="room_service">Cozinha / Room Service</option>
+          <option value="governanca">Governança & Limpeza</option>
+          <option value="recepcao">Recepção & Hospedagem</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Gestão de Hospedagem & Pousada</h1>
+        <p class="page-desc">Atendimentos em tempo real para quartos, chalés e solicitações de hóspedes.</p>
+      </div>
+      <div>
+        <button class="btn-top-action highlight" onclick="openNewGuestModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Registrar Novo Hóspede
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-tabs-bar">
+      <button class="tab-btn active" onclick="setTab('concierge')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Recepção & Concierge
+        <span class="tab-pill" id="badgeConcierge">3</span>
+      </button>
+      <button class="tab-btn" onclick="setTab('room_service')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        Room Service da Pousada
+        <span class="tab-pill" id="badgeRoomService">2</span>
+      </button>
+      <button class="tab-btn" onclick="setTab('cafe')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Café da Manhã
+        <span class="tab-pill" id="badgeCafe">4</span>
+      </button>
+      <button class="tab-btn" onclick="setTab('governanca')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Governança & SPA
+        <span class="tab-pill" id="badgeGovernanca">2</span>
+      </button>
+      <button class="tab-btn" onclick="setTab('hospedes')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Quartos & Hóspedes
+        <span class="tab-pill" id="badgeHospedes">6</span>
+      </button>
+    </div>
+
+    <section id="tab-concierge">
+      <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.1rem;">Solicitações Ativas na Recepção</h3>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Sincronizado automaticamente com o quarto do hóspede</span>
+      </div>
+      <div class="cards-grid" id="conciergeCardsGrid"></div>
+    </section>
+
+    <section id="tab-room_service" style="display: none;">
+      <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.1rem;">Pedidos de Room Service & Gastronomia</h3>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Itens solicitados via cardápio digital do quarto</span>
+      </div>
+      <div class="cards-grid" id="roomServiceCardsGrid"></div>
+    </section>
+
+    <section id="tab-cafe" style="display: none;">
+      <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.1rem;">Agendamentos de Café da Manhã</h3>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Horários reservados pelos hóspedes</span>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Acomodação</th>
+              <th>Hóspede</th>
+              <th>Horário Agendado</th>
+              <th>Local Escolhido</th>
+              <th>Preferências</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="cafeTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tab-governanca" style="display: none;">
+      <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.1rem;">Arrumação, Toalhas e Agendamentos de SPA</h3>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Demandas do setor de governança</span>
+      </div>
+      <div class="cards-grid" id="governancaCardsGrid"></div>
+    </section>
+
+    <section id="tab-hospedes" style="display: none;">
+      <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.1rem;">Mapa de Quartos & Chalés da Pousada</h3>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Status de ocupação e consumo acumulado</span>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Quarto / Chalé</th>
+              <th>Hóspede Principal</th>
+              <th>Check-in / Check-out</th>
+              <th>Status do Quarto</th>
+              <th>Consumo Acumulado</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="hospedesTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="modalHospede">
+    <div class="modal-box">
+      <h3 class="modal-title">Registrar Novo Hóspede</h3>
+      <div class="form-group">
+        <label class="form-label">Nome Completo</label>
+        <input type="text" class="form-input" id="newGuestName" placeholder="Ex: Lucas Ferreira">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Acomodação (Quarto / Chalé)</label>
+        <input type="text" class="form-input" id="newGuestRoom" placeholder="Ex: Quarto 412 ou Chalé 07">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Data de Check-out Prevista</label>
+        <input type="date" class="form-input" id="newGuestCheckout">
+      </div>
+      <div class="modal-btns">
+        <button class="btn-action secondary" onclick="closeModal('modalHospede')">Cancelar</button>
+        <button class="btn-action success" onclick="saveNewGuest()">Salvar Hóspede</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-msg" id="toastMsg">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span id="toastText">Operação realizada com sucesso!</span>
+  </div>
+
+  <button class="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    var hotelRequests = [
+      { id: 'HR-101', room: 'Quarto 412', type: 'Transfer / Táxi', details: 'Transfer para o Aeroporto Internacional às 16:30 (2 passageiros)', time: '10 min atrás', status: 'pending' },
+      { id: 'HR-102', room: 'Chalé 04', type: 'Toalhas Extras', details: '2x Toalhas de banho e 1x kit amenities de luxo', time: '18 min atrás', status: 'preparing' },
+      { id: 'HR-103', room: 'Quarto 205', type: 'Late Check-out', details: 'Solicitação de extensão de check-out até às 14:00', time: '35 min atrás', status: 'pending' }
+    ];
+
+    var roomServiceOrders = [
+      { id: 'RS-881', room: 'Quarto 412', items: [{ name: 'Filé Mignon ao Molho Madeira', price: 89.00, qty: 1 }, { name: 'Vinho Tinto Reserva Malbec', price: 35.00, qty: 1 }], total: 124.00, time: '8 min atrás', status: 'preparing' },
+      { id: 'RS-882', room: 'Chalé 08', items: [{ name: 'Club Sandwich Gourmet', price: 45.00, qty: 2 }, { name: 'Suco Natural de Laranja', price: 14.00, qty: 2 }], total: 118.00, time: '22 min atrás', status: 'pending' }
+    ];
+
+    var breakfastBookings = [
+      { id: 'BK-1', room: 'Quarto 412', guest: 'Dr. Roberto Vasconcelos', time: '08:00', location: 'No Quarto', notes: 'Sem lactose, café descafeinado', status: 'confirmed' },
+      { id: 'BK-2', room: 'Chalé 02', guest: 'Mariana & Felipe', time: '08:30', location: 'Salão da Pousada', notes: 'Mesa externa com vista para o jardim', status: 'confirmed' },
+      { id: 'BK-3', room: 'Quarto 301', guest: 'Ana Clara Prado', time: '09:00', location: 'No Quarto', notes: 'Cesta com pães artesanais e frutas', status: 'confirmed' },
+      { id: 'BK-4', room: 'Chalé 06', guest: 'Carlos Eduardo Mendes', time: '09:30', location: 'Salão da Pousada', notes: 'Nenhuma restrição', status: 'confirmed' }
+    ];
+
+    var housekeepingTasks = [
+      { id: 'HK-1', room: 'Quarto 412', guest: 'Dr. Roberto', type: 'Arrumação Completa', time: 'Solicitado agora', status: 'pending' },
+      { id: 'HK-2', room: 'Chalé 05', guest: 'Juliana Costa', type: 'Reserva Massagem SPA', time: 'Hoje às 17:00 (60min Relaxante)', status: 'confirmed' }
+    ];
+
+    var guestsList = [
+      { room: 'Quarto 412', guest: 'Dr. Roberto Vasconcelos', dates: '08/09 - 12/09', status: 'Ocupado', bill: 840.00 },
+      { room: 'Chalé 02', guest: 'Mariana Silva', dates: '07/09 - 10/09', status: 'Ocupado', bill: 1250.00 },
+      { room: 'Chalé 04', guest: 'Beatriz Amaral', dates: '06/09 - 09/09', status: 'Check-out Hoje', bill: 680.00 },
+      { room: 'Quarto 205', guest: 'Fernando Torres', dates: '08/09 - 11/09', status: 'Ocupado', bill: 450.00 },
+      { room: 'Quarto 301', guest: 'Ana Clara Prado', dates: '09/09 - 14/09', status: 'Ocupado', bill: 210.00 },
+      { room: 'Chalé 07', guest: 'Disponível', dates: '—', status: 'Livre / Limpo', bill: 0.00 }
+    ];
+
+    function syncLocalStorage() {
+      try {
+        var saved = localStorage.getItem('nolei_hotel_orders');
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            parsed.forEach(function(p) {
+              if (!roomServiceOrders.find(function(o) { return o.id === p.id; })) {
+                roomServiceOrders.unshift({
+                  id: p.id || 'RS-' + Math.floor(Math.random()*900 + 100),
+                  room: p.room || 'Quarto 412',
+                  items: p.items || [{ name: 'Pedido do Quarto', price: p.total || 50, qty: 1 }],
+                  total: p.total || 50,
+                  time: 'Recente',
+                  status: 'pending'
+                });
+              }
+            });
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function showToast(text) {
+      var toast = document.getElementById('toastMsg');
+      document.getElementById('toastText').innerText = text;
+      toast.style.display = 'inline-flex';
+      setTimeout(function() { toast.style.display = 'none'; }, 3500);
+    }
+
+    function setTab(tabId) {
+      ['concierge', 'room_service', 'cafe', 'governanca', 'hospedes'].forEach(function(t) {
+        document.getElementById('tab-' + t).style.display = (t === tabId) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.tab-btn').forEach(function(btn, index) {
+        var tabs = ['concierge', 'room_service', 'cafe', 'governanca', 'hospedes'];
+        btn.classList.toggle('active', tabs[index] === tabId);
+      });
+    }
+
+    function switchOperatorRole(role) {
+      var label = document.getElementById('currentRoleLabel');
+      if (role === 'concierge') {
+        label.innerText = 'Concierge Geral';
+        setTab('concierge');
+      } else if (role === 'room_service') {
+        label.innerText = 'Cozinha / Room Service';
+        setTab('room_service');
+      } else if (role === 'governanca') {
+        label.innerText = 'Governança & SPA';
+        setTab('governanca');
+      } else if (role === 'recepcao') {
+        label.innerText = 'Recepção & Hospedagem';
+        setTab('hospedes');
+      }
+      showToast('Visão operacional alterada para: ' + label.innerText);
+    }
+
+    function renderConcierge() {
+      var grid = document.getElementById('conciergeCardsGrid');
+      document.getElementById('badgeConcierge').innerText = hotelRequests.length;
+      if (hotelRequests.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><p>Nenhuma solicitação pendente no concierge no momento.</p></div>';
+        return;
+      }
+      grid.innerHTML = hotelRequests.map(function(r) {
+        return '<div class="panel-card">' +
+          '<div class="card-header-row">' +
+            '<span class="room-badge">' +
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>' +
+              r.room +
+            '</span>' +
+            '<span class="status-badge ' + (r.status === 'pending' ? 'pending' : 'preparing') + '">' +
+              (r.status === 'pending' ? 'Pendente' : 'Em Andamento') +
+            '</span>' +
+          '</div>' +
+          '<div>' +
+            '<div style="font-weight: 700; font-size: 0.95rem; color: var(--gold-deep);">' + r.type + '</div>' +
+            '<div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">' + r.details + '</div>' +
+            '<div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px;">Recebido: ' + r.time + '</div>' +
+          '</div>' +
+          '<div class="card-actions">' +
+            (r.status === 'pending' ? 
+              '<button class="btn-action success" onclick="updateConciergeStatus(\'' + r.id + '\', \'preparing\')">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>' +
+                'Atender Pedido' +
+              '</button>' : 
+              '<button class="btn-action success" onclick="completeConcierge(\'' + r.id + '\')">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+                'Concluir Chamado' +
+              '</button>') +
+            '<button class="btn-action danger" onclick="removeConcierge(\'' + r.id + '\')">Dispensar</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function updateConciergeStatus(id, newStatus) {
+      var req = hotelRequests.find(function(r) { return r.id === id; });
+      if (req) {
+        req.status = newStatus;
+        renderConcierge();
+        showToast('Chamado ' + id + ' colocado em atendimento.');
+      }
+    }
+
+    function completeConcierge(id) {
+      hotelRequests = hotelRequests.filter(function(r) { return r.id !== id; });
+      renderConcierge();
+      showToast('Chamado ' + id + ' concluído com sucesso!');
+    }
+
+    function removeConcierge(id) {
+      hotelRequests = hotelRequests.filter(function(r) { return r.id !== id; });
+      renderConcierge();
+      showToast('Chamado dispensado.');
+    }
+
+    function renderRoomService() {
+      var grid = document.getElementById('roomServiceCardsGrid');
+      document.getElementById('badgeRoomService').innerText = roomServiceOrders.length;
+      if (roomServiceOrders.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><p>Nenhum pedido de refeição ou bebida pendente.</p></div>';
+        return;
+      }
+      grid.innerHTML = roomServiceOrders.map(function(o) {
+        return '<div class="panel-card">' +
+          '<div class="card-header-row">' +
+            '<span class="room-badge">' + o.room + '</span>' +
+            '<span class="status-badge ' + (o.status === 'pending' ? 'pending' : 'preparing') + '">' +
+              (o.status === 'pending' ? 'Pendente' : 'Em Preparo') +
+            '</span>' +
+          '</div>' +
+          '<div class="order-items-box">' +
+            o.items.map(function(item) {
+              return '<div class="order-item-line">' +
+                '<span>' + item.qty + 'x ' + item.name + '</span>' +
+                '<span style="font-weight: 700;">R$ ' + (item.price * item.qty).toFixed(2).replace('.', ',') + '</span>' +
+              '</div>';
+            }).join('') +
+            '<div style="border-top: 1px dashed var(--border); margin-top: 8px; padding-top: 6px; display: flex; justify-content: space-between; font-weight: 800; color: var(--gold-deep);">' +
+              '<span>Total do Pedido:</span>' +
+              '<span>R$ ' + o.total.toFixed(2).replace('.', ',') + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="font-size: 0.72rem; color: var(--text-dim);">Recebido: ' + o.time + ' • Pedido #' + o.id + '</div>' +
+          '<div class="card-actions">' +
+            (o.status === 'pending' ? 
+              '<button class="btn-action success" onclick="updateOrderStatus(\'' + o.id + '\', \'preparing\')">Aceitar e Enviar à Cozinha</button>' : 
+              '<button class="btn-action success" onclick="deliverOrder(\'' + o.id + '\')">Marcar como Entregue no Quarto</button>') +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function updateOrderStatus(id, status) {
+      var ord = roomServiceOrders.find(function(o) { return o.id === id; });
+      if (ord) {
+        ord.status = status;
+        renderRoomService();
+        showToast('Pedido ' + id + ' em preparo na cozinha da pousada.');
+      }
+    }
+
+    function deliverOrder(id) {
+      roomServiceOrders = roomServiceOrders.filter(function(o) { return o.id !== id; });
+      renderRoomService();
+      showToast('Pedido ' + id + ' entregue com sucesso!');
+    }
+
+    function renderBreakfast() {
+      var tbody = document.getElementById('cafeTableBody');
+      document.getElementById('badgeCafe').innerText = breakfastBookings.length;
+      tbody.innerHTML = breakfastBookings.map(function(b) {
+        return '<tr>' +
+          '<td><span class="room-badge">' + b.room + '</span></td>' +
+          '<td><strong>' + b.guest + '</strong></td>' +
+          '<td><strong>' + b.time + '</strong></td>' +
+          '<td>' + b.location + '</td>' +
+          '<td style="color: var(--text-muted); font-size: 0.8rem;">' + b.notes + '</td>' +
+          '<td>' +
+            '<button class="btn-action success" style="padding: 4px 8px; font-size: 0.72rem;" onclick="showToast(\'Agendamento de ' + b.guest + ' confirmado!\')">Confirmar</button>' +
+          '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function renderHousekeeping() {
+      var grid = document.getElementById('governancaCardsGrid');
+      document.getElementById('badgeGovernanca').innerText = housekeepingTasks.length;
+      grid.innerHTML = housekeepingTasks.map(function(t) {
+        return '<div class="panel-card">' +
+          '<div class="card-header-row">' +
+            '<span class="room-badge">' + t.room + '</span>' +
+            '<span class="status-badge ' + (t.status === 'pending' ? 'pending' : 'preparing') + '">' + (t.status === 'pending' ? 'Aguardando' : 'Confirmado') + '</span>' +
+          '</div>' +
+          '<div>' +
+            '<div style="font-weight: 700; color: var(--gold-deep);">' + t.type + '</div>' +
+            '<div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Hóspede: ' + t.guest + '</div>' +
+            '<div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px;">' + t.time + '</div>' +
+          '</div>' +
+          '<div class="card-actions">' +
+            '<button class="btn-action success" onclick="completeHousekeeping(\'' + t.id + '\')">Concluir Tarefa</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function completeHousekeeping(id) {
+      housekeepingTasks = housekeepingTasks.filter(function(t) { return t.id !== id; });
+      renderHousekeeping();
+      showToast('Serviço de governança concluído!');
+    }
+
+    function renderGuests() {
+      var tbody = document.getElementById('hospedesTableBody');
+      document.getElementById('badgeHospedes').innerText = guestsList.length;
+      tbody.innerHTML = guestsList.map(function(g) {
+        return '<tr>' +
+          '<td><span class="room-badge">' + g.room + '</span></td>' +
+          '<td><strong>' + g.guest + '</strong></td>' +
+          '<td>' + g.dates + '</td>' +
+          '<td>' +
+            '<span class="status-badge ' + (g.status === 'Ocupado' ? 'preparing' : (g.status.includes('Livre') ? 'delivered' : 'pending')) + '">' +
+              g.status +
+            '</span>' +
+          '</td>' +
+          '<td><strong>R$ ' + g.bill.toFixed(2).replace('.', ',') + '</strong></td>' +
+          '<td>' +
+            '<button class="btn-action secondary" style="padding: 4px 8px; font-size: 0.72rem;" onclick="showToast(\'Abrindo extrato de ' + g.room + '\')">Extrato</button>' +
+          '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function openNewGuestModal() {
+      document.getElementById('modalHospede').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function saveNewGuest() {
+      var name = document.getElementById('newGuestName').value.trim();
+      var room = document.getElementById('newGuestRoom').value.trim();
+      if (!name || !room) {
+        alert('Por favor preencha nome e acomodação.');
+        return;
+      }
+      guestsList.unshift({
+        room: room,
+        guest: name,
+        dates: 'Check-in Hoje',
+        status: 'Ocupado',
+        bill: 0.00
+      });
+      renderGuests();
+      closeModal('modalHospede');
+      showToast('Novo hóspede ' + name + ' registrado em ' + room + '!');
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      syncLocalStorage();
+      renderConcierge();
+      renderRoomService();
+      renderBreakfast();
+      renderHousekeeping();
+      renderGuests();
+    });
+  </script>
+</body>
+</html>

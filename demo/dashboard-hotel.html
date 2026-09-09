@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B132B">
+  <title>Dashboard Hotel & Pousada — Métricas de Hospedagem Nolei</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-deep: #0B132B;
+      --gold-accent: #D4A853;
+      --gold-light: #FBF7EE;
+      --leaf-green: #15803D;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --radius: 14px;
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--gold-deep); }
+
+    .top-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+    .top-bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .top-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; color: var(--gold-deep); font-size: 1.05rem; }
+    .top-brand span { color: var(--gold-accent); }
+    .top-nav-actions { display: flex; gap: 8px; }
+    .btn-action { background: var(--bg-light); border: 1px solid var(--border); color: var(--gold-deep); font-family: var(--font-heading); font-size: 0.76rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-action:hover { background: var(--gold-deep); color: var(--white); }
+    .btn-action.highlight { background: var(--gold-light); color: var(--gold-deep); border-color: rgba(212,168,83,0.4); font-weight: 700; }
+
+    .container { max-width: 1240px; width: 100%; margin: 0 auto; padding: 24px 20px 60px; flex: 1; }
+    .page-header { margin-bottom: 24px; }
+    .page-title { font-size: 1.55rem; font-weight: 800; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .kpi-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-val { font-size: 1.85rem; font-family: var(--font-heading); font-weight: 800; color: var(--gold-deep); margin-top: 4px; }
+    .kpi-sub { font-size: 0.75rem; color: var(--leaf-green); font-weight: 600; margin-top: 4px; }
+
+    .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
+    .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .chart-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
+
+    .ranking-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .ranking-item:last-child { border-bottom: none; }
+    .ranking-bar-bg { height: 6px; background: #E2E8F0; border-radius: 4px; margin-top: 6px; overflow: hidden; }
+    .ranking-bar-fill { height: 100%; background: var(--gold-accent); border-radius: 4px; }
+
+    .btn-back-to-top { position: fixed; bottom: 24px; left: 24px; width: 42px; height: 42px; border-radius: 50%; background: var(--gold-deep); color: var(--white); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../index.html" class="top-brand">
+        <div>Hotel & Pousada <span>Dashboard</span></div>
+      </a>
+      <div class="top-nav-actions">
+        <a href="hotel.html" class="btn-action">Ver Cardápio Quarto 412</a>
+        <a href="painel-hotel.html" class="btn-action highlight">Abrir Painel Hotel & Pousada</a>
+        <a href="../index.html" class="btn-action">Início</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Performance de Hospedagem & Governança</h1>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">Taxa de ocupação de chalés e quartos, consumo de room service e tempo de resposta do concierge.</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Taxa de Ocupação</div>
+        <div class="kpi-val">87,5%</div>
+        <div class="kpi-sub">14 de 16 quartos & chalés ocupados</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Faturamento Room Service</div>
+        <div class="kpi-val">R$ 3.430,00</div>
+        <div class="kpi-sub">+28% com pedidos diretos pelo quarto</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Tempo Médio de Atendimento</div>
+        <div class="kpi-val">11 min</div>
+        <div class="kpi-sub">Solicitações de concierge & governança</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Índice de Satisfação Hóspedes</div>
+        <div class="kpi-val">4.95 ★</div>
+        <div class="kpi-sub">Baseado em 42 avaliações no check-out</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3 class="chart-title">Serviços Mais Solicitados pelos Hóspedes</h3>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Café da Manhã Agendado no Quarto</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 90%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">32 pedidos</strong>
+        </div>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Transfer para Aeroporto / Passeios</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 68%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">18 solicitações</strong>
+        </div>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Toalhas Extras & Amenities de Luxo</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 54%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">14 solicitações</strong>
+        </div>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Sessão de Massagem no SPA</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 45%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">11 reservas</strong>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3 class="chart-title">Consumo Acumulado por Acomodação</h3>
+        <div class="ranking-item">
+          <div>
+            <div style="font-weight: 700;">Chalé 02 (Suíte Master)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Mariana Silva • Check-out 10/09</div>
+          </div>
+          <div style="text-align: right;">
+            <strong style="color: var(--gold-deep);">R$ 1.250,00</strong>
+            <div style="font-size: 0.75rem; color: var(--leaf-green);">Room service + SPA</div>
+          </div>
+        </div>
+        <div class="ranking-item">
+          <div>
+            <div style="font-weight: 700;">Quarto 412 (Vista Jardim)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Dr. Roberto • Check-out 12/09</div>
+          </div>
+          <div style="text-align: right;">
+            <strong style="color: var(--gold-deep);">R$ 840,00</strong>
+            <div style="font-size: 0.75rem; color: var(--leaf-green);">Room service + Transfer</div>
+          </div>
+        </div>
+        <div class="ranking-item">
+          <div>
+            <div style="font-weight: 700;">Chalé 04 (Chalé Rústico)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Beatriz Amaral • Check-out Hoje</div>
+          </div>
+          <div style="text-align: right;">
+            <strong style="color: var(--gold-deep);">R$ 680,00</strong>
+            <div style="font-size: 0.75rem; color: var(--leaf-green);">Gastronomia do quarto</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button class="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+</body>
+</html>

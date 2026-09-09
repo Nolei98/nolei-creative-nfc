@@ -963,13 +963,13 @@
       <!-- Desktop Nav Organized by Sector -->
       <nav class="desktop-nav" aria-label="Navegação por Setor">
         <a href="#solucoes" class="nav-link">Demos por Setor</a>
-        <a href="demo/gestao.html?setor=restaurante" class="nav-link">
+        <a href="demo/painel-restaurante.html" class="nav-link">
           Restaurante & Cozinha
         </a>
-        <a href="demo/gestao.html?setor=hotel" class="nav-link">
-          Hotel & Suítes
+        <a href="demo/painel-hotel.html" class="nav-link">
+          Hotel & Pousada
         </a>
-        <a href="demo/dashboard.html" class="nav-link">Métricas & ROI</a>
+        <a href="demo/dashboard-restaurante.html" class="nav-link">Métricas & ROI</a>
         <a href="docs.html" class="nav-link">Documentação</a>
         <button type="button" class="nav-google-btn" onclick="openGoogleHelperModal()" title="Assistente Google Meu Negócio">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -988,20 +988,20 @@
   <div class="mobile-drawer" id="mobile-drawer" onclick="closeMobileMenu()">
     <div class="mobile-drawer-content" onclick="event.stopPropagation()">
       <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; padding-left:4px;">Segmentos de Negócio</div>
-      <a href="demo/gestao.html?setor=restaurante" class="mobile-nav-link" style="background:#ECFDF5; color:#047857; border-color:#A7F3D0;" onclick="closeMobileMenu()">
+      <a href="demo/painel-restaurante.html" class="mobile-nav-link" style="background:#ECFDF5; color:#047857; border-color:#A7F3D0;" onclick="closeMobileMenu()">
         Painel Restaurante & Cozinha ↗
       </a>
-      <a href="demo/gestao.html?setor=hotel" class="mobile-nav-link" style="background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;" onclick="closeMobileMenu()">
-        Painel Hotel & Concierge ↗
+      <a href="demo/painel-hotel.html" class="mobile-nav-link" style="background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;" onclick="closeMobileMenu()">
+        Painel Hotel & Pousada ↗
       </a>
-      <a href="demo/gestao.html?setor=fidelidade" class="mobile-nav-link" style="background:#FAF5FF; color:#7E22CE; border-color:#E9D5FF;" onclick="closeMobileMenu()">
+      <a href="demo/painel-fidelidade.html" class="mobile-nav-link" style="background:#FAF5FF; color:#7E22CE; border-color:#E9D5FF;" onclick="closeMobileMenu()">
         Painel Fidelidade & Bônus ↗
       </a>
       <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:8px 0 4px; padding-left:4px;">Navegação Geral</div>
       <a href="#solucoes" class="mobile-nav-link" onclick="closeMobileMenu()">
         Demos Interativas (NFC / QR)
       </a>
-      <a href="demo/dashboard.html" class="mobile-nav-link" onclick="closeMobileMenu()">
+      <a href="demo/dashboard-restaurante.html" class="mobile-nav-link" onclick="closeMobileMenu()">
         Dashboard Métricas & ROI
       </a>
       <a href="docs.html" class="mobile-nav-link" onclick="closeMobileMenu()">
@@ -1062,7 +1062,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <a href="demo/dashboard.html?setor=google" class="card-param-text" style="color:var(--navy); font-weight:600; text-decoration:underline;">Ver Métricas de Reputação ↗</a>
+          <a href="demo/dashboard-avaliacoes.html" class="card-param-text" style="color:var(--navy); font-weight:600; text-decoration:underline;">Ver Métricas de Reputação ↗</a>
           <button class="btn-card-qr-action" id="qr-action-avaliacao" onclick="openQrCodeModal('Google Avaliações', 'demo/avaliacao.html')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code
@@ -1087,7 +1087,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <a href="demo/gestao.html?setor=restaurante" class="card-param-text" style="color:var(--leaf-green); font-weight:700; text-decoration:underline;">Abrir Painel Restaurante & Cozinha ↗</a>
+          <a href="demo/painel-restaurante.html" class="card-param-text" style="color:var(--leaf-green); font-weight:700; text-decoration:underline;">Abrir Painel Restaurante & Cozinha ↗</a>
           <button class="btn-card-qr-action" id="qr-action-cardapio" onclick="openQrCodeModal('Cardápio Digital (Mesa 04)', 'demo/cardapio.html', 'mesa=04')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code
@@ -1112,7 +1112,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <a href="demo/gestao.html?setor=hotel" class="card-param-text" style="color:var(--blue); font-weight:700; text-decoration:underline;">Abrir Painel Hotel & Suítes ↗</a>
+          <a href="demo/painel-hotel.html" class="card-param-text" style="color:var(--blue); font-weight:700; text-decoration:underline;">Abrir Painel Hotel & Pousada ↗</a>
           <button class="btn-card-qr-action" id="qr-action-hotel" onclick="openQrCodeModal('Concierge & Quarto (Suíte 412)', 'demo/hotel.html', 'quarto=412')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code
@@ -1137,7 +1137,7 @@
           </div>
         </a>
         <div class="card-actions-row">
-          <a href="demo/gestao.html?setor=fidelidade" class="card-param-text" style="color:#7E22CE; font-weight:700; text-decoration:underline;">Abrir Painel Fidelidade & Bônus ↗</a>
+          <a href="demo/painel-fidelidade.html" class="card-param-text" style="color:#7E22CE; font-weight:700; text-decoration:underline;">Abrir Painel Fidelidade & Bônus ↗</a>
           <button class="btn-card-qr-action" id="qr-action-fidelidade" onclick="openQrCodeModal('Cartão Fidelidade', 'demo/fidelidade.html', 'nome=Maria&loja=Café Origem')" style="display:none;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Escanear QR Code
@@ -1240,8 +1240,8 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Documentação Técnica & Manual
         </a>
-        <a href="demo/gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; padding:8px 12px;">Painel Gestão & Cozinha</a>
-        <a href="demo/dashboard.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none; padding:8px 12px;">Dashboard ROI</a>
+        <a href="demo/painel-restaurante.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; padding:8px 12px;">Painel Gestão & Cozinha</a>
+        <a href="demo/dashboard-restaurante.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none; padding:8px 12px;">Dashboard ROI</a>
       </div>
       <div>© 2024 Nolei Creative • Ecossistemas Inteligentes de Hardware & Software</div>
     </footer>

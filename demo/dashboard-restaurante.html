@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0F223D">
+  <title>Dashboard Restaurante & Salão — Métricas Nolei</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0F223D;
+      --navy-light: #162C46;
+      --green: #2E7D32;
+      --green-accent: #22C55E;
+      --green-light: #E8F5E9;
+      --orange: #F97316;
+      --white: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --radius: 14px;
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--navy); }
+
+    .top-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+    .top-bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .top-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; color: var(--navy); font-size: 1.05rem; }
+    .top-brand span { color: var(--green); }
+    .top-nav-actions { display: flex; gap: 8px; }
+    .btn-action { background: var(--bg-light); border: 1px solid var(--border); color: var(--navy); font-family: var(--font-heading); font-size: 0.76rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-action:hover { background: var(--navy); color: var(--white); }
+    .btn-action.highlight { background: var(--green-light); color: var(--green); border-color: rgba(46,125,50,0.3); font-weight: 700; }
+
+    .container { max-width: 1240px; width: 100%; margin: 0 auto; padding: 24px 20px 60px; flex: 1; }
+    .page-header { margin-bottom: 24px; }
+    .page-title { font-size: 1.55rem; font-weight: 800; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .kpi-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-val { font-size: 1.85rem; font-family: var(--font-heading); font-weight: 800; color: var(--navy); margin-top: 4px; }
+    .kpi-sub { font-size: 0.75rem; color: var(--green); font-weight: 600; margin-top: 4px; }
+
+    .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
+    .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .chart-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
+    
+    .ranking-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .ranking-item:last-child { border-bottom: none; }
+    .ranking-bar-bg { height: 6px; background: #E2E8F0; border-radius: 4px; margin-top: 6px; overflow: hidden; }
+    .ranking-bar-fill { height: 100%; background: var(--green); border-radius: 4px; }
+
+    .btn-back-to-top { position: fixed; bottom: 24px; left: 24px; width: 42px; height: 42px; border-radius: 50%; background: var(--navy); color: var(--white); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../index.html" class="top-brand">
+        <div>Restaurante & Salão <span>Dashboard</span></div>
+      </a>
+      <div class="top-nav-actions">
+        <a href="cardapio.html" class="btn-action">Ver Cardápio Mesa 04</a>
+        <a href="painel-restaurante.html" class="btn-action highlight">Abrir Painel do Salão & Cozinha</a>
+        <a href="../index.html" class="btn-action">Início</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Métricas de Performance do Restaurante</h1>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">Resultados em tempo real de salão, garçons, cardápio digital e tempo de preparo.</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Faturamento Hoje</div>
+        <div class="kpi-val">R$ 4.820,50</div>
+        <div class="kpi-sub">+18,4% em relação à média diária</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Mesas Atendidas</div>
+        <div class="kpi-val">34 mesas</div>
+        <div class="kpi-sub">Tempo médio de permanência: 52 min</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Ticket Médio por Mesa</div>
+        <div class="kpi-val">R$ 141,77</div>
+        <div class="kpi-sub">+22% com pedidos via cardápio digital</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Tempo Médio na Cozinha</div>
+        <div class="kpi-val">14 min</div>
+        <div class="kpi-sub">Dentro do padrão estabelecido (&lt; 18 min)</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3 class="chart-title">Pratos & Bebidas Mais Pedidos Hoje</h3>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Risoto de Funghi com Trufa</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 88%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">28 pedidos</strong>
+        </div>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Salmão Grelhado na Brasa</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 72%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">23 pedidos</strong>
+        </div>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Burger Artesanal com Gruyère</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 65%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">19 pedidos</strong>
+        </div>
+        <div class="ranking-item">
+          <div style="flex: 1; padding-right: 12px;">
+            <div style="font-weight: 700; font-size: 0.9rem;">Gin Tônica Botânica</div>
+            <div class="ranking-bar-bg"><div class="ranking-bar-fill" style="width: 55%;"></div></div>
+          </div>
+          <strong style="font-size: 0.9rem;">16 pedidos</strong>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3 class="chart-title">Desempenho & Avaliações da Equipe de Garçons</h3>
+        <div class="ranking-item">
+          <div>
+            <div style="font-weight: 700;">Mateus Santos</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Mesas 01 a 05 • 14 atendimentos</div>
+          </div>
+          <div style="text-align: right;">
+            <strong style="color: #F59E0B;">4.9 ★</strong>
+            <div style="font-size: 0.75rem; color: var(--green);">98% satisfação</div>
+          </div>
+        </div>
+        <div class="ranking-item">
+          <div>
+            <div style="font-weight: 700;">Juliana Ramos</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Mesas 06 a 10 • 12 atendimentos</div>
+          </div>
+          <div style="text-align: right;">
+            <strong style="color: #F59E0B;">4.8 ★</strong>
+            <div style="font-size: 0.75rem; color: var(--green);">95% satisfação</div>
+          </div>
+        </div>
+        <div class="ranking-item">
+          <div>
+            <div style="font-weight: 700;">Rodrigo Lima</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Mesas 11 a 15 • 8 atendimentos</div>
+          </div>
+          <div style="text-align: right;">
+            <strong style="color: #F59E0B;">4.7 ★</strong>
+            <div style="font-size: 0.75rem; color: var(--green);">92% satisfação</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button class="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+</body>
+</html>

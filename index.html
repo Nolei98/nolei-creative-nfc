@@ -508,15 +508,10 @@
 
       <!-- Desktop Nav -->
       <!-- Desktop Nav Organized by Sector -->
-      <nav class="desktop-nav" aria-label="Navegação por Setor">
-        <a href="#solucoes" class="nav-link">Demos por Setor</a>
-        <a href="demo/painel-restaurante.html" class="nav-link">
-          Restaurante & Cozinha
-        </a>
-        <a href="demo/painel-hotel.html" class="nav-link">
-          Hotel & Pousada
-        </a>
-        <a href="demo/dashboard-restaurante.html" class="nav-link">Métricas & ROI</a>
+      <!-- Desktop Nav (KISS, CLEAN, LUXURY) -->
+      <nav class="desktop-nav" aria-label="Navegação Principal">
+        <a href="#solucoes" class="nav-link">Demonstrações</a>
+        <a href="#hardware" class="nav-link">Hardware & Displays</a>
         <a href="docs.html" class="nav-link">Documentação</a>
         <button type="button" class="nav-google-btn" onclick="openGoogleHelperModal()" title="Assistente Google Meu Negócio">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -531,30 +526,20 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
+  <!-- Mobile Drawer Menu (KISS, CLEAN, LUXURY) -->
   <div class="mobile-drawer" id="mobile-drawer" onclick="closeMobileMenu()">
     <div class="mobile-drawer-content" onclick="event.stopPropagation()">
-      <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; padding-left:4px;">Segmentos de Negócio</div>
-      <a href="demo/painel-restaurante.html" class="mobile-nav-link" style="background:#ECFDF5; color:#047857; border-color:#A7F3D0;" onclick="closeMobileMenu()">
-        Painel Restaurante & Cozinha 
-      </a>
-      <a href="demo/painel-hotel.html" class="mobile-nav-link" style="background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;" onclick="closeMobileMenu()">
-        Painel Hotel & Pousada 
-      </a>
-      <a href="demo/painel-fidelidade.html" class="mobile-nav-link" style="background:#FAF5FF; color:#7E22CE; border-color:#E9D5FF;" onclick="closeMobileMenu()">
-        Painel Fidelidade & Bônus 
-      </a>
-      <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:8px 0 4px; padding-left:4px;">Navegação Geral</div>
       <a href="#solucoes" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Demos Interativas (NFC / QR)
+        Demonstrações Interativas
       </a>
-      <a href="demo/dashboard-restaurante.html" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Dashboard Métricas & ROI
+      <a href="#hardware" class="mobile-nav-link" onclick="closeMobileMenu()">
+        Hardware & Displays Físicos
       </a>
       <a href="docs.html" class="mobile-nav-link" onclick="closeMobileMenu()">
-        Documentação & Guia dos Setores
+        Documentação & Guia Técnico
       </a>
-      <button type="button" class="mobile-nav-link" style="border:1px solid #AECBFA; background:#E8F0FE; color:#1A73E8; width:100%; font-family:inherit; cursor:pointer;" onclick="closeMobileMenu(); openGoogleHelperModal();">
+      <button type="button" class="mobile-nav-link" style="border:1px solid rgba(11,19,43,0.15); background:#F1F5F9; color:var(--navy); width:100%; font-family:inherit; cursor:pointer;" onclick="closeMobileMenu(); openGoogleHelperModal();">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Assistente Google Meu Negócio
       </button>
     </div>

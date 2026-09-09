@@ -1030,26 +1030,8 @@
         <div class="brand-title" id="brand-title-text">Nolei <span>Gestão & Cozinha</span></div>
       </a>
 
-      <div class="top-nav-actions">
-        <a href="cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top-action highlight">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
-          Cardápio Mesa 04 ↗
-        </a>
-        <a href="hotel.html?source=nfc&quarto=412" target="_blank" class="btn-top-action highlight" style="background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
-          Suíte 412 Hotel ↗
-        </a>
-        <a href="fidelidade.html?source=nfc" target="_blank" class="btn-top-action highlight" style="background:#FEF3C7; color:#B45309; border-color:#FDE68A;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M17 7h.01M7 17h.01M17 17h.01"/></svg>
-          Fidelidade ↗
-        </a>
-        <a href="dashboard.html" class="btn-top-action">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Dashboard ROI
-        </a>
-        <a href="../index.html" class="btn-top-action">
-          Hub Principal
-        </a>
+      <div class="top-nav-actions" id="dynamic-top-actions">
+        <!-- Injected dynamically based on sector -->
       </div>
     </div>
   </header>
@@ -1101,7 +1083,7 @@
         </button>
         <button class="main-tab" id="tab-hotel" onclick="switchSection('hotel')">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
-          Hotel & Concierge
+          Hotel & Pousada (Concierge)
           <span class="tab-badge" id="badge-total-hotel-orders" style="background:#EFF6FF; color:#1D4ED8;">3 Pedidos</span>
         </button>
         <button class="main-tab" id="tab-loyalty" onclick="switchSection('loyalty')">
@@ -1152,7 +1134,7 @@
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-active">3 chamados</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--leaf-green);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Suítes Ocupadas</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Quartos Ocupados na Pousada</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-rooms">8 Suítes</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--orange);">
@@ -1400,14 +1382,12 @@
   </main>
 
   <!-- Footer -->
+  <!-- Footer -->
   <footer style="text-align:center; padding:32px 16px 40px; color:var(--text-muted); font-size:0.78rem; border-top:1px solid var(--border); margin-top:40px; background:var(--white);">
-    <div style="margin-bottom:12px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-      <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação & Manual</a>
-      <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Dashboard ROI</a>
-      <a href="cardapio.html?source=nfc&mesa=04" target="_blank" style="color:var(--navy); font-weight:600; text-decoration:none;">Cardápio da Mesa 04 ↗</a>
-      <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
+    <div id="dynamic-footer-links" style="margin-bottom:12px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <!-- Injected dynamically based on sector -->
     </div>
-    <p>© 2026 Nolei Creative — Sistema de Inteligência Física & Digital para Estabelecimentos.</p>
+    <p id="dynamic-footer-desc">© 2026 Nolei Creative — Sistema de Inteligência Física & Digital para Estabelecimentos.</p>
   </footer>
 
   <!-- Modal CRUD Produto -->
@@ -1713,6 +1693,9 @@
       const brandTitle = document.getElementById('brand-title-text');
       const pageTitle = document.getElementById('main-page-title');
       const pageDesc = document.getElementById('main-page-desc');
+      const topActions = document.getElementById('dynamic-top-actions');
+      const footerLinks = document.getElementById('dynamic-footer-links');
+      const footerDesc = document.getElementById('dynamic-footer-desc');
 
       // Elements to toggle
       const tabKds = document.getElementById('tab-kds');
@@ -1733,7 +1716,7 @@
         if (descPill) descPill.textContent = 'Módulos de Salão, Mesas, Cozinha, Cardápio e Garçons';
         if (brandTitle) brandTitle.innerHTML = 'Nolei <span>Gastronomia & Cozinha</span>';
         if (pageTitle) pageTitle.textContent = 'Painel do Restaurante & Cozinha';
-        if (pageDesc) pageDesc.textContent = 'Controle de comandas por mesa, chamados de garçom, fila de preparo e cardápio.';
+        if (pageDesc) pageDesc.textContent = 'Controle de comandas por mesa, chamados de garçom, fila de preparo e cardápio digital.';
 
         if (tabKds) tabKds.style.display = 'inline-flex';
         if (tabProducts) tabProducts.style.display = 'inline-flex';
@@ -1743,19 +1726,44 @@
         if (tabLoyalty) tabLoyalty.style.display = 'none';
         if (operatorBar) operatorBar.style.display = 'block';
 
+        if (topActions) {
+          topActions.innerHTML = `
+            <a href="cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top-action highlight">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+              Cardápio Mesa 04 ↗
+            </a>
+            <a href="dashboard.html?setor=cardapio" class="btn-top-action">
+              Métricas do Restaurante
+            </a>
+            <a href="../index.html" class="btn-top-action">
+              Hub Principal
+            </a>
+          `;
+        }
+
+        if (footerLinks) {
+          footerLinks.innerHTML = `
+            <a href="../docs.html#restaurante" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação do Restaurante</a>
+            <a href="cardapio.html?source=nfc&mesa=04" target="_blank" style="color:var(--leaf-green); font-weight:700; text-decoration:none;">Abrir Cardápio da Mesa 04 ↗</a>
+            <a href="dashboard.html?setor=cardapio" style="color:var(--navy); font-weight:600; text-decoration:none;">Métricas de Vendas</a>
+            <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
+          `;
+        }
+        if (footerDesc) footerDesc.textContent = '© 2026 Nolei Creative — Painel Operacional de Gastronomia & Restaurantes.';
+
         switchSection('kds');
 
       } else if (sec === 'hotel') {
         if (badgePill) {
-          badgePill.textContent = 'Segmento: Hotelaria & Hospedagem';
+          badgePill.textContent = 'Segmento: Hotelaria & Pousada';
           badgePill.style.background = '#1E3A8A';
           badgePill.style.color = '#93C5FD';
           badgePill.style.borderColor = '#3B82F6';
         }
-        if (descPill) descPill.textContent = 'Módulos de Suítes, Room Service, Café no Quarto, SPA e Governança';
-        if (brandTitle) brandTitle.innerHTML = 'Nolei <span>Hotelaria & Concierge</span>';
-        if (pageTitle) pageTitle.textContent = 'Painel Hotelaria & Suítes';
-        if (pageDesc) pageDesc.textContent = 'Gestão de solicitações dos quartos, room service, café da manhã, SPA e governança.';
+        if (descPill) descPill.textContent = 'Módulos de Quartos, Room Service, Café na Pousada, SPA e Governança';
+        if (brandTitle) brandTitle.innerHTML = 'Nolei <span>Hotelaria & Pousada</span>';
+        if (pageTitle) pageTitle.textContent = 'Painel Hotel & Pousada (Recepção)';
+        if (pageDesc) pageDesc.textContent = 'Gestão de solicitações dos quartos da pousada, room service, café da manhã, SPA e governança.';
 
         if (tabHotel) tabHotel.style.display = 'inline-flex';
         if (tabUsers) tabUsers.style.display = 'inline-flex';
@@ -1764,6 +1772,31 @@
         if (tabWaiters) tabWaiters.style.display = 'none';
         if (tabLoyalty) tabLoyalty.style.display = 'none';
         if (operatorBar) operatorBar.style.display = 'none';
+
+        if (topActions) {
+          topActions.innerHTML = `
+            <a href="hotel.html?source=nfc&quarto=412" target="_blank" class="btn-top-action highlight" style="background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
+              Quarto 412 Pousada ↗
+            </a>
+            <a href="dashboard.html?setor=hotel" class="btn-top-action">
+              Métricas da Pousada
+            </a>
+            <a href="../index.html" class="btn-top-action">
+              Hub Principal
+            </a>
+          `;
+        }
+
+        if (footerLinks) {
+          footerLinks.innerHTML = `
+            <a href="../docs.html#hotel" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação da Pousada</a>
+            <a href="hotel.html?source=nfc&quarto=412" target="_blank" style="color:#1D4ED8; font-weight:700; text-decoration:none;">Abrir Quarto 412 na Pousada ↗</a>
+            <a href="dashboard.html?setor=hotel" style="color:var(--navy); font-weight:600; text-decoration:none;">Métricas de Hospedagem</a>
+            <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
+          `;
+        }
+        if (footerDesc) footerDesc.textContent = '© 2026 Nolei Creative — Painel Operacional de Hotelaria & Pousadas.';
 
         switchSection('hotel');
 
@@ -1774,7 +1807,7 @@
           badgePill.style.color = '#E879F9';
           badgePill.style.borderColor = '#D946EF';
         }
-        if (descPill) descPill.textContent = 'Catálogo de Prêmios, Bônus de Boas-Vindas e Membros do Clube';
+        if (descPill) descPill.textContent = 'Catálogo de Prêmios, Bônus no Cadastro e Membros do Clube';
         if (brandTitle) brandTitle.innerHTML = 'Nolei <span>Clube de Fidelidade</span>';
         if (pageTitle) pageTitle.textContent = 'Painel Fidelidade & Recompensas';
         if (pageDesc) pageDesc.textContent = 'Configuração de prêmios, regras de acúmulo de pontos e membros cadastrados.';
@@ -1786,6 +1819,31 @@
         if (tabProducts) tabProducts.style.display = 'none';
         if (tabWaiters) tabWaiters.style.display = 'none';
         if (operatorBar) operatorBar.style.display = 'none';
+
+        if (topActions) {
+          topActions.innerHTML = `
+            <a href="fidelidade.html?source=nfc" target="_blank" class="btn-top-action highlight" style="background:#FEF3C7; color:#B45309; border-color:#FDE68A;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M17 7h.01M7 17h.01M17 17h.01"/></svg>
+              Cartão Fidelidade ↗
+            </a>
+            <a href="dashboard.html?setor=fidelidade" class="btn-top-action">
+              Métricas de Retenção
+            </a>
+            <a href="../index.html" class="btn-top-action">
+              Hub Principal
+            </a>
+          `;
+        }
+
+        if (footerLinks) {
+          footerLinks.innerHTML = `
+            <a href="../docs.html#fidelidade" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação do Clube</a>
+            <a href="fidelidade.html?source=nfc" target="_blank" style="color:var(--orange); font-weight:700; text-decoration:none;">Abrir Cartão do Membro ↗</a>
+            <a href="dashboard.html?setor=fidelidade" style="color:var(--navy); font-weight:600; text-decoration:none;">Métricas do Clube</a>
+            <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
+          `;
+        }
+        if (footerDesc) footerDesc.textContent = '© 2026 Nolei Creative — Painel de Fidelidade & Bônus de Clientes.';
 
         switchSection('loyalty');
 
@@ -1809,6 +1867,26 @@
         if (tabWaiters) tabWaiters.style.display = 'inline-flex';
         if (tabUsers) tabUsers.style.display = 'inline-flex';
         if (operatorBar) operatorBar.style.display = 'block';
+
+        if (topActions) {
+          topActions.innerHTML = `
+            <a href="dashboard.html" class="btn-top-action">
+              Dashboard ROI
+            </a>
+            <a href="../index.html" class="btn-top-action">
+              Hub Principal
+            </a>
+          `;
+        }
+
+        if (footerLinks) {
+          footerLinks.innerHTML = `
+            <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação & Manual</a>
+            <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Dashboard ROI</a>
+            <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
+          `;
+        }
+        if (footerDesc) footerDesc.textContent = '© 2026 Nolei Creative — Sistema de Inteligência Física & Digital para Estabelecimentos.';
 
         switchSection('kds');
       }

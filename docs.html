@@ -590,7 +590,7 @@
         <a href="index.html" class="btn-top-link">
           ← Início
         </a>
-        <a href="demo/gestao.html" class="btn-top-link">
+        <a href="demo/gestao.html?setor=restaurante" class="btn-top-link">
           Painel Gestão (Cozinha & Salão)
         </a>
         <a href="demo/dashboard.html" class="btn-top-link">
@@ -611,7 +611,7 @@
       <ul class="sidebar-menu">
         <li><a href="#como-funciona" class="sidebar-link">1. Como Funciona (Sem App)</a></li>
         <li><a href="#gastronomia" class="sidebar-link">2. Restaurantes & Bares</a></li>
-        <li><a href="#hotelaria" class="sidebar-link">3. Hotéis, Pousadas & Suítes</a></li>
+        <li><a href="#hotelaria" class="sidebar-link">3. Hotéis & Pousadas</a></li>
         <li><a href="#fidelidade" class="sidebar-link">4. Fidelidade & Varejo</a></li>
         <li><a href="#google-reviews" class="sidebar-link">5. Google 5 Estrelas & Clínicas</a></li>
         <li><a href="#painel-gestao" class="sidebar-link">6. Central de Gestão & ROI</a></li>
@@ -653,7 +653,7 @@
             <div class="step-number">2</div>
             <div class="step-body">
               <h4>A Página Abre em Menos de 1 Segundo no Navegador</h4>
-              <p>A tela já abre personalizada para aquele ponto exato (exemplo: <em>Mesa 04</em>, <em>Suíte 412</em> ou <em>Balcão Principal</em>).</p>
+              <p>A tela já abre personalizada para aquele ponto exato (exemplo: <em>Mesa 04</em>, <em>Quarto 412</em> ou <em>Balcão Principal</em>).</p>
             </div>
           </div>
           <div class="flow-step-item">
@@ -709,7 +709,7 @@
           <a href="demo/cardapio.html" target="_blank" class="doc-cta-btn">
             Testar Cardápio (Visão: Cliente) ↗
           </a>
-          <a href="demo/gestao.html" target="_blank" class="doc-cta-btn" style="background:var(--orange-accent);">
+          <a href="demo/gestao.html?setor=restaurante" target="_blank" class="doc-cta-btn" style="background:var(--orange-accent);">
             Abrir Monitor da Cozinha (Visão: Cozinha/Garçom) ↗
           </a>
         </div>
@@ -721,7 +721,7 @@
           <span class="section-tag tag-hotel">Setor de Hotelaria</span>
           <span style="font-size:0.72rem; font-weight:700; background:#F1F5F9; color:var(--navy); padding:3px 8px; border-radius:6px;">Contextos: Hóspede, Governança e Recepção</span>
         </div>
-        <h2 class="section-title">3. Hotéis, Pousadas, Resorts & Suítes</h2>
+        <h2 class="section-title">3. Hotéis & Pousadas (Concierge 24h)</h2>
         <p class="doc-p">
           Substitua livretos de papel desgastados na cabeceira da cama e interfones que não atendem por um <strong>Concierge Digital 24 horas</strong> na ponta dos dedos do hóspede.
         </p>
@@ -738,7 +738,7 @@
             <div class="step-number">B</div>
             <div class="step-body">
               <h4>Agendamento de Café no Quarto</h4>
-              <p>O hóspede escolhe o horário desejado (ex: 7h30, 8h00, 8h30) para o café ser servido na suíte, sem fila na recepção.</p>
+              <p>O hóspede escolhe o horário desejado (ex: 7h30, 8h00, 8h30) para o café ser servido no quarto da pousada, sem fila na recepção.</p>
             </div>
           </div>
           <div class="flow-step-item">
@@ -807,8 +807,11 @@
 
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
           <a href="demo/fidelidade.html" target="_blank" class="doc-cta-btn">
-            Testar Cartão (Visão: Cliente) ↗
-          </a>
+    Testar Cartão (Visão: Cliente) ↗
+  </a>
+  <a href="demo/gestao.html?setor=fidelidade" target="_blank" class="doc-cta-btn" style="background:var(--orange);">
+    Abrir Painel de Bônus & Fidelidade (Visão: Gerente) ↗
+  </a>
           <a href="demo/gestao.html#loyalty" target="_blank" class="doc-cta-btn" style="background:#047857;">
             Gestão de Prêmios (Visão: Admin) ↗
           </a>
@@ -879,7 +882,7 @@
               <td><strong>Monitor da Cozinha (Preparo de Pedidos)</strong></td>
               <td>Cozinheiros & Garçons</td>
               <td>Zero pedidos perdidos ou esquecidos, com baixa em tempo real.</td>
-              <td><a href="demo/gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
+              <td><a href="demo/gestao.html?setor=restaurante" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
             </tr>
             <tr>
               <td><strong>Painel de Hotelaria</strong></td>
@@ -897,7 +900,7 @@
               <td><strong>CRUD de Produtos</strong></td>
               <td>Gerência Geral</td>
               <td>Edição de preços, descrições e fotos instantaneamente.</td>
-              <td><a href="demo/gestao.html" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
+              <td><a href="demo/gestao.html?setor=restaurante" target="_blank" style="color:var(--orange-accent); font-weight:700;">Acessar ↗</a></td>
             </tr>
             <tr>
               <td><strong>Dashboard Executivo de ROI</strong></td>
@@ -983,7 +986,7 @@
       </div>
       <div>
         <a href="index.html" style="color:var(--navy); font-weight:600; text-decoration:none; margin-right:14px;">Hub Principal</a>
-        <a href="demo/gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; margin-right:14px;">Painel Gestão</a>
+        <a href="demo/gestao.html?setor=restaurante" style="color:var(--orange-accent); font-weight:600; text-decoration:none; margin-right:14px;">Painel Gestão</a>
         <a href="demo/dashboard.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none;">Dashboard ROI</a>
       </div>
     </div>

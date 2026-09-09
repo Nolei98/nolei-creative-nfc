@@ -448,6 +448,17 @@
 </head>
 <body>
 
+  <!-- Context Perspective Bar -->
+  <div style="background:#0F223D; color:#94A3B8; font-size:0.75rem; padding:8px 20px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="background:rgba(249,115,22,0.25); color:#fb923c; border:1px solid rgba(251,146,60,0.4); padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase; font-size:0.68rem; letter-spacing:0.5px;">Visão: Diretoria / Executivo</span>
+      <span style="color:#E2E8F0; font-weight:500;">Métricas Consolidadas & ROI Operacional</span>
+    </div>
+    <a href="gestao.html" style="color:#22C55E; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:0.75rem;">
+      Abrir Painel Operacional (KDS / Salão / Hotel) ↗
+    </a>
+  </div>
+
   <!-- Top Bar -->
   <header class="top-bar">
     <div class="top-bar-inner">
@@ -478,7 +489,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
       </div>
       <div style="font-size:0.8rem; color:#166534; line-height:1.45;">
-        <strong>🖥️ Dica de Visualização Executiva:</strong>
+        <strong>Dica de Visualização Executiva:</strong>
         <span>Para exportar dados, visualizar gráficos em alta definição e simular o ROI completo, acesse este dashboard em um <strong>Desktop, Notebook ou Tablet</strong>.</span>
       </div>
     </div>
@@ -571,7 +582,7 @@
     <!-- Footer -->
     <footer class="footer">
       <div style="margin-bottom:8px;">
-        <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none; margin-right:14px;">📖 Manual & Documentação</a>
+        <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none; margin-right:14px;">Manual & Documentação</a>
         <a href="gestao.html" style="color:var(--orange-accent); font-weight:600; text-decoration:none; margin-right:14px;">Painel Gestão & KDS</a>
         <a href="../index.html" style="color:var(--leaf-green); font-weight:600; text-decoration:none;">Hub de Demos</a>
       </div>
@@ -586,7 +597,7 @@
       geral: {
         kpis: [
           { label: "Engajamentos Físico-Digitais", val: "14.820", up: "+312%", sub: "toques e scans no mês" },
-          { label: "Novas Avaliações 5★ Google", val: "482", up: "+420%", sub: "captadas na saída" },
+          { label: "Novas Avaliações 5 Estrelas Google", val: "482", up: "+420%", sub: "captadas na saída" },
           { label: "Ticket Médio por Mesa/Quarto", val: "R$ 88,40", up: "+26,5%", sub: "vs R$ 69,80 antes" },
           { label: "Taxa de Retenção & Recompra", val: "44,8%", up: "+18,2%", sub: "clientes fidelizados" }
         ],
@@ -603,8 +614,8 @@
       },
       google: {
         kpis: [
-          { label: "Avaliações 5★ Captadas", val: "328", up: "+540%", sub: "direto no Google Maps" },
-          { label: "Nota Média do Perfil", val: "4.9 ★", up: "Era 4.2", sub: "+0.7 pts de reputação" },
+          { label: "Avaliações 5 Estrelas Captadas", val: "328", up: "+540%", sub: "direto no Google Maps" },
+          { label: "Nota Média do Perfil", val: "4.9 / 5.0", up: "Era 4.2", sub: "+0.7 pts de reputação" },
           { label: "Feedbacks Críticos Retidos", val: "19", up: "100%", sub: "desviados do Google público" },
           { label: "Conversão de Toques em Review", val: "68,4%", up: "+52%", sub: "conclusão em <30s" }
         ],

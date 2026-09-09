@@ -582,6 +582,17 @@
 </head>
 <body>
 
+  <!-- Context Perspective Bar -->
+  <div style="background:#0F223D; color:#94A3B8; font-size:0.75rem; padding:8px 20px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="background:rgba(46,125,50,0.25); color:#4ade80; border:1px solid rgba(74,222,128,0.4); padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase; font-size:0.68rem; letter-spacing:0.5px;">Visão: Cliente</span>
+      <span style="color:#E2E8F0; font-weight:500;">Membro do Clube Fidelidade • Balcão</span>
+    </div>
+    <a href="gestao.html#loyalty" target="_blank" style="color:#F97316; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:0.75rem;">
+      Ver Visão: Admin Gestão de Bônus ↗
+    </a>
+  </div>
+
   <!-- Splash Screen -->
   <div id="splash-screen" class="splash-screen hidden">
     <div class="splash-icon">
@@ -652,14 +663,14 @@
           <div class="progress-fill" id="progress-fill-bar"></div>
         </div>
         <div class="progress-info">
-          <span id="level-next-text">Faltam 73 pts para Nível Ouro 🏆</span>
+          <span id="level-next-text">Faltam 73 pts para Nível Ouro</span>
           <span id="points-ratio-text">127 / 200 pts</span>
         </div>
       </div>
 
       <!-- Stamps Card -->
       <div class="stamps-section">
-        <h3 class="stamps-title">Cartela de Selos do Mês ☕</h3>
+        <h3 class="stamps-title">Cartela de Selos do Mês</h3>
         <p class="stamps-desc">A cada café consumido, você ganha 1 selo ao aproximar o celular na tag NFC do balcão.</p>
 
         <div class="stamps-grid" id="stamps-grid-box">
@@ -681,10 +692,10 @@
   <!-- Footer -->
   <footer style="text-align:center; padding:32px 20px 40px; color:var(--text-muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:30px; background:var(--white);">
     <div style="margin-bottom:10px; display:flex; justify-content:center; gap:18px; flex-wrap:wrap;">
-      <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">📖 Documentação & Manual</a>
-      <a href="gestao.html#loyalty" target="_blank" style="color:var(--orange); font-weight:700; text-decoration:none;">🖥️ Painel Fidelidade (Admin) ↗</a>
-      <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">📊 Dashboard ROI</a>
-      <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">🏠 Hub Principal</a>
+      <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação & Manual</a>
+      <a href="gestao.html#loyalty" target="_blank" style="color:var(--orange); font-weight:700; text-decoration:none;">Painel Fidelidade (Admin) ↗</a>
+      <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Dashboard ROI</a>
+      <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
     </div>
     <p style="margin:0;">© 2026 Nolei Creative • Sistema de Cartão Fidelidade Digital & Gamificação</p>
   </footer>
@@ -728,8 +739,10 @@
   <!-- Modal Voucher de Resgate -->
   <div class="modal-overlay" id="voucher-modal" onclick="closeVoucherModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()" style="text-align:center;">
-      <div style="font-size:2.5rem; margin-bottom:8px;">🎉</div>
-      <h3 class="modal-title" style="margin-bottom:4px;">Cupom de Resgate Gerado!</h3>
+      <div style="width:48px; height:48px; border-radius:50%; background:var(--leaf-green-light); color:var(--leaf-green); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h3 class="modal-title" style="margin-bottom:4px;">Cupom de Resgate Gerado</h3>
       <p class="modal-sub" id="voucher-reward-name">Café Espresso ou Cappuccino</p>
 
       <div style="background:var(--bg-light); border:2px dashed var(--border); border-radius:14px; padding:18px; margin:16px 0;">
@@ -738,7 +751,7 @@
         <div style="font-size:0.72rem; color:var(--text-muted);">Válido por 30 minutos na loja física</div>
       </div>
 
-      <button class="btn-submit-auth" onclick="closeVoucherModal()" style="background:var(--leaf-green);">Entendi, vou resgatar no balcão 👍</button>
+      <button class="btn-submit-auth" onclick="closeVoucherModal()" style="background:var(--leaf-green);">Entendi, vou resgatar no balcão</button>
     </div>
   </div>
 
@@ -770,7 +783,7 @@
         id: "lr_1",
         title: "Café Espresso ou Cappuccino",
         points: 50,
-        icon: "☕",
+        badge: "Bebida",
         desc: "Válido para qualquer café clássico ou cappuccino até 300ml no balcão.",
         active: true
       },
@@ -778,7 +791,7 @@
         id: "lr_2",
         title: "Fatia de Bolo Artesanal do Dia",
         points: 80,
-        icon: "🍰",
+        badge: "Doceria",
         desc: "Fatia generosa de bolo de cenoura com chocolate, fubá cremoso ou red velvet.",
         active: true
       },
@@ -786,7 +799,7 @@
         id: "lr_3",
         title: "Frappuccino Especial com Chantilly",
         points: 120,
-        icon: "🥤",
+        badge: "Especial",
         desc: "Frappuccino artesanal com calda de caramelo salgado ou chocolate belga.",
         active: true
       },
@@ -794,7 +807,7 @@
         id: "lr_4",
         title: "15% de Desconto na Conta Total",
         points: 150,
-        icon: "⭐",
+        badge: "Desconto",
         desc: "Desconto aplicado diretamente no fechamento da comanda da mesa ou suíte.",
         active: true
       },
@@ -802,7 +815,7 @@
         id: "lr_5",
         title: "Almoço Executivo / Brunch Completo",
         points: 300,
-        icon: "🍽️",
+        badge: "Refeição",
         desc: "Prato principal + bebida natural + sobremesa à escolha no cardápio.",
         active: true
       }
@@ -836,8 +849,8 @@
         document.getElementById('points-ratio-text').textContent = `${activeMember.points} / ${target} pts`;
         const diff = Math.max(0, target - activeMember.points);
         document.getElementById('level-next-text').textContent = diff > 0 
-          ? `Faltam ${diff} pts para Nível Ouro 🏆` 
-          : `🎉 Você é Nível Ouro VIP!`;
+          ? `Faltam ${diff} pts para Nível Ouro` 
+          : `Você atingiu o Nível Ouro VIP`;
 
         // Render Stamps (10 slots)
         const filledStamps = Math.min(10, Math.floor(activeMember.points / 15));
@@ -862,8 +875,10 @@
 
           return `
             <div class="reward-card">
-              <div style="font-size:1.8rem; margin-right:12px; display:flex; align-items:center;">
-                ${r.icon || '🎁'}
+              <div style="margin-right:12px; display:flex; align-items:center;">
+                <span style="font-size:0.68rem; font-weight:700; background:var(--orange-light); color:var(--orange); border:1px solid rgba(249,115,22,0.3); padding:3px 8px; border-radius:6px; text-transform:uppercase;">
+                  ${r.badge || 'Prêmio'}
+                </span>
               </div>
               <div class="reward-info" style="flex:1;">
                 <h4 style="font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:2px;">${r.title}</h4>
@@ -921,7 +936,7 @@
       localStorage.setItem('nolei_loyalty_member', JSON.stringify(activeMember));
       updateLoyaltyUI();
       closeLoyaltyAuthModal();
-      showToast(`Cartão Fidelidade validado: ${activeMember.name}! ✨`);
+      showToast(`Cartão Fidelidade validado: ${activeMember.name}`);
     }
 
     function handleLoyaltyRegister() {
@@ -942,7 +957,7 @@
       localStorage.setItem('nolei_loyalty_member', JSON.stringify(activeMember));
       updateLoyaltyUI();
       closeLoyaltyAuthModal();
-      showToast(`Bem-vindo(a) ao Clube, ${name}! Você ganhou 50 pontos de bônus! 🎉`);
+      showToast(`Bem-vindo(a) ao Clube, ${name}! Você ganhou 50 pontos de bônus.`);
     }
 
     function logoutLoyalty() {

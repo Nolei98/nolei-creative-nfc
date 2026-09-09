@@ -956,6 +956,37 @@
 </head>
 <body>
 
+    <!-- Top Context Perspective & Role Switcher Bar -->
+  <div style="background:#0B1524; color:#94A3B8; font-size:0.75rem; padding:8px 20px; border-bottom:1px solid #1E293B;">
+    <div style="max-width:1240px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="role-context-badge" style="background:#1E3A8A; color:#93C5FD; border:1px solid #3B82F6; padding:3px 8px; border-radius:4px; font-weight:700; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.5px;">
+          Visão: Administrador Geral
+        </span>
+        <span id="role-context-desc" style="color:#E2E8F0; font-weight:500;">
+          Acesso Total aos Módulos (Salão, KDS, Hotel, Fidelidade, Cardápio e Equipe)
+        </span>
+      </div>
+
+      <!-- Quick Role Mode Switcher Buttons -->
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+        <span style="font-size:0.72rem; color:#94A3B8; margin-right:2px;">Modo de Visão:</span>
+        <button type="button" class="btn-role-mode active" id="btn-role-admin" onclick="setRolePerspective('admin', this)" style="background:#1E293B; color:#FFFFFF; border:1px solid #334155; padding:3px 9px; border-radius:5px; font-size:0.72rem; font-weight:600; cursor:pointer;">
+          Admin Geral
+        </button>
+        <button type="button" class="btn-role-mode" id="btn-role-waiter" onclick="setRolePerspective('waiter', this)" style="background:#0F172A; color:#94A3B8; border:1px solid #334155; padding:3px 9px; border-radius:5px; font-size:0.72rem; font-weight:600; cursor:pointer;">
+          Garçom (Salão)
+        </button>
+        <button type="button" class="btn-role-mode" id="btn-role-kitchen" onclick="setRolePerspective('kitchen', this)" style="background:#0F172A; color:#94A3B8; border:1px solid #334155; padding:3px 9px; border-radius:5px; font-size:0.72rem; font-weight:600; cursor:pointer;">
+          Cozinha (KDS)
+        </button>
+        <button type="button" class="btn-role-mode" id="btn-role-hotel" onclick="setRolePerspective('hotel', this)" style="background:#0F172A; color:#94A3B8; border:1px solid #334155; padding:3px 9px; border-radius:5px; font-size:0.72rem; font-weight:600; cursor:pointer;">
+          Hotelaria (Recepção)
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Top Bar -->
   <header class="top-bar">
     <div class="top-bar-inner">
@@ -995,17 +1026,17 @@
     <div class="operator-inner">
       <div class="operator-current">
         <span class="operator-badge" id="operator-badge-display">
-          👑 Operador: Administrador Geral
+          Operador: Administrador Geral
         </span>
         <span class="operator-tables-badge" id="operator-tables-display">
-          📍 Todas as Mesas do Salão
+          Salão Total: Todas as Mesas
         </span>
       </div>
 
       <div class="operator-switch-box">
         <span style="font-size:0.75rem; opacity:0.85;">Trocar Perfil / Garçom:</span>
         <select id="operator-select-dropdown" class="operator-select" onchange="changeActiveOperator(this.value)">
-          <option value="admin">👑 Administrador Geral (Total)</option>
+          <option value="admin">Administrador Geral (Acesso Total)</option>
         </select>
       </div>
     </div>
@@ -1084,19 +1115,19 @@
       <!-- Hotel Metrics Summary -->
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:16px;">
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--blue);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🛎️ Solicitações Ativas</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Solicitações Ativas</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-active">3 chamados</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--leaf-green);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🏨 Suítes com Hóspedes</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Suítes Ocupadas</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-rooms">8 Suítes</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--orange);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🍔 Room Service Pendente</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Room Service Pendente</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-rs">1 pedido</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--amber);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🧹 Arrumações & SPA</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Arrumações & SPA</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-hotel-hk">2 agendados</div>
         </div>
       </div>
@@ -1115,9 +1146,9 @@
           </select>
           <select id="hotel-status-filter" class="search-input" style="max-width:160px;" onchange="filterHotelOrders()">
             <option value="all">Todos Status</option>
-            <option value="solicitado">⏳ Solicitado</option>
-            <option value="preparo">🛎️ Em Atendimento</option>
-            <option value="entregue">✓ Concluído</option>
+            <option value="solicitado">Solicitado</option>
+            <option value="preparo">Em Atendimento</option>
+            <option value="entregue">Concluído</option>
           </select>
         </div>
         <button class="btn-new-item" onclick="openNewHotelOrderModal()" style="background:var(--blue);">
@@ -1154,19 +1185,19 @@
       <!-- Loyalty Metrics & Program Rules -->
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:16px;">
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--amber);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🎁 Prêmios Ativos</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Prêmios Ativos</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-loyalty-rewards">5 Prêmios</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--leaf-green);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">👥 Membros Fidelidade</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Membros Fidelidade</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;" id="kpi-loyalty-members">6 Clientes</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--blue);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">⭐ Pontos em Circulação</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Pontos em Circulação</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;">960 pts</div>
         </div>
         <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; border-left:4px solid var(--orange);">
-          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">🎉 Bônus de Boas-Vindas</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Bônus de Boas-Vindas</div>
           <div style="font-size:1.4rem; font-weight:700; color:var(--navy); margin-top:2px;">+50 pts / cadastro</div>
         </div>
       </div>
@@ -1174,9 +1205,9 @@
       <!-- Config Banner -->
       <div style="background:#FFFBEB; border:1px solid #FCD34D; border-radius:var(--radius-sm); padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div style="font-size:0.82rem; color:#92400E;">
-          <strong>⚙️ Regras do Programa:</strong> R$ 1,00 gasto = 1 Ponto acumulado • Bônus no Cadastro = 50 pontos automáticos • Validade dos pontos = 12 meses.
+          <strong>Regras do Programa:</strong> R$ 1,00 gasto = 1 Ponto acumulado • Bônus no Cadastro = 50 pontos automáticos • Validade dos pontos = 12 meses.
         </div>
-        <button class="btn-top-action" onclick="showToast('Regras do programa atualizadas!')" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A; font-weight:700; font-size:0.75rem;">Editar Parâmetros ⚙️</button>
+        <button class="btn-top-action" onclick="showToast('Regras do programa atualizadas!')" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A; font-weight:700; font-size:0.75rem;">Editar Parâmetros</button>
       </div>
 
       <div class="crud-header-bar">
@@ -1214,7 +1245,7 @@
       
       <div id="waiter-readonly-products-notice" class="restricted-banner" style="display:none;">
         <div>
-          <strong>🔒 Modo de Visualização do Garçom:</strong>
+          <strong>Modo de Visualização do Garçom:</strong>
           <p style="font-size:0.78rem; margin-top:2px;">Consulte os itens e preços disponíveis no cardápio. Para editar pratos ou pausar itens, mude para o perfil de Administrador.</p>
         </div>
       </div>
@@ -1262,7 +1293,7 @@
       
       <div id="waiter-readonly-waiters-notice" class="restricted-banner" style="display:none;">
         <div>
-          <strong>🔒 Gestão de Equipe Restrita:</strong>
+          <strong>Gestão de Equipe Restrita:</strong>
           <p style="font-size:0.78rem; margin-top:2px;">O cadastro de novos garçons e a atribuição de mesas são funções exclusivas do Administrador Geral.</p>
         </div>
       </div>
@@ -1338,10 +1369,10 @@
   <!-- Footer -->
   <footer style="text-align:center; padding:32px 16px 40px; color:var(--text-muted); font-size:0.78rem; border-top:1px solid var(--border); margin-top:40px; background:var(--white);">
     <div style="margin-bottom:12px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-      <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">📖 Documentação & Manual</a>
-      <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">📊 Dashboard ROI</a>
-      <a href="cardapio.html?source=nfc&mesa=04" target="_blank" style="color:var(--navy); font-weight:600; text-decoration:none;">🍽️ Cardápio da Mesa 04 ↗</a>
-      <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">🏠 Hub Principal</a>
+      <a href="../docs.html" style="color:var(--navy); font-weight:700; text-decoration:none;">Documentação & Manual</a>
+      <a href="dashboard.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Dashboard ROI</a>
+      <a href="cardapio.html?source=nfc&mesa=04" target="_blank" style="color:var(--navy); font-weight:600; text-decoration:none;">Cardápio da Mesa 04 ↗</a>
+      <a href="../index.html" style="color:var(--navy); font-weight:600; text-decoration:none;">Hub Principal</a>
     </div>
     <p>© 2026 Nolei Creative — Sistema de Inteligência Física & Digital para Estabelecimentos.</p>
   </footer>
@@ -1351,7 +1382,7 @@
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
         <h3 id="modal-product-title" style="font-size:1.1rem;">Novo Item no Cardápio</h3>
-        <button onclick="closeProductModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+        <button onclick="closeProductModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
       </div>
 
       <form id="product-form" onsubmit="saveProduct(event)">
@@ -1406,7 +1437,7 @@
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
         <h3 id="modal-waiter-title" style="font-size:1.1rem;">Cadastrar Novo Garçom</h3>
-        <button onclick="closeWaiterModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+        <button onclick="closeWaiterModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
       </div>
 
       <form id="waiter-form" onsubmit="saveWaiter(event)">
@@ -1456,7 +1487,7 @@
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
         <h3 id="modal-user-title" style="font-size:1.1rem;">Cadastrar Novo Cliente</h3>
-        <button onclick="closeUserModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+        <button onclick="closeUserModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
       </div>
 
       <form id="user-form" onsubmit="saveUser(event)">
@@ -1501,7 +1532,7 @@
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
         <h3 id="modal-hotel-title" style="font-size:1.1rem;">Nova Solicitação de Quarto</h3>
-        <button onclick="closeHotelOrderModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+        <button onclick="closeHotelOrderModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
       </div>
 
       <form id="hotel-order-form" onsubmit="saveHotelOrder(event)">
@@ -1520,12 +1551,12 @@
           <div class="form-group">
             <label class="form-label">Categoria de Serviço:</label>
             <select id="hotel-category" class="form-control" required>
-              <option value="Room Service">🍔 Room Service</option>
-              <option value="Café no Quarto">🍳 Café no Quarto</option>
-              <option value="SPA">🧖 SPA & Massagem</option>
-              <option value="Governança">🧹 Governança & Toalhas</option>
-              <option value="Concierge">🚗 Concierge & Táxi</option>
-              <option value="Check-out">💳 Fechamento de Conta</option>
+              <option value="Room Service">Room Service</option>
+              <option value="Café no Quarto">Café no Quarto</option>
+              <option value="SPA">SPA & Massagem</option>
+              <option value="Governança">Governança & Toalhas</option>
+              <option value="Concierge">Concierge & Táxi</option>
+              <option value="Check-out">Fechamento de Conta</option>
             </select>
           </div>
 
@@ -1547,10 +1578,10 @@
           <div class="form-group full">
             <label class="form-label">Status da Solicitação:</label>
             <select id="hotel-status" class="form-control">
-              <option value="solicitado">⏳ Solicitado (Aguardando Recepção)</option>
-              <option value="preparo">🛎️ Em Atendimento / Preparo</option>
-              <option value="entregue">✓ Concluído / Entregue na Suíte</option>
-              <option value="cancelado">✕ Cancelado</option>
+              <option value="solicitado">Solicitado (Aguardando Recepção)</option>
+              <option value="preparo">Em Atendimento / Preparo</option>
+              <option value="entregue">Concluído / Entregue na Suíte</option>
+              <option value="cancelado">Cancelado</option>
             </select>
           </div>
         </div>
@@ -1568,7 +1599,7 @@
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
         <h3 id="modal-reward-title" style="font-size:1.1rem;">Cadastrar Prêmio no Catálogo</h3>
-        <button onclick="closeRewardModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">✕</button>
+        <button onclick="closeRewardModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
       </div>
 
       <form id="reward-form" onsubmit="saveReward(event)">
@@ -1586,7 +1617,7 @@
 
           <div class="form-group">
             <label class="form-label">Ícone / Emoji:</label>
-            <input type="text" id="reward-icon" class="form-control" placeholder="☕" value="🎁" required>
+            <input type="text" id="reward-icon" class="form-control" placeholder="Bebida, Doceria..." value="Recompensa" required>
           </div>
 
           <div class="form-group full">
@@ -1618,6 +1649,60 @@
   </div>
 
   <script>
+    // Role Perspective Switcher
+    function setRolePerspective(role, btnEl) {
+      document.querySelectorAll('.btn-role-mode').forEach(b => {
+        b.style.background = '#0F172A';
+        b.style.color = '#94A3B8';
+        b.classList.remove('active');
+      });
+      if (btnEl) {
+        btnEl.style.background = '#1E293B';
+        btnEl.style.color = '#FFFFFF';
+        btnEl.classList.add('active');
+      }
+
+      const badge = document.getElementById('role-context-badge');
+      const desc = document.getElementById('role-context-desc');
+
+      if (role === 'admin') {
+        badge.textContent = 'Visão: Administrador Geral';
+        badge.style.background = '#1E3A8A';
+        badge.style.color = '#93C5FD';
+        badge.style.borderColor = '#3B82F6';
+        desc.textContent = 'Acesso Total aos Módulos (Salão, KDS, Hotel, Fidelidade, Cardápio e Equipe)';
+        changeActiveOperator('admin');
+        switchSection('kds');
+      } else if (role === 'waiter') {
+        badge.textContent = 'Visão: Garçom / Salão';
+        badge.style.background = '#065F46';
+        badge.style.color = '#6EE7B7';
+        badge.style.borderColor = '#10B981';
+        desc.textContent = 'Focado em Chamados de Mesa, Atendimento e Fechamento de Conta';
+        // Auto select first waiter
+        const stored = getStoredWaiters();
+        if (stored && stored.length > 0) {
+          changeActiveOperator(stored[0].id);
+        }
+        switchSection('kds');
+      } else if (role === 'kitchen') {
+        badge.textContent = 'Visão: Cozinha / KDS';
+        badge.style.background = '#831843';
+        badge.style.color = '#F472B6';
+        badge.style.borderColor = '#EC4899';
+        desc.textContent = 'Fila de Preparo de Pratos, Bebidas e Tempo em Cozinha';
+        changeActiveOperator('admin');
+        switchSection('kds');
+      } else if (role === 'hotel') {
+        badge.textContent = 'Visão: Recepção / Hotel';
+        badge.style.background = '#701A75';
+        badge.style.color = '#E879F9';
+        badge.style.borderColor = '#D946EF';
+        desc.textContent = 'Controle de Suítes, Room Service, Café no Quarto, SPA e Governança';
+        switchSection('hotel');
+      }
+    }
+
     // 1. Initial Garçons / Waiters State
     const defaultWaiters = [
       {
@@ -1823,7 +1908,7 @@
         id: "lr_1",
         title: "Café Espresso ou Cappuccino",
         points: 50,
-        icon: "☕",
+        badge: "Bebida",
         desc: "Válido para qualquer café clássico ou cappuccino até 300ml no balcão.",
         active: true
       },
@@ -1831,7 +1916,7 @@
         id: "lr_2",
         title: "Fatia de Bolo Artesanal do Dia",
         points: 80,
-        icon: "🍰",
+        badge: "Doceria",
         desc: "Fatia generosa de bolo de cenoura com chocolate, fubá cremoso ou red velvet.",
         active: true
       },
@@ -1839,7 +1924,7 @@
         id: "lr_3",
         title: "Frappuccino Especial com Chantilly",
         points: 120,
-        icon: "🥤",
+        badge: "Especial",
         desc: "Frappuccino artesanal com calda de caramelo salgado ou chocolate belga.",
         active: true
       },
@@ -1847,7 +1932,7 @@
         id: "lr_4",
         title: "15% de Desconto na Conta Total",
         points: 150,
-        icon: "⭐",
+        badge: "Desconto",
         desc: "Desconto aplicado diretamente no fechamento da comanda da mesa ou suíte.",
         active: true
       },
@@ -1855,7 +1940,7 @@
         id: "lr_5",
         title: "Almoço Executivo / Brunch Completo",
         points: 300,
-        icon: "🍽️",
+        badge: "Refeição",
         desc: "Prato principal + bebida natural + sobremesa à escolha no cardápio.",
         active: true
       }
@@ -1930,22 +2015,22 @@
       const select = document.getElementById('operator-select-dropdown');
 
       // Populate dropdown
-      let html = `<option value="admin" ${activeOperatorId === 'admin' ? 'selected' : ''}>👑 Administrador Geral (Total)</option>`;
+      let html = `<option value="admin" ${activeOperatorId === 'admin' ? 'selected' : ''}>Administrador Geral (Total)</option>`;
       waiters.forEach(w => {
-        html += `<option value="${w.id}" ${activeOperatorId === w.id ? 'selected' : ''}>👤 Garçom: ${w.name} (${w.tables.join(', ')})</option>`;
+        html += `<option value="${w.id}" ${activeOperatorId === w.id ? 'selected' : ''}>Garçom: ${w.name} (${w.tables.join(', ')})</option>`;
       });
       select.innerHTML = html;
 
       if (op.role === 'admin') {
-        badge.textContent = `👑 Operador: Administrador Geral`;
-        tablesBadge.textContent = `📍 Salão Total (Todas as Mesas)`;
+        badge.textContent = `Operador: Administrador Geral`;
+        tablesBadge.textContent = `Salão Total (Todas as Mesas)`;
         document.getElementById('btn-add-product-crud').style.display = 'inline-flex';
         document.getElementById('btn-add-waiter-crud').style.display = 'inline-flex';
         document.getElementById('waiter-readonly-products-notice').style.display = 'none';
         document.getElementById('waiter-readonly-waiters-notice').style.display = 'none';
       } else {
-        badge.textContent = `👤 Garçom: ${op.name}`;
-        tablesBadge.textContent = `📍 Mesas: ${op.tables.join(', ')}`;
+        badge.textContent = `Garçom: ${op.name}`;
+        tablesBadge.textContent = `Mesas: ${op.tables.join(', ')}`;
         document.getElementById('btn-add-product-crud').style.display = 'none';
         document.getElementById('btn-add-waiter-crud').style.display = 'none';
         document.getElementById('waiter-readonly-products-notice').style.display = 'flex';
@@ -1966,7 +2051,7 @@
       localStorage.setItem('nolei_active_operator', val);
       updateOperatorUI();
       const op = getActiveOperator();
-      showToast(`Perfil alterado para: ${op.name} ✅`);
+      showToast(`Perfil alterado para: ${op.name}`);
     }
 
     // Navigation Switch
@@ -2063,11 +2148,11 @@
         <div class="service-alert-card ${alert.type}">
           <div class="alert-info-left">
             <div class="alert-mesa-badge">
-              📍 ${alert.table.toUpperCase()}
+              ${alert.table.toUpperCase()}
             </div>
             <div>
               <div class="alert-title-main">
-                ${alert.type === 'garcom' ? '🔔 <strong>Garçom Solicitado na Mesa</strong>' : '💳 <strong>Solicitação de Fechamento de Conta</strong>'}
+                ${alert.type === 'garcom' ? '<strong>Garçom Solicitado na Mesa</strong>' : '<strong>Solicitação de Fechamento de Conta</strong>'}
               </div>
               <div class="alert-time-sub">${alert.msg} • ${alert.time}</div>
             </div>
@@ -2084,7 +2169,7 @@
       serviceAlerts = serviceAlerts.filter(a => a.id !== id);
       localStorage.setItem('nolei_service_alerts', JSON.stringify(serviceAlerts));
       renderAlerts();
-      showToast('Chamado atendido e finalizado com sucesso! ✅');
+      showToast('Chamado atendido e finalizado com sucesso!');
     }
 
     // Render KDS (Table Orders)
@@ -2102,7 +2187,7 @@
       if (visibleTables.length === 0) {
         grid.innerHTML = `
           <div style="grid-column: 1 / -1; text-align:center; padding: 40px 20px; background:var(--white); border-radius:var(--radius); border:1px solid var(--border);">
-            <div style="font-size:2rem; margin-bottom:8px;">🍽️</div>
+            <div style="font-size:1rem; font-weight:700; color:var(--text-muted); margin-bottom:8px;">Nenhum pedido ativo no momento</div>
             <h3 style="font-size:1.1rem; color:var(--navy);">Nenhuma comanda ativa no momento</h3>
             <p style="font-size:0.82rem; color:var(--text-muted); margin-top:4px;">
               ${op.role !== 'admin' ? `Não há pedidos em aberto nas suas mesas atribuídas (${op.tables.join(', ')}).` : 'O salão está sem comandas ativas no momento.'}
@@ -2137,12 +2222,12 @@
                   <div>
                     <div class="kds-item-name">${item.name}</div>
                     <div class="kds-item-meta">
-                      <span>👤 ${item.orderedBy}</span> • <span>🕒 ${item.time}</span>
+                      <span>${item.orderedBy}</span> • <span>${item.time}</span>
                     </div>
                   </div>
                   <div>
                     <span class="status-badge ${item.status === 'entregue' ? 'entregue' : 'preparo'}" onclick="toggleItemStatus('${t.table}', ${itemIdx})">
-                      ${item.status === 'entregue' ? '✓ Entregue' : '⏳ Preparo'}
+                      ${item.status === 'entregue' ? 'Entregue' : 'Em Preparo'}
                     </span>
                   </div>
                 </div>
@@ -2177,7 +2262,7 @@
       }
 
       renderKDS();
-      showToast(`Status atualizado para: ${next === 'entregue' ? 'Entregue na Mesa ✅' : 'Em Preparo ⏳'}`);
+      showToast(`Status atualizado para: ${next === 'entregue' ? 'Entregue na Mesa' : 'Em Preparo'}`);
     }
 
     function markAllTableDelivered(tableName) {
@@ -2188,7 +2273,7 @@
         localStorage.setItem('nolei_table_orders_04', JSON.stringify(t.items));
       }
       renderKDS();
-      showToast(`Todos os pedidos da ${tableName} marcados como Entregues! 🍽️`);
+      showToast(`Todos os pedidos da ${tableName} marcados como Entregues!`);
     }
 
     function closeTableComanda(tableName) {
@@ -2201,7 +2286,7 @@
           localStorage.removeItem('nolei_table_orders_04');
         }
         renderKDS();
-        showToast(`Comanda da ${tableName} encerrada e mesa liberada! 💳`);
+        showToast(`Comanda da ${tableName} encerrada e mesa liberada!`);
       }
     }
 
@@ -2217,26 +2302,26 @@
       document.getElementById('kpi-hotel-active').textContent = `${activeCount} chamados`;
 
       const categoryIcons = {
-        'Room Service': '🍔',
-        'Café no Quarto': '🍳',
-        'SPA': '🧖',
-        'Governança': '🧹',
-        'Concierge': '🚗',
-        'Check-out': '💳'
+        'Room Service': 'Room Service',
+        'Café no Quarto': 'Café no Quarto',
+        'SPA': 'SPA & Bem-Estar',
+        'Governança': 'Governança',
+        'Concierge': 'Concierge',
+        'Check-out': 'Check-out'
       };
 
       const statusLabels = {
-        'solicitado': '<span class="status-badge preparo" style="background:#FFFBEB; color:#B45309; border-color:#FCD34D;">⏳ Solicitado</span>',
-        'preparo': '<span class="status-badge preparo" style="background:#EFF6FF; color:#1D4ED8; border-color:#93C5FD;">🛎️ Em Atendimento</span>',
-        'entregue': '<span class="status-badge entregue">✓ Concluído / Entregue</span>',
-        'cancelado': '<span class="status-badge preparo" style="background:#FEF2F2; color:#B91C1C; border-color:#FCA5A5;">✕ Cancelado</span>'
+        'solicitado': '<span class="status-badge preparo" style="background:#FFFBEB; color:#B45309; border-color:#FCD34D;">Solicitado</span>',
+        'preparo': '<span class="status-badge preparo" style="background:#EFF6FF; color:#1D4ED8; border-color:#93C5FD;">Em Atendimento</span>',
+        'entregue': '<span class="status-badge entregue">Concluído / Entregue</span>',
+        'cancelado': '<span class="status-badge preparo" style="background:#FEF2F2; color:#B91C1C; border-color:#FCA5A5;">Cancelado</span>'
       };
 
       tbody.innerHTML = list.map(o => `
         <tr>
           <td>
             <span class="category-chip" style="background:#EFF6FF; color:#1E40AF; border-color:#BFDBFE; font-weight:700;">
-              📍 Suíte ${o.room}
+              Suíte ${o.room}
             </span>
           </td>
           <td>
@@ -2244,7 +2329,7 @@
           </td>
           <td>
             <div style="font-weight:700; color:var(--navy); font-size:0.86rem; display:flex; align-items:center; gap:6px;">
-              <span>${categoryIcons[o.category] || '🛎️'}</span>
+              <span style="font-size:0.75rem; font-weight:700; color:var(--navy);">${o.category}</span>
               <span>${o.service}</span>
             </div>
             <span class="category-chip" style="font-size:0.7rem; margin-top:2px;">${o.category}</span>
@@ -2263,12 +2348,12 @@
             <div class="action-btn-group" style="justify-content:flex-end; gap:4px;">
               ${o.status === 'solicitado' ? `
                 <button class="btn-table-action" style="font-size:0.72rem; padding:4px 8px; background:#EFF6FF; color:#1D4ED8; border-color:#BFDBFE;" title="Iniciar Preparo/Atendimento" onclick="updateHotelOrderStatus('${o.id}', 'preparo')">
-                  Atender 🛎️
+                  Atender
                 </button>
               ` : ''}
               ${o.status === 'preparo' || o.status === 'solicitado' ? `
                 <button class="btn-table-action" style="font-size:0.72rem; padding:4px 8px; background:#ECFDF5; color:#047857; border-color:#A7F3D0;" title="Marcar Entregue no Quarto" onclick="updateHotelOrderStatus('${o.id}', 'entregue')">
-                  Entregue ✓
+                  Entregue
                 </button>
               ` : ''}
               <button class="btn-action-icon" title="Editar" onclick="editHotelOrder('${o.id}')">
@@ -2353,7 +2438,7 @@
       localStorage.setItem('nolei_hotel_orders', JSON.stringify(hotelOrders));
       renderHotelOrders();
       closeHotelOrderModal();
-      showToast(`Solicitação da Suíte ${room} salva com sucesso! 🛎️`);
+      showToast(`Solicitação da Suíte ${room} salva com sucesso!`);
     }
 
     function updateHotelOrderStatus(id, newStatus) {
@@ -2362,7 +2447,7 @@
       o.status = newStatus;
       localStorage.setItem('nolei_hotel_orders', JSON.stringify(hotelOrders));
       renderHotelOrders();
-      showToast(`Suíte ${o.room}: Status atualizado para "${newStatus === 'entregue' ? 'Entregue / Concluído ✅' : 'Em Atendimento 🛎️'}"`);
+      showToast(`Suíte ${o.room}: Status atualizado para "${newStatus === 'entregue' ? 'Entregue / Concluído' : 'Em Atendimento'}"`);
     }
 
     function deleteHotelOrder(id) {
@@ -2389,14 +2474,14 @@
       tbody.innerHTML = list.map(r => `
         <tr>
           <td style="font-size:1.6rem; text-align:center;">
-            ${r.icon || '🎁'}
+            <span style="font-size:0.7rem; font-weight:700; background:var(--orange-light); color:var(--orange); border:1px solid rgba(249,115,22,0.3); padding:2px 8px; border-radius:4px; text-transform:uppercase;">${r.badge || 'Prêmio'}</span>
           </td>
           <td>
             <strong style="color:var(--navy); font-size:0.92rem;">${r.title}</strong>
           </td>
           <td>
             <span class="category-chip" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A; font-weight:700; font-size:0.85rem;">
-              ⭐ ${r.points} Pontos
+              ${r.points} Pontos
             </span>
           </td>
           <td>
@@ -2442,7 +2527,7 @@
       document.getElementById('reward-id').value = r.id;
       document.getElementById('reward-title').value = r.title;
       document.getElementById('reward-points').value = r.points;
-      document.getElementById('reward-icon').value = r.icon || '🎁';
+      if (document.getElementById('reward-icon')) document.getElementById('reward-icon').value = r.badge || 'Recompensa';
       document.getElementById('reward-desc').value = r.desc;
       document.getElementById('reward-active').value = r.active !== false ? 'true' : 'false';
 
@@ -2458,7 +2543,7 @@
       const id = document.getElementById('reward-id').value;
       const title = document.getElementById('reward-title').value.trim();
       const points = parseInt(document.getElementById('reward-points').value) || 50;
-      const icon = document.getElementById('reward-icon').value.trim() || '🎁';
+      const badge = (document.getElementById('reward-icon') ? document.getElementById('reward-icon').value.trim() : '') || 'Recompensa';
       const desc = document.getElementById('reward-desc').value.trim();
       const active = document.getElementById('reward-active').value === 'true';
 
@@ -2475,7 +2560,7 @@
       localStorage.setItem('nolei_loyalty_rewards', JSON.stringify(loyaltyRewards));
       renderLoyaltyRewards();
       closeRewardModal();
-      showToast(`Prêmio "${title}" salvo no catálogo! 🎉`);
+      showToast(`Prêmio "${title}" salvo no catálogo!`);
     }
 
     function toggleRewardActive(id) {
@@ -2609,7 +2694,7 @@
       localStorage.setItem('nolei_menu_products', JSON.stringify(products));
       renderProducts();
       closeProductModal();
-      showToast(`Item "${name}" salvo com sucesso! 🎉`);
+      showToast(`Item "${name}" salvo com sucesso!`);
     }
 
     function toggleProductActive(id) {
@@ -2665,7 +2750,7 @@
           <td>
             <div style="display:flex; align-items:center; gap:6px;">
               <span class="category-chip" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A; font-weight:700;">
-                ⭐ ${avgRating.toFixed(1)}
+                Nota ${avgRating.toFixed(1)} / 5.0
               </span>
               <span style="font-size:0.75rem; color:var(--text-muted);">(${countRating} avaliações)</span>
             </div>
@@ -2746,7 +2831,7 @@
       localStorage.setItem('nolei_waiters_list', JSON.stringify(waiters));
       updateOperatorUI();
       closeWaiterModal();
-      showToast(`Garçom "${name}" cadastrado com sucesso! ✅`);
+      showToast(`Garçom "${name}" cadastrado com sucesso!`);
     }
 
     function deleteWaiter(id) {

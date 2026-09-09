@@ -531,6 +531,17 @@
 
     <canvas id="confetti"></canvas>
 
+    <!-- Context Perspective Bar -->
+    <div style="background:#0F223D; color:#94A3B8; font-size:0.75rem; padding:8px 20px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+            <span style="background:rgba(59,130,246,0.25); color:#60a5fa; border:1px solid rgba(96,165,250,0.4); padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase; font-size:0.68rem; letter-spacing:0.5px;">Visão: Cliente / Paciente</span>
+            <span style="color:#E2E8F0; font-weight:500;">Experiência de Avaliação Google no Balcão</span>
+        </div>
+        <a href="dashboard.html" target="_blank" style="color:#F97316; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:0.75rem;">
+            Ver Dashboard ROI ↗
+        </a>
+    </div>
+
     <!-- Top Bar -->
     <header class="top-bar">
         <div class="top-left">
@@ -568,7 +579,7 @@
                     <div class="business-rating-row">
                         <span class="rating-score">4.9</span>
                         <div class="rating-stars-summary">
-                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            <span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span><span style="color:#f59e0b;">★</span>
                         </div>
                         <span class="rating-count">(184 avaliações)</span>
                     </div>
@@ -616,11 +627,11 @@
                 <div id="good-branch" style="display: none;">
                     <div class="chips-title">O que você mais gostou?</div>
                     <div class="chips-container" id="chips-container">
-                        <div class="chip" onclick="toggleChip(this)">✨ Atendimento impecável</div>
-                        <div class="chip" onclick="toggleChip(this)">⏰ Pontualidade</div>
-                        <div class="chip" onclick="toggleChip(this)">🌿 Ambiente limpo e agradável</div>
-                        <div class="chip" onclick="toggleChip(this)">👩‍⚕️ Profissionalismo e clareza</div>
-                        <div class="chip" onclick="toggleChip(this)">⭐ Recomendo de olhos fechados</div>
+                        <div class="chip" onclick="toggleChip(this)">Atendimento impecável</div>
+                        <div class="chip" onclick="toggleChip(this)">Pontualidade no horário</div>
+                        <div class="chip" onclick="toggleChip(this)">Ambiente limpo e agradável</div>
+                        <div class="chip" onclick="toggleChip(this)">Profissionalismo e clareza</div>
+                        <div class="chip" onclick="toggleChip(this)">Recomendo com confiança</div>
                     </div>
 
                     <textarea class="review-textarea" id="review-text" placeholder="Escreva seu depoimento para o Google Maps (opcional)..."></textarea>
@@ -670,7 +681,7 @@
         <!-- Google Business Profile Helper Banner for Business Owners -->
         <div class="helper-banner" style="background:#ffffff; border:1px solid #dadce0; border-radius:12px; padding:16px; margin-top:20px; text-align:center;">
             <div style="font-size:0.85rem; font-weight:600; color:#202124; margin-bottom:4px;">
-                Quer essa tecnologia de avaliação 5★ no seu estabelecimento?
+                Quer essa tecnologia de avaliação 5 estrelas no seu estabelecimento?
             </div>
             <div style="font-size:0.78rem; color:#5f6368; margin-bottom:12px;">
                 Ainda não tem ficha no Google Meu Negócio ou quer o display NFC com seu link?
@@ -690,9 +701,9 @@
 
     <footer class="footer" style="display:flex; flex-direction:column; gap:8px; align-items:center;">
         <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-            <a href="../docs.html" style="color:#0f223d; font-weight:700; text-decoration:none;">📖 Documentação</a>
-            <a href="dashboard.html" style="color:#0f223d; font-weight:600; text-decoration:none;">📊 Dashboard ROI</a>
-            <a href="../index.html" style="color:#0f223d; font-weight:600; text-decoration:none;">🏠 Hub Principal</a>
+            <a href="../docs.html" style="color:#0f223d; font-weight:700; text-decoration:none;">Documentação</a>
+            <a href="dashboard.html" style="color:#0f223d; font-weight:600; text-decoration:none;">Dashboard ROI</a>
+            <a href="../index.html" style="color:#0f223d; font-weight:600; text-decoration:none;">Hub Principal</a>
         </div>
         <p style="margin:0; font-size:0.75rem; color:#64748b;">Powered by Nolei Creative • Google Avaliações Inteligente</p>
     </footer>

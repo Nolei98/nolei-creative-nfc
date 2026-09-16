@@ -89,12 +89,12 @@
     },
     kds_cozinha: {
       id: 'kds_cozinha',
-      name: 'KDS Cozinha & Salão ao Vivo',
+      name: 'Painel de Pedidos da Cozinha',
       icon: '👨‍🍳',
       segments: ['gastronomia'],
-      desc: 'Monitor de pedidos e chamados em tempo real para os garçons e equipe da cozinha.',
+      desc: 'Monitor de comandas e chamados em tempo real para garçons e equipe da cozinha.',
       operatorAction: {
-        label: 'Abrir KDS Cozinha & Salão',
+        label: 'Abrir Painel da Cozinha',
         getUrl: (c) => `demo/painel-restaurante.html?org=${c.slug}`
       },
       isDefault: true

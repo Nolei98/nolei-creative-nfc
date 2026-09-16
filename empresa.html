@@ -975,7 +975,18 @@
       document.getElementById('qr-modal-title').textContent = title;
       document.getElementById('qr-modal-desc').textContent = currentCompany && currentCompany.customDomain ? ('Domínio White-label: ' + currentCompany.customDomain) : 'Aponte a câmera para simular aproximação NFC';
       document.getElementById('qr-modal-url').textContent = fullUrl;
-      document.getElementById('qr-modal-test-btn').href = targetUrl;
+      const testBtn = document.getElementById('qr-modal-test-btn');
+      if (currentCompany && (currentCompany.slug === 'barbearia-dom-corleone' || currentCompany.slug === 'horizon-imoveis')) {
+        testBtn.href = '#';
+        testBtn.onclick = (e) => { e.preventDefault(); alert('Esta demonstração está atualmente em desenvolvimento.'); };
+        testBtn.textContent = 'Demo em Breve';
+        testBtn.style.opacity = '0.6';
+      } else {
+        testBtn.href = targetUrl;
+        testBtn.onclick = null;
+        testBtn.textContent = 'Abrir Destino';
+        testBtn.style.opacity = '1';
+      }
       document.getElementById('qr-modal-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(fullUrl);
       document.getElementById('qr-modal').style.display = 'flex';
     }

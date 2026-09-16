@@ -425,7 +425,7 @@
             Mostruário oficial de soluções prontas para apresentar a clientes de cada segmento comercial.
           </div>
         </div>
-        <span class="badge-status-item badge-active" style="padding:4px 10px; font-size:0.75rem;">7 Soluções Disponíveis</span>
+        <span class="badge-status-item badge-active" style="padding:4px 10px; font-size:0.75rem;">5 Demos Prontas • 2 Em Desenvolvimento</span>
       </div>
 
       <!-- Grid de Soluções com 2 botões: Abrir Demonstração e Entrar na Empresa -->
@@ -593,7 +593,8 @@
         imageUrl: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=80',
         iconSvg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>',
         descPequenina: 'Tag colada no espelho: cliente acompanha pontos do corte de cabelo e agenda horário sem fila.',
-        demoUrl: '../demo/fidelidade.html?source=nfc&org=barbearia-dom-corleone'
+        demoUrl: '',
+        inDevelopment: true
       },
       {
         slug: 'horizon-imoveis',
@@ -602,7 +603,8 @@
         imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80',
         iconSvg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="6" x2="9.01" y2="6"/><line x1="15" y1="6" x2="15.01" y2="6"/><line x1="9" y1="10" x2="9.01" y2="10"/><line x1="15" y1="10" x2="15.01" y2="10"/><line x1="9" y1="14" x2="9.01" y2="14"/><line x1="15" y1="14" x2="15.01" y2="14"/><line x1="9" y1="18" x2="15" y2="18"/></svg>',
         descPequenina: 'Placa no portão/loteamento: cliente vê ficha técnica e botão de contato com corretor de plantão.',
-        demoUrl: '../demo/storytelling-artesanato.html?source=nfc&org=horizon-imoveis&tipo=imovel'
+        demoUrl: '',
+        inDevelopment: true
       }
     ];
 
@@ -612,17 +614,35 @@
       if (!container) return;
 
       container.innerHTML = DEMOS_CATALOG.map(item => {
+        const isDev = item.inDevelopment === true;
+        const devBadge = isDev 
+          ? `<div style="position:absolute; top:12px; right:12px; z-index:4; background:#F59E0B; color:#0E0D0C; font-size:0.68rem; font-weight:800; padding:4px 10px; border-radius:20px; letter-spacing:0.04em; display:flex; align-items:center; gap:4px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Em Desenvolvimento
+            </div>`
+          : '';
+
+        const actionBtn = isDev
+          ? `<button type="button" disabled class="btn-demo-primary" style="opacity:0.65; cursor:not-allowed; background:#1C1814; border:1px solid rgba(245,158,11,0.35); color:#F59E0B; pointer-events:auto;" title="Esta demonstração está em desenvolvimento e não está disponível para abertura.">
+              <span>Em Desenvolvimento</span>
+            </button>`
+          : `<a href="${item.demoUrl}" target="_blank" class="btn-demo-primary">
+              <span>Abrir Demonstração</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>`;
+
         return `
-          <div class="demo-card">
+          <div class="demo-card ${isDev ? 'card-in-dev' : ''}" style="${isDev ? 'border-color: rgba(245,158,11,0.22);' : ''}">
             <div class="demo-cover-box">
-              <img src="${item.imageUrl}" alt="${item.name}" class="demo-cover-img" loading="lazy">
+              <img src="${item.imageUrl}" alt="${item.name}" class="demo-cover-img" loading="lazy" style="${isDev ? 'filter: saturate(0.85);' : ''}">
               <div class="demo-cover-overlay"></div>
               <div class="demo-badge-sector">${item.sector}</div>
+              ${devBadge}
             </div>
 
             <div class="demo-body">
               <div class="demo-header">
-                <div class="demo-icon-box">${item.iconSvg}</div>
+                <div class="demo-icon-box" style="${isDev ? 'border-color:rgba(245,158,11,0.3); color:#F59E0B;' : ''}">${item.iconSvg}</div>
                 <div class="demo-header-info">
                   <h3>${item.name}</h3>
                 </div>
@@ -631,10 +651,7 @@
               <p class="demo-desc">${item.descPequenina}</p>
 
               <div class="demo-card-actions">
-                <a href="${item.demoUrl}" target="_blank" class="btn-demo-primary">
-                  <span>Abrir Demonstração</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                </a>
+                ${actionBtn}
                 <a href="../empresa.html?slug=${item.slug}" target="_blank" class="btn-demo-secondary">
                   <span>Entrar na Empresa</span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>

@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nolei Admin Hub — Soluções Phygital & Gestão</title>
   <meta name="theme-color" content="#141210">
-  <title>Portal do Administrador & Demos — Nolei Phygital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #141210;
-      --card: #1C1814;
-      --elevated: #26201A;
-      --text: #F2EADF;
-      --muted: #A2937E;
-      --dim: #786B5A;
-      --accent: #C15D30;
-      --accent-deep: #93401F;
-      --green: #10B981;
-      --gold: #F59E0B;
-      --blue: #38BDF8;
+      --bg: #0E0D0C;
+      --card: #161412;
+      --elevated: #1F1B17;
       --border: rgba(242, 234, 223, 0.08);
       --border-strong: rgba(193, 93, 48, 0.35);
+      --text: #F2EADF;
+      --muted: #A2937E;
+      --dim: #6E6355;
+      --accent: #C15D30;
+      --accent-hover: #D96D3B;
+      --accent-deep: #8E3E1B;
+      --gold: #D4A853;
+      --green: #10B981;
       --radius: 12px;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--bg);
@@ -35,9 +36,9 @@
       flex-direction: column;
     }
 
-    /* Top Navigation */
+    /* Top Navbar */
     .admin-navbar {
-      background: rgba(20, 18, 16, 0.95);
+      background: rgba(14, 13, 12, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 12px 24px;
@@ -47,54 +48,53 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 12px;
     }
     .nav-brand {
       display: flex;
       align-items: center;
       gap: 10px;
-      color: var(--text);
-      text-decoration: none;
       font-weight: 800;
       font-size: 1.05rem;
+      color: var(--text);
+      text-decoration: none;
     }
-    .nav-brand span { color: var(--accent); }
     .brand-icon {
       width: 32px;
       height: 32px;
       border-radius: 8px;
-      background: var(--elevated);
-      border: 1px solid var(--border-strong);
+      background: var(--accent);
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent);
+      font-size: 1.1rem;
     }
+    .nav-brand span { color: var(--accent); }
 
-    /* Main Tab Navigation Buttons (Top Header) */
     .header-main-tabs {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--card);
-      border: 1px solid var(--border);
+      gap: 6px;
+      background: #141210;
       padding: 4px;
       border-radius: 10px;
+      border: 1px solid var(--border);
     }
     .tab-nav-btn {
       background: none;
-      border: none;
+      border: 1px solid transparent;
       color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 7px 14px;
-      border-radius: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
+      gap: 7px;
+      transition: all 0.15s;
+      text-decoration: none;
     }
     .tab-nav-btn:hover {
       color: var(--text);
@@ -103,10 +103,11 @@
     .tab-nav-btn.active {
       background: var(--elevated);
       color: var(--text);
-      border: 1px solid var(--border-strong);
+      border-color: var(--border-strong);
+      font-weight: 700;
     }
-    .tab-nav-btn.highlight {
-      color: var(--accent);
+    .tab-nav-btn.private-btn {
+      color: #F59E0B;
     }
 
     .nav-actions {
@@ -115,9 +116,9 @@
       align-items: center;
     }
     .btn-top {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      padding: 7px 14px;
+      padding: 8px 16px;
       border-radius: 8px;
       text-decoration: none;
       display: inline-flex;
@@ -142,72 +143,15 @@
     .btn-top-primary:hover { background: var(--accent-deep); }
 
     /* Layout */
-    .admin-layout {
-      display: grid;
-      grid-template-columns: 240px 1fr;
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 24px 20px 60px;
       flex: 1;
     }
-    @media (max-width: 900px) {
-      .admin-layout { grid-template-columns: 1fr; }
-      .admin-sidebar { display: none; }
-    }
 
-    /* Sidebar */
-    .admin-sidebar {
-      background: #110F0D;
-      border-right: 1px solid var(--border);
-      padding: 20px 14px;
-    }
-    .sidebar-section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--dim);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin: 16px 0 8px 10px;
-    }
-    .sidebar-nav {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .nav-item-btn {
-      width: 100%;
-      text-align: left;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 10px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.15s;
-    }
-    .nav-item-btn:hover {
-      background: var(--card);
-      color: var(--text);
-    }
-    .nav-item-btn.active {
-      background: var(--elevated);
-      color: var(--accent);
-      font-weight: 700;
-      border-left: 3px solid var(--accent);
-      border-radius: 0 8px 8px 0;
-    }
-
-    /* Main Area */
-    .admin-main {
-      padding: 28px 24px 60px;
-      max-width: 1120px;
-    }
-
-    /* Content Cards */
+    /* Card Blocks */
     .card-block {
       background: var(--card);
       border: 1px solid var(--border);
@@ -216,16 +160,16 @@
       margin-bottom: 24px;
     }
     .card-block-title {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    /* Demo Showcase Grid */
+    /* Grid de Soluções */
     .demos-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -238,25 +182,25 @@
       padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
     .demo-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(193, 93, 48, 0.4);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
     .demo-header {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 14px;
+      margin-bottom: 12px;
     }
     .demo-icon-box {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
-      background: #1F1A15;
-      border: 1px solid var(--border-strong);
+      background: #141210;
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -266,34 +210,33 @@
     .demo-header-info h3 {
       font-size: 1rem;
       font-weight: 700;
-      color: #FFFFFF;
+      color: var(--text);
       line-height: 1.3;
+      margin-bottom: 3px;
     }
     .demo-sector-tag {
       font-size: 0.72rem;
-      color: var(--accent);
       font-weight: 600;
-      margin-top: 2px;
+      color: var(--muted);
     }
     .demo-desc {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--muted);
-      line-height: 1.45;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      flex: 1;
     }
     .demo-card-actions {
-      margin-top: auto;
       display: flex;
       gap: 8px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(242, 234, 223, 0.06);
+      margin-top: auto;
     }
     .btn-demo-primary {
       flex: 1;
       background: var(--accent);
       color: #fff;
-      border: 1px solid var(--accent);
-      padding: 8px 12px;
-      border-radius: 6px;
+      padding: 9px 12px;
+      border-radius: 7px;
       font-size: 0.78rem;
       font-weight: 700;
       text-decoration: none;
@@ -310,11 +253,11 @@
       background: #141210;
       color: var(--muted);
       border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 0.75rem;
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 0.78rem;
       font-weight: 600;
-      text-decoration: none;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 5px;
@@ -324,6 +267,136 @@
       background: var(--elevated);
       color: var(--text);
       border-color: rgba(242, 234, 223, 0.2);
+    }
+
+    /* Switcher de Empresas da Demo */
+    .company-switcher-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .btn-switcher-pill {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-switcher-pill:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .btn-switcher-pill.active {
+      background: rgba(193, 93, 48, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Sub-tabs de Gestão (Métricas, Catálogo, Configurações) */
+    .mgmt-subtabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: #141210;
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      width: fit-content;
+    }
+    .btn-subtab {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-subtab:hover {
+      color: var(--text);
+    }
+    .btn-subtab.active {
+      background: var(--elevated);
+      color: var(--text);
+      border-color: var(--border-strong);
+      font-weight: 700;
+    }
+
+    /* Header da Empresa Ativa */
+    .active-company-hero {
+      background: var(--elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .active-company-info h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .active-company-info div {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .active-company-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .kpi-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .kpi-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .kpi-subtitle {
+      font-size: 0.72rem;
+      color: var(--green);
+      margin-top: 4px;
     }
 
     /* Table & Badges */
@@ -350,7 +423,7 @@
       display: inline-block;
       font-size: 0.7rem;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 3px 8px;
       border-radius: 4px;
     }
     .badge-active { background: rgba(16, 185, 129, 0.15); color: var(--green); }
@@ -368,7 +441,7 @@
     .form-input:focus { outline: none; border-color: var(--accent); }
     .form-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
       margin-bottom: 16px;
     }
@@ -383,11 +456,55 @@
       background: var(--accent);
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 11px 22px;
       border-radius: 8px;
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+    .btn-save:hover { background: var(--accent-deep); }
+
+    /* Infra Grid na Área Privada */
+    .infra-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .infra-card {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      text-decoration: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.15s;
+    }
+    .infra-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .infra-icon {
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .infra-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .infra-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -402,171 +519,129 @@
       Nolei <span>Admin Hub</span>
     </a>
 
-    <!-- Top Navigation Tabs: Soluções Prontas e Novo Usuário -->
+    <!-- Top Navigation Tabs Principais -->
     <div class="header-main-tabs">
       <button class="tab-nav-btn active" id="btn-tab-demos" onclick="switchAdminTab('demos', this)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         Soluções Prontas
       </button>
-      <a href="novo-cliente.html" class="tab-nav-btn highlight" style="text-decoration:none;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-        Novo Usuário / Cliente
-      </a>
-      <button class="tab-nav-btn" id="btn-tab-private" onclick="openPrivateClientsArea(this)" style="color:#F59E0B;">
+      <button class="tab-nav-btn" id="btn-tab-mgmt" onclick="switchAdminTab('mgmt', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        Painel & Configurações da Empresa
+      </button>
+      <button class="tab-nav-btn private-btn" id="btn-tab-private" onclick="openPrivateClientsArea(this)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         Área Privada
       </button>
     </div>
 
     <div class="nav-actions">
-      <a href="gerador-tags.html" target="_blank" class="btn-top btn-top-ghost">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-        Gerador de Tags
-      </a>
       <a href="novo-cliente.html" class="btn-top btn-top-primary">
         + Cadastrar Cliente
       </a>
     </div>
   </header>
 
-  <div class="admin-layout">
-    <!-- Sidebar -->
-    <aside class="admin-sidebar">
-      <div class="sidebar-section-label">Mostruário Phygital</div>
-      <ul class="sidebar-nav">
-        <li><button class="nav-item-btn active" onclick="switchAdminTab('demos', this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Soluções Prontas
-        </button></li>
-        <li><button class="nav-item-btn" onclick="switchAdminTab('overview', this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-          Métricas da Demo
-        </button></li>
-        <li><button class="nav-item-btn" onclick="switchAdminTab('catalog', this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M15 2v19"/><path d="M5 2v7c0 2.2 1.8 4 4 4v8"/></svg>
+  <div class="admin-container">
+
+    <!-- ================================================================= -->
+    <!-- TAB 1: SOLUÇÕES PHYGITAL PRONTAS (Mostruário de Demonstrações)   -->
+    <!-- ================================================================= -->
+    <div class="card-block" id="tab-demos-box">
+      <div class="card-block-title" style="flex-wrap:wrap; gap:8px;">
+        <div>
+          <span style="font-size:1.25rem;">Soluções Phygital Prontas</span>
+          <div style="font-size:0.82rem; color:var(--muted); font-weight:normal; margin-top:2px;">
+            Mostruário oficial de soluções prontas para apresentar a clientes de cada segmento comercial.
+          </div>
+        </div>
+        <span class="badge-status-item badge-active" style="padding:4px 10px; font-size:0.75rem;">7 Soluções Disponíveis</span>
+      </div>
+
+      <!-- Grid de Soluções com 2 botões por card -->
+      <div class="demos-grid" id="demos-container">
+        <!-- Injetado dinamicamente via renderDemosShowcase() -->
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- TAB 2: PAINEL & GESTÃO DA EMPRESA (Métricas, Catálogo & Configs) -->
+    <!-- ================================================================= -->
+    <div class="card-block" id="tab-mgmt-box" style="display:none;">
+      
+      <!-- Seletor Horizontal de Empresas -->
+      <div style="font-size:0.8rem; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">
+        Selecione a Empresa / Demonstração:
+      </div>
+      <div class="company-switcher-bar" id="company-switcher-bar">
+        <!-- Injetado dinamicamente via renderCompanySwitcher() -->
+      </div>
+
+      <!-- Hero Card da Empresa Selecionada -->
+      <div class="active-company-hero">
+        <div class="active-company-info">
+          <h2 id="active-company-name">🌿 Botânico Bistrô</h2>
+          <div id="active-company-sector">Setor de Gastronomia & Restaurantes • Juazeiro do Norte - CE</div>
+        </div>
+        <div class="active-company-actions">
+          <a id="btn-open-portal" href="../empresa.html?slug=botanico-bistro" target="_blank" class="btn-top btn-top-ghost">
+            <span>Abrir Portal do Cliente</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+          <a id="btn-open-live-demo" href="../demo/cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top btn-top-primary">
+            <span>Abrir Experiência no Celular</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sub-tabs internas: Métricas, Catálogo, Configurações -->
+      <div class="mgmt-subtabs">
+        <button class="btn-subtab active" id="btn-sub-overview" onclick="switchMgmtSubtab('overview', this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          Métricas da Empresa
+        </button>
+        <button class="btn-subtab" id="btn-sub-catalog" onclick="switchMgmtSubtab('catalog', this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M15 2v19"/><path d="M5 2v7c0 2.2 1.8 4 4 4v8"/></svg>
           Catálogo & Serviços
-        </button></li>
-        <li><button class="nav-item-btn" onclick="switchAdminTab('settings', this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-          Configurações
-        </button></li>
-      </ul>
-
-      <div class="sidebar-section-label">Área Privada (Contratos)</div>
-      <ul class="sidebar-nav">
-        <li><button class="nav-item-btn" onclick="openPrivateClientsArea(this)" style="color:#F59E0B;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Clientes Cadastrados
-        </button></li>
-        <li><a href="novo-cliente.html" class="nav-item-btn" style="text-decoration:none; color:var(--accent);">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-          Cadastrar Novo Cliente
-        </a></li>
-      </ul>
-
-      <div class="sidebar-section-label">Infraestrutura Phygital</div>
-      <ul class="sidebar-nav">
-        <li><a href="gerador-tags.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-          Gerador de Tags/QR
-        </a></li>
-        <li><a href="../r.html?t=m04" target="_blank" class="nav-item-btn" style="text-decoration:none;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          Testar NFC's ROUT
-        </a></li>
-        <li><a href="status-supabase.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-          Diagnóstico de Nuvem
-        </a></li>
-      </ul>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="admin-main">
-
-      <!-- TAB 1: SOLUÇÕES PHYGITAL PRONTAS (Mostruário) -->
-      <div class="card-block" id="tab-demos-box">
-        <div class="card-block-title" style="flex-wrap:wrap; gap:8px;">
-          <div>
-            <span style="font-size:1.25rem;">Soluções Phygital Prontas</span>
-            <div style="font-size:0.82rem; color:var(--muted); font-weight:normal; margin-top:2px;">
-              Clique no botão da demonstração desejada para abrir a experiência correspondente para o cliente.
-            </div>
-          </div>
-          <span class="badge-status-item badge-active" style="padding:4px 10px; font-size:0.75rem;">7 Soluções Disponíveis</span>
-        </div>
-
-        <!-- Grid de Demonstrações: Nome da demo em si + descrição pequenina + botão específico -->
-        <div class="demos-grid" id="demos-container">
-          <!-- Injetado dinamicamente via renderDemosShowcase() -->
-        </div>
+        </button>
+        <button class="btn-subtab" id="btn-sub-settings" onclick="switchMgmtSubtab('settings', this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Configurações (Wi-Fi & Contato)
+        </button>
       </div>
 
-      <!-- TAB 2: ÁREA PRIVADA DE CLIENTES REAIS (Protegida) -->
-      <div class="card-block" id="tab-private-box" style="display:none;">
-        <div class="card-block-title" style="flex-wrap:wrap; gap:12px;">
-          <div>
-            <span style="font-size:1.25rem;">Gestão de Clientes Reais (Sessão Privada)</span>
-            <div style="font-size:0.82rem; color:var(--muted); font-weight:normal; margin-top:2px;">
-              Lista exclusiva de clientes e contratos cadastrados. Ficam protegidos e isolados das demonstrações.
-            </div>
+      <!-- Sub-aba 1: Métricas & KPIs -->
+      <div id="mgmt-overview-section">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-title" id="kpi-title-1">Toques NFC Hoje</div>
+            <div class="kpi-value" id="kpi-nfc">142</div>
+            <div class="kpi-subtitle" id="kpi-sub-1">▲ +18% em relação a ontem</div>
           </div>
-          <div style="display:flex; gap:8px;">
-            <a href="novo-cliente.html" class="btn-top btn-top-primary">+ Novo Cliente</a>
-            <button class="btn-top btn-top-ghost" onclick="logoutPrivateArea()">Encerrar Sessão</button>
+          <div class="kpi-card">
+            <div class="kpi-title" id="kpi-title-2">Chamados Atendidos</div>
+            <div class="kpi-value" id="kpi-calls">38</div>
+            <div class="kpi-subtitle" id="kpi-sub-2">Tempo médio: 2.1 minutos</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title" id="kpi-title-3">Faturamento Comandas</div>
+            <div class="kpi-value" id="kpi-rev">R$ 4.890</div>
+            <div class="kpi-subtitle" id="kpi-sub-3">Ticket médio: R$ 86,40</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title" id="kpi-title-4">Índice Google Maps</div>
+            <div class="kpi-value" id="kpi-rating">4.9 ★</div>
+            <div class="kpi-subtitle" id="kpi-sub-4">184 avaliações públicas</div>
           </div>
         </div>
-
-        <div id="private-clients-content" style="margin-top:16px; overflow-x:auto;">
-          <!-- Injetado dinamicamente via renderPrivateClients() -->
-        </div>
       </div>
 
-      <!-- Header Title para abas de métricas/catálogo -->
-      <div id="org-header-row" style="margin-bottom: 24px; display:none;">
-        <h2 id="current-org-name" style="font-size:1.6rem; font-weight:800;">🌿 Botânico Bistrô</h2>
-        <div id="current-org-segment" style="font-size:0.85rem; color:var(--muted);">Setor de Gastronomia • Juazeiro do Norte / Cariri</div>
-      </div>
-
-      <!-- KPI Grid -->
-      <div class="kpi-grid" style="display:none; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
-        <div style="background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px;">
-          <div style="font-size:0.75rem; font-weight:600; color:var(--muted); margin-bottom:4px;">Toques NFC Hoje</div>
-          <div style="font-size:1.5rem; font-weight:800; color:var(--text); font-family:'JetBrains Mono', monospace;" id="kpi-nfc">142</div>
-          <div style="font-size:0.7rem; color:var(--green); margin-top:4px;">▲ +18% em relação a ontem</div>
-        </div>
-        <div style="background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px;">
-          <div style="font-size:0.75rem; font-weight:600; color:var(--muted); margin-bottom:4px;">Chamados Atendidos</div>
-          <div style="font-size:1.5rem; font-weight:800; color:var(--text); font-family:'JetBrains Mono', monospace;" id="kpi-calls">38</div>
-          <div style="font-size:0.7rem; color:var(--green); margin-top:4px;">Tempo médio: 2.1 minutos</div>
-        </div>
-        <div style="background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px;">
-          <div style="font-size:0.75rem; font-weight:600; color:var(--muted); margin-bottom:4px;">Faturamento Comandas</div>
-          <div style="font-size:1.5rem; font-weight:800; color:var(--text); font-family:'JetBrains Mono', monospace;" id="kpi-rev">R$ 4.890</div>
-          <div style="font-size:0.7rem; color:var(--green); margin-top:4px;">Ticket médio: R$ 86,40</div>
-        </div>
-        <div style="background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px;">
-          <div style="font-size:0.75rem; font-weight:600; color:var(--muted); margin-bottom:4px;">Índice de Avaliação</div>
-          <div style="font-size:1.5rem; font-weight:800; color:var(--text); font-family:'JetBrains Mono', monospace;" id="kpi-rating">4.9 ★</div>
-          <div style="font-size:0.7rem; color:var(--green); margin-top:4px;">184 reviews no Google Maps</div>
-        </div>
-      </div>
-
-      <!-- Quick Launchpad -->
-      <div class="card-block" style="display:none;" id="launchpad-block">
-        <div class="card-block-title">
-          <span>Acesso Rápido às Operações do Setor</span>
-        </div>
-        <div id="launchpad-container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
-          <!-- Injetado dinamicamente -->
-        </div>
-      </div>
-
-      <!-- Tab: Catalog Items -->
-      <div class="card-block" id="tab-catalog-box" style="display:none;">
-        <div class="card-block-title">
-          <span id="catalog-title">Catálogo de Produtos & Preços</span>
-          <button class="btn-top btn-top-primary" onclick="alert('Item adicionado em modo de demonstração!')">+ Adicionar Item</button>
+      <!-- Sub-aba 2: Catálogo de Produtos & Serviços -->
+      <div id="mgmt-catalog-section" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h4 style="color:#fff;" id="catalog-section-title">Itens Disponíveis no Cardápio / Catálogo</h4>
+          <button class="btn-top btn-top-primary" style="padding:6px 12px; font-size:0.75rem;" onclick="alert('Item cadastrado em modo demonstração!')">+ Novo Item</button>
         </div>
         <div style="overflow-x:auto;">
           <table class="items-table">
@@ -574,7 +649,7 @@
               <tr>
                 <th>Item / Descrição</th>
                 <th>Categoria</th>
-                <th>Preço</th>
+                <th>Preço / Pts</th>
                 <th>Status</th>
                 <th>Ações</th>
               </tr>
@@ -586,33 +661,108 @@
         </div>
       </div>
 
-      <!-- Tab: Settings -->
-      <div class="card-block" id="tab-settings-box" style="display:none;">
-        <div class="card-block-title">Dados Comerciais & WhatsApp</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nome do Estabelecimento:</label>
-            <input type="text" id="set-name" class="form-input" value="Botânico Bistrô">
-          </div>
-          <div class="form-group">
-            <label>WhatsApp de Recebimento de Pedidos:</label>
-            <input type="text" id="set-wa" class="form-input" value="87999099937">
-          </div>
+      <!-- Sub-aba 3: Configurações Comerciais (Wi-Fi, WhatsApp e Google) -->
+      <div id="mgmt-settings-section" style="display:none;">
+        <div style="font-size:0.85rem; color:var(--muted); margin-bottom:16px;">
+          Os dados abaixo pertencem exclusivamente à empresa selecionada e são utilizados no seu totem NFC, no Wi-Fi e nos botões de atendimento.
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Rede Wi-Fi do Local (SSID):</label>
-            <input type="text" id="set-wifi-ssid" class="form-input" value="Botanico_5G">
+        <form onsubmit="handleSaveActiveCompanySettings(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nome do Estabelecimento:</label>
+              <input type="text" id="set-name" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label>WhatsApp de Atendimento (E.164 com 55):</label>
+              <input type="text" id="set-wa" class="form-input" required>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Senha do Wi-Fi:</label>
-            <input type="text" id="set-wifi-pass" class="form-input" value="botanicogourmet">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Rede Wi-Fi do Local (SSID):</label>
+              <input type="text" id="set-wifi-ssid" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label>Senha do Wi-Fi:</label>
+              <input type="text" id="set-wifi-pass" class="form-input" required>
+            </div>
           </div>
-        </div>
-        <button class="btn-save" onclick="alert('Configurações salvas no arquivo JSON local com sucesso!')">Salvar Alterações</button>
+          <div class="form-row">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>URL do Google Maps (Avaliação 5 Estrelas):</label>
+              <input type="url" id="set-google-url" class="form-input">
+            </div>
+          </div>
+          <button type="submit" class="btn-save">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Salvar Alterações desta Empresa
+          </button>
+        </form>
       </div>
 
-    </main>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- TAB 3: ÁREA PRIVADA (Clientes Reais Cadastrados & Ferramentas)   -->
+    <!-- ================================================================= -->
+    <div class="card-block" id="tab-private-box" style="display:none;">
+      <div class="card-block-title" style="flex-wrap:wrap; gap:12px;">
+        <div>
+          <span style="font-size:1.25rem;">Gestão de Clientes Reais (Sessão Privada)</span>
+          <div style="font-size:0.82rem; color:var(--muted); font-weight:normal; margin-top:2px;">
+            Lista exclusiva de clientes e contratos cadastrados. Ficam protegidos e isolados das demonstrações.
+          </div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a href="novo-cliente.html" class="btn-top btn-top-primary">+ Novo Cliente</a>
+          <button class="btn-top btn-top-ghost" onclick="logoutPrivateArea()">Encerrar Sessão</button>
+        </div>
+      </div>
+
+      <!-- Tabela de Clientes Cadastrados -->
+      <div id="private-clients-content" style="margin-top:16px; overflow-x:auto;">
+        <!-- Injetado dinamicamente via renderPrivateClients() -->
+      </div>
+
+      <!-- Ferramentas de Infraestrutura Phygital (Exclusivas da Área Privada) -->
+      <div style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+        <h4 style="color:#fff; font-size:1rem; margin-bottom:4px;">Ferramentas de Infraestrutura Phygital</h4>
+        <p style="font-size:0.8rem; color:var(--muted);">Utilitários para gravação de tags, testes de redirecionamento e telemetria.</p>
+        
+        <div class="infra-grid">
+          <a href="gerador-tags.html" target="_blank" class="infra-card">
+            <div class="infra-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            </div>
+            <div>
+              <div class="infra-title">Gerador de Tags/QR</div>
+              <div class="infra-desc">Geração de QR codes e URLs criptografadas para gravação em tags NFC físicas.</div>
+            </div>
+          </a>
+
+          <a href="../r.html?t=m04" target="_blank" class="infra-card">
+            <div class="infra-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <div class="infra-title">Testar NFC's ROUT</div>
+              <div class="infra-desc">Simulador de aproximação NFC com redirecionamento dinâmico instantâneo.</div>
+            </div>
+          </a>
+
+          <a href="status-supabase.html" target="_blank" class="infra-card">
+            <div class="infra-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <div>
+              <div class="infra-title">Diagnóstico de Nuvem</div>
+              <div class="infra-desc">Monitoramento de sincronização remota e integridade da base de dados.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Modal de Login para Área Privada -->
@@ -644,7 +794,7 @@
 
   <script src="../js/nolei-companies.js"></script>
   <script>
-    // Catálogo oficial de Demonstrações com nomes intuitivos e descrições pequeninas
+    // Catálogo oficial de Soluções com nomes amigáveis e ações
     const DEMOS_CATALOG = [
       {
         slug: 'botanico-bistro',
@@ -652,9 +802,7 @@
         sector: 'Gastronomia & Restaurantes',
         iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M15 2v19"/><path d="M5 2v7c0 2.2 1.8 4 4 4v8"/></svg>',
         descPequenina: 'Aproximação NFC na mesa: cliente vê fotos e cardápio, chama garçom e comanda vai direto para a cozinha.',
-        demoUrl: '../demo/cardapio.html?source=nfc&mesa=04',
-        painelTitle: 'Painel da Cozinha',
-        painelUrl: '../demo/painel-restaurante.html'
+        demoUrl: '../demo/cardapio.html?source=nfc&mesa=04'
       },
       {
         slug: 'hotel-imperial',
@@ -662,9 +810,7 @@
         sector: 'Hotelaria & Hospedagem',
         iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M9 21v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>',
         descPequenina: 'Tag na cabeceira da cama: hóspede pede room service 24h, agenda café colonial e aciona governança.',
-        demoUrl: '../demo/hotel.html?source=nfc&quarto=412',
-        painelTitle: 'Painel da Recepção',
-        painelUrl: '../demo/painel-hotel.html'
+        demoUrl: '../demo/hotel.html?source=nfc&quarto=412'
       },
       {
         slug: 'clinica-dra-sofia',
@@ -672,9 +818,7 @@
         sector: 'Saúde, Clínicas & Estética',
         iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
         descPequenina: 'Totem de balcão: direciona notas 4-5★ para o Google Maps e capta críticas em canal privado de ouvidoria.',
-        demoUrl: '../demo/avaliacao.html?source=nfc',
-        painelTitle: 'Ouvidoria Privada',
-        painelUrl: '../demo/dashboard-avaliacoes.html'
+        demoUrl: '../demo/avaliacao.html?source=nfc&org=clinica-dra-sofia'
       },
       {
         slug: 'cafe-origem',
@@ -682,9 +826,7 @@
         sector: 'Cafeterias, Varejo & Fidelidade',
         iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
         descPequenina: 'Programa de carimbos gamificado sem app: acumula pontos e valida cupons anti-fraude no caixa.',
-        demoUrl: '../demo/fidelidade.html?source=nfc',
-        painelTitle: 'Balcão do Caixa',
-        painelUrl: '../demo/painel-fidelidade.html'
+        demoUrl: '../demo/fidelidade.html?source=nfc&org=cafe-origem'
       },
       {
         slug: 'atelie-raizes',
@@ -692,9 +834,7 @@
         sector: 'Moda Autoral, Couro & Artesanato',
         iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>',
         descPequenina: 'Etiqueta costurada na peça: aproximação revela história do artesão e certificado de autenticidade numerado.',
-        demoUrl: '../demo/storytelling-artesanato.html?source=nfc',
-        painelTitle: 'Ver Portal',
-        painelUrl: '../empresa.html?slug=atelie-raizes'
+        demoUrl: '../demo/storytelling-artesanato.html?source=nfc&org=atelie-raizes'
       },
       {
         slug: 'barbearia-dom-corleone',
@@ -702,9 +842,7 @@
         sector: 'Barbearias, Salões & Beleza',
         iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>',
         descPequenina: 'Tag colada no espelho: cliente acompanha pontos do corte de cabelo e agenda horário sem fila.',
-        demoUrl: '../demo/fidelidade.html?source=nfc&org=barbearia-dom-corleone',
-        painelTitle: 'Ver Portal',
-        painelUrl: '../empresa.html?slug=barbearia-dom-corleone'
+        demoUrl: '../demo/fidelidade.html?source=nfc&org=barbearia-dom-corleone'
       },
       {
         slug: 'horizon-imoveis',
@@ -712,23 +850,110 @@
         sector: 'Imobiliárias, Construtoras & Plantões',
         iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="6" x2="9.01" y2="6"/><line x1="15" y1="6" x2="15.01" y2="6"/><line x1="9" y1="10" x2="9.01" y2="10"/><line x1="15" y1="10" x2="15.01" y2="10"/><line x1="9" y1="14" x2="9.01" y2="14"/><line x1="15" y1="14" x2="15.01" y2="14"/><line x1="9" y1="18" x2="15" y2="18"/></svg>',
         descPequenina: 'Placa no portão/loteamento: cliente vê ficha técnica e botão de contato com corretor de plantão.',
-        demoUrl: '../demo/storytelling-artesanato.html?source=nfc&tipo=imovel',
-        painelTitle: 'Ver Portal',
-        painelUrl: '../empresa.html?slug=horizon-imoveis'
-      },
-      {
-        slug: 'dashboard-roi',
-        name: 'Relatório Executivo de ROI & Métricas do Salão',
-        sector: 'Gestão Operacional & Faturamento',
-        iconSvg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
-        descPequenina: 'Painel com cálculo de economia de equipe, tempo poupado dos garçons e giro de mesas por turno.',
-        demoUrl: '../demo/dashboard-restaurante.html',
-        painelTitle: 'Abrir Relatório',
-        painelUrl: '../demo/dashboard-restaurante.html'
+        demoUrl: '../demo/storytelling-artesanato.html?source=nfc&org=horizon-imoveis&tipo=imovel'
       }
     ];
 
-    // Renderiza a lista de Demonstrações (Mostruário de Demos)
+    // Banco de dados dinâmico de Métricas e Catálogo para cada empresa
+    const DEMOS_EXTRA_DATA = {
+      'botanico-bistro': {
+        kpis: {
+          nfc: '142', calls: '38', rev: 'R$ 4.890', rating: '4.9 ★',
+          t1: 'Toques NFC Hoje', t2: 'Chamados Atendidos', t3: 'Faturamento Comandas', t4: 'Índice Google Maps',
+          s1: '▲ +18% hoje', s2: 'Tempo médio: 2.1 min', s3: 'Ticket: R$ 86,40', s4: '184 reviews Google'
+        },
+        items: [
+          { title: 'Bruschetta Caprese', desc: 'Tomate cereja, muçarela de búfala e manjericão fresco.', cat: 'Entradas', price: 'R$ 28,90', active: true },
+          { title: 'Risoto de Funghi Trufado', desc: 'Arroz arbóreo, cogumelos frescos e azeite trufado.', cat: 'Principais', price: 'R$ 58,90', active: true },
+          { title: 'Salmão Grelhado na Brasa', desc: 'Purê de batata-doce roxa e aspargos salteados.', cat: 'Principais', price: 'R$ 72,00', active: true },
+          { title: 'Gin Tônica Botânica', desc: 'Gin artesanal infusionado, tônica e pepino japonês.', cat: 'Bebidas', price: 'R$ 38,00', active: true },
+          { title: 'Petit Gâteau Belga', desc: 'Chocolate meio amargo com sorvete de baunilha.', cat: 'Sobremesas', price: 'R$ 32,00', active: true }
+        ]
+      },
+      'hotel-imperial': {
+        kpis: {
+          nfc: '64', calls: '19', rev: 'R$ 2.450', rating: '4.8 ★',
+          t1: 'Aproximações na Suíte', t2: 'Pedidos Room Service', t3: 'Faturamento de Quarto', t4: 'Índice Google Maps',
+          s1: 'Hóspedes ativos', s2: 'Tempo médio: 14 min', s3: 'Ticket: R$ 128,90', s4: '126 reviews Google'
+        },
+        items: [
+          { title: 'Club Sandwich Imperial', desc: 'Frango grelhado, bacon crocante e batatas rústicas.', cat: 'Room Service', price: 'R$ 45,00', active: true },
+          { title: 'Filé Mignon ao Madeira', desc: 'Com risoto de parmesão e brotos frescos.', cat: 'Room Service', price: 'R$ 89,00', active: true },
+          { title: 'Cesta de Café da Manhã Colonial', desc: 'Cesta matinal agendada entregue na suíte.', cat: 'Café no Quarto', price: 'Incluso', active: true },
+          { title: 'Massagem Relaxante SPA', desc: 'Sessão de 50 minutos com óleos essenciais.', cat: 'SPA', price: 'R$ 180,00', active: true },
+          { title: 'Transfer Aeroporto Juazeiro', desc: 'Veículo executivo com motorista particular.', cat: 'Concierge', price: 'R$ 120,00', active: true }
+        ]
+      },
+      'clinica-dra-sofia': {
+        kpis: {
+          nfc: '89', calls: '24', rev: '100%', rating: '5.0 ★',
+          t1: 'Pacientes no Totem', t2: 'Avaliações Direcionadas', t3: 'Retenção de Críticas', t4: 'Índice Google Maps',
+          s1: '▲ +24% este mês', s2: 'Notas 5 estrelas', s3: 'Canal privado de ouvidoria', s4: '98 reviews Google'
+        },
+        items: [
+          { title: 'Filtro de Avaliações Google Maps 5★', desc: 'Direcionamento automático para notas 4 e 5 estrelas.', cat: 'Reputação', price: 'Ativo', active: true },
+          { title: 'Canal Privado de Ouvidoria', desc: 'Captura confidencial de insatisfações antes de reviews públicos.', cat: 'SAC Diretoria', price: 'Ativo', active: true },
+          { title: 'Apresentação de Especialistas & CRM', desc: 'Biografia e corpo clínico exibido no celular do paciente.', cat: 'Institucional', price: 'Ativo', active: true },
+          { title: 'Agendamento Expresso WhatsApp', desc: 'Marcação rápida sem fila de espera no balcão.', cat: 'Atendimento', price: 'Ativo', active: true }
+        ]
+      },
+      'cafe-origem': {
+        kpis: {
+          nfc: '210', calls: '45', rev: 'R$ 3.120', rating: '4.9 ★',
+          t1: 'Carimbos Validados', t2: 'Recompensas Resgatadas', t3: 'Faturamento Fidelizado', t4: 'Índice Google Maps',
+          s1: 'Clientes frequentes', s2: 'Vouchers anti-fraude', s3: 'Ticket médio: R$ 24,50', s4: '310 reviews Google'
+        },
+        items: [
+          { title: 'Espresso Tradicional Grãos Especiais', desc: 'Café coado ou espresso com grãos selecionados.', cat: 'Resgate 50 pts', price: '50 pts', active: true },
+          { title: 'Fatia de Bolo de Cenoura com Ganache', desc: 'Receita artesanal do dia.', cat: 'Resgate 80 pts', price: '80 pts', active: true },
+          { title: 'Frappuccino de Caramelo & Chantilly', desc: 'Bebida gelada premium com café arábica.', cat: 'Resgate 120 pts', price: '120 pts', active: true },
+          { title: 'Cartela Fidelidade 10 Carimbos', desc: 'Cartão digital no celular sem aplicativo.', cat: 'Gamificação', price: 'Ativo', active: true }
+        ]
+      },
+      'atelie-raizes': {
+        kpis: {
+          nfc: '48', calls: '12', rev: 'R$ 6.200', rating: '5.0 ★',
+          t1: 'Aproximações na Tag', t2: 'Encomendas Iniciadas', t3: 'Faturamento Autoral', t4: 'Índice Google Maps',
+          s1: 'Storytelling verificado', s2: 'WhatsApp do Mestre', s3: 'Ticket médio: R$ 380', s4: '42 reviews Google'
+        },
+        items: [
+          { title: 'Bolsa Mandacaru #07', desc: 'Couro vegetal livre de cromo com ferragens de latão.', cat: 'Coleção Raízes', price: 'R$ 380,00', active: true },
+          { title: 'Carteira Sertão Minimalista', desc: '4 slots de cartões e costura manual ponto de sela.', cat: 'Acessórios', price: 'R$ 140,00', active: true },
+          { title: 'Gibão Tradicional Cariri', desc: 'Feito sob medida em couro nobre para apresentações.', cat: 'Peça Especial', price: 'R$ 650,00', active: true },
+          { title: 'Cinto Couro Fogueteiro', desc: 'Bordas polidas com cera de abelha e fivela maciça.', cat: 'Coleção', price: 'R$ 160,00', active: true },
+          { title: 'Certificado Phygital de Autenticidade', desc: 'Chancela digital de peça original numerada.', cat: 'Garantia', price: 'Vitalícia', active: true }
+        ]
+      },
+      'barbearia-dom-corleone': {
+        kpis: {
+          nfc: '115', calls: '34', rev: 'R$ 2.890', rating: '4.9 ★',
+          t1: 'Toques no Espelho', t2: 'Agendamentos Rápidos', t3: 'Faturamento de Cortes', t4: 'Índice Google Maps',
+          s1: 'Clientes da cadeira', s2: 'Sem fila de espera', s3: 'Ticket médio: R$ 68', s4: '155 reviews Google'
+        },
+        items: [
+          { title: 'Corte Masculino Degradê Navalhado', desc: 'Acabamento minucioso com lavagem e finalização.', cat: 'Cortes', price: 'R$ 55,00', active: true },
+          { title: 'Barba Terapia com Toalha Quente', desc: 'Óleos essenciais, massagem facial e navalhete.', cat: 'Barba', price: 'R$ 45,00', active: true },
+          { title: 'Combo Corte + Barba VIP', desc: 'Experiência completa com bebida de cortesia.', cat: 'Combo', price: 'R$ 85,00', active: true },
+          { title: 'Cartela Fidelidade do Clube', desc: 'A cada 10 cortes, o 11º é cortesia da casa.', cat: 'Fidelidade', price: 'Ativo', active: true }
+        ]
+      },
+      'horizon-imoveis': {
+        kpis: {
+          nfc: '76', calls: '18', rev: '2 Reservas', rating: '4.9 ★',
+          t1: 'Toques na Placa', t2: 'Contatos no WhatsApp', t3: 'Conversão em Visitas', t4: 'Plantão Ativo',
+          s1: 'Totem no loteamento', s2: 'Falar com corretor', s3: 'Lotes reservados', s4: 'Plantão Juazeiro'
+        },
+        items: [
+          { title: 'Lote Residencial Jardins do Cariri #12', desc: '360m² com topografia plana e rede subterrânea.', cat: 'Loteamento', price: 'R$ 145.000', active: true },
+          { title: 'Tour Virtual 360º Phygital', desc: 'Acesso instantâneo à maquete 3D e memorial descritivo.', cat: 'Tour Digital', price: 'Ativo', active: true },
+          { title: 'Plantão WhatsApp com Corretor', desc: 'Conexão prioritária com corretor com código do lote.', cat: 'Plantão', price: 'Ativo', active: true }
+        ]
+      }
+    };
+
+    let activeCompanySlug = 'botanico-bistro';
+
+    // 1. Renderiza o mostruário de Soluções Prontas (Tab 1)
     function renderDemosShowcase() {
       const container = document.getElementById('demos-container');
       if (!container) return;
@@ -748,20 +973,144 @@
 
             <div class="demo-card-actions">
               <a href="${item.demoUrl}" target="_blank" class="btn-demo-primary">
-                <span>Abrir Solução</span>
+                <span>Abrir Experiência</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
               </a>
-              <a href="${item.painelUrl}" target="_blank" class="btn-demo-secondary">
-                <span>${item.painelTitle}</span>
+              <button onclick="selectCompanyAndGoToMgmt('${item.slug}')" class="btn-demo-secondary">
+                <span>Painel & Configs</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </a>
+              </button>
             </div>
           </div>
         `;
       }).join('');
     }
 
-    // Modal de Login & Autenticação da Área Privada
+    // 2. Renderiza a barra seletora de empresas no Painel de Gestão (Tab 2)
+    function renderCompanySwitcher() {
+      const bar = document.getElementById('company-switcher-bar');
+      if (!bar || !window.NoleiCompanies) return;
+
+      const demoCompanies = window.NoleiCompanies.getDemoCompanies();
+      bar.innerHTML = demoCompanies.map(c => {
+        const isActive = c.slug === activeCompanySlug;
+        return `
+          <button class="btn-switcher-pill ${isActive ? 'active' : ''}" onclick="selectCompanyForMgmt('${c.slug}')">
+            <span>${c.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // 3. Atualiza os dados de Métricas, Catálogo e Configurações para a empresa ativa
+    function updateActiveCompanyView() {
+      if (!window.NoleiCompanies) return;
+      const org = window.NoleiCompanies.getBySlug(activeCompanySlug);
+      if (!org) return;
+
+      // Header hero da empresa
+      document.getElementById('active-company-name').textContent = org.name;
+      const segInfo = window.NoleiCompanies.getSegment(org.segment);
+      document.getElementById('active-company-sector').textContent = (segInfo ? segInfo.name : 'Segmento Phygital') + ' • ' + (org.city || 'Juazeiro do Norte - CE');
+      
+      document.getElementById('btn-open-portal').href = '../empresa.html?slug=' + org.slug;
+      
+      const extra = DEMOS_EXTRA_DATA[activeCompanySlug] || DEMOS_EXTRA_DATA['botanico-bistro'];
+      document.getElementById('btn-open-live-demo').href = extra.demoUrl || ('../demo/cardapio.html?org=' + org.slug);
+
+      // Métricas da Empresa Ativa
+      if (extra && extra.kpis) {
+        document.getElementById('kpi-title-1').textContent = extra.kpis.t1;
+        document.getElementById('kpi-nfc').textContent = extra.kpis.nfc;
+        document.getElementById('kpi-sub-1').textContent = extra.kpis.s1;
+
+        document.getElementById('kpi-title-2').textContent = extra.kpis.t2;
+        document.getElementById('kpi-calls').textContent = extra.kpis.calls;
+        document.getElementById('kpi-sub-2').textContent = extra.kpis.s2;
+
+        document.getElementById('kpi-title-3').textContent = extra.kpis.t3;
+        document.getElementById('kpi-rev').textContent = extra.kpis.rev;
+        document.getElementById('kpi-sub-3').textContent = extra.kpis.s3;
+
+        document.getElementById('kpi-title-4').textContent = extra.kpis.t4;
+        document.getElementById('kpi-rating').textContent = extra.kpis.rating;
+        document.getElementById('kpi-sub-4').textContent = extra.kpis.s4;
+      }
+
+      // Catálogo da Empresa Ativa
+      const tbody = document.getElementById('items-tbody');
+      if (extra && extra.items) {
+        tbody.innerHTML = extra.items.map((it, idx) => `
+          <tr>
+            <td>
+              <div style="font-weight:700; color:#fff;">${it.title}</div>
+              <div style="font-size:0.75rem; color:var(--muted);">${it.desc}</div>
+            </td>
+            <td><span style="font-size:0.75rem; color:var(--accent);">${it.cat}</span></td>
+            <td><span style="font-family:'JetBrains Mono', monospace; font-weight:700; color:#34D399;">${it.price}</span></td>
+            <td><span class="badge-status-item badge-active">Ativo</span></td>
+            <td>
+              <button onclick="alert('Status alternado com sucesso!')" style="background:none; border:1px solid var(--border); color:var(--muted); padding:4px 8px; border-radius:4px; font-size:0.72rem; cursor:pointer;">
+                Alternar
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Configurações Específicas da Empresa Ativa (Wi-Fi, WhatsApp e Google Place)
+      document.getElementById('set-name').value = org.name.replace(/^[\p{Emoji}\s]+/u, '').trim();
+      document.getElementById('set-wa').value = org.whatsapp || '5587999099937';
+      document.getElementById('set-wifi-ssid').value = org.wifiSsid || (org.slug + '_Wifi');
+      document.getElementById('set-wifi-pass').value = org.wifiPass || 'nolei2026';
+      document.getElementById('set-google-url').value = org.googlePlaceUrl || 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4';
+
+      // Atualiza estado visual das pills
+      renderCompanySwitcher();
+    }
+
+    // Seleciona empresa para gestão
+    function selectCompanyForMgmt(slug) {
+      activeCompanySlug = slug;
+      updateActiveCompanyView();
+    }
+
+    // Atalho direto a partir de um card da vitrine
+    function selectCompanyAndGoToMgmt(slug) {
+      activeCompanySlug = slug;
+      switchAdminTab('mgmt', document.getElementById('btn-tab-mgmt'));
+      updateActiveCompanyView();
+    }
+
+    // Sub-abas de Gestão (Overview / Catalog / Settings)
+    function switchMgmtSubtab(sub, btn) {
+      document.querySelectorAll('.btn-subtab').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.getElementById('mgmt-overview-section').style.display = sub === 'overview' ? 'block' : 'none';
+      document.getElementById('mgmt-catalog-section').style.display = sub === 'catalog' ? 'block' : 'none';
+      document.getElementById('mgmt-settings-section').style.display = sub === 'settings' ? 'block' : 'none';
+    }
+
+    // Salvar Configurações da Empresa Ativa
+    function handleSaveActiveCompanySettings(e) {
+      e.preventDefault();
+      if (!window.NoleiCompanies) return;
+      const org = window.NoleiCompanies.getBySlug(activeCompanySlug);
+      if (!org) return;
+
+      org.name = document.getElementById('set-name').value;
+      org.whatsapp = document.getElementById('set-wa').value;
+      org.wifiSsid = document.getElementById('set-wifi-ssid').value;
+      org.wifiPass = document.getElementById('set-wifi-pass').value;
+      org.googlePlaceUrl = document.getElementById('set-google-url').value;
+
+      window.NoleiCompanies.save(org);
+      updateActiveCompanyView();
+      alert(`Configurações de "${org.name}" salvas com sucesso no catálogo local!`);
+    }
+
+    // 4. Área Privada & Autenticação
     let pendingNavBtn = null;
 
     function openPrivateClientsArea(btn) {
@@ -799,7 +1148,7 @@
       switchAdminTab('demos', document.getElementById('btn-tab-demos'));
     }
 
-    // Renderiza a lista de clientes reais criados (Área Privada)
+    // Renderiza lista de clientes cadastrados (Área Privada)
     function renderPrivateClients() {
       const container = document.getElementById('private-clients-content');
       if (!container || !window.NoleiCompanies) return;
@@ -811,9 +1160,9 @@
             <div style="width:44px; height:44px; border-radius:10px; background:#1F1A15; border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; color:var(--accent); margin:0 auto 12px;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </div>
-            <h4 style="color:#fff; margin-bottom:4px;">Nenhum cliente cadastrado ainda</h4>
+            <h4 style="color:#fff; margin-bottom:4px;">Nenhum cliente real cadastrado ainda</h4>
             <p style="font-size:0.85rem; max-width:460px; margin:0 auto 16px;">
-              A base para cadastro e geração de páginas está pronta. Os novos clientes cadastrados ficarão listados aqui de forma privada para trabalharmos depois.
+              A base para cadastro e geração de páginas está pronta. Os novos clientes cadastrados ficarão listados aqui de forma privada para acompanhamento de contrato.
             </p>
             <a href="novo-cliente.html" class="btn-top btn-top-primary">+ Cadastrar Primeiro Cliente</a>
           </div>
@@ -877,53 +1226,36 @@
       }
     }
 
-    // Gerenciador de Abas: Não abre nada automaticamente, apenas exibe a aba selecionada
+    // 5. Gerenciador de Abas Principais
     function switchAdminTab(tab, btn) {
-      document.querySelectorAll('.nav-item-btn, .tab-nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
       const demosBox = document.getElementById('tab-demos-box');
+      const mgmtBox = document.getElementById('tab-mgmt-box');
       const privateBox = document.getElementById('tab-private-box');
-      const headerRow = document.getElementById('org-header-row');
-      const kpiBox = document.querySelector('.kpi-grid');
-      const launchpadBox = document.getElementById('launchpad-block');
-      const catBox = document.getElementById('tab-catalog-box');
-      const setBox = document.getElementById('tab-settings-box');
 
-      // Oculta todas as seções
       demosBox.style.display = 'none';
+      mgmtBox.style.display = 'none';
       privateBox.style.display = 'none';
-      headerRow.style.display = 'none';
-      kpiBox.style.display = 'none';
-      launchpadBox.style.display = 'none';
-      catBox.style.display = 'none';
-      setBox.style.display = 'none';
 
       if (tab === 'demos') {
         demosBox.style.display = 'block';
         renderDemosShowcase();
-        const topDemosBtn = document.getElementById('btn-tab-demos');
-        if (topDemosBtn) topDemosBtn.classList.add('active');
+      } else if (tab === 'mgmt') {
+        mgmtBox.style.display = 'block';
+        renderCompanySwitcher();
+        updateActiveCompanyView();
       } else if (tab === 'private') {
         privateBox.style.display = 'block';
         renderPrivateClients();
-        const topPrivBtn = document.getElementById('btn-tab-private');
-        if (topPrivBtn) topPrivBtn.classList.add('active');
-      } else if (tab === 'overview') {
-        headerRow.style.display = 'block';
-        kpiBox.style.display = 'grid';
-        launchpadBox.style.display = 'block';
-      } else if (tab === 'catalog') {
-        headerRow.style.display = 'block';
-        catBox.style.display = 'block';
-      } else if (tab === 'settings') {
-        headerRow.style.display = 'block';
-        setBox.style.display = 'block';
       }
     }
 
-    // Inicialização na carga: abre exclusivamente no menu com as demos sem disparar navegações indesejadas
+    // Inicialização Limpa
     renderDemosShowcase();
+    renderCompanySwitcher();
+    updateActiveCompanyView();
     switchAdminTab('demos', document.getElementById('btn-tab-demos'));
   </script>
 </body>

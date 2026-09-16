@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141210">
+  <title>Conectando • Nolei NFC ROUT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141210;
+      --card: #1C1814;
+      --text: #F2EADF;
+      --muted: #A2937E;
+      --accent: #C15D30;
+      --gold: #F59E0B;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .splash-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .radar-box {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .radar-wave {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      opacity: 0;
+      animation: ripple 1.6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    .radar-wave:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    @keyframes ripple {
+      0% { transform: scale(0.4); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .icon-center {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid rgba(193, 93, 48, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      box-shadow: 0 4px 20px rgba(193, 93, 48, 0.3);
+      z-index: 2;
+    }
+    .brand-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      background: rgba(193, 93, 48, 0.12);
+      border: 1px solid rgba(193, 93, 48, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .status-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .status-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .btn-manual {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: underline;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="splash-container">
+    <div class="radar-box">
+      <div class="radar-wave"></div>
+      <div class="radar-wave"></div>
+      <div class="icon-center">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+          <path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/>
+          <path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/>
+          <path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/>
+        </svg>
+      </div>
+    </div>
+
+    <span class="brand-tag">NFC's ROUT • Zero Download</span>
+    <h1 class="status-title" id="status-title">Conectando ao ponto...</h1>
+    <p class="status-sub" id="status-sub">Abrindo a experiência digital instantaneamente.</p>
+
+    <a id="manual-link" href="index.html" class="btn-manual" style="display:none;">Toque aqui caso não redirecione</a>
+  </div>
+
+  <script>
+    (async function() {
+      const params = new URLSearchParams(window.location.search);
+      const tag = (params.get('t') || params.get('tag') || '').toLowerCase().trim();
+      const org = (params.get('c') || params.get('org') || 'botanico-bistro').toLowerCase().trim();
+      const mesa = params.get('mesa');
+      const quarto = params.get('quarto');
+
+      let targetUrl = 'index.html';
+      let label = 'Ponto Físico';
+
+      // 1. Tenta carregar do mapa de rotas local ou arquivo JSON
+      try {
+        const res = await fetch('data/routes.json');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.routes && data.routes[tag]) {
+            targetUrl = data.routes[tag].target;
+            label = data.routes[tag].label;
+          }
+        }
+      } catch(e) {}
+
+      // 2. Resolução inteligente algorítmica caso não esteja no JSON
+      if (targetUrl === 'index.html') {
+        if (mesa) {
+          targetUrl = `demo/cardapio.html?source=nfc&mesa=${mesa}`;
+          label = `Mesa ${mesa}`;
+        } else if (quarto) {
+          targetUrl = `demo/hotel.html?source=nfc&quarto=${quarto}`;
+          label = `Quarto ${quarto}`;
+        } else if (tag.startsWith('m') && !isNaN(tag.substring(1))) {
+          const num = tag.substring(1).padStart(2, '0');
+          targetUrl = `demo/cardapio.html?source=nfc&mesa=${num}`;
+          label = `Mesa ${num}`;
+        } else if (tag.startsWith('q') && !isNaN(tag.substring(1))) {
+          const num = tag.substring(1);
+          targetUrl = `demo/hotel.html?source=nfc&quarto=${num}`;
+          label = `Quarto ${num}`;
+        } else if (tag === 'google' || tag === 'review' || tag === 'avaliacao' || tag === 'clinica') {
+          targetUrl = 'demo/avaliacao.html?source=nfc';
+          label = 'Avaliação 5 Estrelas';
+        } else if (tag === 'fidelidade' || tag === 'pontos') {
+          targetUrl = 'demo/fidelidade.html?source=nfc';
+          label = 'Clube Fidelidade';
+        } else if (tag === 'arte' || tag === 'couro' || tag === 'moda' || tag.startsWith('etq')) {
+          targetUrl = 'demo/storytelling-artesanato.html?source=nfc';
+          label = 'Certificado da Peça';
+        }
+      }
+
+      // 3. Atualiza UI na tela
+      document.getElementById('status-title').textContent = `Acessando ${label}...`;
+      document.getElementById('status-sub').textContent = 'Você já está sendo conectado à experiência.';
+      const manualBtn = document.getElementById('manual-link');
+      manualBtn.href = targetUrl;
+      manualBtn.style.display = 'inline-block';
+
+      // 4. Redirecionamento suave após 300ms (tempo para o feedback háptico do NFC)
+      setTimeout(() => {
+        window.location.replace(targetUrl);
+      }, 300);
+    })();
+  </script>
+</body>
+</html>

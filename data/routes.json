@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "baseRedirectUrl": "https://nolei-creative-nfc.vercel.app/r.html",
+  "defaultOrg": "botanico-bistro",
+  "routes": {
+    "m01": {
+      "target": "demo/cardapio.html?source=nfc&mesa=01",
+      "label": "Mesa 01",
+      "org": "botanico-bistro"
+    },
+    "m02": {
+      "target": "demo/cardapio.html?source=nfc&mesa=02",
+      "label": "Mesa 02",
+      "org": "botanico-bistro"
+    },
+    "m03": {
+      "target": "demo/cardapio.html?source=nfc&mesa=03",
+      "label": "Mesa 03",
+      "org": "botanico-bistro"
+    },
+    "m04": {
+      "target": "demo/cardapio.html?source=nfc&mesa=04",
+      "label": "Mesa 04",
+      "org": "botanico-bistro"
+    },
+    "m05": {
+      "target": "demo/cardapio.html?source=nfc&mesa=05",
+      "label": "Mesa 05",
+      "org": "botanico-bistro"
+    },
+    "m06": {
+      "target": "demo/cardapio.html?source=nfc&mesa=06",
+      "label": "Mesa 06",
+      "org": "botanico-bistro"
+    },
+    "m07": {
+      "target": "demo/cardapio.html?source=nfc&mesa=07",
+      "label": "Mesa 07",
+      "org": "botanico-bistro"
+    },
+    "m08": {
+      "target": "demo/cardapio.html?source=nfc&mesa=08",
+      "label": "Mesa 08",
+      "org": "botanico-bistro"
+    },
+    "m09": {
+      "target": "demo/cardapio.html?source=nfc&mesa=09",
+      "label": "Mesa 09",
+      "org": "botanico-bistro"
+    },
+    "m10": {
+      "target": "demo/cardapio.html?source=nfc&mesa=10",
+      "label": "Mesa 10",
+      "org": "botanico-bistro"
+    },
+    "q101": {
+      "target": "demo/hotel.html?source=nfc&quarto=101",
+      "label": "Quarto 101",
+      "org": "hotel-imperial"
+    },
+    "q204": {
+      "target": "demo/hotel.html?source=nfc&quarto=204",
+      "label": "Quarto 204",
+      "org": "hotel-imperial"
+    },
+    "q412": {
+      "target": "demo/hotel.html?source=nfc&quarto=412",
+      "label": "Suíte 412",
+      "org": "hotel-imperial"
+    },
+    "q415": {
+      "target": "demo/hotel.html?source=nfc&quarto=415",
+      "label": "Suíte Master 415",
+      "org": "hotel-imperial"
+    },
+    "google": {
+      "target": "demo/avaliacao.html?source=nfc",
+      "label": "Google Avaliações 5★",
+      "org": "clinica-dra-sofia"
+    },
+    "clinica": {
+      "target": "demo/avaliacao.html?source=nfc",
+      "label": "Google Avaliações 5★",
+      "org": "clinica-dra-sofia"
+    },
+    "fidelidade": {
+      "target": "demo/fidelidade.html?source=nfc",
+      "label": "Clube Fidelidade",
+      "org": "cafe-origem"
+    },
+    "arte": {
+      "target": "demo/storytelling-artesanato.html?source=nfc",
+      "label": "Etiqueta Storytelling #07",
+      "org": "atelie-raizes"
+    },
+    "etq01": {
+      "target": "demo/storytelling-artesanato.html?source=nfc",
+      "label": "Peça de Couro #01",
+      "org": "atelie-raizes"
+    },
+    "etq07": {
+      "target": "demo/storytelling-artesanato.html?source=nfc",
+      "label": "Bolsa Mandacaru #07",
+      "org": "atelie-raizes"
+    }
+  }
+}

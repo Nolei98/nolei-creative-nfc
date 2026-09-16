@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141210">
+  <title>Gerador de Tags & QR Codes para Gráfica — Nolei Creative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg: #141210;
+      --card: #1C1814;
+      --elevated: #26201A;
+      --text: #F2EADF;
+      --muted: #A2937E;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --gold: #D4A853;
+      --border: rgba(242, 234, 223, 0.08);
+      --border-strong: rgba(193, 93, 48, 0.35);
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 24px 16px 60px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .title-box h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .control-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s;
+    }
+    .btn-action:hover { background: var(--accent-deep); }
+    .btn-outline {
+      background: var(--elevated);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); }
+
+    /* Print Sheets Grid */
+    .print-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* O Card Físico que vai para o Acrílico ou Adesivo */
+    .tag-card {
+      background: #FFFFFF;
+      color: #111827;
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      border: 2px solid #E5E7EB;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      page-break-inside: avoid;
+    }
+    .card-biz-name {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4B5563;
+      margin-bottom: 6px;
+    }
+    .card-spot-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #111827;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+    .nfc-badge-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FEF3C7;
+      border: 1px solid #F59E0B;
+      color: #92400E;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .qr-frame {
+      background: #FFFFFF;
+      padding: 8px;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-frame img, .qr-frame canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    .card-instruction {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #1F2937;
+      margin-bottom: 4px;
+    }
+    .card-sub-instruction {
+      font-size: 0.7rem;
+      color: #6B7280;
+      margin-bottom: 12px;
+    }
+    .card-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: #9CA3AF;
+      word-break: break-all;
+      background: #F3F4F6;
+      padding: 4px 8px;
+      border-radius: 4px;
+      width: 100%;
+    }
+    .card-footer-branding {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #9CA3AF;
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      .no-print, .header, .control-card {
+        display: none !important;
+      }
+      .print-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5cm !important;
+        margin: 0 !important;
+      }
+      .tag-card {
+        box-shadow: none !important;
+        border: 1px dashed #9CA3AF !important;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header no-print">
+      <div class="title-box">
+        <h1>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Gerador de Displays & QR Codes para Gráfica
+        </h1>
+        <div style="font-size:0.8rem; color:var(--muted); margin-top:2px;">Gera as artes para acrílicos de mesa, quartos ou etiquetas com 1 clique</div>
+      </div>
+      <a href="status-supabase.html" class="btn-action btn-outline" style="text-decoration:none;">Painel de Diagnóstico</a>
+    </header>
+
+    <!-- Controls -->
+    <div class="control-card no-print">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nome do Estabelecimento / Cliente:</label>
+          <input type="text" id="biz-name" class="form-control" value="Botânico Bistrô">
+        </div>
+        <div class="form-group">
+          <label>Tipo de Ponto Físico:</label>
+          <select id="spot-type" class="form-control" onchange="updatePrefix()">
+            <option value="mesa" data-prefix="m" data-label="Mesa">Mesas de Restaurante (ex: Mesa 01 a 20)</option>
+            <option value="quarto" data-prefix="q" data-label="Quarto">Quartos / Suítes de Hotel (ex: Quarto 101)</option>
+            <option value="etiqueta" data-prefix="etq" data-label="Peça">Etiquetas de Moda / Couro (ex: Peça #01)</option>
+            <option value="google" data-prefix="google" data-label="Totem Google">Totem Google Reviews (Balcão)</option>
+            <option value="fidelidade" data-prefix="fidelidade" data-label="Clube Fidelidade">Display Balcão Fidelidade</option>
+          </select>
+        </div>
+        <div class="form-group" id="group-range">
+          <label>Quantidade de Pontos (Do 1 até):</label>
+          <input type="number" id="spot-count" class="form-control" value="10" min="1" max="50">
+        </div>
+        <div class="form-group">
+          <label>URL Base do Roteador (NFC's ROUT):</label>
+          <input type="text" id="base-url" class="form-control" value="https://nolei-creative-nfc.vercel.app/r.html">
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-action" onclick="generateCards()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          Gerar Cartela de Displays
+        </button>
+        <button class="btn-action" style="background:#15803D;" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Imprimir Cartela (PDF para Gráfica)
+        </button>
+        <button class="btn-action btn-outline" onclick="copyUrlList()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          Copiar Lista de Links para NFC Tools
+        </button>
+      </div>
+    </div>
+
+    <!-- Output Grid -->
+    <div class="print-grid" id="cards-container">
+      <!-- Injetado dinamicamente -->
+    </div>
+  </div>
+
+  <script>
+    function updatePrefix() {
+      const type = document.getElementById('spot-type').value;
+      const rangeGroup = document.getElementById('group-range');
+      if (type === 'google' || type === 'fidelidade') {
+        rangeGroup.style.display = 'none';
+      } else {
+        rangeGroup.style.display = 'block';
+      }
+    }
+
+    let currentUrls = [];
+
+    function generateCards() {
+      const container = document.getElementById('cards-container');
+      container.innerHTML = '';
+      currentUrls = [];
+
+      const bizName = document.getElementById('biz-name').value.trim() || 'Nolei Creative';
+      const typeSelect = document.getElementById('spot-type');
+      const type = typeSelect.value;
+      const prefix = typeSelect.selectedOptions[0].getAttribute('data-prefix');
+      const labelPrefix = typeSelect.selectedOptions[0].getAttribute('data-label');
+      const baseUrl = document.getElementById('base-url').value.trim();
+      const count = parseInt(document.getElementById('spot-count').value) || 10;
+
+      const itemsToGen = [];
+
+      if (type === 'google') {
+        itemsToGen.push({ code: 'google', title: 'Avaliação 5 Estrelas', sub: 'Deixe sua opinião no Google' });
+      } else if (type === 'fidelidade') {
+        itemsToGen.push({ code: 'fidelidade', title: 'Clube de Fidelidade', sub: 'Aproxime e ganhe carimbos' });
+      } else {
+        for (let i = 1; i <= count; i++) {
+          const numStr = String(i).padStart(2, '0');
+          itemsToGen.push({
+            code: prefix + numStr,
+            title: `${labelPrefix} ${numStr}`,
+            sub: 'Aproxime o celular ou aponte a câmera'
+          });
+        }
+      }
+
+      itemsToGen.forEach((item, idx) => {
+        const fullUrl = `${baseUrl}?t=${item.code}`;
+        currentUrls.push(fullUrl);
+
+        const card = document.createElement('div');
+        card.className = 'tag-card';
+        card.innerHTML = `
+          <div class="card-biz-name">${bizName}</div>
+          <div class="card-spot-title">${item.title}</div>
+          <div class="nfc-badge-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
+            Tecnologia NFC Integrada
+          </div>
+          <div class="qr-frame" id="qr-box-${idx}"></div>
+          <div class="card-instruction">${item.sub}</div>
+          <div class="card-sub-instruction">Sem necessidade de baixar aplicativo</div>
+          <div class="card-url">${fullUrl}</div>
+          <div class="card-footer-branding">Powered by Nolei Creative — NFC's ROUT</div>
+        `;
+        container.appendChild(card);
+
+        // Gera QR Code nítido
+        new QRCode(document.getElementById(`qr-box-${idx}`), {
+          text: fullUrl,
+          width: 124,
+          height: 124,
+          colorDark: "#000000",
+          colorLight: "#FFFFFF",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      });
+    }
+
+    function copyUrlList() {
+      if (currentUrls.length === 0) {
+        alert('Gere os cartões primeiro!');
+        return;
+      }
+      const text = currentUrls.join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Lista copiada! Cole no bloco de notas ou use no NFC Tools para gravação em lote:\n\n' + text);
+      });
+    }
+
+    // Inicializa na carga
+    generateCards();
+  </script>
+</body>
+</html>

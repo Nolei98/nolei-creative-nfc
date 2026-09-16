@@ -16,7 +16,7 @@
       --navy-light: #2A231C;
       --green: #34D399;
       --green-accent: #22C55E;
-      --green-light: #E8F5E9;
+      --green-light: rgba(52, 211, 153, 0.15);
       --orange: #E5855A;
       --white: #FFFFFF;
       --bg-light: #141210;
@@ -34,11 +34,11 @@
     .top-bar { background: #1F1A15; border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
     .top-bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .top-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; color: #F2EADF; font-size: 1.05rem; }
-    .top-brand span { color: #34D399; }
+    .top-brand span { color: #C15D30; }
     .top-nav-actions { display: flex; gap: 8px; }
     .btn-action { background: #141210; border: 1px solid var(--border); color: #F2EADF; font-family: var(--font-heading); font-size: 0.76rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
     .btn-action:hover { background: #2A231C; color: var(--white); }
-    .btn-action.highlight { background: var(--green-light); color: #34D399; border-color: rgba(46,125,50,0.3); font-weight: 700; }
+    .btn-action.highlight { background: rgba(193, 93, 48, 0.2); color: #F2EADF; border-color: rgba(193, 93, 48, 0.4); font-weight: 700; }
 
     .container { max-width: 1240px; width: 100%; margin: 0 auto; padding: 24px 20px 60px; flex: 1; }
     .page-header { margin-bottom: 24px; }
@@ -69,8 +69,8 @@
         <div>Restaurante & Salão <span>Dashboard</span></div>
       </a>
       <div class="top-nav-actions">
-        <a href="cardapio.html" class="btn-action">Ver Cardápio Mesa 04</a>
-        <a href="painel-restaurante.html" class="btn-action highlight">Abrir Painel do Salão & Cozinha</a>
+        <a href="cardapio.html?mesa=04" class="btn-action" target="_blank">Ver Cardápio Mesa 04</a>
+        <a href="painel-restaurante.html" class="btn-action highlight" target="_blank">Abrir Painel do Salão & Cozinha</a>
         <a href="../index.html" class="btn-action">Início</a>
       </div>
     </div>

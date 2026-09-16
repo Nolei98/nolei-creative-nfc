@@ -395,7 +395,7 @@
     </div>
 
     <div class="nav-actions">
-      <a href="gerador-tags.html" class="btn-top btn-top-ghost">
+      <a href="gerador-tags.html" target="_blank" class="btn-top btn-top-ghost">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
         Gerador de Tags
       </a>
@@ -426,9 +426,9 @@
 
       <div class="sidebar-section-label">Infraestrutura Phygital</div>
       <ul class="sidebar-nav">
-        <li><a href="gerador-tags.html" class="nav-item-btn" style="text-decoration:none;">🖨️ Gerador de Tags/QR</a></li>
+        <li><a href="gerador-tags.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">🖨️ Gerador de Tags/QR</a></li>
         <li><a href="../r.html?t=m04" target="_blank" class="nav-item-btn" style="text-decoration:none;">⚡ Testar NFC's ROUT</a></li>
-        <li><a href="status-supabase.html" class="nav-item-btn" style="text-decoration:none;">☁️ Diagnóstico de Nuvem</a></li>
+        <li><a href="status-supabase.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">☁️ Diagnóstico de Nuvem</a></li>
       </ul>
     </aside>
 
@@ -669,16 +669,24 @@
       document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
+      const kpiBox = document.querySelector('.kpi-grid');
+      const launchpadBox = document.getElementById('launchpad-container').closest('.card-block');
       const catBox = document.getElementById('tab-catalog-box');
       const setBox = document.getElementById('tab-settings-box');
 
       if (tab === 'overview') {
-        catBox.style.display = 'block';
-        setBox.style.display = 'block';
+        kpiBox.style.display = 'grid';
+        launchpadBox.style.display = 'block';
+        catBox.style.display = 'none';
+        setBox.style.display = 'none';
       } else if (tab === 'catalog') {
+        kpiBox.style.display = 'none';
+        launchpadBox.style.display = 'none';
         catBox.style.display = 'block';
         setBox.style.display = 'none';
       } else if (tab === 'settings') {
+        kpiBox.style.display = 'none';
+        launchpadBox.style.display = 'none';
         catBox.style.display = 'none';
         setBox.style.display = 'block';
       }
@@ -686,6 +694,11 @@
 
     // Inicializa na carga com Botânico Bistrô
     switchOrganization('botanico-bistro');
+    // Inicia na aba de Visão Geral com catálogo e dados ocultos
+    const kpiBox = document.querySelector('.kpi-grid');
+    const launchpadBox = document.getElementById('launchpad-container').closest('.card-block');
+    document.getElementById('tab-catalog-box').style.display = 'none';
+    document.getElementById('tab-settings-box').style.display = 'none';
   </script>
 </body>
 </html>

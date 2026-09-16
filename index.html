@@ -123,6 +123,27 @@
     }
 
     /* TOP INSTITUTIONAL HEADER */
+    .nav-hub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #FFFFFF !important;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      box-shadow: 0 4px 16px rgba(193, 93, 48, 0.35);
+      transition: all 0.2s ease;
+    }
+    .nav-hub-btn:hover {
+      background: #A84920;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(193, 93, 48, 0.5);
+    }
     .site-header {
       background: rgba(20, 18, 16, 0.88);
       backdrop-filter: blur(16px);
@@ -1086,63 +1107,14 @@
         <div class="brand-title">Nolei <span>Creative</span></div>
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="desktop-nav" aria-label="Navegação Principal">
-        <a href="#solucoes" class="nav-link">Soluções</a>
-        <a href="#hardware" class="nav-link">Hardware & Displays</a>
-        <a href="docs.html" class="nav-link">Documentação</a>
-        <a href="admin/index.html" class="nav-link" style="color:var(--accent); font-weight:700;">Hub de Demonstrações</a>
-        <button type="button" class="nav-google-btn" onclick="openGoogleHelperModal()" title="Assistente Google Meu Negócio">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Google Perfil
-        </button>
-      </nav>
-
-      <!-- Hamburger Button (Mobile Only) -->
-      <button class="btn-hamburger" id="btn-hamburger" aria-label="Abrir Menu" onclick="toggleMobileMenu()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
+      <div class="header-actions">
+        <a href="admin/index.html" class="nav-hub-btn">
+          <span>Hub de Demonstrações</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
     </div>
   </header>
-
-    <!-- Mobile Drawer Menu (Mobile Only) -->
-  <div class="mobile-drawer" id="mobile-drawer" onclick="closeMobileMenu()">
-    <div class="mobile-drawer-content" onclick="event.stopPropagation()">
-      <div class="drawer-header">
-        <span class="drawer-label">Navegação Principal</span>
-        <button type="button" class="btn-drawer-close" onclick="closeMobileMenu()" aria-label="Fechar Menu">&times;</button>
-      </div>
-      <div class="drawer-menu-links">
-        <a href="#solucoes" class="drawer-link" onclick="closeMobileMenu()">
-          <span>Soluções & Aplicações</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-        <a href="#hardware" class="drawer-link" onclick="closeMobileMenu()">
-          <span>Hardware & Displays Físicos</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-        <a href="docs.html" class="drawer-link" onclick="closeMobileMenu()">
-          <span>Documentação & Guia Técnico</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-        <a href="admin/index.html" class="drawer-link" onclick="closeMobileMenu()" style="color:var(--accent); font-weight:700;">
-          <span>Hub de Demonstrações (Admin)</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-        <button type="button" class="drawer-link drawer-btn-google" onclick="closeMobileMenu(); openGoogleHelperModal();">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Assistente Google Meu Negócio</span>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-      <div class="drawer-footer">
-        <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="drawer-cta-btn">
-          Solicitar Orçamento no WhatsApp
-        </a>
-      </div>
-    </div>
   </div>
 
   <div class="page-container">

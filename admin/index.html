@@ -394,25 +394,21 @@
     </a>
 
     <!-- Top Navigation Tabs Principais -->
-    <div class="header-main-tabs">
+    <div class="header-main-tabs" id="admin-main-tabs">
       <button class="tab-nav-btn active" id="btn-tab-demos" onclick="switchAdminTab('demos', this)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         Soluções Prontas
       </button>
-      <a href="novo-cliente.html" class="tab-nav-btn" style="text-decoration:none;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-        Novo Usuário / Cliente
-      </a>
-      <button class="tab-nav-btn private-btn" id="btn-tab-private" onclick="openPrivateClientsArea(this)">
+      
+      <!-- Apenas visível quando logado -->
+      <button class="tab-nav-btn private-btn" id="btn-tab-private" style="display:none;" onclick="switchAdminTab('private', this)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Área Privada
+        Clientes Cadastrados
       </button>
     </div>
 
-    <div class="nav-actions">
-      <a href="novo-cliente.html" class="btn-top btn-top-primary">
-        + Cadastrar Cliente
-      </a>
+    <div class="nav-actions" id="admin-nav-actions">
+      <!-- Injetado dinamicamente via updateAuthState() -->
     </div>
   </header>
 
@@ -466,6 +462,19 @@
         <p style="font-size:0.8rem; color:var(--muted);">Utilitários para gravação de tags, testes de redirecionamento e telemetria.</p>
         
         <div class="infra-grid">
+        <div class="infra-card" onclick="openGoogleHelperModal()" style="cursor:pointer; border-color:rgba(193,93,48,0.25);">
+          <div class="infra-icon" style="color:var(--accent);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="infra-title" style="display:flex; align-items:center; gap:6px;">
+              Assistente Google Meu Negócio
+              <span style="font-size:0.65rem; background:var(--accent); color:#fff; padding:2px 6px; border-radius:10px; font-weight:700;">Privado</span>
+            </div>
+            <div class="infra-desc">Obter link de avaliação 5★ e gerar QR Code oficial para gravação em tags físicas de balcão.</div>
+          </div>
+        </div>
+        
           <a href="gerador-tags.html" target="_blank" class="infra-card">
             <div class="infra-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
@@ -637,6 +646,69 @@
       }).join('');
     }
 
+    
+    // Gerenciamento de Estado de Autenticação (Logado vs Deslogado)
+    function updateAuthState() {
+      const isAuth = window.NoleiCompanies && window.NoleiCompanies.isAdminAuthenticated();
+      const navActions = document.getElementById('admin-nav-actions');
+      const tabPrivateBtn = document.getElementById('btn-tab-private');
+
+      if (isAuth) {
+        // Estado LOGADO: Mostra tab privada, botão novo cliente e botão de logout
+        if (tabPrivateBtn) tabPrivateBtn.style.display = 'inline-flex';
+        if (navActions) {
+          navActions.innerHTML = `
+            <span style="font-size:0.75rem; color:var(--muted); display:flex; align-items:center; gap:6px; margin-right:4px;">
+              <span style="width:7px; height:7px; border-radius:50%; background:#10B981;"></span> Admin
+            </span>
+            <a href="novo-cliente.html" class="btn-top btn-top-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              + Cadastrar Cliente
+            </a>
+            <button onclick="logoutAdmin()" class="btn-top" style="color:#FCA5A5; border-color:rgba(239,68,68,0.35); cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Deslogar
+            </button>
+          `;
+        }
+      } else {
+        // Estado NÃO LOGADO: Esconde tab privada e botões restritos, mostra botão de login
+        if (tabPrivateBtn) tabPrivateBtn.style.display = 'none';
+        if (navActions) {
+          navActions.innerHTML = `
+            <button onclick="openLoginModal()" class="btn-top" style="color:var(--accent); border-color:var(--border-strong); cursor:pointer;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Área Restrita (Login)
+            </button>
+          `;
+        }
+      }
+    }
+
+    function openLoginModal() {
+      document.getElementById('login-modal').style.display = 'flex';
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+    }
+
+    function logoutAdmin() {
+      if (window.NoleiCompanies) {
+        window.NoleiCompanies.logoutAdmin();
+      }
+      switchAdminTab('demos', document.getElementById('btn-tab-demos'));
+      updateAuthState();
+    }
+
+    function openGoogleHelperModal() {
+      const modal = document.getElementById('modal-google-helper');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeGoogleHelperModal(e) {
+      const modal = document.getElementById('modal-google-helper');
+      if (modal) modal.style.display = 'none';
+    }
+
     // 2. Área Privada & Autenticação
     let pendingNavBtn = null;
 
@@ -662,7 +734,7 @@
 
       if (window.NoleiCompanies && window.NoleiCompanies.loginAdmin(user, pass)) {
         closeLoginModal();
-        switchAdminTab('private', pendingNavBtn);
+        updateAuthState(); switchAdminTab('private', document.getElementById('btn-tab-private'));
       } else {
         alert('Credenciais incorretas! Padrão: admin / nolei2026');
       }
@@ -767,7 +839,13 @@
       if (tab === 'demos') {
         demosBox.style.display = 'block';
         renderDemosShowcase();
+    updateAuthState();
+    if (new URLSearchParams(window.location.search).get("login") === "1") { openLoginModal(); }
       } else if (tab === 'private') {
+        if (!window.NoleiCompanies || !window.NoleiCompanies.isAdminAuthenticated()) {
+          openLoginModal();
+          return;
+        }
         privateBox.style.display = 'block';
         renderPrivateClients();
       }
@@ -777,5 +855,60 @@
     renderDemosShowcase();
     switchAdminTab('demos', document.getElementById('btn-tab-demos'));
   </script>
+
+  <!-- Modal Google Business Profile Helper (Exclusivo da Área Logada) -->
+  <div class="modal-overlay" id="modal-google-helper" onclick="closeGoogleHelperModal(event)" style="display:none; position:fixed; inset:0; background:rgba(10,8,7,0.85); backdrop-filter:blur(6px); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+    <div class="modal-card" style="max-width: 480px; width:100%; text-align: left; max-height: 85vh; overflow-y: auto; background: var(--card); border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 28px; box-shadow: 0 20px 48px rgba(0,0,0,0.7);" onclick="event.stopPropagation()">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="width:34px; height:34px; border-radius:10px; background:#1F1A15; display:flex; align-items:center; justify-content:center; color:var(--accent); border: 1px solid var(--border-strong);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="modal-title" style="margin-bottom:0; font-size:1.15rem; color:#fff;">Assistente Google Meu Negócio</h3>
+        </div>
+        <button onclick="closeGoogleHelperModal()" style="background:var(--elevated); border:1px solid var(--border); color:var(--muted); cursor:pointer; font-size:1.2rem; line-height:1; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">&times;</button>
+      </div>
+      
+      <p style="margin-bottom:16px; color:var(--muted); font-size:0.84rem;">
+        Se o cliente ainda não tem perfil no Google ou precisa do link direto de 5 estrelas para gravação na Tag NFC:
+      </p>
+
+      <div style="background:var(--elevated); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+          <span style="background:var(--accent); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">1</span>
+          <strong style="color:#fff; font-size:0.88rem;">Cliente ainda não tem perfil no Google?</strong>
+        </div>
+        <p style="font-size:0.78rem; color:var(--muted); margin-bottom:10px; line-height:1.4;">
+          Cadastre o estabelecimento no Google Meu Negócio para figurar no Google Maps.
+        </p>
+        <a href="https://business.google.com/create" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:var(--accent); color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600;">
+          Abrir Cadastro Oficial no Google
+        </a>
+      </div>
+
+      <div style="background:var(--elevated); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+          <span style="background:var(--accent); color:#fff; font-size:0.75rem; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
+          <strong style="color:#fff; font-size:0.88rem;">Como extrair o link de 5 estrelas:</strong>
+        </div>
+        <ol style="font-size:0.78rem; color:var(--muted); padding-left:18px; margin-bottom:6px; line-height:1.5;">
+          <li>Acesse a conta Google Meu Negócio da empresa.</li>
+          <li>No painel de controle, clique em <strong>"Solicitar avaliações"</strong>.</li>
+          <li>Copie a URL curta (ex: <code>g.page/r/.../review</code>) e cadastre no cliente.</li>
+        </ol>
+      </div>
+
+      <div style="background:var(--elevated); border:1px solid var(--border-strong); border-radius:10px; padding:14px; margin-bottom:16px;">
+        <strong style="color:#fff; font-size:0.88rem; display:block; margin-bottom:4px;">Gravar na Tag Física:</strong>
+        <p style="font-size:0.78rem; color:var(--muted); line-height:1.4; margin-bottom:10px;">
+          O link oficial do Google é gravado no chip NFC de balcão e totens para captação direta.
+        </p>
+        <button onclick="closeGoogleHelperModal()" class="btn-top btn-top-primary" style="width:100%; justify-content:center;">
+          Entendido, fechar assistente
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

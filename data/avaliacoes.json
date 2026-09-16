@@ -1,0 +1,12 @@
+{
+  "business": {
+    "name": "Clínica Dra. Sofia Santos",
+    "specialty": "Dermatologia & Estética Avançada",
+    "address": "Av. Leão Sampaio, 1200 — Lagoa Seca, Juazeiro do Norte - CE",
+    "google_maps_review_url": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+    "whatsapp_sac": "5587999099937"
+  },
+  "rating_threshold": 4,
+  "positive_message": "Ficamos muito honrados com sua confiança! Sua avaliação no Google ajuda outros pacientes a conhecerem nosso atendimento.",
+  "negative_message": "Sentimos muito que sua experiência não tenha sido 100% perfeita. Conte-nos o que houve no formulário privado abaixo para nossa gerência médica resolver imediatamente."
+}

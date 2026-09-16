@@ -1,0 +1,135 @@
+{
+  "restaurant": {
+    "name": "🌿 Botânico Bistrô",
+    "segment": "Gastronomia Contemporânea",
+    "whatsapp": "5587999099937",
+    "currency": "BRL",
+    "service_fee_pct": 10,
+    "wifi": {
+      "ssid": "Botanico_5G",
+      "password": "botanicogourmet"
+    }
+  },
+  "tables": [
+    "m01",
+    "m02",
+    "m03",
+    "m04",
+    "m05",
+    "m06",
+    "m07",
+    "m08",
+    "m09",
+    "m10"
+  ],
+  "categories": [
+    {
+      "id": "entradas",
+      "label": "Entradas"
+    },
+    {
+      "id": "principais",
+      "label": "Principais"
+    },
+    {
+      "id": "bebidas",
+      "label": "Bebidas"
+    },
+    {
+      "id": "sobremesas",
+      "label": "Sobremesas"
+    }
+  ],
+  "items": [
+    {
+      "id": "e1",
+      "category": "entradas",
+      "title": "Bruschetta Caprese",
+      "price": 28.9,
+      "description": "Pão rústico artesanal, tomates cereja confitados, muçarela de búfala fresca e pesto de manjericão.",
+      "badges": [
+        "Vegetariano"
+      ],
+      "image": "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "e2",
+      "category": "entradas",
+      "title": "Carpaccio de Abobrinha",
+      "price": 32,
+      "description": "Lâminas finas grelhadas com pesto de rúcula, raspas de limão siciliano e parmesão 24 meses.",
+      "badges": [
+        "Vegano",
+        "Sem Glúten"
+      ],
+      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "p1",
+      "category": "principais",
+      "title": "Risoto de Funghi Trufado",
+      "price": 58.9,
+      "description": "Arroz arbóreo italiano com mix de cogumelos frescos, azeite trufado e queijo grana padano.",
+      "badges": [
+        "Vegetariano"
+      ],
+      "image": "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "p2",
+      "category": "principais",
+      "title": "Salmão Grelhado na Brasa",
+      "price": 72,
+      "description": "Posta de salmão fresco com purê de batata-doce roxa, aspargos verdes salteados e redução de maracujá.",
+      "badges": [
+        "Sem Glúten"
+      ],
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "p3",
+      "category": "principais",
+      "title": "Burger Botânico Artesanal",
+      "price": 45.9,
+      "description": "Blend 180g angus na brasa, queijo gruyère derretido, cebola caramelizada e aioli de ervas no brioche.",
+      "badges": [
+        "Artesanal"
+      ],
+      "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "b1",
+      "category": "bebidas",
+      "title": "Limonada Siciliana com Hortelã",
+      "price": 18.9,
+      "description": "Limão siciliano fresco com folhas de hortelã orgânica maceradas e água com gás.",
+      "badges": [
+        "Refrescante",
+        "Sem Açúcar"
+      ],
+      "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "b2",
+      "category": "bebidas",
+      "title": "Gin Tônica Botânica",
+      "price": 38,
+      "description": "Gin artesanal infusionado, tônica premium, pepino japonês, zimbro e ramo de alecrim tostado.",
+      "badges": [
+        "Drink Autoral"
+      ],
+      "image": "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "id": "s1",
+      "category": "sobremesas",
+      "title": "Petit Gâteau Belga",
+      "price": 32,
+      "description": "Bolo quente com recheio cremoso de chocolate 70% acompanhado de sorvete de fava de baunilha.",
+      "badges": [
+        "Sobremesa"
+      ],
+      "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80"
+    }
+  ]
+}

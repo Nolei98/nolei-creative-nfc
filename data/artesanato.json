@@ -1,0 +1,51 @@
+{
+  "atelier": {
+    "name": "Ateliê Raízes do Cariri",
+    "artisan": "Mestre Cícero dos Anjos",
+    "location": "Juazeiro do Norte, Ceará",
+    "whatsapp": "5587999099937",
+    "bio": "Herdeiro de 3 gerações de seleiros e artesãos do Cariri, Mestre Cícero transforma couro bovino e caprino em peças utilitárias que unem a tradição do sertão à moda contemporânea autoral."
+  },
+  "piece": {
+    "id": "etq-07",
+    "code": "RAIZES-2026-07",
+    "name": "Bolsa Mandacaru — Couro Legítimo Curtido a Óleo Natural",
+    "collection": "Coleção Raízes do Sertão",
+    "edition": "Série Numerada: Peça Nº 07 de 50",
+    "price": 380,
+    "crafting_time": "14 horas de trabalho manual",
+    "materials": [
+      {
+        "name": "Couro Bovino Flor Integral",
+        "origin": "Curtume local do Cariri, curtimento vegetal 100% livre de cromo"
+      },
+      {
+        "name": "Linha Encerada Reforçada",
+        "origin": "Costura manual ponto de sela (garantia de não descosturar)"
+      },
+      {
+        "name": "Metais em Ouro Velho",
+        "origin": "Latão maciço com banho anti-oxidação"
+      }
+    ],
+    "storytelling": [
+      {
+        "step": "1. O Desenho & O Corte",
+        "desc": "Inspirada na geometria resistente do mandacaru que floresce na caatinga, cada pedaço de couro é selecionado à mão pelo mestre, aproveitando as marcas naturais que comprovam a autenticidade da pele."
+      },
+      {
+        "step": "2. O Pesponto Manual",
+        "desc": "Nenhuma máquina de costura industrial toca a peça. Cada furo é feito com sovela e costurado à mão com duas agulhas simultâneas, técnica tradicional de selaria centenária."
+      },
+      {
+        "step": "3. A Finalização com Óleo de Amêndoas",
+        "desc": "A bolsa recebe hidratação orgânica que realça o tom conhaque natural e garante maciez ao toque, desenvolvendo uma pátina única com os anos de uso."
+      }
+    ],
+    "care_guide": [
+      "Evite molhar excessivamente. Se molhar, seque à sombra.",
+      "Hidrate o couro a cada 6 meses com hidratante neutro ou cera de abelha.",
+      "Guarde em local arejado, preferencialmente dentro do saco de algodão original."
+    ]
+  }
+}

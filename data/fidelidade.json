@@ -1,0 +1,34 @@
+{
+  "program": {
+    "businessName": "☕ Café Origem",
+    "rule": "A cada R$ 10 em compras = 1 Carimbo / Ponto",
+    "totalStamps": 10,
+    "whatsapp": "5587999099937"
+  },
+  "rewards": [
+    {
+      "id": "r1",
+      "points": 50,
+      "title": "Espresso ou Cappuccino Grátis",
+      "desc": "Válido para qualquer café tradicional do cardápio."
+    },
+    {
+      "id": "r2",
+      "points": 80,
+      "title": "Fatia de Bolo Artesanal",
+      "desc": "Escolha entre Cenoura com Chocolate ou Red Velvet."
+    },
+    {
+      "id": "r3",
+      "points": 120,
+      "title": "Frappuccino Especial 400ml",
+      "desc": "Qualquer sabor com chantilly da casa."
+    },
+    {
+      "id": "r4",
+      "points": 200,
+      "title": "Pacote Café Especial 250g em Grãos",
+      "desc": "Torra fresca do Cariri para levar para casa."
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141210">
+  <title>Certificado Phygital & História da Peça — Nolei Creative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #141210;
+      --bg-card: #1C1814;
+      --bg-elevated: #26201A;
+      --text-main: #F2EADF;
+      --text-muted: #A2937E;
+      --text-dim: #786B5A;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --gold: #D4A853;
+      --border: rgba(242, 234, 223, 0.08);
+      --border-strong: rgba(193, 93, 48, 0.35);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      padding: 0 0 60px;
+      line-height: 1.6;
+    }
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(20, 18, 16, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .tag-nfc-active {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(193, 93, 48, 0.15);
+      border: 1px solid var(--border-strong);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.4); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .hero-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-body {
+      padding: 24px;
+    }
+    .cert-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(212, 168, 83, 0.12);
+      border: 1px solid rgba(212, 168, 83, 0.3);
+      padding: 4px 12px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .piece-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .piece-serial {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .artisan-box {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      background: var(--bg-elevated);
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .artisan-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      border: 2px solid var(--gold);
+    }
+    .artisan-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .artisan-loc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .step-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .step-item {
+      display: flex;
+      gap: 14px;
+    }
+    .step-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .care-item {
+      padding: 10px 14px;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      border-left: 3px solid var(--gold);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .btn-cta-atelier {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: #15803D;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 16px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(21, 128, 61, 0.35);
+      transition: background 0.15s, transform 0.15s;
+      margin-top: 10px;
+    }
+    .btn-cta-atelier:hover {
+      background: #166534;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <a href="../index.html" class="btn-back">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      Voltar
+    </a>
+    <div class="tag-nfc-active">
+      <span class="pulse-dot"></span>
+      Tag NFC Validada
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Hero Card -->
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=700&q=80" alt="Bolsa em Couro Legítimo" class="hero-img">
+      <div class="hero-body">
+        <span class="cert-badge">Certificado Phygital de Autenticidade</span>
+        <h1 class="piece-title" id="piece-name">Bolsa Mandacaru — Couro Legítimo</h1>
+        <div class="piece-serial" id="piece-serial">Série Numerada: Peça Nº 07 de 50 • Coleção Raízes</div>
+        <p style="font-size:0.85rem; color:var(--text-muted);" id="piece-desc">
+          Confeccionada artesanalmente em Juazeiro do Norte com curtimento vegetal livre de cromo. Cada marca e textura da pele certifica a sua unicidade.
+        </p>
+      </div>
+    </div>
+
+    <!-- O Artesão -->
+    <div class="section-card">
+      <h2 class="section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        As Mãos que Criaram
+      </h2>
+      <div class="artisan-box">
+        <div class="artisan-avatar">C</div>
+        <div>
+          <div class="artisan-name" id="artisan-name">Mestre Cícero dos Anjos</div>
+          <div class="artisan-loc" id="artisan-loc">Ateliê Raízes do Cariri • Juazeiro do Norte, Ceará</div>
+        </div>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-top:12px; line-height:1.6;" id="artisan-bio">
+        Herdeiro de 3 gerações de mestres do couro no Cariri, Mestre Cícero une as técnicas seculares da selaria sertaneja ao design contemporâneo de luxo autoral.
+      </p>
+    </div>
+
+    <!-- Processo de Criação (Storytelling) -->
+    <div class="section-card">
+      <h2 class="section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        A Jornada desta Peça (14h de Trabalho)
+      </h2>
+      <div class="step-timeline" id="timeline-box">
+        <div class="step-item">
+          <div class="step-dot">1</div>
+          <div>
+            <div class="step-title">Seleção do Couro & Corte com Navalha</div>
+            <div class="step-desc">Apenas peles com curtimento vegetal e textura nobre são aproveitadas, respeitando a anatomia natural do couro.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-dot">2</div>
+          <div>
+            <div class="step-title">Pesponto Manual com Duas Agulhas</div>
+            <div class="step-desc">Costura ponto de sela feita com linha encerada grossa, garantindo resistência inquebrável por décadas.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-dot">3</div>
+          <div>
+            <div class="step-title">Hidratação Orgânica e Polimento das Bordas</div>
+            <div class="step-desc">Finalizada com cera de abelha e óleos naturais que conferem toque aveludado e perfume característico de couro puro.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guia de Conservação -->
+    <div class="section-card">
+      <h2 class="section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Como Cuidar da sua Peça Viva
+      </h2>
+      <div class="care-item">Evite molhar excessivamente. Caso ocorra, seque à sombra sem expor ao sol direto.</div>
+      <div class="care-item">Hidrate o couro a cada 6 meses com hidratante corporal neutro ou pomada de couro.</div>
+      <div class="care-item">O couro legítimo ganha personalidade com o tempo; marcas de uso contam a sua história.</div>
+    </div>
+
+    <!-- Direct WhatsApp Link -->
+    <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Aproximei%20a%20tag%20da%20Bolsa%20Mandacaru%20(Pe%C3%A7a%2007)%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20encomendas%20personalizadas." target="_blank" class="btn-cta-atelier">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      Falar com o Mestre Artesão via WhatsApp
+    </a>
+
+    <footer style="text-align:center; padding:28px 10px; color:var(--text-dim); font-size:0.75rem;">
+      <div>Tecnologia Phygital Powered by Nolei Creative — NFC's ROUT</div>
+    </footer>
+
+  </div>
+
+  <script src="../js/nolei-config.js"></script>
+  <script src="../js/nolei-core.js"></script>
+  <script>
+    // Carrega dados dinâmicos do JSON se disponível
+    fetch('../data/artesanato.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.piece) {
+          document.getElementById('piece-name').textContent = data.piece.name;
+          document.getElementById('piece-serial').textContent = data.piece.edition;
+          document.getElementById('artisan-name').textContent = data.atelier.artisan;
+          document.getElementById('artisan-loc').textContent = `${data.atelier.name} • ${data.atelier.location}`;
+          document.getElementById('artisan-bio').textContent = data.atelier.bio;
+        }
+      })
+      .catch(err => {
+        console.log('[Storytelling] Operando via dados pré-renderizados locais.');
+      });
+
+    // Registra visualização de storytelling no Core SDK
+    if (window.noleiClient) {
+      window.noleiClient.sendInteraction('storytelling_view', {
+        piece: 'Bolsa Mandacaru #07',
+        artisan: 'Mestre Cícero dos Anjos'
+      });
+    }
+  </script>
+</body>
+</html>

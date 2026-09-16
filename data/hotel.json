@@ -1,0 +1,72 @@
+{
+  "hotel": {
+    "name": "Hotel Jardim Imperial ★★★★★",
+    "segment": "Hotelaria & Pousadas Boutique",
+    "whatsapp": "5587999099937",
+    "wifi": {
+      "ssid": "Imperial_VIP",
+      "password": "suites_imperial"
+    }
+  },
+  "rooms": [
+    "101",
+    "102",
+    "204",
+    "305",
+    "412",
+    "415",
+    "501"
+  ],
+  "services": [
+    {
+      "id": "room_service",
+      "title": "Room Service",
+      "desc": "Pratos quentes, lanches artesanais, massas frescas e vinhos selecionados com entrega no quarto.",
+      "hours": "24 Horas",
+      "items": [
+        {
+          "name": "Club Sandwich Imperial",
+          "price": 45,
+          "desc": "Frango grelhado, bacon crocante, alface, tomate e batatas rústicas."
+        },
+        {
+          "name": "Filé Mignon ao Molho Madeira",
+          "price": 89,
+          "desc": "Com risoto de parmesão trufado e brotos frescos."
+        },
+        {
+          "name": "Pizza Artesanal Margherita",
+          "price": 52,
+          "desc": "Massa de fermentação natural com muçarela de búfala (4 fatias)."
+        },
+        {
+          "name": "Taça Vinho Tinto Reserva",
+          "price": 35,
+          "desc": "Malbec argentino servido na taça de cristal."
+        }
+      ]
+    },
+    {
+      "id": "breakfast",
+      "title": "Café da Manhã no Quarto",
+      "desc": "Cesta colonial completa entregue no horário agendado.",
+      "hours": "06:30 às 10:30",
+      "times": [
+        "07:30",
+        "08:30",
+        "09:30",
+        "10:00"
+      ]
+    },
+    {
+      "id": "housekeeping",
+      "title": "Governança & Arrumação",
+      "desc": "Troca de toalhas, reposição de amenities Natura e limpeza do quarto.",
+      "options": [
+        "Arrumar agora",
+        "Arrumar às 14:00",
+        "Não Perturbe"
+      ]
+    }
+  ]
+}

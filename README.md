@@ -1,143 +1,135 @@
-# 🚀 Nolei Creative — Protótipo NFC Demo
+# ⚡ Nolei Creative — Plataforma Phygital & Hub Administrativo NFC
 
-Landing page institucional para demonstração de produtos NFC da **Nolei Creative**.  
-Dois cenários interativos: **Avaliações Google para Clínicas** e **Cardápio Digital para Restaurantes**.
-
----
-
-## 📋 Pré-requisitos
-
-- Um navegador moderno (Chrome, Safari, Firefox, Edge)
-- Para demonstração NFC: tag NTAG213 ou NTAG215 + app [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)
-- Para deploy: conta gratuita em Vercel, Netlify, ou GitHub Pages
+Ecossistema físico-digital de alta performance desenvolvido pela **Nolei Creative**. Conecta pontos físicos (mesas, balcões, suítes, fachadas, espelhos e peças de vestuário) a experiências web interativas **sem exigir download de aplicativos da App Store ou Google Play**.
 
 ---
 
-## 🏗️ Estrutura do Projeto
+## 🌐 Acesso Rápido em Produção
+
+* **Página Institucional**: [https://nolei-creative-nfc.vercel.app](https://nolei-creative-nfc.vercel.app)
+* **Hub Comercial & Administrativo**: [https://nolei-creative-nfc.vercel.app/admin/index.html](https://nolei-creative-nfc.vercel.app/admin/index.html)
+* **Cadastro de Novo Cliente**: [https://nolei-creative-nfc.vercel.app/admin/novo-cliente.html](https://nolei-creative-nfc.vercel.app/admin/novo-cliente.html)
+* **Portal Exclusivo do Estabelecimento (Exemplo)**: [https://nolei-creative-nfc.vercel.app/empresa.html?slug=botanico-bistro](https://nolei-creative-nfc.vercel.app/empresa.html?slug=botanico-bistro)
+* **Documentação Técnica & Manual**: [https://nolei-creative-nfc.vercel.app/docs.html](https://nolei-creative-nfc.vercel.app/docs.html)
+
+---
+
+## 🏛️ Arquitetura do Sistema
+
+O ecossistema é estruturado em **3 camadas modulares**:
 
 ```
-├── index.html              ← Página principal (SPA)
-├── css/
-│   └── styles.css          ← Design system completo
-├── js/
-│   ├── app.js              ← Controlador principal
-│   ├── splash.js           ← Splash screen NFC
-│   ├── analytics.js        ← Detecção de canal + WhatsApp
-│   ├── demo-clinic.js      ← Demo avaliação Google
-│   └── demo-restaurant.js  ← Demo cardápio digital
-└── README.md               ← Este arquivo
+┌────────────────────────────────────────────────────────────────────────┐
+│                        1. CAMADA INSTITUCIONAL                         │
+│  index.html (Visão Geral • 7 Pilares • 8 Hardwares Físicos • Banner)   │
+└──────────────────────────────────┬─────────────────────────────────────┘
+                                   │
+┌──────────────────────────────────▼─────────────────────────────────────┐
+│                      2. HUB COMERCIAL & ADMIN                          │
+│  /admin/index.html                                                     │
+│   ├── [Público] Mostruário de 7 Demos com Fotos de Alta Resolução      │
+│   └── [Restrito - Login] Área Privada de Gestão                        │
+│         ├── Lista de Contratos & Clientes Ativos                       │
+│         ├── Assistente Google Meu Negócio (Links 5★ e QR)              │
+│         ├── Gerador de Tags & QR em Lote (gerador-tags.html)           │
+│         ├── Diagnóstico de Nuvem Supabase (status-supabase.html)       │
+│         └── Botão Deslogar (Encerramento Seguro de Sessão)             │
+│                                                                        │
+│  /admin/novo-cliente.html (Auth Guard Obrigatório)                     │
+│   ├── Seleção de Segmento Comercial                                    │
+│   ├── Módulos Contratados 100% Customizáveis (Iniciam Desmarcados)     │
+│   ├── Suporte a Domínio Próprio White-label (ex: cliente.com.br)       │
+│   └── Geração Automática do Portal Exclusivo da Empresa                │
+└──────────────────────────────────┬─────────────────────────────────────┘
+                                   │
+┌──────────────────────────────────▼─────────────────────────────────────┐
+│                 3. PORTAL EXCLUSIVO DA EMPRESA                         │
+│  empresa.html?slug=<slug-do-cliente>                                   │
+│   ├── Ambiente 100% Isolado (Sem Contaminação de Outros Negócios)      │
+│   ├── Acesso Direto no Topo: "Hub de Demonstrações"                    │
+│   ├── 4 KPIs Operacionais em Tempo Real (Toques, Chamados, Google, Tags)│
+│   ├── Módulos Contratados com Simulador de QR Code e Aproximação NFC   │
+│   ├── Mapeamento Físico de Pontos (Mesas, Balcões, Quartos, Totens)    │
+│   └── Formulário de Configurações com Salvamento Imediato              │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📡 Programando a Tag NFC
+## 🔒 Controle de Acesso & Segurança (Auth Guard)
 
-### 1. Instale o NFC Tools
-- **Android**: [Google Play](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)
-- **iOS**: [App Store](https://apps.apple.com/app/nfc-tools/id1252962749)
+O sistema diferencia visual e funcionalmente a área pública da área administrativa:
 
-### 2. Configure a URL com parâmetros de rastreamento
-
-Use este formato ao gravar a tag:
-
-```
-https://SEU-DOMINIO.com/?source=nfc&medium=acrylic_stand&loc=recepcao
-```
-
-**Parâmetros disponíveis:**
-| Parâmetro | Descrição | Exemplos |
-|-----------|-----------|----------|
-| `source` | Canal de acesso | `nfc`, `qr` |
-| `medium` | Tipo de hardware | `acrylic_stand`, `card`, `table_sticker` |
-| `loc` | Localização física | `recepcao`, `mesa_04`, `balcao` |
-
-### 3. Grave a Tag
-1. Abra o NFC Tools → **Escrever** → **Adicionar um registro** → **URL/URI**
-2. Cole a URL com parâmetros
-3. Toque **Escrever** e aproxime o celular da tag
-4. Aguarde confirmação ✅
+| Recurso | Acesso Público | Usuário Autenticado (`admin` / `nolei2026`) |
+|---|:---:|:---:|
+| **Mostruário de Demonstrações** | ✅ Disponível | ✅ Disponível |
+| **Páginas de Demonstração Ativas** | ✅ Disponível | ✅ Disponível |
+| **Demonstrações em Desenvolvimento** | ⛔ Bloqueado com Badge | ⛔ Bloqueado com Badge |
+| **Portais de Empresas Cadastradas** | ✅ Por Link Direto | ✅ Por Link Direto |
+| **Aba Área Privada de Contratos** | 🔒 Oculta | ✅ Visível com Lista de Clientes |
+| **Cadastro de Novo Cliente** | 🔒 Bloqueado com Redirecionamento | ✅ Formulário Liberado |
+| **Assistente Google Meu Negócio** | 🔒 Oculto | ✅ Modal Administrativo Ativo |
+| **Botão Deslogar** | — | ✅ Disponível no Topo |
 
 ---
 
-## 📱 Gerando o QR Code
+## 🎯 Catálogo dos 7 Segmentos Comerciais
 
-1. Acesse [qr-code-generator.com](https://www.qr-code-generator.com/) ou similar
-2. Use a mesma URL, mas com `source=qr`:
-   ```
-   https://SEU-DOMINIO.com/?source=qr&medium=table_sticker
-   ```
-3. Baixe e imprima o QR Code
-4. Cole no suporte físico junto à tag NFC
+| Segmento | Estabelecimento Modelo | Status da Demo | Principais Módulos |
+|---|---|:---:|---|
+| **1. Gastronomia & Bares** | 🌿 Botânico Bistrô | ✅ Ativa | Cardápio digital, comanda por mesa, chamada de garçom, monitor de cozinha (KDS) e dashboard ROI |
+| **2. Hotelaria & Pousadas** | 🏨 Hotel Jardim Imperial ★★★★★ | ✅ Ativa | Concierge na cabeceira, room service 24h, agendamento de café colonial e governança |
+| **3. Saúde & Clínicas** | ⭐ Clínica Dra. Sofia Santos | ✅ Ativa | Totem balcão com filtro de satisfação (4-5★ vai pro Google Maps; 1-3★ vai pra ouvidoria interna) |
+| **4. Fidelidade & Varejo** | ☕ Café Origem | ✅ Ativa | Cartão de 10 carimbos digital gamificado no balcão sem aplicativo e catálogo de prêmios |
+| **5. Moda Autoral & Couro** | 🧵 Ateliê Raízes do Cariri | ✅ Ativa | Etiqueta costurada na peça com storytelling do artesão e certificado de autenticidade numerado |
+| **6. Barbearias & Salões** | ✂️ Barbearia Dom Corleone | 🚧 Em Desenvolvimento | Tag de espelho anti-metal, fidelidade de cortes e agendamento sem fila |
+| **7. Imobiliárias & Plantões**| 🏙️ Horizon Imóveis | 🚧 Em Desenvolvimento | Placa phygital de fachada IP68, tour 360° e WhatsApp de corretor de plantão 24h |
 
 ---
 
-## 🌐 Deploy (Hospedagem Gratuita)
+## 🛠️ Hardware Phygital & Displays Físicos (8 Modelos)
 
-### Opção 1: Vercel (Recomendado)
+Todos os displays são gravados a laser e equipados com chips **NTAG213 / NTAG215** de alta sensibilidade:
+
+1. **Display L-Shape Black Piano (Restaurantes)**: Acrílico preto brilhante para centro de mesas com QR Code de apoio.
+2. **Totem Google Avaliações (Clínicas & Balcões)**: Acrílico cristal de alta densidade para check-out e recepção.
+3. **Cavalete em Madeira Nobre (Cafés & Suítes)**: Madeira maciça de reflorestamento com gravação pirogravada.
+4. **Cartão Mini Quadrado (Fidelização)**: PVC rígido fosco com cantos arredondados para chaveiro ou carteira.
+5. **Disco Resinado Auto-Adesivo (Áreas Externas)**: Acrílico impermeável com resina PU automotiva e fita 3M VHB para piscinas e bistrôs.
+6. **Tag de Espelho & Bancada Anti-Metal (Barbearias)**: Adesivo com camada de **ferrite anti-interferência** que isola reflexos e superfícies metálicas condutivas.
+7. **Placa de Fachada Externa IP68 (Imobiliárias & Loteamentos)**: Acrílico cast maciço e alumínio escovado com blindagem UV total contra intempéries e sol.
+8. **Tag em Couro com Chip Oculto (Moda Autoral)**: Couro vegetal costurado manualmente com chip NFC ultrafino selado internamente.
+
+---
+
+## 💻 Stack Tecnológica
+
+* **Frontend**: HTML5 Semântico, CSS3 Moderno (*Warm Obsidian Design System* com variáveis CSS), Vanilla JavaScript modular e responsivo.
+* **Banco de Dados & Realtime**: Supabase (PostgreSQL) com fallback resiliente para `localStorage` e arquivos JSON estruturados.
+* **Roteamento Phygital**: Motor dinâmico `r.html?t=<tag_id>` com redirecionamento em milissegundos.
+* **Deploy & Hospedagem**: Vercel Production com CI/CD automático conectado ao GitHub.
+
+---
+
+## 🚀 Como Executar Localmente
+
+1. Clone o repositório:
 ```bash
-npm i -g vercel
-vercel --prod
+git clone https://github.com/Nolei98/nolei-creative-nfc.git
+cd nolei-creative-nfc
 ```
 
-### Opção 2: Netlify
-1. Arraste a pasta do projeto para [app.netlify.com/drop](https://app.netlify.com/drop)
-2. Pronto! URL gerada automaticamente.
-
-### Opção 3: GitHub Pages
-1. Crie um repositório no GitHub
-2. Faça push dos arquivos
-3. Vá em Settings → Pages → Source: `main` branch
-4. Acesse `https://seu-usuario.github.io/nome-repo`
-
----
-
-## ⚙️ Personalização
-
-### Trocar o Número do WhatsApp
-Em `js/analytics.js`, procure a constante:
-```javascript
-const WHATSAPP_PHONE = '5511999999999';
+2. Abra qualquer arquivo diretamente no navegador ou sirva via servidor local:
+```bash
+npx serve .
+# ou
+python -m http.server 3000
 ```
-Substitua pelo número real (formato: código do país + DDD + número, sem símbolos).
 
-### Trocar Dados da Clínica Fictícia
-Em `index.html`, procure a seção `#demo-clinic-content` e altere:
-- Nome da doutora
-- Especialidade
-- Nome da clínica
-
-### Trocar Itens do Cardápio
-Em `js/demo-restaurant.js`, edite o objeto `menuData` com os itens reais.
-
-### Trocar Nome do Restaurante
-Em `index.html`, procure `#demo-restaurant-content` e altere:
-- Nome do restaurante
-- Número da mesa
-
-### Configurar Link de Avaliação Google Real
-1. Acesse o [Google Place ID Finder](https://developers.google.com/maps/documentation/places/web-service/place-id)
-2. Busque o negócio e copie o Place ID
-3. O link final será:
-   ```
-   https://search.google.com/local/writereview?placeid=SEU_PLACE_ID
-   ```
-
-> ⚠️ **Dica profissional**: Nunca grave o link do Google diretamente na tag NFC. Use sua própria URL como proxy/redirect para poder alterar o destino sem reprogramar o hardware.
+3. Acesse `http://localhost:3000` para a homepage ou `http://localhost:3000/admin/index.html` para o Hub Comercial.
 
 ---
 
-## 🧪 Testando Localmente
+## 📄 Licença & Direitos
 
-Basta abrir o `index.html` no navegador. Para simular diferentes canais:
-
-- **Simular NFC**: `index.html?source=nfc`
-- **Simular QR**: `index.html?source=qr`
-- **Acesso direto**: `index.html` (sem parâmetros)
-
-Para testar responsividade, use o DevTools do Chrome (F12 → Toggle Device Toolbar).
-
----
-
-## 📄 Licença
-
-Protótipo proprietário da Nolei Creative. Uso interno para demonstrações de vendas.
+Plataforma proprietária desenvolvida pela **Nolei Creative**. Todos os direitos reservados.

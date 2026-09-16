@@ -395,6 +395,7 @@
     </div>
 
     <div class="nav-actions">
+      <a href="novo-cliente.html" class="btn-top btn-top-primary" style="background:var(--accent); color:#fff; border-color:var(--accent);">+ Novo Cliente</a>
       <a href="gerador-tags.html" target="_blank" class="btn-top btn-top-ghost">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
         Gerador de Tags
@@ -412,6 +413,7 @@
       <div class="sidebar-section-label">Gestão do Estabelecimento</div>
       <ul class="sidebar-nav">
         <li><button class="nav-item-btn active" onclick="switchAdminTab('overview', this)">📊 Visão Geral & Métricas</button></li>
+        <li><button class="nav-item-btn" onclick="switchAdminTab('companies', this)">🏢 Clientes & Empresas</button></li>
         <li><button class="nav-item-btn" onclick="switchAdminTab('catalog', this)">🍽️ Cardápio & Serviços</button></li>
         <li><button class="nav-item-btn" onclick="switchAdminTab('settings', this)">⚙️ Dados & WhatsApp</button></li>
       </ul>
@@ -475,6 +477,38 @@
         </div>
       </div>
 
+      
+      <!-- Tab: Companies & Clients -->
+      <div class="card-block" id="tab-companies-box" style="display:none;">
+        <div class="card-block-title" style="flex-wrap:wrap; gap:12px;">
+          <div>
+            <span style="font-size:1.15rem;">Portfólio de Clientes & Empresas</span>
+            <div style="font-size:0.8rem; color:var(--muted); font-weight:normal; margin-top:2px;">
+              Cada empresa possui um portal exclusivo onde clientes e equipe acessam <strong>estritamente o que foi contratado</strong>.
+            </div>
+          </div>
+          <a href="novo-cliente.html" class="btn-top btn-top-primary" style="background:var(--accent); color:#fff;">+ Cadastrar Novo Cliente</a>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Empresa / Segmento</th>
+                <th>Cidade</th>
+                <th>WhatsApp</th>
+                <th>Módulos Ativos</th>
+                <th>Portal Exclusivo</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="companies-tbody">
+              <!-- Injetado dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- Tab: Catalog Items -->
       <div class="card-block" id="tab-catalog-box">
         <div class="card-block-title">
@@ -528,6 +562,7 @@
     </main>
   </div>
 
+  <script src="../js/nolei-companies.js"></script>
   <script>
     const ORG_PROFILES = {
       'botanico-bistro': {
@@ -612,44 +647,96 @@
       }
     };
 
+    
     function switchOrganization(orgId) {
-      const data = ORG_PROFILES[orgId] || ORG_PROFILES['botanico-bistro'];
+      const select = document.getElementById('select-org');
+      if (select && select.value !== orgId) {
+        select.value = orgId;
+      }
 
-      document.getElementById('current-org-name').textContent = data.name;
-      document.getElementById('current-org-segment').textContent = data.segment;
-      document.getElementById('btn-open-live-demo').href = data.liveUrl;
+      // 1. Tenta carregar do gerenciador dinâmico de empresas
+      let company = window.NoleiCompanies ? window.NoleiCompanies.getBySlug(orgId) : null;
+      let data = ORG_PROFILES[orgId];
+
+      if (!company && !data) {
+        orgId = 'botanico-bistro';
+        company = window.NoleiCompanies ? window.NoleiCompanies.getBySlug(orgId) : null;
+        data = ORG_PROFILES[orgId];
+      }
+
+      const name = company ? company.name : data.name;
+      const segInfo = company ? window.NoleiCompanies.getSegment(company.segment) : null;
+      const segmentStr = company ? (segInfo.name + ' • ' + (company.city || 'Juazeiro do Norte - CE')) : data.segment;
+      const waNumber = company ? company.whatsapp : data.wa;
+      const liveUrl = '../empresa.html?slug=' + (company ? company.slug : orgId);
+
+      document.getElementById('current-org-name').textContent = name;
+      document.getElementById('current-org-segment').textContent = segmentStr;
+      document.getElementById('btn-open-live-demo').href = liveUrl;
 
       // KPIs
-      document.getElementById('kpi-nfc').textContent = data.kpis.nfc;
-      document.getElementById('kpi-calls').textContent = data.kpis.calls;
-      document.getElementById('kpi-rev').textContent = data.kpis.rev;
-      document.getElementById('kpi-rating').textContent = data.kpis.rating;
+      const kpis = (data && data.kpis) || { nfc: '94', calls: '28', rev: 'R$ 3.850', rating: '4.9 ★' };
+      document.getElementById('kpi-nfc').textContent = kpis.nfc;
+      document.getElementById('kpi-calls').textContent = kpis.calls;
+      document.getElementById('kpi-rev').textContent = kpis.rev;
+      document.getElementById('kpi-rating').textContent = kpis.rating;
 
       // Settings inputs
-      document.getElementById('set-name').value = data.name.replace(/^[^s]+s/, '');
-      document.getElementById('set-wa').value = data.wa;
+      document.getElementById('set-name').value = name.replace(/^[\s\p{Emoji}]+/u, '').trim();
+      document.getElementById('set-wa').value = waNumber;
+      if (company) {
+        document.getElementById('set-wifi-ssid').value = company.wifiSsid || '';
+        document.getElementById('set-wifi-pass').value = company.wifiPass || '';
+      }
 
-      // Launchpad
+      // Launchpad dinâmico baseado estritamente nos módulos contratados da empresa
       const lp = document.getElementById('launchpad-container');
-      lp.innerHTML = data.launch.map(l => `
-        <a href="${l.url}" target="_blank" class="launch-card">
-          <div class="launch-icon">${l.icon}</div>
-          <div class="launch-info">
-            <h4>${l.title}</h4>
-            <p>${l.desc}</p>
+      if (company && company.modules && company.modules.length > 0) {
+        lp.innerHTML = company.modules.map(modId => {
+          const mod = window.NoleiCompanies.getModule(modId);
+          if (!mod) return '';
+          const targetUrl = mod.operatorAction ? mod.operatorAction.getUrl(company) : (mod.clientAction ? mod.clientAction.getUrl(company) : liveUrl);
+          const actionTitle = mod.operatorAction ? mod.operatorAction.label : (mod.clientAction ? mod.clientAction.label : mod.name);
+          return `
+            <a href="../${targetUrl.replace(/^\.\.\//, '')}" target="_blank" class="launch-card">
+              <div class="launch-icon">${mod.icon || '⚡'}</div>
+              <div class="launch-info">
+                <h4>${actionTitle}</h4>
+                <p>${mod.desc}</p>
+              </div>
+            </a>
+          `;
+        }).join('');
+      } else if (data && data.launch) {
+        lp.innerHTML = data.launch.map(l => `
+          <a href="${l.url}" target="_blank" class="launch-card">
+            <div class="launch-icon">${l.icon}</div>
+            <div class="launch-info">
+              <h4>${l.title}</h4>
+              <p>${l.desc}</p>
+            </div>
+          </a>
+        `).join('');
+      } else {
+        lp.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 20px; color: var(--muted); text-align: center;">
+            Nenhum módulo ativo. Cadastre módulos para esta empresa no menu de clientes.
           </div>
-        </a>
-      `).join('');
+        `;
+      }
 
-      // Catalog Table
+      // Tabela de itens do catálogo
       const tb = document.getElementById('items-tbody');
-      tb.innerHTML = data.items.map((item, idx) => `
+      const items = (data && data.items) || [
+        { title: 'Serviço Principal', desc: 'Atendimento e recepção com aproximação NFC.', cat: 'Principal', price: 'Ativo', active: true }
+      ];
+      tb.innerHTML = items.map((item, idx) => `
         <tr>
           <td>
             <div class="item-title-cell">${item.title}</div>
             <div class="item-desc-cell">${item.desc}</div>
           </td>
-          <td><span style="font-size:0.75rem; color:var(--muted);">${item.cat}</span></td>
+          <td><span style="font-size:0.75rem; color:var(--muted); font-weight:600;">${item.cat}</span></td>
           <td><span class="price-tag">${item.price}</span></td>
           <td><span class="badge-status-item ${item.active ? 'badge-active' : 'badge-paused'}">${item.active ? 'Ativo' : 'Pausado'}</span></td>
           <td>
@@ -661,44 +748,75 @@
       `).join('');
     }
 
-    function toggleItemStatus(idx) {
-      alert('Status do item alternado no catálogo local!');
+
+    function deleteCustomCompany(slug) {
+      if (confirm('Tem certeza que deseja remover esta empresa?')) {
+        window.NoleiCompanies.delete(slug);
+        renderCompaniesTable();
+        populateOrgSelector();
+        alert('Empresa removida com sucesso!');
+      }
+    }
+
+    function populateOrgSelector() {
+      const select = document.getElementById('select-org');
+      if (!select || !window.NoleiCompanies) return;
+      const all = window.NoleiCompanies.getAll();
+      const currentVal = select.value;
+
+      select.innerHTML = all.map(comp => {
+        const seg = window.NoleiCompanies.getSegment(comp.segment);
+        return `<option value="${comp.slug}">${comp.name} (${seg.name.split('&')[0].trim()})</option>`;
+      }).join('');
+
+      if (all.some(c => c.slug === currentVal)) {
+        select.value = currentVal;
+      }
     }
 
     function switchAdminTab(tab, btn) {
       document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
 
       const kpiBox = document.querySelector('.kpi-grid');
       const launchpadBox = document.getElementById('launchpad-container').closest('.card-block');
+      const compBox = document.getElementById('tab-companies-box');
       const catBox = document.getElementById('tab-catalog-box');
       const setBox = document.getElementById('tab-settings-box');
+
+      kpiBox.style.display = 'none';
+      launchpadBox.style.display = 'none';
+      if (compBox) compBox.style.display = 'none';
+      catBox.style.display = 'none';
+      setBox.style.display = 'none';
 
       if (tab === 'overview') {
         kpiBox.style.display = 'grid';
         launchpadBox.style.display = 'block';
-        catBox.style.display = 'none';
-        setBox.style.display = 'none';
+      } else if (tab === 'companies') {
+        if (compBox) {
+          compBox.style.display = 'block';
+          renderCompaniesTable();
+        }
       } else if (tab === 'catalog') {
-        kpiBox.style.display = 'none';
-        launchpadBox.style.display = 'none';
         catBox.style.display = 'block';
-        setBox.style.display = 'none';
       } else if (tab === 'settings') {
-        kpiBox.style.display = 'none';
-        launchpadBox.style.display = 'none';
-        catBox.style.display = 'none';
         setBox.style.display = 'block';
       }
     }
 
-    // Inicializa na carga com Botânico Bistrô
+    // Inicialização sincronizada
+    populateOrgSelector();
+    renderCompaniesTable();
     switchOrganization('botanico-bistro');
-    // Inicia na aba de Visão Geral com catálogo e dados ocultos
     const kpiBox = document.querySelector('.kpi-grid');
     const launchpadBox = document.getElementById('launchpad-container').closest('.card-block');
     document.getElementById('tab-catalog-box').style.display = 'none';
     document.getElementById('tab-settings-box').style.display = 'none';
+    if (document.getElementById('tab-companies-box')) {
+      document.getElementById('tab-companies-box').style.display = 'none';
+    }
+
   </script>
 </body>
 </html>

@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141210">
+  <title id="page-title">Portal do Estabelecimento — Nolei Phygital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141210;
+      --card: #1F1A15;
+      --elevated: #2A231C;
+      --surface: #241E18;
+      --text: #F2EADF;
+      --muted: #A2937E;
+      --dim: #786B5A;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --green: #10B981;
+      --green-light: rgba(16, 185, 129, 0.15);
+      --gold: #F59E0B;
+      --gold-light: rgba(245, 158, 11, 0.15);
+      --border: rgba(242, 234, 223, 0.08);
+      --border-strong: rgba(193, 93, 48, 0.35);
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation */
+    .top-bar {
+      background: rgba(20, 18, 16, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--elevated);
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-title span { color: var(--accent); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      background: #181410;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn-action:hover {
+      background: var(--elevated);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .btn-action.highlight {
+      background: rgba(193, 93, 48, 0.2);
+      color: var(--text);
+      border-color: rgba(193, 93, 48, 0.4);
+      font-weight: 700;
+    }
+    .btn-action.highlight:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+      flex: 1;
+    }
+
+    /* Company Hero */
+    .company-hero {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(193, 93, 48, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .company-identity {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .company-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 16px;
+      background: var(--elevated);
+      border: 2px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+    .company-name {
+      font-size: 1.7rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+    .company-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge-segment {
+      background: rgba(193, 93, 48, 0.18);
+      color: var(--accent);
+      border: 1px solid rgba(193, 93, 48, 0.35);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-status {
+      background: var(--green-light);
+      color: var(--green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-city {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .hero-summary {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 16px;
+      max-width: 760px;
+      line-height: 1.5;
+    }
+
+    .hero-actions-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Section Headings */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .modules-count-badge {
+      background: var(--elevated);
+      color: var(--accent);
+      border: 1px solid var(--border-strong);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Modules Grid */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+    .module-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+    .module-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(193, 93, 48, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    .module-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .module-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+    .module-info h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .module-info p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .module-card-footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(242, 234, 223, 0.05);
+    }
+    .btn-module-primary {
+      background: var(--elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn-module-primary:hover {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+    .btn-module-secondary {
+      background: #141210;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn-module-secondary:hover {
+      background: var(--elevated);
+      color: var(--text);
+      border-color: rgba(242, 234, 223, 0.2);
+    }
+
+    /* Physical Spots Box */
+    .spots-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 36px;
+    }
+    .spots-table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+    .spots-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    .spots-table th {
+      background: var(--elevated);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .spots-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .spots-table tr:last-child td {
+      border-bottom: none;
+    }
+    .spot-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(193, 93, 48, 0.12);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(193, 93, 48, 0.25);
+    }
+
+    /* Switcher Footer */
+    .switch-company-bar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .switch-label {
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .company-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-pill {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-pill:hover, .btn-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 28px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .qr-img-box {
+      background: #FFFFFF;
+      padding: 14px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 18px 0;
+    }
+    .qr-img-box img {
+      display: block;
+      width: 200px;
+      height: 200px;
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--elevated);
+      color: #fff;
+      border: 1px solid var(--accent);
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-msg.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="admin/index.html" class="brand-group">
+        <div class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="brand-title">Nolei <span>Phygital Hub</span></div>
+          <div style="font-size: 0.68rem; color: var(--muted);">Portal Exclusivo do Estabelecimento</div>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <button class="btn-action" onclick="copyPortalLink()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          Copiar Link do Portal
+        </button>
+        <a href="admin/novo-cliente.html" class="btn-action highlight">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Cadastrar Novo Cliente
+        </a>
+        <a href="admin/index.html" class="btn-action">
+          Voltar ao Admin
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Company Hero Section -->
+    <section class="company-hero">
+      <div class="hero-glow"></div>
+      <div class="hero-header-row">
+        <div class="company-identity">
+          <div class="company-avatar" id="c-avatar">🏢</div>
+          <div>
+            <h1 class="company-name" id="c-name">Carregando Estabelecimento...</h1>
+            <div class="company-badges">
+              <span class="badge-segment" id="c-segment-badge">🏷️ Segmento</span>
+              <span class="badge-status">● Plataforma Phygital Ativa</span>
+              <span class="badge-city" id="c-city">📍 Local</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-actions-bar">
+          <a id="btn-hero-wa" href="#" target="_blank" class="btn-action highlight">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            WhatsApp Comercial
+          </a>
+          <button class="btn-action" onclick="showWifiModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            Credenciais Wi-Fi
+          </button>
+        </div>
+      </div>
+
+      <p class="hero-summary" id="c-summary">
+        Acesse abaixo as ferramentas físicas e digitais ativadas exclusivamente para este cliente.
+      </p>
+    </section>
+
+    <!-- Contracted Modules Section -->
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">
+          <span>Módulos & Recursos Contratados</span>
+          <span class="modules-count-badge" id="modules-count">0 Módulos</span>
+        </h2>
+        <div class="section-desc">Esta empresa possui acesso liberado estritamente aos módulos listados abaixo.</div>
+      </div>
+    </div>
+
+    <!-- Modules Grid (Injected Dynamically) -->
+    <div class="modules-grid" id="modules-container">
+      <!-- Injetado dinamicamente via JS -->
+    </div>
+
+    <!-- Physical Spots Section -->
+    <section class="spots-box">
+      <div class="section-header" style="margin-bottom: 4px;">
+        <div>
+          <h3 class="section-title" style="font-size: 1.1rem;">📍 Pontos Físicos & Tags NFC Mapeadas</h3>
+          <div class="section-desc">Identificadores físicos (tags NTAG213 e displays de acrílico) deste estabelecimento.</div>
+        </div>
+        <a href="admin/gerador-tags.html" target="_blank" class="btn-action">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Imprimir Cartelas de Tags
+        </a>
+      </div>
+
+      <div class="spots-table-wrap">
+        <table class="spots-table">
+          <thead>
+            <tr>
+              <th>Código Tag</th>
+              <th>Local / Identificação</th>
+              <th>Tipo</th>
+              <th>Acesso Direto</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="spots-tbody">
+            <!-- Injetado dinamicamente -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Quick Company Switcher -->
+    <div class="switch-company-bar">
+      <div class="switch-label">Ver outros estabelecimentos modelo por área:</div>
+      <div class="company-pills" id="companies-pill-container">
+        <!-- Injetado dinamicamente -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- QR Code Modal -->
+  <div class="modal-overlay" id="qr-modal" onclick="closeModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeQrModal()">&times;</button>
+      <h3 id="qr-modal-title" style="font-size: 1.15rem; font-weight: 800;">QR Code da Tag NFC</h3>
+      <p id="qr-modal-desc" style="font-size: 0.8rem; color: var(--muted); margin-top: 4px;">Aponte a câmera do celular para testar</p>
+      
+      <div class="qr-img-box">
+        <img id="qr-modal-img" src="" alt="QR Code">
+      </div>
+
+      <div style="font-family:'JetBrains Mono', monospace; font-size:0.75rem; color:var(--muted); word-break:break-all; margin-bottom:16px;" id="qr-modal-url"></div>
+
+      <div style="display:flex; gap:8px; justify-content:center;">
+        <button class="btn-action highlight" onclick="copyQrUrl()">Copiar Link</button>
+        <a id="qr-modal-test-btn" href="#" target="_blank" class="btn-action">Abrir Destino</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wi-Fi Modal -->
+  <div class="modal-overlay" id="wifi-modal" onclick="closeModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeWifiModal()">&times;</button>
+      <div style="font-size: 2.2rem; margin-bottom: 8px;">📶</div>
+      <h3 style="font-size: 1.2rem; font-weight: 800;">Rede Wi-Fi do Estabelecimento</h3>
+      <p style="font-size: 0.82rem; color: var(--muted); margin: 6px 0 20px;">Credenciais para acesso rápido de clientes e colaboradores</p>
+      
+      <div style="background:var(--elevated); border:1px solid var(--border); border-radius:8px; padding:16px; text-align:left; margin-bottom:18px;">
+        <div style="font-size:0.75rem; color:var(--muted); margin-bottom:4px;">Nome da Rede (SSID):</div>
+        <div style="font-family:'JetBrains Mono', monospace; font-size:1rem; font-weight:700; color:#fff;" id="wifi-ssid-val">-</div>
+        
+        <div style="font-size:0.75rem; color:var(--muted); margin-top:14px; margin-bottom:4px;">Senha de Acesso:</div>
+        <div style="font-family:'JetBrains Mono', monospace; font-size:1rem; font-weight:700; color:var(--accent);" id="wifi-pass-val">-</div>
+      </div>
+
+      <button class="btn-action highlight" style="width:100%; justify-content:center;" onclick="copyWifiCredentials()">
+        Copiar Senha do Wi-Fi
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-msg" id="toast-box">
+    <span>✅</span>
+    <span id="toast-text">Mensagem</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/nolei-companies.js"></script>
+  <script>
+    let currentCompany = null;
+    let currentQrUrl = '';
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-text').textContent = msg;
+      box.classList.add('show');
+      setTimeout(() => box.classList.remove('show'), 3000);
+    }
+
+    function copyPortalLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('Link do portal copiado para a área de transferência!');
+      }).catch(() => {
+        showToast('Link pronto: ' + window.location.href);
+      });
+    }
+
+    function getSlugFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('slug') || params.get('id') || 'botanico-bistro';
+    }
+
+    function renderCompany() {
+      const slug = getSlugFromUrl();
+      currentCompany = window.NoleiCompanies.getBySlug(slug);
+
+      if (!currentCompany) {
+        // Fallback para primeira empresa disponível
+        const all = window.NoleiCompanies.getAll();
+        currentCompany = all[0] || null;
+      }
+
+      if (!currentCompany) {
+        document.getElementById('c-name').textContent = 'Nenhuma empresa encontrada';
+        return;
+      }
+
+      // Segment info
+      const seg = window.NoleiCompanies.getSegment(currentCompany.segment);
+
+      // Metadados
+      document.title = currentCompany.name + ' — Portal Phygital';
+      document.getElementById('c-avatar').textContent = seg.icon || '🏢';
+      document.getElementById('c-name').textContent = currentCompany.name;
+      document.getElementById('c-segment-badge').textContent = seg.name;
+      document.getElementById('c-city').textContent = '📍 ' + (currentCompany.city || 'Juazeiro do Norte - CE');
+      document.getElementById('c-summary').textContent = currentCompany.summary || ('Plataforma física e digital integrada para ' + currentCompany.name);
+
+      // WhatsApp Button
+      const waNumber = (currentCompany.whatsapp || '87999099937').replace(/\D/g, '');
+      document.getElementById('btn-hero-wa').href = 'https://wa.me/' + (waNumber.startsWith('55') ? waNumber : ('55' + waNumber));
+
+      // Módulos Contratados (SOMENTE O QUE O CLIENTE POSSUI)
+      const modulesBox = document.getElementById('modules-container');
+      const activeModules = currentCompany.modules || [];
+      document.getElementById('modules-count').textContent = activeModules.length + ' Ativo' + (activeModules.length === 1 ? '' : 's');
+
+      if (activeModules.length === 0) {
+        modulesBox.innerHTML = `
+          <div style="grid-column: 1 / -1; background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius); padding: 40px 20px; text-align: center; color: var(--muted);">
+            <div style="font-size: 2rem; margin-bottom: 8px;">⚙️</div>
+            <h4 style="color:#fff; margin-bottom:4px;">Nenhum módulo ativado no momento</h4>
+            <p style="font-size:0.85rem;">Edite este cliente no painel do administrador para habilitar ferramentas.</p>
+          </div>
+        `;
+      } else {
+        modulesBox.innerHTML = activeModules.map(modId => {
+          const mod = window.NoleiCompanies.getModule(modId);
+          if (!mod) return '';
+
+          let clientBtn = '';
+          if (mod.clientAction) {
+            const url = mod.clientAction.getUrl(currentCompany);
+            clientBtn = `
+              <a href="${url}" target="_blank" class="btn-module-primary">
+                <span>${mod.clientAction.label}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            `;
+          }
+
+          let operatorBtn = '';
+          if (mod.operatorAction) {
+            const opUrl = mod.operatorAction.getUrl(currentCompany);
+            operatorBtn = `
+              <a href="${opUrl}" target="_blank" class="btn-module-secondary">
+                <span>⚙️ ${mod.operatorAction.label}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            `;
+          }
+
+          return `
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-icon-box">${mod.icon || '⚡'}</div>
+                <div class="module-info">
+                  <h3>${mod.name}</h3>
+                  <p>${mod.desc}</p>
+                </div>
+              </div>
+
+              <div class="module-card-footer">
+                ${clientBtn}
+                ${operatorBtn}
+                <button class="btn-module-secondary" onclick="openQrForModule('${mod.name}', '${mod.clientAction ? mod.clientAction.getUrl(currentCompany) : (mod.operatorAction ? mod.operatorAction.getUrl(currentCompany) : window.location.href)}')">
+                  <span>📱 Ver QR Code de Acesso</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Pontos Físicos
+      const spotsTbody = document.getElementById('spots-tbody');
+      const spots = currentCompany.spots || [];
+      if (spots.length === 0) {
+        spotsTbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center; padding: 24px; color: var(--muted);">Nenhum ponto físico cadastrado.</td>
+          </tr>
+        `;
+      } else {
+        spotsTbody.innerHTML = spots.map(s => {
+          const directUrl = s.url || `r.html?t=${s.code}`;
+          return `
+            <tr>
+              <td><span class="spot-code">${s.code.toUpperCase()}</span></td>
+              <td style="font-weight:700;">${s.label}</td>
+              <td style="color:var(--muted); text-transform:capitalize;">${s.type || 'Ponto'}</td>
+              <td>
+                <a href="${directUrl}" target="_blank" style="color:var(--accent); text-decoration:none; font-weight:600; font-size:0.8rem; display:inline-flex; align-items:center; gap:4px;">
+                  Abrir Ponto
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+              </td>
+              <td>
+                <button class="btn-action" style="padding:4px 8px; font-size:0.72rem;" onclick="openQrForSpot('${s.label}', '${directUrl}')">
+                  QR Code
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Switcher Pills
+      const pillsBox = document.getElementById('companies-pill-container');
+      const allCompanies = window.NoleiCompanies.getAll();
+      pillsBox.innerHTML = allCompanies.map(c => {
+        const isActive = c.slug === currentCompany.slug;
+        return `
+          <a href="empresa.html?slug=${c.slug}" class="btn-pill ${isActive ? 'active' : ''}">
+            ${c.name}
+          </a>
+        `;
+      }).join('');
+    }
+
+    // Modal QR Code
+    function openQrForModule(title, targetUrl) {
+      const fullUrl = targetUrl.startsWith('http') ? targetUrl : (window.location.origin + '/' + targetUrl.replace(/^\//, ''));
+      currentQrUrl = fullUrl;
+      document.getElementById('qr-modal-title').textContent = title;
+      document.getElementById('qr-modal-desc').textContent = 'Aponte a câmera para simular aproximação NFC';
+      document.getElementById('qr-modal-url').textContent = fullUrl;
+      document.getElementById('qr-modal-test-btn').href = targetUrl;
+      document.getElementById('qr-modal-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(fullUrl);
+      document.getElementById('qr-modal').style.display = 'flex';
+    }
+
+    function openQrForSpot(label, targetUrl) {
+      openQrForModule('Ponto: ' + label, targetUrl);
+    }
+
+    function closeQrModal() {
+      document.getElementById('qr-modal').style.display = 'none';
+    }
+
+    function copyQrUrl() {
+      navigator.clipboard.writeText(currentQrUrl).then(() => {
+        showToast('Link da tag copiado!');
+      });
+    }
+
+    // Modal Wi-Fi
+    function showWifiModal() {
+      if (!currentCompany) return;
+      document.getElementById('wifi-ssid-val').textContent = currentCompany.wifiSsid || (currentCompany.slug + '_Wifi');
+      document.getElementById('wifi-pass-val').textContent = currentCompany.wifiPass || 'nolei2026';
+      document.getElementById('wifi-modal').style.display = 'flex';
+    }
+
+    function closeWifiModal() {
+      document.getElementById('wifi-modal').style.display = 'none';
+    }
+
+    function copyWifiCredentials() {
+      const pass = document.getElementById('wifi-pass-val').textContent;
+      navigator.clipboard.writeText(pass).then(() => {
+        showToast('Senha do Wi-Fi copiada para a área de transferência!');
+        closeWifiModal();
+      });
+    }
+
+    function closeModal(e) {
+      if (e.target.classList.contains('modal-overlay')) {
+        e.target.style.display = 'none';
+      }
+    }
+
+    // Inicia renderização
+    renderCompany();
+  </script>
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141210">
+  <title>Cadastrar Novo Cliente — Nolei Creative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141210;
+      --card: #1F1A15;
+      --elevated: #2A231C;
+      --surface: #241E18;
+      --text: #F2EADF;
+      --muted: #A2937E;
+      --dim: #786B5A;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --green: #10B981;
+      --gold: #F59E0B;
+      --border: rgba(242, 234, 223, 0.08);
+      --border-strong: rgba(193, 93, 48, 0.35);
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* Top Navigation */
+    .top-navbar {
+      background: rgba(20, 18, 16, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+    .nav-brand span { color: var(--accent); }
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--elevated);
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+    .btn-top {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #181410;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .btn-top:hover {
+      background: var(--elevated);
+      border-color: var(--accent);
+    }
+
+    /* Form Container */
+    .form-wrapper {
+      max-width: 860px;
+      width: 100%;
+      margin: 32px auto 80px;
+      padding: 0 20px;
+    }
+    .page-title-box {
+      margin-bottom: 28px;
+    }
+    .page-title {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .page-subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Form Card */
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .card-step-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-number {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(193, 93, 48, 0.2);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* Segment Selector Grid */
+    .segments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .segment-card {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      user-select: none;
+    }
+    .segment-card:hover {
+      border-color: rgba(193, 93, 48, 0.4);
+      background: #2E2620;
+    }
+    .segment-card.selected {
+      border-color: var(--accent);
+      background: rgba(193, 93, 48, 0.15);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .seg-icon {
+      font-size: 1.6rem;
+    }
+    .seg-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    /* Modules List (Checkboxes) */
+    .modules-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .module-select-item {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.15s;
+    }
+    .module-select-item:hover {
+      border-color: rgba(193, 93, 48, 0.35);
+    }
+    .module-select-item.checked {
+      background: rgba(193, 93, 48, 0.12);
+      border-color: var(--accent);
+    }
+    .module-checkbox {
+      margin-top: 3px;
+      accent-color: var(--accent);
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+    .mod-item-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .mod-item-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* Form Fields */
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .form-label span {
+      color: var(--accent);
+    }
+    .form-input {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-family: inherit;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-submit:hover {
+      background: var(--accent-deep);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-navbar">
+    <a href="index.html" class="nav-brand">
+      <div class="brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      Nolei <span>Admin Hub</span>
+    </a>
+
+    <div style="display:flex; gap:10px;">
+      <a href="index.html" class="btn-top">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Voltar ao Painel
+      </a>
+    </div>
+  </header>
+
+  <main class="form-wrapper">
+
+    <div class="page-title-box">
+      <h1 class="page-title">Cadastrar Novo Cliente & Empresa</h1>
+      <p class="page-subtitle">Configure o estabelecimento, selecione os módulos contratados de acordo com o setor e gere automaticamente o portal exclusivo do cliente.</p>
+    </div>
+
+    <form id="form-novo-cliente" onsubmit="salvarNovoCliente(event)">
+
+      <!-- ETAPA 1: Área / Segmento -->
+      <div class="form-card">
+        <div class="card-step-title">
+          <span class="step-number">1</span>
+          <span>Área / Segmento de Atuação</span>
+        </div>
+        <div class="step-desc">Selecione o setor do cliente. Os módulos disponíveis para contratação serão atualizados dinamicamente abaixo.</div>
+
+        <div class="segments-grid" id="segments-container">
+          <!-- Injetado dinamicamente -->
+        </div>
+        <input type="hidden" id="input-segment" value="gastronomia">
+      </div>
+
+      <!-- ETAPA 2: Seleção de Módulos -->
+      <div class="form-card">
+        <div class="card-step-title">
+          <span class="step-number">2</span>
+          <span>Módulos & Recursos Contratados</span>
+        </div>
+        <div class="step-desc">Marque estritamente os módulos que este cliente terá acesso no portal dele.</div>
+
+        <div class="modules-list" id="modules-selection-container">
+          <!-- Injetado dinamicamente de acordo com a área selecionada -->
+        </div>
+      </div>
+
+      <!-- ETAPA 3: Dados Base da Empresa -->
+      <div class="form-card">
+        <div class="card-step-title">
+          <span class="step-number">3</span>
+          <span>Dados Básicos do Estabelecimento</span>
+        </div>
+        <div class="step-desc">Informações cadastrais para contato, Wi-Fi e geração dos links NFC.</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome da Empresa / Estabelecimento <span>*</span></label>
+            <input type="text" id="input-name" class="form-input" placeholder="Ex: Cantina da Serra" required oninput="autoGenerateSlug(this.value)">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Identificador na URL (Slug) <span>*</span></label>
+            <input type="text" id="input-slug" class="form-input" placeholder="cantina-da-serra" required style="font-family:'JetBrains Mono', monospace;">
+            <span class="form-hint">Acesso: empresa.html?slug=<strong>seu-slug</strong></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">WhatsApp Comercial <span>*</span></label>
+            <input type="text" id="input-whatsapp" class="form-input" placeholder="87999099937" value="87999099937" required>
+            <span class="form-hint">Receberá chamados, pedidos e notificações.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Cidade & Estado</label>
+            <input type="text" id="input-city" class="form-input" placeholder="Juazeiro do Norte - CE" value="Juazeiro do Norte - CE">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Link de Avaliações Google (Maps / Place ID)</label>
+            <input type="url" id="input-google" class="form-input" placeholder="https://search.google.com/local/writereview?placeid=..." value="https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Nome da Rede Wi-Fi (SSID)</label>
+            <input type="text" id="input-wifi-ssid" class="form-input" placeholder="Ex: Cantina_Wifi">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Senha do Wi-Fi</label>
+            <input type="text" id="input-wifi-pass" class="form-input" placeholder="Ex: bemvindo2026">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Breve Descrição / Resumo</label>
+            <input type="text" id="input-summary" class="form-input" placeholder="Ex: Cozinha italiana contemporânea com massas artesanais.">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+        <a href="index.html" class="btn-top" style="padding:12px 20px;">Cancelar</a>
+        <button type="submit" class="btn-submit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          ✨ Criar e Publicar Página da Empresa
+        </button>
+      </div>
+
+    </form>
+  </main>
+
+  <script src="../js/nolei-companies.js"></script>
+  <script>
+    let selectedSegment = 'gastronomia';
+
+    function renderSegments() {
+      const segs = window.NoleiCompanies.getSegments();
+      const container = document.getElementById('segments-container');
+
+      container.innerHTML = Object.keys(segs).map(segId => {
+        const s = segs[segId];
+        const isSelected = segId === selectedSegment;
+        return `
+          <div class="segment-card ${isSelected ? 'selected' : ''}" onclick="selectSegment('${segId}')">
+            <div class="seg-icon">${s.icon}</div>
+            <div class="seg-name">${s.name}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectSegment(segId) {
+      selectedSegment = segId;
+      document.getElementById('input-segment').value = segId;
+      renderSegments();
+      renderModules();
+    }
+
+    function renderModules() {
+      const modules = window.NoleiCompanies.getModulesForSegment(selectedSegment);
+      const container = document.getElementById('modules-selection-container');
+
+      container.innerHTML = modules.map(m => {
+        const isChecked = m.isDefault !== false;
+        return `
+          <label class="module-select-item ${isChecked ? 'checked' : ''}">
+            <input type="checkbox" class="module-checkbox" value="${m.id}" ${isChecked ? 'checked' : ''} onchange="toggleModuleItem(this)">
+            <div>
+              <div class="mod-item-title">${m.icon || '⚡'} ${m.name}</div>
+              <div class="mod-item-desc">${m.desc}</div>
+            </div>
+          </label>
+        `;
+      }).join('');
+    }
+
+    function toggleModuleItem(checkbox) {
+      const parent = checkbox.closest('.module-select-item');
+      if (checkbox.checked) {
+        parent.classList.add('checked');
+      } else {
+        parent.classList.remove('checked');
+      }
+    }
+
+    function autoGenerateSlug(name) {
+      const slug = window.NoleiCompanies.slugify(name);
+      document.getElementById('input-slug').value = slug;
+    }
+
+    function salvarNovoCliente(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('input-name').value.trim();
+      const slug = document.getElementById('input-slug').value.trim();
+      const segment = document.getElementById('input-segment').value;
+      const whatsapp = document.getElementById('input-whatsapp').value.trim();
+      const city = document.getElementById('input-city').value.trim();
+      const googlePlaceUrl = document.getElementById('input-google').value.trim();
+      const wifiSsid = document.getElementById('input-wifi-ssid').value.trim();
+      const wifiPass = document.getElementById('input-wifi-pass').value.trim();
+      const summary = document.getElementById('input-summary').value.trim();
+
+      // Coleta módulos marcados
+      const checkedCheckboxes = document.querySelectorAll('.module-checkbox:checked');
+      const selectedModules = Array.from(checkedCheckboxes).map(cb => cb.value);
+
+      if (selectedModules.length === 0) {
+        if (!confirm('Você não marcou nenhum módulo para este cliente. Deseja continuar mesmo assim?')) {
+          return;
+        }
+      }
+
+      try {
+        const saved = window.NoleiCompanies.save({
+          name: name,
+          slug: slug,
+          segment: segment,
+          whatsapp: whatsapp,
+          city: city,
+          googlePlaceUrl: googlePlaceUrl,
+          wifiSsid: wifiSsid,
+          wifiPass: wifiPass,
+          summary: summary,
+          modules: selectedModules
+        });
+
+        alert('✨ Empresa "' + saved.name + '" cadastrada com sucesso! Redirecionando para a página exclusiva...');
+        window.location.href = '../empresa.html?slug=' + saved.slug;
+      } catch (err) {
+        alert('Erro ao salvar cliente: ' + err.message);
+      }
+    }
+
+    // Inicialização
+    renderSegments();
+    renderModules();
+  </script>
+</body>
+</html>

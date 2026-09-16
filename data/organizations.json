@@ -1,0 +1,289 @@
+{
+  "version": "1.0",
+  "segments": {
+    "gastronomia": {
+      "name": "Gastronomia & Restaurantes",
+      "icon": "🍽️",
+      "color": "#F59E0B",
+      "description": "Bistrôs, restaurantes, pizzarias, hamburguerias e bares com atendimento em mesa ou balcão."
+    },
+    "hotelaria": {
+      "name": "Hotelaria & Pousadas Boutique",
+      "icon": "🏨",
+      "color": "#D4A853",
+      "description": "Hotéis, resorts, pousadas e flats com serviços de quarto, governança e concierge."
+    },
+    "saude": {
+      "name": "Saúde, Clínicas & Estética",
+      "icon": "⭐",
+      "color": "#A78BFA",
+      "description": "Consultórios, clínicas médicas, dermatologia, odontologia e centros de estética."
+    },
+    "fidelidade": {
+      "name": "Cafeterias, Varejo & Fidelidade",
+      "icon": "☕",
+      "color": "#C15D30",
+      "description": "Cafeterias, docerias, tabacarias e lojas de varejo com programa de recompensas e carimbos."
+    },
+    "artesanato_moda": {
+      "name": "Moda Autoral & Artesanato Phygital",
+      "icon": "🧵",
+      "color": "#E5855A",
+      "description": "Ateliês de couro, calçados artesanais, joias autorais e confecções regionais com storytelling."
+    },
+    "beleza": {
+      "name": "Barbearias, Salões & Beleza",
+      "icon": "✂️",
+      "color": "#38BDF8",
+      "description": "Barbearias tradicionais, salões de cabeleireiro, estúdios de manicure e spa capilar."
+    },
+    "imobiliaria": {
+      "name": "Imobiliárias, Construtoras & Plantões",
+      "icon": "🏙️",
+      "color": "#34D399",
+      "description": "Plantões de venda de loteamentos, empreendimentos residenciais e imobiliárias de alto padrão."
+    }
+  },
+  "organizations": [
+    {
+      "id": "org_botanico_bistro",
+      "slug": "botanico-bistro",
+      "name": "🌿 Botânico Bistrô",
+      "segment": "gastronomia",
+      "city": "Juazeiro do Norte - CE",
+      "whatsapp": "87999099937",
+      "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "wifiSsid": "Botanico_5G",
+      "wifiPass": "botanicogourmet",
+      "brandColor": "#F59E0B",
+      "summary": "Restaurante com foco em culinária contemporânea orgânica e ambiente biofílico.",
+      "spots": [
+        {
+          "code": "m01",
+          "label": "Mesa 01",
+          "type": "mesa",
+          "url": "demo/cardapio.html?source=nfc&mesa=01"
+        },
+        {
+          "code": "m02",
+          "label": "Mesa 02",
+          "type": "mesa",
+          "url": "demo/cardapio.html?source=nfc&mesa=02"
+        },
+        {
+          "code": "m03",
+          "label": "Mesa 03",
+          "type": "mesa",
+          "url": "demo/cardapio.html?source=nfc&mesa=03"
+        },
+        {
+          "code": "m04",
+          "label": "Mesa 04 (Salão Principal)",
+          "type": "mesa",
+          "url": "demo/cardapio.html?source=nfc&mesa=04"
+        }
+      ],
+      "modules": [
+        "cardapio_digital",
+        "kds_cozinha",
+        "chamado_garcom",
+        "dashboard_roi",
+        "google_reviews",
+        "wifi_connect"
+      ]
+    },
+    {
+      "id": "org_hotel_imperial",
+      "slug": "hotel-imperial",
+      "name": "🏨 Hotel Jardim Imperial ★★★★★",
+      "segment": "hotelaria",
+      "city": "Juazeiro do Norte - CE",
+      "whatsapp": "87999099937",
+      "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "wifiSsid": "JardimImperial_VIP",
+      "wifiPass": "suite412",
+      "brandColor": "#D4A853",
+      "summary": "Hotel boutique com serviço de concierge e room service digital por aproximação nos quartos.",
+      "spots": [
+        {
+          "code": "q101",
+          "label": "Apartamento 101",
+          "type": "quarto",
+          "url": "demo/hotel.html?source=nfc&quarto=101"
+        },
+        {
+          "code": "q204",
+          "label": "Suíte Executiva 204",
+          "type": "quarto",
+          "url": "demo/hotel.html?source=nfc&quarto=204"
+        },
+        {
+          "code": "q412",
+          "label": "Suíte 412 Imperial",
+          "type": "quarto",
+          "url": "demo/hotel.html?source=nfc&quarto=412"
+        }
+      ],
+      "modules": [
+        "concierge_suite",
+        "painel_recepcao",
+        "room_service",
+        "cafe_quarto",
+        "spa_transfer",
+        "google_reviews",
+        "wifi_connect"
+      ]
+    },
+    {
+      "id": "org_clinica_dra_sofia",
+      "slug": "clinica-dra-sofia",
+      "name": "⭐ Clínica Dra. Sofia Santos",
+      "segment": "saude",
+      "city": "Juazeiro do Norte - CE",
+      "whatsapp": "87999099937",
+      "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "wifiSsid": "ClinicaSofia_Pacientes",
+      "wifiPass": "saude2026",
+      "brandColor": "#A78BFA",
+      "summary": "Clínica de Dermatologia e Estética Facial com totem de avaliação e reputação no Google Maps.",
+      "spots": [
+        {
+          "code": "totem_rec",
+          "label": "Totem Balcão Recepção",
+          "type": "totem",
+          "url": "demo/avaliacao.html?source=nfc"
+        },
+        {
+          "code": "consult_01",
+          "label": "Consultório Principal 01",
+          "type": "consultorio",
+          "url": "demo/avaliacao.html?source=nfc"
+        }
+      ],
+      "modules": [
+        "google_reviews",
+        "ouvidoria_privada",
+        "apresentacao_equipe",
+        "agendamento_whatsapp",
+        "wifi_connect"
+      ]
+    },
+    {
+      "id": "org_cafe_origem",
+      "slug": "cafe-origem",
+      "name": "☕ Café Origem",
+      "segment": "fidelidade",
+      "city": "Crato - CE",
+      "whatsapp": "87999099937",
+      "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "wifiSsid": "CafeOrigem_Wifi",
+      "wifiPass": "graosartesanais",
+      "brandColor": "#C15D30",
+      "summary": "Cafeteria de grãos especiais com programa de 10 carimbos digitais e resgate de recompensas.",
+      "spots": [
+        {
+          "code": "fidelidade_balcao",
+          "label": "Display Balcão de Caixa",
+          "type": "balcao",
+          "url": "demo/fidelidade.html?source=nfc"
+        }
+      ],
+      "modules": [
+        "cartao_fidelidade",
+        "balcao_operador",
+        "catalogo_premios",
+        "google_reviews",
+        "wifi_connect"
+      ]
+    },
+    {
+      "id": "org_atelie_raizes",
+      "slug": "atelie-raizes",
+      "name": "🧵 Ateliê Raízes do Cariri",
+      "segment": "artesanato_moda",
+      "city": "Juazeiro do Norte - CE",
+      "whatsapp": "87999099937",
+      "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "wifiSsid": "Atelie_Visitantes",
+      "wifiPass": "couroregional",
+      "brandColor": "#E5855A",
+      "summary": "Ateliê de artefatos em couro legítimo com etiquetas NFC costuradas contando a história do artesão.",
+      "spots": [
+        {
+          "code": "etq01",
+          "label": "Bolsa Mandacaru #07",
+          "type": "etiqueta",
+          "url": "demo/storytelling-artesanato.html?source=nfc"
+        }
+      ],
+      "modules": [
+        "etiqueta_storytelling",
+        "catalogo_colecao",
+        "encomendas_whatsapp",
+        "certificado_autenticidade",
+        "google_reviews"
+      ]
+    },
+    {
+      "id": "org_barbearia_dom",
+      "slug": "barbearia-dom-corleone",
+      "name": "✂️ Barbearia Dom Corleone",
+      "segment": "beleza",
+      "city": "Barbalha - CE",
+      "whatsapp": "87999099937",
+      "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "wifiSsid": "BarbeariaDom_VIP",
+      "wifiPass": "corteclube",
+      "brandColor": "#38BDF8",
+      "summary": "Barbearia vintage com fidelidade de cortes no espelho e agendamento rápido de navalha e barba.",
+      "spots": [
+        {
+          "code": "cadeira01",
+          "label": "Espelho Cadeira 01",
+          "type": "espelho",
+          "url": "demo/fidelidade.html?source=nfc"
+        },
+        {
+          "code": "cadeira02",
+          "label": "Espelho Cadeira 02",
+          "type": "espelho",
+          "url": "demo/fidelidade.html?source=nfc"
+        }
+      ],
+      "modules": [
+        "cartao_fidelidade",
+        "balcao_operador",
+        "google_reviews",
+        "agendamento_whatsapp",
+        "wifi_connect"
+      ]
+    },
+    {
+      "id": "org_horizon_imoveis",
+      "slug": "horizon-imoveis",
+      "name": "🏙️ Horizon Imóveis & Arquitetura",
+      "segment": "imobiliaria",
+      "city": "Juazeiro do Norte - CE",
+      "whatsapp": "87999099937",
+      "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "wifiSsid": "Horizon_Plantao",
+      "wifiPass": "imoveis2026",
+      "brandColor": "#34D399",
+      "summary": "Imobiliária inovadora com placas inteligentes em loteamentos para tour virtual e contato imediato de corretor.",
+      "spots": [
+        {
+          "code": "placa_lote01",
+          "label": "Totem Loteamento Jardins #01",
+          "type": "placa",
+          "url": "demo/storytelling-artesanato.html?source=nfc"
+        }
+      ],
+      "modules": [
+        "placa_phygital",
+        "corretor_plantao",
+        "google_reviews",
+        "agendamento_whatsapp"
+      ]
+    }
+  ]
+}

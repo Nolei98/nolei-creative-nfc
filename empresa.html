@@ -418,44 +418,7 @@
       border: 1px solid rgba(193, 93, 48, 0.25);
     }
 
-    /* Switcher Footer */
-    .switch-company-bar {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .switch-label {
-      font-size: 0.84rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .company-pills {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .btn-pill {
-      background: var(--elevated);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 20px;
-      text-decoration: none;
-      transition: all 0.15s;
-    }
-    .btn-pill:hover, .btn-pill.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
+    
 
     /* Modal */
     .modal-overlay {
@@ -727,14 +690,6 @@
         </button>
       </form>
     </section>
-
-    <!-- Quick Company Switcher -->
-    <div class="switch-company-bar">
-      <div class="switch-label">Ver outros estabelecimentos modelo por área:</div>
-      <div class="company-pills" id="companies-pill-container">
-        <!-- Injetado dinamicamente -->
-      </div>
-    </div>
 
   </main>
 
@@ -1010,18 +965,6 @@
         const count = spots.length;
         spotsCountEl.textContent = count + ' Tag' + (count === 1 ? '' : 's');
       }
-
-      // Switcher Pills - Exibe apenas as empresas DEMO oficiais
-      const pillsBox = document.getElementById('companies-pill-container');
-      const demoCompanies = window.NoleiCompanies.getDemoCompanies();
-      pillsBox.innerHTML = demoCompanies.map(c => {
-        const isActive = c.slug === currentCompany.slug;
-        return `
-          <a href="empresa.html?slug=${c.slug}" class="btn-pill ${isActive ? 'active' : ''}">
-            ${c.name}
-          </a>
-        `;
-      }).join('');
     }
 
     // Modal QR Code (com suporte a Domínio Próprio White-label)

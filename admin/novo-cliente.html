@@ -394,8 +394,16 @@
           </div>
 
           <div class="form-group">
+            <label class="form-label">Domínio Próprio / White-label (Opcional)</label>
+            <input type="text" id="input-custom-domain" class="form-input" placeholder="Ex: cardapio.seurestaurante.com.br" style="font-family:'JetBrains Mono', monospace;">
+            <span class="form-hint">Se preenchido, os links e QR Codes usarão o domínio do próprio cliente.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="grid-column: 1 / -1;">
             <label class="form-label">Breve Descrição / Resumo</label>
-            <input type="text" id="input-summary" class="form-input" placeholder="Ex: Cozinha italiana contemporânea com massas artesanais.">
+            <input type="text" id="input-summary" class="form-input" placeholder="Ex: Cozinha italiana contemporânea com massas artesanais e atendimento por aproximação.">
           </div>
         </div>
       </div>
@@ -438,15 +446,16 @@
       renderModules();
     }
 
+    // Renderiza módulos SEMPRE DESMARCADOS por padrão para o usuário escolher livremente
     function renderModules() {
       const modules = window.NoleiCompanies.getModulesForSegment(selectedSegment);
       const container = document.getElementById('modules-selection-container');
 
       container.innerHTML = modules.map(m => {
-        const isChecked = m.isDefault !== false;
+        const isChecked = false; // Tudo desmarcado por padrão conforme solicitado
         return `
-          <label class="module-select-item ${isChecked ? 'checked' : ''}">
-            <input type="checkbox" class="module-checkbox" value="${m.id}" ${isChecked ? 'checked' : ''} onchange="toggleModuleItem(this)">
+          <label class="module-select-item">
+            <input type="checkbox" class="module-checkbox" value="${m.id}" onchange="toggleModuleItem(this)">
             <div>
               <div class="mod-item-title">${m.icon || '⚡'} ${m.name}</div>
               <div class="mod-item-desc">${m.desc}</div>
@@ -481,6 +490,7 @@
       const googlePlaceUrl = document.getElementById('input-google').value.trim();
       const wifiSsid = document.getElementById('input-wifi-ssid').value.trim();
       const wifiPass = document.getElementById('input-wifi-pass').value.trim();
+      const customDomain = document.getElementById('input-custom-domain').value.trim();
       const summary = document.getElementById('input-summary').value.trim();
 
       // Coleta módulos marcados
@@ -500,6 +510,7 @@
           segment: segment,
           whatsapp: whatsapp,
           city: city,
+          customDomain: customDomain,
           googlePlaceUrl: googlePlaceUrl,
           wifiSsid: wifiSsid,
           wifiPass: wifiPass,

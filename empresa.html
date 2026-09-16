@@ -748,7 +748,10 @@
       document.title = currentCompany.name + ' — Portal Phygital';
       document.getElementById('c-avatar').textContent = seg.icon || '🏢';
       document.getElementById('c-name').textContent = currentCompany.name;
-      document.getElementById('c-segment-badge').textContent = seg.name;
+      
+      const domainBadge = currentCompany.customDomain ? `<span class="badge-segment" style="background:rgba(56,189,248,0.15); color:#38BDF8; border-color:rgba(56,189,248,0.3);">🌐 ${currentCompany.customDomain}</span>` : '';
+      document.getElementById('c-segment-badge').outerHTML = `<span class="badge-segment" id="c-segment-badge">${seg.name}</span>` + domainBadge;
+      
       document.getElementById('c-city').textContent = '📍 ' + (currentCompany.city || 'Juazeiro do Norte - CE');
       document.getElementById('c-summary').textContent = currentCompany.summary || ('Plataforma física e digital integrada para ' + currentCompany.name);
 
@@ -852,10 +855,10 @@
         }).join('');
       }
 
-      // Switcher Pills
+      // Switcher Pills - Exibe apenas as empresas DEMO oficiais
       const pillsBox = document.getElementById('companies-pill-container');
-      const allCompanies = window.NoleiCompanies.getAll();
-      pillsBox.innerHTML = allCompanies.map(c => {
+      const demoCompanies = window.NoleiCompanies.getDemoCompanies();
+      pillsBox.innerHTML = demoCompanies.map(c => {
         const isActive = c.slug === currentCompany.slug;
         return `
           <a href="empresa.html?slug=${c.slug}" class="btn-pill ${isActive ? 'active' : ''}">
@@ -865,12 +868,16 @@
       }).join('');
     }
 
-    // Modal QR Code
+    // Modal QR Code (com suporte a Domínio Próprio White-label)
     function openQrForModule(title, targetUrl) {
-      const fullUrl = targetUrl.startsWith('http') ? targetUrl : (window.location.origin + '/' + targetUrl.replace(/^\//, ''));
+      let baseOrigin = window.location.origin;
+      if (currentCompany && currentCompany.customDomain) {
+        baseOrigin = 'https://' + currentCompany.customDomain;
+      }
+      const fullUrl = targetUrl.startsWith('http') ? targetUrl : (baseOrigin + '/' + targetUrl.replace(/^\//, ''));
       currentQrUrl = fullUrl;
       document.getElementById('qr-modal-title').textContent = title;
-      document.getElementById('qr-modal-desc').textContent = 'Aponte a câmera para simular aproximação NFC';
+      document.getElementById('qr-modal-desc').textContent = currentCompany && currentCompany.customDomain ? ('Domínio White-label: ' + currentCompany.customDomain) : 'Aponte a câmera para simular aproximação NFC';
       document.getElementById('qr-modal-url').textContent = fullUrl;
       document.getElementById('qr-modal-test-btn').href = targetUrl;
       document.getElementById('qr-modal-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(fullUrl);

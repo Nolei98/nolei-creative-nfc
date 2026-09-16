@@ -410,20 +410,18 @@
   <div class="admin-layout">
     <!-- Sidebar -->
     <aside class="admin-sidebar">
-      <div class="sidebar-section-label">Gestão do Estabelecimento</div>
+            <div class="sidebar-section-label">Mostruário Phygital</div>
       <ul class="sidebar-nav">
-        <li><button class="nav-item-btn active" onclick="switchAdminTab('overview', this)">📊 Visão Geral & Métricas</button></li>
-        <li><button class="nav-item-btn" onclick="switchAdminTab('companies', this)">🏢 Clientes & Empresas</button></li>
+        <li><button class="nav-item-btn active" onclick="switchAdminTab('demos', this)">🌟 Tipos de Clientes [DEMO]</button></li>
+        <li><button class="nav-item-btn" onclick="switchAdminTab('overview', this)">📊 Painel & Métricas da Demo</button></li>
         <li><button class="nav-item-btn" onclick="switchAdminTab('catalog', this)">🍽️ Cardápio & Serviços</button></li>
         <li><button class="nav-item-btn" onclick="switchAdminTab('settings', this)">⚙️ Dados & WhatsApp</button></li>
       </ul>
 
-      <div class="sidebar-section-label">Painéis Específicos</div>
+      <div class="sidebar-section-label">Área Privada (Contratos)</div>
       <ul class="sidebar-nav">
-        <li><a href="../demo/painel-restaurante.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">👨‍🍳 KDS Cozinha / Garçom</a></li>
-        <li><a href="../demo/painel-hotel.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">🛎️ Recepção / Governança</a></li>
-        <li><a href="../demo/painel-fidelidade.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">🎁 Balcão Fidelidade</a></li>
-        <li><a href="../demo/dashboard-restaurante.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">📈 Relatório de ROI</a></li>
+        <li><button class="nav-item-btn" onclick="openPrivateClientsArea(this)" style="color:#F59E0B;">🔒 Clientes Reais (Privado)</button></li>
+        <li><a href="novo-cliente.html" class="nav-item-btn" style="text-decoration:none; color:var(--accent);">➕ Cadastrar Novo Cliente</a></li>
       </ul>
 
       <div class="sidebar-section-label">Infraestrutura Phygital</div>
@@ -478,34 +476,41 @@
       </div>
 
       
-      <!-- Tab: Companies & Clients -->
-      <div class="card-block" id="tab-companies-box" style="display:none;">
-        <div class="card-block-title" style="flex-wrap:wrap; gap:12px;">
+      
+      <!-- TAB: Tipos de Clientes [DEMO] (Mostruário Inicial) -->
+      <div class="card-block" id="tab-demos-box">
+        <div class="card-block-title" style="flex-wrap:wrap; gap:8px;">
           <div>
-            <span style="font-size:1.15rem;">Portfólio de Clientes & Empresas</span>
-            <div style="font-size:0.8rem; color:var(--muted); font-weight:normal; margin-top:2px;">
-              Cada empresa possui um portal exclusivo onde clientes e equipe acessam <strong>estritamente o que foi contratado</strong>.
+            <span style="font-size:1.3rem;">✨ Tipos de Clientes & Soluções [DEMO]</span>
+            <div style="font-size:0.84rem; color:var(--muted); font-weight:normal; margin-top:2px;">
+              Mostruário oficial de soluções prontas para apresentar a clientes de cada segmento comercial.
             </div>
           </div>
-          <a href="novo-cliente.html" class="btn-top btn-top-primary" style="background:var(--accent); color:#fff;">+ Cadastrar Novo Cliente</a>
+          <span class="badge-status-item badge-active" style="padding:4px 10px; font-size:0.75rem;">7 Demos Prontas</span>
         </div>
 
-        <div style="overflow-x:auto;">
-          <table class="items-table">
-            <thead>
-              <tr>
-                <th>Empresa / Segmento</th>
-                <th>Cidade</th>
-                <th>WhatsApp</th>
-                <th>Módulos Ativos</th>
-                <th>Portal Exclusivo</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody id="companies-tbody">
-              <!-- Injetado dinamicamente -->
-            </tbody>
-          </table>
+        <div id="demos-grid-container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; margin-top:18px;">
+          <!-- Injetado dinamicamente via renderDemosShowcase() -->
+        </div>
+      </div>
+
+      <!-- TAB: Gestão Privada de Novos Clientes -->
+      <div class="card-block" id="tab-private-box" style="display:none;">
+        <div class="card-block-title" style="flex-wrap:wrap; gap:12px;">
+          <div>
+            <span style="font-size:1.25rem;">🔒 Clientes Reais Cadastrados (Área Privada)</span>
+            <div style="font-size:0.82rem; color:var(--muted); font-weight:normal; margin-top:2px;">
+              Sessão restrita para gestão de clientes cadastrados. Fica salva para trabalhar depois e não aparece nas Demos.
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="novo-cliente.html" class="btn-top btn-top-primary" style="background:var(--accent); color:#fff;">+ Cadastrar Novo Cliente</a>
+            <button class="btn-top btn-top-ghost" onclick="logoutPrivateArea()">Encerrar Sessão</button>
+          </div>
+        </div>
+
+        <div id="private-clients-content" style="margin-top:16px; overflow-x:auto;">
+          <!-- Injetado dinamicamente via renderPrivateClients() -->
         </div>
       </div>
 
@@ -818,5 +823,31 @@
     }
 
   </script>
+
+  <!-- Modal de Login para Área Privada -->
+  <div class="modal-overlay" id="login-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; z-index:1000; padding:20px;">
+    <div class="modal-card" style="background:#1F1A15; border:1px solid rgba(193,93,48,0.4); border-radius:14px; padding:32px; max-width:380px; width:100%; text-align:center; box-shadow:0 12px 36px rgba(0,0,0,0.6);">
+      <div style="font-size:2.2rem; margin-bottom:10px;">🔒</div>
+      <h3 style="font-size:1.25rem; font-weight:800; color:#fff;">Acesso Restrito</h3>
+      <p style="font-size:0.82rem; color:var(--muted); margin:6px 0 20px;">Digite o usuário e senha para acessar a área privada de novos clientes cadastrados.</p>
+      
+      <form onsubmit="handlePrivateLogin(event)" style="display:flex; flex-direction:column; gap:14px; text-align:left;">
+        <div>
+          <label style="font-size:0.75rem; font-weight:600; color:var(--muted);">Usuário:</label>
+          <input type="text" id="login-user" class="form-input" value="admin" required style="margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:0.75rem; font-weight:600; color:var(--muted);">Senha:</label>
+          <input type="password" id="login-pass" class="form-input" placeholder="Digite a senha" required style="margin-top:4px;">
+          <span style="font-size:0.7rem; color:var(--dim); margin-top:2px; display:block;">Senha padrão: <strong>nolei2026</strong></span>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button type="button" class="btn-top btn-top-ghost" style="flex:1; justify-content:center;" onclick="closeLoginModal()">Cancelar</button>
+          <button type="submit" class="btn-top btn-top-primary" style="flex:1; justify-content:center; background:var(--accent); color:#fff; border-color:var(--accent);">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>

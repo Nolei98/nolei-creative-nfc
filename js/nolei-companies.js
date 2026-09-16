@@ -569,24 +569,54 @@
       return MODULES_REGISTRY[moduleId] || null;
     }
 
+    // Retorna apenas as empresas DEMO oficiais do mostruário
+    getDemoCompanies() {
+      return DEFAULT_ORGANIZATIONS.map(org => Object.assign({}, org));
+    }
+
+    // Retorna apenas os clientes reais cadastrados (privados)
+    getCustomCompanies() {
+      if (typeof localStorage === 'undefined' || typeof localStorage.getItem !== 'function') return [];
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
     // Retorna a lista combinada de empresas (padrão + criadas pelo usuário)
     getAll() {
-      let custom = [];
-      if (typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function') {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (raw) custom = JSON.parse(raw);
-        } catch (e) {
-          console.warn('[NoleiCompanies] Erro ao carregar custom companies:', e);
-        }
-      }
-
-      // Merge: empresas custom com mesmo slug substituem a padrão
+      const custom = this.getCustomCompanies();
       const map = new Map();
       DEFAULT_ORGANIZATIONS.forEach(org => map.set(org.slug, Object.assign({}, org)));
       custom.forEach(org => map.set(org.slug, Object.assign({}, org)));
-
       return Array.from(map.values());
+    }
+
+    // Métodos de autenticação para Área Privada de Novos Clientes
+    isAdminAuthenticated() {
+      if (typeof sessionStorage === 'undefined') return false;
+      return sessionStorage.getItem('nolei_private_auth') === 'true';
+    }
+
+    loginAdmin(username, password) {
+      const u = (username || '').trim().toLowerCase();
+      const p = (password || '').trim();
+      if ((u === 'admin' || u === 'nolei') && (p === 'nolei2026' || p === 'admin123' || p === '87999099937')) {
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.setItem('nolei_private_auth', 'true');
+        }
+        return true;
+      }
+      return false;
+    }
+
+    logoutAdmin() {
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.removeItem('nolei_private_auth');
+      }
+      return true;
     }
 
     // Busca uma empresa pelo slug
@@ -616,6 +646,7 @@
       const slug = data.slug ? this.slugify(data.slug) : this.slugify(data.name);
       const segment = data.segment || 'gastronomia';
       const segInfo = this.getSegment(segment);
+      const customDomain = data.customDomain ? data.customDomain.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/+$/, '') : '';
 
       const companyRecord = {
         id: data.id || ('org_' + slug + '_' + Date.now().toString(36)),
@@ -624,6 +655,7 @@
         segment: segment,
         city: data.city || 'Juazeiro do Norte - CE',
         whatsapp: data.whatsapp ? data.whatsapp.replace(/\D/g, '') : '87999099937',
+        customDomain: customDomain,
         googlePlaceUrl: data.googlePlaceUrl || 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
         wifiSsid: data.wifiSsid || (slug + '_Wifi'),
         wifiPass: data.wifiPass || 'nolei2026',
@@ -635,21 +667,16 @@
         modules: Array.isArray(data.modules) ? data.modules : []
       };
 
-      // Salva no localStorage
-      let custom = [];
+      // Salva no localStorage (lista de clientes customizados / privados)
+      let custom = this.getCustomCompanies();
+      const idx = custom.findIndex(c => c.slug === slug);
+      if (idx >= 0) {
+        custom[idx] = companyRecord;
+      } else {
+        custom.push(companyRecord);
+      }
+
       if (typeof localStorage !== 'undefined' && typeof localStorage.setItem === 'function') {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (raw) custom = JSON.parse(raw);
-        } catch (e) {}
-
-        const idx = custom.findIndex(c => c.slug === slug);
-        if (idx >= 0) {
-          custom[idx] = companyRecord;
-        } else {
-          custom.push(companyRecord);
-        }
-
         localStorage.setItem(STORAGE_KEY, JSON.stringify(custom));
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('nolei:company_updated', { detail: companyRecord }));
@@ -668,7 +695,9 @@
         let custom = JSON.parse(raw);
         const filtered = custom.filter(c => c.slug !== slug);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
-        window.dispatchEvent(new CustomEvent('nolei:company_deleted', { detail: { slug } }));
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('nolei:company_deleted', { detail: { slug } }));
+        }
         return true;
       } catch (e) {
         return false;

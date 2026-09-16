@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plano Estratégico & Catálogo de Produtos — Nolei Creative NFC</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #141210;
+      --bg-card: #1C1814;
+      --bg-elevated: #26201A;
+      --text-main: #F2EADF;
+      --text-muted: #B8A996;
+      --text-dim: #786B5A;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --accent-badge-bg: rgba(193, 93, 48, 0.15);
+      --accent-badge-border: rgba(193, 93, 48, 0.35);
+      --gold: #F59E0B;
+      --green: #34D399;
+      --blue: #38BDF8;
+      --border: rgba(242, 234, 223, 0.10);
+      --border-strong: rgba(242, 234, 223, 0.18);
+      --radius: 14px;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 30px 20px 80px;
+    }
+
+    .doc-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Top Action Bar */
+    .top-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+
+    .btn-back-hub:hover {
+      color: var(--text-main);
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(193, 93, 48, 0.35);
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .btn-print:hover {
+      background: var(--accent-deep);
+      transform: translateY(-1px);
+    }
+
+    /* Cover / Header */
+    .doc-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doc-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 240px;
+      height: 100%;
+      background: radial-gradient(circle at 100% 0%, rgba(193, 93, 48, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .doc-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-badge-bg);
+      border: 1px solid var(--accent-badge-border);
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .doc-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .doc-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .doc-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .meta-item-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    /* Section Styles */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 30px;
+      margin-bottom: 28px;
+    }
+
+    .section-badge-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-badge-bg);
+      border: 1px solid var(--accent-badge-border);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-right: 10px;
+    }
+
+    .section-heading {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .p-lead {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* Cards & Grids */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .feature-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .feature-box h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-box p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Phase Box */
+    .phase-block {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      margin: 24px 0;
+    }
+
+    .phase-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .phase-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .phase-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .combo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .combo-item {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .combo-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .combo-details {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Table Styles */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-elevated);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+
+    .custom-table th {
+      background: #181512;
+      color: var(--text-main);
+      font-weight: 700;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+    }
+
+    .custom-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: middle;
+    }
+
+    .custom-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .custom-table tr:hover td {
+      background: rgba(242, 234, 223, 0.02);
+    }
+
+    .val-setup {
+      color: var(--gold);
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .val-saas {
+      color: var(--green);
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    /* 15 Ideas Grid */
+    .ideas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .idea-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .idea-badge {
+      align-self: flex-start;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .badge-green { background: rgba(52, 211, 153, 0.15); color: #34D399; }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: #FCD34D; }
+    .badge-blue { background: rgba(56, 189, 248, 0.15); color: #38BDF8; }
+    .badge-purple { background: rgba(167, 139, 250, 0.15); color: #C4B5FD; }
+
+    .idea-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .idea-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Callout & Strategic Guide */
+    .callout-box {
+      background: rgba(193, 93, 48, 0.10);
+      border: 1px solid var(--accent-badge-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .callout-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #E5855A;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .callout-body {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+
+    /* Step timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .timeline-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      flex: 1;
+    }
+
+    .step-heading {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #111827 !important;
+        padding: 0 !important;
+        font-size: 11pt !important;
+      }
+      .top-actions {
+        display: none !important;
+      }
+      .doc-container {
+        max-width: 100% !important;
+      }
+      .doc-header, .section-card {
+        background: #FFFFFF !important;
+        border: 1px solid #E5E7EB !important;
+        color: #111827 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        margin-bottom: 20px !important;
+        padding: 20px !important;
+      }
+      .doc-title {
+        color: #111827 !important;
+      }
+      .doc-subtitle, .p-lead, .feature-box p, .phase-desc, .combo-details, .idea-desc, .step-desc, .meta-item-label {
+        color: #4B5563 !important;
+      }
+      .feature-box, .combo-item, .table-container, .idea-card, .step-content {
+        background: #F9FAFB !important;
+        border: 1px solid #E5E7EB !important;
+        color: #111827 !important;
+      }
+      .custom-table th {
+        background: #F3F4F6 !important;
+        color: #111827 !important;
+      }
+      .custom-table td {
+        color: #374151 !important;
+      }
+      .val-setup { color: #B45309 !important; }
+      .val-saas { color: #047857 !important; }
+      .doc-tagline, .section-badge-num, .step-circle {
+        background: #C15D30 !important;
+        color: #FFFFFF !important;
+      }
+      .callout-box {
+        background: #FFF7ED !important;
+        border: 1px solid #FDBA74 !important;
+      }
+      .callout-title { color: #C15D30 !important; }
+      .callout-body { color: #374151 !important; }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-container">
+
+    <!-- Top Action Bar -->
+    <div class="top-actions">
+      <a href="docs.html" class="btn-back-hub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Voltar ao Manual Técnico
+      </a>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <a href="PLANO_ESTRATEGICO_NOLEI_CREATIVE.pdf" download="PLANO_ESTRATEGICO_NOLEI_CREATIVE.pdf" class="btn-print" style="background: var(--bg-elevated); border: 1px solid var(--accent); color: var(--accent); text-decoration: none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Baixar Arquivo PDF
+        </a>
+        <button class="btn-print" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Imprimir / PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Master Header -->
+    <header class="doc-header">
+      <div class="doc-tagline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
+        Documento Oficial de Estruturação — NFC's ROUT
+      </div>
+      <h1 class="doc-title">Plano Estratégico & Catálogo de Produtos</h1>
+      <p class="doc-subtitle">
+        Arquitetura de soluções físico-digitais (Phygital) para Juazeiro do Norte e região do Cariri. Estratégia de entrada, catálogo de 15 possibilidades, engenharia de software e playbook de monetização.
+      </p>
+
+      <div class="doc-meta-grid">
+        <div>
+          <div class="meta-item-label">Empresa</div>
+          <div class="meta-item-value">Nolei Creative</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Mercado Inicial</div>
+          <div class="meta-item-value">Cariri (Juazeiro / Crato / Barbalha)</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Status da Plataforma</div>
+          <div class="meta-item-value" style="color:var(--green);">🟢 100% Funcional em Produção</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Tecnologia Base</div>
+          <div class="meta-item-value">NFC NTAG213/215 + QR Dinâmico</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: VISÃO & ARQUITETURA -->
+    <section class="section-card">
+      <h2 class="section-heading">
+        <span class="section-badge-num">1</span>
+        Visão Estratégica e Arquitetura Tecnológica
+      </h2>
+      <p class="p-lead">
+        A Nolei Creative conecta ambientes físicos ao ecossistema digital com <strong>fricção zero</strong>. Em vez de forçar o cliente a baixar aplicativos pesados nas lojas virtuais, toda a navegação acontece no navegador nativo do smartphone em menos de 1 segundo através de chips NFC de alta indução ou QR Codes contextuais.
+      </p>
+
+      <div class="grid-3">
+        <div class="feature-box">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Hardware de Alta Percepção
+          </h4>
+          <p>Displays L-shape em acrílico Black Piano, blocos em madeira nobre e tags NTAG213/215 com gravação a laser resistente a umidade e alto tráfego.</p>
+        </div>
+
+        <div class="feature-box">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Software (Zero Download UX)
+          </h4>
+          <p>Páginas web ultrarrápidas, sem login burocrático. O cliente aproxima o smartphone e a tela já abre configurada exatamente para a mesa ou suíte onde ele está.</p>
+        </div>
+
+        <div class="feature-box">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Inteligência & Contexto Local
+          </h4>
+          <p>Roteamento inteligente por URL com parâmetros (ex: <code>mesa=04</code>, <code>quarto=412</code>), separando visão de cliente da visão de garçom, governança e gestor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FASES DE EXECUÇÃO -->
+    <section class="section-card page-break">
+      <h2 class="section-heading">
+        <span class="section-badge-num">2</span>
+        Fases de Execução e Combos Estratégicos (Plano de Ação)
+      </h2>
+      <p class="p-lead">
+        Para maximizar o faturamento imediato e validar a tecnologia no comércio local, a execução divide-se em 3 horizontes claros:
+      </p>
+
+      <!-- FASE 1 -->
+      <div class="phase-block">
+        <div class="phase-tag">Fase 1 • Execução Imediata (O Hoje — Pronta para Vender)</div>
+        <h3 class="phase-title">Soluções de Alto Impacto para Gerar Caixa Rápido no Cariri</h3>
+        <p class="phase-desc">Módulos que já estão 100% desenvolvidos, testados e disponíveis no nosso ecossistema para implantação imediata.</p>
+
+        <div class="combo-grid">
+          <div class="combo-item">
+            <div class="combo-name" style="color:#60A5FA;">🏨 Combo Hotelaria (Concierge Phygital)</div>
+            <div class="combo-details">
+              Displays nas suítes permitindo solicitar room service, agendar café da manhã, acionar governança e Wi-Fi, finalizando com avaliação automática no check-out.
+            </div>
+          </div>
+
+          <div class="combo-item">
+            <div class="combo-name" style="color:#FB923C;">🍽️ Combo Gastronomia (Autoatendimento)</div>
+            <div class="combo-details">
+              Tags nas mesas que carregam cardápios digitais instantâneos, reduzindo custos de atendimento e taxas abusivas de delivery, com chamados de garçom e comanda.
+            </div>
+          </div>
+
+          <div class="combo-item">
+            <div class="combo-name" style="color:#FCD34D;">⭐ Combo Clínicas & Serviços (Prova Social)</div>
+            <div class="combo-details">
+              Totens no balcão que conectam ao Wi-Fi e redirecionam pacientes satisfeitos diretamente para avaliações 5 estrelas oficiais no Google Meu Negócio.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FASE 2 -->
+      <div class="phase-block" style="border-left-color: var(--gold);">
+        <div class="phase-tag" style="color: var(--gold);">Fase 2 • Varejo e Mundo Corporativo (O Amanhã)</div>
+        <h3 class="phase-title">Expansão para Comércio de Rua, Lojas e Equipes Comerciais</h3>
+        <p class="phase-desc">Soluções voltadas a lojistas e profissionais liberais da região que precisam reter clientes no ponto de venda.</p>
+
+        <div class="combo-grid">
+          <div class="combo-item">
+            <div class="combo-name">🛍️ Combo Moda & Varejo (Vitrine e Provador)</div>
+            <div class="combo-details">
+              Etiquetas nas araras com estoque virtual e "Botão Mágico" no provador para chamar vendedor no WhatsApp pedindo outro tamanho sem sair da cabine.
+            </div>
+          </div>
+
+          <div class="combo-item">
+            <div class="combo-name">💼 Combo B2B & Eventos (Networking Digital)</div>
+            <div class="combo-details">
+              Cartões de visita em PVC inteligente e credenciais para congressos que transferem contatos e portfolios para a agenda do celular em 1 segundo.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FASE 3 -->
+      <div class="phase-block" style="border-left-color: var(--green);">
+        <div class="phase-tag" style="color: var(--green);">Fase 3 • Escala e Nichos Premium do Cariri (O Depois)</div>
+        <h3 class="phase-title">Produtos Focados em Volume, Turismo Regional e Operação</h3>
+        <p class="phase-desc">Projetos de alta escalabilidade alavancados pela vocação cultural e turística de Juazeiro do Norte e arredores.</p>
+
+        <div class="combo-grid">
+          <div class="combo-item">
+            <div class="combo-name">⛪ Turismo Religioso & Histórico</div>
+            <div class="combo-details">
+              Totens em pontos de peregrinação (Horto, igrejas históricas) com áudio-guias imersivos e botão de Pix imediato para doações.
+            </div>
+          </div>
+
+          <div class="combo-item">
+            <div class="combo-name">🐾 Pet ID Inteligente</div>
+            <div class="combo-details">
+              Pingentes de coleira resistentes à água contendo ficha médica do pet e contato emergencial do tutor em caso de perda.
+            </div>
+          </div>
+
+          <div class="combo-item">
+            <div class="combo-name">⚙️ Check-in de Frotas & Máquinas</div>
+            <div class="combo-details">
+              Tags industriais para frotas de vans, máquinas e painéis elétricos permitindo checklists operacionais em 3 cliques.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: AS 15 IDEIAS VALIDADAS -->
+    <section class="section-card page-break">
+      <h2 class="section-heading">
+        <span class="section-badge-num">3</span>
+        Catálogo Completo de Possibilidades (As 15 Ideias Validadas)
+      </h2>
+      <p class="p-lead">
+        Todas as 15 frentes de aplicação mapeadas para a tecnologia NFC/QR da Nolei Creative:
+      </p>
+
+      <div class="ideas-grid">
+        <div class="idea-card">
+          <span class="idea-badge badge-green">Carro-Chefe 01</span>
+          <div class="idea-title">Concierge Phygital (Hotéis)</div>
+          <div class="idea-desc">Agendamento de café, pedidos no quarto e solicitações por aproximação sem app.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-green">Carro-Chefe 02</span>
+          <div class="idea-title">Display Google 5★ (Clínicas)</div>
+          <div class="idea-desc">Placa no balcão que direciona notas altas ao Maps e filtra insatisfações privadamente.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-green">Carro-Chefe 03</span>
+          <div class="idea-title">Cardápio & Comanda (Restaurantes)</div>
+          <div class="idea-desc">Autoatendimento por mesa, chamado de garçom e fechamento de conta ágil.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-amber">Varejo 04</span>
+          <div class="idea-title">Botão Mágico no Provador</div>
+          <div class="idea-desc">Tag no espelho da cabine chamando o atendente para troca de peça ou numeração.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-amber">Varejo 05</span>
+          <div class="idea-title">Vitrine Estendida</div>
+          <div class="idea-desc">Etiquetas inteligentes nas araras para consulta de grade e cores indisponíveis na loja física.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-amber">Varejo 06</span>
+          <div class="idea-title">Fidelidade "Zero Download"</div>
+          <div class="idea-desc">Carimbos digitais no balcão direto no navegador, captando o WhatsApp do cliente.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-amber">Varejo 07</span>
+          <div class="idea-title">Espelho Interativo (Barbearias)</div>
+          <div class="idea-desc">Catálogo de barbas, cortes e produtos pós-barba na bancada do profissional.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-blue">Regional 08</span>
+          <div class="idea-title">Totens Turismo Religioso (Cariri)</div>
+          <div class="idea-desc">História falada, fotos de época e doação Pix nas colinas e monumentos da região.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-blue">Corporativo 09</span>
+          <div class="idea-title">Credenciais Phygital para Eventos</div>
+          <div class="idea-desc">Crachás NFC para feiras e congressos médicos/empresariais com troca rápida de dados.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-blue">Corporativo 10</span>
+          <div class="idea-title">Cartão de Visita PVC B2B</div>
+          <div class="idea-desc">Cartão rígido reciclável que grava o vCard na agenda do lead com apenas 1 toque.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-purple">Nicho 11</span>
+          <div class="idea-title">Pet ID Inteligente</div>
+          <div class="idea-desc">Tag de coleira resistente à água com dados de vacinação e telefone do tutor.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-purple">Nicho 12</span>
+          <div class="idea-title">Smart Open Houses (Imóveis)</div>
+          <div class="idea-desc">Placas em fachadas com tour virtual 360º e contato instantâneo do corretor.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-purple">Nicho 13</span>
+          <div class="idea-title">Check-in de Frotas & Máquinas</div>
+          <div class="idea-desc">Inspeção de segurança e checklist veicular para empresas de logística locais.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-purple">Nicho 14</span>
+          <div class="idea-title">Guia Digital de Treino (Academias)</div>
+          <div class="idea-desc">Tag nos aparelhos que abre vídeo de 15s ensinando a postura correta do exercício.</div>
+        </div>
+
+        <div class="idea-card">
+          <span class="idea-badge badge-purple">Nicho 15</span>
+          <div class="idea-title">Storytelling & Selo de Origem</div>
+          <div class="idea-desc">Rastreabilidade para cachaças artesanais, couro e calçados típicos do Cariri.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MATRIZ DE MONETIZAÇÃO -->
+    <section class="section-card page-break">
+      <h2 class="section-heading">
+        <span class="section-badge-num">4</span>
+        Matriz de Monetização Recomendada (SaaS + Setup)
+      </h2>
+      <p class="p-lead">
+        Modelo de precificação híbrido comprovado: <strong>Taxa Única de Setup</strong> (cobre confecção das peças físicas e programação das tags com lucro imediato) + <strong>Assinatura Mensal</strong> (recorrência pura por hospedagem, suporte e inteligência de dados).
+      </p>
+
+      <div class="table-container">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Nicho / Solução</th>
+              <th>Setup Físico (Taxa Única)</th>
+              <th>Mensalidade (SaaS Recorrente)</th>
+              <th>Argumento Irrefutável de Venda</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Clínicas & Consultórios</strong><br><small style="color:var(--text-dim);">Google Avaliações 5★</small></td>
+              <td><span class="val-setup">R$ 120 - R$ 180</span><br><small>por display de balcão</small></td>
+              <td><span class="val-saas">R$ 59,90 - R$ 89,90</span><br><small>/mês por ponto</small></td>
+              <td><em>"Um único paciente particular conquistado pela melhoria de nota no Google Maps paga o ano inteiro do sistema."</em></td>
+            </tr>
+            <tr>
+              <td><strong>Restaurantes & Bares</strong><br><small style="color:var(--text-dim);">Cardápio & Comanda de Mesa</small></td>
+              <td><span class="val-setup">R$ 25 - R$ 40</span><br><small>por mesa (ex: 20 mesas = R$ 600)</small></td>
+              <td><span class="val-saas">R$ 169,90 - R$ 289,90</span><br><small>/mês por restaurante</small></td>
+              <td><em>"Elimina custos com reimpressão de cardápio a cada ajuste de preço e diminui em até 27% a dependência de garçons em horários de pico."</em></td>
+            </tr>
+            <tr>
+              <td><strong>Hotéis & Pousadas</strong><br><small style="color:var(--text-dim);">Concierge & Room Service</small></td>
+              <td><span class="val-setup">R$ 35 - R$ 55</span><br><small>por quarto (ex: 15 suítes = R$ 600)</small></td>
+              <td><span class="val-saas">R$ 399,90 - R$ 790,00</span><br><small>/mês por hotel</small></td>
+              <td><em>"Aumenta o consumo de itens extras no quarto, agiliza a governança e substitui ramais telefônicos antigos sem quebra-quebra de cabos."</em></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Equação de Lucro da Nolei Creative:
+        </div>
+        <div class="callout-body">
+          Com apenas <strong>1 hotel de 20 quartos</strong> + <strong>3 restaurantes médios</strong> + <strong>5 clínicas</strong>, você gera <strong>R$ 3.200 de Setup líquido na entrada</strong> e garante <strong>R$ 1.350 a R$ 1.800 de receita recorrente mensal (MRR)</strong>, com custo de servidor praticamente zero (arquitetura web estática de alta velocidade).
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: PLAYBOOK PRÁTICO PARA COMEÇAR JÁ -->
+    <section class="section-card page-break">
+      <h2 class="section-heading">
+        <span class="section-badge-num">5</span>
+        Playbook de Execução: Como ir para a Rua no Cariri Esta Semana
+      </h2>
+      <p class="p-lead">
+        Você já possui as tags NFC e o software rodando. O que falta é apenas transformar essa tecnologia em uma oferta palpável para os empresários locais. Siga este roteiro de 7 dias:
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-circle">1</div>
+          <div class="step-content">
+            <div class="step-heading">Passo 1: Montagem do Mostruário de Impacto (24 horas)</div>
+            <div class="step-desc">
+              Não venda telas abstratas. Compre <strong>2 displays de acrílico L-shape 10x15cm</strong> em papelarias do Centro de Juazeiro (ex: Papelaria Globo, Casa Freitas) ou gráficas rápidas no Triângulo (R$ 12 a R$ 18 cada). Cole a tag NFC no verso e imprima a arte com QR Code. Configure uma tag para a demo de <strong>Restaurante</strong> e outra para a de <strong>Avaliação Google</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-circle">2</div>
+          <div class="step-content">
+            <div class="step-heading">Passo 2: Lista dos 10 Primeiros Alvos Fáceis no Cariri</div>
+            <div class="step-desc">
+              Foque onde o dono está presente:
+              <br>• <strong>Gastronomia:</strong> Bares e bistrôs no Lagoa Seca (Juazeiro) e Praça da Sé (Crato).
+              <br>• <strong>Clínicas:</strong> Dentistas e clínicas dermatológicas/estéticas nas avenidas centrais.
+              <br>• <strong>Pousadas:</strong> Hotéis executivos próximos ao Cariri Garden Shopping e pousadas charmosas no pé da serra de Barbalha.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-circle">3</div>
+          <div class="step-content">
+            <div class="step-heading">Passo 3: A Abordagem "Show, Don't Tell" (Sem Conversa Fiada)</div>
+            <div class="step-desc">
+              Ao chegar no estabelecimento, peça para falar 2 minutos com o gerente/dono e diga:
+              <br><em>"Olá, sou de Juazeiro e desenvolvi uma tecnologia de placas inteligentes que restaurantes de São Paulo estão usando para aumentar o giro de mesas sem precisar contratar mais garçons. Posso só encostar aqui no seu celular para você ver como funciona?"</em>
+              <br>Quando ele encostar o celular e o cardápio ou tela de avaliação abrir instantaneamente no aparelho dele com a Mesa 04, <strong>o valor fica evidente em 3 segundos</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-circle">4</div>
+          <div class="step-content">
+            <div class="step-heading">Passo 4: Proposta Piloto com Risco Zero para o Cliente</div>
+            <div class="step-desc">
+              Para o primeiro cliente não ter como dizer não, ofereça o <strong>Piloto de Demonstração</strong>:
+              <br><em>"Eu deixo 5 mesas instaladas aqui no seu salão por 7 dias sem você pagar mensalidade. Se sua equipe e seus clientes aprovarem, a gente oficializa o contrato de R$ 169/mês. Se não gostar, eu retiro as peças sem você me dever um centavo."</em>
+              <br>Nenhum empresário que vê o sistema funcionando recusa um teste gratuito de risco zero.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box" style="background: rgba(52, 211, 153, 0.10); border-color: rgba(52, 211, 153, 0.3);">
+        <div class="callout-title" style="color: var(--green);">
+          🚀 Conclusão do Engenheiro de Software & Estrategista de Mercado:
+        </div>
+        <div class="callout-body">
+          O software está pronto, rápido e bonito. A oportunidade no Cariri é gigantesca porque você será o <strong>pioneiro regional em experiências Phygital</strong>. Não espere ter 100 peças estocadas. Vá para a rua com 2 displays na mão e feche o primeiro cliente ainda esta semana. O feedback do primeiro cliente é o que vai calibrar os próximos 50 contratos!
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

@@ -1136,6 +1136,16 @@
  }
 
  function submitHotelOrder(category, service, priceVal, details) {
+    if (window.noleiClient) {
+      window.noleiClient.sendInteraction('solicitacao_quarto', {
+        category,
+        service,
+        priceVal,
+        details,
+        room: currentRoom,
+        guest: activeGuest ? activeGuest.name : 'Hóspede'
+      });
+    }
  const now = new Date();
  const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 

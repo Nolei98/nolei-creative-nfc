@@ -1158,7 +1158,9 @@
  <span id="toast-msg"></span>
  </div>
 
- <script>
+  <script src="../js/nolei-config.js"></script>
+  <script src="../js/nolei-core.js"></script>
+  <script>
  // Initial / Synced Products from CRUD
  const defaultDatabase = {
  entradas: [
@@ -1574,6 +1576,9 @@
  }
 
  function chamarGarcom() {
+    if (window.noleiClient) {
+      window.noleiClient.sendInteraction('chamado_garcom', { table: tableName, type: 'garcom' });
+    }
  const now = Date.now();
  let existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
  const activeIdx = existingAlerts.findIndex(a => a.table === tableName && a.type === 'garcom');
@@ -1608,6 +1613,9 @@
  }
 
  function pedirConta() {
+    if (window.noleiClient) {
+      window.noleiClient.sendInteraction('pedido_conta', { table: tableName, type: 'conta' });
+    }
  const now = Date.now();
  let existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
  const activeIdx = existingAlerts.findIndex(a => a.table === tableName && a.type === 'conta');

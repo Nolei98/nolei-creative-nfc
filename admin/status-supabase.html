@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141210">
+  <title>Central Supabase & Diagnóstico de Nuvem — Nolei Creative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #141210;
+      --bg-card: #1C1814;
+      --bg-elevated: #26201A;
+      --text-main: #F2EADF;
+      --text-muted: #A2937E;
+      --text-dim: #786B5A;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --green: #10B981;
+      --amber: #F59E0B;
+      --red: #EF4444;
+      --border: rgba(242, 234, 223, 0.08);
+      --border-strong: rgba(193, 93, 48, 0.35);
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      padding: 24px 16px 60px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .title-box h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-online { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-offline { background: rgba(245, 158, 11, 0.15); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn-action {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s;
+    }
+    .btn-action:hover { background: var(--accent-deep); }
+    .btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    .table-status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .status-item {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .status-item-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .status-item-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .events-log {
+      background: #0D0B0A;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      height: 220px;
+      overflow-y: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #34D399;
+    }
+    .event-line {
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <div class="title-box">
+        <h1>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Diagnóstico Supabase & Nolei Core
+        </h1>
+        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Monitor de estado da nuvem em tempo real</div>
+      </div>
+      <div id="badge-cloud-status" class="badge-status badge-offline">Modo Offline (Demo Local)</div>
+    </header>
+
+    <!-- Credentials Card -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        Credenciais de Conexão
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">
+        As credenciais são salvas no arquivo <code>js/nolei-config.js</code>. Você também pode testar temporariamente colando-as abaixo:
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">Supabase URL:</label>
+        <input type="text" id="cfg-url" class="form-input" placeholder="https://xyzcompany.supabase.co">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Supabase Anon Public Key:</label>
+        <input type="text" id="cfg-key" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn-action" onclick="testConnection()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          Testar Conexão com a Nuvem
+        </button>
+        <button class="btn-action btn-secondary" onclick="sendTestEvent()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          Disparar Evento de Teste (Mesa 04)
+        </button>
+      </div>
+    </div>
+
+    <!-- Health Grid -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Status das Tabelas Relacionais
+      </div>
+      <div class="table-status-grid">
+        <div class="status-item">
+          <div class="status-item-name">organizations</div>
+          <div class="status-item-val" id="st-orgs" style="color:var(--amber);">Verificando...</div>
+        </div>
+        <div class="status-item">
+          <div class="status-item-name">spots (pontos)</div>
+          <div class="status-item-val" id="st-spots" style="color:var(--amber);">Verificando...</div>
+        </div>
+        <div class="status-item">
+          <div class="status-item-name">catalog_items</div>
+          <div class="status-item-val" id="st-catalog" style="color:var(--amber);">Verificando...</div>
+        </div>
+        <div class="status-item">
+          <div class="status-item-name">interactions (realtime)</div>
+          <div class="status-item-val" id="st-interactions" style="color:var(--amber);">Verificando...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Monitor -->
+    <div class="card">
+      <div class="card-title" style="justify-content:space-between;">
+        <span style="display:flex; align-items:center; gap:8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Console de Eventos em Tempo Real
+        </span>
+        <button onclick="clearLog()" style="background:none; border:none; color:var(--text-dim); font-size:0.75rem; cursor:pointer;">Limpar</button>
+      </div>
+      <div class="events-log" id="events-log">
+        <div class="event-line">[Console Inicializado] Aguardando chamados de mesas, suítes ou balcões...</div>
+      </div>
+    </div>
+
+    <!-- Quick Schema Setup Guide -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        Passo a Passo de Instalação (60 Segundos)
+      </div>
+      <ol style="padding-left:20px; font-size:0.85rem; color:var(--text-muted); display:flex; flex-direction:column; gap:8px;">
+        <li>Acesse <a href="https://supabase.com" target="_blank" style="color:var(--accent);">supabase.com</a> e crie um projeto novo gratuito.</li>
+        <li>No painel do Supabase, clique em <strong>SQL Editor</strong> no menu lateral esquerdo.</li>
+        <li>Copie o conteúdo de <code>supabase/schema.sql</code> do seu projeto, cole no editor e clique no botão verde <strong>Run</strong>.</li>
+        <li>Vá em <strong>Project Settings > API</strong> e copie a <code>Project URL</code> e a <code>anon public key</code>.</li>
+        <li>Cole essas duas chaves no arquivo <code>js/nolei-config.js</code> ou teste direto nesta tela!</li>
+      </ol>
+    </div>
+  </div>
+
+  <script src="../js/nolei-config.js"></script>
+  <script src="../js/nolei-core.js"></script>
+  <script>
+    const logEl = document.getElementById('events-log');
+
+    function addLog(msg, isError = false) {
+      const line = document.createElement('div');
+      line.className = 'event-line';
+      if (isError) line.style.color = '#EF4444';
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      logEl.prepend(line);
+    }
+
+    function clearLog() {
+      logEl.innerHTML = '<div class="event-line">[Console Limpo]</div>';
+    }
+
+    // Inicializa valores da tela
+    const client = new NoleiCore();
+    const cfg = client.getSupabaseConfig();
+    document.getElementById('cfg-url').value = cfg.supabaseUrl || '';
+    document.getElementById('cfg-key').value = cfg.supabaseKey || '';
+
+    updateBadge();
+
+    function updateBadge() {
+      const badge = document.getElementById('badge-cloud-status');
+      if (client.isLive()) {
+        badge.className = 'badge-status badge-online';
+        badge.textContent = 'Nuvem Conectada (Supabase Live)';
+      } else {
+        badge.className = 'badge-status badge-offline';
+        badge.textContent = 'Modo Offline (Demo Local)';
+      }
+    }
+
+    // Ouve eventos do SDK
+    client.onInteraction(evento => {
+      addLog(`🔔 NOVO EVENTO RECEBIDO: Tipo=${evento.type} | Ponto=${evento.spot_label} | ID=${evento.id}`);
+    });
+
+    async function testConnection() {
+      const url = document.getElementById('cfg-url').value.trim();
+      const key = document.getElementById('cfg-key').value.trim();
+
+      if (!url || !key) {
+        addLog('Modo Demo Local ativo. Nenhuma credencial preenchida (usando armazenamento offline).', true);
+        document.getElementById('st-orgs').textContent = 'Local (Seed)';
+        document.getElementById('st-spots').textContent = 'Local (Seed)';
+        document.getElementById('st-catalog').textContent = 'Local (Seed)';
+        document.getElementById('st-interactions').textContent = 'Ativo (Local)';
+        updateBadge();
+        return;
+      }
+
+      NoleiCore.config({ supabaseUrl: url, supabaseKey: key });
+      addLog(`Testando conexão com ${url}...`);
+
+      try {
+        const res = await fetch(`${url}/rest/v1/organizations?select=count`, {
+          headers: { 'apikey': key, 'Authorization': `Bearer ${key}` }
+        });
+        if (res.ok) {
+          addLog('✅ Conexão com Supabase estabelecida com sucesso!');
+          document.getElementById('st-orgs').style.color = 'var(--green)';
+          document.getElementById('st-orgs').textContent = 'Conectado (OK)';
+          document.getElementById('st-spots').style.color = 'var(--green)';
+          document.getElementById('st-spots').textContent = 'Conectado (OK)';
+          document.getElementById('st-catalog').style.color = 'var(--green)';
+          document.getElementById('st-catalog').textContent = 'Conectado (OK)';
+          document.getElementById('st-interactions').style.color = 'var(--green)';
+          document.getElementById('st-interactions').textContent = 'Realtime (OK)';
+          updateBadge();
+        } else {
+          addLog(`❌ Erro HTTP ${res.status}: Verifique se a chave ou URL estão corretas.`, true);
+        }
+      } catch(err) {
+        addLog(`❌ Falha de rede: ${err.message}`, true);
+      }
+    }
+
+    async function sendTestEvent() {
+      addLog('Disparando chamado de garçom de teste...');
+      const ev = await client.sendInteraction('chamado_garcom', { motivo: 'Teste de diagnóstico disparado pelo painel' });
+      addLog(`Evento gerado com sucesso! ID=${ev.id}`);
+    }
+
+    // Testa no load
+    testConnection();
+  </script>
+</body>
+</html>

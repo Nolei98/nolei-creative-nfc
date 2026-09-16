@@ -824,6 +824,8 @@
     <div>Desenvolvido por Nolei Creative</div>
   </footer>
 
+  <script src="../js/nolei-config.js"></script>
+  <script src="../js/nolei-core.js"></script>
   <script>
     // Read URL query parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -897,6 +899,12 @@
       // Click event
       btn.addEventListener('click', () => {
         currentSelectedStar = starVal;
+        if (window.noleiClient) {
+          window.noleiClient.sendInteraction(starVal >= 4 ? 'avaliacao_positiva' : 'avaliacao_negativa', {
+            rating: starVal,
+            business: document.getElementById('clinic-name').textContent
+          });
+        }
         updateStarsDisplay(currentSelectedStar);
 
         formContainer.style.display = 'block';

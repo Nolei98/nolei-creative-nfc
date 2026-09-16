@@ -1095,6 +1095,14 @@
     }
     renderKDS();
     renderAlerts();
+    if (window.noleiClient) {
+      window.noleiClient.onInteraction(evento => {
+        if (evento.type === 'chamado_garcom' || evento.type === 'pedido_conta') {
+          renderAlerts();
+          showToast(`Novo chamado: ${evento.spot_label} (${evento.type === 'chamado_garcom' ? 'Garçom' : 'Conta'})`);
+        }
+      });
+    }
     renderProducts();
   }
 

@@ -1,13 +1,8 @@
 /**
  * ==============================================================================
- * NOLEI CORE SDK v1.0 — Cliente Unificado Multi-Tenant Phygital
+ * NOLEI CORE SDK v1.1 — Cliente Unificado Multi-Tenant Phygital
  * Conecta qualquer frontend (Cardápio, Hotel, Fidelidade, Clínicas, Moda) ao
- * backend com zero redundância.
- * 
- * Modos de Operação Automáticos:
- * 1. LIVE MODE: Conexão REST/Realtime via Supabase quando configurado.
- * 2. SEED / OFFLINE MODE: Funciona imediatamente via localStorage com dados simulados,
- *    garantindo que todas as telas funcionem offline e em demonstrações mesmo sem internet.
+ * backend Supabase com zero redundância e suporte offline completo.
  * ==============================================================================
  */
 
@@ -22,27 +17,32 @@
 }(typeof self !== 'undefined' ? self : this, function() {
   'use strict';
 
-  // Configurações globais opcionais
-  const globalConfig = {
-    supabaseUrl: (typeof window !== 'undefined' && window.NOLEI_SUPABASE_URL) || '',
-    supabaseKey: (typeof window !== 'undefined' && window.NOLEI_SUPABASE_KEY) || '',
-    storageKeyPrefix: 'nolei_db_'
-  };
+  // Configurações globais com fallback para window.NOLEI_CONFIG
+  function getGlobalConfig() {
+    const fromWindow = (typeof window !== 'undefined' && window.NOLEI_CONFIG) || {};
+    return {
+      supabaseUrl: fromWindow.supabaseUrl || (typeof window !== 'undefined' && window.NOLEI_SUPABASE_URL) || '',
+      supabaseKey: fromWindow.supabaseKey || (typeof window !== 'undefined' && window.NOLEI_SUPABASE_KEY) || '',
+      storageKeyPrefix: 'nolei_db_',
+      defaultOrg: fromWindow.defaultOrg || 'botanico-bistro'
+    };
+  }
 
   // Fixtures padrão para demonstrações imediatas (Zero Configuração)
   const SEED_FIXTURES = {
     'botanico-bistro': {
       org: {
-        id: 'org-botanico',
+        id: 'a1b2c3d4-e5f6-4a5b-8c9d-000000000001',
         slug: 'botanico-bistro',
         name: '🌿 Botânico Bistrô',
         segment: 'gastronomia',
         whatsapp: '5587999099937',
-        color: '#f59e0b'
+        brand_color: '#f59e0b'
       },
       spots: {
         'm04': { code: 'm04', label: 'Mesa 04', type: 'mesa' },
-        'm01': { code: 'm01', label: 'Mesa 01', type: 'mesa' }
+        'm01': { code: 'm01', label: 'Mesa 01', type: 'mesa' },
+        'm02': { code: 'm02', label: 'Mesa 02', type: 'mesa' }
       },
       catalog: [
         { id: '1', category: 'entradas', title: 'Bruschetta Caprese', price: 28.90, desc: 'Tomate cereja, muçarela de búfala e manjericão fresco.', badges: ['Vegetariano'] },
@@ -55,31 +55,31 @@
     },
     'hotel-imperial': {
       org: {
-        id: 'org-hotel',
+        id: 'a1b2c3d4-e5f6-4a5b-8c9d-000000000002',
         slug: 'hotel-imperial',
         name: 'Hotel Jardim Imperial ★★★★★',
         segment: 'hotelaria',
         whatsapp: '5587999099937',
-        color: '#d4a853'
+        brand_color: '#d4a853'
       },
       spots: {
-        'q412': { code: 'q412', label: 'Suíte 412', type: 'quarto' },
+        'q412': { code: 'q412', label: 'Suíte 412 Imperial', type: 'quarto' },
         'q415': { code: 'q415', label: 'Suíte Master 415', type: 'quarto' }
       },
       catalog: [
-        { id: 'h1', category: 'lanches', title: 'Club Sandwich Imperial', price: 45.00, desc: 'Frango grelhado, bacon crocante, alface, tomate e maionese artesanal.' },
-        { id: 'h2', category: 'principais', title: 'Filé Mignon ao Molho Madeira', price: 89.00, desc: 'Com arroz de brócolis e batatas rústicas douradas.' },
+        { id: 'h1', category: 'lanches', title: 'Club Sandwich Imperial', price: 45.00, desc: 'Frango grelhado, bacon crocante, alface, tomate e maionese.' },
+        { id: 'h2', category: 'principais', title: 'Filé Mignon ao Madeira', price: 89.00, desc: 'Com arroz de brócolis e batatas rústicas douradas.' },
         { id: 'h3', category: 'bebidas', title: 'Taça Malbec Reserva', price: 35.00, desc: 'Vinho tinto encorpado argentino safra 2021.' }
       ]
     },
     'atelie-raizes': {
       org: {
-        id: 'org-atelie',
+        id: 'a1b2c3d4-e5f6-4a5b-8c9d-000000000003',
         slug: 'atelie-raizes',
         name: 'Ateliê Raízes do Cariri',
         segment: 'artesanato_moda',
         whatsapp: '5587999099937',
-        color: '#C15D30'
+        brand_color: '#C15D30'
       },
       spots: {
         'etq-01': { code: 'etq-01', label: 'Bolsa Mandacaru em Couro #07', type: 'etiqueta' }
@@ -90,7 +90,7 @@
           category: 'couro', 
           title: 'Bolsa Mandacaru — Couro Legítimo', 
           price: 380.00, 
-          desc: 'Confeccionada à mão pelo artesão Mestre Cícero em Juazeiro do Norte. Curtimento vegetal livre de cromo.',
+          desc: 'Feita à mão em Juazeiro do Norte com curtimento vegetal.',
           badges: ['Tiragem Limitada: 50 un', '100% Cariri', 'Garantia Vitalícia']
         }
       ]
@@ -99,13 +99,14 @@
 
   class NoleiCore {
     constructor(options = {}) {
+      const cfg = getGlobalConfig();
       this.options = Object.assign({
-        org: 'botanico-bistro',
+        org: cfg.defaultOrg,
         spot: 'm04',
         autoDetectUrlParams: true
       }, options);
 
-      // Detecta parâmetros de URL automaticamente se habilitado
+      // Detecta parâmetros de URL automaticamente
       if (this.options.autoDetectUrlParams && typeof window !== 'undefined' && window.location) {
         const params = new URLSearchParams(window.location.search);
         if (params.get('org')) this.options.org = params.get('org');
@@ -118,32 +119,64 @@
       this.orgSlug = this.options.org;
       this.spotCode = this.options.spot;
       this.listeners = [];
+      this.realtimeWs = null;
 
       this._initStorageListeners();
+      this._initRealtimeIfConfigured();
     }
 
     /**
-     * Configura credenciais da nuvem (Supabase)
+     * Configura credenciais dinamicamente
      */
     static config(cfg = {}) {
-      if (cfg.supabaseUrl) globalConfig.supabaseUrl = cfg.supabaseUrl;
-      if (cfg.supabaseKey) globalConfig.supabaseKey = cfg.supabaseKey;
+      if (typeof window !== 'undefined') {
+        window.NOLEI_CONFIG = Object.assign(window.NOLEI_CONFIG || {}, cfg);
+      }
     }
 
     /**
-     * Verifica se está em modo nuvem ativa
+     * Retorna se a nuvem Supabase está com credenciais preenchidas
      */
     isLive() {
-      return !!(globalConfig.supabaseUrl && globalConfig.supabaseKey);
+      const cfg = getGlobalConfig();
+      return !!(cfg.supabaseUrl && cfg.supabaseKey);
+    }
+
+    getSupabaseConfig() {
+      return getGlobalConfig();
     }
 
     /**
-     * Carrega informações da Organização e do Ponto Físico
+     * Inicializa a sessão carregando dados da organização e do ponto
      */
     async init() {
       const fixture = SEED_FIXTURES[this.orgSlug] || SEED_FIXTURES['botanico-bistro'];
-      this.orgData = fixture.org;
-      this.spotData = fixture.spots[this.spotCode] || {
+
+      if (this.isLive()) {
+        try {
+          const cfg = getGlobalConfig();
+          const res = await fetch(`${cfg.supabaseUrl}/rest/v1/organizations?slug=eq.${this.orgSlug}&select=*`, {
+            headers: {
+              'apikey': cfg.supabaseKey,
+              'Authorization': `Bearer ${cfg.supabaseKey}`
+            }
+          });
+          if (res.ok) {
+            const orgs = await res.json();
+            if (orgs && orgs.length > 0) {
+              this.orgData = orgs[0];
+            }
+          }
+        } catch(e) {
+          console.warn('[NoleiCore] Erro ao buscar organização na nuvem, usando cache:', e);
+        }
+      }
+
+      if (!this.orgData) {
+        this.orgData = fixture.org;
+      }
+
+      this.spotData = (fixture.spots && fixture.spots[this.spotCode]) || {
         code: this.spotCode,
         label: 'Ponto ' + this.spotCode.toUpperCase(),
         type: 'mesa'
@@ -157,50 +190,78 @@
     }
 
     /**
-     * Obtém o catálogo de itens/serviços
+     * Retorna itens do catálogo (cardápio, serviços ou produtos)
      */
     async getCatalog(filter = {}) {
       const fixture = SEED_FIXTURES[this.orgSlug] || SEED_FIXTURES['botanico-bistro'];
-      let items = fixture.catalog || [];
 
+      if (this.isLive()) {
+        try {
+          const cfg = getGlobalConfig();
+          let url = `${cfg.supabaseUrl}/rest/v1/catalog_items?is_available=eq.true`;
+          if (filter.category && filter.category !== 'todos') {
+            url += `&category=eq.${filter.category}`;
+          }
+          const res = await fetch(url, {
+            headers: {
+              'apikey': cfg.supabaseKey,
+              'Authorization': `Bearer ${cfg.supabaseKey}`
+            }
+          });
+          if (res.ok) {
+            const items = await res.json();
+            if (items && items.length > 0) {
+              return items;
+            }
+          }
+        } catch(e) {
+          console.warn('[NoleiCore] Usando catálogo local:', e);
+        }
+      }
+
+      let items = fixture.catalog || [];
       if (filter.category && filter.category !== 'todos') {
         items = items.filter(item => item.category === filter.category);
       }
-
       return items;
     }
 
     /**
-     * Dispara uma interação (Pedido, Chamar Garçom, Avaliação, etc.)
+     * Dispara uma interação (pedido, chamado, avaliação, etc.)
      */
     async sendInteraction(type, payload = {}) {
+      const spotLabel = (this.spotData && this.spotData.label) || ('Ponto ' + this.spotCode);
       const interaction = {
         id: 'int_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
         org_slug: this.orgSlug,
         spot_code: this.spotCode,
-        spot_label: (this.spotData && this.spotData.label) || this.spotCode,
+        spot_label: spotLabel,
         type: type,
         payload: payload,
         status: 'pendente',
         created_at: new Date().toISOString()
       };
 
-      // 1. Grava no storage local para mock/resiliência imediata
+      // 1. Grava no cache local
       this._saveLocalInteraction(interaction);
 
-      // 2. Se tiver Supabase ativo, envia para a nuvem
+      // 2. Ponte de compatibilidade retroativa com nolei_service_alerts
+      this._syncToLegacyAlerts(interaction);
+
+      // 3. Envia para o Supabase se configurado
       if (this.isLive()) {
         try {
-          await fetch(`${globalConfig.supabaseUrl}/rest/v1/interactions`, {
+          const cfg = getGlobalConfig();
+          await fetch(`${cfg.supabaseUrl}/rest/v1/interactions`, {
             method: 'POST',
             headers: {
-              'apikey': globalConfig.supabaseKey,
-              'Authorization': `Bearer ${globalConfig.supabaseKey}`,
+              'apikey': cfg.supabaseKey,
+              'Authorization': `Bearer ${cfg.supabaseKey}`,
               'Content-Type': 'application/json',
               'Prefer': 'return=minimal'
             },
             body: JSON.stringify({
-              org_slug: interaction.org_slug,
+              org_id: this.orgData ? this.orgData.id : null,
               spot_code: interaction.spot_code,
               spot_label: interaction.spot_label,
               type: interaction.type,
@@ -209,18 +270,18 @@
             })
           });
         } catch (err) {
-          console.warn('[NoleiCore] Falha ao enviar para nuvem, gravado apenas em cache local:', err);
+          console.warn('[NoleiCore] Falha ao enviar ao Supabase, salvo localmente:', err);
         }
       }
 
-      // Notifica ouvintes locais na mesma aba e em outras abas
+      // Notifica ouvintes locais
       this._notifyListeners(interaction);
 
       return interaction;
     }
 
     /**
-     * Ouve novos eventos em tempo real (para a tela do Garçom / Recepção)
+     * Ouve eventos em tempo real
      */
     onInteraction(callback) {
       if (typeof callback === 'function') {
@@ -232,7 +293,7 @@
     }
 
     /**
-     * Atualiza o status de um chamado ('atendido', 'concluido', 'cancelado')
+     * Atualiza o status de um chamado
      */
     async updateInteractionStatus(id, newStatus) {
       const list = this.getRecentInteractions();
@@ -240,15 +301,31 @@
       if (item) {
         item.status = newStatus;
         item.resolved_at = new Date().toISOString();
-        localStorage.setItem(this._storageKey(), JSON.stringify(list));
+        if (typeof localStorage !== 'undefined' && typeof localStorage.setItem === 'function') {
+          localStorage.setItem(this._storageKey(), JSON.stringify(list));
+        }
         this._notifyListeners(item);
       }
+
+      // Atualiza também na nuvem se ativo
+      if (this.isLive()) {
+        try {
+          const cfg = getGlobalConfig();
+          await fetch(`${cfg.supabaseUrl}/rest/v1/interactions?id=eq.${id}`, {
+            method: 'PATCH',
+            headers: {
+              'apikey': cfg.supabaseKey,
+              'Authorization': `Bearer ${cfg.supabaseKey}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: newStatus, resolved_at: new Date().toISOString() })
+          });
+        } catch(e) {}
+      }
+
       return item;
     }
 
-    /**
-     * Retorna a lista de interações recentes salvas no cache
-     */
     getRecentInteractions() {
       if (typeof localStorage === 'undefined' || typeof localStorage.getItem !== 'function') return [];
       try {
@@ -259,16 +336,40 @@
       }
     }
 
-    // --- MÉTODOS INTERNOS DE GERENCIAMENTO ---
+    // --- MÉTODOS INTERNOS & RETROCOMPATIBILIDADE ---
+
+    _syncToLegacyAlerts(interaction) {
+      if (typeof localStorage === 'undefined' || typeof localStorage.setItem !== 'function') return;
+      if (interaction.type === 'chamado_garcom' || interaction.type === 'pedido_conta') {
+        try {
+          const existing = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+          const legacyType = interaction.type === 'chamado_garcom' ? 'garcom' : 'conta';
+          const tableStr = interaction.spot_label.toLowerCase();
+          
+          // Evita duplicar alerta pendente da mesma mesa
+          if (!existing.some(a => a.table === tableStr && a.type === legacyType)) {
+            existing.unshift({
+              id: interaction.id,
+              table: tableStr,
+              type: legacyType,
+              time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+            });
+            localStorage.setItem('nolei_service_alerts', JSON.stringify(existing));
+          }
+        } catch(e) {}
+      }
+    }
+
     _storageKey() {
-      return globalConfig.storageKeyPrefix + this.orgSlug;
+      const cfg = getGlobalConfig();
+      return cfg.storageKeyPrefix + this.orgSlug;
     }
 
     _saveLocalInteraction(item) {
       if (typeof localStorage === 'undefined' || typeof localStorage.setItem !== 'function') return;
       const list = this.getRecentInteractions();
       list.unshift(item);
-      if (list.length > 50) list.pop(); // Mantém as últimas 50
+      if (list.length > 50) list.pop();
       localStorage.setItem(this._storageKey(), JSON.stringify(list));
     }
 
@@ -276,7 +377,6 @@
       this.listeners.forEach(cb => {
         try { cb(item); } catch(e) { console.error(e); }
       });
-      // Notificação cross-tab via CustomEvent
       if (typeof window !== 'undefined') {
         window.dispatchEvent(new CustomEvent('nolei:event', { detail: item }));
       }
@@ -299,12 +399,47 @@
       });
     }
 
-    /**
-     * Helpers de Utilidade
-     */
+    _initRealtimeIfConfigured() {
+      if (!this.isLive() || typeof WebSocket === 'undefined') return;
+      const cfg = getGlobalConfig();
+      try {
+        // Extrai o host do supabase para websocket realtime
+        const url = new URL(cfg.supabaseUrl);
+        const wsUrl = `wss://${url.host}/realtime/v1/websocket?apikey=${cfg.supabaseKey}&vsn=1.0.0`;
+        
+        this.realtimeWs = new WebSocket(wsUrl);
+        this.realtimeWs.onopen = () => {
+          if (cfg.debug) console.log('[NoleiCore] Conectado ao Realtime Supabase!');
+          // Join interactions channel
+          this.realtimeWs.send(JSON.stringify({
+            topic: 'realtime:public:interactions',
+            event: 'phx_join',
+            payload: {},
+            ref: '1'
+          }));
+        };
+
+        this.realtimeWs.onmessage = (msg) => {
+          try {
+            const data = JSON.parse(msg.data);
+            if (data.event === 'INSERT' && data.payload && data.payload.record) {
+              this._notifyListeners(data.payload.record);
+            }
+          } catch(err) {}
+        };
+      } catch(err) {
+        console.warn('[NoleiCore] Realtime websocket não pôde ser iniciado, operando via polling/storage:', err);
+      }
+    }
+
     static formatCurrency(val) {
       return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val);
     }
+  }
+
+  // Instância singleton global pronta para uso nas páginas
+  if (typeof window !== 'undefined') {
+    window.noleiClient = new NoleiCore();
   }
 
   return NoleiCore;

@@ -707,7 +707,7 @@
       </div>
       <div class="business-address">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        <span>Av. Paulista, 1000 — Jardins, São Paulo - SP</span>
+        <span id="business-address-text">Av. Paulista, 1000 — Jardins, São Paulo - SP</span>
       </div>
     </div>
 
@@ -826,17 +826,76 @@
 
   <script src="../js/nolei-config.js"></script>
   <script src="../js/nolei-core.js"></script>
+  <script src="../js/nolei-companies.js"></script>
   <script>
     // Read URL query parameters
     const urlParams = new URLSearchParams(window.location.search);
 
-    // 1. Dynamic Clinic / Business Name
-    const clinicParam = urlParams.get('clinica') || urlParams.get('nome');
-    if (clinicParam) {
-      const decoded = decodeURIComponent(clinicParam);
+    // Banco de chips temáticos por segmento comercial
+    const SECTOR_CHIPS = {
+      gastronomia: [
+        "Sabor espetacular", "Pratos bem apresentados", "Atendimento impecável", "Ambiente aconchegante", "Recomendo a todos"
+      ],
+      hotelaria: [
+        "Suíte impecável", "Café colonial incrível", "Atendimento 5 estrelas", "Cama muito confortável", "Localização e vista"
+      ],
+      saude: [
+        "Atendimento humanizado", "Pontualidade no horário", "Profissionalismo e clareza", "Ambiente seguro e limpo", "Recomendo com confiança"
+      ],
+      fidelidade: [
+        "Café de altíssima qualidade", "Atendimento rápido", "Ambiente acolhedor", "Programa de fidelidade ótimo", "Super recomendo"
+      ],
+      artesanato_moda: [
+        "Qualidade do couro legítimo", "Costura manual perfeita", "Acabamento primoroso", "Atendimento do ateliê", "Peça exclusiva e durável"
+      ],
+      beleza: [
+        "Corte e barba impecáveis", "Pontualidade no atendimento", "Profissionais de alto nível", "Ambiente sofisticado", "Cuidado aos detalhes"
+      ],
+      imobiliaria: [
+        "Atendimento transparente", "Corretores atenciosos", "Informações precisas", "Plantão ágil", "Recomendo com certeza"
+      ]
+    };
+
+    // 1. Dynamic Business / Organization Resolution
+    const orgQuery = urlParams.get('org') || urlParams.get('slug') || urlParams.get('clinica') || urlParams.get('nome') || urlParams.get('empresa');
+    let currentOrg = null;
+
+    if (window.NoleiCompanies && orgQuery) {
+      currentOrg = window.NoleiCompanies.getBySlug(orgQuery);
+    }
+
+    if (currentOrg) {
+      const cleanName = currentOrg.name.replace(/^[\p{Emoji}\s]+/u, '').trim();
+      document.getElementById('clinic-name').textContent = cleanName;
+      document.getElementById('business-logo').textContent = cleanName.charAt(0).toUpperCase();
+      
+      const segInfo = window.NoleiCompanies.getSegment(currentOrg.segment);
+      if (segInfo) {
+        document.getElementById('business-category').textContent = segInfo.name;
+      }
+      
+      const addrEl = document.getElementById('business-address-text');
+      if (addrEl && currentOrg.city) {
+        addrEl.textContent = currentOrg.city + ' • Perfil Oficial no Google Maps';
+      }
+
+      if (currentOrg.googlePlaceUrl) {
+        document.getElementById('btn-post-google').href = currentOrg.googlePlaceUrl;
+      }
+
+      document.title = `Google Avaliações — ${cleanName}`;
+
+      // Atualiza chips com temas da área da empresa
+      const chips = SECTOR_CHIPS[currentOrg.segment] || SECTOR_CHIPS.saude;
+      const chipsBox = document.getElementById('chips-container');
+      if (chipsBox) {
+        chipsBox.innerHTML = chips.map(c => `<button type="button" class="chip-btn" onclick="toggleChip(this)">${c}</button>`).join('');
+      }
+    } else if (orgQuery) {
+      const decoded = decodeURIComponent(orgQuery).replace(/^[\p{Emoji}\s]+/u, '').trim();
       document.getElementById('clinic-name').textContent = decoded;
       document.getElementById('business-logo').textContent = decoded.charAt(0).toUpperCase();
-      document.getElementById('page-title').textContent = `Google Avaliações — ${decoded}`;
+      document.title = `Google Avaliações — ${decoded}`;
     }
 
     // 2. Splash Screen for NFC / QR

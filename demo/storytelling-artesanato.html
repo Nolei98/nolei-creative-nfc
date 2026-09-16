@@ -250,6 +250,146 @@
       background: #166534;
       transform: translateY(-2px);
     }
+  
+    html {
+      scroll-behavior: smooth;
+    }
+    .cert-section {
+      border: 1px solid rgba(212, 168, 83, 0.35);
+      background: linear-gradient(180deg, rgba(212, 168, 83, 0.04) 0%, rgba(28, 24, 20, 0.95) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 168, 83, 0.12);
+      border: 1px solid rgba(212, 168, 83, 0.4);
+      color: var(--gold);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .cert-cell {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .cert-cell-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+    .cert-cell-val {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .cert-signature-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(212, 168, 83, 0.2);
+    }
+    .cert-hash {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+    }
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .collection-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .collection-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .collection-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .collection-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .collection-item-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .collection-item-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      flex: 1;
+      line-height: 1.4;
+    }
+    .collection-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .collection-price {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #34D399;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .btn-item-order {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(193, 93, 48, 0.15);
+      border: 1px solid var(--border-strong);
+      color: var(--accent);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-item-order:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
   </style>
 </head>
 <body>
@@ -268,7 +408,7 @@
   <div class="container">
 
     <!-- Hero Card -->
-    <div class="hero-card">
+    <div class="hero-card" id="storytelling">
       <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=700&q=80" alt="Bolsa em Couro Legítimo" class="hero-img">
       <div class="hero-body">
         <span class="cert-badge">Certificado Phygital de Autenticidade</span>
@@ -339,6 +479,116 @@
       <div class="care-item">Hidrate o couro a cada 6 meses com hidratante corporal neutro ou pomada de couro.</div>
       <div class="care-item">O couro legítimo ganha personalidade com o tempo; marcas de uso contam a sua história.</div>
     </div>
+
+    
+    <!-- SEÇÃO: CERTIFICADO DE AUTENTICIDADE (#certificado) -->
+    <section id="certificado" class="section-card cert-section">
+      <div class="cert-seal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        Certificado Phygital de Autenticidade Registrada
+      </div>
+      <h2 class="section-title" style="color:var(--gold);">
+        Garantia de Procedência & Rastreabilidade
+      </h2>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+        Esta peça foi produzida sob rigoroso protocolo de artesanato de tradição do Cariri cearense. Sua autenticidade é atestada por chip NFC blindado e chancelada digitalmente pelo ateliê.
+      </p>
+
+      <div class="cert-grid">
+        <div class="cert-cell">
+          <div class="cert-cell-label">Edição & Matrícula</div>
+          <div class="cert-cell-val" id="cert-num">#RC-2026-07M (07/50)</div>
+        </div>
+        <div class="cert-cell">
+          <div class="cert-cell-label">Mestre Artesão</div>
+          <div class="cert-cell-val">Cícero dos Anjos</div>
+        </div>
+        <div class="cert-cell">
+          <div class="cert-cell-label">Curtimento</div>
+          <div class="cert-cell-val">100% Vegetal Orgânico</div>
+        </div>
+        <div class="cert-cell">
+          <div class="cert-cell-label">Garantia</div>
+          <div class="cert-cell-val" style="color:#34D399;">Costura & Rebites Vitalícia</div>
+        </div>
+      </div>
+
+      <div class="cert-signature-row">
+        <div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">Chancela Criptográfica NFC:</div>
+          <div class="cert-hash">SHA256: 7f8a9e4b...c15d3099</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Status: Peça Original Verificada
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO: VITRINE DA COLEÇÃO AUTORAL (#colecao) -->
+    <section id="colecao" class="section-card">
+      <h2 class="section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Coleção Autoral Raízes do Sertão
+      </h2>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+        Modelos disponíveis para encomenda personalizada com gravação a laser das suas iniciais e escolha da tonalidade do couro (Café, Caramelo ou Pinhão).
+      </p>
+
+      <div class="collection-grid">
+        <!-- Item 1 -->
+        <div class="collection-card">
+          <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=400&q=80" alt="Bolsa Mandacaru" class="collection-img">
+          <div class="collection-body">
+            <div class="collection-item-title">Bolsa Mandacaru #07</div>
+            <div class="collection-item-desc">Alça regulável, forro em brim pesado e fecho em latão maciço escovado.</div>
+            <div class="collection-price-row">
+              <span class="collection-price">R$ 380,00</span>
+              <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Bolsa%20Mandacaru%20do%20Ateli%C3%AA%20Ra%C3%ADzes." target="_blank" class="btn-item-order">Encomendar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="collection-card">
+          <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=400&q=80" alt="Carteira Sertão" class="collection-img">
+          <div class="collection-body">
+            <div class="collection-item-title">Carteira Sertão Minimalista</div>
+            <div class="collection-item-desc">4 slots para cartões, bolso para cédulas dobradas e costura manual ponto de sela.</div>
+            <div class="collection-price-row">
+              <span class="collection-price">R$ 140,00</span>
+              <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Carteira%20Sert%C3%A3o%20Minimalista." target="_blank" class="btn-item-order">Encomendar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="collection-card">
+          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=400&q=80" alt="Gibão Tradicional" class="collection-img">
+          <div class="collection-body">
+            <div class="collection-item-title">Gibão Tradicional Cariri</div>
+            <div class="collection-item-desc">Peça icônica sertaneja feita sob medida para montaria, cerimonial ou coleção.</div>
+            <div class="collection-price-row">
+              <span class="collection-price">R$ 650,00</span>
+              <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20o%20Gib%C3%A3o%20Tradicional." target="_blank" class="btn-item-order">Sob Medida</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="collection-card">
+          <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=400&q=80" alt="Cinto Couro Cru" class="collection-img">
+          <div class="collection-body">
+            <div class="collection-item-title">Cinto Couro Fogueteiro</div>
+            <div class="collection-item-desc">Couro de sola 4mm, bordas brunidas com cera de abelha e fivela maciça.</div>
+            <div class="collection-price-row">
+              <span class="collection-price">R$ 160,00</span>
+              <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20o%20Cinto%20Couro%20Fogueteiro." target="_blank" class="btn-item-order">Encomendar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Direct WhatsApp Link -->
     <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Aproximei%20a%20tag%20da%20Bolsa%20Mandacaru%20(Pe%C3%A7a%2007)%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20encomendas%20personalizadas." target="_blank" class="btn-cta-atelier">

@@ -19,6 +19,11 @@
 
   const STORAGE_KEY = 'nolei_custom_companies';
 
+  function formatWa(num) {
+    const digits = (num || '87999099937').toString().replace(/\D/g, '');
+    return digits.startsWith('55') ? digits : ('55' + digits);
+  }
+
   // Catálogo completo de segmentos disponíveis
   const SEGMENTS = {
     gastronomia: {
@@ -309,7 +314,7 @@
       desc: 'Botão de atendimento prioritário via WhatsApp com envio automático do código do lote/imóvel.',
       clientAction: {
         label: 'Falar com Corretor no WhatsApp',
-        getUrl: (c) => `https://wa.me/${c.whatsapp || '5587999099937'}?text=Ol%C3%A1%2C%20estou%20em%20frente%20ao%20im%C3%B3vel%20da%20${encodeURIComponent(c.name)}%20e%20gostaria%20de%20informa%C3%A7%C3%B5es`
+        getUrl: (c) => `https://wa.me/${formatWa(c.whatsapp)}?text=Ol%C3%A1%2C%20estou%20em%20frente%20ao%20im%C3%B3vel%20da%20${encodeURIComponent(c.name)}%20e%20gostaria%20de%20informa%C3%A7%C3%B5es`
       },
       isDefault: true
     },
@@ -347,7 +352,7 @@
       desc: 'Link inteligente com mensagem pré-configurada para marcação de consultas, cortes ou visitas.',
       clientAction: {
         label: 'Agendar via WhatsApp',
-        getUrl: (c) => `https://wa.me/${c.whatsapp || '5587999099937'}?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20${encodeURIComponent(c.name)}`
+        getUrl: (c) => `https://wa.me/${formatWa(c.whatsapp)}?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20${encodeURIComponent(c.name)}`
       },
       isDefault: true
     },
@@ -359,7 +364,7 @@
       desc: 'Conversa direta com o ateliê para orçamentos e personalizações de peças em couro e joias.',
       clientAction: {
         label: 'Pedir Encomenda no WhatsApp',
-        getUrl: (c) => `https://wa.me/${c.whatsapp || '5587999099937'}?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20encomenda%20com%20o%20${encodeURIComponent(c.name)}`
+        getUrl: (c) => `https://wa.me/${formatWa(c.whatsapp)}?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20encomenda%20com%20o%20${encodeURIComponent(c.name)}`
       },
       isDefault: true
     }
@@ -373,7 +378,7 @@
       name: '🌿 Botânico Bistrô',
       segment: 'gastronomia',
       city: 'Juazeiro do Norte - CE',
-      whatsapp: '87999099937',
+      whatsapp: '5587999099937',
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'Botanico_5G',
       wifiPass: 'botanicogourmet',
@@ -400,7 +405,7 @@
       name: '🏨 Hotel Jardim Imperial ★★★★★',
       segment: 'hotelaria',
       city: 'Juazeiro do Norte - CE',
-      whatsapp: '87999099937',
+      whatsapp: '5587999099937',
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'JardimImperial_VIP',
       wifiPass: 'suite412',
@@ -427,7 +432,7 @@
       name: '⭐ Clínica Dra. Sofia Santos',
       segment: 'saude',
       city: 'Juazeiro do Norte - CE',
-      whatsapp: '87999099937',
+      whatsapp: '5587999099937',
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'ClinicaSofia_Pacientes',
       wifiPass: 'saude2026',
@@ -451,7 +456,7 @@
       name: '☕ Café Origem',
       segment: 'fidelidade',
       city: 'Crato - CE',
-      whatsapp: '87999099937',
+      whatsapp: '5587999099937',
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'CafeOrigem_Wifi',
       wifiPass: 'graosartesanais',
@@ -474,7 +479,7 @@
       name: '🧵 Ateliê Raízes do Cariri',
       segment: 'artesanato_moda',
       city: 'Juazeiro do Norte - CE',
-      whatsapp: '87999099937',
+      whatsapp: '5587999099937',
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'Atelie_Visitantes',
       wifiPass: 'couroregional',
@@ -497,7 +502,7 @@
       name: '✂️ Barbearia Dom Corleone',
       segment: 'beleza',
       city: 'Barbalha - CE',
-      whatsapp: '87999099937',
+      whatsapp: '5587999099937',
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'BarbeariaDom_VIP',
       wifiPass: 'corteclube',
@@ -521,7 +526,7 @@
       name: '🏙️ Horizon Imóveis & Arquitetura',
       segment: 'imobiliaria',
       city: 'Juazeiro do Norte - CE',
-      whatsapp: '87999099937',
+      whatsapp: '5587999099937',
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'Horizon_Plantao',
       wifiPass: 'imoveis2026',

@@ -573,9 +573,15 @@
           <div>
             <h1 class="company-name" id="c-name">Carregando Estabelecimento...</h1>
             <div class="company-badges">
-              <span class="badge-segment" id="c-segment-badge">🏷️ Segmento</span>
+              <span class="badge-segment" id="c-segment-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              <span>Segmento</span>
+            </span>
               <span class="badge-status">● Plataforma Phygital Ativa</span>
-              <span class="badge-city" id="c-city">📍 Local</span>
+              <span class="badge-city" id="c-city">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Local</span>
+            </span>
             </div>
           </div>
         </div>
@@ -617,7 +623,10 @@
     <section class="spots-box">
       <div class="section-header" style="margin-bottom: 4px;">
         <div>
-          <h3 class="section-title" style="font-size: 1.1rem;">📍 Pontos Físicos & Tags NFC Mapeadas</h3>
+          <h3 class="section-title" style="font-size: 1.1rem; display:flex; align-items:center; gap:8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Pontos Físicos & Tags NFC Mapeadas</span>
+          </h3>
           <div class="section-desc">Identificadores físicos (tags NTAG213 e displays de acrílico) deste estabelecimento.</div>
         </div>
         <a href="admin/gerador-tags.html" target="_blank" class="btn-action">
@@ -678,7 +687,9 @@
   <div class="modal-overlay" id="wifi-modal" onclick="closeModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeWifiModal()">&times;</button>
-      <div style="font-size: 2.2rem; margin-bottom: 8px;">📶</div>
+      <div style="width:52px; height:52px; border-radius:12px; background:rgba(193,93,48,0.15); border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; color:var(--accent); margin:0 auto 12px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        </div>
       <h3 style="font-size: 1.2rem; font-weight: 800;">Rede Wi-Fi do Estabelecimento</h3>
       <p style="font-size: 0.82rem; color: var(--muted); margin: 6px 0 20px;">Credenciais para acesso rápido de clientes e colaboradores</p>
       
@@ -698,7 +709,7 @@
 
   <!-- Toast -->
   <div class="toast-msg" id="toast-box">
-    <span>✅</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
     <span id="toast-text">Mensagem</span>
   </div>
 
@@ -784,7 +795,7 @@
       document.getElementById('c-avatar').innerHTML = SEG_ICONS[currentCompany.segment] || '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg>';
       document.getElementById('c-name').textContent = currentCompany.name;
       
-      const domainBadge = currentCompany.customDomain ? `<span class="badge-segment" style="background:rgba(56,189,248,0.15); color:#38BDF8; border-color:rgba(56,189,248,0.3);">🌐 ${currentCompany.customDomain}</span>` : '';
+      const domainBadge = currentCompany.customDomain ? `<span class="badge-segment" style="background:rgba(56,189,248,0.15); color:#38BDF8; border-color:rgba(56,189,248,0.3);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> ${currentCompany.customDomain}</span>` : '';
       document.getElementById('c-segment-badge').outerHTML = `<span class="badge-segment" id="c-segment-badge">${seg.name}</span>` + domainBadge;
       
       document.getElementById('c-city').innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:3px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>' + (currentCompany.city || 'Juazeiro do Norte - CE');
@@ -803,7 +814,9 @@
       if (activeModules.length === 0) {
         modulesBox.innerHTML = `
           <div style="grid-column: 1 / -1; background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius); padding: 40px 20px; text-align: center; color: var(--muted);">
-            <div style="font-size: 2rem; margin-bottom: 8px;">⚙️</div>
+            <div style="width:48px; height:48px; border-radius:12px; background:var(--elevated); border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; color:var(--accent); margin:0 auto 12px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
             <h4 style="color:#fff; margin-bottom:4px;">Nenhum módulo ativado no momento</h4>
             <p style="font-size:0.85rem;">Edite este cliente no painel do administrador para habilitar ferramentas.</p>
           </div>
@@ -829,7 +842,10 @@
             const opUrl = mod.operatorAction.getUrl(currentCompany);
             operatorBtn = `
               <a href="${opUrl}" target="_blank" class="btn-module-secondary">
-                <span>⚙️ ${mod.operatorAction.label}</span>
+                <span style="display:inline-flex; align-items:center; gap:5px;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                  ${mod.operatorAction.label}
+                </span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
               </a>
             `;

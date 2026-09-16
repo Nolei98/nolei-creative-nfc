@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141210">
+  <title>Portal do Administrador — Nolei Creative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141210;
+      --card: #1C1814;
+      --elevated: #26201A;
+      --text: #F2EADF;
+      --muted: #A2937E;
+      --dim: #786B5A;
+      --accent: #C15D30;
+      --accent-deep: #93401F;
+      --green: #10B981;
+      --gold: #F59E0B;
+      --blue: #38BDF8;
+      --border: rgba(242, 234, 223, 0.08);
+      --border-strong: rgba(193, 93, 48, 0.35);
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation */
+    .admin-navbar {
+      background: rgba(20, 18, 16, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+    .nav-brand span { color: var(--accent); }
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--elevated);
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+    .org-selector-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .org-select {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      outline: none;
+    }
+    .org-select option {
+      background: var(--card);
+      color: var(--text);
+    }
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn-top {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-top-ghost {
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-top-ghost:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .btn-top-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-top-primary:hover { background: var(--accent-deep); }
+
+    /* Layout */
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      flex: 1;
+    }
+    @media (max-width: 900px) {
+      .admin-layout { grid-template-columns: 1fr; }
+      .admin-sidebar { display: none; }
+    }
+
+    /* Sidebar */
+    .admin-sidebar {
+      background: #110F0D;
+      border-right: 1px solid var(--border);
+      padding: 20px 14px;
+    }
+    .sidebar-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 16px 0 8px 10px;
+    }
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .nav-item-btn {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+    .nav-item-btn:hover {
+      background: var(--card);
+      color: var(--text);
+    }
+    .nav-item-btn.active {
+      background: var(--elevated);
+      color: var(--accent);
+      font-weight: 700;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Main Area */
+    .admin-main {
+      padding: 28px 24px 60px;
+      max-width: 1120px;
+    }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .kpi-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .kpi-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .kpi-sub {
+      font-size: 0.7rem;
+      color: var(--green);
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Content Cards */
+    .card-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .card-block-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Quick Action Launchpad */
+    .launchpad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .launch-card {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: all 0.2s;
+    }
+    .launch-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      background: #2E2620;
+    }
+    .launch-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    .launch-info h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .launch-info p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Table & CRUD */
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .items-table th {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .items-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .item-title-cell {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .item-desc-cell {
+      font-size: 0.75rem;
+      color: var(--muted);
+      max-width: 320px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .price-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .badge-status-item {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .badge-active { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+    .badge-paused { background: rgba(239, 68, 68, 0.15); color: #F87171; }
+
+    /* Form Controls */
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn-save {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-save:hover { background: var(--accent-deep); }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="admin-navbar">
+    <a href="../index.html" class="nav-brand">
+      <div class="brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      Nolei <span>Admin Hub</span>
+    </a>
+
+    <!-- Organization Switcher -->
+    <div class="org-selector-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4"/></svg>
+      <select id="select-org" class="org-select" onchange="switchOrganization(this.value)">
+        <option value="botanico-bistro" selected>🌿 Botânico Bistrô (Gastronomia)</option>
+        <option value="hotel-imperial">🏨 Hotel Jardim Imperial (Hotelaria)</option>
+        <option value="clinica-dra-sofia">⭐ Clínica Dra. Sofia (Saúde & Estética)</option>
+        <option value="cafe-origem">☕ Café Origem (Fidelidade & Varejo)</option>
+        <option value="atelie-raizes">🧵 Ateliê Raízes do Cariri (Moda Autoral)</option>
+      </select>
+    </div>
+
+    <div class="nav-actions">
+      <a href="gerador-tags.html" class="btn-top btn-top-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Gerador de Tags
+      </a>
+      <a id="btn-open-live-demo" href="../demo/cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top btn-top-primary">
+        Ver Tela do Cliente
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-section-label">Gestão do Estabelecimento</div>
+      <ul class="sidebar-nav">
+        <li><button class="nav-item-btn active" onclick="switchAdminTab('overview', this)">📊 Visão Geral & Métricas</button></li>
+        <li><button class="nav-item-btn" onclick="switchAdminTab('catalog', this)">🍽️ Cardápio & Serviços</button></li>
+        <li><button class="nav-item-btn" onclick="switchAdminTab('settings', this)">⚙️ Dados & WhatsApp</button></li>
+      </ul>
+
+      <div class="sidebar-section-label">Painéis Específicos</div>
+      <ul class="sidebar-nav">
+        <li><a href="../demo/painel-restaurante.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">👨‍🍳 KDS Cozinha / Garçom</a></li>
+        <li><a href="../demo/painel-hotel.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">🛎️ Recepção / Governança</a></li>
+        <li><a href="../demo/painel-fidelidade.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">🎁 Balcão Fidelidade</a></li>
+        <li><a href="../demo/dashboard-restaurante.html" target="_blank" class="nav-item-btn" style="text-decoration:none;">📈 Relatório de ROI</a></li>
+      </ul>
+
+      <div class="sidebar-section-label">Infraestrutura Phygital</div>
+      <ul class="sidebar-nav">
+        <li><a href="gerador-tags.html" class="nav-item-btn" style="text-decoration:none;">🖨️ Gerador de Tags/QR</a></li>
+        <li><a href="../r.html?t=m04" target="_blank" class="nav-item-btn" style="text-decoration:none;">⚡ Testar NFC's ROUT</a></li>
+        <li><a href="status-supabase.html" class="nav-item-btn" style="text-decoration:none;">☁️ Diagnóstico de Nuvem</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+
+      <!-- Header Title -->
+      <div style="margin-bottom: 24px;">
+        <h2 id="current-org-name" style="font-size:1.6rem; font-weight:800;">🌿 Botânico Bistrô</h2>
+        <div id="current-org-segment" style="font-size:0.85rem; color:var(--muted);">Setor de Gastronomia • Juazeiro do Norte / Cariri</div>
+      </div>
+
+      <!-- KPI Grid -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Toques NFC Hoje <span>📶</span></div>
+          <div class="kpi-val" id="kpi-nfc">142</div>
+          <div class="kpi-sub">▲ +18% em relação a ontem</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Chamados Atendidos <span>🛎️</span></div>
+          <div class="kpi-val" id="kpi-calls">38</div>
+          <div class="kpi-sub">Tempo médio: 2.1 minutos</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Faturamento Comandas <span>💳</span></div>
+          <div class="kpi-val" id="kpi-rev">R$ 4.890</div>
+          <div class="kpi-sub">Ticket médio: R$ 86,40</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Índice de Avaliação <span>⭐</span></div>
+          <div class="kpi-val" id="kpi-rating">4.9 ★</div>
+          <div class="kpi-sub">184 reviews no Google Maps</div>
+        </div>
+      </div>
+
+      <!-- Quick Launchpad -->
+      <div class="card-block">
+        <div class="card-block-title">
+          <span>Acesso Rápido às Operações do Setor</span>
+        </div>
+        <div class="launchpad-grid" id="launchpad-container">
+          <!-- Injetado dinamicamente -->
+        </div>
+      </div>
+
+      <!-- Tab: Catalog Items -->
+      <div class="card-block" id="tab-catalog-box">
+        <div class="card-block-title">
+          <span id="catalog-title">Catálogo de Produtos & Preços</span>
+          <button class="btn-top btn-top-primary" onclick="alert('Item adicionado em modo de demonstração!')">+ Adicionar Item</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Item / Descrição</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="items-tbody">
+              <!-- Injetado dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Settings -->
+      <div class="card-block" id="tab-settings-box">
+        <div class="card-block-title">Dados Comerciais & WhatsApp</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome do Estabelecimento:</label>
+            <input type="text" id="set-name" class="form-input" value="Botânico Bistrô">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp de Recebimento de Pedidos:</label>
+            <input type="text" id="set-wa" class="form-input" value="87999099937">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Rede Wi-Fi do Local (SSID):</label>
+            <input type="text" id="set-wifi-ssid" class="form-input" value="Botanico_5G">
+          </div>
+          <div class="form-group">
+            <label>Senha do Wi-Fi:</label>
+            <input type="text" id="set-wifi-pass" class="form-input" value="botanicogourmet">
+          </div>
+        </div>
+        <button class="btn-save" onclick="alert('Configurações salvas no arquivo JSON local com sucesso!')">Salvar Alterações</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    const ORG_PROFILES = {
+      'botanico-bistro': {
+        name: '🌿 Botânico Bistrô',
+        segment: 'Gastronomia & Restaurantes • Juazeiro do Norte',
+        wa: '87999099937',
+        liveUrl: '../demo/cardapio.html?source=nfc&mesa=04',
+        kpis: { nfc: '142', calls: '38', rev: 'R$ 4.890', rating: '4.9 ★' },
+        launch: [
+          { icon: '👨‍🍳', title: 'Abrir KDS Cozinha & Salão', desc: 'Monitor de comandas com visualização em tempo real.', url: '../demo/painel-restaurante.html' },
+          { icon: '📱', title: 'Ver Cardápio Mesa 04', desc: 'Visualização exata do cliente com chamado de garçom.', url: '../demo/cardapio.html?source=nfc&mesa=04' },
+          { icon: '📈', title: 'Relatório Executivo de ROI', desc: 'Métricas de economia de equipe e giro de mesas.', url: '../demo/dashboard-restaurante.html' }
+        ],
+        items: [
+          { title: 'Bruschetta Caprese', desc: 'Pão rústico, tomate cereja confit e muçarela de búfala.', cat: 'Entradas', price: 'R$ 28,90', active: true },
+          { title: 'Risoto de Funghi Trufado', desc: 'Arroz arbóreo, cogumelos frescos e azeite trufado.', cat: 'Principais', price: 'R$ 58,90', active: true },
+          { title: 'Salmão Grelhado na Brasa', desc: 'Purê de batata-doce roxa e aspargos salteados.', cat: 'Principais', price: 'R$ 72,00', active: true },
+          { title: 'Gin Tônica Botânica', desc: 'Gin artesanal infusionado, tônica e pepino japonês.', cat: 'Bebidas', price: 'R$ 38,00', active: true }
+        ]
+      },
+      'hotel-imperial': {
+        name: '🏨 Hotel Jardim Imperial',
+        segment: 'Hotelaria & Pousadas Boutique • Juazeiro do Norte',
+        wa: '87999099937',
+        liveUrl: '../demo/hotel.html?source=nfc&quarto=412',
+        kpis: { nfc: '64', calls: '19', rev: 'R$ 2.450', rating: '4.8 ★' },
+        launch: [
+          { icon: '🛎️', title: 'Central da Governança', desc: 'Despacho de toalhas, arrumação e café no quarto.', url: '../demo/painel-hotel.html' },
+          { icon: '🛌', title: 'Concierge da Suíte 412', desc: 'Experiência de room service por aproximação.', url: '../demo/hotel.html?source=nfc&quarto=412' }
+        ],
+        items: [
+          { title: 'Club Sandwich Imperial', desc: 'Frango grelhado, bacon crocante e batatas rústicas.', cat: 'Room Service', price: 'R$ 45,00', active: true },
+          { title: 'Filé Mignon ao Madeira', desc: 'Com risoto de parmesão e brotos frescos.', cat: 'Room Service', price: 'R$ 89,00', active: true },
+          { title: 'Café da Manhã Colonial', desc: 'Cesta completa entregue no quarto no horário agendado.', cat: 'Café no Quarto', price: 'R$ 0,00', active: true }
+        ]
+      },
+      'clinica-dra-sofia': {
+        name: '⭐ Clínica Dra. Sofia Santos',
+        segment: 'Saúde, Dermatologia & Estética Avançada',
+        wa: '87999099937',
+        liveUrl: '../demo/avaliacao.html?source=nfc',
+        kpis: { nfc: '89', calls: '24', rev: '—', rating: '5.0 ★' },
+        launch: [
+          { icon: '⭐', title: 'Totem de Avaliações', desc: 'Filtro inteligente de 5 estrelas no balcão da recepção.', url: '../demo/avaliacao.html?source=nfc' },
+          { icon: '📋', title: 'Painel de Feedbacks Privados', desc: 'Ouvidoria de insatisfações antes de virarem reviews públicos.', url: '../demo/dashboard-avaliacoes.html' }
+        ],
+        items: [
+          { title: 'Filtro Google Maps 5★', desc: 'Direcionamento automático para notas 4 e 5 estrelas.', cat: 'Filtro Ético', price: 'Ativo', active: true },
+          { title: 'Canal Privado de Ouvidoria', desc: 'Captura de sugestões diretamente no WhatsApp da diretoria.', cat: 'SAC Privado', price: 'Ativo', active: true }
+        ]
+      },
+      'cafe-origem': {
+        name: '☕ Café Origem',
+        segment: 'Cafeterias, Varejo & Fidelidade',
+        wa: '87999099937',
+        liveUrl: '../demo/fidelidade.html?source=nfc',
+        kpis: { nfc: '210', calls: '45', rev: 'R$ 3.120', rating: '4.9 ★' },
+        launch: [
+          { icon: '🎁', title: 'Balcão de Pontuação', desc: 'Validação de selos e códigos de desconto anti-fraude.', url: '../demo/painel-fidelidade.html' },
+          { icon: '🏷️', title: 'Cartão do Cliente', desc: 'Cartela com 10 carimbos digitais sem aplicativo.', url: '../demo/fidelidade.html?source=nfc' }
+        ],
+        items: [
+          { title: 'Espresso Tradicional', desc: 'Resgate com 50 pontos acumulados.', cat: 'Recompensa', price: '50 pts', active: true },
+          { title: 'Fatia de Bolo Artesanal', desc: 'Resgate com 80 pontos acumulados.', cat: 'Recompensa', price: '80 pts', active: true },
+          { title: 'Frappuccino Especial', desc: 'Resgate com 120 pontos acumulados.', cat: 'Recompensa', price: '120 pts', active: true }
+        ]
+      },
+      'atelie-raizes': {
+        name: '🧵 Ateliê Raízes do Cariri',
+        segment: 'Moda Autoral, Couro & Artesanato Regional',
+        wa: '87999099937',
+        liveUrl: '../demo/storytelling-artesanato.html?source=nfc',
+        kpis: { nfc: '48', calls: '12', rev: 'R$ 6.200', rating: '5.0 ★' },
+        launch: [
+          { icon: '🏷️', title: 'Etiqueta Phygital da Peça', desc: 'História do mestre artesão e certificado numerado.', url: '../demo/storytelling-artesanato.html?source=nfc' },
+          { icon: '📱', title: 'Canal Direto de Encomendas', desc: 'Link de contato com o artesão para peças sob medida.', url: 'https://wa.me/5587999099937' }
+        ],
+        items: [
+          { title: 'Bolsa Mandacaru (Couro Legítimo)', desc: 'Peça Nº 07 de 50 • Curtimento vegetal com óleo natural.', cat: 'Coleção Raízes', price: 'R$ 380,00', active: true },
+          { title: 'Gibão Tradicional Sertanejo', desc: 'Costura manual ponto de sela feita sob medida.', cat: 'Exclusivo', price: 'R$ 650,00', active: true }
+        ]
+      }
+    };
+
+    function switchOrganization(orgId) {
+      const data = ORG_PROFILES[orgId] || ORG_PROFILES['botanico-bistro'];
+
+      document.getElementById('current-org-name').textContent = data.name;
+      document.getElementById('current-org-segment').textContent = data.segment;
+      document.getElementById('btn-open-live-demo').href = data.liveUrl;
+
+      // KPIs
+      document.getElementById('kpi-nfc').textContent = data.kpis.nfc;
+      document.getElementById('kpi-calls').textContent = data.kpis.calls;
+      document.getElementById('kpi-rev').textContent = data.kpis.rev;
+      document.getElementById('kpi-rating').textContent = data.kpis.rating;
+
+      // Settings inputs
+      document.getElementById('set-name').value = data.name.replace(/^[^s]+s/, '');
+      document.getElementById('set-wa').value = data.wa;
+
+      // Launchpad
+      const lp = document.getElementById('launchpad-container');
+      lp.innerHTML = data.launch.map(l => `
+        <a href="${l.url}" target="_blank" class="launch-card">
+          <div class="launch-icon">${l.icon}</div>
+          <div class="launch-info">
+            <h4>${l.title}</h4>
+            <p>${l.desc}</p>
+          </div>
+        </a>
+      `).join('');
+
+      // Catalog Table
+      const tb = document.getElementById('items-tbody');
+      tb.innerHTML = data.items.map((item, idx) => `
+        <tr>
+          <td>
+            <div class="item-title-cell">${item.title}</div>
+            <div class="item-desc-cell">${item.desc}</div>
+          </td>
+          <td><span style="font-size:0.75rem; color:var(--muted);">${item.cat}</span></td>
+          <td><span class="price-tag">${item.price}</span></td>
+          <td><span class="badge-status-item ${item.active ? 'badge-active' : 'badge-paused'}">${item.active ? 'Ativo' : 'Pausado'}</span></td>
+          <td>
+            <button onclick="toggleItemStatus(${idx})" style="background:none; border:1px solid var(--border); color:var(--muted); padding:4px 8px; border-radius:4px; font-size:0.72rem; cursor:pointer;">
+              Alternar Status
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleItemStatus(idx) {
+      alert('Status do item alternado no catálogo local!');
+    }
+
+    function switchAdminTab(tab, btn) {
+      document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const catBox = document.getElementById('tab-catalog-box');
+      const setBox = document.getElementById('tab-settings-box');
+
+      if (tab === 'overview') {
+        catBox.style.display = 'block';
+        setBox.style.display = 'block';
+      } else if (tab === 'catalog') {
+        catBox.style.display = 'block';
+        setBox.style.display = 'none';
+      } else if (tab === 'settings') {
+        catBox.style.display = 'none';
+        setBox.style.display = 'block';
+      }
+    }
+
+    // Inicializa na carga com Botânico Bistrô
+    switchOrganization('botanico-bistro');
+  </script>
+</body>
+</html>

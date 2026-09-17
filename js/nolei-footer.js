@@ -11,16 +11,16 @@
   'use strict';
 
   const PORTFOLIO_URL = 'https://portfolio-jr-lilac.vercel.app/';
-  const WHATSAPP_URL = 'https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado%20com%20a%20Nolei%20Creative.';
+  const WHATSAPP_URL = 'https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado%20com%20a%20GetKoda.'; 
 
   const footerStyle = `
     .nolei-unified-footer {
-      background: #0E0D0C;
-      border-top: 1px solid rgba(242, 234, 223, 0.08);
+      background: #0A0A0C;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding: 32px 20px 36px;
       color: #A2937E;
       font-size: 0.82rem;
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       width: 100%;
       margin-top: auto;
       box-sizing: border-box;
@@ -53,10 +53,10 @@
       transition: color 0.15s ease;
     }
     .nolei-footer-creator-link span {
-      color: #C15D30;
+      color: #0055FF;
     }
     .nolei-footer-creator-link:hover {
-      color: #C15D30;
+      color: #0055FF;
     }
     .nolei-footer-sub {
       color: #6E6355;
@@ -79,11 +79,11 @@
       color: #F2EADF;
     }
     .nolei-footer-nav a.highlight {
-      color: #C15D30;
+      color: #0055FF;
       font-weight: 600;
     }
     .nolei-footer-nav a.highlight:hover {
-      color: #D96D3B;
+      color: #38BDF8;
     }
   `;
 
@@ -94,7 +94,7 @@
           <div>
             Desenvolvido por 
             <a href="${PORTFOLIO_URL}" target="_blank" rel="noopener noreferrer" class="nolei-footer-creator-link" title="Acessar portfólio oficial do desenvolvedor">
-              Nolei <span>Creative</span>
+              GetKoda <span style="background:linear-gradient(90deg, #38BDF8 0%, #2DD4BF 50%, #A78BFA 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Phygital</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>
           </div>

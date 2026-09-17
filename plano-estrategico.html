@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plano Estratégico & Catálogo de Produtos — Nolei Creative NFC</title>
+  <title>Plano Estratégico & Catálogo de Produtos — GetKoda NFC</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,16 +12,16 @@
 
   <style>
     :root {
-      --bg-main: #141210;
-      --bg-card: #1C1814;
+      --bg-main: #0A0A0C;
+      --bg-card: rgba(18, 19, 26, 0.72);
       --bg-elevated: #26201A;
       --text-main: #F2EADF;
       --text-muted: #B8A996;
       --text-dim: #786B5A;
-      --accent: #C15D30;
-      --accent-deep: #93401F;
-      --accent-badge-bg: rgba(193, 93, 48, 0.15);
-      --accent-badge-border: rgba(193, 93, 48, 0.35);
+      --accent: #0055FF;
+      --accent-deep: #003DB8;
+      --accent-badge-bg: rgba(0, 85, 255, 0.15);
+      --accent-badge-border: rgba(0, 85, 255, 0.35);
       --gold: #F59E0B;
       --green: #34D399;
       --blue: #38BDF8;
@@ -89,7 +89,7 @@
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(193, 93, 48, 0.35);
+      box-shadow: 0 4px 14px rgba(0, 85, 255, 0.35);
       transition: background 0.15s, transform 0.15s;
     }
 
@@ -116,7 +116,7 @@
       right: 0;
       width: 240px;
       height: 100%;
-      background: radial-gradient(circle at 100% 0%, rgba(193, 93, 48, 0.22), transparent 70%);
+      background: radial-gradient(circle at 100% 0%, rgba(0, 85, 255, 0.22), transparent 70%);
       pointer-events: none;
     }
 
@@ -405,7 +405,7 @@
 
     /* Callout & Strategic Guide */
     .callout-box {
-      background: rgba(193, 93, 48, 0.10);
+      background: rgba(0, 85, 255, 0.10);
       border: 1px solid var(--accent-badge-border);
       border-radius: 12px;
       padding: 20px;
@@ -536,6 +536,7 @@
     }
   </style>
   <script src="js/nolei-companies.js"></script>
+  <link rel="stylesheet" href="css/getkoda-design-system.css">
 </head>
 <body>
 
@@ -577,7 +578,7 @@
       <div class="doc-meta-grid">
         <div>
           <div class="meta-item-label">Empresa</div>
-          <div class="meta-item-value">Nolei Creative</div>
+          <div class="meta-item-value">GetKoda</div>
         </div>
         <div>
           <div class="meta-item-label">Mercado Inicial</div>
@@ -601,7 +602,7 @@
         Visão Estratégica e Arquitetura Tecnológica
       </h2>
       <p class="p-lead">
-        A Nolei Creative conecta ambientes físicos ao ecossistema digital com <strong>fricção zero</strong>. Em vez de forçar o cliente a baixar aplicativos pesados nas lojas virtuais, toda a navegação acontece no navegador nativo do smartphone em menos de 1 segundo através de chips NFC de alta indução ou QR Codes contextuais.
+        A GetKoda conecta ambientes físicos ao ecossistema digital com <strong>fricção zero</strong>. Em vez de forçar o cliente a baixar aplicativos pesados nas lojas virtuais, toda a navegação acontece no navegador nativo do smartphone em menos de 1 segundo através de chips NFC de alta indução ou QR Codes contextuais.
       </p>
 
       <div class="grid-3">
@@ -732,7 +733,7 @@
         Catálogo Completo de Possibilidades (As 15 Ideias Validadas)
       </h2>
       <p class="p-lead">
-        Todas as 15 frentes de aplicação mapeadas para a tecnologia NFC/QR da Nolei Creative:
+        Todas as 15 frentes de aplicação mapeadas para a tecnologia NFC/QR da GetKoda:
       </p>
 
       <div class="ideas-grid">
@@ -880,7 +881,7 @@
       <div class="callout-box">
         <div class="callout-title">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Equação de Lucro da Nolei Creative:
+          Equação de Lucro da GetKoda:
         </div>
         <div class="callout-body">
           Com apenas <strong>1 hotel de 20 quartos</strong> + <strong>3 restaurantes médios</strong> + <strong>5 clínicas</strong>, você gera <strong>R$ 3.200 de Setup líquido na entrada</strong> e garante <strong>R$ 1.350 a R$ 1.800 de receita recorrente mensal (MRR)</strong>, com custo de servidor praticamente zero (arquitetura web estática de alta velocidade).
@@ -962,17 +963,17 @@
 
   <!-- Tela de Bloqueio: Acesso Restrito (Requer Login) -->
   <div id="auth-blocked-screen" style="display:none; min-height:85vh; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:var(--bg-card, #1C1814); border:1px solid rgba(193, 93, 48, 0.4); border-radius:16px; padding:44px 32px; max-width:460px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.6);">
-      <div style="width:56px; height:56px; border-radius:14px; background:#26201A; border:1px solid rgba(193, 93, 48, 0.35); display:flex; align-items:center; justify-content:center; color:var(--accent, #C15D30); margin:0 auto 16px;">
+    <div style="background:var(--bg-card, #1C1814); border:1px solid rgba(0, 85, 255, 0.40); border-radius:16px; padding:44px 32px; max-width:460px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+      <div style="width:56px; height:56px; border-radius:14px; background:#26201A; border:1px solid rgba(0, 85, 255, 0.35); display:flex; align-items:center; justify-content:center; color:var(--accent, #C15D30); margin:0 auto 16px;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
       <div style="font-family:var(--font-mono, monospace); font-size:0.72rem; font-weight:700; color:#EF4444; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:6px;">[Acesso Restrito ao Administrador]</div>
       <h2 style="font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:10px;">Você precisa estar logado</h2>
       <p style="font-size:0.86rem; color:var(--text-muted, #B8A996); line-height:1.55; margin-bottom:26px;">
-        O <strong>Plano Estratégico & Catálogo</strong> é um documento confidencial da Nolei Creative. Apenas administradores autenticados possuem permissão de visualização.
+        O <strong>Plano Estratégico & Catálogo</strong> é um documento confidencial da GetKoda. Apenas administradores autenticados possuem permissão de visualização.
       </p>
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <a href="admin/index.html?login=1" style="background:var(--accent, #C15D30); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(193,93,48,0.4);">
+        <a href="admin/index.html?login=1" style="background:var(--accent, #C15D30); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(0, 85, 255, 0.40);">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
           Fazer Login como Administrador
         </a>

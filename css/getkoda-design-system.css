@@ -1,0 +1,429 @@
+/* ==========================================================================
+   🌌 GETKODA — DESIGN SYSTEM & IDENTIDADE VISUAL (VERSÃO 2.0)
+   Fonte da verdade oficial para componentes, cores, vidros e tipografia
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  /* --- 1. SUPERFÍCIES & FUNDOS --- */
+  --gk-canvas-light: #E5E5E3;            /* Noomo Mineral Canvas */
+  --gk-canvas-dark: #0A0A0C;             /* OLED Obsidian Deep Base */
+  --gk-surface-oled: #111113;            /* Painel Preto Puro */
+  --gk-surface-velvet: #0F172A;          /* Deep Velvet Surface */
+  --gk-surface-card: rgba(18, 19, 26, 0.72); /* Soft Glass Fill Dark */
+  --gk-surface-card-elevated: rgba(26, 28, 38, 0.85);
+  
+  /* --- 2. O ESPECTRO GETKODA (GRADIENTE DE ASSINATURA) --- */
+  --gk-electric-blue: #0055FF;
+  --gk-cyber-teal: #0D9488;
+  --gk-deep-violet: #6D28D9;
+  --gk-gradient-spectrum: linear-gradient(135deg, #0055FF 0%, #0D9488 52%, #6D28D9 100%);
+  --gk-gradient-text: linear-gradient(90deg, #0055FF 0%, #0D9488 50%, #8B5CF6 100%);
+  --gk-gradient-accent: linear-gradient(90deg, #38BDF8 0%, #2DD4BF 50%, #A78BFA 100%);
+
+  /* --- 3. PILARES CORE (PRODUTOS) --- */
+  /* Pilar 1: IA Core (Agent as a Service) */
+  --gk-pilar-ai: #6D28D9;
+  --gk-pilar-ai-light: #A78BFA;
+  --gk-pilar-ai-spotlight: rgba(139, 92, 246, 0.16);
+
+  /* Pilar 2: Aquisição & Sedes Digitais Phygital */
+  --gk-pilar-web: #0055FF;
+  --gk-pilar-web-light: #60A5FA;
+  --gk-pilar-web-spotlight: rgba(59, 130, 246, 0.16);
+
+  /* Pilar 3: Design Magnético & Ecossistemas */
+  --gk-pilar-eco: #0D9488;
+  --gk-pilar-eco-light: #2DD4BF;
+  --gk-pilar-eco-spotlight: rgba(20, 184, 166, 0.16);
+
+  /* --- 4. CORES TIPOGRÁFICAS --- */
+  --gk-text-pure: #FFFFFF;
+  --gk-text-main: #F1F5F9;
+  --gk-text-muted: #94A3B8;
+  --gk-text-dim: #64748B;
+
+  /* --- 5. BORDAS & VIDROS (CYBER GLASSMORPHISM) --- */
+  --gk-glass-border: rgba(255, 255, 255, 0.12);
+  --gk-glass-border-hover: rgba(255, 255, 255, 0.28);
+  --gk-glass-blur: blur(28px);
+  --gk-glass-blur-deep: blur(40px);
+  --gk-radius-pill: 9999px;
+  --gk-radius-card: 28px;
+  --gk-radius-md: 16px;
+  --gk-radius-sm: 10px;
+
+  /* --- 6. SISTEMA DE LUZ & RELEVO (LIQUID GLASS BUTTONS) --- */
+  --btn-radius: 9999px;
+  --btn-radius-square: 18px;
+  --glass-bg: linear-gradient(135deg, rgba(0, 85, 255, 0.10) 0%, rgba(109, 40, 217, 0.12) 100%);
+  --glass-bg-hover: linear-gradient(135deg, rgba(0, 85, 255, 0.22) 0%, rgba(109, 40, 217, 0.25) 100%);
+  --glass-top-light: inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
+  --glass-rim: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+  --glass-relief: inset 0 -12px 18px -12px rgba(20, 30, 50, 0.25);
+  --glass-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+  --glass-shadow-hover: 0 16px 32px rgba(0, 85, 255, 0.28), 0 16px 32px rgba(109, 40, 217, 0.22);
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 72%, rgba(255, 255, 255, 0) 100%);
+  --glass-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+
+  /* --- 7. FONTES --- */
+  --gk-font-display: 'Syne', sans-serif;
+  --gk-font-body: 'Plus Jakarta Sans', sans-serif;
+  --gk-font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ==========================================================================
+   TIPOGRAFIA EDITORIAL HIGH-END
+   ========================================================================== */
+.gk-display,
+.syne-title {
+  font-family: var(--gk-font-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.gk-display-hero {
+  font-family: var(--gk-font-display);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+}
+
+.gk-body,
+.jakarta-body {
+  font-family: var(--gk-font-body);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Micro-selos & Kickers editoriais */
+.gk-kicker {
+  font-family: var(--gk-font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gk-electric-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gk-kicker::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* Texto com Gradiente de Assinatura GetKoda */
+.gk-text-gradient {
+  background: var(--gk-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.gk-text-accent {
+  background: var(--gk-gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   SISTEMA DE BOTÕES LIQUID GLASS (.lg-base)
+   ========================================================================== */
+.lg-base {
+  border-radius: var(--btn-radius);
+  font-family: var(--gk-font-body);
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+  isolation: isolate;
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow), var(--glass-top-light), var(--glass-rim), var(--glass-relief);
+  border: none;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  position: relative;
+  cursor: pointer;
+  padding: 14px 28px;
+  text-decoration: none !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Reflexo Especular Curvo (Sheen) */
+.lg-base::before {
+  content: "";
+  pointer-events: none;
+  background: var(--glass-sheen);
+  border-radius: 9999px 9999px 90% 90%;
+  height: 44%;
+  position: absolute;
+  top: 3px;
+  left: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+/* Conteúdo interno */
+.lg-base > span,
+.lg-base > * {
+  z-index: 2;
+  text-shadow: var(--glass-text-shadow);
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+  position: relative;
+}
+
+/* Hover e Active */
+.lg-base:hover {
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover), inset 0 1.5px 0 #ffffffe6, inset 0 0 0 1px #ffffff73, var(--glass-relief);
+  transform: translateY(-2px);
+  color: #FFFFFF !important;
+}
+
+.lg-base:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Variação Primária Sólida Translúcida (High-Contrast Hero) */
+.lg-primary {
+  background: linear-gradient(135deg, rgba(0, 85, 255, 0.88) 0%, rgba(13, 148, 136, 0.88) 50%, rgba(109, 40, 217, 0.88) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 14px 34px rgba(0, 85, 255, 0.4), inset 0 1.5px 0 rgba(255, 255, 255, 0.8);
+}
+
+.lg-primary:hover {
+  background: linear-gradient(135deg, rgba(0, 85, 255, 1) 0%, rgba(13, 148, 136, 1) 50%, rgba(109, 40, 217, 1) 100%);
+  box-shadow: 0 18px 42px rgba(0, 85, 255, 0.55), 0 0 24px rgba(13, 148, 136, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Variação Compacta para Navbar e Tabelas */
+.lg-sm {
+  padding: 8px 18px;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   ARQUITETURA DE CARTÕES GLASSMORPHIC & SPOTLIGHT DINÂMICO
+   ========================================================================== */
+.gk-card-glass {
+  background: var(--gk-surface-card);
+  border: 1px solid var(--gk-glass-border);
+  border-radius: var(--gk-radius-card);
+  backdrop-filter: var(--gk-glass-blur);
+  -webkit-backdrop-filter: var(--gk-glass-blur);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+/* Borda cáustica reflexiva no topo */
+.gk-card-glass::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Spotlight dinâmico que segue o cursor do mouse */
+.gk-spotlight-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.gk-card-glass:hover .gk-spotlight-layer {
+  opacity: 1;
+}
+
+.gk-card-glass:hover {
+  transform: translateY(-4px);
+  border-color: var(--gk-glass-border-hover);
+  box-shadow: 0 28px 60px -20px rgba(0, 0, 0, 0.7), 
+              0 0 30px -10px rgba(0, 85, 255, 0.18);
+}
+
+/* Moldura de Vidro para Ícones / Hardware (Glass Frame) */
+.gk-glass-frame {
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Backdrop Glow Circular */
+.gk-backdrop-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+/* ==========================================================================
+   TRILHA DE CIRCUITO LATERAL (CIRCUIT TRACER)
+   ========================================================================== */
+.gk-circuit-tracer {
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gk-circuit-fill {
+  width: 100%;
+  height: 0%;
+  background: var(--gk-gradient-spectrum);
+  border-radius: 9999px;
+  box-shadow: 0 0 12px rgba(0, 85, 255, 0.8), 0 0 6px rgba(13, 148, 136, 0.8);
+  transition: height 0.1s linear;
+}
+
+.gk-circuit-label {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center right;
+  font-family: var(--gk-font-mono);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  color: var(--gk-text-muted);
+  white-space: nowrap;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+@media (max-width: 900px) {
+  .gk-circuit-tracer {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   FORMULÁRIOS & FLOATING LABELS GETKODA
+   ========================================================================== */
+.gk-input-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.gk-floating-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--gk-glass-border);
+  border-radius: 12px;
+  color: var(--gk-text-pure);
+  padding: 16px 18px;
+  font-family: var(--gk-font-body);
+  font-size: 0.92rem;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.gk-floating-input:focus {
+  border-color: var(--gk-electric-blue);
+  background: rgba(0, 85, 255, 0.05);
+  box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.18), 0 10px 24px -8px rgba(0, 85, 255, 0.3);
+}
+
+.gk-floating-label {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--gk-font-body);
+  font-size: 0.88rem;
+  color: var(--gk-text-muted);
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gk-floating-input:focus ~ .gk-floating-label,
+.gk-floating-input:not(:placeholder-shown) ~ .gk-floating-label {
+  top: -10px;
+  left: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gk-pilar-web-light);
+  background: var(--gk-surface-oled);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 85, 255, 0.25);
+}
+
+/* ==========================================================================
+   ILUMINAÇÃO DE FUNDO ORB (MESH NEON GLOWS)
+   ========================================================================== */
+.gk-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.gk-orb-blue {
+  background: radial-gradient(circle, #0055FF 0%, rgba(0, 85, 255, 0) 70%);
+}
+
+.gk-orb-teal {
+  background: radial-gradient(circle, #0D9488 0%, rgba(13, 148, 136, 0) 70%);
+}
+
+.gk-orb-violet {
+  background: radial-gradient(circle, #6D28D9 0%, rgba(109, 40, 217, 0) 70%);
+}

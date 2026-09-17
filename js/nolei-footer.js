@@ -124,6 +124,8 @@
   }
 
   function mountFooter() {
+    // Não renderiza em páginas de demonstração
+    if (window.location.pathname.includes('/demo/') || window.location.pathname.startsWith('/demo')) return;
     injectStyleOnce();
 
     // 1. Elemento com ID explícito #nolei-footer

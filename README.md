@@ -4,13 +4,16 @@ Ecossistema físico-digital de alta performance desenvolvido pela **Nolei Creati
 
 ---
 
-## 🌐 Acesso Rápido em Produção
+## 🌐 Acesso Rápido em Produção (URLs Amigáveis)
 
 * **Página Institucional**: [https://nolei-creative-nfc.vercel.app](https://nolei-creative-nfc.vercel.app)
-* **Hub de Demonstrações & Soluções**: [https://nolei-creative-nfc.vercel.app/admin/index.html](https://nolei-creative-nfc.vercel.app/admin/index.html)
-* **Termos de Uso & Privacidade LGPD (Público)**: [https://nolei-creative-nfc.vercel.app/termos-lgpd.html](https://nolei-creative-nfc.vercel.app/termos-lgpd.html)
-* **Portal Exclusivo do Estabelecimento (Exemplo)**: [https://nolei-creative-nfc.vercel.app/empresa.html?slug=botanico-bistro](https://nolei-creative-nfc.vercel.app/empresa.html?slug=botanico-bistro)
-* **Área Privada de Gestão (Requer Login `admin` / `nolei2026`)**: [https://nolei-creative-nfc.vercel.app/admin/index.html?login=1](https://nolei-creative-nfc.vercel.app/admin/index.html?login=1)
+* **Hub Comercial de Demonstrações**: [https://nolei-creative-nfc.vercel.app/hub](https://nolei-creative-nfc.vercel.app/hub) (ou `/admin`)
+* **Portal Exclusivo do Estabelecimento**: [https://nolei-creative-nfc.vercel.app/empresa/botanico-bistro](https://nolei-creative-nfc.vercel.app/empresa/botanico-bistro) (ou `/e/botanico-bistro`)
+* **Acesso do Gestor / Login**: [https://nolei-creative-nfc.vercel.app/login](https://nolei-creative-nfc.vercel.app/login)
+* **Termos de Uso & LGPD**: [https://nolei-creative-nfc.vercel.app/termos](https://nolei-creative-nfc.vercel.app/termos) (ou `/lgpd`)
+* **Plano Estratégico Comercial**: [https://nolei-creative-nfc.vercel.app/plano](https://nolei-creative-nfc.vercel.app/plano)
+* **Manual Técnico & Arquitetura**: [https://nolei-creative-nfc.vercel.app/docs](https://nolei-creative-nfc.vercel.app/docs)
+* **Roteador NFC**: [https://nolei-creative-nfc.vercel.app/r?t=m04](https://nolei-creative-nfc.vercel.app/r?t=m04)
 
 ---
 
@@ -49,7 +52,7 @@ O ecossistema é estruturado em **3 camadas modulares**:
                                    │
 ┌──────────────────────────────────▼─────────────────────────────────────┐
 │                 3. ÁREA PRIVADA & FERRAMENTAS ADMIN                    │
-│  /admin/index.html [Aba Privada] (Requer Login 'admin' / 'nolei2026')  │
+│  /hub [Aba Privada] (Requer Autenticação de Gestor Nolei)               │
 │   ├── Lista de Contratos & Clientes Reais Cadastrados                  │
 │   ├── Assistente Google Meu Negócio (Extração de Link 5★ e QR)         │
 │   ├── Plano Estratégico & Catálogo (plano-estrategico.html)            │
@@ -66,7 +69,7 @@ O ecossistema é estruturado em **3 camadas modulares**:
 
 O sistema diferencia estritamente os recursos abertos aos clientes dos utilitários de gestão comercial e documentos estratégicos da Nolei Creative:
 
-| Recurso | Acesso Público | Usuário Autenticado (`admin` / `nolei2026`) |
+| Recurso | Acesso Público | Gestor Autenticado (Credencial Nolei) |
 |---|:---:|:---:|
 | **Demonstrações de Clientes (Demos)** | ✅ Disponível ("Abrir Demonstração") | ✅ Disponível |
 | **Acesso a Painéis ("Entrar na Empresa")** | 🔒 Oculto para Visitantes | ✅ Visível após Login |
@@ -124,8 +127,7 @@ Todos os displays são gravados a laser e equipados com chips semicondutores **N
 
 ---
 
-## 🔑 Credenciais de Demonstração & Testes
+## 🔑 Acesso & Credenciamento de Novos Clientes
 
-* **Usuário**: `admin`
-* **Senha**: `nolei2026`
-* **Ativação Rápida de Login via URL**: Acesse `/admin/index.html?login=1` para disparar o modal autenticador imediatamente.
+* **Acesso Administrativo**: Disponível para gestores e parceiros credenciados através de `/login`.
+* **Solicitar Cadastro**: Novos estabelecimentos podem solicitar credenciamento diretamente via WhatsApp Comercial [https://wa.me/5587999099937](https://wa.me/5587999099937).

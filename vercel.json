@@ -1,0 +1,32 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/hub", "destination": "/admin/index.html" },
+    { "source": "/login", "destination": "/admin/index.html?login=1" },
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/login", "destination": "/admin/index.html?login=1" },
+    { "source": "/termos", "destination": "/termos-lgpd.html" },
+    { "source": "/lgpd", "destination": "/termos-lgpd.html" },
+    { "source": "/privacidade", "destination": "/termos-lgpd.html" },
+    { "source": "/plano", "destination": "/plano-estrategico.html" },
+    { "source": "/catalogo", "destination": "/plano-estrategico.html" },
+    { "source": "/docs", "destination": "/docs.html" },
+    { "source": "/manual", "destination": "/docs.html" },
+    { "source": "/r", "destination": "/r.html" },
+    { "source": "/empresa/:slug", "destination": "/empresa.html?slug=:slug" },
+    { "source": "/e/:slug", "destination": "/empresa.html?slug=:slug" },
+    { "source": "/demo/cardapio", "destination": "/demo/cardapio.html" },
+    { "source": "/demo/hotel", "destination": "/demo/hotel.html" },
+    { "source": "/demo/avaliacao", "destination": "/demo/avaliacao.html" },
+    { "source": "/demo/fidelidade", "destination": "/demo/fidelidade.html" },
+    { "source": "/demo/storytelling", "destination": "/demo/storytelling-artesanato.html" },
+    { "source": "/demo/storytelling-artesanato", "destination": "/demo/storytelling-artesanato.html" },
+    { "source": "/cardapio", "destination": "/demo/cardapio.html?source=nfc&org=botanico-bistro" },
+    { "source": "/hotel", "destination": "/demo/hotel.html?source=nfc&org=jardim-imperial" },
+    { "source": "/avaliacao", "destination": "/demo/avaliacao.html?source=nfc&org=dra-sofia" },
+    { "source": "/fidelidade", "destination": "/demo/fidelidade.html?source=nfc&org=cafe-origem" },
+    { "source": "/artesanato", "destination": "/demo/storytelling-artesanato.html?source=nfc&org=atelie-raizes" }
+  ]
+}

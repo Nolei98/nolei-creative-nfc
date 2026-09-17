@@ -913,6 +913,24 @@
 
         </div>
 
+        
+        <!-- Regras de Governança e Manutenção do Projeto -->
+        <div style="background: rgba(193, 93, 48, 0.08); border: 1px solid rgba(193, 93, 48, 0.3); border-radius: 12px; padding: 20px 24px; margin-bottom: 30px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h3 style="font-size:1.05rem; font-weight:800; color:var(--accent); margin:0;">Regras de Governança e Manutenção Contínua</h3>
+          </div>
+          <p style="font-size:0.84rem; color:var(--color-ink-muted); line-height:1.5; margin-bottom:10px;">
+            Diretrizes obrigatórias registradas em <code style="color:#fff;">.agent/rules/project_maintenance_rules.md</code> e <code style="color:#fff;">.cursorrules</code>:
+          </p>
+          <ul style="font-size:0.82rem; color:var(--color-ink-main); line-height:1.6; padding-left:20px;">
+            <li><strong>Alterações de Estrutura:</strong> Atualizar obrigatoriamente o <code>README.md</code> ao adicionar, renomear ou remover páginas, rotas ou módulos.</li>
+            <li><strong>Alterações de Fluxo ou Logística Operacional:</strong> Atualizar obrigatoriamente este documento (<code>docs.html</code>) ao alterar jornadas, acessos ou regras operacionais.</li>
+            <li><strong>Segregação Estrita:</strong> Visitantes não autenticados visualizam apenas o botão "Abrir Demonstração". O botão "Entrar na Empresa" e painéis de retaguarda só aparecem após login.</li>
+            <li><strong>Títulos Limpos:</strong> Tags <code>&lt;title&gt;</code> não devem conter emojis para preservar a identidade profissional das abas do navegador.</li>
+          </ul>
+        </div>
+
         <!-- Tabela Detalhada de Ferramentas -->
         <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:14px;">Matriz de Módulos e Ferramentas do Hub</h3>
         <table class="doc-table">
@@ -927,7 +945,7 @@
           <tbody>
             <tr style="background: rgba(193, 93, 48, 0.08);">
               <td><strong>Hub Comercial (Soluções Prontas)</strong></td>
-              <td><span style="color:#34D399; font-size:0.75rem; font-weight:700;">● Acesso Livre (Demos)</span></td>
+              <td><span style="color:#34D399; font-size:0.75rem; font-weight:700;">● Demos Públicas / Painéis Restritos</span></td>
               <td>Catálogo com fotos dos 7 segmentos comerciais, pitches e links de teste.</td>
               <td><a href="admin/index.html" target="_blank" style="color:var(--accent); font-weight:800;">Abrir Hub</a></td>
             </tr>

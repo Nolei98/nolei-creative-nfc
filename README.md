@@ -14,6 +14,16 @@ Ecossistema físico-digital de alta performance desenvolvido pela **Nolei Creati
 
 ---
 
+## 📋 Regras Mandatórias de Governança & Manutenção
+
+Para assegurar a confiabilidade arquitetural e a sincronização contínua do ecossistema, são estabelecidas as seguintes regras:
+1. **Alterações Estruturais no Projeto**: Sempre que houver adição, renomeação, exclusão de arquivos, rotas, módulos ou componentes de hardware, o arquivo [README.md](file:///d:/Workspace/Colonizacao/README.md) deve ser obrigatoriamente atualizado.
+2. **Alterações de Fluxo e Logística Operacional**: Sempre que forem modificados fluxos de interação, autenticação, jornada do usuário ou processos de atendimento (cozinha, recepção, caixa, governança), a documentação técnica interna [docs.html](file:///d:/Workspace/Colonizacao/docs.html) deve ser obrigatoriamente atualizada.
+3. **Higienização de Títulos (`<title>`)**: É estritamente proibido o uso de emotes ou emojis em tags `<title>` em qualquer página do projeto, mantendo as abas do navegador corporativas e limpas.
+4. **Isolamento de Gestão no Hub**: O Hub de Demonstrações exibe exclusivamente experiências para clientes finais para visitantes deslogados. Painéis de gestão ("Entrar na Empresa", KDS, governança, métricas) são restritos a administradores autenticados.
+
+---
+
 ## 🏛️ Arquitetura do Sistema
 
 O ecossistema é estruturado em **3 camadas modulares**:
@@ -58,7 +68,8 @@ O sistema diferencia estritamente os recursos abertos aos clientes dos utilitár
 
 | Recurso | Acesso Público | Usuário Autenticado (`admin` / `nolei2026`) |
 |---|:---:|:---:|
-| **Mostruário de Demonstrações** | ✅ Disponível | ✅ Disponível |
+| **Demonstrações de Clientes (Demos)** | ✅ Disponível ("Abrir Demonstração") | ✅ Disponível |
+| **Acesso a Painéis ("Entrar na Empresa")** | 🔒 Oculto para Visitantes | ✅ Visível após Login |
 | **Páginas de Demonstração Ativas** | ✅ Disponível | ✅ Disponível |
 | **Demonstrações em Desenvolvimento** | 🚧 Bloqueado com Badge | 🚧 Bloqueado com Badge |
 | **Termos de Uso & LGPD** | ✅ Disponível | ✅ Disponível |

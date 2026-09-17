@@ -623,6 +623,76 @@
       border-color: var(--accent);
     }
 
+    
+    /* DEMO Buttons and Disabled State on Solutions */
+    .card-action-demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #FFFFFF !important;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 9px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      width: fit-content;
+      margin-top: 4px;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 12px rgba(193, 93, 48, 0.35);
+    }
+    .card-action-demo-btn:hover {
+      background: #A84920;
+      border-color: #A84920;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(193, 93, 48, 0.5);
+    }
+
+    .solution-card.card-disabled {
+      filter: grayscale(100%) opacity(0.55);
+      cursor: not-allowed;
+      border-color: rgba(242, 234, 223, 0.08) !important;
+      box-shadow: none !important;
+    }
+    .solution-card.card-disabled:hover {
+      transform: none !important;
+      border-color: rgba(242, 234, 223, 0.08) !important;
+      box-shadow: none !important;
+    }
+    .solution-card.card-disabled:hover .card-photo {
+      transform: none !important;
+      opacity: 0.7 !important;
+    }
+    .card-action-btn-disabled {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #8E8271;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 14px;
+      border-radius: 8px;
+      width: fit-content;
+      margin-top: 4px;
+      cursor: not-allowed;
+      user-select: none;
+    }
+    .badge-em-dev {
+      background: rgba(142, 130, 113, 0.18);
+      border: 1px solid rgba(142, 130, 113, 0.35);
+      color: #A2937E;
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
     /* HARDWARE SECTION */
     .hardware-section {
       margin-bottom: 60px;
@@ -774,7 +844,7 @@
       max-width: 1200px;
       margin: 0 auto 36px;
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr;
       gap: 40px;
     }
 
@@ -1108,14 +1178,13 @@
       </a>
 
       <div class="header-actions">
-        <a href="admin/index.html" class="nav-hub-btn">
-          <span>Hub de Demonstrações</span>
+        <a href="admin/index.html?login=1" class="nav-hub-btn">
+          <span>Hub de Demonstrações [Login]</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
     </div>
   </header>
-  </div>
 
   <div class="page-container">
 
@@ -1147,7 +1216,7 @@
       <span style="font-size: 0.8rem; color: var(--text-muted);">Aplicações físico-digitais para estabelecimentos</span>
     </div>
 
-    <!-- Solutions Grid (Informational Pillars) -->
+        <!-- Solutions Grid (Informational Pillars) -->
     <div class="solutions-grid reveal-stagger">
 
       <!-- 1. Google Avaliações -->
@@ -1161,9 +1230,15 @@
             <h3 class="card-title">Google Avaliações & Reputação</h3>
             <p class="card-desc">Captação direta de avaliações 5 estrelas oficiais no Google Maps com filtro ético inteligente que preserva a imagem da sua marca.</p>
           </div>
-          <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Filtro de satisfação anti-críticas públicas
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Filtro de satisfação anti-críticas públicas
+            </div>
+            <a href="demo/avaliacao.html?source=nfc&org=dra-sofia" target="_blank" class="card-action-demo-btn">
+              <span>Abrir Demonstração [DEMO]</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -1179,9 +1254,15 @@
             <h3 class="card-title">Cardápio & Salão Inteligente</h3>
             <p class="card-desc">Comanda por mesa, chamada de garçom em tempo real, pedidos direto no celular e monitor de pedidos para a equipe da cozinha.</p>
           </div>
-          <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Giro de mesas mais rápido e zero filas
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Giro de mesas mais rápido e zero filas
+            </div>
+            <a href="demo/cardapio.html?source=nfc&org=botanico-bistro" target="_blank" class="card-action-demo-btn">
+              <span>Abrir Demonstração [DEMO]</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -1197,9 +1278,15 @@
             <h3 class="card-title">Concierge & Governança</h3>
             <p class="card-desc">Room service 24h na cabeceira da cama, agendamento de café colonial e chamados de toalhas e manutenção sem usar ramal telefônico.</p>
           </div>
-          <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Experiência 5 estrelas para o hóspede
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Experiência 5 estrelas para o hóspede
+            </div>
+            <a href="demo/hotel.html?source=nfc&org=jardim-imperial" target="_blank" class="card-action-demo-btn">
+              <span>Abrir Demonstração [DEMO]</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -1215,9 +1302,15 @@
             <h3 class="card-title">Clube Fidelidade Digital</h3>
             <p class="card-desc">Pontuação automática no balcão, cartela de selos gamificada que abre direto no navegador sem instalar aplicativo na Play Store ou App Store.</p>
           </div>
-          <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Retenção e compras recorrentes
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Retenção e compras recorrentes
+            </div>
+            <a href="demo/fidelidade.html?source=nfc&org=cafe-origem" target="_blank" class="card-action-demo-btn">
+              <span>Abrir Demonstração [DEMO]</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -1233,95 +1326,68 @@
             <h3 class="card-title">Storytelling & Certificado Phygital</h3>
             <p class="card-desc">Etiquetas costuradas em couro ou tecidos contando a história do artesão, tiragem numerada e certificado criptográfico de autenticidade.</p>
           </div>
-          <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Valor agregado e procedência comprovada
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Valor agregado e procedência comprovada
+            </div>
+            <a href="demo/storytelling-artesanato.html?source=nfc&org=atelie-raizes" target="_blank" class="card-action-demo-btn">
+              <span>Abrir Demonstração [DEMO]</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
+
       <!-- 6. Barbearias, Salões & Estética -->
-      <div class="solution-card">
+      <div class="solution-card card-disabled">
         <div class="card-photo-box">
           <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80" alt="Barbearia e Salão" class="card-photo" loading="lazy">
         </div>
         <div class="card-details">
           <div>
-            <div class="card-meta" style="display:flex; align-items:center; gap:8px;">Barbearias, Salões & Estética <span style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.35); color:#F59E0B; font-size:0.62rem; font-weight:700; padding:2px 7px; border-radius:8px;">EM DESENVOLVIMENTO</span></div>
+            <div class="card-meta" style="display:flex; align-items:center; gap:8px;">Barbearias, Salões & Estética <span class="badge-em-dev">EM DESENVOLVIMENTO</span></div>
             <h3 class="card-title">Barbearia & Agendamento Phygital</h3>
             <p class="card-desc">Tag colada na bancada ou espelho: o cliente aproxima o smartphone para consultar selos de corte acumulados, agendar o próximo horário sem fila e conectar ao Wi-Fi.</p>
           </div>
-          <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Agendamento ágil e fidelização no espelho
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#A2937E; font-size:0.75rem; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              Agendamento ágil e fidelização no espelho
+            </div>
+            <div class="card-action-btn-disabled">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              <span>[Em Desenvolvimento]</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- 7. Imobiliárias, Construtoras & Plantões -->
-      <div class="solution-card">
+      <div class="solution-card card-disabled">
         <div class="card-photo-box">
           <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Imóveis e Construtoras" class="card-photo" loading="lazy">
         </div>
         <div class="card-details">
           <div>
-            <div class="card-meta" style="display:flex; align-items:center; gap:8px;">Imobiliárias, Construtoras & Plantões <span style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.35); color:#F59E0B; font-size:0.62rem; font-weight:700; padding:2px 7px; border-radius:8px;">EM DESENVOLVIMENTO</span></div>
+            <div class="card-meta" style="display:flex; align-items:center; gap:8px;">Imobiliárias, Construtoras & Plantões <span class="badge-em-dev">EM DESENVOLVIMENTO</span></div>
             <h3 class="card-title">Placa Phygital de Imóveis & Tour Virtual</h3>
             <p class="card-desc">Placa inteligente instalada na fachada ou stand de vendas: o visitante aproxima o celular e acessa a ficha técnica, tour 360°, tabela de valores e contato direto com o corretor.</p>
           </div>
-          <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#34D399; font-size:0.75rem; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Captação de leads qualificados 24 horas
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card-benefit-row" style="display:flex; align-items:center; gap:6px; color:#A2937E; font-size:0.75rem; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              Captação de leads qualificados 24 horas
+            </div>
+            <div class="card-action-btn-disabled">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              <span>[Em Desenvolvimento]</span>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
-
-    <!-- CTA Banner Direcionando para o Hub Comercial -->
-    <div class="demo-hub-banner reveal" style="background:var(--bg-panel); border:1px solid var(--border-subtle); border-radius:var(--radius-card); padding:28px 32px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; margin-bottom:50px;">
-      <div>
-        <div style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:4px;">Ambiente de Demonstrações & Gestão</div>
-        <h3 style="font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:6px;">Deseja experimentar a plataforma em ação?</h3>
-        <p style="font-size:0.88rem; color:var(--text-muted); max-width:640px; line-height:1.5;">
-          Acesse o Hub Comercial da Nolei para testar as demonstrações interativas de cada segmento e conhecer a área de gestão da empresa.
-        </p>
-      </div>
-      <a href="admin/index.html" class="nav-google-btn" style="padding:14px 26px; font-size:0.9rem; font-weight:700; text-decoration:none; border-radius:30px; background:var(--accent); color:#fff; border:1px solid var(--accent); box-shadow:0 4px 18px rgba(193,93,48,0.4); display:inline-flex; align-items:center; gap:8px;">
-        <span>Acessar Hub de Demonstrações</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-
-    <!-- SEÇÃO DE PEÇAS FÍSICAS & HARDWARE -->
-    <section class="hardware-section reveal" id="hardware">
-      <div class="section-label-row" style="margin-bottom: 6px;">
-        <span class="section-label" style="color:var(--gold);">Hardware & Displays Físicos</span>
-        <span style="font-size: 0.8rem; color: var(--text-muted);">Acabamento Premium em Acrílico & Madeira</span>
-      </div>
-      <h2 style="font-size: 1.45rem; margin-bottom: 6px;">Modelos Físicos de Apresentação</h2>
-      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-        Displays resistentes e sofisticados com chip NFC embutido de alta sensibilidade e gravação com a sua marca.
-      </p>
-
-      <div class="hardware-grid reveal-stagger">
-
-        <!-- 1. Display Acrílico L-Shape Menu -->
-        <div class="hardware-card">
-          <img src="assets/images/display-menu-acrilico.jpg" alt="Display Acrílico L-Shape Menu Digital" class="hardware-photo" loading="lazy">
-          <div class="hardware-body">
-            <div>
-              <span class="hardware-badge">Restaurantes & Bares</span>
-              <h4 class="hardware-title">Display L-Shape Black Piano</h4>
-              <p class="hardware-spec">Acrílico preto brilhante com NFC + QR gravados a laser. Posicionamento fixo de centro de mesa.</p>
-            </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(193,93,48,0.07); border:1px solid rgba(193,93,48,0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
-              <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
-                NFC na Prática:
-              </div>
-              O cliente encosta o topo do smartphone no display da mesa para abrir o cardápio, fazer pedidos e chamar o garçom sem tocar em papel.
-            </div>
-          </div>
         </div>
 
         <!-- 2. Totem Google Reviews -->
@@ -1476,13 +1542,7 @@
           <div class="footer-brand-title">Nolei <span>Creative</span></div>
           <p class="footer-brand-desc">Ecossistemas inteligentes com hardware sob medida, tecnologia NFC de alta performance e aplicações web projetadas para máxima retenção e vendas.</p>
         </div>
-        <div>
-          <div class="footer-heading">Navegação</div>
-          <ul class="footer-links">
-            <li><a href="admin/index.html" class="footer-link">Hub de Demonstrações & Soluções</a></li>
-            <li><a href="#hardware" class="footer-link">Displays & Peças Físicas</a></li>
-          </ul>
-        </div>
+        
         <div>
           <div class="footer-heading">Contato & Projetos</div>
           <ul class="footer-links">

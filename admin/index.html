@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#141210">
 
   <!-- Primary Meta Tags -->
-  <title>✨ Hub de Demonstrações & Soluções Phygital — Nolei Creative</title>
+  <title>Hub de Demonstrações & Soluções Phygital — Nolei Creative</title>
   <meta name="title" content="✨ Hub de Demonstrações & Soluções Phygital — Nolei Creative">
   <meta name="description" content="Mostruário oficial de soluções prontas para 7 segmentos comerciais com displays inteligentes, tecnologia NFC e aplicações sem aplicativo.">
   <meta name="keywords" content="hub de demonstracoes nfc, solucoes phygital, nolei creative, mostruario nfc">
@@ -219,6 +219,23 @@
       flex-direction: column;
       transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
     }
+    
+    .demo-card.card-in-dev {
+      filter: grayscale(100%) opacity(0.55);
+      cursor: not-allowed;
+      border-color: rgba(242, 234, 223, 0.08) !important;
+      box-shadow: none !important;
+    }
+    .demo-card.card-in-dev:hover {
+      transform: none !important;
+      border-color: rgba(242, 234, 223, 0.08) !important;
+      box-shadow: none !important;
+    }
+    .demo-card.card-in-dev .demo-cover-img {
+      transform: none !important;
+      opacity: 0.7 !important;
+    }
+
     .demo-card:hover {
       transform: translateY(-4px);
       border-color: var(--border-strong);
@@ -676,17 +693,19 @@
       const container = document.getElementById('demos-container');
       if (!container) return;
 
+      const isAuth = window.NoleiCompanies && window.NoleiCompanies.isAdminAuthenticated();
+
       container.innerHTML = DEMOS_CATALOG.map(item => {
         const isDev = item.inDevelopment === true;
         const devBadge = isDev 
-          ? `<div style="position:absolute; top:12px; right:12px; z-index:4; background:#F59E0B; color:#0E0D0C; font-size:0.68rem; font-weight:800; padding:4px 10px; border-radius:20px; letter-spacing:0.04em; display:flex; align-items:center; gap:4px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          ? `<div style="position:absolute; top:12px; right:12px; z-index:4; background:#36302A; color:#A2937E; border:1px solid rgba(242,234,223,0.12); font-size:0.68rem; font-weight:800; padding:4px 10px; border-radius:20px; letter-spacing:0.04em; display:flex; align-items:center; gap:4px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
               Em Desenvolvimento
             </div>`
           : '';
 
         const actionBtn = isDev
-          ? `<button type="button" disabled class="btn-demo-primary" style="opacity:0.65; cursor:not-allowed; background:#1C1814; border:1px solid rgba(245,158,11,0.35); color:#F59E0B; pointer-events:auto;" title="Esta demonstração está em desenvolvimento e não está disponível para abertura.">
+          ? `<button type="button" disabled class="btn-demo-primary" style="opacity:0.6; cursor:not-allowed; background:#1C1814; border:1px solid rgba(255,255,255,0.08); color:#8E8271; pointer-events:auto;" title="Esta demonstração está em desenvolvimento.">
               <span>Em Desenvolvimento</span>
             </button>`
           : `<a href="${item.demoUrl}" target="_blank" class="btn-demo-primary">
@@ -694,10 +713,18 @@
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>`;
 
+        // "Entrar na Empresa" só aparece para usuários administradores autenticados e se não estiver em dev
+        const secondaryBtn = (isAuth && !isDev)
+          ? `<a href="../empresa.html?slug=${item.slug}" target="_blank" class="btn-demo-secondary">
+              <span>Entrar na Empresa</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>`
+          : '';
+
         return `
-          <div class="demo-card ${isDev ? 'card-in-dev' : ''}" style="${isDev ? 'border-color: rgba(245,158,11,0.22);' : ''}">
+          <div class="demo-card ${isDev ? 'card-in-dev' : ''}">
             <div class="demo-cover-box">
-              <img src="${item.imageUrl}" alt="${item.name}" class="demo-cover-img" loading="lazy" style="${isDev ? 'filter: saturate(0.85);' : ''}">
+              <img src="${item.imageUrl}" alt="${item.name}" class="demo-cover-img" loading="lazy">
               <div class="demo-cover-overlay"></div>
               <div class="demo-badge-sector">${item.sector}</div>
               ${devBadge}
@@ -705,7 +732,7 @@
 
             <div class="demo-body">
               <div class="demo-header">
-                <div class="demo-icon-box" style="${isDev ? 'border-color:rgba(245,158,11,0.3); color:#F59E0B;' : ''}">${item.iconSvg}</div>
+                <div class="demo-icon-box" style="${isDev ? 'border-color:rgba(255,255,255,0.08); color:#8E8271;' : ''}">${item.iconSvg}</div>
                 <div class="demo-header-info">
                   <h3>${item.name}</h3>
                 </div>
@@ -715,10 +742,7 @@
 
               <div class="demo-card-actions">
                 ${actionBtn}
-                <a href="../empresa.html?slug=${item.slug}" target="_blank" class="btn-demo-secondary">
-                  <span>Entrar na Empresa</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </a>
+                ${secondaryBtn}
               </div>
             </div>
           </div>
@@ -732,6 +756,9 @@
       const isAuth = window.NoleiCompanies && window.NoleiCompanies.isAdminAuthenticated();
       const navActions = document.getElementById('admin-nav-actions');
       const tabPrivateBtn = document.getElementById('btn-tab-private');
+
+      // Atualiza mostruário de demonstrações para exibir ou esconder os botões de entrar na empresa
+      renderDemosShowcase();
 
       if (isAuth) {
         // Estado LOGADO: Mostra tab privada, botão novo cliente e botão de logout
@@ -825,6 +852,7 @@
         window.NoleiCompanies.logoutAdmin();
       }
       switchAdminTab('demos', document.getElementById('btn-tab-demos'));
+      updateAuthState();
     }
 
     // Renderiza lista de clientes cadastrados (Área Privada)

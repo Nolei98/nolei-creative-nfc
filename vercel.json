@@ -3,21 +3,77 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/hub", "destination": "/admin" },
-    { "source": "/login", "destination": "/admin?login=1" },
-    { "source": "/admin/login", "destination": "/admin?login=1" },
-    { "source": "/termos", "destination": "/termos-lgpd" },
-    { "source": "/lgpd", "destination": "/termos-lgpd" },
-    { "source": "/privacidade", "destination": "/termos-lgpd" },
-    { "source": "/plano", "destination": "/plano-estrategico" },
-    { "source": "/catalogo", "destination": "/plano-estrategico" },
-    { "source": "/manual", "destination": "/docs" },
-    { "source": "/empresa/:slug", "destination": "/empresa?slug=:slug" },
-    { "source": "/e/:slug", "destination": "/empresa?slug=:slug" },
-    { "source": "/cardapio", "destination": "/demo/cardapio?source=nfc&org=botanico-bistro" },
-    { "source": "/hotel", "destination": "/demo/hotel?source=nfc&org=jardim-imperial" },
-    { "source": "/avaliacao", "destination": "/demo/avaliacao?source=nfc&org=dra-sofia" },
-    { "source": "/fidelidade", "destination": "/demo/fidelidade?source=nfc&org=cafe-origem" },
-    { "source": "/artesanato", "destination": "/demo/storytelling-artesanato?source=nfc&org=atelie-raizes" }
+    {
+      "source": "/hubs/login",
+      "destination": "/admin?tab=login"
+    },
+    {
+      "source": "/hubs",
+      "destination": "/admin"
+    },
+    {
+      "source": "/hub",
+      "destination": "/admin"
+    },
+    {
+      "source": "/login",
+      "destination": "/admin?login=1"
+    },
+    {
+      "source": "/admin/login",
+      "destination": "/admin?login=1"
+    },
+    {
+      "source": "/termos",
+      "destination": "/termos-lgpd"
+    },
+    {
+      "source": "/lgpd",
+      "destination": "/termos-lgpd"
+    },
+    {
+      "source": "/privacidade",
+      "destination": "/termos-lgpd"
+    },
+    {
+      "source": "/plano",
+      "destination": "/plano-estrategico"
+    },
+    {
+      "source": "/catalogo",
+      "destination": "/plano-estrategico"
+    },
+    {
+      "source": "/manual",
+      "destination": "/docs"
+    },
+    {
+      "source": "/empresa/:slug",
+      "destination": "/empresa?slug=:slug"
+    },
+    {
+      "source": "/e/:slug",
+      "destination": "/empresa?slug=:slug"
+    },
+    {
+      "source": "/cardapio",
+      "destination": "/demo/cardapio?source=nfc&org=botanico-bistro"
+    },
+    {
+      "source": "/hotel",
+      "destination": "/demo/hotel?source=nfc&org=jardim-imperial"
+    },
+    {
+      "source": "/avaliacao",
+      "destination": "/demo/avaliacao?source=nfc&org=dra-sofia"
+    },
+    {
+      "source": "/fidelidade",
+      "destination": "/demo/fidelidade?source=nfc&org=cafe-origem"
+    },
+    {
+      "source": "/artesanato",
+      "destination": "/demo/storytelling-artesanato?source=nfc&org=atelie-raizes"
+    }
   ]
 }

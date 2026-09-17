@@ -7,9 +7,10 @@ Ecossistema físico-digital de alta performance desenvolvido pela **Nolei Creati
 ## 🌐 Acesso Rápido em Produção (URLs Amigáveis)
 
 * **Página Institucional**: [https://nolei-creative-nfc.vercel.app](https://nolei-creative-nfc.vercel.app)
-* **Hub Comercial de Demonstrações**: [https://nolei-creative-nfc.vercel.app/hub](https://nolei-creative-nfc.vercel.app/hub) (ou `/admin`)
+* **Hubs de Soluções & Acesso**: [https://nolei-creative-nfc.vercel.app/hubs](https://nolei-creative-nfc.vercel.app/hubs) (ou `/admin`)
 * **Portal Exclusivo do Estabelecimento**: [https://nolei-creative-nfc.vercel.app/empresa/botanico-bistro](https://nolei-creative-nfc.vercel.app/empresa/botanico-bistro) (ou `/e/botanico-bistro`)
-* **Acesso do Gestor / Login**: [https://nolei-creative-nfc.vercel.app/login](https://nolei-creative-nfc.vercel.app/login)
+* **Acesso do Gestor / Login**: [https://nolei-creative-nfc.vercel.app/login](https://nolei-creative-nfc.vercel.app/login) (ou `/hubs/login`)
+* **Portfólio Oficial do Criador**: [https://portfolio-jr-lilac.vercel.app](https://portfolio-jr-lilac.vercel.app)
 * **Termos de Uso & LGPD**: [https://nolei-creative-nfc.vercel.app/termos](https://nolei-creative-nfc.vercel.app/termos) (ou `/lgpd`)
 * **Plano Estratégico Comercial**: [https://nolei-creative-nfc.vercel.app/plano](https://nolei-creative-nfc.vercel.app/plano)
 * **Manual Técnico & Arquitetura**: [https://nolei-creative-nfc.vercel.app/docs](https://nolei-creative-nfc.vercel.app/docs)
@@ -23,7 +24,8 @@ Para assegurar a confiabilidade arquitetural e a sincronização contínua do ec
 1. **Alterações Estruturais no Projeto**: Sempre que houver adição, renomeação, exclusão de arquivos, rotas, módulos ou componentes de hardware, o arquivo [README.md](file:///d:/Workspace/Colonizacao/README.md) deve ser obrigatoriamente atualizado.
 2. **Alterações de Fluxo e Logística Operacional**: Sempre que forem modificados fluxos de interação, autenticação, jornada do usuário ou processos de atendimento (cozinha, recepção, caixa, governança), a documentação técnica interna [docs.html](file:///d:/Workspace/Colonizacao/docs.html) deve ser obrigatoriamente atualizada.
 3. **Higienização de Títulos (`<title>`)**: É estritamente proibido o uso de emotes ou emojis em tags `<title>` em qualquer página do projeto, mantendo as abas do navegador corporativas e limpas.
-4. **Isolamento de Gestão no Hub**: O Hub de Demonstrações exibe exclusivamente experiências para clientes finais para visitantes deslogados. Painéis de gestão ("Entrar na Empresa", KDS, governança, métricas) são restritos a administradores autenticados.
+4. **Isolamento de Gestão nos Hubs**: A rota `/hubs` exibe por padrão a tela de Acesso aos Hubs (login integrado solicitando Usuário + Senha de Acesso e botão "Solicitar cadastro" via WhatsApp) e convite sugestivo para explorar as Soluções Prontas sem login. Painéis de gestão ("Entrar na Empresa", KDS, governança, métricas e clientes reais) são restritos a administradores autenticados.
+5. **Componente Modular de Rodapé (`nolei-footer.js`)**: Todas as subpáginas utilizam o script compartilhado `/js/nolei-footer.js`, conectando a marca "Nolei Creative" ao portfólio oficial do criador ([portfolio-jr-lilac.vercel.app](https://portfolio-jr-lilac.vercel.app/)), mantendo apenas a home-page com layout de rodapé exclusivo.
 
 ---
 

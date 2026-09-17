@@ -591,8 +591,8 @@
  </a>
 
  <div class="top-nav-links">
-        <a href="admin/index.html" class="btn-top-link" style="color:var(--accent); font-weight:700;">
-          ← Voltar ao Hub Admin
+        <a href="/hubs" class="btn-top-link" style="color:var(--accent); font-weight:700;">
+          ← Voltar aos Hubs
         </a>
         <button onclick="window.NoleiCompanies.logoutAdmin(); window.location.reload();" class="btn-top-link" style="background:transparent; border:1px solid rgba(239,68,68,0.4); color:#FCA5A5; cursor:pointer; font-weight:700;" title="Encerrar sessão">
           Deslogar
@@ -616,6 +616,7 @@
  <li><a href="#hardware-modelos" class="sidebar-link">7. Displays & Modelos Físicos</a></li>
  <li><a href="#faq" class="sidebar-link">8. Dúvidas Frequentes (FAQ)</a></li>
         <li><a href="#termos-lgpd" class="sidebar-link">9. Termos de Uso & LGPD</a></li>
+        <li><a href="#governanca" class="sidebar-link">10. Governança & Manutenção</a></li>
       </ul>
  </aside>
 
@@ -1135,6 +1136,43 @@
       </div>
     </section>
 
+    <!-- Section 10: Governança, Roteamento & Manutenção Contínua -->
+    <section id="governanca" class="doc-section">
+      <span class="section-tag tag-gestao">Governança & Arquitetura</span>
+      <h2 class="section-title">10. Regras de Governança & Manutenção Contínua</h2>
+      <p class="section-desc">Diretrizes arquiteturais para manutenção do ecossistema, integridade de rotas amigáveis, segurança de credenciais e sincronização de documentações.</p>
+
+      <div class="feature-card" style="margin-bottom: 20px;">
+        <div class="feature-card-title">1. Estrutura de Rotas Amigáveis (Vercel Rewrites)</div>
+        <p class="feature-card-desc" style="margin-bottom: 8px;">A plataforma adota convenções limpas e amigáveis sem expor extensões <code>.html</code>:</p>
+        <ul style="font-size:0.82rem; color:var(--color-ink-muted); padding-left:20px; line-height:1.6;">
+          <li><code>/hubs</code>: Central de acesso aos Hubs e catálogo de Soluções Prontas.</li>
+          <li><code>/empresa/:slug</code> ou <code>/e/:slug</code>: Portal exclusivo do estabelecimento cliente.</li>
+          <li><code>/login</code> ou <code>/hubs/login</code>: Tela dedicada de autenticação do gestor.</li>
+          <li><code>/termos</code> ou <code>/lgpd</code>: Termos de Uso e Política de Privacidade.</li>
+          <li><code>/plano</code>: Plano Estratégico Comercial (exclusivo para administradores).</li>
+          <li><code>/docs</code>: Manual Técnico e Arquitetura do Sistema.</li>
+        </ul>
+      </div>
+
+      <div class="feature-card" style="margin-bottom: 20px;">
+        <div class="feature-card-title">2. Acesso aos Hubs & Credenciais de Gestor</div>
+        <p class="feature-card-desc" style="margin-bottom: 8px;">A tela de login integrada na rota <code>/hubs</code> solicita explicitamente <strong>Usuário</strong> e <strong>Senha de Acesso</strong>. É estritamente proibido exibir credenciais pré-preenchidas na interface do usuário.</p>
+        <p class="feature-card-desc">Visitantes não autenticados contam com o botão <strong>"Solicitar cadastro"</strong> conectado diretamente ao WhatsApp comercial da Nolei Creative e um banner convidativo para explorar as <strong>Soluções Prontas por Área</strong> sem necessidade de login.</p>
+      </div>
+
+      <div class="feature-card" style="margin-bottom: 20px;">
+        <div class="feature-card-title">3. Componente Modular de Rodapé (nolei-footer.js)</div>
+        <p class="feature-card-desc" style="margin-bottom: 8px;">Para eliminar redundância de código e garantir modularidade, todas as 16 subpáginas da plataforma importam o componente unificado <code>/js/nolei-footer.js</code>.</p>
+        <p class="feature-card-desc">A menção à <strong>Nolei Creative</strong> em todos os rodapés direciona de forma padronizada para o portfólio oficial do criador: <a href="https://portfolio-jr-lilac.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:700;">portfolio-jr-lilac.vercel.app</a>. Apenas a home-page institucional retém seu rodapé expandido exclusivo.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-title">4. Demonstrações em Desenvolvimento</div>
+        <p class="feature-card-desc">Cards de projetos em construção exibem o badge <code>EM DESENVOLVIMENTO</code> posicionado de forma limpa no cabeçalho (sem cobrir imagens ou títulos), visual em escala de cinza suave (55% de opacidade sem efeitos de hover/transform) e botões inativos com reticências: <code>Em Desenvolvimento...</code>.</p>
+      </div>
+    </section>
+
   </main>
 
  </div>
@@ -1181,11 +1219,11 @@
         A <strong>Documentação Técnica & Manual de Arquitetura</strong> é de acesso restrito à equipe técnica da Nolei Creative. Apenas administradores autenticados possuem permissão.
       </p>
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <a href="admin/index.html?login=1" style="background:var(--accent, #C15D30); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(193,93,48,0.4);">
+        <a href="/hubs" style="background:var(--accent, #C15D30); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(193,93,48,0.4);">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
           Fazer Login como Administrador
         </a>
-        <a href="index.html" style="background:var(--color-ink-panel-2, #2A231C); color:var(--color-ink-muted, #A2937E); border:1px solid var(--border, rgba(242,234,223,0.08)); text-decoration:none; font-weight:600; font-size:0.82rem; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center;">
+        <a href="/" style="background:var(--color-ink-panel-2, #2A231C); color:var(--color-ink-muted, #A2937E); border:1px solid var(--border, rgba(242,234,223,0.08)); text-decoration:none; font-weight:600; font-size:0.82rem; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center;">
           Voltar para o Início Público
         </a>
       </div>
@@ -1216,5 +1254,6 @@
     })();
   </script>
 
+  <script src="/js/nolei-footer.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#141210">
 
   <!-- Primary Meta Tags -->
-  <title>Hub de Demonstrações & Soluções Phygital — Nolei Creative</title>
+  <title>Hubs — Nolei Creative</title>
   <meta name="title" content="✨ Hub de Demonstrações & Soluções Phygital — Nolei Creative">
   <meta name="description" content="Mostruário oficial de soluções prontas para 7 segmentos comerciais com displays inteligentes, tecnologia NFC e aplicações sem aplicativo.">
   <meta name="keywords" content="hub de demonstracoes nfc, solucoes phygital, nolei creative, mostruario nfc">
@@ -438,21 +438,23 @@
 
   <!-- Top Navbar -->
   <header class="admin-navbar">
-    <a href="../index.html" class="nav-brand">
+    <a href="/" class="nav-brand">
       <div class="brand-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
       </div>
-      Nolei <span>Admin Hub</span>
+      Nolei <span>Creative</span>
     </a>
 
     <!-- Top Navigation Tabs Principais -->
     <div class="header-main-tabs" id="admin-main-tabs">
-      <button class="tab-nav-btn active" id="btn-tab-demos" onclick="switchAdminTab('demos', this)">
+      <button class="tab-nav-btn active" id="btn-tab-login" onclick="switchAdminTab('login', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Entrar
+      </button>
+      <button class="tab-nav-btn" id="btn-tab-demos" onclick="switchAdminTab('demos', this)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         Soluções Prontas
       </button>
-      
-      <!-- Apenas visível quando logado -->
       <button class="tab-nav-btn private-btn" id="btn-tab-private" style="display:none;" onclick="switchAdminTab('private', this)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         Clientes Cadastrados
@@ -465,6 +467,58 @@
   </header>
 
   <div class="admin-container">
+
+    <!-- ================================================================= -->
+    <!-- TAB 0: ACESSO AO HUB (Login Integrado com User + Senha)           -->
+    <!-- ================================================================= -->
+    <div id="tab-login-box" style="display:block;">
+      <div style="max-width:440px; margin:20px auto 40px; text-align:center;">
+        <div class="card-block" style="padding:34px 28px; border-color:rgba(193,93,48,0.35); box-shadow:0 16px 40px rgba(0,0,0,0.6);">
+          <div style="width:52px; height:52px; border-radius:14px; background:#2A231C; border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; color:var(--accent); margin:0 auto 14px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h2 style="font-size:1.35rem; font-weight:800; color:#fff;">Acesso aos Hubs</h2>
+          <p style="font-size:0.84rem; color:var(--muted); margin:6px 0 24px;">Digite suas credenciais de gestor para acessar a lista de clientes e painéis.</p>
+          
+          <form onsubmit="handlePrivateLogin(event)" style="display:flex; flex-direction:column; gap:14px; text-align:left;">
+            <div>
+              <label style="font-size:0.75rem; font-weight:600; color:var(--muted);">Usuário:</label>
+              <input type="text" id="login-user" class="form-input" placeholder="Digite seu usuário" required style="margin-top:4px;">
+            </div>
+            <div>
+              <label style="font-size:0.75rem; font-weight:600; color:var(--muted);">Senha de Acesso:</label>
+              <input type="password" id="login-pass" class="form-input" placeholder="Digite sua senha de acesso" required style="margin-top:4px;">
+            </div>
+            <button type="submit" class="btn-top btn-top-primary" style="margin-top:6px; padding:12px; justify-content:center; font-size:0.88rem; font-weight:700; width:100%;">
+              Entrar no Hub
+            </button>
+          </form>
+
+          <div style="margin-top:22px; padding-top:16px; border-top:1px solid var(--border); font-size:0.78rem; color:var(--muted);">
+            <span>Ainda não possui conta ou é novo parceiro?</span>
+            <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20meu%20cadastro%20e%20ser%20cliente%20da%20Nolei%20Creative." target="_blank" class="btn-top" style="display:flex; align-items:center; justify-content:center; gap:6px; margin-top:8px; color:var(--accent); border-color:var(--border-strong); text-decoration:none; font-weight:700;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Solicitar cadastro
+            </a>
+          </div>
+        </div>
+
+        <!-- Sugestivo: Conhecer Soluções Prontas por Área -->
+        <div onclick="switchAdminTab('demos', document.getElementById('btn-tab-demos'))" style="cursor:pointer; margin-top:20px; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; text-align:left; transition:all 0.2s ease;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Acesso de Demonstração</div>
+              <div style="font-size:0.95rem; font-weight:800; color:#fff;">Deseja ver as Soluções Prontas por Área?</div>
+              <p style="font-size:0.78rem; color:var(--muted); margin-top:2px;">Conheça cardápios, hotelaria, totens de avaliação e fidelidade sem login.</p>
+            </div>
+            <span class="btn-top btn-top-ghost" style="flex-shrink:0; white-space:nowrap; border-color:var(--border-strong); color:var(--accent); font-size:0.75rem;">
+              Ver Soluções →
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <!-- ================================================================= -->
     <!-- TAB 1: SOLUÇÕES PHYGITAL PRONTAS (Mostruário de Demonstrações)   -->
@@ -620,7 +674,7 @@
     </div>
   </div>
 
-  <script src="../js/nolei-companies.js"></script>
+  <script src="/js/nolei-companies.js"></script>
   <script>
     // Catálogo oficial de Soluções com nomes amigáveis e ações
     const DEMOS_CATALOG = [
@@ -700,16 +754,11 @@
 
       container.innerHTML = DEMOS_CATALOG.map(item => {
         const isDev = item.inDevelopment === true;
-        const devBadge = isDev 
-          ? `<div style="position:absolute; top:12px; right:12px; z-index:4; background:#36302A; color:#A2937E; border:1px solid rgba(242,234,223,0.12); font-size:0.68rem; font-weight:800; padding:4px 10px; border-radius:20px; letter-spacing:0.04em; display:flex; align-items:center; gap:4px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-              Em Desenvolvimento
-            </div>`
-          : '';
 
         const actionBtn = isDev
           ? `<button type="button" disabled class="btn-demo-primary" style="opacity:0.6; cursor:not-allowed; background:#1C1814; border:1px solid rgba(255,255,255,0.08); color:#8E8271; pointer-events:auto;" title="Esta demonstração está em desenvolvimento.">
-              <span>Em Desenvolvimento</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              <span>Em Desenvolvimento...</span>
             </button>`
           : `<a href="${item.demoUrl}" target="_blank" class="btn-demo-primary">
               <span>Abrir Demonstração</span>
@@ -730,13 +779,13 @@
               <img src="${item.imageUrl}" alt="${item.name}" class="demo-cover-img" loading="lazy">
               <div class="demo-cover-overlay"></div>
               <div class="demo-badge-sector">${item.sector}</div>
-              ${devBadge}
             </div>
 
             <div class="demo-body">
               <div class="demo-header">
                 <div class="demo-icon-box" style="${isDev ? 'border-color:rgba(255,255,255,0.08); color:#8E8271;' : ''}">${item.iconSvg}</div>
                 <div class="demo-header-info">
+                  ${isDev ? '<div style="margin-bottom:5px;"><span style="background:#26211C; border:1px solid rgba(242,234,223,0.12); color:#A2937E; font-size:0.62rem; font-weight:800; padding:2px 7px; border-radius:6px; letter-spacing:0.04em;">EM DESENVOLVIMENTO</span></div>' : ''}
                   <h3>${item.name}</h3>
                 </div>
               </div>
@@ -759,17 +808,19 @@
       const isAuth = window.NoleiCompanies && window.NoleiCompanies.isAdminAuthenticated();
       const navActions = document.getElementById('admin-nav-actions');
       const tabPrivateBtn = document.getElementById('btn-tab-private');
+      const tabLoginBtn = document.getElementById('btn-tab-login');
 
-      // Atualiza mostruário de demonstrações para exibir ou esconder os botões de entrar na empresa
+      // Atualiza mostruário de demonstrações
       renderDemosShowcase();
 
       if (isAuth) {
-        // Estado LOGADO: Mostra tab privada, botão novo cliente e botão de logout
+        // Estado LOGADO: Oculta aba de login, mostra Clientes Cadastrados
+        if (tabLoginBtn) tabLoginBtn.style.display = 'none';
         if (tabPrivateBtn) tabPrivateBtn.style.display = 'inline-flex';
         if (navActions) {
           navActions.innerHTML = `
             <span style="font-size:0.75rem; color:var(--muted); display:flex; align-items:center; gap:6px; margin-right:4px;">
-              <span style="width:7px; height:7px; border-radius:50%; background:#10B981;"></span> Admin
+              <span style="width:7px; height:7px; border-radius:50%; background:#10B981;"></span> Gestor
             </span>
             <a href="novo-cliente.html" class="btn-top btn-top-primary">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -782,31 +833,82 @@
           `;
         }
       } else {
-        // Estado NÃO LOGADO: Esconde tab privada e botões restritos, mostra botão de login
+        // Estado NÃO LOGADO: Mostra aba de login, esconde aba privada e ações restritas
+        if (tabLoginBtn) tabLoginBtn.style.display = 'inline-flex';
         if (tabPrivateBtn) tabPrivateBtn.style.display = 'none';
         if (navActions) {
-          navActions.innerHTML = `
-            <button onclick="openLoginModal()" class="btn-top" style="color:var(--accent); border-color:var(--border-strong); cursor:pointer;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              Área Restrita (Login)
-            </button>
-          `;
+          navActions.innerHTML = '';
         }
       }
-    }
-
-    function openLoginModal() {
-      document.getElementById('login-modal').style.display = 'flex';
-      document.getElementById('login-pass').value = '';
-      document.getElementById('login-pass').focus();
     }
 
     function logoutAdmin() {
       if (window.NoleiCompanies) {
         window.NoleiCompanies.logoutAdmin();
       }
-      switchAdminTab('demos', document.getElementById('btn-tab-demos'));
       updateAuthState();
+      switchAdminTab('login', document.getElementById('btn-tab-login'));
+    }
+
+    function logoutPrivateArea() {
+      logoutAdmin();
+    }
+
+    function handlePrivateLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('login-user') ? document.getElementById('login-user').value : 'admin';
+      const pass = document.getElementById('login-pass').value;
+
+      if (window.NoleiCompanies && window.NoleiCompanies.loginAdmin(user, pass)) {
+        updateAuthState();
+        switchAdminTab('private', document.getElementById('btn-tab-private'));
+      } else {
+        alert('Credenciais incorretas! Verifique seu usuário e senha de acesso, ou solicite cadastro.');
+      }
+    }
+
+    // 3. Gerenciador de Abas Principais
+    function switchAdminTab(tab, btn) {
+      document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const loginBox = document.getElementById('tab-login-box');
+      const demosBox = document.getElementById('tab-demos-box');
+      const privateBox = document.getElementById('tab-private-box');
+
+      if (loginBox) loginBox.style.display = 'none';
+      if (demosBox) demosBox.style.display = 'none';
+      if (privateBox) privateBox.style.display = 'none';
+
+      if (tab === 'login') {
+        if (loginBox) loginBox.style.display = 'block';
+      } else if (tab === 'demos') {
+        if (demosBox) demosBox.style.display = 'block';
+        renderDemosShowcase();
+      } else if (tab === 'private') {
+        if (!window.NoleiCompanies || !window.NoleiCompanies.isAdminAuthenticated()) {
+          switchAdminTab('login', document.getElementById('btn-tab-login'));
+          return;
+        }
+        if (privateBox) privateBox.style.display = 'block';
+        renderPrivateClients();
+      }
+    }
+
+    // Inicialização da Página de Hubs
+    updateAuthState();
+    const isAlreadyAuth = window.NoleiCompanies && window.NoleiCompanies.isAdminAuthenticated();
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTab = urlParams.get('tab');
+    const isLoginParam = urlParams.get('login') === '1';
+
+    if (isAlreadyAuth) {
+      switchAdminTab('private', document.getElementById('btn-tab-private'));
+    } else if (urlTab === 'demos') {
+      switchAdminTab('demos', document.getElementById('btn-tab-demos'));
+    } else {
+      // Padrão não autenticado ou tab=login / login=1: abre na aba de login com convite para demos
+      switchAdminTab('login', document.getElementById('btn-tab-login'));
     }
 
     function openGoogleHelperModal() {
@@ -817,45 +919,6 @@
     function closeGoogleHelperModal(e) {
       const modal = document.getElementById('modal-google-helper');
       if (modal) modal.style.display = 'none';
-    }
-
-    // 2. Área Privada & Autenticação
-    let pendingNavBtn = null;
-
-    function openPrivateClientsArea(btn) {
-      pendingNavBtn = btn;
-      if (window.NoleiCompanies && window.NoleiCompanies.isAdminAuthenticated()) {
-        switchAdminTab('private', btn);
-      } else {
-        document.getElementById('login-modal').style.display = 'flex';
-        document.getElementById('login-pass').value = '';
-        document.getElementById('login-pass').focus();
-      }
-    }
-
-    function closeLoginModal() {
-      document.getElementById('login-modal').style.display = 'none';
-    }
-
-    function handlePrivateLogin(e) {
-      e.preventDefault();
-      const pass = document.getElementById('login-pass').value;
-
-      if (window.NoleiCompanies && window.NoleiCompanies.loginAdmin('admin', pass)) {
-        closeLoginModal();
-        updateAuthState();
-        switchAdminTab('private', document.getElementById('btn-tab-private'));
-      } else {
-        alert('Senha incorreta! Verifique suas credenciais de acesso ou solicite cadastro.');
-      }
-    }
-
-    function logoutPrivateArea() {
-      if (window.NoleiCompanies) {
-        window.NoleiCompanies.logoutAdmin();
-      }
-      switchAdminTab('demos', document.getElementById('btn-tab-demos'));
-      updateAuthState();
     }
 
     // Renderiza lista de clientes cadastrados (Área Privada)
@@ -935,36 +998,6 @@
         alert('Cliente removido com sucesso!');
       }
     }
-
-    // 3. Gerenciador de Abas Principais
-    function switchAdminTab(tab, btn) {
-      document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-
-      const demosBox = document.getElementById('tab-demos-box');
-      const privateBox = document.getElementById('tab-private-box');
-
-      demosBox.style.display = 'none';
-      privateBox.style.display = 'none';
-
-      if (tab === 'demos') {
-        demosBox.style.display = 'block';
-        renderDemosShowcase();
-    updateAuthState();
-    if (new URLSearchParams(window.location.search).get("login") === "1") { openLoginModal(); }
-      } else if (tab === 'private') {
-        if (!window.NoleiCompanies || !window.NoleiCompanies.isAdminAuthenticated()) {
-          openLoginModal();
-          return;
-        }
-        privateBox.style.display = 'block';
-        renderPrivateClients();
-      }
-    }
-
-    // Inicialização Limpa
-    renderDemosShowcase();
-    switchAdminTab('demos', document.getElementById('btn-tab-demos'));
   </script>
 
   <!-- Modal Google Business Profile Helper (Exclusivo da Área Logada) -->
@@ -1021,5 +1054,6 @@
     </div>
   </div>
 
+  <script src="/js/nolei-footer.js"></script>
 </body>
 </html>

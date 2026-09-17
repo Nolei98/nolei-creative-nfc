@@ -1,52 +1,49 @@
 /* ==========================================================================
-   🌌 GETKODA — DESIGN SYSTEM & IDENTIDADE VISUAL (VERSÃO 2.0)
-   Fonte da verdade oficial para componentes, cores, vidros e tipografia
+   🌌 NOLEI CREATIVE — EDITORIAL LIGHT DESIGN SYSTEM & CYBER GLASS (v2.0)
+   Minimalismo Editorial High-End (Noomo Agency) & Futurismo Translúcido
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
 
 :root {
-  /* --- 1. SUPERFÍCIES & FUNDOS --- */
-  --gk-canvas-light: #E5E5E3;            /* Noomo Mineral Canvas */
-  --gk-canvas-dark: #0A0A0C;             /* OLED Obsidian Deep Base */
-  --gk-surface-oled: #111113;            /* Painel Preto Puro */
-  --gk-surface-velvet: #0F172A;          /* Deep Velvet Surface */
-  --gk-surface-card: rgba(18, 19, 26, 0.72); /* Soft Glass Fill Dark */
-  --gk-surface-card-elevated: rgba(26, 28, 38, 0.85);
+  /* --- 1. SUPERFÍCIES & FUNDOS (EDITORIAL MINERAL WHITE) --- */
+  --gk-canvas-light: #F8FAFC;            /* Noomo Mineral Canvas / Crisp Light */
+  --gk-canvas: #F8FAFC;
+  --gk-surface-card: rgba(255, 255, 255, 0.85); /* White Cyber Glass */
+  --gk-surface-card-elevated: #FFFFFF;
+  --gk-surface-panel: #F1F5F9;
+  --gk-surface-velvet: #F8FAFC;
   
-  /* --- 2. O ESPECTRO GETKODA (GRADIENTE DE ASSINATURA) --- */
+  /* --- 2. O ESPECTRO NOLEI (GRADIENTE DE ASSINATURA) --- */
   --gk-electric-blue: #0055FF;
   --gk-cyber-teal: #0D9488;
   --gk-deep-violet: #6D28D9;
   --gk-gradient-spectrum: linear-gradient(135deg, #0055FF 0%, #0D9488 52%, #6D28D9 100%);
-  --gk-gradient-text: linear-gradient(90deg, #0055FF 0%, #0D9488 50%, #8B5CF6 100%);
-  --gk-gradient-accent: linear-gradient(90deg, #38BDF8 0%, #2DD4BF 50%, #A78BFA 100%);
+  --gk-gradient-text: linear-gradient(135deg, #0055FF 0%, #0D9488 50%, #6D28D9 100%);
+  --gk-gradient-accent: linear-gradient(135deg, #0055FF 0%, #0D9488 50%, #7C3AED 100%);
 
   /* --- 3. PILARES CORE (PRODUTOS) --- */
-  /* Pilar 1: IA Core (Agent as a Service) */
   --gk-pilar-ai: #6D28D9;
-  --gk-pilar-ai-light: #A78BFA;
-  --gk-pilar-ai-spotlight: rgba(139, 92, 246, 0.16);
+  --gk-pilar-ai-light: #8B5CF6;
+  --gk-pilar-ai-spotlight: rgba(109, 40, 217, 0.07);
 
-  /* Pilar 2: Aquisição & Sedes Digitais Phygital */
   --gk-pilar-web: #0055FF;
-  --gk-pilar-web-light: #60A5FA;
-  --gk-pilar-web-spotlight: rgba(59, 130, 246, 0.16);
+  --gk-pilar-web-light: #3B82F6;
+  --gk-pilar-web-spotlight: rgba(0, 85, 255, 0.07);
 
-  /* Pilar 3: Design Magnético & Ecossistemas */
   --gk-pilar-eco: #0D9488;
-  --gk-pilar-eco-light: #2DD4BF;
-  --gk-pilar-eco-spotlight: rgba(20, 184, 166, 0.16);
+  --gk-pilar-eco-light: #14B8A6;
+  --gk-pilar-eco-spotlight: rgba(13, 148, 136, 0.07);
 
-  /* --- 4. CORES TIPOGRÁFICAS --- */
-  --gk-text-pure: #FFFFFF;
-  --gk-text-main: #F1F5F9;
-  --gk-text-muted: #94A3B8;
-  --gk-text-dim: #64748B;
+  /* --- 4. CORES TIPOGRÁFICAS (ALTO CONTRASTE MINERAL) --- */
+  --gk-text-pure: #0A0A0C;
+  --gk-text-main: #0F172A;
+  --gk-text-muted: #64748B;
+  --gk-text-dim: #94A3B8;
 
-  /* --- 5. BORDAS & VIDROS (CYBER GLASSMORPHISM) --- */
-  --gk-glass-border: rgba(255, 255, 255, 0.12);
-  --gk-glass-border-hover: rgba(255, 255, 255, 0.28);
+  /* --- 5. BORDAS & VIDROS (CYBER GLASSMORPHISM CLARO) --- */
+  --gk-glass-border: rgba(15, 23, 42, 0.08);
+  --gk-glass-border-hover: rgba(0, 85, 255, 0.35);
   --gk-glass-blur: blur(28px);
   --gk-glass-blur-deep: blur(40px);
   --gk-radius-pill: 9999px;
@@ -57,15 +54,15 @@
   /* --- 6. SISTEMA DE LUZ & RELEVO (LIQUID GLASS BUTTONS) --- */
   --btn-radius: 9999px;
   --btn-radius-square: 18px;
-  --glass-bg: linear-gradient(135deg, rgba(0, 85, 255, 0.10) 0%, rgba(109, 40, 217, 0.12) 100%);
-  --glass-bg-hover: linear-gradient(135deg, rgba(0, 85, 255, 0.22) 0%, rgba(109, 40, 217, 0.25) 100%);
-  --glass-top-light: inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
-  --glass-rim: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
-  --glass-relief: inset 0 -12px 18px -12px rgba(20, 30, 50, 0.25);
-  --glass-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
-  --glass-shadow-hover: 0 16px 32px rgba(0, 85, 255, 0.28), 0 16px 32px rgba(109, 40, 217, 0.22);
-  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 72%, rgba(255, 255, 255, 0) 100%);
-  --glass-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-bg-hover: #FFFFFF;
+  --glass-top-light: inset 0 1.5px 0 rgba(255, 255, 255, 1);
+  --glass-rim: inset 0 0 0 1px rgba(0, 85, 255, 0.18);
+  --glass-relief: inset 0 -6px 12px rgba(0, 0, 0, 0.03);
+  --glass-shadow: 0 8px 20px rgba(0, 85, 255, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --glass-shadow-hover: 0 12px 28px rgba(0, 85, 255, 0.16), 0 4px 10px rgba(0, 0, 0, 0.06);
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.15) 72%, rgba(255, 255, 255, 0) 100%);
+  --glass-text-shadow: none;
 
   /* --- 7. FONTES --- */
   --gk-font-display: 'Syne', sans-serif;
@@ -89,9 +86,10 @@
   font-family: var(--gk-font-display);
   font-weight: 900;
   letter-spacing: -0.05em;
-  line-height: 0.88;
+  line-height: 0.92;
   text-transform: uppercase;
   font-size: clamp(2.4rem, 6vw, 4.8rem);
+  color: var(--gk-text-main);
 }
 
 .gk-body,
@@ -105,12 +103,17 @@
   font-family: var(--gk-font-body);
   font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--gk-electric-blue);
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  background: rgba(0, 85, 255, 0.08);
+  border: 1px solid rgba(0, 85, 255, 0.22);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
 }
 
 .gk-kicker::before {
@@ -119,10 +122,10 @@
   height: 6px;
   border-radius: 50%;
   background: currentColor;
-  box-shadow: 0 0 10px currentColor;
+  box-shadow: 0 0 8px currentColor;
 }
 
-/* Texto com Gradiente de Assinatura GetKoda */
+/* Texto com Gradiente de Assinatura */
 .gk-text-gradient {
   background: var(--gk-gradient-text);
   -webkit-background-clip: text;
@@ -149,9 +152,9 @@
   font-family: var(--gk-font-body);
   font-weight: 700;
   font-size: 0.88rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #FFFFFF !important;
+  color: var(--gk-text-main) !important;
   isolation: isolate;
   background: var(--glass-bg);
   box-shadow: var(--glass-shadow), var(--glass-top-light), var(--glass-rim), var(--glass-relief);
@@ -176,7 +179,7 @@
   border-radius: 9999px 9999px 90% 90%;
   height: 44%;
   position: absolute;
-  top: 3px;
+  top: 2px;
   left: 10px;
   right: 10px;
   z-index: 1;
@@ -186,7 +189,6 @@
 .lg-base > span,
 .lg-base > * {
   z-index: 2;
-  text-shadow: var(--glass-text-shadow);
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -197,26 +199,28 @@
 /* Hover e Active */
 .lg-base:hover {
   background: var(--glass-bg-hover);
-  box-shadow: var(--glass-shadow-hover), inset 0 1.5px 0 #ffffffe6, inset 0 0 0 1px #ffffff73, var(--glass-relief);
+  box-shadow: var(--glass-shadow-hover), inset 0 1.5px 0 #ffffff, inset 0 0 0 1px rgba(0, 85, 255, 0.35);
   transform: translateY(-2px);
-  color: #FFFFFF !important;
+  color: var(--gk-electric-blue) !important;
 }
 
 .lg-base:active {
   transform: translateY(0px) scale(0.98);
 }
 
-/* Variação Primária Sólida Translúcida (High-Contrast Hero) */
+/* Variação Primária Sólida com Gradiente de Assinatura */
 .lg-primary {
-  background: linear-gradient(135deg, rgba(0, 85, 255, 0.88) 0%, rgba(13, 148, 136, 0.88) 50%, rgba(109, 40, 217, 0.88) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 14px 34px rgba(0, 85, 255, 0.4), inset 0 1.5px 0 rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, #0055FF 0%, #0D9488 52%, #6D28D9 100%) !important;
+  color: #FFFFFF !important;
+  border: none;
+  box-shadow: 0 12px 28px rgba(0, 85, 255, 0.35), inset 0 1.5px 0 rgba(255, 255, 255, 0.65);
 }
 
 .lg-primary:hover {
-  background: linear-gradient(135deg, rgba(0, 85, 255, 1) 0%, rgba(13, 148, 136, 1) 50%, rgba(109, 40, 217, 1) 100%);
-  box-shadow: 0 18px 42px rgba(0, 85, 255, 0.55), 0 0 24px rgba(13, 148, 136, 0.45);
+  background: linear-gradient(135deg, #0044DD 0%, #0B7A70 52%, #5B21B6 100%) !important;
+  box-shadow: 0 16px 36px rgba(0, 85, 255, 0.45), 0 0 20px rgba(13, 148, 136, 0.35);
   transform: translateY(-2px);
+  color: #FFFFFF !important;
 }
 
 /* Variação Compacta para Navbar e Tabelas */
@@ -240,7 +244,7 @@
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.08);
 }
 
 /* Borda cáustica reflexiva no topo */
@@ -250,8 +254,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 50%, transparent 100%);
   pointer-events: none;
 }
 
@@ -272,32 +276,20 @@
 .gk-card-glass:hover {
   transform: translateY(-4px);
   border-color: var(--gk-glass-border-hover);
-  box-shadow: 0 28px 60px -20px rgba(0, 0, 0, 0.7), 
-              0 0 30px -10px rgba(0, 85, 255, 0.18);
+  box-shadow: 0 24px 48px -12px rgba(0, 85, 255, 0.12), 
+              0 0 24px -6px rgba(0, 85, 255, 0.10);
 }
 
-/* Moldura de Vidro para Ícones / Hardware (Glass Frame) */
+/* Moldura de Vidro para Fotos / Hardware */
 .gk-glass-frame {
   width: 100%;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   position: relative;
   overflow: hidden;
-}
-
-/* Backdrop Glow Circular */
-.gk-backdrop-glow {
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  filter: blur(40px);
-  pointer-events: none;
-  opacity: 0.35;
-  transition: opacity 0.3s;
 }
 
 /* ==========================================================================
@@ -310,7 +302,7 @@
   transform: translateY(-50%);
   width: 3px;
   height: 200px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.08);
   border-radius: 9999px;
   z-index: 800;
   display: flex;
@@ -323,7 +315,7 @@
   height: 0%;
   background: var(--gk-gradient-spectrum);
   border-radius: 9999px;
-  box-shadow: 0 0 12px rgba(0, 85, 255, 0.8), 0 0 6px rgba(13, 148, 136, 0.8);
+  box-shadow: 0 0 10px rgba(0, 85, 255, 0.6), 0 0 4px rgba(13, 148, 136, 0.6);
   transition: height 0.1s linear;
 }
 
@@ -350,7 +342,7 @@
 }
 
 /* ==========================================================================
-   FORMULÁRIOS & FLOATING LABELS GETKODA
+   FORMULÁRIOS & FLOATING LABELS
    ========================================================================== */
 .gk-input-group {
   position: relative;
@@ -360,7 +352,7 @@
 
 .gk-floating-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  background: #FFFFFF;
   border: 1px solid var(--gk-glass-border);
   border-radius: 12px;
   color: var(--gk-text-pure);
@@ -374,8 +366,8 @@
 
 .gk-floating-input:focus {
   border-color: var(--gk-electric-blue);
-  background: rgba(0, 85, 255, 0.05);
-  box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.18), 0 10px 24px -8px rgba(0, 85, 255, 0.3);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.12), 0 10px 24px -8px rgba(0, 85, 255, 0.18);
 }
 
 .gk-floating-label {
@@ -397,23 +389,23 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--gk-pilar-web-light);
-  background: var(--gk-surface-oled);
+  color: var(--gk-electric-blue);
+  background: #FFFFFF;
   padding: 2px 8px;
   border-radius: 6px;
   border: 1px solid rgba(0, 85, 255, 0.25);
 }
 
 /* ==========================================================================
-   ILUMINAÇÃO DE FUNDO ORB (MESH NEON GLOWS)
+   ILUMINAÇÃO DE FUNDO ORB (PASTEL NEON MESH GLOWS)
    ========================================================================== */
 .gk-ambient-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(140px);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.25;
+  opacity: 0.18;
 }
 
 .gk-orb-blue {

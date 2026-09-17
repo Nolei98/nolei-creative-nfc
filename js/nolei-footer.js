@@ -11,14 +11,14 @@
   'use strict';
 
   const PORTFOLIO_URL = 'https://portfolio-jr-lilac.vercel.app/';
-  const WHATSAPP_URL = 'https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado%20com%20a%20GetKoda.'; 
+  const WHATSAPP_URL = 'https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado%20com%20a%20Nolei%20Creative.';  
 
   const footerStyle = `
     .nolei-unified-footer {
-      background: #0A0A0C;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: #F1F5F9;
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
       padding: 32px 20px 36px;
-      color: #A2937E;
+      color: #64748B;
       font-size: 0.82rem;
       font-family: 'Plus Jakarta Sans', sans-serif;
       width: 100%;
@@ -43,7 +43,7 @@
       gap: 4px;
     }
     .nolei-footer-creator-link {
-      color: #F2EADF;
+      color: #0F172A;
       text-decoration: none;
       font-weight: 700;
       font-size: 0.95rem;
@@ -59,7 +59,7 @@
       color: #0055FF;
     }
     .nolei-footer-sub {
-      color: #6E6355;
+      color: #94A3B8;
       font-size: 0.74rem;
       font-family: 'Inter', sans-serif;
     }
@@ -71,12 +71,12 @@
       font-size: 0.8rem;
     }
     .nolei-footer-nav a {
-      color: #A2937E;
+      color: #64748B;
       text-decoration: none;
       transition: color 0.15s ease;
     }
     .nolei-footer-nav a:hover {
-      color: #F2EADF;
+      color: #0F172A;
     }
     .nolei-footer-nav a.highlight {
       color: #0055FF;
@@ -94,7 +94,7 @@
           <div>
             Desenvolvido por 
             <a href="${PORTFOLIO_URL}" target="_blank" rel="noopener noreferrer" class="nolei-footer-creator-link" title="Acessar portfólio oficial do desenvolvedor">
-              GetKoda <span style="background:linear-gradient(90deg, #38BDF8 0%, #2DD4BF 50%, #A78BFA 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Phygital</span>
+              Nolei <span style="background:linear-gradient(135deg, #0055FF 0%, #0D9488 50%, #7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Creative</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>
           </div>

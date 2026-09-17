@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0A0A0C">
+  <meta name="theme-color" content="#F8FAFC">
   <!-- Primary Meta Tags -->
-  <title>GetKoda — Ecossistema Físico-Digital & Soluções Phygital (NFC & QR Code)</title>
-  <meta name="title" content="GetKoda — Ecossistema Físico-Digital & Soluções Phygital (NFC & QR Code)">
+  <title>Nolei Creative — Ecossistema Físico-Digital & Soluções Phygital (NFC & QR Code)</title>
+  <meta name="title" content="Nolei Creative — Ecossistema Físico-Digital & Soluções Phygital (NFC & QR Code)">
   <meta name="description" content="Transforme mesas, balcões e acomodações em canais rápidos de vendas, captação de avaliações 5 estrelas no Google e fidelização por aproximação NFC ou QR Code, sem precisar instalar aplicativo.">
   <meta name="keywords" content="GetKoda, NFC, QR Code, cardápio digital, avaliação Google Maps, concierge hotel, pousada, clube de fidelidade, totens inteligentes, displays acrílico, phygital">
-  <meta name="author" content="GetKoda">
+  <meta name="author" content="Nolei Creative">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://nolei-creative-nfc.vercel.app/">
 
   <!-- Open Graph / Facebook / WhatsApp Preview -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nolei-creative-nfc.vercel.app/">
-  <meta property="og:title" content="GetKoda — Ecossistemas Inteligentes Phygital com NFC">
+  <meta property="og:title" content="Nolei Creative — Ecossistemas Inteligentes Phygital com NFC">
   <meta property="og:description" content="Aproxime o celular. A experiência começa. Soluções completas com hardware de luxo personalizado e web apps integrados para gastronomia, hotelaria e varejo.">
   <meta property="og:image" content="https://nolei-creative-nfc.vercel.app/og-image.jpg">
   <meta property="og:image:secure_url" content="https://nolei-creative-nfc.vercel.app/og-image.jpg">
@@ -24,13 +24,13 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="GetKoda — Hardware & Displays Inteligentes com NFC">
-  <meta property="og:site_name" content="GetKoda">
+  <meta property="og:site_name" content="Nolei Creative">
   <meta property="og:locale" content="pt_BR">
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://nolei-creative-nfc.vercel.app/">
-  <meta name="twitter:title" content="GetKoda — Ecossistemas Inteligentes Phygital com NFC">
+  <meta name="twitter:title" content="Nolei Creative — Ecossistemas Inteligentes Phygital com NFC">
   <meta name="twitter:description" content="Aproxime o celular. A experiência começa. Soluções completas com hardware personalizado e web apps integrados.">
   <meta name="twitter:image" content="https://nolei-creative-nfc.vercel.app/og-image.jpg">
   
@@ -48,23 +48,23 @@
        Versão Oficial 2.0 (kodaget.com standard)
        ========================================= */
     :root {
-      --bg-canvas: #0A0A0C;
-      --bg-panel: rgba(18, 19, 26, 0.72);
-      --bg-panel-elevated: rgba(26, 28, 38, 0.85);
-      --bg-panel-glass: rgba(18, 19, 26, 0.65);
+      --bg-canvas: #F8FAFC;
+      --bg-panel: rgba(255, 255, 255, 0.85);
+      --bg-panel-elevated: #FFFFFF;
+      --bg-panel-glass: rgba(255, 255, 255, 0.75);
       
-      --text-main: #FFFFFF;
-      --text-muted: #94A3B8;
-      --text-dim: #64748B;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
       
       --accent: #0055FF;
       --accent-deep: #003DB8;
-      --accent-glow: rgba(0, 85, 255, 0.35);
-      --accent-badge-bg: rgba(0, 85, 255, 0.12);
-      --accent-badge-border: rgba(0, 85, 255, 0.35);
+      --accent-glow: rgba(0, 85, 255, 0.25);
+      --accent-badge-bg: rgba(0, 85, 255, 0.08);
+      --accent-badge-border: rgba(0, 85, 255, 0.22);
       
-      --border-subtle: rgba(255, 255, 255, 0.10);
-      --border-hover: rgba(255, 255, 255, 0.28);
+      --border-subtle: rgba(15, 23, 42, 0.08);
+      --border-hover: rgba(0, 85, 255, 0.35);
       
       --radius-card: 28px;
       --radius-sm: 12px;
@@ -72,8 +72,8 @@
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       
-      --shadow-sm: 0 16px 36px rgba(0, 0, 0, 0.45);
-      --shadow-hover: 0 24px 50px rgba(0, 85, 255, 0.25);
+      --shadow-sm: 0 16px 36px -12px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -12px rgba(0, 85, 255, 0.14);
     }
 
     * {
@@ -146,14 +146,14 @@
       box-shadow: 0 6px 20px rgba(0, 85, 255, 0.50);
     }
     .site-header {
-      background: rgba(20, 18, 16, 0.88);
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(248, 250, 252, 0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
-      position: sticky;
-      top: 0;
-      z-index: 500;
-      padding: 14px 24px;
+      transition: all 0.3s ease;
     }
 
     .header-inner {
@@ -230,7 +230,7 @@
     }
 
     .nav-google-btn {
-      background: var(--bg-panel);
+      background: #FFFFFF;
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
       font-family: var(--font-heading);
@@ -296,10 +296,10 @@
       top: 0;
       left: 0;
       right: 0;
-      background: #191410;
-      border-bottom: 1px solid var(--accent-badge-border);
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-subtle);
       padding: 24px 20px 28px;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
       transform: translateY(-100%);
       transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
     }
@@ -476,12 +476,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-panel);
+      background: rgba(255, 255, 255, 0.90);
       border: 1px solid var(--border-subtle);
       border-radius: 30px;
       padding: 10px 24px;
       gap: 16px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.06);
       user-select: none;
       pointer-events: none;
     }
@@ -557,7 +557,7 @@
       min-width: 170px;
       position: relative;
       overflow: hidden;
-      background: #000000;
+      background: #E2E8F0;
     }
 
     .card-photo {
@@ -650,22 +650,22 @@
       box-shadow: 0 3px 12px rgba(0, 85, 255, 0.35);
     }
     .card-action-demo-btn:hover {
-      background: #A84920;
-      border-color: #A84920;
+      background: var(--accent-deep);
+      border-color: var(--accent-deep);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0, 85, 255, 0.50);
+      box-shadow: 0 6px 18px rgba(0, 85, 255, 0.35);
     }
 
     .solution-card.card-disabled {
       filter: grayscale(45%) opacity(0.75);
       cursor: default;
-      border-color: rgba(242, 234, 223, 0.12) !important;
+      border-color: rgba(15, 23, 42, 0.06) !important;
       box-shadow: none !important;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(241, 245, 249, 0.6) !important;
     }
     .solution-card.card-disabled:hover {
       transform: none !important;
-      border-color: rgba(242, 234, 223, 0.12) !important;
+      border-color: rgba(15, 23, 42, 0.06) !important;
       box-shadow: none !important;
     }
     .solution-card.card-disabled:hover .card-photo {
@@ -679,9 +679,9 @@
       font-family: var(--font-mono);
       font-size: 0.74rem;
       font-weight: 700;
-      color: #8E8271;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94A3B8;
+      background: #F1F5F9;
+      border: 1px solid rgba(15, 23, 42, 0.08);
       padding: 8px 14px;
       border-radius: 8px;
       width: fit-content;
@@ -713,13 +713,14 @@
     }
 
     .hardware-card {
-      background: var(--bg-panel);
+      background: #FFFFFF;
       border: 1px solid var(--border-subtle);
-      border-radius: 14px;
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 28px -10px rgba(15, 23, 42, 0.06);
     }
 
     .hardware-card:hover {
@@ -840,7 +841,7 @@
 
     /* FOOTER */
     .footer {
-      background: #0E0D0C;
+      background: #F1F5F9;
       border-top: 1px solid var(--border-subtle);
       padding: 44px 24px 32px;
       color: var(--text-muted);
@@ -1181,7 +1182,7 @@
         <div class="brand-mark">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/><path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/><path d="M12.91 4.1a16.1 16.1 0 0 1 0 15.8"/></svg>
         </div>
-        <div class="brand-title">GetKoda <span>Phygital</span></div>
+        <div class="brand-title">Nolei <span>Creative</span></div>
       </a>
 
       <div class="header-actions">
@@ -1195,15 +1196,15 @@
 
   <div class="page-container">
 
-    <!-- Hero com Shaders & Ambient Glows GetKoda -->
+    <!-- Hero com Shaders, Ondas 3D NFC & Ambient Glows Nolei Creative -->
     <div class="hero" style="position:relative;">
       <div class="gk-ambient-orb gk-orb-blue" style="top:-60px; left:50%; transform:translateX(-55%); width:480px; height:480px;"></div>
       <div class="gk-ambient-orb gk-orb-teal" style="top:100px; right:5%; width:340px; height:340px;"></div>
       <div class="gk-kicker hero-eyebrow">Ecossistemas Físico-Digitais • NFC & Web</div>
       <h1 class="hero-title gk-display-hero">Aproxime o celular.<br>A experiência <span class="gk-text-gradient">começa</span>.</h1>
       
-      <!-- Container WebGL 3D Iridescent Glass Sculpture -->
-      <div id="gk-hero-3d-canvas" style="width: 100%; max-width: 360px; height: 300px; margin: 0 auto 12px; position: relative; z-index: 2;"></div>
+      <!-- Container WebGL 3D NFC Signal Waves -->
+      <div id="gk-hero-3d-canvas" style="width: 100%; max-width: 360px; height: 280px; margin: 0 auto 10px; position: relative; z-index: 2;"></div>
 
       <p class="hero-subtitle">Soluções integradas com placas inteligentes para captação de avaliações, cardápios dinâmicos, concierge hoteleiro e clubes de fidelização.</p>
     </div>
@@ -1414,7 +1415,7 @@
               <h4 class="hardware-title">Display L-Shape Black Piano</h4>
               <p class="hardware-spec">Acrílico preto brilhante com NFC + QR gravados a laser. Posicionamento fixo de centro de mesa.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1433,7 +1434,7 @@
               <h4 class="hardware-title">Totem Google Avaliações</h4>
               <p class="hardware-spec">Acrílico cristal de alta densidade para balcões de recepção e check-out de clínicas e estética.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1452,7 +1453,7 @@
               <h4 class="hardware-title">Cavalete em Madeira Nobre</h4>
               <p class="hardware-spec">Madeira maciça de reflorestamento com gravação pirogravada ou laser. Toque rústico sofisticado.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1471,7 +1472,7 @@
               <h4 class="hardware-title">Cartão Mini Quadrado</h4>
               <p class="hardware-spec">PVC rígido de alta durabilidade com cantos arredondados, acabamento fosco e chip de proximidade.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1490,7 +1491,7 @@
               <h4 class="hardware-title">Disco Resinado Auto-Adesivo</h4>
               <p class="hardware-spec">Disco acrílico impermeável revestido com resina PU automotiva e fita 3M VHB de alta resistência.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1509,7 +1510,7 @@
               <h4 class="hardware-title">Tag Espelho & Bancada Anti-Metal</h4>
               <p class="hardware-spec">Adesivo ultrafino resinado com camada de ferrite que isola a interferência de superfícies espelhadas e metálicas.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1528,7 +1529,7 @@
               <h4 class="hardware-title">Placa Phygital Externa IP68</h4>
               <p class="hardware-spec">Acrílico cast maciço e base em alumínio escovado com chip de longo alcance e vedação impermeável total contra sol e intempéries.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1547,7 +1548,7 @@
               <h4 class="hardware-title">Tag em Couro com Chip Oculto</h4>
               <p class="hardware-spec">Couro vegetal com costura perimetral reforçada e gravação pirogravada com o monograma da marca.</p>
             </div>
-            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background:rgba(0, 85, 255, 0.07); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
+            <div class="hardware-nfc-hint" style="margin-top:14px; padding:10px 12px; background: rgba(0, 85, 255, 0.05); border:1px solid rgba(0, 85, 255, 0.22); border-radius:8px; font-size:0.76rem; line-height:1.45; color:var(--text-muted);">
               <div style="font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; display:flex; align-items:center; gap:5px; margin-bottom:3px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M16 12a4 4 0 1 1-8 0"/></svg>
                 NFC na Prática:
@@ -1564,7 +1565,7 @@
     <div class="contact-card gk-card-glass reveal" id="contato">
       <h3 class="contact-title">Quer produzir seus displays personalizados?</h3>
       <p class="contact-desc">Desenvolvemos as peças com a identidade da sua marca, gravadas e programadas prontas para uso no seu estabelecimento.</p>
-      <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Visitei%20o%20site%20da%20GetKoda%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta lg-base lg-primary">
+      <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Visitei%20o%20site%20da%20Nolei%20Creative%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta lg-base lg-primary">
         Solicitar Orçamento no WhatsApp
       </a>
     </div>
@@ -1573,7 +1574,7 @@
     <footer class="footer reveal home-footer">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand-title"><a href="https://portfolio-jr-lilac.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none;">GetKoda <span style="background:var(--gk-gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Phygital</span></a></div>
+          <div class="footer-brand-title"><a href="https://portfolio-jr-lilac.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none;">Nolei <span>Creative</span></a></div>
           <p class="footer-brand-desc">Ecossistemas inteligentes com hardware sob medida, tecnologia NFC de alta performance e aplicações web projetadas para máxima retenção e vendas.</p>
         </div>
         
@@ -1586,7 +1587,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div>© 2026 <a href="https://portfolio-jr-lilac.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none; font-weight:700;">GetKoda Phygital</a> • Ecossistemas Inteligentes de Hardware & Software</div>
+        <div>© 2026 <a href="https://portfolio-jr-lilac.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none; font-weight:700;">Nolei Creative</a> • Ecossistemas Inteligentes de Hardware & Software</div>
         <div>Tecnologia NFC & QR Code de Alta Sensibilidade</div>
       </div>
     </footer>

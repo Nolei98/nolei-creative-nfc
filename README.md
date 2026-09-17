@@ -1,16 +1,16 @@
 # ⚡ Nolei Creative — Plataforma Phygital & Hub Administrativo NFC
 
-Ecossistema físico-digital de alta performance desenvolvido pela **Nolei Creative**. Conecta pontos físicos (mesas, balcões, suítes, fachadas, espelhos e peças de vestuário) a experiências web interativas **sem exigir download de aplicativos da App Store ou Google Play**.
+Ecossistema físico-digital de alta performance desenvolvido pela **Nolei Creative**. Conecta pontos físicos (mesas, balcões, suítes, fachadas, espelhos e peças nobres de couro/vestuário) a experiências web interativas **sem exigir download de aplicativos da App Store ou Google Play**.
 
 ---
 
 ## 🌐 Acesso Rápido em Produção
 
 * **Página Institucional**: [https://nolei-creative-nfc.vercel.app](https://nolei-creative-nfc.vercel.app)
-* **Hub Comercial & Administrativo**: [https://nolei-creative-nfc.vercel.app/admin/index.html](https://nolei-creative-nfc.vercel.app/admin/index.html)
-* **Cadastro de Novo Cliente**: [https://nolei-creative-nfc.vercel.app/admin/novo-cliente.html](https://nolei-creative-nfc.vercel.app/admin/novo-cliente.html)
+* **Hub de Demonstrações & Soluções**: [https://nolei-creative-nfc.vercel.app/admin/index.html](https://nolei-creative-nfc.vercel.app/admin/index.html)
+* **Termos de Uso & Privacidade LGPD (Público)**: [https://nolei-creative-nfc.vercel.app/termos-lgpd.html](https://nolei-creative-nfc.vercel.app/termos-lgpd.html)
 * **Portal Exclusivo do Estabelecimento (Exemplo)**: [https://nolei-creative-nfc.vercel.app/empresa.html?slug=botanico-bistro](https://nolei-creative-nfc.vercel.app/empresa.html?slug=botanico-bistro)
-* **Documentação Técnica & Manual**: [https://nolei-creative-nfc.vercel.app/docs.html](https://nolei-creative-nfc.vercel.app/docs.html)
+* **Área Privada de Gestão (Requer Login `admin` / `nolei2026`)**: [https://nolei-creative-nfc.vercel.app/admin/index.html?login=1](https://nolei-creative-nfc.vercel.app/admin/index.html?login=1)
 
 ---
 
@@ -20,37 +20,33 @@ O ecossistema é estruturado em **3 camadas modulares**:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                        1. CAMADA INSTITUCIONAL                         │
-│  index.html (Visão Geral • 7 Pilares • 8 Hardwares Físicos • Banner)   │
+│                        1. CAMADA PÚBLICA                               │
+│  index.html (Visão Geral • 7 Pilares • Hardwares Físicos • Banner)     │
+│  termos-lgpd.html (Termos de Uso • Política LGPD • Garantia Hardware)  │
+│  /admin/index.html [Aba Demos] (Mostruário de 7 Soluções Comerciais)   │
 └──────────────────────────────────┬─────────────────────────────────────┘
                                    │
 ┌──────────────────────────────────▼─────────────────────────────────────┐
-│                      2. HUB COMERCIAL & ADMIN                          │
-│  /admin/index.html                                                     │
-│   ├── [Público] Mostruário de 7 Demos com Fotos de Alta Resolução      │
-│   └── [Restrito - Login] Área Privada de Gestão                        │
-│         ├── Lista de Contratos & Clientes Ativos                       │
-│         ├── Assistente Google Meu Negócio (Links 5★ e QR)              │
-│         ├── Gerador de Tags & QR em Lote (gerador-tags.html)           │
-│         ├── Diagnóstico de Nuvem Supabase (status-supabase.html)       │
-│         └── Botão Deslogar (Encerramento Seguro de Sessão)             │
-│                                                                        │
-│  /admin/novo-cliente.html (Auth Guard Obrigatório)                     │
-│   ├── Seleção de Segmento Comercial                                    │
-│   ├── Módulos Contratados 100% Customizáveis (Iniciam Desmarcados)     │
-│   ├── Suporte a Domínio Próprio White-label (ex: cliente.com.br)       │
-│   └── Geração Automática do Portal Exclusivo da Empresa                │
-└──────────────────────────────────┬─────────────────────────────────────┘
-                                   │
-┌──────────────────────────────────▼─────────────────────────────────────┐
-│                 3. PORTAL EXCLUSIVO DA EMPRESA                         │
+│                 2. PORTAL EXCLUSIVO DA EMPRESA                         │
 │  empresa.html?slug=<slug-do-cliente>                                   │
-│   ├── Ambiente 100% Isolado (Sem Contaminação de Outros Negócios)      │
+│   ├── Ambiente 100% Isolado por Tenant                                 │
 │   ├── Acesso Direto no Topo: "Hub de Demonstrações"                    │
 │   ├── 4 KPIs Operacionais em Tempo Real (Toques, Chamados, Google, Tags)│
 │   ├── Módulos Contratados com Simulador de QR Code e Aproximação NFC   │
 │   ├── Mapeamento Físico de Pontos (Mesas, Balcões, Quartos, Totens)    │
-│   └── Formulário de Configurações com Salvamento Imediato              │
+│   └── Configurações Comerciais (Wi-Fi, WhatsApp e Avaliações Google)   │
+└──────────────────────────────────┬─────────────────────────────────────┘
+                                   │
+┌──────────────────────────────────▼─────────────────────────────────────┐
+│                 3. ÁREA PRIVADA & FERRAMENTAS ADMIN                    │
+│  /admin/index.html [Aba Privada] (Requer Login 'admin' / 'nolei2026')  │
+│   ├── Lista de Contratos & Clientes Reais Cadastrados                  │
+│   ├── Assistente Google Meu Negócio (Extração de Link 5★ e QR)         │
+│   ├── Plano Estratégico & Catálogo (plano-estrategico.html)            │
+│   ├── Manual Técnico & Arquitetura (docs.html)                         │
+│   ├── Gerador de Displays & QR em Lote para Gráfica (gerador-tags.html)│
+│   ├── Diagnóstico de Nuvem Supabase (status-supabase.html)             │
+│   └── Cadastro de Novo Cliente (/admin/novo-cliente.html)              │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -58,18 +54,24 @@ O ecossistema é estruturado em **3 camadas modulares**:
 
 ## 🔒 Controle de Acesso & Segurança (Auth Guard)
 
-O sistema diferencia visual e funcionalmente a área pública da área administrativa:
+O sistema diferencia estritamente os recursos abertos aos clientes dos utilitários de gestão comercial e documentos estratégicos da Nolei Creative:
 
 | Recurso | Acesso Público | Usuário Autenticado (`admin` / `nolei2026`) |
 |---|:---:|:---:|
 | **Mostruário de Demonstrações** | ✅ Disponível | ✅ Disponível |
 | **Páginas de Demonstração Ativas** | ✅ Disponível | ✅ Disponível |
-| **Demonstrações em Desenvolvimento** | ⛔ Bloqueado com Badge | ⛔ Bloqueado com Badge |
+| **Demonstrações em Desenvolvimento** | 🚧 Bloqueado com Badge | 🚧 Bloqueado com Badge |
+| **Termos de Uso & LGPD** | ✅ Disponível | ✅ Disponível |
 | **Portais de Empresas Cadastradas** | ✅ Por Link Direto | ✅ Por Link Direto |
-| **Aba Área Privada de Contratos** | 🔒 Oculta | ✅ Visível com Lista de Clientes |
-| **Cadastro de Novo Cliente** | 🔒 Bloqueado com Redirecionamento | ✅ Formulário Liberado |
-| **Assistente Google Meu Negócio** | 🔒 Oculto | ✅ Modal Administrativo Ativo |
-| **Botão Deslogar** | — | ✅ Disponível no Topo |
+| **Aba Área Privada de Contratos** | 🔒 Oculta no Hub | ✅ Visível com Lista de Clientes |
+| **Cadastro de Novo Cliente (`novo-cliente.html`)** | 🔒 Bloqueado com Tela de Erro | ✅ Formulário Liberado |
+| **Plano Estratégico (`plano-estrategico.html`)** | 🔒 Bloqueado com Tela de Erro | ✅ Documento Comercial Liberado |
+| **Documentação Técnica (`docs.html`)** | 🔒 Bloqueado com Tela de Erro | ✅ Manual Técnico Liberado |
+| **Gerador de Tags (`gerador-tags.html`)** | 🔒 Bloqueado com Tela de Erro | ✅ Ferramenta de Impressão Liberada |
+| **Status Supabase (`status-supabase.html`)** | 🔒 Bloqueado com Tela de Erro | ✅ Telemetria da Nuvem Liberada |
+| **Botão Deslogar** | — | ✅ Disponível em Todas as Rotas Admin |
+
+> **Nota de Segurança**: Qualquer tentativa de acesso direto às rotas administrativas por usuários não logados renderiza a tela estilizada **`[Acesso Restrito ao Administrador] Você precisa estar logado`**, oferecendo botão direto para login ou retorno ao início público, sem disparar alertas invasivos.
 
 ---
 
@@ -77,7 +79,7 @@ O sistema diferencia visual e funcionalmente a área pública da área administr
 
 | Segmento | Estabelecimento Modelo | Status da Demo | Principais Módulos |
 |---|---|:---:|---|
-| **1. Gastronomia & Bares** | 🌿 Botânico Bistrô | ✅ Ativa | Cardápio digital, comanda por mesa, chamada de garçom, monitor de cozinha (KDS) e dashboard ROI |
+| **1. Gastronomia & Bares** | 🌿 Botânico Bistrô | ✅ Ativa | Cardápio digital, comanda por mesa, chamada de garçom, monitor de cozinha e dashboard ROI |
 | **2. Hotelaria & Pousadas** | 🏨 Hotel Jardim Imperial ★★★★★ | ✅ Ativa | Concierge na cabeceira, room service 24h, agendamento de café colonial e governança |
 | **3. Saúde & Clínicas** | ⭐ Clínica Dra. Sofia Santos | ✅ Ativa | Totem balcão com filtro de satisfação (4-5★ vai pro Google Maps; 1-3★ vai pra ouvidoria interna) |
 | **4. Fidelidade & Varejo** | ☕ Café Origem | ✅ Ativa | Cartão de 10 carimbos digital gamificado no balcão sem aplicativo e catálogo de prêmios |
@@ -87,9 +89,9 @@ O sistema diferencia visual e funcionalmente a área pública da área administr
 
 ---
 
-## 🛠️ Hardware Phygital & Displays Físicos (8 Modelos)
+## 🛠️ Hardware Phygital & Displays Físicos
 
-Todos os displays são gravados a laser e equipados com chips **NTAG213 / NTAG215** de alta sensibilidade:
+Todos os displays são gravados a laser e equipados com chips semicondutores **NTAG213 / NTAG215 / NTAG216** de alta sensibilidade:
 
 1. **Display L-Shape Black Piano (Restaurantes)**: Acrílico preto brilhante para centro de mesas com QR Code de apoio.
 2. **Totem Google Avaliações (Clínicas & Balcões)**: Acrílico cristal de alta densidade para check-out e recepção.
@@ -98,38 +100,21 @@ Todos os displays são gravados a laser e equipados com chips **NTAG213 / NTAG21
 5. **Disco Resinado Auto-Adesivo (Áreas Externas)**: Acrílico impermeável com resina PU automotiva e fita 3M VHB para piscinas e bistrôs.
 6. **Tag de Espelho & Bancada Anti-Metal (Barbearias)**: Adesivo com camada de **ferrite anti-interferência** que isola reflexos e superfícies metálicas condutivas.
 7. **Placa de Fachada Externa IP68 (Imobiliárias & Loteamentos)**: Acrílico cast maciço e alumínio escovado com blindagem UV total contra intempéries e sol.
-8. **Tag em Couro com Chip Oculto (Moda Autoral)**: Couro vegetal costurado manualmente com chip NFC ultrafino selado internamente.
+8. **Etiqueta em Couro com Chip Oculto (Moda Autoral)**: Couro vegetal com costura perimetral reforçada e gravação térmica.
 
 ---
 
 ## 💻 Stack Tecnológica
 
-* **Frontend**: HTML5 Semântico, CSS3 Moderno (*Warm Obsidian Design System* com variáveis CSS), Vanilla JavaScript modular e responsivo.
-* **Banco de Dados & Realtime**: Supabase (PostgreSQL) com fallback resiliente para `localStorage` e arquivos JSON estruturados.
-* **Roteamento Phygital**: Motor dinâmico `r.html?t=<tag_id>` com redirecionamento em milissegundos.
-* **Deploy & Hospedagem**: Vercel Production com CI/CD automático conectado ao GitHub.
+* **Frontend**: HTML5 Semântico, CSS3 Moderno (Warm Obsidian Design System), JavaScript ES6+ Vanilla (Zero dependências externas pesadas).
+* **NFC & Roteamento**: Roteamento universal por query strings (`?source=nfc&org=...&spot=...`) com compatibilidade iOS 11+ e Android 5+.
+* **Nuvem & Backend**: Supabase (PostgreSQL, Row Level Security, Realtime WebSockets) + Vercel Edge Network.
+* **Segurança**: Privacy by Design, Zero Coleta de Identificadores Pessoais no toque, Auth Guard em rotas de gestão.
 
 ---
 
-## 🚀 Como Executar Localmente
+## 🔑 Credenciais de Demonstração & Testes
 
-1. Clone o repositório:
-```bash
-git clone https://github.com/Nolei98/nolei-creative-nfc.git
-cd nolei-creative-nfc
-```
-
-2. Abra qualquer arquivo diretamente no navegador ou sirva via servidor local:
-```bash
-npx serve .
-# ou
-python -m http.server 3000
-```
-
-3. Acesse `http://localhost:3000` para a homepage ou `http://localhost:3000/admin/index.html` para o Hub Comercial.
-
----
-
-## 📄 Licença & Direitos
-
-Plataforma proprietária desenvolvida pela **Nolei Creative**. Todos os direitos reservados.
+* **Usuário**: `admin`
+* **Senha**: `nolei2026`
+* **Ativação Rápida de Login via URL**: Acesse `/admin/index.html?login=1` para disparar o modal autenticador imediatamente.

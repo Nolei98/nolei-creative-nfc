@@ -591,8 +591,8 @@
  </a>
 
  <div class="top-nav-links">
-        <a href="/hubs" class="btn-top-link" style="color:var(--accent); font-weight:700;">
-          ← Voltar aos Hubs
+        <a href="/dashboard/admin" class="btn-top-link" style="color:var(--accent); font-weight:700;">
+          ← Painel Admin
         </a>
         <button onclick="window.NoleiCompanies.logoutAdmin(); window.location.reload();" class="btn-top-link" style="background:transparent; border:1px solid rgba(239,68,68,0.4); color:#FCA5A5; cursor:pointer; font-weight:700;" title="Encerrar sessão">
           Deslogar
@@ -1146,18 +1146,19 @@
         <div class="feature-card-title">1. Estrutura de Rotas Amigáveis (Vercel Rewrites)</div>
         <p class="feature-card-desc" style="margin-bottom: 8px;">A plataforma adota convenções limpas e amigáveis sem expor extensões <code>.html</code>:</p>
         <ul style="font-size:0.82rem; color:var(--color-ink-muted); padding-left:20px; line-height:1.6;">
-          <li><code>/hubs</code>: Central de acesso aos Hubs e catálogo de Soluções Prontas.</li>
-          <li><code>/empresa/:slug</code> ou <code>/e/:slug</code>: Portal exclusivo do estabelecimento cliente.</li>
-          <li><code>/login</code> ou <code>/hubs/login</code>: Tela dedicada de autenticação do gestor.</li>
+          <li><code>/login</code>: Central de acesso aos Hubs e autenticação de gestores e parceiros.</li>
+          <li><code>/dashboard/admin</code>: Dashboard geral administrativo (sessão privada do administrador).</li>
+          <li><code>/dashboard/:slug</code>: Dashboard exclusivo do estabelecimento cliente autenticado.</li>
+          <li><code>/empresa/:slug</code> ou <code>/e/:slug</code>: Portal comercial do estabelecimento.</li>
           <li><code>/termos</code> ou <code>/lgpd</code>: Termos de Uso e Política de Privacidade.</li>
           <li><code>/plano</code>: Plano Estratégico Comercial (exclusivo para administradores).</li>
-          <li><code>/docs</code>: Manual Técnico e Arquitetura do Sistema.</li>
+          <li><code>/docs</code>: Manual Técnico e Arquitetura do Sistema (exclusivo para administradores).</li>
         </ul>
       </div>
 
       <div class="feature-card" style="margin-bottom: 20px;">
         <div class="feature-card-title">2. Acesso aos Hubs & Credenciais de Gestor</div>
-        <p class="feature-card-desc" style="margin-bottom: 8px;">A tela de login integrada na rota <code>/hubs</code> solicita explicitamente <strong>Usuário</strong> e <strong>Senha de Acesso</strong>. É estritamente proibido exibir credenciais pré-preenchidas na interface do usuário.</p>
+        <p class="feature-card-desc" style="margin-bottom: 8px;">A tela de login integrada na rota <code>/login</code> solicita explicitamente <strong>Usuário</strong> e <strong>Senha</strong>. É estritamente proibido exibir credenciais pré-preenchidas na interface do usuário.</p>
         <p class="feature-card-desc">Visitantes não autenticados contam com o botão <strong>"Solicitar cadastro"</strong> conectado diretamente ao WhatsApp comercial da Nolei Creative e um banner convidativo para explorar as <strong>Soluções Prontas por Área</strong> sem necessidade de login.</p>
       </div>
 
@@ -1225,7 +1226,7 @@
         A <strong>Documentação Técnica & Manual de Arquitetura</strong> é de acesso restrito à equipe técnica da Nolei Creative. Apenas administradores autenticados possuem permissão.
       </p>
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <a href="/hubs" style="background:var(--accent, #C15D30); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(193,93,48,0.4);">
+        <a href="/login" style="background:var(--accent, #C15D30); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(193,93,48,0.4);">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
           Fazer Login como Administrador
         </a>

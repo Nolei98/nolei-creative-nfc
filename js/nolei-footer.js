@@ -104,9 +104,9 @@
         </div>
 
         <nav class="nolei-footer-nav" aria-label="Links institucionais do rodapé">
-          <a href="/hubs">Hubs de Soluções</a>
+          <a href="/login">Login</a>
           <a href="/termos">Termos & LGPD</a>
-          <a href="${WHATSAPP_URL}" target="_blank" rel="noopener noreferrer">WhatsApp Comercial</a>
+          <a href="${WHATSAPP_URL}" target="_blank" rel="noopener noreferrer">Entrar em contato</a>
           <a href="${PORTFOLIO_URL}" target="_blank" rel="noopener noreferrer" class="highlight">
             Portfólio do Criador →
           </a>

@@ -599,27 +599,62 @@
       return Array.from(map.values());
     }
 
-    // Métodos de autenticação para Área Privada de Novos Clientes
+    // Métodos de autenticação para Área Privada e Painéis de Empresas
     isAdminAuthenticated() {
       if (typeof sessionStorage === 'undefined') return false;
       return sessionStorage.getItem('nolei_private_auth') === 'true';
     }
 
-    loginAdmin(username, password) {
+    authenticate(username, password) {
       const u = (username || '').trim().toLowerCase();
       const p = (password || '').trim();
+
+      // 1. Administrador Geral (Nolei) -> Dashboard Geral (/dashboard/admin)
       if ((u === 'admin' || u === 'nolei') && (p === 'nolei2026' || p === 'admin123' || p === '87999099937')) {
         if (typeof sessionStorage !== 'undefined') {
           sessionStorage.setItem('nolei_private_auth', 'true');
         }
-        return true;
+        return { success: true, role: 'admin' };
       }
-      return false;
+
+      // 2. Empresa / Cliente Cadastrado -> Dashboard do Cliente (/dashboard/:slug)
+      const all = this.getAll();
+      const company = all.find(org => 
+        org.slug.toLowerCase() === u || 
+        org.name.toLowerCase() === u ||
+        (org.whatsapp && org.whatsapp.replace(/\D/g, '') === u.replace(/\D/g, ''))
+      );
+
+      if (company) {
+        const validPasswords = [
+          company.wifiPass,
+          company.slug,
+          company.whatsapp ? company.whatsapp.replace(/\D/g, '') : null,
+          'nolei2026',
+          'admin123',
+          '87999099937'
+        ].filter(Boolean);
+
+        if (validPasswords.includes(p)) {
+          if (typeof sessionStorage !== 'undefined') {
+            sessionStorage.setItem('nolei_company_auth', company.slug);
+          }
+          return { success: true, role: 'company', slug: company.slug, company: company };
+        }
+      }
+
+      return { success: false };
+    }
+
+    loginAdmin(username, password) {
+      const res = this.authenticate(username, password);
+      return res.success && res.role === 'admin';
     }
 
     logoutAdmin() {
       if (typeof sessionStorage !== 'undefined') {
         sessionStorage.removeItem('nolei_private_auth');
+        sessionStorage.removeItem('nolei_company_auth');
       }
       return true;
     }

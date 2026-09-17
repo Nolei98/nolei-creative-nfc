@@ -7,9 +7,9 @@ Ecossistema físico-digital de alta performance desenvolvido pela **Nolei Creati
 ## 🌐 Acesso Rápido em Produção (URLs Amigáveis)
 
 * **Página Institucional**: [https://nolei-creative-nfc.vercel.app](https://nolei-creative-nfc.vercel.app)
-* **Hubs de Soluções & Acesso**: [https://nolei-creative-nfc.vercel.app/hubs](https://nolei-creative-nfc.vercel.app/hubs) (ou `/admin`)
-* **Portal Exclusivo do Estabelecimento**: [https://nolei-creative-nfc.vercel.app/empresa/botanico-bistro](https://nolei-creative-nfc.vercel.app/empresa/botanico-bistro) (ou `/e/botanico-bistro`)
-* **Acesso do Gestor / Login**: [https://nolei-creative-nfc.vercel.app/login](https://nolei-creative-nfc.vercel.app/login) (ou `/hubs/login`)
+* **Acesso aos Hubs / Login**: [https://nolei-creative-nfc.vercel.app/login](https://nolei-creative-nfc.vercel.app/login)
+* **Dashboard do Administrador Geral**: [https://nolei-creative-nfc.vercel.app/dashboard/admin](https://nolei-creative-nfc.vercel.app/dashboard/admin)
+* **Dashboard / Portal do Estabelecimento**: [https://nolei-creative-nfc.vercel.app/dashboard/botanico-bistro](https://nolei-creative-nfc.vercel.app/dashboard/botanico-bistro) (ou `/empresa/botanico-bistro`)
 * **Portfólio Oficial do Criador**: [https://portfolio-jr-lilac.vercel.app](https://portfolio-jr-lilac.vercel.app)
 * **Termos de Uso & LGPD**: [https://nolei-creative-nfc.vercel.app/termos](https://nolei-creative-nfc.vercel.app/termos) (ou `/lgpd`)
 * **Plano Estratégico Comercial**: [https://nolei-creative-nfc.vercel.app/plano](https://nolei-creative-nfc.vercel.app/plano)
@@ -24,9 +24,12 @@ Para assegurar a confiabilidade arquitetural e a sincronização contínua do ec
 1. **Alterações Estruturais no Projeto**: Sempre que houver adição, renomeação, exclusão de arquivos, rotas, módulos ou componentes de hardware, o arquivo [README.md](file:///d:/Workspace/Colonizacao/README.md) deve ser obrigatoriamente atualizado.
 2. **Alterações de Fluxo e Logística Operacional**: Sempre que forem modificados fluxos de interação, autenticação, jornada do usuário ou processos de atendimento (cozinha, recepção, caixa, governança), a documentação técnica interna [docs.html](file:///d:/Workspace/Colonizacao/docs.html) deve ser obrigatoriamente atualizada.
 3. **Higienização de Títulos (`<title>`)**: É estritamente proibido o uso de emotes ou emojis em tags `<title>` em qualquer página do projeto, mantendo as abas do navegador corporativas e limpas.
-4. **Isolamento de Gestão nos Hubs**: A rota `/hubs` exibe por padrão a tela de Acesso aos Hubs (login integrado solicitando Usuário + Senha de Acesso e botão "Solicitar cadastro" via WhatsApp) e convite sugestivo para explorar as Soluções Prontas sem login. Painéis de gestão ("Entrar na Empresa", KDS, governança, métricas e clientes reais) são restritos a administradores autenticados.
-5. **Componente Modular de Rodapé (`nolei-footer.js`)**: As subpáginas institucionais (`empresa.html`, `docs.html`, `termos-lgpd.html`, `plano-estrategico.html`, `admin/index.html`) utilizam o script compartilhado `/js/nolei-footer.js`, conectando a marca "Nolei Creative" ao portfólio oficial do criador ([portfolio-jr-lilac.vercel.app](https://portfolio-jr-lilac.vercel.app/)), enquanto a home-page mantém rodapé institucional exclusivo.
-6. **Ausência de Rodapé nas Demonstrações & CTA no Topo**: As páginas de demonstração interativa (`/demo/*.html`) não possuem rodapé. Em seu lugar, apresentam no menu superior um Call to Action (CTA) destacado **`Entrar em contato`**, direcionando para o WhatsApp Comercial com mensagem pré-formatada contextualizada para cada segmento.
+4. **Acesso Corporativo e Transição de Rotas (`/login`)**: A rota `/login` exibe a tela de login integrado com inputs alinhados e botão "Solicitar cadastro" para "Entrar em contato" via WhatsApp. Ao autenticar:
+   - **Administrador Geral**: A URL torna-se `/dashboard/admin`, exibindo a lista de clientes reais e ferramentas, e o ícone da logo muda para o símbolo de camadas do dashboard.
+   - **Empresa Cadastrada**: O usuário é redirecionado para `/dashboard/:slug` (ex: `/dashboard/botanico-bistro`).
+   - Fora do dashboard (na tela de login e mostruário), a logo preserva o ícone de ondas NFC idêntico ao da home.
+5. **Componente Modular de Rodapé (`nolei-footer.js`)**: As subpáginas institucionais (`empresa.html`, `docs.html`, `termos-lgpd.html`, `plano-estrategico.html`, `admin/index.html`) utilizam o script compartilhado `/js/nolei-footer.js`, exibindo o link **`Entrar em contato`** para o WhatsApp comercial e conectando a marca "Nolei Creative" ao portfólio oficial do criador ([portfolio-jr-lilac.vercel.app](https://portfolio-jr-lilac.vercel.app/)), enquanto a home-page mantém rodapé institucional com as mesmas convenções.
+6. **Ausência de Rodapé nas Demonstrações & CTA no Topo**: As páginas de demonstração interativa (`/demo/*.html`) não possuem rodapé. Em seu lugar, apresentam no menu superior um Call to Action (CTA) destacado **`Entrar em contato`**, direcionando para o WhatsApp com mensagem pré-formatada contextualizada para cada segmento.
 
 ---
 
@@ -55,7 +58,7 @@ O ecossistema é estruturado em **3 camadas modulares**:
                                    │
 ┌──────────────────────────────────▼─────────────────────────────────────┐
 │                 3. ÁREA PRIVADA & FERRAMENTAS ADMIN                    │
-│  /hub [Aba Privada] (Requer Autenticação de Gestor Nolei)               │
+│  /dashboard/admin (Requer Autenticação de Gestor Nolei)                │
 │   ├── Lista de Contratos & Clientes Reais Cadastrados                  │
 │   ├── Assistente Google Meu Negócio (Extração de Link 5★ e QR)         │
 │   ├── Plano Estratégico & Catálogo (plano-estrategico.html)            │
@@ -132,5 +135,5 @@ Todos os displays são gravados a laser e equipados com chips semicondutores **N
 
 ## 🔑 Acesso & Credenciamento de Novos Clientes
 
-* **Acesso Administrativo**: Disponível para gestores e parceiros credenciados através de `/login`.
-* **Solicitar Cadastro**: Novos estabelecimentos podem solicitar credenciamento diretamente via WhatsApp Comercial [https://wa.me/5587999099937](https://wa.me/5587999099937).
+* **Acesso Administrativo & Painel do Gestor**: Disponível através de `/login`. Ao logar, a URL torna-se `/dashboard/admin` para administradores gerais ou `/dashboard/:slug` para estabelecimentos cadastrados.
+* **Solicitar Cadastro**: Novos estabelecimentos podem solicitar credenciamento através do botão "Solicitar cadastro" / "Entrar em contato" diretamente via WhatsApp [https://wa.me/5587999099937](https://wa.me/5587999099937).

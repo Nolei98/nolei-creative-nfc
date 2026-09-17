@@ -4,24 +4,32 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/dashboard/admin",
+      "destination": "/admin?tab=private"
+    },
+    {
+      "source": "/dashboard/:slug",
+      "destination": "/empresa?slug=:slug"
+    },
+    {
+      "source": "/login",
+      "destination": "/admin?tab=login"
+    },
+    {
       "source": "/hubs/login",
       "destination": "/admin?tab=login"
     },
     {
       "source": "/hubs",
-      "destination": "/admin"
+      "destination": "/admin?tab=login"
     },
     {
       "source": "/hub",
-      "destination": "/admin"
-    },
-    {
-      "source": "/login",
-      "destination": "/admin?login=1"
+      "destination": "/admin?tab=login"
     },
     {
       "source": "/admin/login",
-      "destination": "/admin?login=1"
+      "destination": "/admin?tab=login"
     },
     {
       "source": "/termos",

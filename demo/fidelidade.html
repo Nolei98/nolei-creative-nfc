@@ -48,18 +48,18 @@
 
  <style>
  :root {
- --navy: #F2EADF;
- --navy-light: #2A231C;
- --leaf-green: #C15D30;
- --leaf-green-light: rgba(193, 93, 48, 0.12);
- --orange: #C15D30;
- --orange-light: rgba(193, 93, 48, 0.12);
+ --navy: #0F172A;
+ --navy-light: #F1F5F9;
+ --leaf-green: #92400E; /* Coffee Amber */
+ --leaf-green-light: rgba(146, 64, 14, 0.10);
+ --orange: #059669; /* Emerald */
+ --orange-light: rgba(5, 150, 105, 0.10);
  --white: #FFFFFF;
- --bg-light: #141210;
- --text: #F2EADF;
- --text-muted: #A2937E;
- --text-dim: #786B5A;
- --border: rgba(242, 234, 223, 0.08);
+ --bg-light: #F8FAFC;
+ --text: #0F172A;
+ --text-muted: #64748B;
+ --text-dim: #94A3B8;
+ --border: rgba(146, 64, 14, 0.15);
  --radius: 18px;
  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -88,7 +88,7 @@
  .splash-screen {
  position: fixed;
  inset: 0;
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  display: flex;
  flex-direction: column;
@@ -124,7 +124,7 @@
 
  /* Header */
  .header {
- background: rgba(20, 18, 16, 0.92);
+ background: rgba(255, 255, 255, 0.94);
  backdrop-filter: blur(12px);
  border-bottom: 1px solid var(--border);
  position: sticky;
@@ -151,9 +151,9 @@
  width: 36px;
  height: 36px;
  border-radius: 10px;
- background: #141210;
+ background: #F1F5F9;
  border: 1px solid var(--border);
- color: #F2EADF;
+ color: #0F172A;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -164,7 +164,7 @@
  font-family: var(--font-heading);
  font-size: 1.05rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  line-height: 1.2;
  }
 
@@ -174,7 +174,7 @@
  }
 
  .tier-badge {
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  font-family: var(--font-heading);
  font-size: 0.75rem;
@@ -194,7 +194,7 @@
 
  /* Unauthenticated Gate Card */
  .unauth-gate-card {
- background: #1F1A15;
+ background: #FFFFFF;
  border: 1px solid var(--border);
  border-radius: var(--radius);
  padding: 36px 24px;
@@ -207,7 +207,7 @@
  width: 64px;
  height: 64px;
  border-radius: 18px;
- background: linear-gradient(90deg, #C15D30, #E5855A);
+ background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
  color: var(--leaf-green);
  display: flex;
  align-items: center;
@@ -219,7 +219,7 @@
  font-family: var(--font-heading);
  font-size: 1.3rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 6px;
  }
 
@@ -239,7 +239,7 @@
  }
 
  .btn-gate-login {
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  border: none;
  padding: 14px;
@@ -256,8 +256,8 @@
  }
 
  .btn-gate-register {
- background: #141210;
- color: #F2EADF;
+ background: #F1F5F9;
+ color: #0F172A;
  border: 1px solid var(--border);
  padding: 14px;
  border-radius: 12px;
@@ -273,7 +273,7 @@
  }
 
  .loyalty-hero-card {
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  border-radius: var(--radius);
  padding: 24px;
@@ -309,7 +309,7 @@
  letter-spacing: -1px;
  line-height: 1;
  margin-bottom: 4px;
- color: #E5855A;
+ color: #0055FF;
  }
 
  .points-label {
@@ -330,7 +330,7 @@
  }
 
  .progress-fill {
- background: linear-gradient(90deg, #C15D30, #E5855A);
+ background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
  width: 65%;
  height: 100%;
  border-radius: 10px;
@@ -345,7 +345,7 @@
 
  /* Stamp Card */
  .stamps-section {
- background: #1F1A15;
+ background: #FFFFFF;
  border: 1px solid var(--border);
  border-radius: var(--radius);
  padding: 20px;
@@ -357,7 +357,7 @@
  font-family: var(--font-heading);
  font-size: 0.95rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 4px;
  }
 
@@ -383,12 +383,12 @@
  font-size: 0.75rem;
  font-weight: 700;
  color: var(--text-dim);
- background: #141210;
+ background: #F1F5F9;
  }
 
  .stamp-slot.filled {
  border: 2px solid var(--navy);
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  }
 
@@ -405,7 +405,7 @@
  font-weight: 700;
  text-transform: uppercase;
  letter-spacing: 0.1em;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 12px;
  }
 
@@ -417,7 +417,7 @@
  }
 
  .reward-card {
- background: #1F1A15;
+ background: #FFFFFF;
  border: 1px solid var(--border);
  border-radius: var(--radius);
  padding: 14px 16px;
@@ -432,7 +432,7 @@
  font-family: var(--font-heading);
  font-size: 0.9rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 2px;
  }
 
@@ -481,7 +481,7 @@
  }
 
  .modal-card {
- background: #1F1A15;
+ background: #FFFFFF;
  border-radius: 22px;
  padding: 28px 24px;
  max-width: 400px;
@@ -499,7 +499,7 @@
  font-family: var(--font-heading);
  font-size: 1.2rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 4px;
  }
 
@@ -511,7 +511,7 @@
 
  .auth-tabs {
  display: flex;
- background: #141210;
+ background: #F1F5F9;
  border: 1px solid var(--border);
  border-radius: 10px;
  padding: 3px;
@@ -532,8 +532,8 @@
  }
 
  .auth-tab.active {
- background: #1F1A15;
- color: #F2EADF;
+ background: #FFFFFF;
+ color: #0F172A;
  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
  }
 
@@ -546,7 +546,7 @@
  display: block;
  font-size: 0.78rem;
  font-weight: 600;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 4px;
  }
 
@@ -557,14 +557,14 @@
  border-radius: 10px;
  font-family: inherit;
  font-size: 0.88rem;
- background: #141210;
+ background: #F1F5F9;
  color: var(--text);
  }
 
  .form-input:focus {
  outline: none;
  border-color: var(--leaf-green);
- background: #1F1A15;
+ background: #FFFFFF;
  }
 
  .btn-submit-auth {
@@ -591,7 +591,7 @@
  bottom: 30px;
  left: 50%;
  transform: translateX(-50%) translateY(20px);
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  padding: 12px 20px;
  border-radius: 100px;
@@ -618,9 +618,9 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #C15D30;
+      background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
       color: #FFFFFF !important;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       padding: 6px 13px;
       border-radius: 20px;
       font-family: inherit;
@@ -628,13 +628,13 @@
       font-weight: 700;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(193, 93, 48, 0.35);
+      box-shadow: 0 2px 10px rgba(0, 85, 255, 0.35);
       white-space: nowrap;
     }
     .btn-top-cta-contact:hover {
-      background: #93401F;
+      background: linear-gradient(135deg, #0044CC 0%, #0033AA 100%);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(193, 93, 48, 0.5);
+      box-shadow: 0 4px 14px rgba(0, 85, 255, 0.50);
       color: #FFFFFF !important;
     }
 
@@ -783,13 +783,13 @@
  <!-- Modal Voucher de Resgate -->
  <div class="modal-overlay" id="voucher-modal" onclick="closeVoucherModal(event)">
  <div class="modal-card" onclick="event.stopPropagation()" style="text-align:center;">
- <div style="width:48px; height:48px; border-radius:50%; background: linear-gradient(90deg, #C15D30, #E5855A); color:var(--leaf-green); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+ <div style="width:48px; height:48px; border-radius:50%; background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%); color:var(--leaf-green); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
  </div>
  <h3 class="modal-title" style="margin-bottom:4px;">Cupom de Resgate Gerado</h3>
  <p class="modal-sub" id="voucher-reward-name">Café Espresso ou Cappuccino</p>
 
- <div style="background: #141210; border:2px dashed var(--border); border-radius:14px; padding:18px; margin:16px 0;">
+ <div style="background: #F1F5F9; border:2px dashed var(--border); border-radius:14px; padding:18px; margin:16px 0;">
  <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Apresente este código no caixa:</div>
  <div style="font-size:1.6rem; font-weight:800; font-family:monospace; color:var(--leaf-green); margin:8px 0;" id="voucher-code-display">ORIGEM-7429</div>
  <div style="font-size:0.72rem; color:var(--text-muted);">Válido por 30 minutos na loja física</div>
@@ -925,7 +925,7 @@
  </span>
  </div>
  <div class="reward-info" style="flex:1;">
- <h4 style="font-size:0.9rem; font-weight:700; color: #F2EADF; margin-bottom:2px;">${r.title}</h4>
+ <h4 style="font-size:0.9rem; font-weight:700; color: #0F172A; margin-bottom:2px;">${r.title}</h4>
  <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">${r.desc}</p>
  <span style="font-size:0.75rem; font-weight:700; color:var(--leaf-green);">${r.points} pontos exigidos</span>
  </div>
@@ -933,7 +933,7 @@
  ${canRedeem ? `
  <button class="btn-redeem" onclick="redeemReward('${r.id}')">Resgatar</button>
  ` : `
- <button class="btn-redeem" style="background: #141210; color:var(--text-dim); cursor:not-allowed; border:1px solid var(--border);" onclick="showToast('Faltam ${missing} pontos para liberar este resgate.')">
+ <button class="btn-redeem" style="background: #F1F5F9; color:var(--text-dim); cursor:not-allowed; border:1px solid var(--border);" onclick="showToast('Faltam ${missing} pontos para liberar este resgate.')">
  Faltam ${missing} pts
  </button>
  `}

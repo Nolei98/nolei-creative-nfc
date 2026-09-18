@@ -51,18 +51,26 @@
   --gk-radius-md: 16px;
   --gk-radius-sm: 10px;
 
-  /* --- 6. SISTEMA DE LUZ & RELEVO (LIQUID GLASS BUTTONS) --- */
-  --btn-radius: 9999px;
-  --btn-radius-square: 18px;
-  --glass-bg: rgba(255, 255, 255, 0.88);
-  --glass-bg-hover: #FFFFFF;
-  --glass-top-light: inset 0 1.5px 0 rgba(255, 255, 255, 1);
-  --glass-rim: inset 0 0 0 1px rgba(0, 85, 255, 0.18);
-  --glass-relief: inset 0 -6px 12px rgba(0, 0, 0, 0.03);
-  --glass-shadow: 0 8px 20px rgba(0, 85, 255, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
-  --glass-shadow-hover: 0 12px 28px rgba(0, 85, 255, 0.16), 0 4px 10px rgba(0, 0, 0, 0.06);
-  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.15) 72%, rgba(255, 255, 255, 0) 100%);
-  --glass-text-shadow: none;
+  /* --- 6. SISTEMA DE LUZ & RELEVO (LIQUID GLASS BUTTONS - KODAGET SPEC) --- */
+  --btn-radius: 9999px; /* Formato Pílula */
+  --btn-radius-square: 18px; /* Formato Ícone / Quadrado */
+  
+  /* Gradiente translúcido da marca (Azul -> Violeta) */
+  --glass-bg: linear-gradient(135deg, rgba(0, 85, 255, 0.08) 0%, rgba(112, 0, 255, 0.08) 100%);
+  --glass-bg-hover: linear-gradient(135deg, rgba(0, 85, 255, 0.18) 0%, rgba(112, 0, 255, 0.18) 100%);
+  
+  /* Sistema de Luz e Relevo */
+  --glass-top-light: inset 0 1.5px 0 rgba(255, 255, 255, 0.75);       /* Fio de luz no topo */
+  --glass-rim: inset 0 0 0 1px rgba(255, 255, 255, 0.45);             /* Borda de bisel */
+  --glass-relief: inset 0 -12px 18px -12px rgba(20, 30, 50, 0.15);    /* Sombra de profundidade interna */
+  --glass-shadow: 0 12px 26px rgba(20, 30, 50, 0.12);                 /* Sombra de repouso */
+  --glass-shadow-hover: 0 16px 30px rgba(0, 85, 255, 0.25), 
+                        0 16px 30px rgba(112, 0, 255, 0.15);         /* Glow colorido no hover */
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 72%, rgba(255, 255, 255, 0) 100%);
+  --glass-text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
+  
+  --btn-font-weight: 700;
+  --tone-neutral-text: #1c2330;
 
   /* --- 7. FONTES --- */
   --gk-font-display: 'Syne', sans-serif;

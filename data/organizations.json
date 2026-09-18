@@ -22,13 +22,13 @@
     "fidelidade": {
       "name": "Cafeterias, Varejo & Fidelidade",
       "icon": "☕",
-      "color": "#C15D30",
+      "color": "#0055FF",
       "description": "Cafeterias, docerias, tabacarias e lojas de varejo com programa de recompensas e carimbos."
     },
     "artesanato_moda": {
       "name": "Moda Autoral & Artesanato Phygital",
       "icon": "🧵",
-      "color": "#E5855A",
+      "color": "#0055FF",
       "description": "Ateliês de couro, calçados artesanais, joias autorais e confecções regionais com storytelling."
     },
     "beleza": {
@@ -178,7 +178,7 @@
       "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
       "wifiSsid": "CafeOrigem_Wifi",
       "wifiPass": "graosartesanais",
-      "brandColor": "#C15D30",
+      "brandColor": "#0055FF",
       "summary": "Cafeteria de grãos especiais com programa de 10 carimbos digitais e resgate de recompensas.",
       "spots": [
         {
@@ -206,7 +206,7 @@
       "googlePlaceUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
       "wifiSsid": "Atelie_Visitantes",
       "wifiPass": "couroregional",
-      "brandColor": "#E5855A",
+      "brandColor": "#0055FF",
       "summary": "Ateliê de artefatos em couro legítimo com etiquetas NFC costuradas contando a história do artesão.",
       "spots": [
         {

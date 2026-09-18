@@ -77,12 +77,12 @@
     }
 
     try {
-      const width = container.clientWidth || 340;
-      const height = container.clientHeight || 280;
+      const width = container.clientWidth || 140;
+      const height = container.clientHeight || 110;
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-      camera.position.set(0, 0, 4.8);
+      camera.position.set(0, 0, 5.2);
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
       renderer.setSize(width, height);
@@ -171,17 +171,7 @@
       const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.9);
       scene.add(ambientLight);
 
-      // --- MOUSE TILT INÉRCIA ---
-      let mouseX = 0, mouseY = 0;
-      let targetRotX = 0, targetRotY = 0;
-
-      window.addEventListener('mousemove', (e) => {
-        const cx = window.innerWidth / 2;
-        const cy = window.innerHeight / 2;
-        mouseX = (e.clientX - cx) / cx;
-        mouseY = (e.clientY - cy) / cy;
-      }, { passive: true });
-
+      // --- ANIMAÇÃO SUAVE AUTÔNOMA (SEM MOVIMENTO DO MOUSE) ---
       const clock = new THREE.Clock();
 
       function animate() {
@@ -204,16 +194,13 @@
         const chipPulse = Math.sin(elapsedTime * 3.5);
         chipMesh.scale.set(1 + chipPulse * 0.03, 1 + chipPulse * 0.03, 1);
 
-        // Balanço orgânico Float
-        rootGroup.position.y = Math.sin(elapsedTime * 1.6) * 0.08;
+        // Balanço orgânico Float suave
+        rootGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.07;
 
-        // Rotação suave contínua no eixo Y & inclinação com o cursor
-        targetRotY += (mouseX * 0.45 - targetRotY) * 0.06;
-        targetRotX += (mouseY * 0.35 - targetRotX) * 0.06;
-
-        rootGroup.rotation.y = Math.sin(elapsedTime * 0.4) * 0.18 + targetRotY;
-        rootGroup.rotation.x = Math.cos(elapsedTime * 0.3) * 0.12 - targetRotX * 0.6;
-        rootGroup.rotation.z = Math.sin(elapsedTime * 0.25) * 0.05;
+        // Rotação suave contínua e estável (independente de mouse)
+        rootGroup.rotation.y = Math.sin(elapsedTime * 0.35) * 0.20;
+        rootGroup.rotation.x = Math.cos(elapsedTime * 0.25) * 0.10;
+        rootGroup.rotation.z = Math.sin(elapsedTime * 0.20) * 0.04;
 
         renderer.render(scene, camera);
       }
@@ -221,8 +208,8 @@
       animate();
 
       window.addEventListener('resize', () => {
-        const w = container.clientWidth || 340;
-        const h = container.clientHeight || 280;
+        const w = container.clientWidth || 140;
+        const h = container.clientHeight || 110;
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
         renderer.setSize(w, h);
@@ -237,8 +224,8 @@
   // --- FALLBACK INTERATIVO EM CANVAS 2D CASO WEBGL ESTEJA DESATIVADO ---
   function renderFallbackNfcCanvas(container) {
     const canvas = document.createElement('canvas');
-    canvas.width = container.clientWidth || 340;
-    canvas.height = container.clientHeight || 280;
+    canvas.width = container.clientWidth || 140;
+    canvas.height = container.clientHeight || 110;
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
@@ -258,26 +245,26 @@
 
       // Chip central
       ctx.beginPath();
-      ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 10, 0, Math.PI * 2);
       ctx.fillStyle = '#0055FF';
       ctx.shadowColor = 'rgba(0, 85, 255, 0.4)';
-      ctx.shadowBlur = 16;
+      ctx.shadowBlur = 8;
       ctx.fill();
 
       // Ondas concêntricas NFC
-      const radii = [50, 80, 110];
+      const radii = [22, 34, 46];
       radii.forEach((r, i) => {
         const pulse = (Math.sin(frame - i * 0.7) + 1) / 2;
         ctx.beginPath();
-        ctx.arc(cx, cy, r + pulse * 6, -Math.PI * 0.35, Math.PI * 0.35);
+        ctx.arc(cx, cy, r + pulse * 2.5, -Math.PI * 0.35, Math.PI * 0.35);
         ctx.strokeStyle = i === 0 ? '#0055FF' : (i === 1 ? '#0D9488' : '#6D28D9');
-        ctx.lineWidth = 4.5;
+        ctx.lineWidth = 2.5;
         ctx.shadowColor = ctx.strokeStyle;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 6;
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(cx, cy, r + pulse * 6, Math.PI - Math.PI * 0.35, Math.PI + Math.PI * 0.35);
+        ctx.arc(cx, cy, r + pulse * 2.5, Math.PI - Math.PI * 0.35, Math.PI + Math.PI * 0.35);
         ctx.stroke();
       });
     }

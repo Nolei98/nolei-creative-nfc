@@ -79,7 +79,7 @@
         name: 'Ateliê Raízes do Cariri',
         segment: 'artesanato_moda',
         whatsapp: '5587999099937',
-        brand_color: '#C15D30'
+        brand_color: '#0055FF'
       },
       spots: {
         'etq-01': { code: 'etq-01', label: 'Bolsa Mandacaru em Couro #07', type: 'etiqueta' }

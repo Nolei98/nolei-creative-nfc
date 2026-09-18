@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#141210">
+  <meta name="theme-color" content="#F8FAFC">
   <title>Central Supabase & Diagnóstico de Nuvem — Nolei Creative</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #141210;
-      --bg-card: #1C1814;
-      --bg-elevated: #26201A;
-      --text-main: #F2EADF;
-      --text-muted: #A2937E;
-      --text-dim: #786B5A;
-      --accent: #C15D30;
-      --accent-deep: #93401F;
+      --bg-main: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --bg-elevated: #F1F5F9;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --accent: #0055FF;
+      --accent-deep: #003DB8;
       --green: #10B981;
       --amber: #F59E0B;
       --red: #EF4444;
-      --border: rgba(242, 234, 223, 0.08);
-      --border-strong: rgba(193, 93, 48, 0.35);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(0, 85, 255, 0.28);
       --radius: 12px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -375,8 +375,8 @@
 
   <!-- Tela de Bloqueio Visual: Acesso Restrito -->
   <div id="auth-blocked-screen" style="display:none; min-height:85vh; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:var(--bg-card, #1C1814); border:1px solid rgba(193, 93, 48, 0.4); border-radius:16px; padding:44px 32px; max-width:460px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.6);">
-      <div style="width:56px; height:56px; border-radius:14px; background:#26201A; border:1px solid rgba(193, 93, 48, 0.35); display:flex; align-items:center; justify-content:center; color:var(--accent, #C15D30); margin:0 auto 16px;">
+    <div style="background:var(--bg-card, #1C1814); border:1px solid rgba(0, 85, 255, 0.4); border-radius:16px; padding:44px 32px; max-width:460px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+      <div style="width:56px; height:56px; border-radius:14px; background:#26201A; border:1px solid rgba(0, 85, 255, 0.35); display:flex; align-items:center; justify-content:center; color:var(--accent, #0055FF); margin:0 auto 16px;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
       <div style="font-family:'JetBrains Mono', monospace; font-size:0.72rem; font-weight:700; color:#EF4444; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:6px;">[Acesso Restrito ao Administrador]</div>
@@ -385,7 +385,7 @@
         O <strong>Diagnóstico de Nuvem Supabase</strong> é um painel interno de monitoramento de tabelas e latência restrito à equipe da Nolei Creative.
       </p>
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <a href="index.html?login=1" style="background:var(--accent, #C15D30); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(193,93,48,0.4);">
+        <a href="index.html?login=1" style="background:var(--accent, #0055FF); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(0, 85, 255,0.4);">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
           Fazer Login como Administrador
         </a>

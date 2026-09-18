@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS organizations (
     )),
     whatsapp TEXT,                                  -- Para notificações e fechamento
     logo_url TEXT,
-    brand_color TEXT DEFAULT '#C15D30',             -- Cor primária da marca
+    brand_color TEXT DEFAULT '#0055FF',             -- Cor primária da marca
     settings JSONB DEFAULT '{
         "currency": "BRL",
         "service_fee_pct": 10,
@@ -194,7 +194,7 @@ VALUES (
     'Ateliê Raízes do Cariri',
     'artesanato_moda',
     '5587999099937',
-    '#C15D30'
+    '#0055FF'
 ) ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO spots (org_id, code, label, type)

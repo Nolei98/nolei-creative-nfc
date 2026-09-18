@@ -125,35 +125,18 @@
 
     /* TOP INSTITUTIONAL HEADER */
     .nav-hub-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent);
-      color: #FFFFFF !important;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 10px 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      border: 1px solid var(--accent);
-      box-shadow: 0 4px 16px rgba(0, 85, 255, 0.35);
-      transition: all 0.2s ease;
-    }
-    .nav-hub-btn:hover {
-      background: #A84920;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(0, 85, 255, 0.50);
+      white-space: nowrap;
     }
     .site-header {
       position: sticky;
       top: 0;
       z-index: 900;
-      background: rgba(248, 250, 252, 0.88);
+      background: rgba(248, 250, 252, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
       transition: all 0.3s ease;
+      padding: 14px 28px;
     }
 
     .header-inner {
@@ -163,6 +146,27 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .site-header {
+        padding: 10px 16px;
+      }
+      .header-inner {
+        gap: 10px;
+      }
+      .brand-title {
+        font-size: 0.95rem;
+      }
+      .brand-mark {
+        width: 32px;
+        height: 32px;
+      }
+      .nav-hub-btn {
+        padding: 8px 14px !important;
+        font-size: 0.76rem !important;
+      }
     }
 
     .brand-logo {
@@ -632,28 +636,8 @@
     
     /* DEMO Buttons and Disabled State on Solutions */
     .card-action-demo-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: #FFFFFF !important;
-      background: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 9px 16px;
-      border-radius: 8px;
-      text-decoration: none;
       width: fit-content;
       margin-top: 4px;
-      transition: all 0.2s ease;
-      box-shadow: 0 3px 12px rgba(0, 85, 255, 0.35);
-    }
-    .card-action-demo-btn:hover {
-      background: var(--accent-deep);
-      border-color: var(--accent-deep);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0, 85, 255, 0.35);
     }
 
     .solution-card.card-disabled {
@@ -817,26 +801,7 @@
     }
 
     .btn-whatsapp-cta {
-      background: var(--accent);
-      color: #FFFFFF;
-      font-family: var(--font-mono);
-      font-size: 0.86rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 13px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 16px rgba(0, 85, 255, 0.35);
-    }
-
-    .btn-whatsapp-cta:hover {
-      background: var(--accent-deep);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 85, 255, 0.50);
+      margin-top: 8px;
     }
 
     /* FOOTER */
@@ -1019,7 +984,7 @@
       left: 24px;
       width: 50px;
       height: 50px;
-      background: #C15D30;
+      background: #0055FF;
       color: #FFFFFF;
       border-radius: 50%;
       text-decoration: none;
@@ -1041,7 +1006,7 @@
     }
 
     .floating-whatsapp-btn:hover {
-      background: #93401F;
+      background: #0044CC;
       transform: translateY(-2px) scale(1.05);
       box-shadow: 0 6px 20px rgba(0, 85, 255, 0.55);
     }
@@ -1185,7 +1150,7 @@
         <div class="brand-title">Nolei <span>Creative</span></div>
       </a>
 
-      <div class="header-actions">
+      <div class="header-actions" id="site-header-actions">
         <a href="/login" class="nav-hub-btn lg-base lg-sm">
           <span>Entrar</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
@@ -1204,7 +1169,7 @@
       <h1 class="hero-title gk-display-hero">Aproxime o celular.<br>A experiência <span class="gk-text-gradient">começa</span>.</h1>
       
       <!-- Container WebGL 3D NFC Signal Waves -->
-      <div id="gk-hero-3d-canvas" style="width: 100%; max-width: 360px; height: 280px; margin: 0 auto 10px; position: relative; z-index: 2;"></div>
+      <div id="gk-hero-3d-canvas" style="width: 100%; max-width: 140px; height: 110px; margin: 0 auto 6px; position: relative; z-index: 2;"></div>
 
       <p class="hero-subtitle">Soluções integradas com placas inteligentes para captação de avaliações, cardápios dinâmicos, concierge hoteleiro e clubes de fidelização.</p>
     </div>
@@ -1249,7 +1214,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
               Filtro de satisfação anti-críticas públicas
             </div>
-            <a href="demo/avaliacao.html?source=nfc&org=dra-sofia" target="_blank" class="card-action-demo-btn lg-base lg-sm">
+            <a href="/demo/avaliacao.html?source=nfc&org=dra-sofia" target="_blank" class="card-action-demo-btn lg-base lg-sm">
               <span>Abrir Demonstração</span>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>
@@ -1273,7 +1238,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
               Giro de mesas mais rápido e zero filas
             </div>
-            <a href="demo/cardapio.html?source=nfc&org=botanico-bistro" target="_blank" class="card-action-demo-btn lg-base lg-sm">
+            <a href="/demo/cardapio.html?source=nfc&org=botanico-bistro" target="_blank" class="card-action-demo-btn lg-base lg-sm">
               <span>Abrir Demonstração</span>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>
@@ -1297,7 +1262,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
               Experiência 5 estrelas para o hóspede
             </div>
-            <a href="demo/hotel.html?source=nfc&org=jardim-imperial" target="_blank" class="card-action-demo-btn lg-base lg-sm">
+            <a href="/demo/hotel.html?source=nfc&org=jardim-imperial" target="_blank" class="card-action-demo-btn lg-base lg-sm">
               <span>Abrir Demonstração</span>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>
@@ -1321,7 +1286,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
               Retenção e compras recorrentes
             </div>
-            <a href="demo/fidelidade.html?source=nfc&org=cafe-origem" target="_blank" class="card-action-demo-btn lg-base lg-sm">
+            <a href="/demo/fidelidade.html?source=nfc&org=cafe-origem" target="_blank" class="card-action-demo-btn lg-base lg-sm">
               <span>Abrir Demonstração</span>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>
@@ -1345,7 +1310,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
               Valor agregado e procedência comprovada
             </div>
-            <a href="demo/storytelling-artesanato.html?source=nfc&org=atelie-raizes" target="_blank" class="card-action-demo-btn lg-base lg-sm">
+            <a href="/demo/storytelling-artesanato.html?source=nfc&org=atelie-raizes" target="_blank" class="card-action-demo-btn lg-base lg-sm">
               <span>Abrir Demonstração</span>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>
@@ -1566,7 +1531,8 @@
       <h3 class="contact-title">Quer produzir seus displays personalizados?</h3>
       <p class="contact-desc">Desenvolvemos as peças com a identidade da sua marca, gravadas e programadas prontas para uso no seu estabelecimento.</p>
       <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Visitei%20o%20site%20da%20Nolei%20Creative%20e%20gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="btn-whatsapp-cta lg-base lg-primary">
-        Solicitar Orçamento no WhatsApp
+        <span>Solicitar Orçamento no WhatsApp</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </a>
     </div>
 
@@ -1582,7 +1548,7 @@
           <div class="footer-heading">Contato & Projetos</div>
           <ul class="footer-links">
             <li><a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Gostaria%20de%20um%20projeto%20personalizado." target="_blank" class="footer-link">Entrar em contato</a></li>
-            <li><a href="termos-lgpd.html" class="footer-link">Termos de Uso & LGPD</a></li>
+            <li><a href="/termos" class="footer-link">Termos de Uso & LGPD</a></li>
           </ul>
         </div>
       </div>
@@ -1801,11 +1767,68 @@
         btn.classList.toggle('visible', window.scrollY > 300);
       }
     });
+
+    // Sincronização de Estado de Autenticação na Home (Não exibir "Entrar" se já estiver logado)
+    function updateHomeNavAuth() {
+      const container = document.getElementById('site-header-actions');
+      if (!container) return;
+      const session = window.NoleiCompanies && window.NoleiCompanies.getAuthSession();
+      if (session) {
+        if (session.role === 'admin') {
+          container.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px;">
+              <a href="/dashboard/admin" class="nav-hub-btn lg-base lg-sm" title="Acessar Área Privada de Gestão">
+                <span>Painel Admin</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </a>
+              <button onclick="logoutHome()" class="lg-base lg-sm" style="background:rgba(239,68,68,0.06); color:#DC2626 !important; font-size:0.75rem; padding:8px 14px; border:1px solid rgba(239,68,68,0.2); cursor:pointer;" title="Encerrar sessão ativa">
+                <span>Encerrar Sessão</span>
+              </button>
+            </div>
+          `;
+        } else if (session.role === 'company') {
+          container.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px;">
+              <a href="/dashboard/${session.slug}" class="nav-hub-btn lg-base lg-sm" title="Acessar Portal da Empresa">
+                <span>Painel (${session.name})</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </a>
+              <button onclick="logoutHome()" class="lg-base lg-sm" style="background:rgba(239,68,68,0.06); color:#DC2626 !important; font-size:0.75rem; padding:8px 14px; border:1px solid rgba(239,68,68,0.2); cursor:pointer;" title="Encerrar sessão ativa">
+                <span>Encerrar Sessão</span>
+              </button>
+            </div>
+          `;
+        }
+      } else {
+        container.innerHTML = `
+          <a href="/login" class="nav-hub-btn lg-base lg-sm">
+            <span>Entrar</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          </a>
+        `;
+      }
+    }
+
+    function logoutHome() {
+      if (window.NoleiCompanies) {
+        window.NoleiCompanies.logout();
+      }
+      updateHomeNavAuth();
+    }
+  </script>
+
+  <!-- Módulo de Empresas & Autenticação Compartilhada -->
+  <script src="/js/nolei-companies.js"></script>
+  <script>
+    // Inicializa verificação de sessão na Home
+    if (typeof updateHomeNavAuth === 'function') {
+      updateHomeNavAuth();
+    }
   </script>
 
   <!-- Three.js WebGL CDN (GetKoda 3D Hero Sculpture) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- GetKoda Interactive Shaders & Spotlights -->
-  <script src="js/getkoda-interactive.js"></script>
+  <script src="/js/getkoda-interactive.js"></script>
 </body>
 </html>

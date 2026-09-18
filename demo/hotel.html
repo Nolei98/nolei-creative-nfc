@@ -48,18 +48,18 @@
 
  <style>
  :root {
- --navy: #F2EADF;
- --navy-light: #2A231C;
- --leaf-green: #C15D30;
- --leaf-green-light: rgba(193, 93, 48, 0.12);
- --orange: #C15D30;
- --orange-light: rgba(193, 93, 48, 0.12);
+ --navy: #0F172A;
+ --navy-light: #F1F5F9;
+ --leaf-green: #D4A853; /* Champagne Gold */
+ --leaf-green-light: rgba(212, 168, 83, 0.12);
+ --orange: #0055FF; /* Azul Cristalizado */
+ --orange-light: rgba(0, 85, 255, 0.10);
  --white: #FFFFFF;
- --bg-light: #141210;
- --text: #F2EADF;
- --text-muted: #A2937E;
- --text-dim: #786B5A;
- --border: rgba(242, 234, 223, 0.08);
+ --bg-light: #F8FAFC;
+ --text: #0F172A;
+ --text-muted: #475569;
+ --text-dim: #64748B;
+ --border: rgba(212, 168, 83, 0.20);
  --radius: 18px;
  --radius-sm: 10px;
  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -89,7 +89,7 @@
  .splash-screen {
  position: fixed;
  inset: 0;
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  display: flex;
  flex-direction: column;
@@ -125,7 +125,7 @@
 
  /* Header */
  .header {
- background: rgba(20, 18, 16, 0.92);
+ background: rgba(255, 255, 255, 0.94);
  backdrop-filter: blur(12px);
  border-bottom: 1px solid var(--border);
  position: sticky;
@@ -152,9 +152,9 @@
  width: 36px;
  height: 36px;
  border-radius: 10px;
- background: #141210;
+ background: #F1F5F9;
  border: 1px solid var(--border);
- color: #F2EADF;
+ color: #0F172A;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -165,7 +165,7 @@
  font-family: var(--font-heading);
  font-size: 1.05rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  line-height: 1.2;
  }
 
@@ -175,7 +175,7 @@
  }
 
  .room-badge {
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  font-family: var(--font-heading);
  font-size: 0.75rem;
@@ -195,7 +195,7 @@
 
  /* Guest Identification Banner */
  .guest-auth-card {
- background: #1F1A15;
+ background: #FFFFFF;
  border: 1px solid var(--border);
  border-radius: var(--radius);
  padding: 16px;
@@ -230,7 +230,7 @@
  font-family: var(--font-heading);
  font-size: 0.92rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  }
 
  .guest-status {
@@ -244,7 +244,7 @@
  }
 
  .btn-auth-hotel {
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  border: none;
  padding: 8px 14px;
@@ -262,7 +262,7 @@
 
  /* Welcome Card */
  .welcome-card {
- background: #1F1A15;
+ background: #FFFFFF;
  border: 1px solid var(--border);
  border-radius: var(--radius);
  padding: 18px;
@@ -276,7 +276,7 @@
  .welcome-text h2 {
  font-size: 1.1rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 2px;
  }
 
@@ -286,12 +286,12 @@
  }
 
  .wifi-chip {
- background: #141210;
+ background: #F1F5F9;
  border: 1px solid var(--border);
  padding: 8px 12px;
  border-radius: 10px;
  font-size: 0.75rem;
- color: #F2EADF;
+ color: #0F172A;
  font-weight: 600;
  cursor: pointer;
  display: flex;
@@ -306,7 +306,7 @@
  font-weight: 700;
  text-transform: uppercase;
  letter-spacing: 0.1em;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 12px;
  }
 
@@ -318,7 +318,7 @@
  }
 
  .service-tile {
- background: #1F1A15;
+ background: #FFFFFF;
  border: 1px solid var(--border);
  border-radius: var(--radius);
  overflow: hidden;
@@ -329,7 +329,7 @@
  }
 
  .service-tile:hover {
- border-color: #F2EADF;
+ border-color: #0F172A;
  transform: translateY(-2px);
  }
 
@@ -338,7 +338,7 @@
  height: 110px;
  object-fit: cover;
  display: block;
- background: #2A231C;
+ background: #FFFFFF;
  }
 
  .tile-body {
@@ -349,7 +349,7 @@
  font-family: var(--font-heading);
  font-size: 0.9rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 2px;
  }
 
@@ -381,7 +381,7 @@
  }
 
  .modal-card {
- background: #1F1A15;
+ background: #FFFFFF;
  border-radius: 22px;
  padding: 26px 22px;
  max-width: 420px;
@@ -410,7 +410,7 @@
  font-family: var(--font-heading);
  font-size: 1.1rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  }
 
  .btn-modal-x {
@@ -449,7 +449,7 @@
  font-family: var(--font-heading);
  font-size: 0.85rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  }
 
  .rs-price {
@@ -459,7 +459,7 @@
  }
 
  .btn-add-item {
- background: #2A231C;
+ background: #FFFFFF;
  color: var(--white);
  border: none;
  padding: 6px 14px;
@@ -498,7 +498,7 @@
  display: block;
  font-size: 0.78rem;
  font-weight: 600;
- color: #F2EADF;
+ color: #0F172A;
  margin-bottom: 4px;
  }
 
@@ -509,19 +509,19 @@
  border-radius: 10px;
  font-family: inherit;
  font-size: 0.88rem;
- background: #141210;
+ background: #F1F5F9;
  color: var(--text);
  }
 
  .form-input:focus {
  outline: none;
  border-color: var(--leaf-green);
- background: #1F1A15;
+ background: #FFFFFF;
  }
 
  /* Guest Orders & Requests Card */
  .guest-orders-card {
- background: #1F1A15;
+ background: #FFFFFF;
  border-radius: var(--radius);
  border: 1px solid var(--border);
  padding: 18px 20px;
@@ -542,7 +542,7 @@
  font-family: var(--font-heading);
  font-size: 0.95rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  display: flex;
  align-items: center;
  gap: 8px;
@@ -569,7 +569,7 @@
  align-items: center;
  justify-content: space-between;
  padding: 12px 14px;
- background: #141210;
+ background: #F1F5F9;
  border: 1px solid var(--border);
  border-radius: 12px;
  gap: 12px;
@@ -588,7 +588,7 @@
  font-family: var(--font-heading);
  font-size: 0.86rem;
  font-weight: 700;
- color: #F2EADF;
+ color: #0F172A;
  }
 
  .guest-order-meta {
@@ -668,9 +668,9 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #C15D30;
+      background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
       color: #FFFFFF !important;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       padding: 6px 13px;
       border-radius: 20px;
       font-family: inherit;
@@ -678,13 +678,13 @@
       font-weight: 700;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(193, 93, 48, 0.35);
+      box-shadow: 0 2px 10px rgba(0, 85, 255, 0.35);
       white-space: nowrap;
     }
     .btn-top-cta-contact:hover {
-      background: #93401F;
+      background: linear-gradient(135deg, #0044CC 0%, #0033AA 100%);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(193, 93, 48, 0.5);
+      box-shadow: 0 4px 14px rgba(0, 85, 255, 0.50);
       color: #FFFFFF !important;
     }
 
@@ -833,7 +833,7 @@
  <!-- Modal de Validação de Hóspede -->
  <div class="modal-overlay" id="guest-auth-modal" onclick="closeGuestAuthModal(event)">
  <div class="modal-card" onclick="event.stopPropagation()">
- <h3 style="font-family:var(--font-heading); font-size:1.15rem; color: #F2EADF; margin-bottom:4px;">Validação da Quarto</h3>
+ <h3 style="font-family:var(--font-heading); font-size:1.15rem; color: #0F172A; margin-bottom:4px;">Validação da Quarto</h3>
  <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:18px;">Por segurança, informe seus dados de check-in para liberar os pedidos no quarto.</p>
 
  <div class="form-group">
@@ -1102,7 +1102,7 @@
  <label class="form-label">Escolha o horário de entrega:</label>
  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
  <button type="button" class="wifi-chip" onclick="selectBreakfastTime(this, '07:30')">07:30</button>
- <button type="button" class="wifi-chip" style="background: #2A231C; color:#fff;" onclick="selectBreakfastTime(this, '08:30')">08:30</button>
+ <button type="button" class="wifi-chip" style="background: #FFFFFF; color:#fff;" onclick="selectBreakfastTime(this, '08:30')">08:30</button>
  <button type="button" class="wifi-chip" onclick="selectBreakfastTime(this, '09:30')">09:30</button>
  <button type="button" class="wifi-chip" onclick="selectBreakfastTime(this, '10:00')">10:00</button>
  </div>
@@ -1146,18 +1146,18 @@
  title.textContent = 'Governança & Toalhas';
  content.innerHTML = `
  <div style="display:flex; flex-direction:column; gap:10px;">
- <button class="btn-submit-order" style="background: #2A231C;" onclick="submitHotelOrder('Governança', 'Arrumação Imediata da Quarto', 0.00, 'Troca de toalhas e lençóis')">Arrumar Quarto Agora</button>
- <button class="btn-submit-order" style="background: #141210; color: #F2EADF; border:1px solid var(--border);" onclick="submitHotelOrder('Governança', 'Kit Toalhas Extras & Roupão', 0.00, '2x Toalhas de Banho + 1x Roupão')">Solicitar Toalhas Extras</button>
- <button class="btn-submit-order" style="background: #141210; color: #F2EADF; border:1px solid var(--border);" onclick="submitHotelOrder('Governança', 'Reposição de Amenities', 0.00, 'Shampoo, condicionador e sabonetes L Occitane')">Reposição de Amenities</button>
+ <button class="btn-submit-order" style="background: #FFFFFF;" onclick="submitHotelOrder('Governança', 'Arrumação Imediata da Quarto', 0.00, 'Troca de toalhas e lençóis')">Arrumar Quarto Agora</button>
+ <button class="btn-submit-order" style="background: #F1F5F9; color: #0F172A; border:1px solid var(--border);" onclick="submitHotelOrder('Governança', 'Kit Toalhas Extras & Roupão', 0.00, '2x Toalhas de Banho + 1x Roupão')">Solicitar Toalhas Extras</button>
+ <button class="btn-submit-order" style="background: #F1F5F9; color: #0F172A; border:1px solid var(--border);" onclick="submitHotelOrder('Governança', 'Reposição de Amenities', 0.00, 'Shampoo, condicionador e sabonetes L Occitane')">Reposição de Amenities</button>
  </div>
  `;
  } else if (type === 'concierge') {
  title.textContent = 'Concierge & Transporte';
  content.innerHTML = `
  <div style="display:flex; flex-direction:column; gap:10px;">
- <button class="btn-submit-order" style="background: #2A231C;" onclick="submitHotelOrder('Concierge', 'Solicitação de Táxi / Transfer', 0.00, 'Transfer Executivo para Aeroporto')">Chamar Táxi / Transfer Executivo</button>
- <button class="btn-submit-order" style="background: #141210; color: #F2EADF; border:1px solid var(--border);" onclick="submitHotelOrder('Concierge', 'Reposição Completa do Frigobar', 0.00, 'Águas, refrigerantes e snacks')">Reposição de Frigobar</button>
- <button class="btn-submit-order" style="background: #141210; color: #F2EADF; border:1px solid var(--border);" onclick="submitHotelOrder('Concierge', 'Atendimento Recepção no Quarto', 0.00, 'Dúvidas e assistência')">Solicitar Atendente na Recepção</button>
+ <button class="btn-submit-order" style="background: #FFFFFF;" onclick="submitHotelOrder('Concierge', 'Solicitação de Táxi / Transfer', 0.00, 'Transfer Executivo para Aeroporto')">Chamar Táxi / Transfer Executivo</button>
+ <button class="btn-submit-order" style="background: #F1F5F9; color: #0F172A; border:1px solid var(--border);" onclick="submitHotelOrder('Concierge', 'Reposição Completa do Frigobar', 0.00, 'Águas, refrigerantes e snacks')">Reposição de Frigobar</button>
+ <button class="btn-submit-order" style="background: #F1F5F9; color: #0F172A; border:1px solid var(--border);" onclick="submitHotelOrder('Concierge', 'Atendimento Recepção no Quarto', 0.00, 'Dúvidas e assistência')">Solicitar Atendente na Recepção</button>
  </div>
  `;
  } else if (type === 'checkout') {
@@ -1167,9 +1167,9 @@
 
  title.textContent = 'Extrato da Quarto & Check-out';
  content.innerHTML = `
- <div style="margin-bottom:14px; background: #141210; padding:12px; border-radius:12px;">
+ <div style="margin-bottom:14px; background: #F1F5F9; padding:12px; border-radius:12px;">
  <div style="font-size:0.78rem; color:var(--text-muted);">Total de Consumo na Quarto ${currentRoom}:</div>
- <div style="font-size:1.3rem; font-weight:700; color: #F2EADF;">R$ ${total.toFixed(2).replace('.', ',')}</div>
+ <div style="font-size:1.3rem; font-weight:700; color: #0F172A;">R$ ${total.toFixed(2).replace('.', ',')}</div>
  <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">(Quarto + Room Service + SPA)</div>
  </div>
  <button class="btn-submit-order" style="background:#15803D;" onclick="submitHotelOrder('Check-out', 'Solicitação de Fechamento de Conta', total, 'Pagamento na saída')">Solicitar Pré-Fechamento da Conta</button>

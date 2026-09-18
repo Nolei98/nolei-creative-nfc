@@ -52,10 +52,10 @@
       --coffee-light: #FBF7F2;
       --green: #34D399;
       --white: #FFFFFF;
-      --bg-light: #141210;
-      --text: #F2EADF;
-      --text-muted: #A2937E;
-      --border: rgba(242, 234, 223, 0.08);
+      --bg-light: #F8FAFC;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --border: rgba(15, 23, 42, 0.08);
       --radius: 14px;
       --font-heading: 'Inter', sans-serif;
       --font-body: 'Inter', sans-serif;
@@ -64,12 +64,12 @@
     body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
     h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--coffee-deep); }
 
-    .top-bar { background: #1F1A15; border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+    .top-bar { background: #FFFFFF; border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
     .top-bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .top-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; color: var(--coffee-deep); font-size: 1.05rem; }
     .top-brand span { color: var(--coffee-accent); }
     .top-nav-actions { display: flex; gap: 8px; }
-    .btn-action { background: #141210; border: 1px solid var(--border); color: var(--coffee-deep); font-family: var(--font-heading); font-size: 0.76rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-action { background: #F8FAFC; border: 1px solid var(--border); color: var(--coffee-deep); font-family: var(--font-heading); font-size: 0.76rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
     .btn-action:hover { background: var(--coffee-deep); color: var(--white); }
     .btn-action.highlight { background: var(--coffee-light); color: var(--coffee-deep); border-color: rgba(194,149,106,0.4); font-weight: 700; }
 
@@ -78,18 +78,18 @@
     .page-title { font-size: 1.55rem; font-weight: 800; }
 
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
-    .kpi-card { background: #1F1A15; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .kpi-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     .kpi-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
     .kpi-val { font-size: 1.85rem; font-family: var(--font-heading); font-weight: 800; color: var(--coffee-deep); margin-top: 4px; }
     .kpi-sub { font-size: 0.75rem; color: #34D399; font-weight: 600; margin-top: 4px; }
 
     .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
-    .chart-card { background: #1F1A15; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .chart-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     .chart-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
 
     .ranking-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
     .ranking-item:last-child { border-bottom: none; }
-    .ranking-bar-bg { height: 6px; background: #2A231C; border-radius: 4px; margin-top: 6px; overflow: hidden; }
+    .ranking-bar-bg { height: 6px; background: #F1F5F9; border-radius: 4px; margin-top: 6px; overflow: hidden; }
     .ranking-bar-fill { height: 100%; background: var(--coffee-accent); border-radius: 4px; }
 
     .btn-back-to-top { position: fixed; bottom: 24px; left: 24px; width: 42px; height: 42px; border-radius: 50%; background: var(--coffee-deep); color: var(--white); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }

@@ -51,14 +51,14 @@
       id: 'fidelidade',
       name: 'Cafeterias, Varejo & Fidelidade',
       icon: '☕',
-      color: '#C15D30',
+      color: '#0055FF',
       desc: 'Cafeterias, docerias, tabacarias e lojas de varejo com programa de recompensas e carimbos.'
     },
     artesanato_moda: {
       id: 'artesanato_moda',
       name: 'Moda Autoral & Artesanato Phygital',
       icon: '🧵',
-      color: '#E5855A',
+      color: '#0284C7',
       desc: 'Ateliês de couro, calçados artesanais, joias autorais e confecções regionais com storytelling.'
     },
     beleza: {
@@ -460,7 +460,7 @@
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'CafeOrigem_Wifi',
       wifiPass: 'graosartesanais',
-      brandColor: '#C15D30',
+      brandColor: '#0055FF',
       summary: 'Cafeteria de grãos especiais com programa de 10 carimbos digitais e resgate de recompensas.',
       spots: [
         { code: 'fidelidade_balcao', label: 'Display Balcão de Caixa', type: 'balcao', url: 'demo/fidelidade.html?source=nfc' }
@@ -483,7 +483,7 @@
       googlePlaceUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
       wifiSsid: 'Atelie_Visitantes',
       wifiPass: 'couroregional',
-      brandColor: '#E5855A',
+      brandColor: '#0055FF',
       summary: 'Ateliê de artefatos em couro legítimo com etiquetas NFC costuradas contando a história do artesão.',
       spots: [
         { code: 'etq01', label: 'Bolsa Mandacaru #07', type: 'etiqueta', url: 'demo/storytelling-artesanato.html?source=nfc' }
@@ -601,8 +601,23 @@
 
     // Métodos de autenticação para Área Privada e Painéis de Empresas
     isAdminAuthenticated() {
-      if (typeof sessionStorage === 'undefined') return false;
-      return sessionStorage.getItem('nolei_private_auth') === 'true';
+      const fromLocal = typeof localStorage !== 'undefined' && (localStorage.getItem('nolei_private_auth') === 'true' || localStorage.getItem('nolei_auth_role') === 'admin');
+      const fromSession = typeof sessionStorage !== 'undefined' && (sessionStorage.getItem('nolei_private_auth') === 'true' || sessionStorage.getItem('nolei_auth_role') === 'admin');
+      return fromLocal || fromSession;
+    }
+
+    getAuthSession() {
+      if (this.isAdminAuthenticated()) {
+        return { role: 'admin' };
+      }
+      const slug = (typeof localStorage !== 'undefined' && localStorage.getItem('nolei_company_auth')) ||
+                   (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nolei_company_auth'));
+      if (slug) {
+        const company = this.getBySlug(slug);
+        const name = company ? company.name : ((typeof localStorage !== 'undefined' && localStorage.getItem('nolei_company_name')) || slug);
+        return { role: 'company', slug: slug, name: name, company: company };
+      }
+      return null;
     }
 
     authenticate(username, password) {
@@ -611,8 +626,13 @@
 
       // 1. Administrador Geral (Nolei) -> Dashboard Geral (/dashboard/admin)
       if ((u === 'admin' || u === 'nolei') && (p === 'nolei2026' || p === 'admin123' || p === '87999099937')) {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('nolei_private_auth', 'true');
+          localStorage.setItem('nolei_auth_role', 'admin');
+        }
         if (typeof sessionStorage !== 'undefined') {
           sessionStorage.setItem('nolei_private_auth', 'true');
+          sessionStorage.setItem('nolei_auth_role', 'admin');
         }
         return { success: true, role: 'admin' };
       }
@@ -636,8 +656,15 @@
         ].filter(Boolean);
 
         if (validPasswords.includes(p)) {
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('nolei_company_auth', company.slug);
+            localStorage.setItem('nolei_auth_role', 'company');
+            localStorage.setItem('nolei_company_name', company.name);
+          }
           if (typeof sessionStorage !== 'undefined') {
             sessionStorage.setItem('nolei_company_auth', company.slug);
+            sessionStorage.setItem('nolei_auth_role', 'company');
+            sessionStorage.setItem('nolei_company_name', company.name);
           }
           return { success: true, role: 'company', slug: company.slug, company: company };
         }
@@ -652,11 +679,23 @@
     }
 
     logoutAdmin() {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem('nolei_private_auth');
+        localStorage.removeItem('nolei_company_auth');
+        localStorage.removeItem('nolei_auth_role');
+        localStorage.removeItem('nolei_company_name');
+      }
       if (typeof sessionStorage !== 'undefined') {
         sessionStorage.removeItem('nolei_private_auth');
         sessionStorage.removeItem('nolei_company_auth');
+        sessionStorage.removeItem('nolei_auth_role');
+        sessionStorage.removeItem('nolei_company_name');
       }
       return true;
+    }
+
+    logout() {
+      return this.logoutAdmin();
     }
 
     // Busca uma empresa pelo slug
@@ -699,7 +738,7 @@
         googlePlaceUrl: data.googlePlaceUrl || 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
         wifiSsid: data.wifiSsid || (slug + '_Wifi'),
         wifiPass: data.wifiPass || 'nolei2026',
-        brandColor: data.brandColor || segInfo.color || '#C15D30',
+        brandColor: data.brandColor || segInfo.color || '#0055FF',
         summary: data.summary || ('Estabelecimento parceiro Nolei no segmento de ' + segInfo.name),
         spots: data.spots || [
           { code: 'spot01', label: 'Ponto Principal / Balcão', type: 'ponto', url: `empresa.html?slug=${slug}` }

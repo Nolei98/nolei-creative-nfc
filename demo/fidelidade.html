@@ -47,417 +47,530 @@
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
  <style>
- :root {
- --navy: #0F172A;
- --navy-light: #F1F5F9;
- --leaf-green: #92400E; /* Coffee Amber */
- --leaf-green-light: rgba(146, 64, 14, 0.10);
- --orange: #059669; /* Emerald */
- --orange-light: rgba(5, 150, 105, 0.10);
- --white: #FFFFFF;
- --bg-light: #F8FAFC;
- --text: #0F172A;
- --text-muted: #64748B;
- --text-dim: #94A3B8;
- --border: rgba(146, 64, 14, 0.15);
- --radius: 18px;
- --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
- --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
- }
+  :root {
+  --navy: #0F172A;
+  --navy-light: #F1F5F9;
+  --leaf-green: #0055FF;
+  --leaf-green-light: rgba(0, 85, 255, 0.10);
+  --orange: #0055FF;
+  --orange-light: rgba(0, 85, 255, 0.10);
+  --white: #FFFFFF;
+  --bg-light: #F8FAFC;
+  --text: #0F172A;
+  --text-muted: #64748B;
+  --text-dim: #94A3B8;
+  --border: rgba(15, 23, 42, 0.08);
+  --radius: 18px;
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
 
- * {
- box-sizing: border-box;
- margin: 0;
- padding: 0;
- -webkit-tap-highlight-color: transparent;
- }
+  * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  }
 
- body {
- font-family: var(--font-body);
- background-color: var(--bg-light);
- color: var(--text);
- min-height: 100vh;
- display: flex;
- flex-direction: column;
- line-height: 1.5;
- -webkit-font-smoothing: antialiased;
- padding-bottom: 60px;
- }
+  body {
+  font-family: var(--font-body);
+  background-color: var(--bg-light);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 60px;
+  }
 
- /* Splash Screen */
- .splash-screen {
- position: fixed;
- inset: 0;
- background: #FFFFFF;
- color: var(--white);
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- z-index: 9999;
- transition: opacity 0.35s ease, visibility 0.35s ease;
- }
+  /* Splash Screen */
+  .splash-screen {
+  position: fixed;
+  inset: 0;
+  background: #FFFFFF;
+  color: #0F172A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
 
- .splash-screen.hidden {
- opacity: 0;
- visibility: hidden;
- pointer-events: none;
- }
+  .splash-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  }
 
- .splash-icon {
- width: 54px;
- height: 54px;
- border-radius: 14px;
- background: var(--leaf-green);
- color: #ffffff;
- display: flex;
- align-items: center;
- justify-content: center;
- margin-bottom: 16px;
- animation: pulse 1.4s infinite ease-in-out;
- }
+  .splash-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.3);
+  animation: pulse 1.4s infinite ease-in-out;
+  }
 
- @keyframes pulse {
- 0%, 100% { transform: scale(1); }
- 50% { transform: scale(1.06); }
- }
+  @keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  }
 
- /* Header */
- .header {
- background: rgba(255, 255, 255, 0.94);
- backdrop-filter: blur(12px);
- border-bottom: 1px solid var(--border);
- position: sticky;
- top: 0;
- z-index: 100;
- padding: 12px 20px;
- }
+  /* Header */
+  .header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  }
 
- .header-inner {
- max-width: 560px;
- margin: 0 auto;
- display: flex;
- align-items: center;
- justify-content: space-between;
- }
+  .header-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  }
 
- .header-left {
- display: flex;
- align-items: center;
- gap: 12px;
- }
+  .header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  }
 
- .btn-back {
- width: 36px;
- height: 36px;
- border-radius: 10px;
- background: #F1F5F9;
- border: 1px solid var(--border);
- color: #0F172A;
- display: flex;
- align-items: center;
- justify-content: center;
- text-decoration: none;
- }
+  .btn-back {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #F1F5F9;
+  border: 1px solid var(--border);
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  }
 
- .store-meta h1 {
- font-family: var(--font-heading);
- font-size: 1.05rem;
- font-weight: 700;
- color: #0F172A;
- line-height: 1.2;
- }
+  .store-meta h1 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+  }
 
- .store-meta p {
- font-size: 0.72rem;
- color: var(--text-muted);
- }
+  .store-meta p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  }
 
- .tier-badge {
- background: #FFFFFF;
- color: var(--white);
- font-family: var(--font-heading);
- font-size: 0.75rem;
- font-weight: 700;
- padding: 6px 12px;
- border-radius: 20px;
- }
+  .tier-badge {
+  background: rgba(0, 85, 255, 0.08);
+  color: #0055FF;
+  border: 1px solid rgba(0, 85, 255, 0.2);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  }
 
- /* Container */
- .container {
- max-width: 560px;
- width: 100%;
- margin: 0 auto;
- padding: 16px 20px;
- flex: 1;
- }
+  /* Container */
+  .container {
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 20px;
+  flex: 1;
+  }
 
- /* Unauthenticated Gate Card */
- .unauth-gate-card {
- background: #FFFFFF;
- border: 1px solid var(--border);
- border-radius: var(--radius);
- padding: 36px 24px;
- text-align: center;
- box-shadow: 0 4px 16px rgba(15, 34, 61, 0.05);
- margin-bottom: 24px;
- }
+  /* Unauthenticated Gate Card */
+  .unauth-gate, .unauth-gate-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 85, 255, 0.06);
+  margin-bottom: 24px;
+  }
 
- .gate-icon-box {
- width: 64px;
- height: 64px;
- border-radius: 18px;
- background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
- color: var(--leaf-green);
- display: flex;
- align-items: center;
- justify-content: center;
- margin: 0 auto 16px;
- }
+  .gate-icon, .gate-icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.25);
+  }
 
- .gate-title {
- font-family: var(--font-heading);
- font-size: 1.3rem;
- font-weight: 700;
- color: #0F172A;
- margin-bottom: 6px;
- }
+  .gate-icon svg {
+  stroke: #FFFFFF;
+  }
 
- .gate-desc {
- font-size: 0.85rem;
- color: var(--text-muted);
- margin-bottom: 24px;
- line-height: 1.5;
- }
+  .gate-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+  }
 
- .gate-buttons-row {
- display: flex;
- flex-direction: column;
- gap: 10px;
- max-width: 320px;
- margin: 0 auto;
- }
+  .gate-sub, .gate-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.5;
+  }
 
- .btn-gate-login {
- background: #FFFFFF;
- color: var(--white);
- border: none;
- padding: 14px;
- border-radius: 12px;
- font-family: var(--font-heading);
- font-weight: 600;
- font-size: 0.9rem;
- cursor: pointer;
- transition: background 0.15s;
- }
+  .gate-actions, .gate-buttons-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+  margin: 0 auto;
+  }
 
- .btn-gate-login:hover {
- background: var(--leaf-green);
- }
+  .btn-gate-login {
+  background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.25);
+  }
 
- .btn-gate-register {
- background: #F1F5F9;
- color: #0F172A;
- border: 1px solid var(--border);
- padding: 14px;
- border-radius: 12px;
- font-family: var(--font-heading);
- font-weight: 600;
- font-size: 0.9rem;
- cursor: pointer;
- }
+  .btn-gate-login:hover {
+  background: linear-gradient(135deg, #0044CC 0%, #0033AA 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 85, 255, 0.35);
+  }
 
- /* Loyalty Dashboard (When Logged In) */
- .loyalty-dashboard {
- display: none;
- }
+  .btn-gate-register {
+  background: #F1F5F9;
+  color: #0F172A;
+  border: 1px solid var(--border);
+  padding: 14px;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  }
 
- .loyalty-hero-card {
- background: #FFFFFF;
- color: var(--white);
- border-radius: var(--radius);
- padding: 24px;
- margin-bottom: 20px;
- box-shadow: 0 8px 24px rgba(15, 34, 61, 0.2);
- position: relative;
- overflow: hidden;
- }
+  .btn-gate-register:hover {
+  background: #E2E8F0;
+  }
 
- .card-top {
- display: flex;
- justify-content: space-between;
- align-items: flex-start;
- margin-bottom: 20px;
- }
+  /* Loyalty Dashboard (When Logged In) */
+  .loyalty-dashboard {
+  display: none;
+  }
 
- .member-name {
- font-family: var(--font-heading);
- font-size: 1.25rem;
- font-weight: 800;
- letter-spacing: -0.4px;
- }
+  .loyalty-hero-card {
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0, 85, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  }
 
- .member-sub {
- font-size: 0.78rem;
- color: #A2937E;
- }
+  .card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  }
 
- .points-number {
- font-family: var(--font-heading);
- font-size: 2.6rem;
- font-weight: 800;
- letter-spacing: -1px;
- line-height: 1;
- margin-bottom: 4px;
- color: #0055FF;
- }
+  .card-top svg {
+  color: #0055FF;
+  stroke: #0055FF;
+  }
 
- .points-label {
- font-size: 0.75rem;
- color: #A2937E;
- text-transform: uppercase;
- letter-spacing: 0.1em;
- }
+  .member-name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: #0F172A;
+  }
 
- /* Progress Bar */
- .progress-track {
- background: rgba(255, 255, 255, 0.12);
- height: 6px;
- border-radius: 10px;
- overflow: hidden;
- margin-top: 16px;
- margin-bottom: 6px;
- }
+  .member-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  }
 
- .progress-fill {
- background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
- width: 65%;
- height: 100%;
- border-radius: 10px;
- }
+  .points-number {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: #0055FF;
+  }
 
- .progress-info {
- display: flex;
- justify-content: space-between;
- font-size: 0.72rem;
- color: #A2937E;
- }
+  .points-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  }
 
- /* Stamp Card */
- .stamps-section {
- background: #FFFFFF;
- border: 1px solid var(--border);
- border-radius: var(--radius);
- padding: 20px;
- margin-bottom: 20px;
- box-shadow: 0 2px 6px rgba(15, 34, 61, 0.03);
- }
+  /* Progress Bar */
+  .progress-track {
+  background: #E2E8F0;
+  height: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  }
 
- .stamps-title {
- font-family: var(--font-heading);
- font-size: 0.95rem;
- font-weight: 700;
- color: #0F172A;
- margin-bottom: 4px;
- }
+  .progress-fill {
+  background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
+  width: 65%;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+  }
 
- .stamps-desc {
- font-size: 0.78rem;
- color: var(--text-muted);
- margin-bottom: 16px;
- }
+  .progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  }
 
- .stamps-grid {
- display: grid;
- grid-template-columns: repeat(5, 1fr);
- gap: 10px;
- }
+  /* Stamp Card */
+  .stamps-section {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(15, 34, 61, 0.04);
+  }
 
- .stamp-slot {
- aspect-ratio: 1;
- border-radius: 50%;
- border: 2px dashed var(--border);
- display: flex;
- align-items: center;
- justify-content: center;
- font-size: 0.75rem;
- font-weight: 700;
- color: var(--text-dim);
- background: #F1F5F9;
- }
+  .stamps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  }
 
- .stamp-slot.filled {
- border: 2px solid var(--navy);
- background: #FFFFFF;
- color: var(--white);
- }
+  .stamps-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  }
 
- .stamp-slot.filled svg {
- width: 18px;
- height: 18px;
- stroke: var(--white);
- }
+  .stamps-counter-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0055FF;
+  background: rgba(0, 85, 255, 0.08);
+  border: 1px solid rgba(0, 85, 255, 0.2);
+  padding: 3px 10px;
+  border-radius: 20px;
+  }
 
- /* Rewards Section */
- .section-label {
- font-family: var(--font-heading);
- font-size: 0.78rem;
- font-weight: 700;
- text-transform: uppercase;
- letter-spacing: 0.1em;
- color: #0F172A;
- margin-bottom: 12px;
- }
+  .stamps-desc {
+  font-size: 0.80rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.4;
+  }
 
- .rewards-list {
- display: flex;
- flex-direction: column;
- gap: 10px;
- margin-bottom: 24px;
- }
+  .stamps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  }
 
- .reward-card {
- background: #FFFFFF;
- border: 1px solid var(--border);
- border-radius: var(--radius);
- padding: 14px 16px;
- display: flex;
- align-items: center;
- justify-content: space-between;
- gap: 12px;
- box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
- }
+  .stamp-slot {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px dashed #CBD5E1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #64748B;
+  background: #F8FAFC;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  cursor: default;
+  user-select: none;
+  }
 
- .reward-info h4 {
- font-family: var(--font-heading);
- font-size: 0.9rem;
- font-weight: 700;
- color: #0F172A;
- margin-bottom: 2px;
- }
+  .stamp-slot.slot-empty {
+  border-color: #CBD5E1;
+  background: #F8FAFC;
+  color: #64748B;
+  }
 
- .reward-info p {
- font-size: 0.75rem;
- color: var(--text-muted);
- }
+  .stamp-slot.slot-prize {
+  border: 2px dashed #38BDF8;
+  background: rgba(0, 85, 255, 0.04);
+  color: #0055FF;
+  }
 
- .btn-redeem {
- background: var(--leaf-green);
- color: var(--white);
- border: none;
- padding: 8px 16px;
- border-radius: 8px;
- font-family: var(--font-heading);
- font-size: 0.78rem;
- font-weight: 600;
- cursor: pointer;
- white-space: nowrap;
- transition: background 0.15s;
- }
+  .slot-prize-tag {
+  font-size: 0.50rem;
+  font-weight: 800;
+  color: #0055FF;
+  letter-spacing: 0.4px;
+  margin-top: 1px;
+  text-transform: uppercase;
+  }
 
- .btn-redeem:hover {
- background: #A84A22;
- }
+  .stamp-slot.filled {
+  border: 2px solid #0055FF;
+  background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.32);
+  transform: scale(1.03);
+  }
+
+  .stamp-slot.filled.slot-prize-won {
+  background: linear-gradient(135deg, #0044CC 0%, #0055FF 50%, #38BDF8 100%);
+  box-shadow: 0 6px 18px rgba(0, 85, 255, 0.42);
+  border-color: #38BDF8;
+  }
+
+  .stamp-graphic {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+
+  .stamp-cup-svg {
+  width: 22px;
+  height: 22px;
+  stroke: #FFFFFF !important;
+  fill: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+  }
+
+  .stamp-check-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: #0055FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .stamp-check-badge svg {
+  width: 9px;
+  height: 9px;
+  stroke: #0055FF !important;
+  stroke-width: 3.5;
+  }
+
+  /* Rewards Section */
+  .section-label {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #0F172A;
+  margin-bottom: 12px;
+  }
+
+  .rewards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  }
+
+  .reward-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+
+  .reward-info h4 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 2px;
+  }
+
+  .reward-info p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  }
+
+  .btn-redeem {
+  background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0, 85, 255, 0.2);
+  }
+
+  .btn-redeem:hover {
+  background: linear-gradient(135deg, #0044CC 0%, #0033AA 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 85, 255, 0.3);
+  }
 
  /* Modal Auth */
  .modal-overlay {
@@ -573,46 +686,60 @@
  color: var(--white);
  border: none;
  padding: 12px;
- border-radius: 10px;
- font-family: var(--font-heading);
- font-weight: 600;
- font-size: 0.9rem;
- cursor: pointer;
- margin-top: 8px;
- }
+   .btn-submit-auth {
+  width: 100%;
+  background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(0, 85, 255, 0.25);
+  transition: all 0.15s ease;
+  }
 
- .btn-submit-auth:hover {
- background: #A84A22;
- }
+  .btn-submit-auth:hover {
+  background: linear-gradient(135deg, #0044CC 0%, #0033AA 100%);
+  transform: translateY(-1px);
+  }
 
- /* Toast */
- .toast-loyalty {
- position: fixed;
- bottom: 30px;
- left: 50%;
- transform: translateX(-50%) translateY(20px);
- background: #FFFFFF;
- color: var(--white);
- padding: 12px 20px;
- border-radius: 100px;
- font-size: 0.85rem;
- font-weight: 600;
- display: flex;
- align-items: center;
- gap: 8px;
- box-shadow: 0 8px 24px rgba(15, 34, 61, 0.3);
- z-index: 10000;
- opacity: 0;
- visibility: hidden;
- transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
- white-space: nowrap;
- }
+  /* Toast */
+  .toast-loyalty {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #0F172A;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 12px 22px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  }
 
- .toast-loyalty.show {
- opacity: 1;
- visibility: visible;
- transform: translateX(-50%) translateY(0);
- }
+  .toast-loyalty svg {
+  stroke: #38BDF8;
+  }
+
+  .toast-loyalty.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  }
  
     .btn-top-cta-contact {
       display: inline-flex;
@@ -720,15 +847,18 @@
  </div>
  </div>
 
- <!-- Stamps Card -->
- <div class="stamps-section">
- <h3 class="stamps-title">Cartela de Selos do Mês</h3>
- <p class="stamps-desc">A cada café consumido, você ganha 1 selo ao aproximar o celular na tag NFC do balcão.</p>
+  <!-- Stamps Card -->
+  <div class="stamps-section">
+  <div class="stamps-header">
+  <h3 class="stamps-title">Cartela de Selos do Mês</h3>
+  <span class="stamps-counter-badge" id="stamps-counter-badge">8 / 10 Selos</span>
+  </div>
+  <p class="stamps-desc">A cada café consumido, você ganha 1 selo ao aproximar o celular na tag NFC do balcão. Ao completar 10, o próximo é grátis!</p>
 
- <div class="stamps-grid" id="stamps-grid-box">
- <!-- Injected via JavaScript -->
- </div>
- </div>
+  <div class="stamps-grid" id="stamps-grid-box">
+  <!-- Injected via JavaScript -->
+  </div>
+  </div>
 
  <!-- Rewards List (Dynamic from CRUD) -->
  <div class="section-label">Catálogo de Prêmios para Resgate</div>
@@ -783,19 +913,19 @@
  <!-- Modal Voucher de Resgate -->
  <div class="modal-overlay" id="voucher-modal" onclick="closeVoucherModal(event)">
  <div class="modal-card" onclick="event.stopPropagation()" style="text-align:center;">
- <div style="width:48px; height:48px; border-radius:50%; background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%); color:var(--leaf-green); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+ <div style="width:48px; height:48px; border-radius:50%; background: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%); color:#FFFFFF; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; box-shadow: 0 4px 14px rgba(0, 85, 255, 0.3);">
+ <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
  </div>
  <h3 class="modal-title" style="margin-bottom:4px;">Cupom de Resgate Gerado</h3>
  <p class="modal-sub" id="voucher-reward-name">Café Espresso ou Cappuccino</p>
 
  <div style="background: #F1F5F9; border:2px dashed var(--border); border-radius:14px; padding:18px; margin:16px 0;">
  <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Apresente este código no caixa:</div>
- <div style="font-size:1.6rem; font-weight:800; font-family:monospace; color:var(--leaf-green); margin:8px 0;" id="voucher-code-display">ORIGEM-7429</div>
+ <div style="font-size:1.6rem; font-weight:800; font-family:monospace; color:#0055FF; margin:8px 0;" id="voucher-code-display">ORIGEM-7429</div>
  <div style="font-size:0.72rem; color:var(--text-muted);">Válido por 30 minutos na loja física</div>
  </div>
 
- <button class="btn-submit-auth" onclick="closeVoucherModal()" style="background:var(--leaf-green);">Entendi, vou resgatar no balcão</button>
+ <button class="btn-submit-auth" onclick="closeVoucherModal()">Entendi, vou resgatar no balcão</button>
  </div>
  </div>
 
@@ -896,18 +1026,70 @@
  ? `Faltam ${diff} pts para Nível Ouro` 
  : `Você atingiu o Nível Ouro VIP`;
 
- // Render Stamps (10 slots)
- const filledStamps = Math.min(10, Math.floor(activeMember.points / 15));
- const stampsContainer = document.getElementById('stamps-grid-box');
- let stampsHtml = '';
- for (let i = 1; i <= 10; i++) {
- if (i <= filledStamps) {
- stampsHtml += `<div class="stamp-slot filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>`;
- } else {
- stampsHtml += `<div class="stamp-slot">${i}</div>`;
- }
- }
- stampsContainer.innerHTML = stampsHtml;
+  // Render Stamps (10 slots)
+  const filledStamps = Math.min(10, Math.floor(activeMember.points / 15));
+  const stampsCounterBadge = document.getElementById('stamps-counter-badge');
+  if (stampsCounterBadge) {
+  stampsCounterBadge.textContent = filledStamps >= 10 
+  ? '10 / 10 — Cartela Completa! 🎉' 
+  : `${filledStamps} / 10 Selos`;
+  }
+
+  const stampsContainer = document.getElementById('stamps-grid-box');
+  let stampsHtml = '';
+  for (let i = 1; i <= 10; i++) {
+  const isFilled = i <= filledStamps;
+  const isTenth = (i === 10);
+  if (isFilled) {
+  if (isTenth) {
+  stampsHtml += `
+  <div class="stamp-slot filled slot-prize-won" title="10º Selo Liberado! Café Especial Grátis!">
+  <div class="stamp-graphic">
+  <svg class="stamp-cup-svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+  <rect x="2" y="7" width="20" height="5"></rect>
+  <line x1="12" y1="22" x2="12" y2="7"></line>
+  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+  </svg>
+  <div class="stamp-check-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  </div>
+  </div>`;
+  } else {
+  stampsHtml += `
+  <div class="stamp-slot filled" title="Selo #${i} Confirmado">
+  <div class="stamp-graphic">
+  <svg class="stamp-cup-svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+  <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+  <line x1="6" y1="2" x2="6" y2="4"></line>
+  <line x1="10" y1="2" x2="10" y2="4"></line>
+  <line x1="14" y1="2" x2="14" y2="4"></line>
+  </svg>
+  <div class="stamp-check-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  </div>
+  </div>`;
+  }
+  } else {
+  if (isTenth) {
+  stampsHtml += `
+  <div class="stamp-slot slot-prize" title="10º Selo: Café Grátis!">
+  <span style="font-size:0.88rem; font-weight:800; color:#0055FF;">10</span>
+  <span class="slot-prize-tag">GRÁTIS 🎁</span>
+  </div>`;
+  } else {
+  stampsHtml += `
+  <div class="stamp-slot slot-empty" title="Selo #${i} Pendente">
+  <span>${i}</span>
+  </div>`;
+  }
+  }
+  }
+  stampsContainer.innerHTML = stampsHtml;
 
  // Render Rewards from Catalog
  const rewards = getStoredRewards().filter(r => r.active !== false);
@@ -920,7 +1102,7 @@
  return `
  <div class="reward-card">
  <div style="margin-right:12px; display:flex; align-items:center;">
- <span style="font-size:0.68rem; font-weight:700; background:var(--orange-light); color:var(--orange); border:1px solid rgba(249,115,22,0.3); padding:3px 8px; border-radius:6px; text-transform:uppercase;">
+ <span style="font-size:0.68rem; font-weight:700; background:var(--orange-light); color:var(--orange); border:1px solid rgba(0,85,255,0.25); padding:3px 8px; border-radius:6px; text-transform:uppercase;">
  ${r.badge || 'Prêmio'}
  </span>
  </div>

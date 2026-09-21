@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0055FF">
+
+  <!-- Primary Meta Tags -->
+  <title>Diretório Predial & Guia de Salas — Centro Empresarial | Nolei NFC</title>
+  <meta name="title" content="🏢 Diretório Predial & Guia de Salas — Nolei NFC">
+  <meta name="description" content="Aproxime seu celular do totem na fachada e encontre rapidamente salas, andares, consultórios, escritórios e contatos do edifício.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0055FF;
+      --primary-gradient: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
+      --primary-dark: #0044CC;
+      --primary-light: rgba(0, 85, 255, 0.08);
+      --primary-border: rgba(0, 85, 255, 0.20);
+      
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --bg-elevated: #F1F5F9;
+      
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      
+      --green: #10B981;
+      --green-light: rgba(16, 185, 129, 0.12);
+      --amber: #F59E0B;
+      --amber-light: rgba(245, 158, 11, 0.12);
+      --blue: #0284C7;
+      --blue-light: rgba(2, 132, 199, 0.12);
+      --slate: #64748B;
+      --slate-light: rgba(100, 116, 139, 0.12);
+      
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.14);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      
+      --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 6px 20px rgba(15, 23, 42, 0.06);
+      --shadow-hover: 0 12px 30px rgba(0, 85, 255, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 40px;
+    }
+
+    /* Splash Screen NFC */
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      background: #FFFFFF;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .splash-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-pulse-box {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: var(--primary-gradient);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0, 85, 255, 0.35);
+      animation: pulseTotem 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulseTotem {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 85, 255, 0.35); }
+      50% { transform: scale(1.08); box-shadow: 0 16px 40px rgba(0, 85, 255, 0.50); }
+    }
+
+    .splash-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .splash-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Top Sticky Status Bar */
+    .top-action-bar {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 10px 16px;
+    }
+
+    .top-action-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .building-mini-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .building-mini-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--primary-gradient);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .building-mini-text h2 {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .building-mini-text p {
+      font-size: 0.72rem;
+      color: var(--green);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .building-mini-text p::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blinkDot 1.4s infinite;
+    }
+
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .btn-top-portal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-top-portal:hover {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    /* Hero Banner Fachada */
+    .facade-hero {
+      position: relative;
+      background: #0F172A;
+      color: #FFFFFF;
+      overflow: hidden;
+      padding: 36px 20px 28px;
+    }
+
+    .facade-bg-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.32;
+      filter: blur(2px) scale(1.03);
+    }
+
+    .facade-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.88) 100%);
+    }
+
+    .facade-content {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .facade-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .facade-title {
+      font-family: var(--font-heading);
+      font-size: 1.55rem;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+      color: #FFFFFF;
+    }
+
+    .facade-sub {
+      font-size: 0.88rem;
+      color: #E2E8F0;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .facade-address-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.80rem;
+      color: #94A3B8;
+      margin-bottom: 18px;
+    }
+
+    .facade-address-row a {
+      color: #38BDF8;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    /* Quick Action Buttons Grid */
+    .hero-quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .btn-hero-action {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+      padding: 10px 8px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      font-family: var(--font-heading);
+    }
+
+    .btn-hero-action:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .btn-hero-action svg {
+      width: 18px;
+      height: 18px;
+      margin-bottom: 4px;
+      stroke: #38BDF8;
+    }
+
+    .btn-hero-action span {
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    /* Alert Banner */
+    .daily-alert-banner {
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      border-bottom: 1px solid #FCD34D;
+      color: #92400E;
+      padding: 12px 16px;
+      display: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .daily-alert-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .daily-alert-inner svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      stroke: #B45309;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 16px;
+      flex: 1;
+    }
+
+    /* Search & Filter Header */
+    .search-section {
+      margin-bottom: 18px;
+    }
+
+    .search-box-wrap {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 52px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 0 46px 0 48px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.12);
+    }
+
+    .search-icon-left {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+      display: flex;
+    }
+
+    .search-btn-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--bg-elevated);
+      border: none;
+      color: var(--text-muted);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Filter Chips Bar */
+    .filter-chips-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-chips-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip-btn {
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chip-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 85, 255, 0.3);
+    }
+
+    /* Result summary line */
+    .result-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .result-count-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    /* Rooms Grid / Cards */
+    .rooms-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .room-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .room-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary-border);
+    }
+
+    .room-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .room-location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      padding: 5px 12px;
+      border-radius: 10px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .room-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .room-status-badge.normal {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .room-status-badge.agendamento {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    .room-status-badge.fechado {
+      background: var(--slate-light);
+      color: var(--slate);
+    }
+
+    .room-status-badge.disponivel {
+      background: var(--amber-light);
+      color: var(--amber);
+    }
+
+    .room-main-info {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .room-avatar-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .room-text-block {
+      flex: 1;
+    }
+
+    .room-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+
+    .room-category-tag {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .room-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .room-hours-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .room-hours-row svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--text-dim);
+    }
+
+    /* Action Buttons Row */
+    .room-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-room-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
+      color: #FFFFFF !important;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-family: var(--font-heading);
+      font-size: 0.80rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 85, 255, 0.25);
+    }
+
+    .btn-room-whatsapp:hover {
+      background: linear-gradient(135deg, #0044CC 0%, #0033AA 100%);
+      transform: translateY(-1px);
+    }
+
+    .btn-room-phone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-strong);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-family: var(--font-heading);
+      font-size: 0.80rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .btn-room-phone:hover {
+      background: #E2E8F0;
+    }
+
+    /* Empty state */
+    .empty-search-state {
+      text-align: center;
+      padding: 40px 20px;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--border);
+      display: none;
+    }
+
+    .empty-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    /* Modais */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 28px 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      transform: scale(0.95);
+      transition: transform 0.2s ease;
+      text-align: center;
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-icon-header {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .wifi-credential-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .wifi-field {
+      margin-bottom: 12px;
+    }
+
+    .wifi-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .wifi-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .wifi-val-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .wifi-val {
+      font-family: monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .btn-copy-mini {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-modal-close {
+      width: 100%;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    /* Toast */
+    .toast-predial {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #0F172A;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      z-index: 10001;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .toast-predial.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Footer */
+    .predial-footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Splash Screen NFC -->
+  <div class="splash-screen" id="splash-screen">
+    <div class="splash-pulse-box">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 11V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5"></path>
+        <path d="M4 11v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path>
+        <path d="M12 4v16"></path>
+        <path d="M8 8h.01"></path>
+        <path d="M16 8h.01"></path>
+        <path d="M8 12h.01"></path>
+        <path d="M16 12h.01"></path>
+        <path d="M8 16h.01"></path>
+        <path d="M16 16h.01"></path>
+      </svg>
+    </div>
+    <h2 class="splash-title" id="splash-building-name">Carregando Diretório...</h2>
+    <p class="splash-sub">Totem Predial Conectado via NFC ✨</p>
+  </div>
+
+  <!-- Top Action Bar Sticky -->
+  <header class="top-action-bar">
+    <div class="top-action-inner">
+      <div class="building-mini-info">
+        <div class="building-mini-badge">🏢</div>
+        <div class="building-mini-text">
+          <h2 id="top-building-name">Centro Empresarial</h2>
+          <p id="top-porter-status">Portaria em Atendimento</p>
+        </div>
+      </div>
+      <a href="painel-predial.html" class="btn-top-portal" title="Acessar Gestão do Edifício">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        <span>Painel do Síndico</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Banner Fachada -->
+  <section class="facade-hero">
+    <div class="facade-bg-image" id="facade-bg"></div>
+    <div class="facade-overlay"></div>
+    <div class="facade-content">
+      <div class="facade-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>Placa de Fachada • Acesso NFC</span>
+      </div>
+      <h1 class="facade-title" id="hero-building-name">Centro Empresarial Cariri Prime</h1>
+      <p class="facade-sub" id="hero-building-sub">Torre Corporativa de Saúde, Negócios & Tecnologia</p>
+      
+      <div class="facade-address-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <div>
+          <span id="hero-building-address">Av. Leão Sampaio, 1450 - Lagoa Seca</span> — 
+          <a href="#" id="hero-maps-link" target="_blank" rel="noopener noreferrer">Abrir no GPS / Maps</a>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="hero-quick-actions">
+        <button class="btn-hero-action" onclick="callPorter()" id="btn-call-porter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Interfone / Portaria</span>
+        </button>
+
+        <button class="btn-hero-action" onclick="openWifiModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+          <span>Wi-Fi Visitante</span>
+        </button>
+
+        <button class="btn-hero-action" onclick="focusSearch()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Buscar Sala</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Daily Alert Banner -->
+  <div class="daily-alert-banner" id="daily-alert-box">
+    <div class="daily-alert-inner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      <span id="daily-alert-text">Elevador 02 em manutenção preventiva hoje.</span>
+    </div>
+  </div>
+
+  <!-- Main Directory Container -->
+  <main class="container">
+    
+    <!-- Search & Filters -->
+    <div class="search-section">
+      <div class="search-box-wrap">
+        <span class="search-icon-left">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <input type="text" id="search-input" class="search-input" placeholder="Buscar por sala, clínica, médico, advogado ou serviço..." oninput="handleSearch(this.value)">
+        <button id="search-clear-btn" class="search-btn-clear" onclick="clearSearch()">✕</button>
+      </div>
+
+      <!-- Floor & Category Chips -->
+      <div class="filter-chips-scroll" id="filter-chips-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Result Meta -->
+    <div class="result-meta-bar">
+      <span>Estabelecimentos & Salas</span>
+      <span class="result-count-badge" id="results-count-badge">0 Salas</span>
+    </div>
+
+    <!-- Rooms Directory List -->
+    <div class="rooms-list" id="rooms-container">
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-search-state" id="empty-state">
+      <div class="empty-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+      <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; margin-bottom:4px;">Nenhuma sala encontrada</h3>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">Tente buscar por outro nome, especialidade ou andar.</p>
+      <button class="chip-btn active" onclick="resetFilters()">Limpar filtros de busca</button>
+    </div>
+
+  </main>
+
+  <!-- Modal Wi-Fi Visitante -->
+  <div class="modal-overlay" id="wifi-modal" onclick="closeWifiModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-icon-header">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+      </div>
+      <h3 class="modal-title">Wi-Fi de Visitantes</h3>
+      <p class="modal-desc">Conecte-se gratuitamente na recepção do edifício.</p>
+
+      <div class="wifi-credential-box">
+        <div class="wifi-field">
+          <div class="wifi-label">Rede (SSID):</div>
+          <div class="wifi-val-row">
+            <span class="wifi-val" id="modal-wifi-ssid">CaririPrime_Visitantes</span>
+            <button class="btn-copy-mini" onclick="copyText('modal-wifi-ssid', 'Nome da rede copiado!')">Copiar</button>
+          </div>
+        </div>
+        <div class="wifi-field">
+          <div class="wifi-label">Senha de Acesso:</div>
+          <div class="wifi-val-row">
+            <span class="wifi-val" id="modal-wifi-pass">prime2026</span>
+            <button class="btn-copy-mini" onclick="copyText('modal-wifi-pass', 'Senha copiada com sucesso!')">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-modal-close" onclick="closeWifiModal()">Concluir</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-predial" id="toast-predial">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-predial-msg">Copiado para a área de transferência!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="predial-footer">
+    <div>Directório Predial Digital • Powered by <strong>Nolei Creative Phygital</strong></div>
+  </footer>
+
+  <script>
+    // Embedded Default Seed Data (Used on first launch or fallback)
+    const defaultData = {
+      building: {
+        name: "Centro Empresarial Cariri Prime",
+        subtitle: "Torre Corporativa de Saúde, Negócios & Tecnologia",
+        address: "Av. Leão Sampaio, 1450 - Lagoa Seca, Juazeiro do Norte - CE",
+        mapsUrl: "https://maps.google.com/?q=Av.+Leao+Sampaio+1450+Juazeiro+do+Norte+CE",
+        bannerUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+        porterHours: "Segunda a Sexta: 07:00 às 20:00 • Sábado: 08:00 às 13:00",
+        porterPhone: "(88) 3571-9000",
+        porterWhatsapp: "5587999099937",
+        wifiSsid: "CaririPrime_Visitantes",
+        wifiPass: "prime2026",
+        alertActive: true,
+        alertMessage: "Elevador 02 (Social) em manutenção preventiva das 13h às 15h. Utilize os elevadores 01 e 03."
+      },
+      rooms: [
+        {
+          id: "sala_101",
+          number: "Sala 101",
+          floor: "1º Andar",
+          floorIndex: 1,
+          name: "Clínica Dermavitta — Dra. Camila Araripe",
+          category: "Saúde & Estética",
+          description: "Dermatologia clínica, tratamentos estéticos avançados, laser e rejuvenescimento facial.",
+          avatar: "👩‍⚕️",
+          whatsapp: "5588996001122",
+          phone: "(88) 3571-1101",
+          hours: "08:00 às 18:00 (Seg a Sex)",
+          status: "normal"
+        },
+        {
+          id: "sala_104",
+          number: "Sala 104",
+          floor: "1º Andar",
+          floorIndex: 1,
+          name: "Araripe & Bezerra Advogados Associados",
+          category: "Jurídico & Advocacia",
+          description: "Assessoria jurídica empresarial, direito tributário, trabalhista e contratos corporativos.",
+          avatar: "⚖️",
+          whatsapp: "5588997223344",
+          phone: "(88) 3571-1104",
+          hours: "08:30 às 17:30 (Seg a Sex)",
+          status: "normal"
+        },
+        {
+          id: "sala_202",
+          number: "Sala 202",
+          floor: "2º Andar",
+          floorIndex: 2,
+          name: "Apex Soluções Contábeis & BPO Financeiro",
+          category: "Contabilidade & Finanças",
+          description: "Gestão contábil, planejamento tributário, abertura de empresas e folha de pagamento digital.",
+          avatar: "📊",
+          whatsapp: "5588998334455",
+          phone: "(88) 3571-1202",
+          hours: "08:00 às 18:00 (Seg a Sex)",
+          status: "normal"
+        },
+        {
+          id: "sala_205",
+          number: "Sala 205",
+          floor: "2º Andar",
+          floorIndex: 2,
+          name: "Dr. Marcelo Feitosa — Odontologia & Implantes",
+          category: "Saúde & Odonto",
+          description: "Implantodontia guiada, reabilitação oral estética, alinhadores invisíveis e próteses.",
+          avatar: "🦷",
+          whatsapp: "5588999445566",
+          phone: "(88) 3571-1205",
+          hours: "09:00 às 19:00 (Seg a Sex)",
+          status: "agendamento"
+        },
+        {
+          id: "sala_301",
+          number: "Sala 301",
+          floor: "3º Andar",
+          floorIndex: 3,
+          name: "ByteFlow Softwares & Automação IA",
+          category: "Tecnologia & Inovação",
+          description: "Desenvolvimento de aplicativos, sistemas web corporativos e integração de inteligência artificial.",
+          avatar: "💻",
+          whatsapp: "5588991556677",
+          phone: "(88) 3571-1301",
+          hours: "09:00 às 18:00 (Seg a Sex)",
+          status: "normal"
+        },
+        {
+          id: "sala_304",
+          number: "Sala 304",
+          floor: "3º Andar",
+          floorIndex: 3,
+          name: "Studio Arquitetura Viva — Arq. Lucas Mourão",
+          category: "Arquitetura & Design",
+          description: "Projetos arquitetônicos residenciais e comerciais, design de interiores e acompanhamento de obras.",
+          avatar: "📐",
+          whatsapp: "5588992667788",
+          phone: "(88) 3571-1304",
+          hours: "08:30 às 17:30 (Seg a Sex)",
+          status: "agendamento"
+        },
+        {
+          id: "sala_401",
+          number: "Sala 401",
+          floor: "4º Andar",
+          floorIndex: 4,
+          name: "Consultório Psicológico — Dra. Mariana Fontes",
+          category: "Saúde & Bem-Estar",
+          description: "Psicoterapia cognitivo-comportamental para adultos e adolescentes, acolhimento e autoconhecimento.",
+          avatar: "🧠",
+          whatsapp: "5588993778899",
+          phone: "(88) 3571-1401",
+          hours: "08:00 às 19:00 (Seg a Sex)",
+          status: "agendamento"
+        },
+        {
+          id: "sala_404",
+          number: "Sala 404",
+          floor: "4º Andar",
+          floorIndex: 4,
+          name: "Sala Comercial 48m² — Disponível para Locação",
+          category: "Espaço Comercial",
+          description: "Piso em porcelanato, lavabo privativo, ar-condicionado instalado e 1 vaga de garagem coberta.",
+          avatar: "🔑",
+          whatsapp: "5587999099937",
+          phone: "(88) 3571-9000",
+          hours: "Tratar na Administração / Portaria",
+          status: "disponivel"
+        },
+        {
+          id: "sala_terreo_01",
+          number: "Térreo Loja 01",
+          floor: "Térreo",
+          floorIndex: 0,
+          name: "Café Origem Prime & Bistro",
+          category: "Gastronomia & Café",
+          description: "Cafés especiais premiados, lanches artesanais, reuniões rápidas e doceria refinada.",
+          avatar: "☕",
+          whatsapp: "5587999099937",
+          phone: "(88) 3571-1001",
+          hours: "07:00 às 19:30 (Seg a Sáb)",
+          status: "normal"
+        }
+      ]
+    };
+
+    // State management
+    let store = null;
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function getStore() {
+      try {
+        const local = localStorage.getItem('nolei_predial_data');
+        if (local) {
+          return JSON.parse(local);
+        }
+      } catch (e) {
+        console.warn('Erro lendo localStorage:', e);
+      }
+      return defaultData;
+    }
+
+    function initData() {
+      store = getStore();
+      // If nothing was stored yet, persist defaults
+      if (!localStorage.getItem('nolei_predial_data')) {
+        localStorage.setItem('nolei_predial_data', JSON.stringify(store));
+      }
+      renderBuildingHeader();
+      renderFilterChips();
+      renderRoomsList();
+    }
+
+    function renderBuildingHeader() {
+      const b = store.building || defaultData.building;
+      
+      document.title = `${b.name} — Diretório Predial & Guia de Salas | Nolei NFC`;
+      document.getElementById('splash-building-name').textContent = b.name;
+      document.getElementById('top-building-name').textContent = b.name;
+      document.getElementById('hero-building-name').textContent = b.name;
+      document.getElementById('hero-building-sub').textContent = b.subtitle;
+      document.getElementById('hero-building-address').textContent = b.address;
+      
+      if (b.mapsUrl) {
+        document.getElementById('hero-maps-link').href = b.mapsUrl;
+      }
+      
+      if (b.bannerUrl) {
+        document.getElementById('facade-bg').style.backgroundImage = `url('${b.bannerUrl}')`;
+      }
+      
+      // Wi-fi credentials
+      document.getElementById('modal-wifi-ssid').textContent = b.wifiSsid || 'Disponível na Recepção';
+      document.getElementById('modal-wifi-pass').textContent = b.wifiPass || 'Sem senha';
+      
+      // Daily alert
+      const alertBox = document.getElementById('daily-alert-box');
+      if (b.alertActive && b.alertMessage && b.alertMessage.trim() !== '') {
+        document.getElementById('daily-alert-text').textContent = b.alertMessage;
+        alertBox.style.display = 'block';
+      } else {
+        alertBox.style.display = 'none';
+      }
+    }
+
+    function renderFilterChips() {
+      const container = document.getElementById('filter-chips-container');
+      const rooms = store.rooms || [];
+      
+      // Extract unique floors
+      const floorsMap = new Map();
+      rooms.forEach(r => {
+        if (r.floor) floorsMap.set(r.floor, r.floorIndex ?? 99);
+      });
+      
+      // Sort floors logically: Térreo (0) then 1º, 2º...
+      const sortedFloors = Array.from(floorsMap.keys()).sort((a, b) => {
+        return (floorsMap.get(a) ?? 99) - (floorsMap.get(b) ?? 99);
+      });
+
+      let html = `<button class="chip-btn ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">Todos os Andares</button>`;
+      
+      sortedFloors.forEach(f => {
+        html += `<button class="chip-btn ${currentFilter === f ? 'active' : ''}" onclick="setFilter('${f}')">${f}</button>`;
+      });
+
+      // Special filter for Disponíveis
+      html += `<button class="chip-btn ${currentFilter === 'disponivel' ? 'active' : ''}" onclick="setFilter('disponivel')">🔑 Salas para Locação</button>`;
+
+      container.innerHTML = html;
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      renderFilterChips();
+      renderRoomsList();
+    }
+
+    function handleSearch(val) {
+      searchQuery = (val || '').trim().toLowerCase();
+      document.getElementById('search-clear-btn').style.display = searchQuery ? 'flex' : 'none';
+      renderRoomsList();
+    }
+
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      searchQuery = '';
+      document.getElementById('search-clear-btn').style.display = 'none';
+      renderRoomsList();
+    }
+
+    function resetFilters() {
+      clearSearch();
+      setFilter('all');
+    }
+
+    function focusSearch() {
+      const el = document.getElementById('search-input');
+      el.focus();
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function renderRoomsList() {
+      const container = document.getElementById('rooms-container');
+      const emptyState = document.getElementById('empty-state');
+      const counter = document.getElementById('results-count-badge');
+      const building = store.building || defaultData.building;
+      const allRooms = store.rooms || [];
+
+      // Filtering logic
+      const filtered = allRooms.filter(r => {
+        // Floor / status filter
+        if (currentFilter === 'disponivel') {
+          if (r.status !== 'disponivel') return false;
+        } else if (currentFilter !== 'all') {
+          if (r.floor !== currentFilter) return false;
+        }
+
+        // Text search
+        if (searchQuery) {
+          const hay = `${r.number} ${r.floor} ${r.name} ${r.category} ${r.description}`.toLowerCase();
+          if (!hay.includes(searchQuery)) return false;
+        }
+
+        return true;
+      });
+
+      counter.textContent = `${filtered.length} ${filtered.length === 1 ? 'Sala' : 'Salas'}`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      container.innerHTML = filtered.map(r => {
+        // Status badge format
+        let statusLabel = 'Atendimento Normal';
+        let statusClass = 'normal';
+        if (r.status === 'agendamento') {
+          statusLabel = 'Hora Marcada';
+          statusClass = 'agendamento';
+        } else if (r.status === 'fechado') {
+          statusLabel = 'Fechado Agora';
+          statusClass = 'fechado';
+        } else if (r.status === 'disponivel') {
+          statusLabel = 'Disponível p/ Locação';
+          statusClass = 'disponivel';
+        }
+
+        // WhatsApp message
+        const waClean = (r.whatsapp || building.porterWhatsapp || '').replace(/\D/g, '');
+        const waMsg = encodeURIComponent(`Olá! Estou na portaria do ${building.name} e gostaria de informações/atendimento na ${r.number} (${r.name}).`);
+        const waUrl = `https://wa.me/${waClean}?text=${waMsg}`;
+        const telUrl = `tel:${(r.phone || building.porterPhone || '').replace(/\D/g, '')}`;
+
+        return `
+          <div class="room-card">
+            <div class="room-card-header">
+              <span class="room-location-badge">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M14 9h4"/><path d="M14 15h4"/></svg>
+                <span>${r.number} • ${r.floor}</span>
+              </span>
+              <span class="room-status-badge ${statusClass}">
+                ● ${statusLabel}
+              </span>
+            </div>
+
+            <div class="room-main-info">
+              <div class="room-avatar-box">
+                ${r.avatar || '🏢'}
+              </div>
+              <div class="room-text-block">
+                <h3 class="room-title">${r.name}</h3>
+                <span class="room-category-tag">${r.category || 'Serviços'}</span>
+                <p class="room-desc">${r.description || ''}</p>
+              </div>
+            </div>
+
+            ${r.hours ? `
+              <div class="room-hours-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Horário: <strong>${r.hours}</strong></span>
+              </div>
+            ` : ''}
+
+            <div class="room-actions-grid">
+              <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn-room-whatsapp">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>WhatsApp</span>
+              </a>
+              <a href="${telUrl}" class="btn-room-phone">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>Ligar / Ramal</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Call Porter Action
+    function callPorter() {
+      const b = store.building || defaultData.building;
+      if (b.porterWhatsapp) {
+        const clean = b.porterWhatsapp.replace(/\D/g, '');
+        const msg = encodeURIComponent(`Olá! Estou na recepção/fachada do ${b.name} e gostaria de falar com a portaria.`);
+        window.open(`https://wa.me/${clean}?text=${msg}`, '_blank');
+      } else if (b.porterPhone) {
+        window.location.href = `tel:${b.porterPhone.replace(/\D/g, '')}`;
+      } else {
+        showToast('Número da portaria não configurado.');
+      }
+    }
+
+    // Wi-Fi Modal
+    function openWifiModal() {
+      document.getElementById('wifi-modal').classList.add('open');
+    }
+
+    function closeWifiModal(e) {
+      if (e && e.target && e.target !== document.getElementById('wifi-modal') && e.type === 'click') return;
+      document.getElementById('wifi-modal').classList.remove('open');
+    }
+
+    // Copy to clipboard
+    function copyText(elementId, successMsg) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg);
+      }).catch(() => {
+        showToast(`Copiado: ${text}`);
+      });
+    }
+
+    // Toast
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast-predial');
+      document.getElementById('toast-predial-msg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // NFC Splash simulation
+    window.addEventListener('DOMContentLoaded', () => {
+      initData();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const isNfc = urlParams.get('source') === 'nfc';
+      const splash = document.getElementById('splash-screen');
+
+      // Show splash on NFC or first visit in session
+      if (isNfc || !sessionStorage.getItem('predial_splash_shown')) {
+        sessionStorage.setItem('predial_splash_shown', 'true');
+        setTimeout(() => {
+          splash.classList.add('hidden');
+        }, 1100);
+      } else {
+        splash.classList.add('hidden');
+      }
+    });
+
+    // Listen for storage changes from admin panel in other tabs
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'nolei_predial_data') {
+        store = getStore();
+        renderBuildingHeader();
+        renderFilterChips();
+        renderRoomsList();
+        showToast('Diretório predial atualizado em tempo real!');
+      }
+    });
+
+    // Escape closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeWifiModal();
+    });
+  </script>
+</body>
+</html>

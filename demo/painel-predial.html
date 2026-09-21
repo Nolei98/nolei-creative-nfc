@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0055FF">
+
+  <title>Painel de Gestão Predial & Salas — Centro Empresarial | Nolei NFC</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0055FF;
+      --primary-gradient: linear-gradient(135deg, #0055FF 0%, #38BDF8 100%);
+      --primary-dark: #0044CC;
+      --primary-light: rgba(0, 85, 255, 0.08);
+      --primary-border: rgba(0, 85, 255, 0.25);
+      
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --bg-elevated: #F1F5F9;
+      
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      
+      --green: #10B981;
+      --green-light: rgba(16, 185, 129, 0.12);
+      --amber: #F59E0B;
+      --amber-light: rgba(245, 158, 11, 0.12);
+      --red: #EF4444;
+      --red-light: rgba(239, 68, 68, 0.12);
+      --blue: #0284C7;
+      --blue-light: rgba(2, 132, 199, 0.12);
+      
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      
+      --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background-color: var(--bg-page); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; line-height: 1.5; }
+    h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--text-main); font-weight: 700; }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .top-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--primary-gradient);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0, 85, 255, 0.25);
+    }
+
+    .brand-text h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+
+    .brand-text p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-top:hover {
+      background: #E2E8F0;
+    }
+
+    .btn-top.primary {
+      background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 85, 255, 0.25);
+    }
+
+    .btn-top.primary:hover {
+      background: linear-gradient(135deg, #0044CC 0%, #0033AA 100%);
+      transform: translateY(-1px);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      flex: 1;
+    }
+
+    /* Header & KPI Summary */
+    .page-header {
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .page-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .kpi-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-value {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 4px;
+      line-height: 1;
+    }
+
+    .kpi-sub {
+      font-size: 0.74rem;
+      color: var(--green);
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    /* Tabs Navigation */
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border: none;
+      background: none;
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    /* Form Card */
+    .settings-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .section-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.80rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      background: #FFFFFF;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.12);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+
+    .btn-save-settings {
+      background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 85, 255, 0.25);
+      transition: transform 0.15s;
+    }
+
+    .btn-save-settings:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Rooms Management Section */
+    .rooms-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .rooms-search-box {
+      position: relative;
+      max-width: 340px;
+      width: 100%;
+    }
+
+    .rooms-search-box input {
+      width: 100%;
+      padding: 9px 14px 9px 36px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      outline: none;
+    }
+
+    .rooms-search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      stroke: var(--text-dim);
+    }
+
+    .btn-add-room {
+      background: linear-gradient(135deg, #0055FF 0%, #0044CC 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(0, 85, 255, 0.25);
+    }
+
+    .table-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .rooms-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.84rem;
+    }
+
+    .rooms-table th {
+      background: var(--bg-elevated);
+      padding: 12px 16px;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .rooms-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .rooms-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .room-cell-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .status-pill.normal { background: var(--green-light); color: var(--green); }
+    .status-pill.agendamento { background: var(--blue-light); color: var(--blue); }
+    .status-pill.fechado { background: var(--slate-light); color: var(--slate); }
+    .status-pill.disponivel { background: var(--amber-light); color: var(--amber); }
+
+    .action-btns {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-table-action {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .btn-table-action:hover {
+      background: #E2E8F0;
+    }
+
+    .btn-table-action.delete {
+      color: var(--red);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .btn-table-action.delete:hover {
+      background: var(--red-light);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      max-width: 580px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .btn-close-x {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-dim);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Toast */
+    .toast-predial {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0F172A;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 22px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      z-index: 10001;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast-predial.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .rooms-table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <div class="brand-block">
+        <div class="brand-icon">🏢</div>
+        <div class="brand-text">
+          <h1 id="nav-brand-title">Gestão Predial & Diretório de Salas</h1>
+          <p>Nolei Creative • Painel de Controle Phygital</p>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <a href="diretorio-predial.html" target="_blank" class="btn-top primary" title="Visualizar a tela do visitante na fachada">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <span>Ver Totem Fachada</span>
+        </a>
+
+        <button class="btn-top" onclick="exportDataJson()" title="Baixar backup dos dados em arquivo JSON">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Exportar JSON</span>
+        </button>
+
+        <button class="btn-top" onclick="openImportModal()" title="Importar backup de dados">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span>Importar JSON</span>
+        </button>
+
+        <button class="btn-top" onclick="resetToDefaults()" title="Restaurar dados de demonstração originais">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+          <span>Restaurar Padrão</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="container">
+    
+    <!-- Header -->
+    <div class="page-header">
+      <h2 class="page-title" id="display-building-title">Centro Empresarial Cariri Prime</h2>
+      <p class="page-desc">Gerencie todas as informações do condomínio, portaria, Wi-Fi de visitantes e o cadastro das salas comerciais.</p>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Salas Cadastradas</div>
+        <div class="kpi-value" id="kpi-total-rooms">0</div>
+        <div class="kpi-sub">Total no diretório</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Salas Ativas / Ocupadas</div>
+        <div class="kpi-value" id="kpi-active-rooms">0</div>
+        <div class="kpi-sub" style="color:var(--green)">Em atendimento regular</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Salas p/ Locação</div>
+        <div class="kpi-value" id="kpi-vacant-rooms" style="color:var(--amber)">0</div>
+        <div class="kpi-sub" style="color:var(--amber)">Disponíveis para alugar</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Andares Atendidos</div>
+        <div class="kpi-value" id="kpi-floors">0</div>
+        <div class="kpi-sub" style="color:var(--blue)">Do térreo aos andares</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" id="tab-btn-rooms" onclick="switchTab('rooms')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M14 9h4"/><path d="M14 15h4"/></svg>
+        <span>Salas & Estabelecimentos</span>
+      </button>
+
+      <button class="tab-btn" id="tab-btn-building" onclick="switchTab('building')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>Dados do Edifício & Portaria</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: GESTÃO DE SALAS -->
+    <div class="tab-pane active" id="tab-pane-rooms">
+      <div class="rooms-toolbar">
+        <div class="rooms-search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="admin-search-input" placeholder="Filtrar salas, profissionais ou andares..." oninput="renderRoomsTable(this.value)">
+        </div>
+
+        <button class="btn-add-room" onclick="openAddRoomModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Cadastrar Nova Sala</span>
+        </button>
+      </div>
+
+      <div class="table-card">
+        <table class="rooms-table">
+          <thead>
+            <tr>
+              <th>Sala / Andar</th>
+              <th>Empresa / Profissional</th>
+              <th>Categoria</th>
+              <th>Contatos</th>
+              <th>Status</th>
+              <th style="text-align:right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="rooms-table-body">
+            <!-- Rendered via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: CONFIGURAÇÕES DO EDIFÍCIO -->
+    <div class="tab-pane" id="tab-pane-building">
+      <div class="settings-card">
+        <h3 class="section-title">Informações Gerais do Edifício</h3>
+        <p class="section-desc">Esses dados são apresentados no topo da placa inteligente do visitante ao aproximar o celular.</p>
+
+        <form id="form-building-settings" onsubmit="handleSaveBuilding(event)">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Nome do Edifício / Centro Empresarial:</label>
+              <input type="text" id="b-name" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subtítulo / Slogan de Destaque:</label>
+              <input type="text" id="b-subtitle" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Endereço Completo de Fachada:</label>
+              <input type="text" id="b-address" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Link do Google Maps ou Waze:</label>
+              <input type="url" id="b-mapsUrl" class="form-input" placeholder="https://maps.google.com/?q=...">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">URL da Foto de Fachada / Banner do Prédio:</label>
+            <input type="url" id="b-bannerUrl" class="form-input" placeholder="https://images.unsplash.com/...">
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Horário de Funcionamento da Portaria:</label>
+              <input type="text" id="b-porterHours" class="form-input" placeholder="Seg a Sex: 07h às 20h...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Telefone Fixo / Interfone Geral da Portaria:</label>
+              <input type="text" id="b-porterPhone" class="form-input" placeholder="(88) 3571-0000">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">WhatsApp da Portaria / Recepção (com DDD):</label>
+              <input type="text" id="b-porterWhatsapp" class="form-input" placeholder="5588999999999">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nome da Rede Wi-Fi de Visitantes (SSID):</label>
+              <input type="text" id="b-wifiSsid" class="form-input" placeholder="Ex: Edificio_Visitantes">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Senha do Wi-Fi de Visitantes:</label>
+            <input type="text" id="b-wifiPass" class="form-input" placeholder="Ex: predio2026">
+          </div>
+
+          <!-- Alert banner options -->
+          <div style="background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; margin:20px 0;">
+            <label class="form-checkbox-row">
+              <input type="checkbox" id="b-alertActive" style="width:18px; height:18px;">
+              <span style="font-weight:700; font-size:0.88rem;">Ativar Comunicado Geral / Alerta do Dia na Fachada</span>
+            </label>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Mensagem do Comunicado:</label>
+              <input type="text" id="b-alertMessage" class="form-input" placeholder="Ex: Elevador 02 em manutenção preventiva hoje das 13h às 15h.">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-save-settings">Salvar Dados do Edifício</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: CADASTRAR / EDITAR SALA -->
+  <div class="modal-overlay" id="room-modal" onclick="closeRoomModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-room-title">Cadastrar Sala Comercial</h3>
+        <button class="btn-close-x" onclick="closeRoomModal()">✕</button>
+      </div>
+
+      <form id="form-room" onsubmit="handleSaveRoom(event)">
+        <input type="hidden" id="room-id">
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Número da Sala / Conjunto:</label>
+            <input type="text" id="room-number" class="form-input" placeholder="Ex: Sala 304, Loja 02" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Andar:</label>
+            <select id="room-floor" class="form-select" required onchange="syncFloorIndex()">
+              <option value="Térreo" data-index="0">Térreo</option>
+              <option value="1º Andar" data-index="1">1º Andar</option>
+              <option value="2º Andar" data-index="2">2º Andar</option>
+              <option value="3º Andar" data-index="3">3º Andar</option>
+              <option value="4º Andar" data-index="4">4º Andar</option>
+              <option value="5º Andar" data-index="5">5º Andar</option>
+              <option value="6º Andar" data-index="6">6º Andar</option>
+              <option value="7º Andar" data-index="7">7º Andar</option>
+              <option value="8º Andar" data-index="8">8º Andar</option>
+              <option value="Subsolo" data-index="-1">Subsolo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nome da Empresa / Profissional / Especialista:</label>
+          <input type="text" id="room-name" class="form-input" placeholder="Ex: Clínica Dermavitta — Dra. Camila Araripe" required>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Categoria / Segmento:</label>
+            <input type="text" id="room-category" class="form-input" placeholder="Ex: Saúde & Estética, Advocacia..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ícone / Avatar / Emoji:</label>
+            <input type="text" id="room-avatar" class="form-input" placeholder="Ex: 👩‍⚕️, ⚖️, 📊, 🦷, 💻, 🔑" value="🏢">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Descrição Resumida dos Serviços:</label>
+          <textarea id="room-desc" class="form-textarea" placeholder="Descreva sucintamente as especialidades e atendimentos da sala..."></textarea>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">WhatsApp de Contato (com DDD):</label>
+            <input type="tel" id="room-whatsapp" class="form-input" placeholder="Ex: 5588999998877">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefone Fixo / Ramal da Sala:</label>
+            <input type="text" id="room-phone" class="form-input" placeholder="Ex: (88) 3571-1234">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Horário de Atendimento:</label>
+            <input type="text" id="room-hours" class="form-input" placeholder="Ex: 08:00 às 18:00 (Seg a Sex)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status Operacional da Sala:</label>
+            <select id="room-status" class="form-select">
+              <option value="normal">Atendimento Normal</option>
+              <option value="agendamento">Apenas com Hora Marcada</option>
+              <option value="fechado">Fechado no Momento</option>
+              <option value="disponivel">🔑 Sala Disponível para Locação</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-top" onclick="closeRoomModal()">Cancelar</button>
+          <button type="submit" class="btn-top primary">Salvar Sala</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: IMPORTAR JSON -->
+  <div class="modal-overlay" id="import-modal" onclick="closeImportModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Importar Dados em JSON</h3>
+        <button class="btn-close-x" onclick="closeImportModal()">✕</button>
+      </div>
+      <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;">Cole o conteúdo do arquivo JSON de backup ou selecione o arquivo do seu computador:</p>
+      
+      <input type="file" id="json-file-input" accept=".json" style="margin-bottom:12px; font-size:0.85rem;" onchange="handleFileSelect(event)">
+      
+      <textarea id="json-textarea-input" class="form-textarea" style="min-height:160px; font-family:monospace; font-size:0.75rem;" placeholder="Cole o código JSON aqui..."></textarea>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn-top" onclick="closeImportModal()">Cancelar</button>
+        <button type="button" class="btn-top primary" onclick="processImportJson()">Confirmar Importação</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-predial" id="toast-admin">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-admin-msg">Operação realizada com sucesso!</span>
+  </div>
+
+  <script>
+    // State Store
+    let store = null;
+
+    function getStore() {
+      try {
+        const local = localStorage.getItem('nolei_predial_data');
+        if (local) return JSON.parse(local);
+      } catch (e) {
+        console.warn('Erro ao ler localStorage:', e);
+      }
+      return null;
+    }
+
+    function saveStore(data) {
+      store = data;
+      localStorage.setItem('nolei_predial_data', JSON.stringify(store));
+      // Dispatch storage event manually for same window listeners
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    async function initAdmin() {
+      store = getStore();
+      if (!store) {
+        try {
+          const res = await fetch('../data/predial.json');
+          if (res.ok) {
+            store = await res.json();
+          }
+        } catch (e) {
+          console.warn('Fallback para embedded seed:', e);
+        }
+      }
+
+      if (!store) {
+        // Minimum default seed
+        store = {
+          building: {
+            name: "Centro Empresarial Cariri Prime",
+            subtitle: "Torre Corporativa de Saúde, Negócios & Tecnologia",
+            address: "Av. Leão Sampaio, 1450 - Lagoa Seca, Juazeiro do Norte - CE",
+            mapsUrl: "https://maps.google.com/?q=Av.+Leao+Sampaio+1450+Juazeiro+do+Norte+CE",
+            bannerUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+            porterHours: "Seg a Sex: 07h às 20h • Sáb: 08h às 13h",
+            porterPhone: "(88) 3571-9000",
+            porterWhatsapp: "5587999099937",
+            wifiSsid: "CaririPrime_Visitantes",
+            wifiPass: "prime2026",
+            alertActive: true,
+            alertMessage: "Elevador 02 em manutenção preventiva das 13h às 15h."
+          },
+          rooms: []
+        };
+      }
+
+      saveStore(store);
+      populateBuildingForm();
+      renderRoomsTable();
+      updateKPIs();
+    }
+
+    // Tabs
+    function switchTab(tabId) {
+      document.getElementById('tab-btn-rooms').classList.toggle('active', tabId === 'rooms');
+      document.getElementById('tab-btn-building').classList.toggle('active', tabId === 'building');
+      document.getElementById('tab-pane-rooms').classList.toggle('active', tabId === 'rooms');
+      document.getElementById('tab-pane-building').classList.toggle('active', tabId === 'building');
+    }
+
+    // Populate Building Form
+    function populateBuildingForm() {
+      const b = store.building || {};
+      document.getElementById('b-name').value = b.name || '';
+      document.getElementById('b-subtitle').value = b.subtitle || '';
+      document.getElementById('b-address').value = b.address || '';
+      document.getElementById('b-mapsUrl').value = b.mapsUrl || '';
+      document.getElementById('b-bannerUrl').value = b.bannerUrl || '';
+      document.getElementById('b-porterHours').value = b.porterHours || '';
+      document.getElementById('b-porterPhone').value = b.porterPhone || '';
+      document.getElementById('b-porterWhatsapp').value = b.porterWhatsapp || '';
+      document.getElementById('b-wifiSsid').value = b.wifiSsid || '';
+      document.getElementById('b-wifiPass').value = b.wifiPass || '';
+      document.getElementById('b-alertActive').checked = !!b.alertActive;
+      document.getElementById('b-alertMessage').value = b.alertMessage || '';
+
+      document.getElementById('display-building-title').textContent = b.name || 'Edifício Comercial';
+      document.getElementById('nav-brand-title').textContent = `${b.name || 'Edifício'} • Gestão`;
+    }
+
+    // Save Building Settings
+    function handleSaveBuilding(e) {
+      e.preventDefault();
+      store.building = {
+        name: document.getElementById('b-name').value.trim(),
+        subtitle: document.getElementById('b-subtitle').value.trim(),
+        address: document.getElementById('b-address').value.trim(),
+        mapsUrl: document.getElementById('b-mapsUrl').value.trim(),
+        bannerUrl: document.getElementById('b-bannerUrl').value.trim(),
+        porterHours: document.getElementById('b-porterHours').value.trim(),
+        porterPhone: document.getElementById('b-porterPhone').value.trim(),
+        porterWhatsapp: document.getElementById('b-porterWhatsapp').value.trim(),
+        wifiSsid: document.getElementById('b-wifiSsid').value.trim(),
+        wifiPass: document.getElementById('b-wifiPass').value.trim(),
+        alertActive: document.getElementById('b-alertActive').checked,
+        alertMessage: document.getElementById('b-alertMessage').value.trim()
+      };
+
+      saveStore(store);
+      populateBuildingForm();
+      showToast('Dados do edifício salvos com sucesso!');
+    }
+
+    // Update KPIs
+    function updateKPIs() {
+      const rooms = store.rooms || [];
+      document.getElementById('kpi-total-rooms').textContent = rooms.length;
+      
+      const activeCount = rooms.filter(r => r.status === 'normal' || r.status === 'agendamento').length;
+      document.getElementById('kpi-active-rooms').textContent = activeCount;
+
+      const vacantCount = rooms.filter(r => r.status === 'disponivel').length;
+      document.getElementById('kpi-vacant-rooms').textContent = vacantCount;
+
+      const floorsSet = new Set(rooms.map(r => r.floor).filter(Boolean));
+      document.getElementById('kpi-floors').textContent = floorsSet.size;
+    }
+
+    // Render Rooms Table
+    function renderRoomsTable(query = '') {
+      const tbody = document.getElementById('rooms-table-body');
+      const q = (query || '').trim().toLowerCase();
+      let rooms = store.rooms || [];
+
+      if (q) {
+        rooms = rooms.filter(r => {
+          const hay = `${r.number} ${r.floor} ${r.name} ${r.category} ${r.description}`.toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      if (rooms.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">
+              Nenhuma sala encontrada. Clique no botão <strong>"+ Cadastrar Nova Sala"</strong> para adicionar.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = rooms.map(r => {
+        let statusClass = r.status || 'normal';
+        let statusLabel = 'Normal';
+        if (r.status === 'agendamento') statusLabel = 'Hora Marcada';
+        if (r.status === 'fechado') statusLabel = 'Fechado';
+        if (r.status === 'disponivel') statusLabel = 'Disponível';
+
+        return `
+          <tr>
+            <td>
+              <span class="room-cell-badge">${r.number}</span>
+              <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">${r.floor}</div>
+            </td>
+            <td>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:1.2rem;">${r.avatar || '🏢'}</span>
+                <div>
+                  <strong style="color:var(--text-main); font-size:0.9rem;">${r.name}</strong>
+                  <div style="font-size:0.75rem; color:var(--text-muted);">${r.hours || 'Horário comercial'}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span style="font-size:0.78rem; font-weight:600; color:var(--primary);">${r.category}</span>
+            </td>
+            <td>
+              <div style="font-size:0.78rem;">${r.whatsapp ? `📱 ${r.whatsapp}` : '-'}</div>
+              <div style="font-size:0.74rem; color:var(--text-muted);">${r.phone ? `☎️ ${r.phone}` : ''}</div>
+            </td>
+            <td>
+              <span class="status-pill ${statusClass}">● ${statusLabel}</span>
+            </td>
+            <td style="text-align:right;">
+              <div class="action-btns" style="justify-content:flex-end;">
+                <button class="btn-table-action" onclick="openEditRoomModal('${r.id}')" title="Editar dados da sala">
+                  ✏️ Editar
+                </button>
+                <button class="btn-table-action delete" onclick="deleteRoom('${r.id}')" title="Excluir sala">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Modal Room Add/Edit
+    function openAddRoomModal() {
+      document.getElementById('modal-room-title').textContent = 'Cadastrar Nova Sala';
+      document.getElementById('room-id').value = '';
+      document.getElementById('room-number').value = '';
+      document.getElementById('room-floor').value = '1º Andar';
+      document.getElementById('room-name').value = '';
+      document.getElementById('room-category').value = '';
+      document.getElementById('room-avatar').value = '🏢';
+      document.getElementById('room-desc').value = '';
+      document.getElementById('room-whatsapp').value = '';
+      document.getElementById('room-phone').value = '';
+      document.getElementById('room-hours').value = '08:00 às 18:00 (Seg a Sex)';
+      document.getElementById('room-status').value = 'normal';
+
+      document.getElementById('room-modal').classList.add('open');
+    }
+
+    function openEditRoomModal(id) {
+      const r = (store.rooms || []).find(item => item.id === id);
+      if (!r) return;
+
+      document.getElementById('modal-room-title').textContent = `Editar ${r.number}`;
+      document.getElementById('room-id').value = r.id;
+      document.getElementById('room-number').value = r.number || '';
+      document.getElementById('room-floor').value = r.floor || '1º Andar';
+      document.getElementById('room-name').value = r.name || '';
+      document.getElementById('room-category').value = r.category || '';
+      document.getElementById('room-avatar').value = r.avatar || '🏢';
+      document.getElementById('room-desc').value = r.description || '';
+      document.getElementById('room-whatsapp').value = r.whatsapp || '';
+      document.getElementById('room-phone').value = r.phone || '';
+      document.getElementById('room-hours').value = r.hours || '';
+      document.getElementById('room-status').value = r.status || 'normal';
+
+      document.getElementById('room-modal').classList.add('open');
+    }
+
+    function closeRoomModal(e) {
+      if (e && e.target && e.target !== document.getElementById('room-modal') && e.type === 'click') return;
+      document.getElementById('room-modal').classList.remove('open');
+    }
+
+    function syncFloorIndex() {
+      // automatically derived in save
+    }
+
+    function handleSaveRoom(e) {
+      e.preventDefault();
+      const id = document.getElementById('room-id').value.trim();
+      const floorSelect = document.getElementById('room-floor');
+      const selectedOption = floorSelect.options[floorSelect.selectedIndex];
+      const floorIndex = parseInt(selectedOption.getAttribute('data-index') || '1', 10);
+
+      const roomData = {
+        id: id || `sala_${Date.now()}`,
+        number: document.getElementById('room-number').value.trim(),
+        floor: floorSelect.value,
+        floorIndex: floorIndex,
+        name: document.getElementById('room-name').value.trim(),
+        category: document.getElementById('room-category').value.trim(),
+        avatar: document.getElementById('room-avatar').value.trim() || '🏢',
+        description: document.getElementById('room-desc').value.trim(),
+        whatsapp: document.getElementById('room-whatsapp').value.trim(),
+        phone: document.getElementById('room-phone').value.trim(),
+        hours: document.getElementById('room-hours').value.trim(),
+        status: document.getElementById('room-status').value
+      };
+
+      if (!store.rooms) store.rooms = [];
+
+      if (id) {
+        // Edit
+        const index = store.rooms.findIndex(r => r.id === id);
+        if (index !== -1) {
+          store.rooms[index] = roomData;
+          showToast(`Sala ${roomData.number} atualizada com sucesso!`);
+        }
+      } else {
+        // Add
+        store.rooms.push(roomData);
+        showToast(`Sala ${roomData.number} cadastrada com sucesso!`);
+      }
+
+      saveStore(store);
+      closeRoomModal();
+      renderRoomsTable();
+      updateKPIs();
+    }
+
+    function deleteRoom(id) {
+      const r = (store.rooms || []).find(item => item.id === id);
+      if (!r) return;
+
+      if (confirm(`Tem certeza que deseja excluir a ${r.number} (${r.name}) do diretório?`)) {
+        store.rooms = store.rooms.filter(item => item.id !== id);
+        saveStore(store);
+        renderRoomsTable();
+        updateKPIs();
+        showToast(`${r.number} removida com sucesso.`);
+      }
+    }
+
+    // Export JSON
+    function exportDataJson() {
+      const jsonStr = JSON.stringify(store, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const filename = `backup_predial_${(store.building?.name || 'edificio').toLowerCase().replace(/\s+/g, '_')}.json`;
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Arquivo de backup exportado!');
+    }
+
+    // Import JSON Modal
+    function openImportModal() {
+      document.getElementById('json-textarea-input').value = '';
+      document.getElementById('json-file-input').value = '';
+      document.getElementById('import-modal').classList.add('open');
+    }
+
+    function closeImportModal(e) {
+      if (e && e.target && e.target !== document.getElementById('import-modal') && e.type === 'click') return;
+      document.getElementById('import-modal').classList.remove('open');
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        document.getElementById('json-textarea-input').value = e.target.result;
+      };
+      reader.readAsText(file);
+    }
+
+    function processImportJson() {
+      const text = document.getElementById('json-textarea-input').value.trim();
+      if (!text) {
+        alert('Por favor, informe ou cole o conteúdo JSON.');
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(text);
+        if (!parsed.building || !Array.isArray(parsed.rooms)) {
+          throw new Error('Formato inválido: o JSON deve conter as chaves "building" e "rooms".');
+        }
+
+        saveStore(parsed);
+        populateBuildingForm();
+        renderRoomsTable();
+        updateKPIs();
+        closeImportModal();
+        showToast('Dados restaurados com sucesso a partir do JSON!');
+      } catch (err) {
+        alert(`Erro ao importar JSON: ${err.message}`);
+      }
+    }
+
+    // Reset to defaults
+    async function resetToDefaults() {
+      if (!confirm('Deseja restaurar todas as informações para o modelo de demonstração padrão? Quaisquer alterações locais não salvas serão substituídas.')) {
+        return;
+      }
+
+      try {
+        const res = await fetch('../data/predial.json');
+        if (res.ok) {
+          store = await res.json();
+          saveStore(store);
+          populateBuildingForm();
+          renderRoomsTable();
+          updateKPIs();
+          showToast('Demonstração padrão restaurada com sucesso!');
+        }
+      } catch (e) {
+        alert('Erro ao carregar modelo padrão.');
+      }
+    }
+
+    // Toast
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast-admin');
+      document.getElementById('toast-admin-msg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+      initAdmin();
+    });
+
+    // Escape closes modals
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeRoomModal();
+        closeImportModal();
+      }
+    });
+  </script>
+</body>
+</html>

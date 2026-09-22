@@ -127,53 +127,116 @@
       border-radius: 12px;
       padding: 24px 20px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
       border: 2px solid #E5E7EB;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       page-break-inside: avoid;
+      transition: all 0.2s ease;
     }
+
+    /* Formato Adesivo Redondo */
+    .tag-card.format-circle {
+      border-radius: 50% !important;
+      aspect-ratio: 1 / 1;
+      width: 250px;
+      height: 250px;
+      padding: 18px 16px;
+      justify-content: center;
+      border: 2px dashed #0055FF !important;
+      margin: 0 auto;
+    }
+    .tag-card.format-circle .qr-frame {
+      width: 105px !important;
+      height: 105px !important;
+      margin-bottom: 6px;
+    }
+    .tag-card.format-circle .card-spot-title {
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+    .tag-card.format-circle .nfc-badge-chip {
+      margin-bottom: 6px;
+      padding: 2px 8px;
+      font-size: 0.65rem;
+    }
+    .tag-card.format-circle .card-sub-instruction,
+    .tag-card.format-circle .card-url {
+      display: none;
+    }
+
+    /* Formato Adesivo Quadrado */
+    .tag-card.format-square {
+      border-radius: 20px !important;
+      aspect-ratio: 1 / 1;
+      width: 250px;
+      height: 250px;
+      padding: 18px 16px;
+      justify-content: center;
+      border: 2px dashed #0055FF !important;
+      margin: 0 auto;
+    }
+    .tag-card.format-square .qr-frame {
+      width: 110px !important;
+      height: 110px !important;
+      margin-bottom: 6px;
+    }
+    .tag-card.format-square .card-spot-title {
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+    .tag-card.format-square .nfc-badge-chip {
+      margin-bottom: 6px;
+      padding: 2px 8px;
+      font-size: 0.65rem;
+    }
+    .tag-card.format-square .card-sub-instruction,
+    .tag-card.format-square .card-url {
+      display: none;
+    }
+
     .card-biz-name {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #4B5563;
-      margin-bottom: 6px;
+      color: #0055FF;
+      margin-bottom: 4px;
     }
     .card-spot-title {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 900;
       color: #111827;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       line-height: 1.1;
     }
     .nfc-badge-chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #FEF3C7;
-      border: 1px solid #F59E0B;
-      color: #92400E;
+      background: rgba(0, 85, 255, 0.08);
+      border: 1px solid rgba(0, 85, 255, 0.25);
+      color: #0055FF;
       font-size: 0.72rem;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 20px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .qr-frame {
       background: #FFFFFF;
-      padding: 8px;
+      padding: 6px;
       border: 1px solid #E5E7EB;
       border-radius: 8px;
-      margin-bottom: 14px;
-      width: 140px;
-      height: 140px;
+      margin-bottom: 12px;
+      width: 135px;
+      height: 135px;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .qr-frame img, .qr-frame canvas {
       width: 100% !important;
@@ -184,19 +247,19 @@
       font-size: 0.8rem;
       font-weight: 700;
       color: #1F2937;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .card-sub-instruction {
       font-size: 0.7rem;
       color: #6B7280;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .card-url {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.65rem;
-      color: #9CA3AF;
+      color: #64748B;
       word-break: break-all;
-      background: #F3F4F6;
+      background: #F1F5F9;
       padding: 4px 8px;
       border-radius: 4px;
       width: 100%;
@@ -204,8 +267,8 @@
     .card-footer-branding {
       font-size: 0.65rem;
       font-weight: 700;
-      color: #9CA3AF;
-      margin-top: 10px;
+      color: #94A3B8;
+      margin-top: 8px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -223,12 +286,11 @@
       .print-grid {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1.5cm !important;
+        gap: 1.2cm !important;
         margin: 0 !important;
       }
       .tag-card {
         box-shadow: none !important;
-        border: 1px dashed #9CA3AF !important;
         page-break-inside: avoid !important;
       }
     }
@@ -267,11 +329,20 @@
           <input type="text" id="biz-name" class="form-control" value="Botânico Bistrô">
         </div>
         <div class="form-group">
+          <label>Formato de Impressão:</label>
+          <select id="card-format" class="form-control" onchange="generateCards()">
+            <option value="display">Display de Acrílico (Mesa/Totem 10x15cm)</option>
+            <option value="adesivo-redondo">Adesivo Redondo (Vinil 5x5cm / 6x6cm)</option>
+            <option value="adesivo-quadrado">Adesivo Quadrado (Vinil 5x5cm)</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label>Tipo de Ponto Físico:</label>
           <select id="spot-type" class="form-control" onchange="updatePrefix()">
             <option value="mesa" data-prefix="m" data-label="Mesa">Mesas de Restaurante (ex: Mesa 01 a 20)</option>
             <option value="quarto" data-prefix="q" data-label="Quarto">Quartos / Suítes de Hotel (ex: Quarto 101)</option>
             <option value="etiqueta" data-prefix="etq" data-label="Peça">Etiquetas de Moda / Couro (ex: Peça #01)</option>
+            <option value="predio" data-prefix="predio" data-label="Fachada Predial">Placa / Totem Predial de Fachada</option>
             <option value="google" data-prefix="google" data-label="Totem Google">Totem Google Reviews (Balcão)</option>
             <option value="fidelidade" data-prefix="fidelidade" data-label="Clube Fidelidade">Display Balcão Fidelidade</option>
           </select>
@@ -312,7 +383,7 @@
     function updatePrefix() {
       const type = document.getElementById('spot-type').value;
       const rangeGroup = document.getElementById('group-range');
-      if (type === 'google' || type === 'fidelidade') {
+      if (type === 'google' || type === 'fidelidade' || type === 'predio') {
         rangeGroup.style.display = 'none';
       } else {
         rangeGroup.style.display = 'block';
@@ -329,6 +400,7 @@
       const bizName = document.getElementById('biz-name').value.trim() || 'Nolei Creative';
       const typeSelect = document.getElementById('spot-type');
       const type = typeSelect.value;
+      const format = document.getElementById('card-format').value;
       const prefix = typeSelect.selectedOptions[0].getAttribute('data-prefix');
       const labelPrefix = typeSelect.selectedOptions[0].getAttribute('data-label');
       const baseUrl = document.getElementById('base-url').value.trim();
@@ -340,6 +412,8 @@
         itemsToGen.push({ code: 'google', title: 'Avaliação 5 Estrelas', sub: 'Deixe sua opinião no Google' });
       } else if (type === 'fidelidade') {
         itemsToGen.push({ code: 'fidelidade', title: 'Clube de Fidelidade', sub: 'Aproxime e ganhe carimbos' });
+      } else if (type === 'predio') {
+        itemsToGen.push({ code: 'predio', title: 'Diretório do Edifício', sub: 'Aproxime ou aponte a câmera' });
       } else {
         for (let i = 1; i <= count; i++) {
           const numStr = String(i).padStart(2, '0');
@@ -351,12 +425,20 @@
         }
       }
 
+      const qrSize = (format === 'adesivo-redondo' || format === 'adesivo-quadrado') ? 95 : 124;
+
       itemsToGen.forEach((item, idx) => {
         const fullUrl = `${baseUrl}?t=${item.code}`;
         currentUrls.push(fullUrl);
 
         const card = document.createElement('div');
         card.className = 'tag-card';
+        if (format === 'adesivo-redondo') {
+          card.classList.add('format-circle');
+        } else if (format === 'adesivo-quadrado') {
+          card.classList.add('format-square');
+        }
+
         card.innerHTML = `
           <div class="card-biz-name">${bizName}</div>
           <div class="card-spot-title">${item.title}</div>
@@ -375,8 +457,8 @@
         // Gera QR Code nítido
         new QRCode(document.getElementById(`qr-box-${idx}`), {
           text: fullUrl,
-          width: 124,
-          height: 124,
+          width: qrSize,
+          height: qrSize,
           colorDark: "#000000",
           colorLight: "#FFFFFF",
           correctLevel: QRCode.CorrectLevel.H
@@ -401,21 +483,21 @@
 
   <!-- Tela de Bloqueio Visual: Acesso Restrito -->
   <div id="auth-blocked-screen" style="display:none; min-height:85vh; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:var(--card, #1C1814); border:1px solid rgba(0, 85, 255, 0.4); border-radius:16px; padding:44px 32px; max-width:460px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.6);">
-      <div style="width:56px; height:56px; border-radius:14px; background:#26201A; border:1px solid rgba(0, 85, 255, 0.35); display:flex; align-items:center; justify-content:center; color:var(--accent, #0055FF); margin:0 auto 16px;">
+    <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:44px 32px; max-width:460px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.08);">
+      <div style="width:56px; height:56px; border-radius:14px; background:rgba(0, 85, 255, 0.08); border:1px solid rgba(0, 85, 255, 0.25); display:flex; align-items:center; justify-content:center; color:#0055FF; margin:0 auto 16px;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
       <div style="font-family:'JetBrains Mono', monospace; font-size:0.72rem; font-weight:700; color:#EF4444; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:6px;">[Acesso Restrito ao Administrador]</div>
-      <h2 style="font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:10px;">Você precisa estar logado</h2>
-      <p style="font-size:0.86rem; color:var(--muted, #A2937E); line-height:1.55; margin-bottom:26px;">
+      <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin-bottom:10px;">Você precisa estar logado</h2>
+      <p style="font-size:0.86rem; color:#64748B; line-height:1.55; margin-bottom:26px;">
         O <strong>Gerador de Tags/QR</strong> para gráfica é uma ferramenta operacional restrita aos administradores da Nolei Creative.
       </p>
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <a href="index.html?login=1" style="background:var(--accent, #0055FF); color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(0, 85, 255,0.4);">
+        <a href="index.html?login=1" style="background:#0055FF; color:#fff; text-decoration:none; font-weight:700; font-size:0.88rem; padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(0, 85, 255,0.25);">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
           Fazer Login como Administrador
         </a>
-        <a href="index.html" style="background:var(--elevated, #26201A); color:var(--muted, #A2937E); border:1px solid var(--border, rgba(242,234,223,0.08)); text-decoration:none; font-weight:600; font-size:0.82rem; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center;">
+        <a href="index.html" style="background:#F8FAFC; color:#64748B; border:1px solid #E2E8F0; text-decoration:none; font-weight:600; font-size:0.82rem; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center;">
           Voltar ao Hub de Demonstrações
         </a>
       </div>

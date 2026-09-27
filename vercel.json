@@ -68,16 +68,44 @@
       "destination": "/demo/cardapio?source=nfc&org=botanico-bistro"
     },
     {
+      "source": "/painel-restaurante",
+      "destination": "/demo/painel-restaurante?org=botanico-bistro"
+    },
+    {
+      "source": "/cozinha",
+      "destination": "/demo/painel-restaurante?org=botanico-bistro"
+    },
+    {
+      "source": "/restaurante",
+      "destination": "/demo/painel-restaurante?org=botanico-bistro"
+    },
+    {
+      "source": "/dashboard-restaurante",
+      "destination": "/demo/dashboard-restaurante?org=botanico-bistro"
+    },
+    {
       "source": "/hotel",
       "destination": "/demo/hotel?source=nfc&org=jardim-imperial"
+    },
+    {
+      "source": "/painel-hotel",
+      "destination": "/demo/painel-hotel?org=jardim-imperial"
     },
     {
       "source": "/avaliacao",
       "destination": "/demo/avaliacao?source=nfc&org=dra-sofia"
     },
     {
+      "source": "/dashboard-avaliacoes",
+      "destination": "/demo/dashboard-avaliacoes?org=dra-sofia"
+    },
+    {
       "source": "/fidelidade",
       "destination": "/demo/fidelidade?source=nfc&org=cafe-origem"
+    },
+    {
+      "source": "/painel-fidelidade",
+      "destination": "/demo/painel-fidelidade?org=cafe-origem"
     },
     {
       "source": "/artesanato",

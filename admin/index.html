@@ -700,47 +700,51 @@
   <script>
     // Catálogo oficial de Soluções com nomes amigáveis e ações
     const DEMOS_CATALOG = [
-{
+      {
         slug: 'clinica-dra-sofia',
         name: 'Totem de Avaliações Google 5★ com Filtro Ético',
         sector: 'Saúde, Clínicas & Estética',
         imageUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=700&q=80',
         iconSvg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
         descPequenina: 'Totem de balcão: direciona notas 4-5★ para o Google Maps e capta críticas em canal privado de ouvidoria.',
-        demoUrl: '/demo/avaliacao.html?source=nfc&org=clinica-dra-sofia'
+        demoUrl: '/demo/avaliacao.html?source=nfc&org=clinica-dra-sofia',
+        adminPanelUrl: '/demo/dashboard-avaliacoes.html?org=clinica-dra-sofia',
+        adminPanelLabel: 'Painel de Feedbacks'
       },
-      
-{
+      {
         slug: 'botanico-bistro',
         name: 'Cardápio na Mesa & Central da Cozinha',
         sector: 'Gastronomia & Restaurantes',
         imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80',
         iconSvg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M15 2v19"/><path d="M5 2v7c0 2.2 1.8 4 4 4v8"/></svg>',
         descPequenina: 'Aproximação NFC na mesa: cliente vê fotos e cardápio, chama garçom e comanda vai direto para a cozinha.',
-        demoUrl: '/demo/cardapio.html?source=nfc&mesa=04'
+        demoUrl: '/demo/cardapio.html?source=nfc&mesa=04',
+        adminPanelUrl: '/demo/painel-restaurante.html?org=botanico-bistro',
+        adminPanelLabel: 'Painel da Cozinha (KDS)'
       },
-      
-{
+      {
         slug: 'hotel-imperial',
         name: 'Concierge de Quarto & Recepção de Hotel',
         sector: 'Hotelaria & Hospedagem',
         imageUrl: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=700&q=80',
         iconSvg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M9 21v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>',
         descPequenina: 'Tag na cabeceira da cama: hóspede pede room service 24h, agenda café colonial e aciona governança.',
-        demoUrl: '/demo/hotel.html?source=nfc&quarto=412'
+        demoUrl: '/demo/hotel.html?source=nfc&quarto=412',
+        adminPanelUrl: '/demo/painel-hotel.html?org=hotel-imperial',
+        adminPanelLabel: 'Painel da Recepção'
       },
-      
-{
+      {
         slug: 'cafe-origem',
         name: 'Cartela Fidelidade Digital (10 Carimbos)',
         sector: 'Cafeterias, Varejo & Fidelidade',
         imageUrl: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=80',
         iconSvg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
         descPequenina: 'Programa de carimbos gamificado sem app: acumula pontos e valida cupons anti-fraude no caixa.',
-        demoUrl: '/demo/fidelidade.html?source=nfc&org=cafe-origem'
+        demoUrl: '/demo/fidelidade.html?source=nfc&org=cafe-origem',
+        adminPanelUrl: '/demo/painel-fidelidade.html?org=cafe-origem',
+        adminPanelLabel: 'Balcão do Atendente'
       },
-      
-{
+      {
         slug: 'atelie-raizes',
         name: 'Storytelling & Etiqueta de Produto Artesanal',
         sector: 'Moda Autoral, Couro & Artesanato',
@@ -749,8 +753,7 @@
         descPequenina: 'Etiqueta costurada na peça: aproximação revela história do artesão e certificado de autenticidade numerado.',
         demoUrl: '/demo/storytelling-artesanato.html?source=nfc&org=atelie-raizes'
       },
-      
-{
+      {
         slug: 'barbearia-dom-corleone',
         name: 'Barbearia & Agendamento por Aproximação',
         sector: 'Barbearias, Salões & Beleza',
@@ -760,8 +763,7 @@
         demoUrl: '',
         inDevelopment: true
       },
-      
-{
+      {
         slug: 'horizon-imoveis',
         name: 'Placa Phygital de Imóveis & Tour Virtual',
         sector: 'Imobiliárias, Construtoras & Plantões',
@@ -771,8 +773,7 @@
         demoUrl: '',
         inDevelopment: true
       }
-    
-];
+    ];
 
     // 1. Renderiza o mostruário de Soluções Prontas (Tab 1)
     function renderDemosShowcase() {
@@ -792,6 +793,13 @@
               <span>Abrir Demonstração</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </a>`;
+
+        const adminBtn = (!isDev && item.adminPanelUrl)
+          ? `<a href="${item.adminPanelUrl}" target="_blank" class="btn-demo-secondary" style="font-weight:700;" title="Abrir painel administrativo operacional">
+              <span>${item.adminPanelLabel || 'Painel Admin'}</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>`
+          : '';
 
         // "Entrar na Empresa" só aparece para usuários administradores autenticados e se não estiver em dev
         const secondaryBtn = (isAuth && !isDev)
@@ -821,6 +829,7 @@
 
               <div class="demo-card-actions">
                 ${actionBtn}
+                ${adminBtn}
                 ${secondaryBtn}
               </div>
             </div>

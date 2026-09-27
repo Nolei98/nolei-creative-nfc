@@ -88,7 +88,7 @@
       desc: 'Cardápio com fotos, filtros por categoria (entradas, principais, bebidas) e adição ao carrinho com aproximação NFC.',
       clientAction: {
         label: 'Abrir Cardápio na Mesa',
-        getUrl: (c) => `demo/cardapio.html?source=nfc&org=${c.slug}&mesa=04`
+        getUrl: (c) => `/demo/cardapio.html?source=nfc&org=${c.slug}&mesa=04`
       },
       isDefault: true
     },
@@ -100,7 +100,7 @@
       desc: 'Monitor de comandas e chamados em tempo real para garçons e equipe da cozinha.',
       operatorAction: {
         label: 'Abrir Painel da Cozinha',
-        getUrl: (c) => `demo/painel-restaurante.html?org=${c.slug}`
+        getUrl: (c) => `/demo/painel-restaurante.html?org=${c.slug}`
       },
       isDefault: true
     },
@@ -112,7 +112,7 @@
       desc: 'Botões de 1 toque no celular do cliente para acionar garçom ou fechar a comanda sem levantar a mão.',
       clientAction: {
         label: 'Testar Chamado de Garçom',
-        getUrl: (c) => `demo/cardapio.html?source=nfc&org=${c.slug}&mesa=04#garcom`
+        getUrl: (c) => `/demo/cardapio.html?source=nfc&org=${c.slug}&mesa=04#garcom`
       },
       isDefault: true
     },
@@ -124,7 +124,7 @@
       desc: 'Painel gerencial de economia de tempo da brigada, giro de mesas e faturamento por comanda.',
       operatorAction: {
         label: 'Abrir Relatório de ROI',
-        getUrl: (c) => `demo/dashboard-restaurante.html?org=${c.slug}`
+        getUrl: (c) => `/demo/dashboard-restaurante.html?org=${c.slug}`
       },
       isDefault: true
     },
@@ -138,7 +138,7 @@
       desc: 'Portal do hóspede na cabeceira da cama com serviços, horário de café, toalhas e canais.',
       clientAction: {
         label: 'Abrir Concierge Suíte 412',
-        getUrl: (c) => `demo/hotel.html?source=nfc&org=${c.slug}&quarto=412`
+        getUrl: (c) => `/demo/hotel.html?source=nfc&org=${c.slug}&quarto=412`
       },
       isDefault: true
     },
@@ -150,7 +150,7 @@
       desc: 'Central da governança para despachar pedidos de hóspedes, toalhas, arrumação e manutenção.',
       operatorAction: {
         label: 'Abrir Painel da Recepção',
-        getUrl: (c) => `demo/painel-hotel.html?org=${c.slug}`
+        getUrl: (c) => `/demo/painel-hotel.html?org=${c.slug}`
       },
       isDefault: true
     },
@@ -162,7 +162,7 @@
       desc: 'Cardápio gourmet 24h para pedidos direto no quarto sem precisar ligar no ramal.',
       clientAction: {
         label: 'Fazer Pedido Room Service',
-        getUrl: (c) => `demo/hotel.html?source=nfc&org=${c.slug}&quarto=412#roomservice`
+        getUrl: (c) => `/demo/hotel.html?source=nfc&org=${c.slug}&quarto=412#roomservice`
       },
       isDefault: true
     },
@@ -174,7 +174,7 @@
       desc: 'Hóspede agenda com antecedência o horário de entrega da cesta de café da manhã.',
       clientAction: {
         label: 'Agendar Café no Quarto',
-        getUrl: (c) => `demo/hotel.html?source=nfc&org=${c.slug}&quarto=412#cafe`
+        getUrl: (c) => `/demo/hotel.html?source=nfc&org=${c.slug}&quarto=412#cafe`
       },
       isDefault: true
     },
@@ -186,7 +186,7 @@
       desc: 'Reserva de massagens e solicitação de transfer ou táxi para aeroporto direto na tela.',
       clientAction: {
         label: 'Reservar SPA / Transfer',
-        getUrl: (c) => `demo/hotel.html?source=nfc&org=${c.slug}&quarto=412#spa`
+        getUrl: (c) => `/demo/hotel.html?source=nfc&org=${c.slug}&quarto=412#spa`
       },
       isDefault: true
     },
@@ -200,7 +200,7 @@
       desc: 'Captura pacientes insatisfeitos (1-3 estrelas) em canal privado antes que publiquem reclamações públicas.',
       operatorAction: {
         label: 'Abrir Painel de Feedbacks Privados',
-        getUrl: (c) => `demo/dashboard-avaliacoes.html?org=${c.slug}`
+        getUrl: (c) => `/demo/dashboard-avaliacoes.html?org=${c.slug}`
       },
       isDefault: true
     },
@@ -212,7 +212,7 @@
       desc: 'Biografia do médico, CRM, protocolos dermatológicos e especialidades na tela de espera.',
       clientAction: {
         label: 'Ver Perfil dos Especialistas',
-        getUrl: (c) => `demo/avaliacao.html?source=nfc&org=${c.slug}#medico`
+        getUrl: (c) => `/demo/avaliacao.html?source=nfc&org=${c.slug}#medico`
       },
       isDefault: true
     },
@@ -226,7 +226,7 @@
       desc: 'Cartela de selos gamificada que abre direto no celular sem precisar instalar aplicativo da Play Store ou App Store.',
       clientAction: {
         label: 'Abrir Cartão Fidelidade do Cliente',
-        getUrl: (c) => `demo/fidelidade.html?source=nfc&org=${c.slug}`
+        getUrl: (c) => `/demo/fidelidade.html?source=nfc&org=${c.slug}`
       },
       isDefault: true
     },
@@ -238,7 +238,7 @@
       desc: 'Terminal do atendente para carimbar o cartão do cliente e validar cupons anti-fraude gerados.',
       operatorAction: {
         label: 'Abrir Balcão do Atendente',
-        getUrl: (c) => `demo/painel-fidelidade.html?org=${c.slug}`
+        getUrl: (c) => `/demo/painel-fidelidade.html?org=${c.slug}`
       },
       isDefault: true
     },
@@ -250,7 +250,7 @@
       desc: 'Lista de brindes e produtos resgatáveis à medida que o cliente acumula pontos nas compras.',
       clientAction: {
         label: 'Ver Catálogo de Prêmios',
-        getUrl: (c) => `demo/fidelidade.html?source=nfc&org=${c.slug}#premios`
+        getUrl: (c) => `/demo/fidelidade.html?source=nfc&org=${c.slug}#premios`
       },
       isDefault: true
     },
@@ -264,7 +264,7 @@
       desc: 'Aproximação na tag costurada ou gravada na peça revelando a história do mestre artesão e fotos do processo.',
       clientAction: {
         label: 'Ver Storytelling da Peça #07',
-        getUrl: (c) => `demo/storytelling-artesanato.html?source=nfc&org=${c.slug}`
+        getUrl: (c) => `/demo/storytelling-artesanato.html?source=nfc&org=${c.slug}`
       },
       isDefault: true
     },
@@ -276,7 +276,7 @@
       desc: 'Selo anti-cópia comprovando que a peça é original e de tiragem limitada feita à mão.',
       clientAction: {
         label: 'Ver Certificado de Autenticidade',
-        getUrl: (c) => `demo/storytelling-artesanato.html?source=nfc&org=${c.slug}#certificado`
+        getUrl: (c) => `/demo/storytelling-artesanato.html?source=nfc&org=${c.slug}#certificado`
       },
       isDefault: true
     },
@@ -288,7 +288,7 @@
       desc: 'Vitrine digital dos modelos disponíveis para encomendas sob medida.',
       clientAction: {
         label: 'Ver Coleção Autoral',
-        getUrl: (c) => `demo/storytelling-artesanato.html?source=nfc&org=${c.slug}#colecao`
+        getUrl: (c) => `/demo/storytelling-artesanato.html?source=nfc&org=${c.slug}#colecao`
       },
       isDefault: true
     },
@@ -302,7 +302,7 @@
       desc: 'Placa colada no portão ou totem de loteamento onde o comprador vê fotos, plantas e valores.',
       clientAction: {
         label: 'Acessar Ficha do Imóvel',
-        getUrl: (c) => `demo/storytelling-artesanato.html?source=nfc&org=${c.slug}&tipo=imovel`
+        getUrl: (c) => `/demo/storytelling-artesanato.html?source=nfc&org=${c.slug}&tipo=imovel`
       },
       isDefault: true
     },
@@ -328,7 +328,7 @@
       desc: 'Direciona clientes muito satisfeitos (4-5 estrelas) direto para o Google Maps da empresa.',
       clientAction: {
         label: 'Avaliar no Google 5★',
-        getUrl: (c) => `demo/avaliacao.html?source=nfc&org=${c.slug}`
+        getUrl: (c) => `/demo/avaliacao.html?source=nfc&org=${c.slug}`
       },
       isDefault: true
     },
@@ -340,7 +340,7 @@
       desc: 'Exibe as credenciais de Wi-Fi e botão de cópia rápida para o cliente conectar sem digitar.',
       clientAction: {
         label: 'Ver Conexão Wi-Fi',
-        getUrl: (c) => `empresa.html?slug=${c.slug}#wifi`
+        getUrl: (c) => `/empresa.html?slug=${c.slug}#wifi`
       },
       isDefault: true
     },
@@ -385,10 +385,10 @@
       brandColor: '#F59E0B',
       summary: 'Restaurante com foco em culinária contemporânea orgânica e ambiente biofílico.',
       spots: [
-        { code: 'm01', label: 'Mesa 01', type: 'mesa', url: 'demo/cardapio.html?source=nfc&mesa=01' },
-        { code: 'm02', label: 'Mesa 02', type: 'mesa', url: 'demo/cardapio.html?source=nfc&mesa=02' },
-        { code: 'm03', label: 'Mesa 03', type: 'mesa', url: 'demo/cardapio.html?source=nfc&mesa=03' },
-        { code: 'm04', label: 'Mesa 04 (Salão Principal)', type: 'mesa', url: 'demo/cardapio.html?source=nfc&mesa=04' }
+        { code: 'm01', label: 'Mesa 01', type: 'mesa', url: '/demo/cardapio.html?source=nfc&mesa=01' },
+        { code: 'm02', label: 'Mesa 02', type: 'mesa', url: '/demo/cardapio.html?source=nfc&mesa=02' },
+        { code: 'm03', label: 'Mesa 03', type: 'mesa', url: '/demo/cardapio.html?source=nfc&mesa=03' },
+        { code: 'm04', label: 'Mesa 04 (Salão Principal)', type: 'mesa', url: '/demo/cardapio.html?source=nfc&mesa=04' }
       ],
       modules: [
         'cardapio_digital',
@@ -412,9 +412,9 @@
       brandColor: '#D4A853',
       summary: 'Hotel boutique com serviço de concierge e room service digital por aproximação nos quartos.',
       spots: [
-        { code: 'q101', label: 'Apartamento 101', type: 'quarto', url: 'demo/hotel.html?source=nfc&quarto=101' },
-        { code: 'q204', label: 'Suíte Executiva 204', type: 'quarto', url: 'demo/hotel.html?source=nfc&quarto=204' },
-        { code: 'q412', label: 'Suíte 412 Imperial', type: 'quarto', url: 'demo/hotel.html?source=nfc&quarto=412' }
+        { code: 'q101', label: 'Apartamento 101', type: 'quarto', url: '/demo/hotel.html?source=nfc&quarto=101' },
+        { code: 'q204', label: 'Suíte Executiva 204', type: 'quarto', url: '/demo/hotel.html?source=nfc&quarto=204' },
+        { code: 'q412', label: 'Suíte 412 Imperial', type: 'quarto', url: '/demo/hotel.html?source=nfc&quarto=412' }
       ],
       modules: [
         'concierge_suite',
@@ -439,8 +439,8 @@
       brandColor: '#A78BFA',
       summary: 'Clínica de Dermatologia e Estética Facial com totem de avaliação e reputação no Google Maps.',
       spots: [
-        { code: 'totem_rec', label: 'Totem Balcão Recepção', type: 'totem', url: 'demo/avaliacao.html?source=nfc' },
-        { code: 'consult_01', label: 'Consultório Principal 01', type: 'consultorio', url: 'demo/avaliacao.html?source=nfc' }
+        { code: 'totem_rec', label: 'Totem Balcão Recepção', type: 'totem', url: '/demo/avaliacao.html?source=nfc' },
+        { code: 'consult_01', label: 'Consultório Principal 01', type: 'consultorio', url: '/demo/avaliacao.html?source=nfc' }
       ],
       modules: [
         'google_reviews',
@@ -463,7 +463,7 @@
       brandColor: '#0055FF',
       summary: 'Cafeteria de grãos especiais com programa de 10 carimbos digitais e resgate de recompensas.',
       spots: [
-        { code: 'fidelidade_balcao', label: 'Display Balcão de Caixa', type: 'balcao', url: 'demo/fidelidade.html?source=nfc' }
+        { code: 'fidelidade_balcao', label: 'Display Balcão de Caixa', type: 'balcao', url: '/demo/fidelidade.html?source=nfc' }
       ],
       modules: [
         'cartao_fidelidade',
@@ -486,7 +486,7 @@
       brandColor: '#0055FF',
       summary: 'Ateliê de artefatos em couro legítimo com etiquetas NFC costuradas contando a história do artesão.',
       spots: [
-        { code: 'etq01', label: 'Bolsa Mandacaru #07', type: 'etiqueta', url: 'demo/storytelling-artesanato.html?source=nfc' }
+        { code: 'etq01', label: 'Bolsa Mandacaru #07', type: 'etiqueta', url: '/demo/storytelling-artesanato.html?source=nfc' }
       ],
       modules: [
         'etiqueta_storytelling',
@@ -509,8 +509,8 @@
       brandColor: '#38BDF8',
       summary: 'Barbearia vintage com fidelidade de cortes no espelho e agendamento rápido de navalha e barba.',
       spots: [
-        { code: 'cadeira01', label: 'Espelho Cadeira 01', type: 'espelho', url: 'demo/fidelidade.html?source=nfc' },
-        { code: 'cadeira02', label: 'Espelho Cadeira 02', type: 'espelho', url: 'demo/fidelidade.html?source=nfc' }
+        { code: 'cadeira01', label: 'Espelho Cadeira 01', type: 'espelho', url: '/demo/fidelidade.html?source=nfc' },
+        { code: 'cadeira02', label: 'Espelho Cadeira 02', type: 'espelho', url: '/demo/fidelidade.html?source=nfc' }
       ],
       modules: [
         'cartao_fidelidade',
@@ -533,7 +533,7 @@
       brandColor: '#34D399',
       summary: 'Imobiliária inovadora com placas inteligentes em loteamentos para tour virtual e contato imediato de corretor.',
       spots: [
-        { code: 'placa_lote01', label: 'Totem Loteamento Jardins #01', type: 'placa', url: 'demo/storytelling-artesanato.html?source=nfc' }
+        { code: 'placa_lote01', label: 'Totem Loteamento Jardins #01', type: 'placa', url: '/demo/storytelling-artesanato.html?source=nfc' }
       ],
       modules: [
         'placa_phygital',

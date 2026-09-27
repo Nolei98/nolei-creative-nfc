@@ -758,24 +758,25 @@
  <!-- Top Bar -->
  <header class="top-bar">
  <div class="top-bar-inner">
- <a href="../index.html" class="top-brand">
+ <a href="/" class="top-brand">
  <div class="brand-mark">
  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
  </div>
- <div class="brand-title">Nolei <span>Gastronomia & Cozinha</span></div>
+ <div class="brand-title"><span id="top-brand-company-name">Nolei</span> <span>Gastronomia & Cozinha</span></div>
  </a>
 
  <div class="top-nav-actions">
- <a href="cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top-action highlight">
+ <a id="btn-top-open-cardapio" href="/demo/cardapio.html?source=nfc&mesa=04" target="_blank" class="btn-top-action highlight">
  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
  Abrir Cardápio Mesa 04 
  </a>
- <a href="../admin/index.html" class="btn-top-action" style="color:var(--leaf-green); font-weight:700;">Hub de Demonstrações</a>
- <a href="dashboard-restaurante.html" class="btn-top-action">
+ <a id="btn-top-company-portal" href="/dashboard/botanico-bistro" class="btn-top-action" style="display:none;">Portal da Empresa</a>
+ <a href="/admin" class="btn-top-action" style="color:var(--leaf-green); font-weight:700;">Hub de Demonstrações</a>
+ <a href="/demo/dashboard-restaurante.html" class="btn-top-action">
  Métricas & ROI
  </a>
- <a href="../index.html" class="btn-top-action">
- Hub Principal
+ <a href="/" class="btn-top-action">
+ Início
  </a>
  </div>
  </div>
@@ -1000,7 +1001,29 @@
  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
  </button>
 
+ <script src="/js/nolei-companies.js"></script>
  <script>
+ // Suporte a Parâmetro de Empresa / Estabelecimento
+ const urlParams = new URLSearchParams(window.location.search);
+ const orgSlug = urlParams.get('org') || 'botanico-bistro';
+ let companyData = null;
+ if (window.NoleiCompanies) {
+   companyData = window.NoleiCompanies.getBySlug(orgSlug);
+   if (companyData) {
+     const brandCompanyEl = document.getElementById('top-brand-company-name');
+     if (brandCompanyEl) brandCompanyEl.textContent = companyData.name;
+     const portalBtn = document.getElementById('btn-top-company-portal');
+     if (portalBtn) {
+       portalBtn.href = '/dashboard/' + companyData.slug;
+       portalBtn.style.display = 'inline-flex';
+     }
+     const openCardapioBtn = document.getElementById('btn-top-open-cardapio');
+     if (openCardapioBtn) {
+       openCardapioBtn.href = `/demo/cardapio.html?source=nfc&org=${companyData.slug}&mesa=04`;
+     }
+   }
+ }
+
  // Tab switching
  function switchTab(tabId) {
  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1032,13 +1055,44 @@
  ]
  };
 
- function getStoredMenu() {
- let menu = JSON.parse(localStorage.getItem('nolei_menu_custom') || 'null');
- if (!menu) {
- menu = defaultMenu;
- localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+ function syncProductsToFlatList(menu) {
+   try {
+     let flat = [];
+     Object.keys(menu).forEach(cat => {
+       (menu[cat] || []).forEach(item => {
+         flat.push({ ...item, category: cat, active: true });
+       });
+     });
+     localStorage.setItem('nolei_menu_products', JSON.stringify(flat));
+   } catch (e) {
+     console.error('Erro ao sincronizar menu flat:', e);
+   }
  }
- return menu;
+
+ function getStoredMenu() {
+   let menu = JSON.parse(localStorage.getItem('nolei_menu_custom') || 'null');
+   if (!menu) {
+     const flatStored = localStorage.getItem('nolei_menu_products');
+     if (flatStored) {
+       try {
+         const list = JSON.parse(flatStored);
+         const grouped = { entradas: [], principais: [], bebidas: [], sobremesas: [] };
+         list.forEach(p => {
+           const cat = p.category || 'principais';
+           if (!grouped[cat]) grouped[cat] = [];
+           grouped[cat].push(p);
+         });
+         menu = grouped;
+       } catch (e) {
+         menu = defaultMenu;
+       }
+     } else {
+       menu = defaultMenu;
+     }
+     localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+     syncProductsToFlatList(menu);
+   }
+   return menu;
  }
 
  // Default Waiters
@@ -1210,11 +1264,24 @@
  const grid = document.getElementById('kds-grid');
  const waiters = getStoredWaiters();
 
- // Sync mesa 04 live orders from customer
- const mesa04Stored = JSON.parse(localStorage.getItem('nolei_table_orders_mesa04') || 'null');
- if (mesa04Stored && mesa04Stored.length > 0) {
- kdsTables[0].items = mesa04Stored;
- }
+ // Sync all tables from localStorage dynamically (mesa 04, mesa 02, etc.)
+ kdsTables.forEach(t => {
+   const cleanNum = t.table.replace(/\D/g, '');
+   const rawNum = parseInt(cleanNum, 10);
+   const candidates = [
+     `nolei_table_orders_${cleanNum}`,
+     `nolei_table_orders_mesa${cleanNum}`,
+     `nolei_table_orders_${rawNum}`,
+     `nolei_table_orders_${t.table.toLowerCase().replace(/\s+/g, '')}`
+   ];
+   for (const key of candidates) {
+     const stored = JSON.parse(localStorage.getItem(key) || 'null');
+     if (stored && Array.isArray(stored) && stored.length > 0) {
+       t.items = stored;
+       break;
+     }
+   }
+ });
 
  let filtered = kdsTables;
  if (activeOperatorId !== 'admin') {
@@ -1242,13 +1309,13 @@
  <span class="table-waiter-badge">Garçom: ${t.waiter}</span>
  </div>
  <div class="table-order-items">
- ${t.items.map((item, iIdx) => `
+ ${t.items.length === 0 ? '<div style="padding:16px; color:var(--text-muted); font-size:0.8rem; text-align:center;">Nenhum item em comanda no momento.</div>' : t.items.map((item, iIdx) => `
  <div class="order-item-row">
  <div class="order-item-info">
  <strong>${item.name}</strong>
- <span class="order-item-meta">${item.orderedBy} • ${item.time || '12:00'}</span>
+ <span class="order-item-meta">${item.orderedBy || 'Cliente'} • ${item.time || '12:00'}</span>
  </div>
- <button class="status-badge ${item.status}" style="border:none; cursor:pointer;" onclick="toggleItemStatus(${tIdx}, ${iIdx})">
+ <button class="status-badge ${item.status || 'preparo'}" style="border:none; cursor:pointer;" onclick="toggleItemStatus(${tIdx}, ${iIdx})">
  ${item.status === 'entregue' ? 'Entregue' : 'Em Preparo'}
  </button>
  </div>
@@ -1267,20 +1334,31 @@
  }
 
  function toggleItemStatus(tIdx, iIdx) {
- const item = kdsTables[tIdx].items[iIdx];
+ const tableObj = kdsTables[tIdx];
+ const item = tableObj.items[iIdx];
  item.status = item.status === 'entregue' ? 'preparo' : 'entregue';
- if (kdsTables[tIdx].table.toLowerCase() === 'mesa 04') {
- localStorage.setItem('nolei_table_orders_mesa04', JSON.stringify(kdsTables[tIdx].items));
+ const cleanNum = tableObj.table.replace(/\D/g, '');
+ if (cleanNum) {
+   localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tableObj.items));
+   localStorage.setItem(`nolei_table_orders_mesa${cleanNum}`, JSON.stringify(tableObj.items));
+   const rawNum = parseInt(cleanNum, 10);
+   localStorage.setItem(`nolei_table_orders_${rawNum}`, JSON.stringify(tableObj.items));
  }
  renderKDS();
  showToast(`Status atualizado para: ${item.status === 'entregue' ? 'Entregue na Mesa' : 'Em Preparo'}`);
  }
 
  function finishTable(tableName) {
- if (tableName.toLowerCase() === 'mesa 04') {
- localStorage.removeItem('nolei_table_orders_mesa04');
- kdsTables[0].items = [];
+ const cleanNum = tableName.replace(/\D/g, '');
+ if (cleanNum) {
+   localStorage.removeItem(`nolei_table_orders_${cleanNum}`);
+   localStorage.removeItem(`nolei_table_orders_mesa${cleanNum}`);
+   const rawNum = parseInt(cleanNum, 10);
+   localStorage.removeItem(`nolei_table_orders_${rawNum}`);
+   localStorage.removeItem(`nolei_table_orders_${tableName.toLowerCase().replace(/\s+/g, '')}`);
  }
+ const found = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase());
+ if (found) found.items = [];
  renderKDS();
  showToast(`Comanda da ${tableName.toUpperCase()} encerrada com sucesso.`);
  }
@@ -1390,6 +1468,7 @@
 
  menu[cat].push({ id, name, priceVal, desc, image, tags: ["Especial"] });
  localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+ syncProductsToFlatList(menu);
  closeProductModal();
  renderProducts();
  showToast(`Prato "${name}" salvo com sucesso.`);
@@ -1400,6 +1479,7 @@
  const menu = getStoredMenu();
  menu[cat] = menu[cat].filter(i => i.id !== id);
  localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+ syncProductsToFlatList(menu);
  renderProducts();
  showToast('Item removido do cardápio.');
  }

@@ -2614,7 +2614,8 @@
           <div style="margin-bottom:20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <h4 style="font-size:0.92rem; font-weight:700; color:#FFFFFF; display:flex; align-items:center; gap:6px;">
-                <span>🏆</span> Ranking de Clientes Mais Fiéis
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8v4h8v-4h-1c-.55 0-1-.45-1-1v-2.34c3.27-.45 6-3.23 6-6.66V4H4v8c0 3.43 2.73 6.21 6 6.66z"></path></svg>
+                Ranking de Clientes Mais Fiéis
               </h4>
               <span style="font-size:0.70rem; color:var(--text-dim);">Classificação por Pontos & Selos</span>
             </div>
@@ -3419,7 +3420,7 @@
         `;
       }
 
-      const hostInfo = cfg ? ` • Titular: ${cfg.hostName} 👑 (${(cfg.members || []).length} conectados)` : '';
+      const hostInfo = cfg ? ` • Titular: ${cfg.hostName} (${(cfg.members || []).length} conectados)` : '';
 
       if (waiterEl) waiterEl.innerHTML = `
         <div style="display:flex; align-items:center; gap:5px;">
@@ -4701,11 +4702,11 @@
       { id: "u_w1", name: "Carlos Eduardo", phone: "(11) 98111-2233", role: "GARCOM", pin: "1001", status: "Ativo", tables: "mesa 01, mesa 02, mesa 03, mesa 04" },
       { id: "u_w2", name: "Mariana Souza", phone: "(11) 98222-3344", role: "GARCOM", pin: "1002", status: "Ativo", tables: "mesa 05, mesa 06, mesa 07" },
       { id: "u_w3", name: "Lucas Ferreira", phone: "(11) 98333-4455", role: "GARCOM", pin: "1003", status: "Ativo", tables: "mesa 08, mesa 09, mesa 10" },
-      { id: "u_c1", name: "Eduardo Camargo", phone: "(11) 95555-1234", role: "CLIENTE", pin: "1234", status: "Ativo", tier: "Diamante VIP", points: 820, stamps: 10 },
-      { id: "u_c2", name: "Beatriz Lima", phone: "(11) 98888-7777", role: "CLIENTE", pin: "7777", status: "Ativo", tier: "Ouro VIP", points: 450, stamps: 8 },
-      { id: "u_c3", name: "Lucas Silva", phone: "(11) 98765-4321", role: "CLIENTE", pin: "4321", status: "Ativo", tier: "Ouro VIP", points: 320, stamps: 6 },
-      { id: "u_c4", name: "Roberto Alves", phone: "(11) 97654-3210", role: "CLIENTE", pin: "3210", status: "Ativo", tier: "Prata VIP", points: 180, stamps: 4 },
-      { id: "u_c5", name: "Patrícia Mendes", phone: "(11) 96543-2109", role: "CLIENTE", pin: "2109", status: "Ativo", tier: "Bronze VIP", points: 90, stamps: 2 }
+      { id: "u_c1", name: "Eduardo Camargo", phone: "(11) 95555-1234", role: "CLIENTE", pin: "1234", status: "Ativo", tier: "Diamante", points: 820, stamps: 10 },
+      { id: "u_c2", name: "Beatriz Lima", phone: "(11) 98888-7777", role: "CLIENTE", pin: "7777", status: "Ativo", tier: "Ouro", points: 450, stamps: 8 },
+      { id: "u_c3", name: "Lucas Silva", phone: "(11) 98765-4321", role: "CLIENTE", pin: "4321", status: "Ativo", tier: "Ouro", points: 320, stamps: 6 },
+      { id: "u_c4", name: "Roberto Alves", phone: "(11) 97654-3210", role: "CLIENTE", pin: "3210", status: "Ativo", tier: "Prata", points: 180, stamps: 4 },
+      { id: "u_c5", name: "Patrícia Mendes", phone: "(11) 96543-2109", role: "CLIENTE", pin: "2109", status: "Ativo", tier: "Bronze", points: 90, stamps: 2 }
     ];
 
     let currentRbacFilter = 'all';
@@ -4743,7 +4744,7 @@
 
       tbody.innerHTML = filtered.map(u => {
         const roleBadgeClass = u.role.toLowerCase();
-        const roleLabel = u.role === 'ADMIN' ? '👑 ADMIN' : u.role === 'GARCOM' ? '👔 GARÇOM' : '👤 CLIENTE';
+        const roleLabel = u.role === 'ADMIN' ? 'ADMIN' : u.role === 'GARCOM' ? 'GARÇOM' : 'CLIENTE';
         const detailInfo = u.role === 'GARCOM' ? `Mesas: ${u.tables || 'mesa 01'}` : u.role === 'CLIENTE' ? `${(u.tier || 'Membro').replace(' VIP', '')} • ${u.points || 0} pts` : (u.permissions || 'Acesso Geral');
 
         return `
@@ -4914,7 +4915,7 @@
       const pin = rbacU ? rbacU.pin : (profile.pin || '4321');
       if (pinEl) pinEl.textContent = `•••• (${pin})`;
 
-      if (tierEl) tierEl.textContent = `🏆 ${(profile.tier ? profile.tier.toUpperCase() : 'NÍVEL OURO').replace(' VIP', '')}`;
+      if (tierEl) tierEl.textContent = (profile.tier ? profile.tier.toUpperCase() : 'NÍVEL OURO').replace(' VIP', '');
       if (pointsEl) pointsEl.textContent = `${profile.points || 320} pontos`;
       if (stampsEl) stampsEl.textContent = `${profile.stamps || 6} / 10 Selos`;
       if (visitsEl) visitsEl.textContent = `${profile.visits || 6} visitas`;

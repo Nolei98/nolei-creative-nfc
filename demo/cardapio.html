@@ -1,1673 +1,1478 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
- <meta name="theme-color" content="#1F1A15">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#121316">
 
   <!-- Primary Meta Tags -->
   <title>Cardápio Digital & Pedidos na Mesa — Botânico Bistrô | Nolei NFC</title>
-  <meta name="title" content="🌿 Cardápio Digital & Pedidos na Mesa — Botânico Bistrô | Nolei NFC">
-  <meta name="description" content="Aproxime seu smartphone da mesa: consulte pratos com fotos em alta definição, chame o garçom, peça a conta e envie pedidos direto pelo WhatsApp sem baixar aplicativos.">
+  <meta name="title" content="Cardápio Digital & Pedidos na Mesa — Botânico Bistrô | Nolei NFC">
+  <meta name="description" content="Aproxime seu smartphone da mesa: consulte pratos em alta definição, chame o garçom, peça a conta e envie pedidos direto pelo WhatsApp sem baixar aplicativos.">
   <meta name="keywords" content="cardapio digital, nfc restaurante, comanda mesa, pedir garcom, botanico bistro, nolei creative">
   <meta name="author" content="Nolei Creative">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://nolei-creative-nfc.vercel.app/demo/cardapio.html">
 
-  <!-- Open Graph / Facebook / WhatsApp Preview -->
+  <!-- Open Graph / Social Preview -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nolei-creative-nfc.vercel.app/demo/cardapio.html">
-  <meta property="og:title" content="🌿 Cardápio Digital & Pedidos na Mesa — Botânico Bistrô | Nolei NFC">
-  <meta property="og:description" content="Aproxime seu smartphone da mesa: consulte pratos com fotos em alta definição, chame o garçom, peça a conta e envie pedidos direto pelo WhatsApp sem baixar aplicativos.">
+  <meta property="og:title" content="Cardápio Digital & Pedidos na Mesa — Botânico Bistrô">
+  <meta property="og:description" content="Cardápio inteligente por aproximação NFC e QR Code. Sem aplicativos.">
   <meta property="og:image" content="https://nolei-creative-nfc.vercel.app/assets/images/display-menu-acrilico.jpg?v=2">
-  <meta property="og:image:secure_url" content="https://nolei-creative-nfc.vercel.app/assets/images/display-menu-acrilico.jpg?v=2">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Display L-Shape de Mesa para Restaurantes — Nolei Creative NFC">
-  <meta property="og:site_name" content="Nolei Creative">
-  <meta property="og:locale" content="pt_BR">
-
-  <!-- Twitter / X Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://nolei-creative-nfc.vercel.app/demo/cardapio.html">
-  <meta name="twitter:title" content="🌿 Cardápio Digital & Pedidos na Mesa — Botânico Bistrô | Nolei NFC">
-  <meta name="twitter:description" content="Aproxime seu smartphone da mesa: consulte pratos com fotos em alta definição, chame o garçom, peça a conta e envie pedidos direto pelo WhatsApp sem baixar aplicativos.">
-  <meta name="twitter:image" content="https://nolei-creative-nfc.vercel.app/assets/images/display-menu-acrilico.jpg?v=2">
-
-  <!-- Primary Meta Tags -->
-
-  <!-- Open Graph / Facebook / WhatsApp Preview -->
-
-  <!-- Twitter / X Cards -->
  
- <!-- Google Fonts -->
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
- <style>
-  :root {
-  --navy: #1C1E24;
-  --navy-light: #242731;
-  --leaf-green: #FF4D30;
-  --leaf-green-light: rgba(255, 77, 48, 0.15);
-  --orange: #FF6B35;
-  --orange-light: rgba(255, 107, 53, 0.15);
-  --flame-gradient: linear-gradient(135deg, #FF453A 0%, #FF6B35 100%);
-  --flame-glow: rgba(255, 77, 48, 0.35);
-  --emerald: #10B981;
-  --white: #FFFFFF;
-  --bg-light: #121316;
-  --text: #FFFFFF;
-  --text-muted: #8E95A5;
-  --text-dim: #64748B;
-  --border: rgba(255, 255, 255, 0.08);
-  --radius: 18px;
-  --radius-sm: 10px;
-  --font-heading: 'Poppins', -apple-system, sans-serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  }
-
-  * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  }
-
-  body {
-  font-family: var(--font-body);
-  background-color: var(--bg-light);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  padding-bottom: 110px;
-  background-image: radial-gradient(circle at 50% 10%, rgba(255, 77, 48, 0.04) 0%, transparent 50%);
-  }
-
-  /* Splash Screen */
-  .splash-screen {
-  position: fixed;
-  inset: 0;
-  background: #121316;
-  color: #FFFFFF;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
-  }
-
-  .splash-screen.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  }
-
-  .splash-icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  background: var(--flame-gradient);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  animation: pulse 1.4s infinite ease-in-out;
-  box-shadow: 0 4px 20px var(--flame-glow);
-  }
-
-  @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-  }
-
-  /* Header */
-  .header {
-  background: rgba(24, 25, 30, 0.92);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 12px 20px;
-  }
-
-  .header-inner {
-  max-width: 560px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  }
-
-  .header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  }
-
-  .btn-back {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: #1C1E24;
-  border: 1px solid var(--border);
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  }
-
-  .meta-title {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  line-height: 1.2;
-  }
-
-  .meta-sub {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  }
-
-  .table-tag {
-  background: var(--flame-gradient);
-  color: #FFFFFF;
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 6px 12px;
-  border-radius: 20px;
-  box-shadow: 0 2px 10px var(--flame-glow);
-  }
-
-  /* Container */
-  .container {
-  max-width: 560px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 16px 20px;
-  flex: 1;
-  }
-
-  /* User Profile Bar */
-  .user-profile-bar {
-  background: #1C1E24;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-  }
-
-  .user-info-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  }
-
-  .user-avatar-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--flame-gradient);
-  color: #FFFFFF;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  }
-
-  .user-text-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  }
-
-  .user-text-sub {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  }
-
-  .btn-switch-user {
-  background: none;
-  border: none;
-  color: var(--orange);
-  font-size: 0.75rem;
-  font-weight: 700;
-  cursor: pointer;
-  }
-
-  /* Shared Table Order Summary Box */
-  .table-order-card {
-  background: #1C1E24;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  }
-
-  .table-order-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-  }
-
-  .table-order-title {
-  font-family: var(--font-heading);
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  }
-
-  .badge-live-order {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #34D399;
-  background: rgba(16, 185, 129, 0.15);
-  padding: 3px 8px;
-  border-radius: 20px;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  }
-
-  .order-items-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  }
-
-  .order-item-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  font-size: 0.82rem;
-  background: #232630;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  }
-
-  .order-item-by {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  display: block;
-  margin-top: 2px;
-  }
-
-  .order-item-price {
-  font-weight: 700;
-  color: #FFFFFF;
-  white-space: nowrap;
-  }
-
-  .empty-orders-text {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  text-align: center;
-  padding: 10px 0;
-  }
-
-  /* Actions Bar */
-  .quick-actions {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 18px;
-  overflow-x: auto;
-  }
-  .quick-actions::-webkit-scrollbar { display: none; }
-
-  .action-chip {
-  background: #1C1E24;
-  border: 1px solid var(--border);
-  color: #FFFFFF;
-  padding: 9px 15px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  .action-chip.garcom {
-  background: rgba(255, 107, 53, 0.12);
-  color: #FB923C;
-  border-color: rgba(255, 107, 53, 0.3);
-  }
-
-  .action-chip.garcom:hover {
-  background: var(--flame-gradient);
-  color: #FFFFFF;
-  border-color: transparent;
-  box-shadow: 0 4px 14px var(--flame-glow);
-  transform: translateY(-1px);
-  }
-
-  .action-chip.conta {
-  background: rgba(16, 185, 129, 0.12);
-  color: #34D399;
-  border-color: rgba(16, 185, 129, 0.3);
-  }
-
-  .action-chip.conta:hover {
-  background: #10B981;
-  color: #FFFFFF;
-  border-color: #34D399;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
-  transform: translateY(-1px);
-  }
-
-  .action-chip.active-pinned {
-  background: #064E3B !important;
-  color: #FFFFFF !important;
-  border-color: #059669 !important;
-  box-shadow: 0 0 16px rgba(6, 78, 59, 0.55) !important;
-  animation: pulsePinned 2s infinite ease-in-out;
-  }
-
-  @keyframes pulsePinned {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  }
-
-  .pulse-dot-pinned {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #34D399;
-  display: inline-block;
-  animation: pulseDotGreen 1.2s infinite;
-  }
-
-  @keyframes pulseDotGreen {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.4); }
-  }
-
-  .action-chip.wifi {
-  background: rgba(59, 130, 246, 0.15);
-  color: #60A5FA;
-  border-color: rgba(59, 130, 246, 0.3);
-  }
-
-  /* Category Tabs */
-  .category-tabs {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 18px;
-  background: #18191E;
-  border-radius: 12px;
-  padding: 4px;
-  border: 1px solid var(--border);
-  }
-
-  .category-tab {
-  flex: 1;
-  padding: 8px 10px;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.15s ease;
-  }
-
-  .category-tab.active {
-  background: var(--flame-gradient);
-  color: #FFFFFF;
-  box-shadow: 0 2px 10px var(--flame-glow);
-  }
-
-  /* Menu Items Grid */
-  .menu-items-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  }
-
-  .menu-item-card {
-  background: #1C1E24;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  display: flex;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  }
-
-  .menu-item-card:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  transform: translateY(-2px);
-  }
-
-  .item-image {
-  width: 120px;
-  min-width: 120px;
-  height: 120px;
-  object-fit: cover;
-  display: block;
-  background: #272A34;
-  }
-
-  .item-info {
-  padding: 12px 14px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 0;
-  }
-
-  .item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 2px;
-  }
-
-  .item-name {
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  }
-
-  .item-price {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--flame-red);
-  white-space: nowrap;
-  }
-
-  .item-desc {
-  font-size: 0.76rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-  margin-bottom: 8px;
-  }
-
-  .item-footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  }
-
-  .badge-tag {
-  font-size: 0.65rem;
-  font-weight: 600;
-  background: #272A34;
-  color: #FFFFFF;
-  padding: 2px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  }
-
-  .btn-add-item {
-  background: var(--flame-gradient);
-  color: #FFFFFF;
-  border: none;
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  box-shadow: 0 2px 8px var(--flame-glow);
-  transition: all 0.15s;
-  }
-
-  .btn-add-item:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 77, 48, 0.45);
-  }
-
-  /* Fixed Bottom Bar */
-  .bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(24, 25, 30, 0.94);
-  backdrop-filter: blur(14px);
-  border-top: 1px solid var(--border);
-  padding: 12px 20px;
-  z-index: 100;
-  }
-
-  .bottom-bar-inner {
-  max-width: 560px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  }
-
-  .table-total-info {
-  display: flex;
-  flex-direction: column;
-  }
-
-  .total-label {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  }
-
-  .total-value {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  }
-
-  .btn-finalize-order {
-  background: var(--flame-gradient);
-  color: #FFFFFF;
-  border: none;
-  border-radius: 100px;
-  padding: 14px 22px;
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 16px var(--flame-glow);
-  transition: all 0.15s;
-  }
-
-  .btn-finalize-order:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255, 77, 48, 0.5);
-  }
-
-  /* Modals */
-  .modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 11, 14, 0.85);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  padding: 20px;
-  }
-
-  .modal-overlay.open {
-  opacity: 1;
-  visibility: visible;
-  }
-
-  .modal-card {
-  background: #1C1E24;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 28px 24px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  transform: scale(0.96);
-  transition: transform 0.2s ease;
-  color: #FFFFFF;
-  }
-
-  .modal-overlay.open .modal-card {
-  transform: scale(1);
-  }
-
-  .modal-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 4px;
-  }
-
-  .modal-sub {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-bottom: 18px;
-  }
-
-  .form-input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 0.88rem;
-  background: #141518;
-  color: #FFFFFF;
-  outline: none;
-  }
-
-  .form-input:focus {
-  border-color: var(--leaf-green);
-  }
-
-  .btn-submit-auth {
-  width: 100%;
-  background: var(--flame-gradient);
-  color: #FFFFFF;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-  margin-top: 8px;
-  box-shadow: 0 4px 14px var(--flame-glow);
-  transition: all 0.15s;
-  }
-
-  /* Toast */
-  .toast-box {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: #272A34;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 14px 24px;
-  border-radius: 100px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  z-index: 10000;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-  }
-
-  .toast-box.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  }
-
-  .toast-box.garcom {
-  background: #FF4D30 !important;
-  box-shadow: 0 10px 30px rgba(255, 77, 48, 0.45) !important;
-  }
-
-  .toast-box.conta {
-  background: #10B981 !important;
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.45) !important;
-  }
-
-  .btn-top-gestao {
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #FF6B35;
-  background: rgba(255, 107, 53, 0.15);
-  border: 1px solid rgba(255, 107, 53, 0.3);
-  padding: 5px 10px;
-  border-radius: 20px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  }
-
-  .btn-top-gestao:hover {
-  background: var(--flame-gradient);
-  color: #fff;
-  }
-
-  .btn-scroll-top {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #1C1E24;
-  color: #FFFFFF;
-  border: 1px solid rgba(255,255,255,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-  z-index: 990;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.25s ease;
-  }
-
-  .btn-scroll-top.visible {
-  opacity: 1;
-  visibility: visible;
-  }
-
-  .btn-scroll-top:hover {
-  background: var(--flame-gradient);
-  transform: translateY(-2px);
-  }
-
-  .btn-top-cta-contact {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--flame-gradient);
-  color: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 6px 13px;
-  border-radius: 20px;
-  font-family: inherit;
-  font-size: 0.76rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 10px var(--flame-glow);
-  white-space: nowrap;
-  }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-app: #121316;
+      --bg-card: #1C1E24;
+      --bg-card-inner: #22252E;
+      --bg-card-hover: #262933;
+      --bg-input: #23252E;
+      
+      --flame-red: #FF4D30;
+      --flame-orange: #FF6B35;
+      --flame-gradient: linear-gradient(135deg, #FF453A 0%, #FF6B35 100%);
+      --flame-glow: rgba(255, 77, 48, 0.35);
+      
+      --emerald: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --amber: #F59E0B;
+      --blue: #3B82F6;
+      
+      --text-white: #FFFFFF;
+      --text-main: #F1F5F9;
+      --text-muted: #8E95A5;
+      --text-dim: #64748B;
+      
+      --border-dark: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(255, 77, 48, 0.5);
+      
+      --radius-xl: 20px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 120px;
+      background-image: radial-gradient(circle at 50% 5%, rgba(255, 77, 48, 0.04) 0%, transparent 60%);
+    }
+
+    /* Splash Screen */
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      background: #121316;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .splash-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--flame-gradient);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      animation: pulse 1.4s infinite ease-in-out;
+      box-shadow: 0 4px 20px var(--flame-glow);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    /* Header */
+    .header {
+      background: rgba(24, 25, 30, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .header-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-back {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .btn-back:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .meta-title {
+      font-family: var(--font-heading);
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.2;
+    }
+
+    .meta-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .table-tag {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px var(--flame-glow);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 18px 20px;
+      flex: 1;
+    }
+
+    /* Restaurant Hero Brand Card */
+    .restaurant-hero {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .restaurant-hero-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--flame-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px var(--flame-glow);
+    }
+
+    .restaurant-hero-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.2;
+    }
+
+    .restaurant-hero-desc {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Wi-Fi Card (Prominently placed below the logo) */
+    .wifi-hero-card {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.05) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .wifi-hero-card:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.18) 0%, rgba(37, 99, 235, 0.08) 100%);
+    }
+
+    .wifi-left-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .wifi-icon-pill {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #1E293B;
+      color: #60A5FA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
+    .wifi-network-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .wifi-network-title span {
+      color: #60A5FA;
+    }
+
+    .wifi-pass-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .wifi-copy-badge {
+      font-size: 0.70rem;
+      font-weight: 700;
+      background: #1E293B;
+      color: #60A5FA;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Quick Action Chips */
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .quick-actions::-webkit-scrollbar { display: none; }
+
+    .action-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      color: var(--text-white);
+      padding: 9px 15px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .action-chip.garcom {
+      background: rgba(255, 107, 53, 0.12);
+      color: #FB923C;
+      border-color: rgba(255, 107, 53, 0.3);
+    }
+
+    .action-chip.garcom:hover {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 4px 14px var(--flame-glow);
+      transform: translateY(-1px);
+    }
+
+    .action-chip.conta {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34D399;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .action-chip.conta:hover {
+      background: #10B981;
+      color: #FFFFFF;
+      border-color: #34D399;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .action-chip.active-pinned {
+      background: #064E3B !important;
+      color: #FFFFFF !important;
+      border-color: #059669 !important;
+      box-shadow: 0 0 16px rgba(6, 78, 59, 0.55) !important;
+      animation: pulsePinned 2s infinite ease-in-out;
+    }
+
+    @keyframes pulsePinned {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .pulse-dot-pinned {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34D399;
+      display: inline-block;
+      animation: pulseDotGreen 1.2s infinite;
+    }
+
+    @keyframes pulseDotGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.4); }
+    }
+
+    /* User Profile Identification Bar */
+    .user-profile-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    }
+
+    .user-info-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-text-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .user-text-sub {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+    }
+
+    .btn-switch-user {
+      background: none;
+      border: none;
+      color: var(--flame-red);
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Shared Table Order Summary Box */
+    .table-order-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .table-order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .table-order-title {
+      font-family: var(--font-heading);
+      font-size: 0.90rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-live-order {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #34D399;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .order-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 0.82rem;
+      background: var(--bg-card-inner);
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border-dark);
+    }
+
+    .order-item-by {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .order-item-price {
+      font-weight: 700;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+
+    .empty-orders-text {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    /* Category Navigation Tabs */
+    .category-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      background: #18191E;
+      border-radius: 14px;
+      padding: 4px;
+      border: 1px solid var(--border-dark);
+      overflow-x: auto;
+    }
+    .category-tabs::-webkit-scrollbar { display: none; }
+
+    .category-tab {
+      flex: 1;
+      padding: 9px 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .category-tab.active {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 2px 10px var(--flame-glow);
+    }
+
+    /* Menu Items List */
+    .menu-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .menu-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .menu-item-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .menu-item-card.is-soldout {
+      opacity: 0.65;
+      filter: grayscale(0.2);
+    }
+
+    .item-image-box {
+      width: 120px;
+      min-width: 120px;
+      height: 120px;
+      position: relative;
+      background: #272A34;
+    }
+
+    .item-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .soldout-tag-overlay {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(239, 68, 68, 0.9);
+      color: #FFFFFF;
+      font-size: 0.62rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .item-info {
+      padding: 12px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .item-name {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .item-price {
+      font-size: 0.90rem;
+      font-weight: 800;
+      color: var(--flame-red);
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .item-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      background: #272A34;
+      color: #FFFFFF;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-dark);
+    }
+
+    .btn-add-item {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 8px var(--flame-glow);
+      transition: all 0.15s;
+    }
+
+    .btn-add-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 77, 48, 0.45);
+    }
+
+    .btn-add-item.disabled {
+      background: #272A34;
+      color: var(--text-dim);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* Fixed Bottom Order Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(24, 25, 30, 0.95);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-dark);
+      padding: 12px 20px;
+      z-index: 100;
+    }
+
+    .bottom-bar-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .table-total-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .total-label {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+    }
+
+    .total-value {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .btn-finalize-order {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 100px;
+      padding: 14px 22px;
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px var(--flame-glow);
+      transition: all 0.15s;
+    }
+
+    .btn-finalize-order:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 77, 48, 0.5);
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 11, 14, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: #1C1E24;
+      border: 1px solid var(--border-dark);
+      border-radius: 22px;
+      padding: 26px 22px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      color: #FFFFFF;
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .modal-sub {
+      font-size: 0.80rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-dark);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: #141518;
+      color: #FFFFFF;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--flame-red);
+    }
+
+    .btn-submit-auth {
+      width: 100%;
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 4px 14px var(--flame-glow);
+      transition: all 0.15s;
+    }
+
+    /* Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #272A34;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 22px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .toast-box.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast-box.garcom {
+      background: #FF4D30 !important;
+      box-shadow: 0 10px 30px rgba(255, 77, 48, 0.45) !important;
+    }
+
+    .toast-box.conta {
+      background: #10B981 !important;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.45) !important;
+    }
+
+    .toast-box.wifi {
+      background: #2563EB !important;
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45) !important;
+    }
   </style>
 </head>
 <body>
 
- <!-- Splash Screen -->
- <div id="splash-screen" class="splash-screen hidden">
- <div class="splash-icon">
- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
- </div>
- <div style="font-size:1.05rem; font-weight:700;" id="splash-text">Conectando à Comanda da Mesa...</div>
- </div>
+  <!-- Splash Screen -->
+  <div id="splash-screen" class="splash-screen hidden">
+    <div class="splash-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+    </div>
+    <div style="font-size:1.05rem; font-weight:700;" id="splash-text">Conectando à Comanda da Mesa...</div>
+  </div>
 
- <!-- Header -->
- <header class="header">
- <div class="header-inner">
- <div class="header-left">
- <a href="/" class="btn-back" aria-label="Voltar">
- <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
- </a>
- <div>
- <h1 class="meta-title">Botânico Gastronomia</h1>
- <p class="meta-sub">Cardápio & Comanda Digital</p>
- </div>
- </div>
- 
-        <div style="display:flex; align-items:center; gap:8px;">
-          <a href="/demo/painel-restaurante.html?org=botanico-bistro" target="_blank" class="btn-top-gestao" style="font-weight:700; text-decoration:none;" title="Abrir painel da cozinha (KDS) em tempo real">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span>Painel da Cozinha</span>
-          </a>
-          <a href="https://wa.me/5587999099937?text=Ol%C3%A1!%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20Card%C3%A1pio%20Digital%20%26%20Sal%C3%A3o%20Inteligente%20no%20site%20da%20Nolei%20Creative%20e%20gostaria%20de%20implantar%20no%20meu%20restaurante." target="_blank" rel="noopener noreferrer" class="btn-top-cta-contact" title="Entrar em contato via WhatsApp">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>Contato</span>
-          </a>
-          <div class="table-tag" id="table-badge">Mesa 04</div>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="/" class="btn-back" aria-label="Voltar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div>
+          <div class="meta-title" id="top-restaurant-name">Botânico Bistrô</div>
+          <div class="meta-sub">Cardápio Interativo • Comanda Digital</div>
         </div>
- </div>
- </header>
+      </div>
 
- <main class="container">
+      <div class="table-tag" id="table-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="16" y1="2" x2="16" y2="4"/></svg>
+        Mesa 04
+      </div>
+    </div>
+  </header>
 
- <!-- User Profile Bar -->
- <div class="user-profile-bar" id="user-profile-bar">
- <div class="user-info-left">
- <div class="user-avatar-circle" id="user-initial">?</div>
- <div>
- <div class="user-text-label" id="user-display-name">Não identificado</div>
- <div class="user-text-sub" id="user-display-sub">Cadastre-se para pedir nesta mesa</div>
- </div>
- </div>
- <button class="btn-switch-user" id="btn-auth-trigger" onclick="openAuthModal()">Identificar</button>
- </div>
+  <main class="container">
 
- <!-- Live Shared Table Order Card -->
- <div class="table-order-card">
- <div class="table-order-header">
- <div class="table-order-title">
- <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
- Comanda Coletiva da <span id="comanda-table-name">Mesa 04</span>
- </div>
- <span class="badge-live-order" id="order-count-badge">0 itens pedidos</span>
- </div>
+    <!-- Restaurant Hero Card -->
+    <div class="restaurant-hero">
+      <div class="restaurant-hero-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+      </div>
+      <div>
+        <h1 class="restaurant-hero-title">Botânico Bistrô & Bar</h1>
+        <p class="restaurant-hero-desc">Gastronomia Contemporânea • Alta Coquetelaria</p>
+      </div>
+    </div>
 
- <div class="order-items-list" id="order-items-list">
- <div class="empty-orders-text">Nenhum item pedido nesta mesa ainda. Escolha no menu abaixo.</div>
- </div>
- </div>
+    <!-- Wi-Fi da Casa (Localizado logo abaixo da Logo) -->
+    <div class="wifi-hero-card" onclick="copyWifiInfo()" title="Toque para copiar a senha do Wi-Fi">
+      <div class="wifi-left-content">
+        <div class="wifi-icon-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+        </div>
+        <div>
+          <div class="wifi-network-title">Wi-Fi da Casa: <span>Botanico_5G</span></div>
+          <div class="wifi-pass-sub">Senha: <strong>botanicogourmet</strong></div>
+        </div>
+      </div>
+      <div class="wifi-copy-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        Copiar
+      </div>
+    </div>
 
- <!-- Quick Action Chips with Vibrant Colors & Live Pinned State -->
- <div class="quick-actions">
- <button class="action-chip garcom" id="btn-action-garcom" onclick="chamarGarcom()">
- <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
- <span id="btn-garcom-label">Chamar Garçom</span>
- </button>
- <button class="action-chip conta" id="btn-action-conta" onclick="pedirConta()">
- <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
- <span id="btn-conta-label">Pedir a Conta</span>
- </button>
- <button class="action-chip wifi" onclick="showToast('Rede: Botanico_5G | Senha: botanicogourmet', 'wifi')">
- <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
- Wi-Fi da Casa
- </button>
- </div>
+    <!-- Quick Action Chips (Chamar Garçom, Pedir a Conta) -->
+    <div class="quick-actions">
+      <button class="action-chip garcom" id="btn-action-garcom" onclick="chamarGarcom()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <span id="btn-garcom-label">Chamar Garçom</span>
+      </button>
+      <button class="action-chip conta" id="btn-action-conta" onclick="pedirConta()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+        <span id="btn-conta-label">Pedir a Conta</span>
+      </button>
+    </div>
 
- <!-- Category Tabs -->
- <div class="category-tabs">
- <button class="category-tab active" onclick="switchCategory('entradas', this)">Entradas</button>
- <button class="category-tab" onclick="switchCategory('principais', this)">Principais</button>
- <button class="category-tab" onclick="switchCategory('bebidas', this)">Bebidas</button>
- <button class="category-tab" onclick="switchCategory('sobremesas', this)">Sobremesas</button>
- </div>
+    <!-- User Profile Bar -->
+    <div class="user-profile-bar" id="user-profile-bar">
+      <div class="user-info-left">
+        <div class="user-avatar-circle" id="user-initial">?</div>
+        <div>
+          <div class="user-text-label" id="user-display-name">Não identificado</div>
+          <div class="user-text-sub" id="user-display-sub">Identifique-se para pedir nesta mesa</div>
+        </div>
+      </div>
+      <button class="btn-switch-user" id="btn-auth-trigger" onclick="openAuthModal()">Identificar</button>
+    </div>
 
- <!-- Menu Items Grid -->
- <div class="menu-items-list" id="items-container">
- <!-- Injected via JavaScript -->
- </div>
+    <!-- Live Shared Table Order Card -->
+    <div class="table-order-card">
+      <div class="table-order-header">
+        <div class="table-order-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Comanda Coletiva da <span id="comanda-table-name" style="margin-left:4px;">Mesa 04</span>
+        </div>
+        <span class="badge-live-order" id="order-count-badge">0 itens</span>
+      </div>
 
- <!-- Footer Links -->
- 
+      <div class="order-items-list" id="order-items-list">
+        <div class="empty-orders-text">Nenhum item pedido nesta mesa ainda. Escolha no cardápio abaixo.</div>
+      </div>
+    </div>
 
- </main>
+    <!-- Category Tabs -->
+    <div class="category-tabs">
+      <button class="category-tab active" onclick="switchCategory('entradas', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>
+        Entradas
+      </button>
+      <button class="category-tab" onclick="switchCategory('principais', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+        Principais
+      </button>
+      <button class="category-tab" onclick="switchCategory('bebidas', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Bebidas
+      </button>
+      <button class="category-tab" onclick="switchCategory('sobremesas', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Sobremesas
+      </button>
+    </div>
 
- <!-- Bottom Bar -->
- <div class="bottom-bar">
- <div class="bottom-bar-inner">
- <div class="table-total-info">
- <span class="total-label">Total da Mesa:</span>
- <span class="total-value" id="table-total-val">R$ 0,00</span>
- </div>
- <button class="btn-finalize-order" onclick="finalizeTableOrder()">
- <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
- Enviar Pedidos da Mesa
- </button>
- </div>
- </div>
+    <!-- Menu Items Grid -->
+    <div class="menu-items-list" id="items-container">
+      <!-- Injected via JavaScript -->
+    </div>
 
- <!-- Modal de Identificação / Cadastro -->
- <div class="modal-overlay" id="auth-modal" onclick="closeAuthModal(event)">
- <div class="modal-card" onclick="event.stopPropagation()">
- <h3 class="modal-title">Identifique-se na Mesa</h3>
- <p class="modal-sub">Seus pedidos serão adicionados à comanda da mesa com o seu nome.</p>
+  </main>
 
- <div class="auth-tabs">
- <button class="auth-tab active" id="tab-login" onclick="setAuthTab('login')">Já sou Cliente</button>
- <button class="auth-tab" id="tab-register" onclick="setAuthTab('register')">Cadastrar</button>
- </div>
+  <!-- Fixed Bottom Order Bar -->
+  <div class="bottom-bar">
+    <div class="bottom-bar-inner">
+      <div class="table-total-info">
+        <span class="total-label">Subtotal da Mesa:</span>
+        <span class="total-value" id="table-total-val">R$ 0,00</span>
+      </div>
+      <button class="btn-finalize-order" onclick="finalizeTableOrder()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Enviar Pedidos da Mesa
+      </button>
+    </div>
+  </div>
 
- <!-- Form Login -->
- <div id="form-login-box">
- <div class="form-group">
- <label class="form-label">Telefone com DDD:</label>
- <input type="tel" id="login-phone" class="form-input" placeholder="(11) 98888-7777" value="(11) 98765-4321">
- </div>
- <button class="btn-submit-auth" onclick="handleLogin()">Entrar na Mesa</button>
- </div>
+  <!-- Modal de Identificação -->
+  <div class="modal-overlay" id="auth-modal" onclick="closeAuthModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 class="modal-title">Identifique-se na Mesa</h3>
+      <p class="modal-sub">Seus pedidos serão registrados na comanda com o seu nome.</p>
 
- <!-- Form Cadastro -->
- <div id="form-register-box" style="display:none;">
- <div class="form-group">
- <label class="form-label">Seu Nome Completo:</label>
- <input type="text" id="reg-name" class="form-input" placeholder="Ex: João Silva">
- </div>
- <div class="form-group">
- <label class="form-label">CPF (Para nota fiscal na mesa):</label>
- <input type="text" id="reg-cpf" class="form-input" placeholder="000.000.000-00">
- </div>
- <div class="form-group">
- <label class="form-label">WhatsApp (Para confirmação do pedido):</label>
- <input type="tel" id="reg-phone" class="form-input" placeholder="(11) 99999-9999">
- </div>
- <button class="btn-submit-auth" onclick="handleRegister()">Cadastrar e Entrar na Mesa</button>
- </div>
+      <div class="form-group">
+        <label class="form-label">Seu Nome:</label>
+        <input type="text" id="reg-name" class="form-input" placeholder="Ex: Lucas Silva" value="Lucas Silva">
+      </div>
+      <div class="form-group">
+        <label class="form-label">WhatsApp (para confirmação):</label>
+        <input type="tel" id="reg-phone" class="form-input" placeholder="(11) 98765-4321" value="(11) 98765-4321">
+      </div>
+      <button class="btn-submit-auth" onclick="handleSimpleAuth()">Confirmar Identificação</button>
+    </div>
+  </div>
 
- </div>
- </div>
+  <!-- Modal de Avaliação do Garçom -->
+  <div class="modal-overlay" id="waiter-rating-modal" onclick="closeWaiterRatingModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+        <div>
+          <h3 class="modal-title">Avaliação do Atendimento</h3>
+          <p class="modal-sub">Como foi sua experiência com o garçom?</p>
+        </div>
+        <button onclick="closeWaiterRatingModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
 
- <!-- Modal de Avaliação do Garçom -->
- <div class="modal-overlay" id="waiter-rating-modal" onclick="closeWaiterRatingModal(event)">
- <div class="modal-card" onclick="event.stopPropagation()">
- <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
- <div>
- <h3 class="modal-title" style="margin-bottom:2px;">Avaliação do Atendimento</h3>
- <p class="modal-sub">Como foi sua experiência com nosso garçom?</p>
- </div>
- <button onclick="closeWaiterRatingModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-dim);">&times;</button>
- </div>
+      <div style="display:flex; align-items:center; gap:12px; background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px; margin-bottom:18px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:var(--flame-gradient); color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-weight:700;">
+          C
+        </div>
+        <div>
+          <div style="font-size:0.95rem; font-weight:700; color:#FFFFFF;" id="rating-waiter-name">Carlos Eduardo</div>
+          <div style="font-size:0.75rem; color:var(--text-muted);" id="rating-waiter-subtitle">Atendente Responsável • Mesa 04</div>
+        </div>
+      </div>
 
- <!-- Garçom Card Info -->
- <div class="waiter-card-header">
- <div class="waiter-avatar-box">
- <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
- </div>
- <div>
- <div style="font-size:0.95rem; font-weight:700; color: #0F172A;" id="rating-waiter-name">Carlos Menezes</div>
- <div style="font-size:0.75rem; color:var(--text-muted);" id="rating-waiter-subtitle">Garçom Responsável • Mesa 04</div>
- </div>
- </div>
+      <div style="text-align:center; margin-bottom:16px;">
+        <div style="font-size:1.8rem; color:#F59E0B; letter-spacing:4px;">★★★★★</div>
+        <div style="font-size:0.80rem; font-weight:600; color:#FFFFFF; margin-top:4px;">Excelente Atendimento (5.0)</div>
+      </div>
 
- <!-- Star Rating -->
- <div class="rating-stars-container" id="stars-row">
- <button type="button" class="star-btn active" data-val="1" onclick="setStarRating(1)" onmouseenter="hoverStarRating(1)" onmouseleave="resetStarHover()">★</button>
- <button type="button" class="star-btn active" data-val="2" onclick="setStarRating(2)" onmouseenter="hoverStarRating(2)" onmouseleave="resetStarHover()">★</button>
- <button type="button" class="star-btn active" data-val="3" onclick="setStarRating(3)" onmouseenter="hoverStarRating(3)" onmouseleave="resetStarHover()">★</button>
- <button type="button" class="star-btn active" data-val="4" onclick="setStarRating(4)" onmouseenter="hoverStarRating(4)" onmouseleave="resetStarHover()">★</button>
- <button type="button" class="star-btn active" data-val="5" onclick="setStarRating(5)" onmouseenter="hoverStarRating(5)" onmouseleave="resetStarHover()">★</button>
- </div>
- <div class="rating-feedback-label" id="star-feedback-text">Excelente atendimento</div>
+      <button class="btn-submit-auth" onclick="submitWaiterRating()">
+        Confirmar Avaliação
+      </button>
+    </div>
+  </div>
 
- <!-- Quick Compliments -->
- <div style="font-size:0.78rem; font-weight:600; color: #0F172A; margin-bottom:8px; text-align:center;">Destaques do Atendimento:</div>
- <div class="compliments-grid" id="compliments-box">
- <span class="compliment-tag selected" onclick="toggleCompliment(this, 'Rapidez')">Rapidez</span>
- <span class="compliment-tag selected" onclick="toggleCompliment(this, 'Simpatia')">Simpatia</span>
- <span class="compliment-tag" onclick="toggleCompliment(this, 'Pedido Correto')">Pedido Correto</span>
- <span class="compliment-tag" onclick="toggleCompliment(this, 'Boas Sugestões')">Boas Sugestões</span>
- </div>
-
- <!-- Tip Option -->
- <div style="font-size:0.78rem; font-weight:600; color: #0F172A; margin-bottom:8px; text-align:center;">Gorjeta Opcional para o Garçom:</div>
- <div class="tip-options-row">
- <button type="button" class="tip-btn" onclick="selectTip(this, 0)">Sem Gorjeta</button>
- <button type="button" class="tip-btn selected" onclick="selectTip(this, 5)">R$ 5,00</button>
- <button type="button" class="tip-btn" onclick="selectTip(this, 10)">R$ 10,00</button>
- <button type="button" class="tip-btn" onclick="selectTip(this, 15)">R$ 15,00</button>
- </div>
-
- <!-- Optional Comment -->
- <div class="form-group" style="margin-top:10px;">
- <label class="form-label">Mensagem para o garçom (opcional):</label>
- <textarea id="rating-comment" class="form-input" rows="2" placeholder="O atendimento foi ótimo, muito atencioso..."></textarea>
- </div>
-
- <button class="btn-submit-auth" onclick="submitWaiterRating()" style="margin-top:14px; background:#15803D; box-shadow:0 4px 12px rgba(21,128,61,0.25);">
- Enviar Avaliação do Garçom
- </button>
- </div>
- </div>
-
- <!-- Toast -->
- <div class="toast-box" id="toast">
- <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
- <span id="toast-msg"></span>
- </div>
+  <!-- Toast -->
+  <div class="toast-box" id="toast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-msg"></span>
+  </div>
 
   <script src="../js/nolei-config.js"></script>
   <script src="../js/nolei-core.js"></script>
   <script>
- // Initial / Synced Products from CRUD
- const defaultDatabase = {
- entradas: [
- {
- id: "e1",
- name: "Bruschetta Caprese",
- priceVal: 28.90,
- desc: "Pão rústico artesanal, tomates cereja confitados, muçarela de búfala e pesto de manjericão.",
- tags: ["Vegetariano"],
- image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=300&q=80",
- active: true
- },
- {
- id: "e2",
- name: "Carpaccio Bovino Trufado",
- priceVal: 38.00,
- desc: "Lâminas de filé mignon, azeite trufado, Grana Padano e alcaparras crocantes.",
- tags: ["Sem Glúten"],
- image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80",
- active: true
- }
- ],
- principais: [
- {
- id: "p1",
- name: "Risoto de Cogumelos Selvagens",
- priceVal: 58.90,
- desc: "Arroz carnaroli com mix de shimeji, shiitake e Paris com manteiga trufada.",
- tags: ["Vegetariano", "Sem Glúten"],
- image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=300&q=80",
- active: true
- },
- {
- id: "p2",
- name: "Salmão Grelhado na Brasa",
- priceVal: 72.00,
- desc: "Posta de salmão com crosta de ervas, mousseline de mandioquinha e aspargos.",
- tags: ["Sem Glúten"],
- image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=300&q=80",
- active: true
- },
- {
- id: "p3",
- name: "Bife Ancho Prime Angus",
- priceVal: 84.00,
- desc: "Corte nobre com chimichurri fresco e batatas rústicas com alecrim.",
- tags: ["300g"],
- image: "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=300&q=80",
- active: true
- }
- ],
- bebidas: [
- {
- id: "b1",
- name: "Limonada Siciliana com Hortelã",
- priceVal: 18.90,
- desc: "Limão siciliano natural prensado, água mineral com gás e hortelã fresca.",
- tags: ["Sem Açúcar"],
- image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300&q=80",
- active: true
- },
- {
- id: "b2",
- name: "Gin Tônica Botânica",
- priceVal: 38.00,
- desc: "Gin artesanal, tônica premium, zimbro, pepino japonês e ramo de alecrim.",
- tags: ["Coquetel"],
- image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80",
- active: true
- }
- ],
- sobremesas: [
- {
- id: "s1",
- name: "Petit Gâteau Chocolate Belga",
- priceVal: 32.00,
- desc: "Bolo quente com recheio cremoso 70% e sorvete artesanal de baunilha Bourbon.",
- tags: ["Artesanal"],
- image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=300&q=80",
- active: true
- }
- ]
- };
+    // Initial / Synced Products from CRUD
+    const defaultDatabase = {
+      entradas: [
+        {
+          id: "e1",
+          name: "Bruschetta Caprese",
+          priceVal: 28.90,
+          desc: "Pão rústico artesanal, tomates cereja confitados, muçarela de búfala e pesto de manjericão fresco.",
+          tags: ["Vegetariano"],
+          image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=400&q=80",
+          active: true
+        },
+        {
+          id: "e2",
+          name: "Carpaccio Bovino Trufado",
+          priceVal: 38.00,
+          desc: "Lâminas de filé mignon, azeite trufado, Grana Padano 24 meses e alcaparras crocantes.",
+          tags: ["Sem Glúten"],
+          image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80",
+          active: true
+        }
+      ],
+      principais: [
+        {
+          id: "p3",
+          name: "Burger Botânico Artesanal",
+          priceVal: 45.90,
+          desc: "Blend 180g angus, queijo gruyère derretido, cebola caramelizada e aioli de ervas no brioche.",
+          tags: ["Artesanal"],
+          image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80",
+          active: true
+        },
+        {
+          id: "p1",
+          name: "Risoto de Cogumelos Selvagens",
+          priceVal: 58.90,
+          desc: "Arroz carnaroli com mix de shimeji, shiitake e cogumelos Paris com manteiga trufada.",
+          tags: ["Vegetariano"],
+          image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
+          active: true
+        },
+        {
+          id: "p2",
+          name: "Salmão Grelhado na Brasa",
+          priceVal: 72.00,
+          desc: "Posta de salmão com crosta de ervas finas, mousseline de mandioquinha e aspargos salteados.",
+          tags: ["Sem Glúten"],
+          image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80",
+          active: true
+        }
+      ],
+      bebidas: [
+        {
+          id: "b1",
+          name: "Limonada Siciliana com Hortelã",
+          priceVal: 18.90,
+          desc: "Limão siciliano natural prensado, água mineral gaseificada e folhas frescas de hortelã.",
+          tags: ["Sem Açúcar"],
+          image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80",
+          active: true
+        },
+        {
+          id: "b2",
+          name: "Gin Tônica Botânica",
+          priceVal: 38.00,
+          desc: "Gin artesanal infusionado, tônica premium, zimbro, lâminas de pepino e ramo de alecrim tostado.",
+          tags: ["Coquetel"],
+          image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=400&q=80",
+          active: true
+        }
+      ],
+      sobremesas: [
+        {
+          id: "s1",
+          name: "Petit Gâteau Chocolate Belga",
+          priceVal: 32.00,
+          desc: "Bolo quente com recheio cremoso 70% cacau acompanhado de sorvete de baunilha Bourbon.",
+          tags: ["Sobremesa"],
+          image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80",
+          active: true
+        }
+      ]
+    };
 
- function getMenuDatabase() {
-   const customStored = localStorage.getItem('nolei_menu_custom');
-   if (customStored) {
-     try {
-       const menuObj = JSON.parse(customStored);
-       if (menuObj && (menuObj.entradas || menuObj.principais || menuObj.bebidas || menuObj.sobremesas)) {
-         return menuObj;
-       }
-     } catch (e) {}
-   }
-   const stored = localStorage.getItem('nolei_menu_products');
-   if (!stored) return defaultDatabase;
-   try {
-     const productList = JSON.parse(stored);
-     const grouped = { entradas: [], principais: [], bebidas: [], sobremesas: [] };
-     productList.forEach(p => {
-       if (p.active !== false && grouped[p.category]) {
-         grouped[p.category].push(p);
-       }
-     });
-     return grouped;
-   } catch (e) {
-     return defaultDatabase;
-   }
- }
-
- // State
- const urlParams = new URLSearchParams(window.location.search);
- const mesaParam = urlParams.get('mesa') || '04';
- const cleanMesaNum = mesaParam.replace(/\D/g, '') || '04';
- const tableName = `Mesa ${mesaParam}`;
-
- document.getElementById('table-badge').textContent = tableName;
- document.getElementById('comanda-table-name').textContent = tableName;
-
- // User session
- let currentUser = JSON.parse(localStorage.getItem('nolei_menu_user') || 'null');
- 
- // Shared Table Orders (simulate table comanda storage)
- const storageKey = `nolei_table_orders_${mesaParam}`;
- let tableOrders = JSON.parse(
-   localStorage.getItem(storageKey) ||
-   localStorage.getItem(`nolei_table_orders_${cleanMesaNum}`) ||
-   localStorage.getItem(`nolei_table_orders_mesa${cleanMesaNum}`) ||
-   '[]'
- );
-
- function syncOrdersToStorage(orders) {
-   const jsonStr = JSON.stringify(orders);
-   localStorage.setItem(storageKey, jsonStr);
-   localStorage.setItem(`nolei_table_orders_${cleanMesaNum}`, jsonStr);
-   localStorage.setItem(`nolei_table_orders_mesa${cleanMesaNum}`, jsonStr);
-   const rawNum = parseInt(cleanMesaNum, 10);
-   localStorage.setItem(`nolei_table_orders_${rawNum}`, jsonStr);
- }
-
- // Seed mock orders from other people at the table if empty
- if (tableOrders.length === 0) {
- tableOrders = [
- { id: "e1", name: "Bruschetta Caprese", priceVal: 28.90, price: "R$ 28,90", orderedBy: "Carlos Menezes", time: "19:42", status: "entregue" },
- { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, price: "R$ 38,00", orderedBy: "Fernanda Lima", time: "19:44", status: "entregue" }
- ];
- syncOrdersToStorage(tableOrders);
- }
-
- // Splash
- const source = urlParams.get('source');
- const splashScreen = document.getElementById('splash-screen');
- const splashText = document.getElementById('splash-text');
-
- if (source === 'nfc' || source === 'qr') {
- const sessionKey = `cardapio_splash_${source}`;
- if (!sessionStorage.getItem(sessionKey)) {
- splashText.textContent = source === 'nfc' 
- ? `NFC Conectado • Comanda ${tableName}` 
- : `QR Code Validado • Comanda ${tableName}`;
- splashScreen.classList.remove('hidden');
- setTimeout(() => {
- splashScreen.classList.add('hidden');
- sessionStorage.setItem(sessionKey, 'true');
- }, 1100);
- }
- }
-
- // UI Updates
- function updateUserUI() {
- const nameEl = document.getElementById('user-display-name');
- const subEl = document.getElementById('user-display-sub');
- const avatarEl = document.getElementById('user-initial');
- const triggerBtn = document.getElementById('btn-auth-trigger');
-
- if (currentUser) {
- nameEl.textContent = currentUser.name;
- subEl.textContent = `CPF: ${currentUser.cpf || 'Cadastrado'} • ${currentUser.phone}`;
- avatarEl.textContent = currentUser.name.charAt(0).toUpperCase();
- triggerBtn.textContent = 'Trocar';
- } else {
- nameEl.textContent = 'Não identificado';
- subEl.textContent = 'Identifique-se para pedir nesta mesa';
- avatarEl.textContent = '?';
- triggerBtn.textContent = 'Identificar';
- }
- }
-
- function updateTableOrdersUI() {
- const listEl = document.getElementById('order-items-list');
- const countEl = document.getElementById('order-count-badge');
- const totalEl = document.getElementById('table-total-val');
-
- if (tableOrders.length === 0) {
- listEl.innerHTML = '<div class="empty-orders-text">Nenhum item pedido nesta mesa ainda.</div>';
- countEl.textContent = '0 itens';
- totalEl.textContent = 'R$ 0,00';
- return;
- }
-
- let total = 0;
- listEl.innerHTML = tableOrders.map(item => {
- total += item.priceVal;
- const isMine = currentUser && item.orderedBy === currentUser.name;
- const isDelivered = item.status === 'entregue';
-
- return `
- <div class="order-item-row" style="${isMine ? 'border-left: 3px solid var(--leaf-green);' : ''}">
- <div>
- <strong>${item.name}</strong>
- <span class="order-item-by">Pedido por: <strong>${item.orderedBy}</strong> • às ${item.time || 'agora'}</span>
- <span class="badge-item-status ${isDelivered ? 'entregue' : 'preparo'}">
- ${isDelivered ? 'Pedido Entregue na Mesa' : 'Em Preparo na Cozinha'}
- </span>
- </div>
- <span class="order-item-price">R$ ${Number(item.priceVal).toFixed(2).replace('.', ',')}</span>
- </div>
- `;
- }).join('');
-
- countEl.textContent = `${tableOrders.length} itens pedidos`;
- totalEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
- }
-
- // Render Category with synced products
- let activeCategory = 'entradas';
- function renderCategory(category) {
- activeCategory = category;
- const container = document.getElementById('items-container');
- const db = getMenuDatabase();
- const items = db[category] || [];
-
- if (items.length === 0) {
- container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-dim); font-size:0.85rem;">Nenhum produto cadastrado nesta categoria.</div>';
- return;
- }
-
- container.innerHTML = items.map(item => `
- <div class="menu-item-card">
- <img src="${item.image}" alt="${item.name}" class="item-image" loading="lazy">
- <div class="item-info">
- <div>
- <div class="item-header">
- <span class="item-name">${item.name}</span>
- <span class="item-price">R$ ${Number(item.priceVal).toFixed(2).replace('.', ',')}</span>
- </div>
- <p class="item-desc">${item.desc}</p>
- </div>
- <div class="item-footer-row">
- <span class="badge-tag">${(item.tags && item.tags[0]) || 'Cardápio'}</span>
- <button class="btn-add-item" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal})">
- <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
- Pedir
- </button>
- </div>
- </div>
- </div>
- `).join('');
- }
-
- function switchCategory(category, btn) {
- document.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
- btn.classList.add('active');
- renderCategory(category);
- }
-
- // Order Action
- function addItemToTable(id, name, priceVal) {
- if (!currentUser) {
- openAuthModal();
- showToast('Por favor, informe seu nome e telefone para pedir.');
- return;
- }
-
- const now = new Date();
- const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
- const newOrderItem = {
- id,
- name,
- priceVal,
- orderedBy: currentUser.name,
- time: timeStr,
- status: 'preparo'
- };
-
- tableOrders.push(newOrderItem);
- syncOrdersToStorage(tableOrders);
-
- updateTableOrdersUI();
- showToast(`Pedido de ${name} enviado à cozinha!`);
- }
-
- function finalizeTableOrder() {
- if (tableOrders.length === 0) {
- showToast('A comanda da mesa está vazia.');
- return;
- }
-
- let total = 0;
- tableOrders.forEach(i => total += i.priceVal);
- const summaryText = `Olá! Gostaria de fechar o pedido da ${tableName}. Total: R$ ${total.toFixed(2).replace('.', ',')}`;
- window.open(`https://wa.me/5587999099937?text=${encodeURIComponent(summaryText)}`, '_blank');
- }
-
- // Waiter Rating System State
- let currentWaiterRating = 5;
- let selectedCompliments = new Set(['Rapidez', 'Simpatia']);
- let selectedTip = 5;
-
- function openWaiterRatingModal() {
- document.getElementById('waiter-rating-modal').classList.add('open');
- }
-
- function closeWaiterRatingModal(e) {
- if (e && e.target && e.target !== document.getElementById('waiter-rating-modal') && e.type === 'click') return;
- document.getElementById('waiter-rating-modal').classList.remove('open');
- }
-
- const ratingLabels = {
- 5: "Excelente atendimento",
- 4: "Muito bom atendimento",
- 3: "Atendimento regular",
- 2: "Pode melhorar",
- 1: "Insatisfeito com atendimento"
- };
-
- function setStarRating(val) {
- currentWaiterRating = val;
- updateStarsUI(val);
- document.getElementById('star-feedback-text').textContent = ratingLabels[val] || '';
- }
-
- function hoverStarRating(val) {
- updateStarsUI(val);
- document.getElementById('star-feedback-text').textContent = ratingLabels[val] || '';
- }
-
- function resetStarHover() {
- updateStarsUI(currentWaiterRating);
- document.getElementById('star-feedback-text').textContent = ratingLabels[currentWaiterRating] || '';
- }
-
- function updateStarsUI(val) {
- const btns = document.querySelectorAll('#stars-row .star-btn');
- btns.forEach(btn => {
- const btnVal = parseInt(btn.getAttribute('data-val'));
- btn.classList.toggle('active', btnVal <= val);
- });
- }
-
- function toggleCompliment(el, tag) {
- if (selectedCompliments.has(tag)) {
- selectedCompliments.delete(tag);
- el.classList.remove('selected');
- } else {
- selectedCompliments.add(tag);
- el.classList.add('selected');
- }
- }
-
- function selectTip(el, amount) {
- selectedTip = amount;
- document.querySelectorAll('.tip-options-row .tip-btn').forEach(b => b.classList.remove('selected'));
- el.classList.add('selected');
- }
-
- function submitWaiterRating() {
- const comment = document.getElementById('rating-comment').value.trim();
- const ratingObj = {
- id: 'wr_' + Date.now(),
- waiterName: 'Carlos Menezes',
- table: tableName,
- rating: currentWaiterRating,
- compliments: Array.from(selectedCompliments),
- tip: selectedTip,
- comment,
- date: new Date().toLocaleDateString('pt-BR'),
- time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
- };
-
- const existing = JSON.parse(localStorage.getItem('nolei_waiter_ratings') || '[]');
- existing.unshift(ratingObj);
- localStorage.setItem('nolei_waiter_ratings', JSON.stringify(existing));
-
- closeWaiterRatingModal();
- showToast(`Avaliação de ${currentWaiterRating} estrelas enviada! Obrigado.`);
- }
-
- // Call Waiter & Ask Bill with persistent Dark Green State
- let lastWaiterCallTimestamp = 0;
- let lastBillCallTimestamp = 0;
-
- function updateServiceButtonsUI() {
- const alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
- const btnGarcom = document.getElementById('btn-action-garcom');
- const btnConta = document.getElementById('btn-action-conta');
-
- if (!btnGarcom || !btnConta) return;
-
- const hasGarcom = alerts.some(a => a.table === tableName && a.type === 'garcom');
- const hasConta = alerts.some(a => a.table === tableName && a.type === 'conta');
-
- if (hasGarcom) {
- btnGarcom.classList.add('active-pinned');
- btnGarcom.title = "Toque para desmarcar o chamado do garçom";
- btnGarcom.innerHTML = `
- <span class="pulse-dot-pinned"></span>
- <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
- <span id="btn-garcom-label">Garçom Notificado • [Desmarcar]</span>
- `;
- } else {
- btnGarcom.classList.remove('active-pinned');
- btnGarcom.title = "Chamar garçom na mesa";
- btnGarcom.innerHTML = `
- <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
- <span id="btn-garcom-label">Chamar Garçom</span>
- `;
- }
-
- if (hasConta) {
- btnConta.classList.add('active-pinned');
- btnConta.title = "Toque para desmarcar a solicitação da conta";
- btnConta.innerHTML = `
- <span class="pulse-dot-pinned"></span>
- <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
- <span id="btn-conta-label">Conta Solicitada • [Desmarcar]</span>
- `;
- } else {
- btnConta.classList.remove('active-pinned');
- btnConta.title = "Solicitar fechamento de conta na mesa";
- btnConta.innerHTML = `
- <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
- <span id="btn-conta-label">Pedir a Conta</span>
- `;
- }
- }
-
- function chamarGarcom() {
-    if (window.noleiClient) {
-      window.noleiClient.sendInteraction('chamado_garcom', { table: tableName, type: 'garcom' });
+    function getMenuDatabase() {
+      const customStored = localStorage.getItem('nolei_menu_custom');
+      if (customStored) {
+        try {
+          const menuObj = JSON.parse(customStored);
+          if (menuObj && (menuObj.entradas || menuObj.principais || menuObj.bebidas || menuObj.sobremesas)) {
+            return menuObj;
+          }
+        } catch (e) {}
+      }
+      return defaultDatabase;
     }
- const now = Date.now();
- let existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
- const activeIdx = existingAlerts.findIndex(a => a.table === tableName && a.type === 'garcom');
 
- // Se já foi chamado, clicar desmarca/cancela o chamado!
- if (activeIdx !== -1) {
- existingAlerts.splice(activeIdx, 1);
- localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
- updateServiceButtonsUI();
- showToast('Chamado do garçom desmarcado com sucesso.');
- return;
- }
+    // State
+    const urlParams = new URLSearchParams(window.location.search);
+    const mesaParam = urlParams.get('mesa') || '04';
+    const cleanMesaNum = mesaParam.replace(/\D/g, '') || '04';
+    const tableName = `Mesa ${mesaParam}`;
 
- // Limitador de frequência (evita spam de chamados em sequência)
- if (now - lastWaiterCallTimestamp < 15000) {
- const remaining = Math.ceil((15000 - (now - lastWaiterCallTimestamp)) / 1000);
- showToast(`Aguarde ${remaining}s antes de enviar um novo chamado.`);
- return;
- }
+    document.getElementById('table-badge').innerHTML = `
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="16" y1="2" x2="16" y2="4"/></svg>
+      ${tableName.toUpperCase()}
+    `;
+    document.getElementById('comanda-table-name').textContent = tableName.toUpperCase();
 
- lastWaiterCallTimestamp = now;
- existingAlerts.unshift({
- id: 'sa_' + Date.now(),
- type: 'garcom',
- table: tableName,
- msg: `Garçom solicitado na ${tableName}`,
- time: 'Agora'
- });
- localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
- updateServiceButtonsUI();
- showToast(`Garçom notificado para a ${tableName}! Toque novamente se desejar cancelar.`);
- }
-
- function pedirConta() {
-    if (window.noleiClient) {
-      window.noleiClient.sendInteraction('pedido_conta', { table: tableName, type: 'conta' });
+    // User session
+    let currentUser = JSON.parse(localStorage.getItem('nolei_menu_user') || 'null');
+    if (!currentUser) {
+      currentUser = { name: "Lucas Silva", phone: "(11) 98765-4321" };
+      localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
     }
- const now = Date.now();
- let existingAlerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
- const activeIdx = existingAlerts.findIndex(a => a.table === tableName && a.type === 'conta');
 
- // Se a conta já foi pedida, clicar desmarca/cancela!
- if (activeIdx !== -1) {
- existingAlerts.splice(activeIdx, 1);
- localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
- updateServiceButtonsUI();
- showToast('Solicitação de conta desmarcada com sucesso.');
- return;
- }
+    // Shared Table Orders
+    const storageKey = `nolei_table_orders_${cleanMesaNum}`;
+    let tableOrders = JSON.parse(
+      localStorage.getItem(storageKey) ||
+      localStorage.getItem(`nolei_table_orders_mesa${cleanMesaNum}`) ||
+      '[]'
+    );
 
- // Limitador de frequência
- if (now - lastBillCallTimestamp < 15000) {
- const remaining = Math.ceil((15000 - (now - lastBillCallTimestamp)) / 1000);
- showToast(`Aguarde ${remaining}s antes de pedir a conta novamente.`);
- return;
- }
+    function syncOrdersToStorage(orders) {
+      const jsonStr = JSON.stringify(orders);
+      localStorage.setItem(storageKey, jsonStr);
+      localStorage.setItem(`nolei_table_orders_mesa${cleanMesaNum}`, jsonStr);
+      const rawNum = parseInt(cleanMesaNum, 10);
+      localStorage.setItem(`nolei_table_orders_${rawNum}`, jsonStr);
+    }
 
- lastBillCallTimestamp = now;
- let total = 0;
- tableOrders.forEach(i => total += i.priceVal);
+    if (tableOrders.length === 0) {
+      tableOrders = [
+        { id: "p3", name: "Burger Botânico Artesanal", priceVal: 45.90, price: "R$ 45,90", orderedBy: "Lucas Silva", time: "14:15", status: "preparo" },
+        { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, price: "R$ 38,00", orderedBy: "Camila", time: "14:18", status: "entregue" },
+        { id: "e1", name: "Bruschetta Caprese", priceVal: 28.90, price: "R$ 28,90", orderedBy: "Lucas Silva", time: "14:10", status: "entregue" }
+      ];
+      syncOrdersToStorage(tableOrders);
+    }
 
- existingAlerts.unshift({
- id: 'sa_' + Date.now(),
- type: 'conta',
- table: tableName,
- msg: `Conta solicitada na ${tableName} (R$ ${total.toFixed(2).replace('.', ',')})`,
- time: 'Agora'
- });
- localStorage.setItem('nolei_service_alerts', JSON.stringify(existingAlerts));
- updateServiceButtonsUI();
- showToast(`Conta da ${tableName} solicitada! Toque novamente se desejar desmarcar.`);
+    // Wi-Fi Copy
+    function copyWifiInfo() {
+      const wifiPass = 'botanicogourmet';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(wifiPass).then(() => {
+          showToast('Senha do Wi-Fi copiada para a área de transferência!', 'wifi');
+        });
+      } else {
+        showToast('Rede: Botanico_5G | Senha: botanicogourmet', 'wifi');
+      }
+    }
 
- // Convite para avaliar o garçom
- setTimeout(() => {
- openWaiterRatingModal();
- }, 1000);
- }
+    // UI Updates
+    function updateUserUI() {
+      const nameEl = document.getElementById('user-display-name');
+      const subEl = document.getElementById('user-display-sub');
+      const avatarEl = document.getElementById('user-initial');
+      const triggerBtn = document.getElementById('btn-auth-trigger');
 
- // Auth Modal Logic
- function openAuthModal() {
- document.getElementById('auth-modal').classList.add('open');
- }
+      if (currentUser) {
+        nameEl.textContent = currentUser.name;
+        subEl.textContent = `${currentUser.phone}`;
+        avatarEl.textContent = currentUser.name.charAt(0).toUpperCase();
+        triggerBtn.textContent = 'Alterar';
+      } else {
+        nameEl.textContent = 'Não identificado';
+        subEl.textContent = 'Identifique-se para pedir na mesa';
+        avatarEl.textContent = '?';
+        triggerBtn.textContent = 'Identificar';
+      }
+    }
 
- function closeAuthModal(e) {
- document.getElementById('auth-modal').classList.remove('open');
- }
+    function updateTableOrdersUI() {
+      const listEl = document.getElementById('order-items-list');
+      const countEl = document.getElementById('order-count-badge');
+      const totalEl = document.getElementById('table-total-val');
 
- function setAuthTab(tab) {
- document.getElementById('tab-login').classList.toggle('active', tab === 'login');
- document.getElementById('tab-register').classList.toggle('active', tab === 'register');
- document.getElementById('form-login-box').style.display = tab === 'login' ? 'block' : 'none';
- document.getElementById('form-register-box').style.display = tab === 'register' ? 'block' : 'none';
- }
+      if (tableOrders.length === 0) {
+        listEl.innerHTML = '<div class="empty-orders-text">Nenhum item pedido nesta mesa ainda.</div>';
+        countEl.textContent = '0 itens';
+        totalEl.textContent = 'R$ 0,00';
+        return;
+      }
 
- function handleLogin() {
- const phone = document.getElementById('login-phone').value.trim();
- if (!phone) {
- alert('Por favor, digite seu telefone.');
- return;
- }
+      let total = 0;
+      listEl.innerHTML = tableOrders.map(item => {
+        total += (item.priceVal || 0);
+        const isMine = currentUser && item.orderedBy === currentUser.name;
+        const isDelivered = item.status === 'entregue';
 
- currentUser = {
- name: "João Silva",
- phone: phone,
- cpf: "342.***.***-09"
- };
+        return `
+          <div class="order-item-row" style="${isMine ? 'border-left: 3px solid var(--flame-red);' : ''}">
+            <div>
+              <strong style="color:#FFFFFF;">${item.name}</strong>
+              <span class="order-item-by">Por: <strong>${item.orderedBy}</strong> • às ${item.time || '12:00'}</span>
+              <span style="font-size:0.68rem; font-weight:700; color:${isDelivered ? '#34D399' : '#FBBF24'}; margin-top:3px; display:inline-block;">
+                ${isDelivered ? '✓ Entregue na Mesa' : '⏳ Em Preparo na Cozinha'}
+              </span>
+            </div>
+            <span class="order-item-price">R$ ${Number(item.priceVal || 0).toFixed(2).replace('.', ',')}</span>
+          </div>
+        `;
+      }).join('');
 
- localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
- updateUserUI();
- updateTableOrdersUI();
- closeAuthModal();
- showToast(`Bem-vindo(a) à ${tableName}, ${currentUser.name}!`);
- }
+      countEl.textContent = `${tableOrders.length} itens pedidos`;
+      totalEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
 
- function handleRegister() {
- const name = document.getElementById('reg-name').value.trim();
- const cpf = document.getElementById('reg-cpf').value.trim();
- const phone = document.getElementById('reg-phone').value.trim();
+    // Render Category
+    let activeCategory = 'entradas';
+    function renderCategory(category) {
+      activeCategory = category;
+      const container = document.getElementById('items-container');
+      const db = getMenuDatabase();
+      const items = db[category] || [];
 
- if (!name || !phone) {
- alert('Por favor, preencha seu nome e telefone.');
- return;
- }
+      if (items.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:30px; color:var(--text-dim); font-size:0.85rem;">Nenhum produto cadastrado nesta categoria.</div>';
+        return;
+      }
 
- currentUser = {
- name,
- cpf: cpf || '000.***.***-00',
- phone
- };
+      container.innerHTML = items.map(item => {
+        const isAvailable = item.active !== false;
 
- localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
- updateUserUI();
- updateTableOrdersUI();
- closeAuthModal();
- showToast(`Cadastro realizado com sucesso, ${name}!`);
- }
+        return `
+          <div class="menu-item-card ${isAvailable ? '' : 'is-soldout'}">
+            <div class="item-image-box">
+              <img src="${item.image}" alt="${item.name}" class="item-image" loading="lazy">
+              ${isAvailable ? '' : '<span class="soldout-tag-overlay">Esgotado</span>'}
+            </div>
+            <div class="item-info">
+              <div>
+                <div class="item-header">
+                  <span class="item-name">${item.name}</span>
+                  <span class="item-price">R$ ${Number(item.priceVal).toFixed(2).replace('.', ',')}</span>
+                </div>
+                <p class="item-desc">${item.desc}</p>
+              </div>
+              <div class="item-footer-row">
+                <span class="badge-tag">${(item.tags && item.tags[0]) || 'Especial'}</span>
+                ${isAvailable 
+                  ? `<button class="btn-add-item" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal})">
+                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                       Pedir
+                     </button>`
+                  : `<button class="btn-add-item disabled" disabled>Esgotado</button>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
 
- // Toast
- let toastTimer;
- function showToast(msg, type = 'default') {
- const toast = document.getElementById('toast');
- toast.className = 'toast-box';
- if (type === 'garcom') toast.classList.add('garcom');
- if (type === 'conta') toast.classList.add('conta');
+    function switchCategory(category, btn) {
+      document.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCategory(category);
+    }
 
- document.getElementById('toast-msg').textContent = msg;
- toast.classList.add('show');
- clearTimeout(toastTimer);
- toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
- }
+    function addItemToTable(id, name, priceVal) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      const clientName = currentUser ? currentUser.name : 'Cliente da Mesa';
 
- // Init
- updateUserUI();
- updateTableOrdersUI();
- renderCategory('entradas');
- updateServiceButtonsUI();
+      tableOrders.push({
+        id: id,
+        name: name,
+        priceVal: priceVal,
+        orderedBy: clientName,
+        time: timeStr,
+        status: "preparo"
+      });
 
- // Live sync polling with table status & service alerts from gestao.html
- setInterval(() => {
- const updated = JSON.parse(localStorage.getItem(storageKey) || 'null');
- if (updated && JSON.stringify(updated) !== JSON.stringify(tableOrders)) {
- tableOrders = updated;
- updateTableOrdersUI();
- }
- updateServiceButtonsUI();
- }, 1500);
+      syncOrdersToStorage(tableOrders);
+      updateTableOrdersUI();
+      showToast(`"${name}" adicionado à comanda!`);
+    }
 
- document.addEventListener('keydown', (e) => {
- if (e.key === 'Escape') {
- closeAuthModal();
- closeWaiterRatingModal();
- }
- });
- 
- // Scroll to Top visibility
- window.addEventListener('scroll', () => {
- const btn = document.getElementById('btn-scroll-top');
- if (btn) {
- if (window.scrollY > 300) {
- btn.classList.add('visible');
- } else {
- btn.classList.remove('visible');
- }
- }
- });
+    // Call Waiter & Request Bill
+    function chamarGarcom() {
+      const alertObj = {
+        id: "alert_" + Date.now(),
+        table: tableName,
+        type: "garcom",
+        time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+      };
+      let alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+      alerts = alerts.filter(a => !(a.table.toLowerCase() === tableName.toLowerCase() && a.type === 'garcom'));
+      alerts.push(alertObj);
+      localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
 
- </script>
+      const btn = document.getElementById('btn-action-garcom');
+      btn.classList.add('active-pinned');
+      document.getElementById('btn-garcom-label').innerHTML = '<span class="pulse-dot-pinned"></span> Garçom a Caminho';
+      showToast('Garçom chamado! Nossa equipe foi notificada.', 'garcom');
+    }
 
- <!-- Scroll to Top Button -->
- <button type="button" class="btn-scroll-top" id="btn-scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Voltar ao Topo" title="Voltar ao Topo">
- <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
- </button>
+    function pedirConta() {
+      const alertObj = {
+        id: "alert_" + Date.now(),
+        table: tableName,
+        type: "conta",
+        time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+      };
+      let alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+      alerts = alerts.filter(a => !(a.table.toLowerCase() === tableName.toLowerCase() && a.type === 'conta'));
+      alerts.push(alertObj);
+      localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
 
-  
+      const btn = document.getElementById('btn-action-conta');
+      btn.classList.add('active-pinned');
+      document.getElementById('btn-conta-label').innerHTML = '<span class="pulse-dot-pinned"></span> Conta Solicitada';
+      showToast('Conta solicitada! O garçom trará a pré-conta.', 'conta');
+    }
+
+    function finalizeTableOrder() {
+      if (tableOrders.length === 0) {
+        showToast('Adicione ao menos um item ao cardápio antes de enviar.');
+        return;
+      }
+      showToast('Pedidos confirmados e enviados para a cozinha!');
+    }
+
+    // Modals
+    function openAuthModal() {
+      document.getElementById('auth-modal').classList.add('open');
+    }
+    function closeAuthModal(e) {
+      document.getElementById('auth-modal').classList.remove('open');
+    }
+    function handleSimpleAuth() {
+      const name = (document.getElementById('reg-name').value || '').trim();
+      const phone = (document.getElementById('reg-phone').value || '').trim();
+      if (!name) {
+        alert('Por favor, digite seu nome.');
+        return;
+      }
+      currentUser = { name, phone };
+      localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+      updateUserUI();
+      closeAuthModal();
+      showToast(`Bem-vindo, ${name}!`);
+    }
+
+    function openWaiterRatingModal() {
+      document.getElementById('waiter-rating-modal').classList.add('open');
+    }
+    function closeWaiterRatingModal() {
+      document.getElementById('waiter-rating-modal').classList.remove('open');
+    }
+    function submitWaiterRating() {
+      closeWaiterRatingModal();
+      showToast('Obrigado pela sua avaliação!');
+    }
+
+    // Toast
+    let toastTimer;
+    function showToast(msg, type = '') {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toast-msg');
+      msgEl.textContent = msg;
+      toast.className = 'toast-box show ' + type;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.className = 'toast-box';
+      }, 3500);
+    }
+
+    // Init
+    updateUserUI();
+    updateTableOrdersUI();
+    renderCategory('entradas');
+
+    // Poll status from KDS
+    setInterval(() => {
+      const stored = localStorage.getItem(storageKey);
+      if (stored) {
+        try {
+          tableOrders = JSON.parse(stored);
+          updateTableOrdersUI();
+        } catch (e) {}
+      }
+    }, 2000);
+  </script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 
   <!-- Primary Meta Tags -->
   <title>Painel POS & Cozinha KDS — Nolei Gourmet | Restaurante Inteligente</title>
-  <meta name="title" content="🔥 Painel POS & Cozinha KDS — Nolei Gourmet | Restaurante Inteligente">
+  <meta name="title" content="Painel POS & Cozinha KDS — Nolei Gourmet | Restaurante Inteligente">
   <meta name="description" content="Terminal operacional gourmet: acompanhe pedidos de cardápio por mesa, comandas ativas de garçons, chamadas de salão e impressão térmica em tempo real.">
   <meta name="keywords" content="painel cozinha restaurante, kds comanda digital, pos restaurante, chamados garcom, nolei creative">
   <meta name="author" content="Nolei Creative">
@@ -17,7 +17,7 @@
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nolei-creative-nfc.vercel.app/demo/painel-restaurante.html">
-  <meta property="og:title" content="🔥 Painel POS & Cozinha KDS — Nolei Gourmet">
+  <meta property="og:title" content="Painel POS & Cozinha KDS — Nolei Gourmet">
   <meta property="og:description" content="Terminal operacional gourmet com KDS, comanda térmica de 80mm/58mm e pedidos em tempo real.">
   <meta property="og:image" content="https://nolei-creative-nfc.vercel.app/assets/images/display-menu-acrilico.jpg?v=2">
  
@@ -28,7 +28,7 @@
 
   <style>
     :root {
-      --bg-app: #131417;
+      --bg-app: #121316;
       --bg-sidebar: #18191E;
       --bg-card: #1C1E24;
       --bg-card-inner: #22252E;
@@ -45,20 +45,21 @@
       --amber: #F59E0B;
       --amber-glow: rgba(245, 158, 11, 0.25);
       --blue: #3B82F6;
+      --blue-glow: rgba(59, 130, 246, 0.25);
       
       --text-white: #FFFFFF;
       --text-main: #F1F5F9;
-      --text-muted: #8E95A5;
+      --text-muted: #94A3B8;
       --text-dim: #64748B;
       
       --border-dark: rgba(255, 255, 255, 0.08);
       --border-focus: rgba(255, 77, 48, 0.5);
       --border-glass: rgba(255, 255, 255, 0.05);
       
-      --radius-xl: 22px;
-      --radius-lg: 16px;
-      --radius-md: 12px;
-      --radius-sm: 8px;
+      --radius-xl: 20px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
       
       --font-heading: 'Poppins', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -87,22 +88,22 @@
         radial-gradient(circle at 90% 80%, rgba(255, 107, 53, 0.02) 0%, transparent 40%);
     }
 
-    /* POS Master Grid Layout */
+    /* Master Layout */
     .pos-layout {
       display: flex;
       min-height: 100vh;
       width: 100%;
     }
 
-    /* 1. Left Sidebar Dock */
+    /* 1. Left Sidebar Navigation Dock */
     .pos-sidebar {
-      width: 90px;
+      width: 88px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border-dark);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 0 20px;
+      padding: 20px 0 16px;
       flex-shrink: 0;
       position: sticky;
       top: 0;
@@ -111,37 +112,41 @@
     }
 
     .brand-flame-logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       background: var(--flame-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 18px var(--flame-glow);
-      margin-bottom: 34px;
+      margin-bottom: 28px;
       color: #FFFFFF;
       text-decoration: none;
       transition: transform 0.2s;
     }
-
     .brand-flame-logo:hover {
-      transform: scale(1.06);
+      transform: scale(1.05);
+    }
+    .brand-flame-logo svg {
+      width: 24px;
+      height: 24px;
     }
 
     .pos-nav-stack {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       width: 100%;
       align-items: center;
+      flex: 1;
     }
 
     .pos-nav-item {
       position: relative;
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
@@ -151,26 +156,25 @@
       justify-content: center;
       gap: 4px;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
+      transition: all 0.2s;
     }
 
     .pos-nav-item svg {
       width: 20px;
       height: 20px;
-      transition: color 0.2s;
+      stroke-width: 2.2;
     }
 
     .pos-nav-item .nav-text {
       font-size: 0.62rem;
-      font-weight: 600;
-      text-transform: capitalize;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
     .pos-nav-item:hover {
-      color: var(--text-white);
       background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
     }
 
     .pos-nav-item.active {
@@ -180,82 +184,74 @@
       border-color: transparent;
     }
 
-    .pos-nav-item.active::before {
-      content: '';
-      position: absolute;
-      left: -19px;
-      width: 5px;
-      height: 28px;
-      border-radius: 0 4px 4px 0;
-      background: var(--flame-red);
-      box-shadow: 0 0 10px var(--flame-red);
-    }
-
     .pos-sidebar-bottom {
-      margin-top: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
+      width: 100%;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-dark);
     }
 
-    /* 2. Center Main Workspace */
+    /* 2. Main Workspace */
     .pos-workspace {
       flex: 1;
-      padding: 24px 28px 40px;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 24px;
       min-width: 0;
+      overflow-y: auto;
+      max-height: 100vh;
     }
 
-    /* Top Bar Header */
+    /* Header Bar */
     .pos-header-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
     }
 
     .pos-search-wrapper {
       position: relative;
       flex: 1;
-      max-width: 520px;
-    }
-
-    .pos-search-input {
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border-dark);
-      border-radius: 30px;
-      padding: 12px 20px 12px 46px;
-      color: var(--text-white);
-      font-size: 0.88rem;
-      font-family: var(--font-body);
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    .pos-search-input:focus {
-      border-color: var(--flame-red);
-      background: var(--bg-card-inner);
-      box-shadow: 0 0 0 3px rgba(255, 77, 48, 0.15);
+      max-width: 480px;
     }
 
     .pos-search-icon {
       position: absolute;
-      left: 16px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-dim);
       pointer-events: none;
     }
 
+    .pos-search-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 11px 16px 11px 42px;
+      color: var(--text-white);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .pos-search-input:focus {
+      border-color: var(--flame-red);
+      box-shadow: 0 0 0 3px rgba(255, 77, 48, 0.15);
+      background: #202229;
+    }
+
     .pos-header-actions {
       display: flex;
       align-items: center;
       gap: 12px;
-      flex-wrap: wrap;
     }
 
     .operator-capsule {
@@ -264,8 +260,8 @@
       gap: 8px;
       background: var(--bg-card);
       border: 1px solid var(--border-dark);
-      padding: 6px 14px;
-      border-radius: 24px;
+      border-radius: 12px;
+      padding: 7px 12px;
     }
 
     .operator-dot {
@@ -280,324 +276,222 @@
       background: transparent;
       border: none;
       color: var(--text-white);
-      font-size: 0.80rem;
-      font-weight: 600;
-      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: var(--font-body);
       outline: none;
       cursor: pointer;
     }
-
     .operator-select-dark option {
       background: #1C1E24;
       color: #FFFFFF;
     }
 
     .btn-flame-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       background: var(--flame-gradient);
       color: #FFFFFF;
       font-family: var(--font-heading);
       font-size: 0.82rem;
       font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 24px;
+      padding: 9px 16px;
+      border-radius: 10px;
       border: none;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       box-shadow: 0 4px 14px var(--flame-glow);
       transition: all 0.2s;
-      text-decoration: none;
     }
-
     .btn-flame-cta:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(255, 77, 48, 0.45);
+      box-shadow: 0 6px 18px rgba(255, 77, 48, 0.45);
     }
 
-    /* Section Headings */
+    /* KPI Metrics Cards Row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .kpi-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .kpi-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .kpi-icon-box.flame {
+      background: rgba(255, 77, 48, 0.12);
+      color: var(--flame-red);
+      border: 1px solid rgba(255, 77, 48, 0.25);
+    }
+    .kpi-icon-box.emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    .kpi-icon-box.amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .kpi-icon-box.blue {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--blue);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+
+    .kpi-meta-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .kpi-value-text {
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .kpi-badge-trend {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--emerald);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 2px;
+    }
+
+    /* Revenue & Flow SVG Chart Card */
+    .chart-card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 20px;
+    }
+
+    .chart-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .chart-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chart-svg-container {
+      width: 100%;
+      height: 110px;
+      position: relative;
+    }
+
+    /* Alerts Container */
+    .alerts-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .service-alert-box {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-left: 4px solid var(--amber);
+      animation: alertPulse 2s infinite ease-in-out;
+    }
+    .service-alert-box.garcom {
+      border-left-color: var(--flame-red);
+      background: linear-gradient(90deg, rgba(255, 77, 48, 0.1) 0%, var(--bg-card) 60%);
+    }
+    .service-alert-box.conta {
+      border-left-color: var(--emerald);
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, var(--bg-card) 60%);
+    }
+
+    @keyframes alertPulse {
+      0%, 100% { border-color: rgba(255, 77, 48, 0.4); }
+      50% { border-color: rgba(255, 77, 48, 0.9); }
+    }
+
+    .alert-tag-table {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.78rem;
+      background: #141518;
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #FFFFFF;
+      border: 1px solid var(--border-dark);
+    }
+
+    .btn-resolve-alert {
+      background: #272A34;
+      border: 1px solid var(--border-dark);
+      color: #FFFFFF;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-resolve-alert:hover {
+      background: var(--emerald);
+      border-color: var(--emerald);
+    }
+
+    /* Section Header */
     .section-header-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 14px;
-      margin-top: 10px;
     }
 
     .section-header-title {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text-white);
-      letter-spacing: -0.01em;
-    }
-
-    .section-view-more {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--flame-red);
-      cursor: pointer;
-      text-decoration: none;
       display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: opacity 0.2s;
-    }
-
-    .section-view-more:hover {
-      opacity: 0.85;
-    }
-
-    /* Categories Capsules List (Reference Image Inspired) */
-    .categories-scroll-row {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 24px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--bg-card-inner) transparent;
-    }
-
-    .category-capsule-card {
-      display: flex;
-      flex-direction: column;
       align-items: center;
       gap: 8px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-dark);
-      border-radius: 18px;
-      padding: 12px 16px;
-      min-width: 82px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      user-select: none;
-    }
-
-    .category-capsule-card:hover {
-      background: var(--bg-card-hover);
-      border-color: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .category-capsule-card.active {
-      background: var(--bg-card-inner);
-      border-color: var(--flame-red);
-      box-shadow: 0 4px 18px rgba(255, 77, 48, 0.2);
-    }
-
-    .cat-avatar-circle {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #272A34;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.45rem;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .category-capsule-card.active .cat-avatar-circle {
-      background: var(--flame-gradient);
-    }
-
-    .cat-label-text {
-      font-size: 0.74rem;
-      font-weight: 600;
-      color: var(--text-white);
-      white-space: nowrap;
-    }
-
-    /* Popular Dishes Carousel Grid (Reference Image Inspired) */
-    .popular-dishes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .popular-dish-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-dark);
-      border-radius: var(--radius-lg);
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: all 0.25s;
-    }
-
-    .popular-dish-card:hover {
-      background: var(--bg-card-hover);
-      border-color: rgba(255, 255, 255, 0.16);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .dish-img-wrap {
-      width: 100%;
-      height: 120px;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 12px;
-      background: #272A34;
-      position: relative;
-    }
-
-    .dish-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-
-    .popular-dish-card:hover .dish-img-wrap img {
-      transform: scale(1.05);
-    }
-
-    .dish-category-tag {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: rgba(19, 20, 23, 0.85);
-      backdrop-filter: blur(8px);
-      color: #FFFFFF;
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .dish-title-text {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text-white);
-      margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .dish-price-text {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--flame-red);
-      margin-bottom: 10px;
-    }
-
-    .dish-card-bottom-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .dish-rating-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.74rem;
-      font-weight: 700;
-      color: var(--amber);
-    }
-
-    .btn-quick-add-pos {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      background: var(--bg-card-inner);
-      border: 1px solid var(--border-dark);
-      color: var(--text-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-quick-add-pos:hover {
-      background: var(--flame-gradient);
-      border-color: transparent;
-      box-shadow: 0 2px 10px var(--flame-glow);
-    }
-
-    /* KDS Salão & Chamados */
-    .alerts-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .service-alert-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding: 14px 18px;
-      border-radius: var(--radius-md);
-      background: var(--bg-card);
-      border: 1px solid var(--border-dark);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .service-alert-box.garcom {
-      border: 1px solid rgba(255, 107, 53, 0.5);
-      background: rgba(255, 107, 53, 0.08);
-      animation: flamePulse 2s infinite ease-in-out;
-    }
-
-    .service-alert-box.conta {
-      border: 1px solid rgba(16, 185, 129, 0.5);
-      background: rgba(16, 185, 129, 0.08);
-      animation: emeraldPulse 2s infinite ease-in-out;
-    }
-
-    @keyframes flamePulse {
-      0%, 100% { box-shadow: 0 0 10px rgba(255, 107, 53, 0.2); }
-      50% { box-shadow: 0 0 22px rgba(255, 107, 53, 0.45); }
-    }
-
-    @keyframes emeraldPulse {
-      0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
-      50% { box-shadow: 0 0 22px rgba(16, 185, 129, 0.45); }
-    }
-
-    .alert-tag-table {
-      font-family: var(--font-heading);
-      font-size: 0.80rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      background: var(--flame-gradient);
-      color: #FFFFFF;
-    }
-
-    .service-alert-box.conta .alert-tag-table {
-      background: var(--emerald);
-    }
-
-    .btn-resolve-alert {
-      font-family: var(--font-heading);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 7px 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      color: #FFFFFF;
-      background: #2A2D37;
-      transition: all 0.15s;
-    }
-
-    .btn-resolve-alert:hover {
-      background: #383D4A;
     }
 
     /* KDS Tables Grid */
@@ -615,20 +509,20 @@
       flex-direction: column;
       overflow: hidden;
       transition: all 0.2s;
+      cursor: pointer;
     }
-
     .table-card:hover {
       border-color: rgba(255, 255, 255, 0.18);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      transform: translateY(-2px);
     }
-
     .table-card.selected-table-active {
       border-color: var(--flame-red);
-      box-shadow: 0 0 0 2px rgba(255, 77, 48, 0.3);
+      box-shadow: 0 0 0 2px rgba(255, 77, 48, 0.35);
     }
 
     .table-card-header {
-      padding: 14px 16px;
+      padding: 13px 16px;
       background: var(--bg-card-inner);
       border-bottom: 1px solid var(--border-dark);
       display: flex;
@@ -637,13 +531,16 @@
     }
 
     .table-title {
-      font-size: 1rem;
+      font-size: 0.96rem;
       font-weight: 800;
       color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .table-waiter-badge {
-      font-size: 0.72rem;
+      font-size: 0.70rem;
       font-weight: 600;
       color: var(--text-muted);
       background: #18191E;
@@ -658,6 +555,8 @@
       flex-direction: column;
       gap: 10px;
       flex: 1;
+      max-height: 220px;
+      overflow-y: auto;
     }
 
     .order-item-row {
@@ -668,41 +567,37 @@
       padding-bottom: 8px;
       border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
     }
-
     .order-item-row:last-child {
       border-bottom: none;
       padding-bottom: 0;
     }
 
     .order-item-info strong {
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--text-white);
       display: block;
     }
 
     .order-item-meta {
-      font-size: 0.72rem;
+      font-size: 0.70rem;
       color: var(--text-dim);
     }
 
     .status-badge {
-      font-size: 0.70rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 4px 9px;
       border-radius: 6px;
       cursor: pointer;
-      text-transform: capitalize;
       border: none;
       transition: all 0.15s;
     }
-
     .status-badge.preparo {
       background: var(--amber-glow);
       color: #FBBF24;
       border: 1px solid rgba(245, 158, 11, 0.3);
     }
-
     .status-badge.entregue {
       background: var(--emerald-glow);
       color: #34D399;
@@ -719,16 +614,40 @@
     }
 
     .table-total {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 800;
       color: var(--text-white);
     }
 
-    .btn-finish-table {
-      font-family: var(--font-heading);
+    .btn-print-action {
+      background: #272A34;
+      border: 1px solid var(--border-dark);
+      color: #FFFFFF;
       font-size: 0.74rem;
       font-weight: 700;
-      padding: 6px 12px;
+      padding: 6px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+    .btn-print-action:hover {
+      background: #323642;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .btn-print-action.primary {
+      background: var(--flame-gradient);
+      border-color: transparent;
+      box-shadow: 0 2px 10px var(--flame-glow);
+    }
+
+    .btn-finish-table {
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 6px 11px;
       border-radius: 8px;
       border: 1px solid rgba(239, 68, 68, 0.3);
       background: rgba(239, 68, 68, 0.1);
@@ -736,13 +655,403 @@
       cursor: pointer;
       transition: all 0.15s;
     }
-
     .btn-finish-table:hover {
       background: #EF4444;
       color: #FFFFFF;
     }
 
-    /* CRUD Tables (Matching reference Order Reports table) */
+    /* =========================================================
+       SPLIT SCREEN POS: 2-COLUMN ORDER LAUNCH SYSTEM (DESKTOP)
+       ========================================================= */
+    .pos-split-layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* Top Mesa Selector Bar */
+    .mesa-selector-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+    }
+    .mesa-selector-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+    .mesa-selector-bar::-webkit-scrollbar-thumb {
+      background: #2D313E;
+      border-radius: 4px;
+    }
+
+    .mesa-pill-btn {
+      background: #141518;
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .mesa-pill-btn:hover {
+      background: #22252E;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .mesa-pill-btn.active {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 4px 14px var(--flame-glow);
+    }
+    .mesa-pill-btn .table-dot-status {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+    }
+    .mesa-pill-btn.empty .table-dot-status {
+      background: var(--text-dim);
+    }
+
+    /* Left Column: Comanda da Mesa Ativa */
+    .pos-comanda-column {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      position: sticky;
+      top: 10px;
+    }
+
+    .comanda-header-box {
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+
+    .comanda-active-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .comanda-waiter-info {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Live Items List in Split View */
+    .comanda-items-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 14px;
+    }
+    .comanda-items-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .comanda-items-scroll::-webkit-scrollbar-thumb {
+      background: #2D313E;
+      border-radius: 4px;
+    }
+
+    .comanda-item-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .comanda-item-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .comanda-item-name {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .comanda-item-sub {
+      font-size: 0.70rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .comanda-item-price-box {
+      text-align: right;
+    }
+
+    .comanda-item-price {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .btn-item-remove {
+      background: transparent;
+      border: none;
+      color: #EF4444;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+    .btn-item-remove:hover {
+      opacity: 1;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    /* Receipt Perforated Row */
+    .receipt-perforated-row {
+      position: relative;
+      margin: 8px -20px 12px;
+      display: flex;
+      align-items: center;
+    }
+    .notch-left {
+      width: 12px;
+      height: 24px;
+      background: var(--bg-app);
+      border-radius: 0 12px 12px 0;
+      flex-shrink: 0;
+    }
+    .dashed-line {
+      flex: 1;
+      border-top: 2px dashed rgba(255, 255, 255, 0.1);
+      margin: 0 6px;
+    }
+    .notch-right {
+      width: 12px;
+      height: 24px;
+      background: var(--bg-app);
+      border-radius: 12px 0 0 12px;
+      flex-shrink: 0;
+    }
+
+    /* Financial Totals */
+    .comanda-totals-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .comanda-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .comanda-total-row.grand-total {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-white);
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 4px;
+    }
+    .comanda-total-row.grand-total .val-highlight {
+      color: var(--flame-red);
+    }
+
+    .comanda-actions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Right Column: Menu / Catalog for Rapid Launch */
+    .pos-catalog-column {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .catalog-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .catalog-tabs-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 14px;
+    }
+    .catalog-tabs-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-tab-pill {
+      background: #141518;
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .cat-tab-pill:hover {
+      background: #22252E;
+      color: #FFFFFF;
+    }
+    .cat-tab-pill.active {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 2px 10px var(--flame-glow);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .catalog-grid::-webkit-scrollbar {
+      width: 4px;
+    }
+    .catalog-grid::-webkit-scrollbar-thumb {
+      background: #2D313E;
+      border-radius: 4px;
+    }
+
+    .catalog-item-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .catalog-item-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+    .catalog-item-card.soldout {
+      opacity: 0.55;
+      filter: grayscale(0.6);
+    }
+
+    .catalog-item-thumb {
+      width: 100%;
+      height: 105px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #141518;
+    }
+
+    .catalog-item-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 32px;
+    }
+
+    .catalog-item-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .catalog-item-price {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--flame-red);
+    }
+
+    .btn-quick-add-dish {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--flame-glow);
+      transition: all 0.15s;
+    }
+    .btn-quick-add-dish:hover {
+      transform: scale(1.08);
+    }
+    .btn-quick-add-dish:disabled {
+      background: #2A2D37;
+      color: var(--text-dim);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* CRUD Tables Management */
     .crud-box {
       background: var(--bg-card);
       border: 1px solid var(--border-dark);
@@ -754,9 +1063,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
+      margin-bottom: 18px;
     }
 
     .custom-table {
@@ -764,27 +1071,22 @@
       border-collapse: collapse;
       font-size: 0.82rem;
     }
-
     .custom-table th {
       text-align: left;
-      padding: 12px 14px;
+      padding: 10px 14px;
       color: var(--text-dim);
-      font-weight: 600;
-      border-bottom: 1px solid var(--border-dark);
+      font-size: 0.72rem;
+      font-weight: 700;
       text-transform: uppercase;
-      font-size: 0.70rem;
-      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--border-dark);
     }
-
     .custom-table td {
-      padding: 14px 14px;
-      color: var(--text-main);
+      padding: 12px 14px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       vertical-align: middle;
     }
-
     .custom-table tr:hover td {
-      background: var(--bg-card-inner);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .table-thumb-img {
@@ -792,6 +1094,7 @@
       height: 44px;
       border-radius: 8px;
       object-fit: cover;
+      background: #141518;
     }
 
     .btn-edit-action {
@@ -803,8 +1106,8 @@
       font-size: 0.74rem;
       cursor: pointer;
       font-weight: 600;
+      margin-right: 4px;
     }
-
     .btn-del-action {
       background: rgba(239, 68, 68, 0.15);
       border: 1px solid rgba(239, 68, 68, 0.3);
@@ -816,272 +1119,53 @@
       font-weight: 600;
     }
 
-    /* 3. Right Side POS Live Comanda Dock (Reference Image Exact Match) */
-    .pos-ticket-dock {
-      width: 360px;
-      background: var(--bg-sidebar);
-      border-left: 1px solid var(--border-dark);
-      padding: 24px 20px 30px;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      z-index: 80;
-    }
-
-    .ticket-card-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-dark);
-      border-radius: var(--radius-xl);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
-    }
-
-    .ticket-header-top {
-      margin-bottom: 16px;
-    }
-
-    .ticket-header-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-
-    .ticket-table-name {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-white);
-      display: flex;
+    /* Toggle Switch Component (Active / Soldout) */
+    .switch-toggle-wrap {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-    }
-
-    .ticket-table-select {
-      background: #272A34;
-      border: 1px solid var(--border-dark);
-      color: #FFFFFF;
-      font-size: 0.74rem;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    /* Order Mode Switch (Delivery / Dine-in / Takeaway) */
-    .order-mode-pill-group {
-      display: flex;
-      background: #141518;
-      border-radius: 24px;
-      padding: 4px;
-      margin: 12px 0 16px;
-      border: 1px solid var(--border-dark);
-    }
-
-    .order-mode-btn {
-      flex: 1;
-      text-align: center;
-      padding: 6px 0;
-      font-size: 0.74rem;
-      font-weight: 700;
-      border-radius: 20px;
-      color: var(--text-muted);
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .order-mode-btn.active {
-      background: var(--flame-gradient);
-      color: #FFFFFF;
-      box-shadow: 0 2px 10px var(--flame-glow);
-    }
-
-    /* Cart / Comanda Items */
-    .ticket-items-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 16px;
-      max-height: 240px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .ticket-item-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ticket-item-thumb {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      object-fit: cover;
-      background: #272A34;
-      flex-shrink: 0;
-    }
-
-    .ticket-item-details {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .ticket-item-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-white);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .ticket-item-sub {
-      font-size: 0.70rem;
-      color: var(--text-dim);
-    }
-
-    .ticket-item-price {
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--text-white);
-      text-align: right;
-    }
-
-    /* Perforated Notches Row (Visual Receipt Aesthetic) */
-    .ticket-perforated-row {
-      position: relative;
-      margin: 10px -20px 14px;
-      display: flex;
-      align-items: center;
-    }
-
-    .ticket-notch-left {
-      width: 14px;
-      height: 28px;
-      background: var(--bg-sidebar);
-      border-radius: 0 14px 14px 0;
-      flex-shrink: 0;
-    }
-
-    .ticket-dashed-line {
-      flex: 1;
-      border-top: 2px dashed rgba(255, 255, 255, 0.12);
-      margin: 0 6px;
-    }
-
-    .ticket-notch-right {
-      width: 14px;
-      height: 28px;
-      background: var(--bg-sidebar);
-      border-radius: 14px 0 0 14px;
-      flex-shrink: 0;
-    }
-
-    /* Promo Code Box */
-    .ticket-promo-row {
-      display: flex;
       gap: 8px;
-      margin-bottom: 16px;
+      cursor: pointer;
     }
-
-    .ticket-promo-input {
-      flex: 1;
-      background: #141518;
-      border: 1px solid var(--border-dark);
-      border-radius: 10px;
-      padding: 8px 12px;
-      color: var(--text-white);
-      font-size: 0.76rem;
-      outline: none;
+    .switch-toggle-input {
+      display: none;
     }
-
-    .btn-ticket-promo {
-      background: #272A34;
-      border: 1px solid var(--border-dark);
-      color: var(--text-white);
-      font-size: 0.70rem;
+    .switch-toggle-slider {
+      width: 38px;
+      height: 20px;
+      background: #333846;
+      border-radius: 20px;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .switch-toggle-slider::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+    }
+    .switch-toggle-input:checked + .switch-toggle-slider {
+      background: var(--emerald);
+    }
+    .switch-toggle-input:checked + .switch-toggle-slider::after {
+      transform: translateX(18px);
+    }
+    .switch-label-status {
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 0 12px;
-      border-radius: 10px;
-      cursor: pointer;
+    }
+    .switch-label-status.active {
+      color: var(--emerald);
+    }
+    .switch-label-status.inactive {
+      color: #F87171;
     }
 
-    /* Calculation Totals */
-    .ticket-calc-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .ticket-calc-row.total-row {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-white);
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .ticket-calc-row.total-row .total-val {
-      color: var(--flame-red);
-    }
-
-    .ticket-cta-button {
-      width: 100%;
-      background: var(--flame-gradient);
-      color: #FFFFFF;
-      font-family: var(--font-heading);
-      font-size: 0.90rem;
-      font-weight: 800;
-      padding: 13px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 20px var(--flame-glow);
-      margin-top: 16px;
-      transition: all 0.2s;
-    }
-
-    .ticket-cta-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 26px rgba(255, 77, 48, 0.5);
-    }
-
-    .ticket-sec-button {
-      width: 100%;
-      background: transparent;
-      color: var(--text-muted);
-      font-family: var(--font-heading);
-      font-size: 0.76rem;
-      font-weight: 600;
-      padding: 8px;
-      border: 1px solid var(--border-dark);
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: all 0.15s;
-    }
-
-    .ticket-sec-button:hover {
-      background: #272A34;
-      color: #FFFFFF;
-    }
-
-    /* Modals with Dark Aesthetic */
+    /* Modals */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -1096,7 +1180,6 @@
       visibility: hidden;
       transition: all 0.25s;
     }
-
     .modal-overlay.open,
     .modal-overlay.show {
       opacity: 1;
@@ -1124,7 +1207,6 @@
     .form-group {
       margin-bottom: 14px;
     }
-
     .form-label {
       font-size: 0.78rem;
       font-weight: 700;
@@ -1132,7 +1214,6 @@
       display: block;
       margin-bottom: 5px;
     }
-
     .form-control {
       width: 100%;
       padding: 10px 14px;
@@ -1143,106 +1224,64 @@
       color: #FFFFFF;
       outline: none;
     }
-
     .form-control:focus {
       border-color: var(--flame-red);
     }
 
-    /* Thermal Ticket Preview & Print Styles */
+    /* Thermal Ticket Preview */
     .ticket-preview-box {
-      background: #0D0E11;
-      border: 1px dashed rgba(255, 255, 255, 0.2);
+      background: #FFFFFF;
+      color: #000000;
       border-radius: 10px;
-      padding: 16px 14px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: #E2E8F0;
-      line-height: 1.4;
-      max-height: 360px;
-      overflow-y: auto;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.35;
       margin-bottom: 16px;
+      max-height: 280px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
     }
-
     .ticket-preview-box.width-58 {
-      max-width: 290px;
+      max-width: 280px;
       margin-left: auto;
       margin-right: auto;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
     }
 
-    .ticket-preview-box.width-80 {
-      max-width: 380px;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 0.78rem;
-    }
-
-    .btn-print-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-heading);
-      font-size: 0.76rem;
-      font-weight: 700;
-      padding: 7px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      border: 1px solid var(--border-dark);
-      background: #272A34;
-      color: #FFFFFF;
-      transition: all 0.15s;
-    }
-
-    .btn-print-action:hover {
-      background: #343845;
-    }
-
-    .btn-print-action.primary {
-      background: var(--flame-gradient);
-      border-color: transparent;
-      box-shadow: 0 4px 14px var(--flame-glow);
-    }
-
-    /* Toast Box */
+    /* Toast */
     .toast-box {
       position: fixed;
       bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
+      right: 24px;
       background: #272A34;
-      color: var(--text-white);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 10px 22px;
-      border-radius: 30px;
+      color: #FFFFFF;
+      border: 1px solid var(--border-dark);
+      padding: 12px 20px;
+      border-radius: 12px;
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
+      z-index: 10000;
       opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.25s;
     }
-
     .toast-box.show {
-      transform: translateX(-50%) translateY(0);
       opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
 
-    /* Physical Print Rules for Thermal Paper */
-    #printable-ticket-area {
-      display: none;
-    }
+    /* Print Styles for Real Thermal POS */
     @media print {
-      @page {
-        margin: 0;
-        size: auto;
-      }
       body * {
         visibility: hidden !important;
       }
       #printable-ticket-area,
       #printable-ticket-area * {
         visibility: visible !important;
-        display: block !important;
       }
       #printable-ticket-area {
         position: absolute !important;
@@ -1264,22 +1303,30 @@
       }
     }
 
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .pos-ticket-dock {
-        display: none; /* Can be toggled or bottom stack */
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .pos-split-layout {
+        grid-template-columns: 1fr;
+      }
+      .pos-comanda-column {
+        position: static;
       }
     }
 
     @media (max-width: 768px) {
       .pos-sidebar {
         width: 68px;
+        padding: 14px 0;
+      }
+      .pos-nav-item {
+        width: 48px;
+        height: 48px;
       }
       .pos-workspace {
-        padding: 16px 14px;
+        padding: 14px;
       }
-      .pos-search-wrapper {
-        max-width: 100%;
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -1292,52 +1339,59 @@
     <!-- 1. Left Sidebar Navigation Dock -->
     <aside class="pos-sidebar">
       <a href="/" class="brand-flame-logo" title="Nolei Gourmet POS">
-        🔥
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/>
+        </svg>
       </a>
 
       <div class="pos-nav-stack">
         <button class="pos-nav-item active" id="tab-btn-kds" onclick="switchTab('kds')" title="Dashboard / KDS Salão">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           <span class="nav-text">KDS</span>
         </button>
 
-        <button class="pos-nav-item" id="tab-btn-products" onclick="switchTab('products')" title="Cardápio & Pratos">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+        <button class="pos-nav-item" id="tab-btn-pos" onclick="switchTab('pos')" title="Lançamento de Comandas / PDV">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span class="nav-text">Comandas</span>
+        </button>
+
+        <button class="pos-nav-item" id="tab-btn-products" onclick="switchTab('products')" title="Cardápio & Estoque">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
           <span class="nav-text">Cardápio</span>
         </button>
 
         <button class="pos-nav-item" id="tab-btn-waiters" onclick="switchTab('waiters')" title="Equipe de Garçons">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span class="nav-text">Garçons</span>
         </button>
 
         <button class="pos-nav-item" id="tab-btn-users" onclick="switchTab('users')" title="Clientes Atendidos">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
           <span class="nav-text">Clientes</span>
         </button>
       </div>
 
       <div class="pos-sidebar-bottom">
         <a id="btn-top-open-cardapio" href="/demo/cardapio.html?source=nfc&mesa=04" target="_blank" class="pos-nav-item" title="Abrir Cardápio Cliente">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         </a>
         <a href="/demo/dashboard-restaurante.html" class="pos-nav-item" title="Métricas & ROI">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </a>
         <a href="/" class="pos-nav-item" title="Início">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </a>
       </div>
     </aside>
 
-    <!-- 2. Main Center Workspace -->
+    <!-- 2. Main Workspace -->
     <main class="pos-workspace">
       
       <!-- Top Search & Operator Bar -->
       <div class="pos-header-row">
         <div class="pos-search-wrapper">
           <svg class="pos-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" class="pos-search-input" id="pos-global-search" placeholder="Buscar pratos, ingredientes, comandas ou mesas..." oninput="handleGlobalSearch(this.value)">
+          <input type="text" class="pos-search-input" id="pos-global-search" placeholder="Buscar pratos, comandas, clientes ou mesas..." oninput="handleGlobalSearch(this.value)">
         </div>
 
         <div class="pos-header-actions">
@@ -1355,69 +1409,243 @@
         </div>
       </div>
 
-      <!-- Categories Section (Reference UI Match) -->
-      <div class="pos-categories-section">
-        <div class="section-header-row">
-          <h2 class="section-header-title">Categorias</h2>
-          <span class="section-view-more" onclick="filterCategoryPill('all')">Ver Todas &rarr;</span>
-        </div>
-        
-        <div class="categories-scroll-row">
-          <div class="category-capsule-card active" id="cat-pill-all" onclick="filterCategoryPill('all')">
-            <div class="cat-avatar-circle">🍽️</div>
-            <span class="cat-label-text">Todas</span>
-          </div>
-          <div class="category-capsule-card" id="cat-pill-principais" onclick="filterCategoryPill('principais')">
-            <div class="cat-avatar-circle">🍔</div>
-            <span class="cat-label-text">Principais</span>
-          </div>
-          <div class="category-capsule-card" id="cat-pill-entradas" onclick="filterCategoryPill('entradas')">
-            <div class="cat-avatar-circle">🥗</div>
-            <span class="cat-label-text">Entradas</span>
-          </div>
-          <div class="category-capsule-card" id="cat-pill-bebidas" onclick="filterCategoryPill('bebidas')">
-            <div class="cat-avatar-circle">🍹</div>
-            <span class="cat-label-text">Drinks & Bar</span>
-          </div>
-          <div class="category-capsule-card" id="cat-pill-sobremesas" onclick="filterCategoryPill('sobremesas')">
-            <div class="cat-avatar-circle">🍨</div>
-            <span class="cat-label-text">Sobremesas</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Popular Dishes Showcase (Reference UI Match) -->
-      <div class="popular-dishes-section" id="popular-dishes-section">
-        <div class="section-header-row">
-          <h2 class="section-header-title">Pratos Populares</h2>
-          <span class="section-view-more" onclick="switchTab('products')">Editar Cardápio &rarr;</span>
-        </div>
-        
-        <div class="popular-dishes-grid" id="popular-dishes-grid">
-          <!-- Dynamically populated from storedMenu -->
-        </div>
-      </div>
-
-      <!-- SECTION 1: SALÃO & COZINHA (KDS) -->
+      <!-- =========================================================
+           TAB 1: KDS & DASHBOARD OPERACIONAL (KPIs + Gráfico + Mesas)
+           ========================================================= -->
       <section id="sec-kds">
-        <div class="section-header-row" style="margin-top:16px;">
-          <h2 class="section-header-title">Fila de Mesas & Chamados Ativos</h2>
-          <span style="font-size:0.75rem; font-weight:700; color:var(--emerald);" id="badge-kds-count">3 Mesas Ativas</span>
+        
+        <!-- KPI Cards Row -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon-box flame">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div>
+              <div class="kpi-meta-label">Faturamento Hoje</div>
+              <div class="kpi-value-text" id="kpi-revenue-val">R$ 3.840,00</div>
+              <div class="kpi-badge-trend">↑ +18.4% vs ontem</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-box emerald">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="16" y1="2" x2="16" y2="4"/></svg>
+            </div>
+            <div>
+              <div class="kpi-meta-label">Ocupação do Salão</div>
+              <div class="kpi-value-text" id="kpi-tables-occupancy">3 / 10 Mesas</div>
+              <div class="kpi-badge-trend">30% de capacidade</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-box amber">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="kpi-meta-label">Tempo Médio KDS</div>
+              <div class="kpi-value-text">14 min</div>
+              <div class="kpi-badge-trend" style="color:var(--amber);">⚡ -3 min meta</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-box blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div>
+              <div class="kpi-meta-label">Satisfação Google</div>
+              <div class="kpi-value-text">4.9 ★</div>
+              <div class="kpi-badge-trend" style="color:#60A5FA;">98 avaliações NFC</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Revenue & Production Flow Chart (Dark Vector SVG) -->
+        <div class="chart-card-box">
+          <div class="chart-header-row">
+            <div class="chart-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+              Fluxo de Pedidos por Horário (Pico Almoço / Jantar)
+            </div>
+            <span style="font-size:0.74rem; color:var(--text-dim); font-weight:600;">Atualizado em tempo real</span>
+          </div>
+
+          <div class="chart-svg-container">
+            <svg width="100%" height="100%" viewBox="0 0 700 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#FF4D30" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#FF4D30" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <path d="M 0,85 Q 70,80 140,50 T 280,30 T 420,70 T 560,20 T 700,45 L 700,100 L 0,100 Z" fill="url(#chartGlow)" />
+              <path d="M 0,85 Q 70,80 140,50 T 280,30 T 420,70 T 560,20 T 700,45" fill="none" stroke="#FF4D30" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="280" cy="30" r="4.5" fill="#FFFFFF" stroke="#FF4D30" stroke-width="2.5"/>
+              <circle cx="560" cy="20" r="4.5" fill="#FFFFFF" stroke="#FF4D30" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.70rem; color:var(--text-dim); margin-top:6px; font-weight:600;">
+            <span>12:00</span>
+            <span>13:00 (Pico R$ 940)</span>
+            <span>14:00</span>
+            <span>16:00</span>
+            <span>19:00</span>
+            <span>20:30 (Pico R$ 1.480)</span>
+            <span>22:00</span>
+          </div>
         </div>
 
         <!-- Active Alerts (Garçom / Pedido de Conta) -->
         <div class="alerts-container" id="alerts-container"></div>
 
+        <!-- Section Title for KDS Grid -->
+        <div class="section-header-row">
+          <h2 class="section-header-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Comandas em Preparo no Salão & KDS
+          </h2>
+          <span style="font-size:0.75rem; font-weight:700; color:var(--emerald);" id="badge-kds-count">3 Mesas Ativas</span>
+        </div>
+
         <!-- KDS Table Cards Grid -->
         <div class="kds-grid" id="kds-grid"></div>
       </section>
 
-      <!-- SECTION 2: CARDÁPIO & PRODUTOS (CRUD) -->
+      <!-- =========================================================
+           TAB 2: LANÇAMENTO DE COMANDAS & PDV (SPLIT SCREEN DESKTOP)
+           ========================================================= -->
+      <section id="sec-pos" style="display:none;">
+        
+        <!-- Top Mesa Selector Bar -->
+        <div class="section-header-row" style="margin-bottom:8px;">
+          <h2 class="section-header-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            1. Selecione a Mesa para Lançar ou Fechar
+          </h2>
+          <span style="font-size:0.74rem; color:var(--text-dim);">Clique na mesa para abrir sua comanda ao lado</span>
+        </div>
+
+        <div class="mesa-selector-bar" id="pos-mesa-selector-bar">
+          <!-- Populated dynamically (Mesa 01 to Mesa 10) -->
+        </div>
+
+        <!-- Split Screen 2-Column Grid -->
+        <div class="pos-split-layout">
+          
+          <!-- LEFT COLUMN: Comanda da Mesa Selecionada -->
+          <div class="pos-comanda-column">
+            <div class="comanda-header-box">
+              <div class="comanda-active-title">
+                <span id="split-comanda-table-title">MESA 04</span>
+                <span style="font-size:0.74rem; font-weight:700; background:rgba(16,185,129,0.15); color:var(--emerald); padding:3px 8px; border-radius:6px; border:1px solid rgba(16,185,129,0.3);">
+                  Em Consumo
+                </span>
+              </div>
+              <div class="comanda-waiter-info" id="split-comanda-waiter-name">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Atendente: Carlos Eduardo • Salão Interno
+              </div>
+            </div>
+
+            <!-- Items List -->
+            <div class="section-header-row" style="margin-bottom:8px;">
+              <span style="font-size:0.74rem; font-weight:700; color:var(--text-dim); text-transform:uppercase;">Itens na Comanda</span>
+              <span style="font-size:0.74rem; color:#FFFFFF; font-weight:700;" id="split-comanda-items-count">3 itens</span>
+            </div>
+
+            <div class="comanda-items-scroll" id="split-comanda-items-list">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Visual Receipt Divider -->
+            <div class="receipt-perforated-row">
+              <div class="notch-left"></div>
+              <div class="dashed-line"></div>
+              <div class="notch-right"></div>
+            </div>
+
+            <!-- Financial Breakdown -->
+            <div class="comanda-totals-box">
+              <div class="comanda-total-row">
+                <span>Subtotal Itens:</span>
+                <strong style="color:#FFFFFF;" id="split-comanda-subtotal">R$ 0,00</strong>
+              </div>
+              <div class="comanda-total-row">
+                <span>Taxa de Serviço Sugerida (10%):</span>
+                <span id="split-comanda-service">R$ 0,00</span>
+              </div>
+              <div class="comanda-total-row grand-total">
+                <span>TOTAL MESA:</span>
+                <span class="val-highlight" id="split-comanda-total">R$ 0,00</span>
+              </div>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="comanda-actions-stack">
+              <button class="btn-flame-cta" style="width:100%; justify-content:center; padding:12px; font-size:0.86rem;" onclick="openPrintTicketModal(currentTicketTableName, 'cozinha')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Imprimir Comanda Térmica (80/58mm)
+              </button>
+              
+              <div style="display:flex; gap:8px;">
+                <button class="btn-print-action" style="flex:1; justify-content:center;" onclick="openPrintTicketModal(currentTicketTableName, 'conta')">
+                  Pré-Conta
+                </button>
+                <button class="btn-finish-table" style="flex:1; justify-content:center; padding:9px;" onclick="finishTable(currentTicketTableName)">
+                  Encerrar Mesa
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Menu / Catálogo para Lançamento Rápido -->
+          <div class="pos-catalog-column">
+            
+            <div class="catalog-header-bar">
+              <div>
+                <h3 style="font-size:1.02rem; font-weight:700; color:#FFFFFF;">2. Catálogo de Pratos & Bebidas</h3>
+                <div style="font-size:0.72rem; color:var(--text-dim);">Toque no [+] para adicionar direto na mesa ativa</div>
+              </div>
+              
+              <div style="position:relative; width:220px;">
+                <input type="text" class="pos-search-input" style="padding:7px 12px 7px 32px; font-size:0.78rem;" placeholder="Filtrar prato..." oninput="handleCatalogFilter(this.value)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-dim);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+            </div>
+
+            <!-- Categories Tabs Filter -->
+            <div class="catalog-tabs-row">
+              <button class="cat-tab-pill active" id="pill-split-all" onclick="filterCatalogCategory('all')">Todos</button>
+              <button class="cat-tab-pill" id="pill-split-principais" onclick="filterCatalogCategory('principais')">Principais</button>
+              <button class="cat-tab-pill" id="pill-split-entradas" onclick="filterCatalogCategory('entradas')">Entradas</button>
+              <button class="cat-tab-pill" id="pill-split-bebidas" onclick="filterCatalogCategory('bebidas')">Bebidas</button>
+              <button class="cat-tab-pill" id="pill-split-sobremesas" onclick="filterCatalogCategory('sobremesas')">Sobremesas</button>
+            </div>
+
+            <!-- Catalog Items Grid -->
+            <div class="catalog-grid" id="split-catalog-grid">
+              <!-- Dynamically populated -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =========================================================
+           TAB 3: CARDÁPIO, ESTOQUE & PREÇOS (CRUD + DISPONIBILIDADE)
+           ========================================================= -->
       <section id="sec-products" style="display:none;">
         <div class="crud-box">
           <div class="crud-header-row">
-            <h3 style="color:#FFFFFF; font-size:1.05rem;">Gerenciador de Pratos & Bebidas</h3>
-            <button class="btn-flame-cta" onclick="openNewProductModal()">+ Cadastrar Prato</button>
+            <div>
+              <h3 style="color:#FFFFFF; font-size:1.05rem;">Gerenciador de Cardápio & Disponibilidade de Estoque</h3>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Ative ou desative itens instantaneamente para a equipe e o cardápio do cliente.</p>
+            </div>
+            <button class="btn-flame-cta" id="btn-admin-add-product" onclick="openNewProductModal()">+ Cadastrar Prato</button>
           </div>
           <div style="overflow-x:auto;">
             <table class="custom-table">
@@ -1427,7 +1655,7 @@
                   <th>Nome do Item</th>
                   <th>Categoria</th>
                   <th>Preço</th>
-                  <th>Descrição</th>
+                  <th>Disponibilidade (Estoque)</th>
                   <th style="text-align:right;">Ações</th>
                 </tr>
               </thead>
@@ -1437,11 +1665,16 @@
         </div>
       </section>
 
-      <!-- SECTION 3: GARÇONS & MESAS -->
+      <!-- =========================================================
+           TAB 4: GARÇONS & ATENDIMENTO (CRUD ADMIN)
+           ========================================================= -->
       <section id="sec-waiters" style="display:none;">
         <div class="crud-box">
           <div class="crud-header-row">
-            <h3 style="color:#FFFFFF; font-size:1.05rem;">Equipe de Atendimento</h3>
+            <div>
+              <h3 style="color:#FFFFFF; font-size:1.05rem;">Equipe de Atendimento & Garçons</h3>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Configure turnos e atribuição de mesas para cada colaborador.</p>
+            </div>
             <button class="btn-flame-cta" onclick="openNewWaiterModal()">+ Cadastrar Garçom</button>
           </div>
           <div style="overflow-x:auto;">
@@ -1462,11 +1695,16 @@
         </div>
       </section>
 
-      <!-- SECTION 4: CLIENTES DO SALÃO -->
+      <!-- =========================================================
+           TAB 5: HISTÓRICO DE CLIENTES DO SALÃO
+           ========================================================= -->
       <section id="sec-users" style="display:none;">
         <div class="crud-box">
           <div class="crud-header-row">
-            <h3 style="color:#FFFFFF; font-size:1.05rem;">Histórico de Clientes do Salão</h3>
+            <div>
+              <h3 style="color:#FFFFFF; font-size:1.05rem;">Histórico de Clientes Atendidos via NFC</h3>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Identificação por mesa e histórico de pedidos para fidelização.</p>
+            </div>
           </div>
           <div style="overflow-x:auto;">
             <table class="custom-table">
@@ -1485,82 +1723,6 @@
       </section>
 
     </main>
-
-    <!-- 3. Right Side POS Live Comanda Dock (Reference Image Exact Match) -->
-    <aside class="pos-ticket-dock">
-      <div class="ticket-card-box">
-        
-        <div class="ticket-header-top">
-          <div class="ticket-header-label">MESA SELECIONADA</div>
-          <div class="ticket-table-name">
-            <span id="pos-ticket-active-table">MESA 04</span>
-            <select class="ticket-table-select" id="pos-ticket-select-table" onchange="selectPosTable(this.value)">
-              <option value="mesa 04">Mesa 04</option>
-              <option value="mesa 02">Mesa 02</option>
-              <option value="mesa 05">Mesa 05</option>
-              <option value="mesa 01">Mesa 01</option>
-            </select>
-          </div>
-          <div style="font-size:0.72rem; color:var(--text-dim); margin-top:3px;" id="pos-ticket-waiter-name">
-            Atendente: Carlos Eduardo • Salão Interno
-          </div>
-        </div>
-
-        <!-- Delivery / Dine-in / Takeaway Switch -->
-        <div class="order-mode-pill-group">
-          <button class="order-mode-btn active" id="btn-mode-dinein" onclick="setPosOrderMode('dinein')">Salão</button>
-          <button class="order-mode-btn" id="btn-mode-balcao" onclick="setPosOrderMode('balcao')">Balcão</button>
-          <button class="order-mode-btn" id="btn-mode-delivery" onclick="setPosOrderMode('delivery')">Delivery</button>
-        </div>
-
-        <!-- Live Items in Table -->
-        <div class="ticket-header-label" style="display:flex; justify-content:space-between; align-items:center;">
-          <span>ITENS EM CONSUMO</span>
-          <span style="color:var(--text-white);" id="pos-ticket-items-count">0 itens</span>
-        </div>
-
-        <div class="ticket-items-list" id="pos-ticket-items-list">
-          <!-- Populated dynamically -->
-        </div>
-
-        <!-- Perforated Notches Row (Visual Receipt Divider) -->
-        <div class="ticket-perforated-row">
-          <div class="ticket-notch-left"></div>
-          <div class="ticket-dashed-line"></div>
-          <div class="ticket-notch-right"></div>
-        </div>
-
-        <!-- Promo Code Input -->
-        <div class="ticket-promo-row">
-          <input type="text" class="ticket-promo-input" id="pos-promo-code" placeholder="Código de desconto / cupom...">
-          <button class="btn-ticket-promo" onclick="applyPromoCode()">APLICAR</button>
-        </div>
-
-        <!-- Calculations Breakdown -->
-        <div class="ticket-calc-row">
-          <span>Subtotal Consumo:</span>
-          <strong id="pos-ticket-subtotal" style="color:#FFFFFF;">R$ 0,00</strong>
-        </div>
-        <div class="ticket-calc-row">
-          <span>Serviço Sugerido (10%):</span>
-          <span id="pos-ticket-service">R$ 0,00</span>
-        </div>
-        <div class="ticket-calc-row total-row">
-          <span>TOTAL:</span>
-          <span class="total-val" id="pos-ticket-total">R$ 0,00</span>
-        </div>
-
-        <!-- Action CTAs -->
-        <button class="ticket-cta-button" onclick="openPrintTicketModal(currentTicketTableName, 'cozinha')">
-          🖨️ Imprimir Comanda (80/58mm)
-        </button>
-        <button class="ticket-sec-button" onclick="finishTable(currentTicketTableName)">
-          Encerrar & Fechar Mesa
-        </button>
-
-      </div>
-    </aside>
-
   </div>
 
   <!-- Modal Produto (CRUD) -->
@@ -1637,7 +1799,9 @@
     <div class="modal-card" style="max-width:540px;" onclick="event.stopPropagation()">
       <div class="modal-header">
         <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:1.4rem;">🖨️</span>
+          <div style="width:36px; height:36px; border-radius:10px; background:var(--flame-gradient); display:flex; align-items:center; justify-content:center; color:#FFF;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          </div>
           <div>
             <h3 id="modal-ticket-title" style="margin:0; font-size:1.15rem; color:#FFFFFF;">Comanda Térmica</h3>
             <div id="modal-ticket-subtitle" style="font-size:0.75rem; color:var(--text-dim);">Impressão para Cozinha, Bar ou Pré-Conta</div>
@@ -1649,9 +1813,9 @@
       <div style="margin-bottom:14px; display:flex; flex-direction:column; gap:10px;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
           <div style="display:flex; gap:6px;">
-            <button type="button" class="btn-print-action primary" id="btn-mode-cozinha" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('cozinha')">🍳 Cozinha</button>
-            <button type="button" class="btn-print-action" id="btn-mode-bar" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('bar')">🍹 Bar</button>
-            <button type="button" class="btn-print-action" id="btn-mode-conta" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('conta')">🧾 Pré-Conta</button>
+            <button type="button" class="btn-print-action primary" id="btn-mode-cozinha" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('cozinha')">Cozinha Quente</button>
+            <button type="button" class="btn-print-action" id="btn-mode-bar" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('bar')">Bar & Drinks</button>
+            <button type="button" class="btn-print-action" id="btn-mode-conta" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('conta')">Pré-Conta</button>
           </div>
           <div style="display:flex; align-items:center; gap:6px;">
             <label style="font-size:0.75rem; color:var(--text-dim); font-weight:600;">Bobina:</label>
@@ -1669,7 +1833,7 @@
       </div>
 
       <div style="background:#141518; border:1px solid var(--border-dark); border-radius:10px; padding:10px 12px; margin-bottom:16px; font-size:0.74rem; color:var(--text-muted); display:flex; gap:8px; align-items:flex-start;">
-        <span style="font-size:1rem;">💡</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--amber); flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
         <div>
           <strong style="color:#FFFFFF;">Reaproveitamento de Hardware:</strong> Compatível com maquininhas Android Smart POS (Stone, Cielo, PagBank) e impressoras térmicas ESC/POS (Epson, Elgin, Bematech) sem comprar novos aparelhos.
         </div>
@@ -1677,10 +1841,10 @@
 
       <div style="display:flex; justify-content:space-between; gap:10px;">
         <button class="btn-print-action" type="button" onclick="copyTicketText()" style="flex:1; justify-content:center;">
-          📋 Copiar Texto
+          Copiar Texto
         </button>
         <button class="btn-print-action primary" type="button" onclick="triggerTicketPrint()" style="flex:1.5; justify-content:center; font-size:0.85rem;">
-          🖨️ Imprimir Agora
+          Imprimir Agora
         </button>
       </div>
     </div>
@@ -1715,32 +1879,40 @@
       if (activeBtn) activeBtn.classList.add('active');
 
       document.getElementById('sec-kds').style.display = tabId === 'kds' ? 'block' : 'none';
+      document.getElementById('sec-pos').style.display = tabId === 'pos' ? 'block' : 'none';
       document.getElementById('sec-products').style.display = tabId === 'products' ? 'block' : 'none';
       document.getElementById('sec-waiters').style.display = tabId === 'waiters' ? 'block' : 'none';
       document.getElementById('sec-users').style.display = tabId === 'users' ? 'block' : 'none';
 
-      // Hide or show popular dishes & categories row based on tab
-      const popSec = document.getElementById('popular-dishes-section');
-      if (popSec) popSec.style.display = tabId === 'kds' ? 'block' : 'none';
+      if (tabId === 'pos') {
+        renderPosMesaSelector();
+        renderSplitComanda();
+        renderSplitCatalog();
+      } else if (tabId === 'kds') {
+        renderKDS();
+        renderAlerts();
+      } else if (tabId === 'products') {
+        renderProducts();
+      }
     }
 
     // Default Products Database
     const defaultMenu = {
       principais: [
-        { id: "p3", name: "Burger Botânico Artesanal", priceVal: 45.90, desc: "Blend 180g angus, queijo gruyère derretido, cebola caramelizada e aioli de ervas no brioche.", tags: ["Artesanal"], image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" },
-        { id: "p1", name: "Risoto de Funghi Porcini", priceVal: 58.90, desc: "Arroz arbóreo italiano com cogumelos frescos, azeite trufado e queijo grana padano.", tags: ["Vegetariano"], image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=500&q=80" },
-        { id: "p2", name: "Salmão Grelhado na Brasa", priceVal: 72.00, desc: "Filé de salmão fresco com purê de batata-doce roxa, aspargos verdes salteados e molho de maracujá.", tags: ["Sem Glúten"], image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=500&q=80" }
+        { id: "p3", name: "Burger Botânico Artesanal", priceVal: 45.90, desc: "Blend 180g angus, queijo gruyère derretido, cebola caramelizada e aioli de ervas no brioche.", tags: ["Artesanal"], active: true, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" },
+        { id: "p1", name: "Risoto de Funghi Porcini", priceVal: 58.90, desc: "Arroz arbóreo italiano com cogumelos frescos, azeite trufado e queijo grana padano.", tags: ["Vegetariano"], active: true, image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=500&q=80" },
+        { id: "p2", name: "Salmão Grelhado na Brasa", priceVal: 72.00, desc: "Filé de salmão fresco com purê de batata-doce roxa, aspargos verdes salteados e molho de maracujá.", tags: ["Sem Glúten"], active: true, image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=500&q=80" }
       ],
       entradas: [
-        { id: "e1", name: "Bruschetta Caprese", priceVal: 28.90, desc: "Tomate cereja confit, muçarela de búfala fresca, manjericão e redução balsâmica.", tags: ["Vegetariano"], image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=500&q=80" },
-        { id: "e2", name: "Carpaccio de Abobrinha", priceVal: 32.00, desc: "Lâminas finas grelhadas com pesto de rúcula, raspas de limão siciliano e parmesão 24 meses.", tags: ["Vegano"], image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=80" }
+        { id: "e1", name: "Bruschetta Caprese", priceVal: 28.90, desc: "Tomate cereja confit, muçarela de búfala fresca, manjericão e redução balsâmica.", tags: ["Vegetariano"], active: true, image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=500&q=80" },
+        { id: "e2", name: "Carpaccio de Abobrinha", priceVal: 32.00, desc: "Lâminas finas grelhadas com pesto de rúcula, raspas de limão siciliano e parmesão 24 meses.", tags: ["Vegano"], active: true, image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=80" }
       ],
       bebidas: [
-        { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, desc: "Gin artesanal infusionado, tônica premium, pepino japonês, zimbro e ramo de alecrim tostado.", tags: ["Drink"], image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=500&q=80" },
-        { id: "b1", name: "Limonada Siciliana com Hortelã", priceVal: 18.90, desc: "Limão siciliano fresco batido com folhas de hortelã orgânica e água com gás.", tags: ["Sem Açúcar"], image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80" }
+        { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, desc: "Gin artesanal infusionado, tônica premium, pepino japonês, zimbro e ramo de alecrim tostado.", tags: ["Drink"], active: true, image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=500&q=80" },
+        { id: "b1", name: "Limonada Siciliana com Hortelã", priceVal: 18.90, desc: "Limão siciliano fresco batido com folhas de hortelã orgânica e água com gás.", tags: ["Sem Açúcar"], active: true, image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80" }
       ],
       sobremesas: [
-        { id: "s1", name: "Petit Gâteau Belga", priceVal: 32.00, desc: "Bolo quente com recheio cremoso de chocolate belga 70% acompanhado de sorvete de fava de baunilha.", tags: ["Sobremesa"], image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80" }
+        { id: "s1", name: "Petit Gâteau Belga", priceVal: 32.00, desc: "Bolo quente com recheio cremoso de chocolate belga 70% acompanhado de sorvete de fava de baunilha.", tags: ["Sobremesa"], active: true, image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80" }
       ]
     };
 
@@ -1749,7 +1921,7 @@
         let flat = [];
         Object.keys(menu).forEach(cat => {
           (menu[cat] || []).forEach(item => {
-            flat.push({ ...item, category: cat, active: true });
+            flat.push({ ...item, category: cat, active: item.active !== false });
           });
         });
         localStorage.setItem('nolei_menu_products', JSON.stringify(flat));
@@ -1784,7 +1956,7 @@
       return w;
     }
 
-    // Active Operator (Waiter Profile)
+    // Active Operator Profile (Admin vs Waiter Permissions)
     let activeOperatorId = 'admin';
 
     function initOperatorDropdown() {
@@ -1796,16 +1968,45 @@
       });
       select.innerHTML = html;
       select.value = activeOperatorId;
+      applyOperatorPermissions();
+    }
+
+    function applyOperatorPermissions() {
+      const isAdmin = activeOperatorId === 'admin';
+      
+      // Header New Product Button
+      const btnHeaderNew = document.getElementById('btn-header-new-product');
+      if (btnHeaderNew) btnHeaderNew.style.display = isAdmin ? 'inline-flex' : 'none';
+
+      // Waiters and Users Sidebar Tabs (Hidden for Waiters)
+      const tabWaiters = document.getElementById('tab-btn-waiters');
+      const tabUsers = document.getElementById('tab-btn-users');
+      if (tabWaiters) tabWaiters.style.display = isAdmin ? 'flex' : 'none';
+      if (tabUsers) tabUsers.style.display = isAdmin ? 'flex' : 'none';
+
+      // Admin Add Button inside Products Section
+      const btnAdminAdd = document.getElementById('btn-admin-add-product');
+      if (btnAdminAdd) btnAdminAdd.style.display = isAdmin ? 'inline-flex' : 'none';
     }
 
     function changeActiveOperator(val) {
       activeOperatorId = val;
+      applyOperatorPermissions();
       renderKDS();
       renderAlerts();
-      showToast(`Visão alterada para: ${val === 'admin' ? 'Administrador Geral' : 'Garçom Selecionado'}`);
+      renderPosMesaSelector();
+      renderSplitComanda();
+      renderProducts();
+      showToast(`Visão alterada: ${val === 'admin' ? 'Administrador Geral' : 'Garçom Selecionado'}`);
     }
 
-    // KDS Initial Tables Data
+    // All 10 Restaurant Tables
+    const allTablesList = [
+      "Mesa 01", "Mesa 02", "Mesa 03", "Mesa 04", "Mesa 05",
+      "Mesa 06", "Mesa 07", "Mesa 08", "Mesa 09", "Mesa 10"
+    ];
+
+    // Initial KDS Tables State
     const kdsTables = [
       {
         table: "Mesa 04",
@@ -1834,184 +2035,350 @@
       }
     ];
 
-    // Selected POS Table for Right Ticket Dock
+    // Selected Table for Split POS
     let currentTicketTableName = 'Mesa 04';
     let currentTicketMode = 'cozinha'; // 'cozinha', 'bar', 'conta'
     let currentPaperSize = '80'; // '80' or '58'
-    let currentSelectedPosCategory = 'all';
+    let currentCatalogCategory = 'all';
+    let currentCatalogSearch = '';
+
+    function getTableData(tableName) {
+      let tableObj = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase());
+      if (!tableObj) {
+        tableObj = {
+          table: tableName,
+          waiter: "Equipe Nolei",
+          items: []
+        };
+        kdsTables.push(tableObj);
+      }
+
+      // Sync latest from localStorage
+      const cleanNum = tableName.replace(/\D/g, '');
+      if (cleanNum) {
+        const rawNum = parseInt(cleanNum, 10);
+        const candidates = [
+          `nolei_table_orders_${cleanNum}`,
+          `nolei_table_orders_mesa${cleanNum}`,
+          `nolei_table_orders_${rawNum}`,
+          `nolei_table_orders_${tableName.toLowerCase().replace(/\s+/g, '')}`
+        ];
+        for (const key of candidates) {
+          const stored = JSON.parse(localStorage.getItem(key) || 'null');
+          if (stored && Array.isArray(stored) && stored.length > 0) {
+            tableObj.items = stored;
+            break;
+          }
+        }
+      }
+      return tableObj;
+    }
 
     function selectPosTable(tableName) {
       currentTicketTableName = tableName;
-      const select = document.getElementById('pos-ticket-select-table');
-      if (select) select.value = tableName.toLowerCase();
-      renderPosTicket();
+      renderPosMesaSelector();
+      renderSplitComanda();
       renderKDS();
     }
 
-    function setPosOrderMode(mode) {
-      ['dinein', 'balcao', 'delivery'].forEach(m => {
-        const b = document.getElementById('btn-mode-' + m);
-        if (b) b.classList.toggle('active', m === mode);
-      });
-      showToast(`Modo alterado para: ${mode.toUpperCase()}`);
-    }
-
-    function filterCategoryPill(cat) {
-      currentSelectedPosCategory = cat;
-      document.querySelectorAll('.category-capsule-card').forEach(c => c.classList.remove('active'));
-      const activePill = document.getElementById('cat-pill-' + cat);
-      if (activePill) activePill.classList.add('active');
-      renderPopularDishes();
-    }
-
-    function handleGlobalSearch(query) {
-      const q = (query || '').toLowerCase().trim();
-      const dishCards = document.querySelectorAll('.popular-dish-card');
-      dishCards.forEach(d => {
-        const text = d.textContent.toLowerCase();
-        d.style.display = text.includes(q) ? '' : 'none';
-      });
-
-      const tableCards = document.querySelectorAll('.table-card');
-      tableCards.forEach(t => {
-        const text = t.textContent.toLowerCase();
-        t.style.display = text.includes(q) ? '' : 'none';
-      });
-    }
-
-    // Render Popular Dishes Carousel
-    function renderPopularDishes() {
-      const container = document.getElementById('popular-dishes-grid');
+    // Render Mesa Selector Bar in Split POS
+    function renderPosMesaSelector() {
+      const container = document.getElementById('pos-mesa-selector-bar');
       if (!container) return;
-      
-      const menu = getStoredMenu();
-      let allItems = [];
-      Object.keys(menu).forEach(cat => {
-        if (currentSelectedPosCategory === 'all' || currentSelectedPosCategory === cat) {
-          (menu[cat] || []).forEach(item => {
-            allItems.push({ ...item, categoryName: cat });
-          });
-        }
-      });
 
-      container.innerHTML = allItems.map(item => `
-        <div class="popular-dish-card">
-          <div class="dish-img-wrap">
-            <span class="dish-category-tag">${item.categoryName}</span>
-            <img src="${item.image || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80'}" alt="${item.name}" loading="lazy">
-          </div>
-          <div class="dish-title-text" title="${item.name}">${item.name}</div>
-          <div class="dish-price-text">R$ ${(item.priceVal || 0).toFixed(2).replace('.', ',')}</div>
-          <div class="dish-card-bottom-row">
-            <div class="dish-rating-badge">
-              <span>★</span>
-              <span>4.9</span>
-            </div>
-            <button class="btn-quick-add-pos" title="Adicionar à Mesa Ativa" onclick="quickAddItemToActiveTable('${item.name}', ${item.priceVal})">
-              +
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
+      const waiters = getStoredWaiters();
+      let availableTables = allTablesList;
 
-    function quickAddItemToActiveTable(name, price) {
-      const tableObj = kdsTables.find(t => t.table.toLowerCase() === currentTicketTableName.toLowerCase());
-      if (tableObj) {
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-        tableObj.items.push({
-          name: name,
-          orderedBy: "Garçom (POS)",
-          time: timeStr,
-          status: "preparo",
-          priceVal: price,
-          notes: "Pedido balcão"
-        });
-        
-        const cleanNum = currentTicketTableName.replace(/\D/g, '');
-        if (cleanNum) {
-          localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tableObj.items));
-        }
-        renderKDS();
-        renderPosTicket();
-        showToast(`"${name}" adicionado à ${currentTicketTableName.toUpperCase()}`);
-      }
-    }
-
-    // Render Right Side POS Live Comanda Ticket
-    function renderPosTicket() {
-      const tableTitle = document.getElementById('pos-ticket-active-table');
-      const waiterEl = document.getElementById('pos-ticket-waiter-name');
-      const itemsList = document.getElementById('pos-ticket-items-list');
-      const countEl = document.getElementById('pos-ticket-items-count');
-      const subtotalEl = document.getElementById('pos-ticket-subtotal');
-      const serviceEl = document.getElementById('pos-ticket-service');
-      const totalEl = document.getElementById('pos-ticket-total');
-
-      if (tableTitle) tableTitle.textContent = currentTicketTableName.toUpperCase();
-
-      const tableObj = kdsTables.find(t => t.table.toLowerCase() === currentTicketTableName.toLowerCase()) || {
-        table: currentTicketTableName,
-        waiter: "Equipe Nolei",
-        items: []
-      };
-
-      // Sync latest from localStorage
-      const cleanNum = currentTicketTableName.replace(/\D/g, '');
-      if (cleanNum) {
-        const stored = JSON.parse(localStorage.getItem(`nolei_table_orders_${cleanNum}`) || 'null');
-        if (stored && Array.isArray(stored) && stored.length > 0) {
-          tableObj.items = stored;
+      if (activeOperatorId !== 'admin') {
+        const op = waiters.find(w => w.id === activeOperatorId);
+        if (op) {
+          availableTables = allTablesList.filter(t => op.tables.includes(t.toLowerCase()));
         }
       }
 
-      if (waiterEl) waiterEl.textContent = `Atendente: ${tableObj.waiter} • Salão Principal`;
+      container.innerHTML = availableTables.map(tName => {
+        const tObj = getTableData(tName);
+        const hasItems = tObj.items && tObj.items.length > 0;
+        const isActive = tName.toLowerCase() === currentTicketTableName.toLowerCase();
+
+        return `
+          <button class="mesa-pill-btn ${isActive ? 'active' : ''} ${hasItems ? '' : 'empty'}" onclick="selectPosTable('${tName}')">
+            <span class="table-dot-status"></span>
+            ${tName.toUpperCase()}
+            ${hasItems ? `<span style="font-size:0.68rem; opacity:0.85;">(${tObj.items.length})</span>` : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    // Render Split Comanda (Left Column)
+    function renderSplitComanda() {
+      const titleEl = document.getElementById('split-comanda-table-title');
+      const waiterEl = document.getElementById('split-comanda-waiter-name');
+      const countEl = document.getElementById('split-comanda-items-count');
+      const listEl = document.getElementById('split-comanda-items-list');
+      const subtotalEl = document.getElementById('split-comanda-subtotal');
+      const serviceEl = document.getElementById('split-comanda-service');
+      const totalEl = document.getElementById('split-comanda-total');
+
+      if (!titleEl) return;
+
+      const tObj = getTableData(currentTicketTableName);
+      titleEl.textContent = currentTicketTableName.toUpperCase();
+      if (waiterEl) waiterEl.innerHTML = `
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Atendente: ${tObj.waiter} • Salão Principal
+      `;
 
       let subtotal = 0;
-      (tableObj.items || []).forEach(i => subtotal += (i.priceVal || 0));
+      (tObj.items || []).forEach(i => subtotal += (i.priceVal || 0));
       const service10 = subtotal * 0.10;
       const grandTotal = subtotal + service10;
 
-      if (countEl) countEl.textContent = `${(tableObj.items || []).length} itens`;
+      if (countEl) countEl.textContent = `${(tObj.items || []).length} itens`;
       if (subtotalEl) subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
       if (serviceEl) serviceEl.textContent = `R$ ${service10.toFixed(2).replace('.', ',')}`;
       if (totalEl) totalEl.textContent = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
 
-      if (!itemsList) return;
+      if (!listEl) return;
 
-      if (!tableObj.items || tableObj.items.length === 0) {
-        itemsList.innerHTML = `<div style="text-align:center; padding:20px; font-size:0.75rem; color:var(--text-dim);">Nenhum pedido ativo nesta mesa.</div>`;
+      if (!tObj.items || tObj.items.length === 0) {
+        listEl.innerHTML = `
+          <div style="text-align:center; padding:30px 10px; font-size:0.78rem; color:var(--text-dim);">
+            <div style="font-size:1.4rem; margin-bottom:6px;">🍽️</div>
+            Nenhum pedido ativo na ${currentTicketTableName.toUpperCase()}.<br>
+            Selecione pratos no catálogo ao lado para lançar.
+          </div>
+        `;
       } else {
-        itemsList.innerHTML = tableObj.items.map((it, idx) => `
-          <div class="ticket-item-row">
-            <div style="width:28px; height:28px; border-radius:6px; background:#272A34; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--flame-red); flex-shrink:0;">
+        listEl.innerHTML = tObj.items.map((it, idx) => `
+          <div class="comanda-item-card">
+            <div style="width:26px; height:26px; border-radius:6px; background:#141518; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--flame-red); flex-shrink:0;">
               1x
             </div>
-            <div class="ticket-item-details">
-              <div class="ticket-item-title">${it.name}</div>
-              <div class="ticket-item-sub">${it.orderedBy || 'Mesa'} • ${it.notes || it.time || '12:00'}</div>
+            <div class="comanda-item-details">
+              <div class="comanda-item-name">${it.name}</div>
+              <div class="comanda-item-sub">${it.orderedBy || 'Mesa'} • ${it.time || '12:00'} ${it.notes ? '• ' + it.notes : ''}</div>
             </div>
-            <div class="ticket-item-price">R$ ${(it.priceVal || 0).toFixed(2).replace('.', ',')}</div>
+            <div class="comanda-item-price-box">
+              <div class="comanda-item-price">R$ ${(it.priceVal || 0).toFixed(2).replace('.', ',')}</div>
+            </div>
+            <button class="btn-item-remove" title="Remover da comanda" onclick="removeItemFromActiveTable(${idx})">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
           </div>
         `).join('');
       }
     }
 
-    function applyPromoCode() {
-      const input = document.getElementById('pos-promo-code');
-      const val = (input.value || '').trim().toUpperCase();
-      if (!val) {
-        showToast('Digite um código de cupom.');
+    function removeItemFromActiveTable(idx) {
+      const tObj = getTableData(currentTicketTableName);
+      if (tObj && tObj.items && tObj.items[idx]) {
+        const removed = tObj.items.splice(idx, 1);
+        const cleanNum = currentTicketTableName.replace(/\D/g, '');
+        if (cleanNum) {
+          localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tObj.items));
+        }
+        renderSplitComanda();
+        renderPosMesaSelector();
+        renderKDS();
+        showToast(`"${removed[0].name}" removido da comanda.`);
+      }
+    }
+
+    // Render Split Catalog (Right Column)
+    function filterCatalogCategory(cat) {
+      currentCatalogCategory = cat;
+      document.querySelectorAll('.cat-tab-pill').forEach(p => p.classList.remove('active'));
+      const activePill = document.getElementById('pill-split-' + cat);
+      if (activePill) activePill.classList.add('active');
+      renderSplitCatalog();
+    }
+
+    function handleCatalogFilter(query) {
+      currentCatalogSearch = (query || '').toLowerCase().trim();
+      renderSplitCatalog();
+    }
+
+    function renderSplitCatalog() {
+      const container = document.getElementById('split-catalog-grid');
+      if (!container) return;
+
+      const menu = getStoredMenu();
+      let allItems = [];
+
+      Object.keys(menu).forEach(cat => {
+        if (currentCatalogCategory === 'all' || currentCatalogCategory === cat) {
+          (menu[cat] || []).forEach(item => {
+            if (!currentCatalogSearch || item.name.toLowerCase().includes(currentCatalogSearch) || (item.desc && item.desc.toLowerCase().includes(currentCatalogSearch))) {
+              allItems.push({ ...item, categoryName: cat });
+            }
+          });
+        }
+      });
+
+      if (allItems.length === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-dim); font-size:0.82rem;">Nenhum produto encontrado.</div>';
         return;
       }
-      showToast(`Cupom "${val}" aplicado com sucesso (10% OFF)!`);
-      input.value = '';
+
+      container.innerHTML = allItems.map(item => {
+        const isAvailable = item.active !== false;
+
+        return `
+          <div class="catalog-item-card ${isAvailable ? '' : 'soldout'}">
+            <img src="${item.image || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80'}" class="catalog-item-thumb" alt="${item.name}" loading="lazy">
+            <div class="catalog-item-title" title="${item.name}">${item.name}</div>
+            <div class="catalog-item-bottom">
+              <div>
+                <div class="catalog-item-price">R$ ${(item.priceVal || 0).toFixed(2).replace('.', ',')}</div>
+                <div style="font-size:0.68rem; color:${isAvailable ? 'var(--emerald)' : '#F87171'}; font-weight:700;">
+                  ${isAvailable ? '✓ Disponível' : '✕ Esgotado'}
+                </div>
+              </div>
+              <button class="btn-quick-add-dish" ${isAvailable ? '' : 'disabled'} title="Adicionar à ${currentTicketTableName.toUpperCase()}" onclick="quickAddItemToActiveTable('${item.name}', ${item.priceVal})">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function quickAddItemToActiveTable(name, price) {
+      const tableObj = getTableData(currentTicketTableName);
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      
+      tableObj.items.push({
+        name: name,
+        orderedBy: activeOperatorId === 'admin' ? 'Gerência (POS)' : 'Garçom (POS)',
+        time: timeStr,
+        status: "preparo",
+        priceVal: price,
+        notes: "Lançamento PDV"
+      });
+      
+      const cleanNum = currentTicketTableName.replace(/\D/g, '');
+      if (cleanNum) {
+        localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tableObj.items));
+      }
+      renderSplitComanda();
+      renderPosMesaSelector();
+      renderKDS();
+      showToast(`"${name}" adicionado à ${currentTicketTableName.toUpperCase()}`);
+    }
+
+    // Render KDS Tab
+    function renderKDS() {
+      const grid = document.getElementById('kds-grid');
+      if (!grid) return;
+
+      const waiters = getStoredWaiters();
+      let activeCount = 0;
+      let totalDayRevenue = 3840.00;
+
+      allTablesList.forEach(tName => {
+        const tObj = getTableData(tName);
+        if (tObj.items && tObj.items.length > 0) activeCount++;
+      });
+
+      const occEl = document.getElementById('kpi-tables-occupancy');
+      if (occEl) occEl.textContent = `${activeCount} / 10 Mesas`;
+
+      let filteredTables = kdsTables.filter(t => t.items && t.items.length > 0);
+      if (activeOperatorId !== 'admin') {
+        const op = waiters.find(w => w.id === activeOperatorId);
+        if (op) {
+          filteredTables = filteredTables.filter(t => op.tables.includes(t.table.toLowerCase()));
+        }
+      }
+
+      document.getElementById('badge-kds-count').textContent = `${filteredTables.length} Mesas em Andamento`;
+
+      if (filteredTables.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-dim);">Nenhuma comanda ativa sob sua responsabilidade no momento.</div>';
+        return;
+      }
+
+      grid.innerHTML = filteredTables.map((t, tIdx) => {
+        let total = 0;
+        t.items.forEach(i => total += (i.priceVal || 0));
+        const isSelected = t.table.toLowerCase() === currentTicketTableName.toLowerCase();
+
+        return `
+          <div class="table-card ${isSelected ? 'selected-table-active' : ''}" onclick="selectPosTable('${t.table}'); switchTab('pos');">
+            <div class="table-card-header">
+              <span class="table-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="16" y1="2" x2="16" y2="4"/></svg>
+                ${t.table.toUpperCase()}
+              </span>
+              <span class="table-waiter-badge">${t.waiter}</span>
+            </div>
+            <div class="table-order-items">
+              ${t.items.map((item, iIdx) => `
+                <div class="order-item-row">
+                  <div class="order-item-info">
+                    <strong>${item.name}</strong>
+                    <span class="order-item-meta">${item.orderedBy || 'Cliente'} • ${item.time || '12:00'} ${item.notes ? '• ' + item.notes : ''}</span>
+                  </div>
+                  <button class="status-badge ${item.status || 'preparo'}" onclick="event.stopPropagation(); toggleItemStatus('${t.table}', ${iIdx})">
+                    ${item.status === 'entregue' ? '✓ Entregue' : '⏳ Em Preparo'}
+                  </button>
+                </div>
+              `).join('')}
+            </div>
+            <div class="table-card-footer">
+              <div>
+                <div style="font-size:0.68rem; color:var(--text-dim); text-transform:uppercase;">Subtotal:</div>
+                <div class="table-total">R$ ${total.toFixed(2).replace('.', ',')}</div>
+              </div>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <button class="btn-print-action" type="button" onclick="event.stopPropagation(); openPrintTicketModal('${t.table}', 'cozinha')" title="Imprimir Comanda Térmica">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                  Comanda
+                </button>
+                <button class="btn-finish-table" type="button" onclick="event.stopPropagation(); finishTable('${t.table}')">Encerrar</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleItemStatus(tableName, iIdx) {
+      const tableObj = getTableData(tableName);
+      const item = tableObj.items[iIdx];
+      if (!item) return;
+      item.status = item.status === 'entregue' ? 'preparo' : 'entregue';
+      const cleanNum = tableName.replace(/\D/g, '');
+      if (cleanNum) {
+        localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tableObj.items));
+      }
+      renderKDS();
+      renderSplitComanda();
+      showToast(`Status: ${item.status === 'entregue' ? 'Entregue na Mesa' : 'Em Preparo na Cozinha'}`);
+    }
+
+    function finishTable(tableName) {
+      if (!confirm(`Deseja realmente encerrar a comanda da ${tableName.toUpperCase()}?`)) return;
+      const cleanNum = tableName.replace(/\D/g, '');
+      if (cleanNum) {
+        localStorage.removeItem(`nolei_table_orders_${cleanNum}`);
+        localStorage.removeItem(`nolei_table_orders_mesa${cleanNum}`);
+      }
+      const found = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase());
+      if (found) found.items = [];
+      renderKDS();
+      renderPosMesaSelector();
+      renderSplitComanda();
+      showToast(`Comanda da ${tableName.toUpperCase()} encerrada com sucesso.`);
     }
 
     // Render Alerts
     function renderAlerts() {
       const container = document.getElementById('alerts-container');
+      if (!container) return;
       const alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
       const waiters = getStoredWaiters();
 
@@ -2033,12 +2400,12 @@
           <div style="display:flex; align-items:center; gap:12px;">
             <span class="alert-tag-table">${a.table.toUpperCase()}</span>
             <div>
-              <strong style="color:#FFFFFF;">${a.type === 'garcom' ? '🔔 Chamado de Garçom na Mesa' : '🧾 Pedido de Fechamento de Conta'}</strong>
+              <strong style="color:#FFFFFF;">${a.type === 'garcom' ? 'Chamado de Garçom na Mesa' : 'Pedido de Fechamento de Conta'}</strong>
               <div style="font-size:0.72rem; color:var(--text-dim);">Registrado: ${a.time || 'Agora'}</div>
             </div>
           </div>
           <div style="display:flex; gap:8px; align-items:center;">
-            ${a.type === 'conta' ? `<button class="btn-resolve-alert" style="background:#059669; border:1px solid #10B981;" onclick="openPrintBillForAlert('${a.table}')">🖨️ Pré-Conta</button>` : ''}
+            ${a.type === 'conta' ? `<button class="btn-resolve-alert" style="background:#059669; border:1px solid #10B981;" onclick="openPrintBillForAlert('${a.table}')">Pré-Conta</button>` : ''}
             <button class="btn-resolve-alert" onclick="resolveAlert('${a.id}')">Atender Chamado</button>
           </div>
         </div>
@@ -2050,130 +2417,45 @@
       alerts = alerts.filter(a => a.id !== alertId);
       localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
       renderAlerts();
-      showToast('Chamado finalizado com sucesso.');
+      showToast('Chamado atendido e finalizado.');
     }
 
-    // Render KDS Tables
-    function renderKDS() {
-      const grid = document.getElementById('kds-grid');
-      const waiters = getStoredWaiters();
-
-      kdsTables.forEach(t => {
-        const cleanNum = t.table.replace(/\D/g, '');
-        const rawNum = parseInt(cleanNum, 10);
-        const candidates = [
-          `nolei_table_orders_${cleanNum}`,
-          `nolei_table_orders_mesa${cleanNum}`,
-          `nolei_table_orders_${rawNum}`,
-          `nolei_table_orders_${t.table.toLowerCase().replace(/\s+/g, '')}`
-        ];
-        for (const key of candidates) {
-          const stored = JSON.parse(localStorage.getItem(key) || 'null');
-          if (stored && Array.isArray(stored) && stored.length > 0) {
-            t.items = stored;
-            break;
-          }
-        }
-      });
-
-      let filtered = kdsTables;
-      if (activeOperatorId !== 'admin') {
-        const op = waiters.find(w => w.id === activeOperatorId);
-        if (op) {
-          filtered = kdsTables.filter(t => op.tables.includes(t.table.toLowerCase()));
-        }
-      }
-
-      document.getElementById('badge-kds-count').textContent = `${filtered.length} Mesas Ativas`;
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-dim);">Nenhuma mesa com pedidos sob sua responsabilidade no momento.</div>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map((t, tIdx) => {
-        let total = 0;
-        t.items.forEach(i => total += (i.priceVal || 0));
-        const isSelected = t.table.toLowerCase() === currentTicketTableName.toLowerCase();
-
-        return `
-          <div class="table-card ${isSelected ? 'selected-table-active' : ''}" onclick="selectPosTable('${t.table}')">
-            <div class="table-card-header">
-              <span class="table-title">${t.table.toUpperCase()}</span>
-              <span class="table-waiter-badge">Garçom: ${t.waiter}</span>
-            </div>
-            <div class="table-order-items">
-              ${t.items.length === 0 ? '<div style="padding:16px; color:var(--text-dim); font-size:0.78rem; text-align:center;">Nenhum item em comanda.</div>' : t.items.map((item, iIdx) => `
-                <div class="order-item-row">
-                  <div class="order-item-info">
-                    <strong>${item.name}</strong>
-                    <span class="order-item-meta">${item.orderedBy || 'Cliente'} • ${item.time || '12:00'} ${item.notes ? '• ' + item.notes : ''}</span>
-                  </div>
-                  <button class="status-badge ${item.status || 'preparo'}" onclick="event.stopPropagation(); toggleItemStatus(${tIdx}, ${iIdx})">
-                    ${item.status === 'entregue' ? 'Entregue' : 'Em Preparo'}
-                  </button>
-                </div>
-              `).join('')}
-            </div>
-            <div class="table-card-footer">
-              <div>
-                <div style="font-size:0.68rem; color:var(--text-dim); text-transform:uppercase;">Subtotal:</div>
-                <div class="table-total">R$ ${total.toFixed(2).replace('.', ',')}</div>
-              </div>
-              <div style="display:flex; gap:6px; align-items:center;">
-                <button class="btn-print-action" type="button" onclick="event.stopPropagation(); openPrintTicketModal('${t.table}', 'cozinha')" title="Imprimir Comanda Térmica">🖨️ Comanda</button>
-                <button class="btn-finish-table" type="button" onclick="event.stopPropagation(); finishTable('${t.table}')">Encerrar</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
+    function openPrintBillForAlert(tableName) {
+      openPrintTicketModal(tableName, 'conta');
     }
 
-    function toggleItemStatus(tIdx, iIdx) {
-      const tableObj = kdsTables[tIdx];
-      const item = tableObj.items[iIdx];
-      item.status = item.status === 'entregue' ? 'preparo' : 'entregue';
-      const cleanNum = tableObj.table.replace(/\D/g, '');
-      if (cleanNum) {
-        localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tableObj.items));
-      }
-      renderKDS();
-      renderPosTicket();
-      showToast(`Status atualizado para: ${item.status === 'entregue' ? 'Entregue na Mesa' : 'Em Preparo'}`);
-    }
-
-    function finishTable(tableName) {
-      const cleanNum = tableName.replace(/\D/g, '');
-      if (cleanNum) {
-        localStorage.removeItem(`nolei_table_orders_${cleanNum}`);
-        localStorage.removeItem(`nolei_table_orders_mesa${cleanNum}`);
-      }
-      const found = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase());
-      if (found) found.items = [];
-      renderKDS();
-      renderPosTicket();
-      showToast(`Comanda da ${tableName.toUpperCase()} encerrada com sucesso.`);
-    }
-
-    // CRUD: Products
+    // Products CRUD & Stock Toggle Switch (Admin vs Waiter)
     function renderProducts() {
       const tbody = document.getElementById('products-table-body');
+      if (!tbody) return;
       const menu = getStoredMenu();
+      const isAdmin = activeOperatorId === 'admin';
       let rows = [];
 
       Object.keys(menu).forEach(cat => {
         (menu[cat] || []).forEach(item => {
+          const isAvailable = item.active !== false;
+
           rows.push(`
             <tr>
               <td><img src="${item.image || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=100&q=80'}" class="table-thumb-img" alt="${item.name}"></td>
               <td><strong>${item.name}</strong></td>
               <td><span style="background:#272A34; padding:3px 8px; border-radius:6px; font-size:0.72rem; text-transform:uppercase;">${cat}</span></td>
               <td><strong style="color:var(--flame-red);">R$ ${(item.priceVal || 0).toFixed(2).replace('.', ',')}</strong></td>
-              <td style="max-width:260px; color:var(--text-dim);">${item.desc || '—'}</td>
+              <td>
+                <label class="switch-toggle-wrap">
+                  <input type="checkbox" class="switch-toggle-input" ${isAvailable ? 'checked' : ''} ${isAdmin ? '' : 'disabled'} onchange="toggleProductAvailability('${cat}', '${item.id}')">
+                  <span class="switch-toggle-slider"></span>
+                  <span class="switch-label-status ${isAvailable ? 'active' : 'inactive'}">
+                    ${isAvailable ? 'Disponível' : 'Esgotado'}
+                  </span>
+                </label>
+              </td>
               <td style="text-align:right;">
-                <button class="btn-edit-action" onclick="openEditProductModal('${cat}', '${item.id}')">Editar</button>
-                <button class="btn-del-action" onclick="deleteProduct('${cat}', '${item.id}')">Excluir</button>
+                ${isAdmin ? `
+                  <button class="btn-edit-action" onclick="openEditProductModal('${cat}', '${item.id}')">Editar</button>
+                  <button class="btn-del-action" onclick="deleteProduct('${cat}', '${item.id}')">Excluir</button>
+                ` : `<span style="font-size:0.72rem; color:var(--text-dim);">Somente Leitura</span>`}
               </td>
             </tr>
           `);
@@ -2183,7 +2465,28 @@
       tbody.innerHTML = rows.join('');
     }
 
+    function toggleProductAvailability(cat, id) {
+      if (activeOperatorId !== 'admin') {
+        showToast('Apenas Administradores podem alterar a disponibilidade de produtos.');
+        return;
+      }
+      const menu = getStoredMenu();
+      const item = (menu[cat] || []).find(i => i.id === id);
+      if (!item) return;
+
+      item.active = item.active === false ? true : false;
+      localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
+      syncProductsToFlatList(menu);
+      renderProducts();
+      renderSplitCatalog();
+      showToast(`Item "${item.name}" marcado como ${item.active ? 'DISPONÍVEL' : 'ESGOTADO'}.`);
+    }
+
     function openNewProductModal() {
+      if (activeOperatorId !== 'admin') {
+        showToast('Apenas administradores podem cadastrar pratos.');
+        return;
+      }
       document.getElementById('edit-prod-id').value = '';
       document.getElementById('modal-product-title').textContent = 'Novo Item no Cardápio';
       document.getElementById('prod-name').value = '';
@@ -2194,6 +2497,7 @@
     }
 
     function openEditProductModal(cat, id) {
+      if (activeOperatorId !== 'admin') return;
       const menu = getStoredMenu();
       const item = (menu[cat] || []).find(i => i.id === id);
       if (!item) return;
@@ -2229,12 +2533,12 @@
         menu[c] = menu[c].filter(i => i.id !== id);
       });
 
-      menu[cat].push({ id, name, priceVal, desc, image, tags: ["Especial"] });
+      menu[cat].push({ id, name, priceVal, desc, image, tags: ["Especial"], active: true });
       localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
       syncProductsToFlatList(menu);
       closeProductModal();
       renderProducts();
-      renderPopularDishes();
+      renderSplitCatalog();
       showToast(`Prato "${name}" salvo com sucesso.`);
     }
 
@@ -2245,13 +2549,14 @@
       localStorage.setItem('nolei_menu_custom', JSON.stringify(menu));
       syncProductsToFlatList(menu);
       renderProducts();
-      renderPopularDishes();
+      renderSplitCatalog();
       showToast('Item removido com sucesso.');
     }
 
     // CRUD: Waiters
     function renderWaiters() {
       const tbody = document.getElementById('waiters-table-body');
+      if (!tbody) return;
       const waiters = getStoredWaiters();
       tbody.innerHTML = waiters.map(w => `
         <tr>
@@ -2300,7 +2605,7 @@
       closeWaiterModal();
       initOperatorDropdown();
       renderWaiters();
-      showToast(`Garçom ${name} cadastrado com sucesso.`);
+      showToast(`Garçom ${name} salvo com sucesso.`);
     }
 
     function deleteWaiter(id) {
@@ -2312,9 +2617,10 @@
       showToast('Garçom removido com sucesso.');
     }
 
-    // Users List
+    // Users History
     function renderUsers() {
       const tbody = document.getElementById('users-table-body');
+      if (!tbody) return;
       const users = [
         { name: "Lucas Silva", phone: "(11) 98765-4321", table: "Mesa 04", status: "Em Atendimento" },
         { name: "Roberto Alves", phone: "(11) 97654-3210", table: "Mesa 02", status: "Em Atendimento" },
@@ -2332,7 +2638,17 @@
       `).join('');
     }
 
-    // Thermal Ticket Printing & POS Logistics
+    // Global Search Handler
+    function handleGlobalSearch(query) {
+      const q = (query || '').toLowerCase().trim();
+      const tableCards = document.querySelectorAll('.table-card');
+      tableCards.forEach(t => {
+        const text = t.textContent.toLowerCase();
+        t.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    // Thermal Printing Logistics
     function openPrintTicketModal(tableName, mode = 'cozinha') {
       currentTicketTableName = tableName;
       currentTicketMode = mode;
@@ -2348,10 +2664,6 @@
         modal.classList.add('open');
         modal.classList.add('show');
       }
-    }
-
-    function openPrintBillForAlert(tableName) {
-      openPrintTicketModal(tableName, 'conta');
     }
 
     function closePrintTicketModal(e) {
@@ -2420,20 +2732,7 @@
       const lineSep = '-'.repeat(width);
       const lines = [];
 
-      const tableObj = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase()) || {
-        table: tableName,
-        waiter: 'Equipe de Atendimento',
-        items: []
-      };
-
-      const cleanNum = tableName.replace(/\D/g, '');
-      if (cleanNum) {
-        const stored = JSON.parse(localStorage.getItem(`nolei_table_orders_${cleanNum}`) || 'null');
-        if (stored && Array.isArray(stored) && stored.length > 0) {
-          tableObj.items = stored;
-        }
-      }
-
+      const tableObj = getTableData(tableName);
       const restName = (companyData && companyData.name) ? companyData.name.toUpperCase() : 'BOTÂNICO BISTRÔ & GASTRONOMIA';
       const restAddress = (companyData && companyData.address) ? companyData.address : 'Av. Des. Moreira, 1701 - Aldeota';
       const now = new Date();
@@ -2536,8 +2835,6 @@
             
             if (it.notes || it.obs) {
               lines.push(`    >>> OBS: ${it.notes || it.obs}`);
-            } else if (idx % 2 === 0) {
-              lines.push(`    >>> OBS: Ponto da casa / sem cebola`);
             }
             lines.push('');
           });
@@ -2568,7 +2865,7 @@
       printArea.className = currentPaperSize === '58' ? 'size-58mm' : '';
       printArea.innerHTML = `<pre style="font-family:'Courier New', Courier, monospace; white-space:pre-wrap; margin:0; line-height:1.3; font-size:${currentPaperSize === '58' ? '8.5pt' : '10pt'};">${ticketText}</pre>`;
       
-      showToast(`Enviando comanda da ${currentTicketTableName.toUpperCase()} para a impressora...`);
+      showToast(`Enviando comanda da ${currentTicketTableName.toUpperCase()} para impressão...`);
       setTimeout(() => {
         window.print();
       }, 150);
@@ -2579,9 +2876,7 @@
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(ticketText).then(() => {
           showToast('Texto da comanda copiado para a área de transferência!');
-        }).catch(() => {
-          fallbackCopy(ticketText);
-        });
+        }).catch(() => fallbackCopy(ticketText));
       } else {
         fallbackCopy(ticketText);
       }
@@ -2610,10 +2905,11 @@
 
     // Initializations
     initOperatorDropdown();
-    renderPopularDishes();
     renderKDS();
-    renderPosTicket();
     renderAlerts();
+    renderPosMesaSelector();
+    renderSplitComanda();
+    renderSplitCatalog();
     renderProducts();
     renderWaiters();
     renderUsers();
@@ -2621,8 +2917,9 @@
     // Live Sync Polling
     setInterval(() => {
       renderKDS();
-      renderPosTicket();
       renderAlerts();
+      renderPosMesaSelector();
+      renderSplitComanda();
     }, 2000);
   </script>
 </body>

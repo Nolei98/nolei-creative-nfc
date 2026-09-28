@@ -2460,9 +2460,13 @@
         statusPill.innerHTML = isOccupied ? 'Em Consumo' : 'Disponível / Livre';
       }
 
+      const cleanNum = currentTicketTableName.replace(/\D/g, '');
+      const cfg = JSON.parse(localStorage.getItem(`nolei_table_config_${cleanNum}`) || 'null');
+      const hostInfo = cfg ? ` • Titular: ${cfg.hostName} 👑 (${(cfg.members || []).length} conectados)` : '';
+
       if (waiterEl) waiterEl.innerHTML = `
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Atendente: ${tObj.waiter} • Salão Principal
+        Atendente: ${tObj.waiter}${hostInfo}
       `;
 
       let subtotal = 0;

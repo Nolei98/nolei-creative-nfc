@@ -395,48 +395,126 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
 
-    .user-info-left {
+    /* Table Host & Connected Guests Bar */
+    .table-host-bar {
+      background: linear-gradient(135deg, rgba(255, 77, 48, 0.12) 0%, rgba(255, 107, 53, 0.05) 100%);
+      border: 1px solid rgba(255, 77, 48, 0.28);
+      border-radius: var(--radius-md);
+      padding: 11px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    }
+    .table-host-bar.guest-mode {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.05) 100%);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .host-info-wrap {
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
     }
 
-    .user-avatar-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--flame-gradient);
-      color: #FFFFFF;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 0.85rem;
+    .host-crown-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #272A34;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .user-text-label {
+    .host-title-text {
       font-size: 0.82rem;
-      font-weight: 700;
+      font-weight: 800;
       color: #FFFFFF;
+      line-height: 1.2;
     }
 
-    .user-text-sub {
+    .host-status-sub {
       font-size: 0.70rem;
       color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    .btn-switch-user {
-      background: none;
-      border: none;
-      color: var(--flame-red);
-      font-size: 0.76rem;
+    .btn-manage-table-host {
+      background: #272A34;
+      border: 1px solid var(--border-dark);
+      color: #FFFFFF;
+      font-size: 0.72rem;
       font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 8px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn-manage-table-host:hover {
+      background: var(--flame-gradient);
+      border-color: transparent;
+      box-shadow: 0 2px 8px var(--flame-glow);
+    }
+
+    .member-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .switch-toggle-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .switch-toggle-input {
+      display: none;
+    }
+    .switch-toggle-slider {
+      width: 38px;
+      height: 20px;
+      background: #333846;
+      border-radius: 20px;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .switch-toggle-slider::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+    }
+    .switch-toggle-input:checked + .switch-toggle-slider {
+      background: var(--emerald);
+    }
+    .switch-toggle-input:checked + .switch-toggle-slider::after {
+      transform: translateX(18px);
     }
 
     /* Shared Table Order Summary Box */
@@ -961,6 +1039,20 @@
       </button>
     </div>
 
+    <!-- Table Host & Multi-Device Connected Bar -->
+    <div class="table-host-bar" id="table-host-bar">
+      <div class="host-info-wrap">
+        <div class="host-crown-badge" id="host-avatar-icon">👑</div>
+        <div>
+          <div class="host-title-text" id="host-banner-title">Você é o Dono da Mesa 04</div>
+          <div class="host-status-sub" id="host-banner-status">🔓 Pedidos liberados para todos na mesa</div>
+        </div>
+      </div>
+      <button class="btn-manage-table-host" onclick="openTableHostModal()" id="btn-host-modal-trigger">
+        ⚙️ Gerenciar (1)
+      </button>
+    </div>
+
     <!-- User Profile Bar -->
     <div class="user-profile-bar" id="user-profile-bar">
       <div class="user-info-left">
@@ -1044,6 +1136,59 @@
         <input type="tel" id="reg-phone" class="form-input" placeholder="(11) 98765-4321" value="(11) 98765-4321">
       </div>
       <button class="btn-submit-auth" onclick="handleSimpleAuth()">Confirmar Identificação</button>
+    </div>
+  </div>
+
+  <!-- Modal de Gestão da Mesa & Participantes (Host Controller) -->
+  <div class="modal-overlay" id="table-host-modal" onclick="closeTableHostModal(event)">
+    <div class="modal-card" style="max-width:480px;" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <div>
+          <h3 class="modal-title" style="display:flex; align-items:center; gap:8px;">
+            <span>👑</span> Gestão da Mesa & Participantes
+          </h3>
+          <p class="modal-sub">Controle quem pode enviar pedidos para a comanda desta mesa.</p>
+        </div>
+        <button onclick="closeTableHostModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+
+      <!-- Quick Easy Permission Switch -->
+      <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+          <div>
+            <strong style="color:#FFFFFF; font-size:0.86rem; display:block;">Permitir Pedidos de Outros Celulares</strong>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Amigos conectados na mesa podem pedir pratos diretamente</span>
+          </div>
+          <label class="switch-toggle-wrap" style="margin-left:10px;">
+            <input type="checkbox" id="host-toggle-allow-guests" class="switch-toggle-input" onchange="toggleGuestOrdering(this.checked)">
+            <span class="switch-toggle-slider"></span>
+          </label>
+        </div>
+        <div id="host-permission-hint" style="font-size:0.70rem; color:var(--emerald); font-weight:600;">
+          ✓ Ativo: Todos os dispositivos na mesa podem escolher pratos.
+        </div>
+      </div>
+
+      <!-- Connected Members List -->
+      <div style="margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim); text-transform:uppercase;">Pessoas Conectadas nesta Mesa</span>
+          <span style="font-size:0.72rem; color:var(--emerald); font-weight:700;" id="modal-members-count">2 pessoas</span>
+        </div>
+        <div id="modal-members-list" style="display:flex; flex-direction:column; gap:8px; max-height:220px; overflow-y:auto;">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" class="btn-manage-table-host" style="width:100%; justify-content:center; padding:10px; background:#1C1E24;" onclick="simulateAddFriendToTable()">
+          + Simular Conexão de Convidado na Mesa
+        </button>
+        <button type="button" class="btn-submit-auth" onclick="closeTableHostModal()">
+          Concluir
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1204,6 +1349,197 @@
       localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
     }
 
+    // Table Host & Connected Members Configuration
+    const tableConfigKey = `nolei_table_config_${cleanMesaNum}`;
+    function getTableConfig() {
+      let cfg = JSON.parse(localStorage.getItem(tableConfigKey) || 'null');
+      if (!cfg) {
+        cfg = {
+          hostName: "Lucas Silva",
+          hostPhone: "(11) 98765-4321",
+          allowGuestsToOrder: true, // If true, anyone on table can order from their device. If false, only Host can order.
+          members: [
+            { name: "Lucas Silva", phone: "(11) 98765-4321", isHost: true, joinedAt: "14:10" },
+            { name: "Camila Alves", phone: "(11) 98888-2233", isHost: false, joinedAt: "14:18" }
+          ]
+        };
+        localStorage.setItem(tableConfigKey, JSON.stringify(cfg));
+      }
+      return cfg;
+    }
+
+    function saveTableConfig(cfg) {
+      localStorage.setItem(tableConfigKey, JSON.stringify(cfg));
+      updateTableHostUI();
+    }
+
+    function isCurrentUserHost() {
+      const cfg = getTableConfig();
+      if (!currentUser) return false;
+      return currentUser.name.toLowerCase() === (cfg.hostName || '').toLowerCase();
+    }
+
+    // Update Table Host Banner & Status
+    function updateTableHostUI() {
+      const cfg = getTableConfig();
+      const isHost = isCurrentUserHost();
+      const bar = document.getElementById('table-host-bar');
+      const titleEl = document.getElementById('host-banner-title');
+      const statusEl = document.getElementById('host-banner-status');
+      const iconEl = document.getElementById('host-avatar-icon');
+      const triggerBtn = document.getElementById('btn-host-modal-trigger');
+
+      if (!bar) return;
+
+      if (isHost) {
+        bar.className = 'table-host-bar';
+        if (iconEl) iconEl.textContent = '👑';
+        if (titleEl) titleEl.textContent = `Você é o Dono da ${tableName.toUpperCase()}`;
+        if (statusEl) {
+          statusEl.textContent = cfg.allowGuestsToOrder 
+            ? '🔓 Pedidos liberados para todos na mesa' 
+            : '🔒 Somente você pode enviar pedidos da mesa';
+        }
+        if (triggerBtn) triggerBtn.innerHTML = `⚙️ Gerenciar (${(cfg.members || []).length})`;
+      } else {
+        bar.className = 'table-host-bar guest-mode';
+        if (iconEl) iconEl.textContent = '👥';
+        if (titleEl) titleEl.textContent = `Conectado na Mesa de ${cfg.hostName} 👑`;
+        if (statusEl) {
+          statusEl.textContent = cfg.allowGuestsToOrder 
+            ? '🔓 Você pode escolher e enviar pedidos' 
+            : '🔒 Aguardando liberação do titular para pedir';
+        }
+        if (triggerBtn) triggerBtn.innerHTML = `Mesa (${(cfg.members || []).length})`;
+      }
+    }
+
+    // Table Host Modal Management
+    function openTableHostModal() {
+      const cfg = getTableConfig();
+      const isHost = isCurrentUserHost();
+      const modal = document.getElementById('table-host-modal');
+      const toggle = document.getElementById('host-toggle-allow-guests');
+      const hint = document.getElementById('host-permission-hint');
+      const countEl = document.getElementById('modal-members-count');
+      const listEl = document.getElementById('modal-members-list');
+
+      if (toggle) {
+        toggle.checked = cfg.allowGuestsToOrder !== false;
+        toggle.disabled = !isHost;
+      }
+      if (hint) {
+        if (!isHost) {
+          hint.innerHTML = `<span style="color:#FBBF24;">Modo Leitura: Apenas o titular (${cfg.hostName}) pode alterar esta permissão.</span>`;
+        } else {
+          hint.innerHTML = cfg.allowGuestsToOrder 
+            ? '<span style="color:var(--emerald);">✓ Ativo: Todos os dispositivos na mesa podem escolher pratos.</span>' 
+            : '<span style="color:#FB923C;">🔒 Restrito: Apenas o titular pode enviar pedidos na mesa.</span>';
+        }
+      }
+
+      if (countEl) countEl.textContent = `${(cfg.members || []).length} pessoas conectadas`;
+
+      if (listEl) {
+        listEl.innerHTML = (cfg.members || []).map(m => {
+          const isThisUser = currentUser && m.name.toLowerCase() === currentUser.name.toLowerCase();
+          return `
+            <div class="member-item-row">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:32px; height:32px; border-radius:50%; background:${m.isHost ? 'var(--flame-gradient)' : '#272A34'}; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.80rem;">
+                  ${m.isHost ? '👑' : m.name.charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">
+                    ${m.name} ${isThisUser ? '<span style="font-size:0.70rem; color:var(--emerald);">(Você)</span>' : ''}
+                  </div>
+                  <div style="font-size:0.68rem; color:var(--text-dim);">Conectado às ${m.joinedAt || '14:00'}</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:6px; align-items:center;">
+                ${m.isHost ? `
+                  <span style="font-size:0.68rem; font-weight:800; background:rgba(255,77,48,0.2); color:var(--flame-red); padding:3px 8px; border-radius:6px;">TITULAR</span>
+                ` : `
+                  ${isHost ? `
+                    <button class="btn-manage-table-host" style="font-size:0.68rem; padding:4px 8px;" onclick="transferHost('${m.name}')">Passar Titular</button>
+                  ` : `
+                    <button class="btn-manage-table-host" style="font-size:0.68rem; padding:4px 8px;" onclick="switchActiveProfile('${m.name}', '${m.phone || ''}')">Usar Perfil</button>
+                  `}
+                `}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeTableHostModal(e) {
+      if (e && e.target && e.target.id !== 'table-host-modal' && !e.target.hasAttribute('onclick')) return;
+      const modal = document.getElementById('table-host-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function toggleGuestOrdering(allow) {
+      if (!isCurrentUserHost()) {
+        showToast('Apenas o Dono da Mesa pode alterar permissões.');
+        return;
+      }
+      const cfg = getTableConfig();
+      cfg.allowGuestsToOrder = allow;
+      saveTableConfig(cfg);
+      
+      const hint = document.getElementById('host-permission-hint');
+      if (hint) {
+        hint.innerHTML = allow 
+          ? '<span style="color:var(--emerald);">✓ Ativo: Todos os dispositivos na mesa podem escolher pratos.</span>' 
+          : '<span style="color:#FB923C;">🔒 Restrito: Apenas o titular pode enviar pedidos na mesa.</span>';
+      }
+
+      dispatchNotification('abertura', 'Permissão da Mesa Alterada', `${tableName.toUpperCase()}: ${allow ? 'Pedidos coletivos liberados para todos.' : 'Pedidos restritos somente ao titular.'}`);
+      showToast(allow ? 'Pedidos liberados para outros celulares na mesa!' : 'Pedidos agora restritos apenas a você.');
+    }
+
+    function simulateAddFriendToTable() {
+      const cfg = getTableConfig();
+      const mockFriends = ["Roberto Alves", "Patrícia Mendes", "Bruno Santos", "Juliana Costa"];
+      const nextFriend = mockFriends.find(f => !cfg.members.some(m => m.name === f)) || `Amigo da Mesa ${cfg.members.length + 1}`;
+      
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      
+      cfg.members.push({
+        name: nextFriend,
+        phone: "(11) 97777-8888",
+        isHost: false,
+        joinedAt: timeStr
+      });
+      saveTableConfig(cfg);
+      openTableHostModal();
+      dispatchNotification('abertura', 'Novo Participante Conectado', `${nextFriend} conectou-se à ${tableName.toUpperCase()}.`);
+      showToast(`"${nextFriend}" conectou-se à mesa!`);
+    }
+
+    function switchActiveProfile(name, phone) {
+      currentUser = { name, phone };
+      localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+      updateUserUI();
+      updateTableHostUI();
+      closeTableHostModal();
+      showToast(`Agora você está usando o dispositivo de: ${name}`);
+    }
+
+    function transferHost(targetName) {
+      const cfg = getTableConfig();
+      cfg.hostName = targetName;
+      cfg.members.forEach(m => m.isHost = (m.name === targetName));
+      saveTableConfig(cfg);
+      openTableHostModal();
+      dispatchNotification('abertura', 'Titularidade Transferida', `${targetName} agora é o novo Dono da ${tableName.toUpperCase()}.`);
+      showToast(`Titularidade da mesa transferida para ${targetName}!`);
+    }
+
     // Shared Table Orders
     const storageKey = `nolei_table_orders_${cleanMesaNum}`;
     let tableOrders = JSON.parse(
@@ -1223,7 +1559,7 @@
     if (tableOrders.length === 0) {
       tableOrders = [
         { id: "p3", name: "Burger Botânico Artesanal", priceVal: 45.90, price: "R$ 45,90", orderedBy: "Lucas Silva", time: "14:15", status: "preparo" },
-        { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, price: "R$ 38,00", orderedBy: "Camila", time: "14:18", status: "entregue" },
+        { id: "b2", name: "Gin Tônica Botânica", priceVal: 38.00, price: "R$ 38,00", orderedBy: "Camila Alves", time: "14:18", status: "entregue" },
         { id: "e1", name: "Bruschetta Caprese", priceVal: 28.90, price: "R$ 28,90", orderedBy: "Lucas Silva", time: "14:10", status: "entregue" }
       ];
       syncOrdersToStorage(tableOrders);
@@ -1349,7 +1685,18 @@
       renderCategory(category);
     }
 
+    // Add Item with Host & Guest Permission Checks
     function addItemToTable(id, name, priceVal) {
+      const cfg = getTableConfig();
+      const isHost = isCurrentUserHost();
+
+      // Check if guests are allowed to order
+      if (!isHost && cfg.allowGuestsToOrder === false) {
+        showToast(`🔒 Apenas o titular da mesa (${cfg.hostName}) pode enviar pedidos no momento.`);
+        openTableHostModal();
+        return;
+      }
+
       const now = new Date();
       const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
       const clientName = currentUser ? currentUser.name : 'Cliente da Mesa';
@@ -1365,6 +1712,7 @@
 
       syncOrdersToStorage(tableOrders);
       updateTableOrdersUI();
+      dispatchNotification('pedido', 'Novo Item Pedido', `${tableName.toUpperCase()} pediu "${name}" (Por: ${clientName}).`);
       showToast(`"${name}" adicionado à comanda!`);
     }
 
@@ -1431,32 +1779,17 @@
     }
 
     function finalizeTableOrder() {
+      const cfg = getTableConfig();
+      if (!isCurrentUserHost() && cfg.allowGuestsToOrder === false) {
+        showToast(`🔒 Apenas o titular da mesa (${cfg.hostName}) pode enviar pedidos.`);
+        return;
+      }
       if (tableOrders.length === 0) {
         showToast('Adicione ao menos um item ao cardápio antes de enviar.');
         return;
       }
       dispatchNotification('pedido', 'Itens Confirmados na Mesa', `${tableName.toUpperCase()} confirmou o envio de ${tableOrders.length} itens para a cozinha.`);
       showToast('Pedidos confirmados e enviados para a cozinha!');
-    }
-
-    function addItemToTable(id, name, priceVal) {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-      const clientName = currentUser ? currentUser.name : 'Cliente da Mesa';
-
-      tableOrders.push({
-        id: id,
-        name: name,
-        priceVal: priceVal,
-        orderedBy: clientName,
-        time: timeStr,
-        status: "preparo"
-      });
-
-      syncOrdersToStorage(tableOrders);
-      updateTableOrdersUI();
-      dispatchNotification('pedido', 'Novo Item Pedido', `${tableName.toUpperCase()} pediu "${name}" (Por: ${clientName}).`);
-      showToast(`"${name}" adicionado à comanda!`);
     }
 
     // Modals
@@ -1476,6 +1809,7 @@
       currentUser = { name, phone };
       localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
       updateUserUI();
+      updateTableHostUI();
       closeAuthModal();
       dispatchNotification('abertura', 'Cliente Identificado', `${tableName.toUpperCase()} foi iniciada por ${name} (${phone}).`);
       showToast(`Bem-vindo, ${name}!`);
@@ -1507,6 +1841,7 @@
 
     // Init Session
     updateUserUI();
+    updateTableHostUI();
     updateTableOrdersUI();
     renderCategory('entradas');
 
@@ -1534,6 +1869,7 @@
           showToast('Esta mesa foi encerrada pelo restaurante e está livre para nova abertura.');
         }
       }
+      updateTableHostUI();
     }, 2000);
   </script>
 </body>

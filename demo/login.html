@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Portal de Acesso Unificado • Nolei Phygital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-base: #0D0E12;
+      --bg-card: #16171D;
+      --bg-card-inner: #1C1E26;
+      --border-dark: #272A34;
+      --border-focus: #FF4D30;
+      --flame-red: #FF4D30;
+      --flame-orange: #FF7426;
+      --flame-gradient: linear-gradient(135deg, #FF4D30 0%, #FF7426 100%);
+      --flame-glow: rgba(255, 77, 48, 0.35);
+      --gold-gradient: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      --text-white: #FFFFFF;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --emerald: #10B981;
+      --amber: #F59E0B;
+      --blue: #3B82F6;
+      --radius-xl: 20px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255, 77, 48, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-dark);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--flame-red);
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 460px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl);
+      padding: 32px 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--flame-gradient);
+    }
+
+    /* Brand Header */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .brand-logo-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px var(--flame-glow);
+      margin-bottom: 12px;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.80rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Role Switcher Tabs */
+    .role-tabs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      background: var(--bg-base);
+      padding: 5px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-dark);
+      margin-bottom: 22px;
+    }
+
+    .role-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 9px 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .role-tab-btn span.tab-icon {
+      font-size: 1.1rem;
+    }
+
+    .role-tab-btn.active {
+      background: var(--bg-card);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-dark);
+    }
+
+    .role-tab-btn.active[data-role="ADMIN"] {
+      border-color: rgba(255, 77, 48, 0.4);
+      color: var(--flame-red);
+    }
+    .role-tab-btn.active[data-role="GARCOM"] {
+      border-color: rgba(59, 130, 246, 0.4);
+      color: #60A5FA;
+    }
+    .role-tab-btn.active[data-role="CLIENTE"] {
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #FBBF24;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .form-label span.hint {
+      color: var(--text-dim);
+      font-weight: 400;
+      font-size: 0.70rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--flame-red);
+      box-shadow: 0 0 0 3px rgba(255, 77, 48, 0.15);
+    }
+
+    /* Role Banner Info */
+    .role-info-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .role-info-card strong {
+      color: #FFFFFF;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    /* Quick Shortcut Pills */
+    .shortcuts-section {
+      margin-top: 18px;
+      border-top: 1px dashed var(--border-dark);
+      padding-top: 14px;
+    }
+
+    .shortcuts-title {
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .shortcuts-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .shortcut-chip {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .shortcut-chip:hover {
+      border-color: var(--flame-red);
+      color: #FFFFFF;
+      background: #232630;
+    }
+
+    /* Submit Button */
+    .btn-login-cta {
+      width: 100%;
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 13px 20px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      box-shadow: 0 4px 15px var(--flame-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      margin-top: 6px;
+    }
+
+    .btn-login-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--flame-glow);
+    }
+
+    .btn-login-cta:active {
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    .login-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.74rem;
+      color: var(--text-dim);
+    }
+
+    .login-footer a {
+      color: var(--flame-red);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #272A34;
+      color: #FFFFFF;
+      border: 1px solid var(--border-dark);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.80rem;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s;
+    }
+    .toast-box.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    
+    <!-- Brand Header -->
+    <div class="brand-header">
+      <div class="brand-logo-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">Botânico Bistrô</h1>
+      <p class="brand-subtitle">Portal Unificado de Autenticação • Nolei Phygital</p>
+    </div>
+
+    <!-- Role Picker Tabs -->
+    <div class="role-tabs-grid">
+      <button class="role-tab-btn active" data-role="ADMIN" onclick="selectRole('ADMIN')">
+        <span class="tab-icon">👑</span>
+        <span>Admin</span>
+      </button>
+      <button class="role-tab-btn" data-role="GARCOM" onclick="selectRole('GARCOM')">
+        <span class="tab-icon">👔</span>
+        <span>Garçom</span>
+      </button>
+      <button class="role-tab-btn" data-role="CLIENTE" onclick="selectRole('CLIENTE')">
+        <span class="tab-icon">⭐</span>
+        <span>Cliente</span>
+      </button>
+    </div>
+
+    <!-- Role Info Card -->
+    <div class="role-info-card" id="role-info-banner">
+      <div style="font-size:1.3rem;" id="role-info-icon">👑</div>
+      <div>
+        <strong id="role-info-title">Perfil de Administrador</strong>
+        <span id="role-info-desc">Controle financeiro, ROI, gestão de cardápio, estoque e cadastro de usuários RBAC.</span>
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" onsubmit="handleLoginSubmit(event)">
+      <div class="form-group">
+        <label class="form-label">
+          <span>Identificação / WhatsApp</span>
+          <span class="hint" id="login-id-hint">Telefone ou Usuário</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <input type="text" id="login-identifier" class="form-control" placeholder="(11) 99999-0000" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          <span>PIN / Senha de Acesso</span>
+          <span class="hint">4 a 6 dígitos</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="login-pin" class="form-control" placeholder="••••" maxlength="6" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-login-cta">
+        <span>Acessar Painel</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </form>
+
+    <!-- Quick Demo Shortcuts -->
+    <div class="shortcuts-section">
+      <div class="shortcuts-title">Atalhos Rápidos de Demonstração:</div>
+      <div class="shortcuts-grid">
+        <button type="button" class="shortcut-chip" onclick="quickFill('ADMIN', '(11) 99999-0000', '1234')">👑 Admin Geral</button>
+        <button type="button" class="shortcut-chip" onclick="quickFill('GARCOM', '(11) 98111-2233', '1001')">👔 Garçom Carlos</button>
+        <button type="button" class="shortcut-chip" onclick="quickFill('GARCOM', '(11) 98222-3344', '1002')">👔 Garçom Mariana</button>
+        <button type="button" class="shortcut-chip" onclick="quickFill('CLIENTE', '(11) 98765-4321', '4321')">⭐ Cliente Lucas</button>
+        <button type="button" class="shortcut-chip" onclick="quickFill('CLIENTE', '(11) 95555-1234', '1234')">⭐ VIP Eduardo</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="login-footer">
+    Desenvolvido por <strong>Nolei Phygital</strong> • <a href="/demo/painel-restaurante.html">Acesso Direto POS</a>
+  </footer>
+
+  <div class="toast-box" id="toast-box"></div>
+
+  <script>
+    let currentRole = 'ADMIN';
+
+    const roleConfig = {
+      ADMIN: {
+        icon: '👑',
+        title: 'Perfil de Administrador',
+        desc: 'Acesso total: métricas ROI, faturamento, estoque de cardápio e gestão RBAC.',
+        defaultId: '(11) 99999-0000',
+        defaultPin: '1234',
+        btnText: 'Acessar Gestão Admin'
+      },
+      GARCOM: {
+        icon: '👔',
+        title: 'Perfil de Atendimento / Garçom',
+        desc: 'Visão operacional: mesas atribuídas, KDS do salão, chamados e lançamento rápido.',
+        defaultId: '(11) 98111-2233',
+        defaultPin: '1001',
+        btnText: 'Acessar Salão / Mesas'
+      },
+      CLIENTE: {
+        icon: '⭐',
+        title: 'Perfil do Cliente Gourmet',
+        desc: 'Comanda digital da mesa, histórico de pedidos e Clube Fidelidade VIP.',
+        defaultId: '(11) 98765-4321',
+        defaultPin: '4321',
+        btnText: 'Acessar Cardápio da Mesa'
+      }
+    };
+
+    function selectRole(role) {
+      currentRole = role;
+      document.querySelectorAll('.role-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.role === role);
+      });
+
+      const conf = roleConfig[role];
+      document.getElementById('role-info-icon').textContent = conf.icon;
+      document.getElementById('role-info-title').textContent = conf.title;
+      document.getElementById('role-info-desc').textContent = conf.desc;
+
+      const btnCta = document.querySelector('.btn-login-cta span');
+      if (btnCta) btnCta.textContent = conf.btnText;
+
+      document.getElementById('login-identifier').value = conf.defaultId;
+      document.getElementById('login-pin').value = conf.defaultPin;
+    }
+
+    function quickFill(role, phone, pin) {
+      selectRole(role);
+      document.getElementById('login-identifier').value = phone;
+      document.getElementById('login-pin').value = pin;
+      showToast(`Preenchido: ${role} (${phone})`);
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const identifier = document.getElementById('login-identifier').value.trim();
+      const pin = document.getElementById('login-pin').value.trim();
+
+      showToast(`Autenticando ${currentRole}...`);
+
+      setTimeout(() => {
+        if (currentRole === 'ADMIN') {
+          sessionStorage.setItem('nolei_session_user', JSON.stringify({ role: 'ADMIN', name: 'Administrador Geral', phone: identifier }));
+          window.location.href = '/demo/painel-restaurante.html';
+        } else if (currentRole === 'GARCOM') {
+          // Identify waiter
+          const waiterName = identifier.includes('98111') ? 'Carlos Eduardo' : identifier.includes('98222') ? 'Mariana Souza' : 'Lucas Ferreira';
+          sessionStorage.setItem('nolei_session_user', JSON.stringify({ role: 'GARCOM', name: waiterName, phone: identifier }));
+          window.location.href = '/demo/painel-restaurante.html';
+        } else {
+          const clientName = identifier.includes('95555') ? 'Eduardo Camargo' : 'Lucas Silva';
+          sessionStorage.setItem('nolei_session_user', JSON.stringify({ role: 'CLIENTE', name: clientName, phone: identifier }));
+          window.location.href = '/demo/cardapio.html?source=nfc&mesa=04';
+        }
+      }, 500);
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast-box');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Initialize with Admin
+    selectRole('ADMIN');
+  </script>
+</body>
+</html>

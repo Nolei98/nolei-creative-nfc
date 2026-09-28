@@ -61,11 +61,29 @@
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
 
+    /* Thematic Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #121316;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #272A34;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 77, 48, 0.25);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--flame-red);
+    }
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      scrollbar-width: thin;
+      scrollbar-color: #272A34 #121316;
     }
 
     body {
@@ -79,6 +97,285 @@
       -webkit-font-smoothing: antialiased;
       padding-bottom: 120px;
       background-image: radial-gradient(circle at 50% 5%, rgba(255, 77, 48, 0.04) 0%, transparent 60%);
+    }
+
+    /* Navigation Drawer Menu */
+    .nav-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 11, 14, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 9998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .nav-drawer-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-drawer-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 320px;
+      max-width: 85vw;
+      background: #18191E;
+      border-right: 1px solid var(--border-dark);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 10px 0 40px rgba(0, 0, 0, 0.6);
+      overflow-y: auto;
+    }
+    .nav-drawer-overlay.open .nav-drawer-panel {
+      transform: translateX(0);
+    }
+
+    .nav-drawer-header {
+      padding: 20px 18px 16px;
+      border-bottom: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #15161B;
+    }
+
+    .nav-drawer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-drawer-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--flame-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px var(--flame-glow);
+    }
+
+    .nav-drawer-user-card {
+      margin: 14px 16px 10px;
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-drawer-menu-list {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 12px;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .nav-drawer-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: all 0.15s;
+    }
+    .nav-drawer-item:hover {
+      background: #22252E;
+      color: #FFFFFF;
+      border-color: var(--border-dark);
+    }
+    .nav-drawer-item.highlight {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #FBBF24;
+    }
+    .nav-drawer-item-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #252832;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #FFFFFF;
+    }
+
+    .nav-drawer-footer {
+      padding: 16px;
+      border-top: 1px solid var(--border-dark);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: center;
+      background: #141518;
+    }
+
+    /* Presence Geofence / Space Validation Badge */
+    .geofence-validation-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: #34D399;
+      margin-top: 8px;
+    }
+
+    /* Comanda Collapsible Styles */
+    .btn-toggle-collapse {
+      background: #272A34;
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-toggle-collapse:hover {
+      background: #333846;
+      color: #FFFFFF;
+    }
+    .table-order-card.is-collapsed .order-items-list {
+      display: none;
+    }
+    .table-order-card.is-collapsed {
+      padding: 12px 16px;
+    }
+    .collapsed-comanda-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding-top: 4px;
+    }
+    .table-order-card.is-collapsed .collapsed-comanda-banner {
+      display: flex;
+    }
+
+    /* Storytelling Switcher & Gourmet Mode */
+    .storytelling-mode-toggle {
+      display: flex;
+      background: #18191E;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 3px;
+      margin-bottom: 14px;
+      gap: 4px;
+    }
+    .story-mode-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 9px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .story-mode-btn.active {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 2px 10px var(--flame-glow);
+    }
+
+    /* Storytelling Gourmet Dish Card */
+    .story-dish-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .story-dish-card:hover {
+      border-color: rgba(255, 77, 48, 0.4);
+      transform: translateY(-2px);
+    }
+    .story-dish-hero-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      position: relative;
+    }
+    .story-dish-body {
+      padding: 16px;
+    }
+    .story-concept-quote {
+      font-size: 0.80rem;
+      font-style: italic;
+      color: #E2E8F0;
+      line-height: 1.45;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid var(--flame-red);
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      margin: 10px 0;
+    }
+    .story-pairing-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 0.74rem;
+      color: #FBBF24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .story-sensory-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .story-sensory-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: #272A34;
+      color: #CBD5E1;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-dark);
     }
 
     /* Splash Screen */
@@ -1442,13 +1739,109 @@
     <div style="font-size:1.05rem; font-weight:700;" id="splash-text">Conectando à Comanda da Mesa...</div>
   </div>
 
+  <!-- Navigation Drawer Menu (Menu Lateral Completo sem bugs de sumir) -->
+  <div class="nav-drawer-overlay" id="demo-nav-drawer" onclick="closeNavDrawer(event)">
+    <div class="nav-drawer-panel" onclick="event.stopPropagation()">
+      <div class="nav-drawer-header">
+        <div class="nav-drawer-brand">
+          <div class="nav-drawer-logo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading); font-weight:800; color:#FFFFFF; font-size:0.95rem;">Botânico Bistrô</div>
+            <div style="font-size:0.70rem; color:var(--text-muted);" id="drawer-table-name">Mesa 04 • Atendimento Ativo</div>
+          </div>
+        </div>
+        <button type="button" onclick="closeNavDrawer()" style="background:none; border:none; color:var(--text-dim); font-size:1.5rem; cursor:pointer; line-height:1;">&times;</button>
+      </div>
+
+      <!-- Drawer User Mini Bar -->
+      <div class="nav-drawer-user-card" onclick="openAuthModal(); closeNavDrawer();" style="cursor:pointer;" title="Toque para alterar identificação">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:34px; height:34px; border-radius:50%; background:var(--flame-gradient); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem;" id="drawer-user-avatar">
+            L
+          </div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;" id="drawer-user-name">Lucas Silva</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);" id="drawer-user-phone">(11) 98765-4321</div>
+          </div>
+        </div>
+        <span style="font-size:0.68rem; font-weight:700; color:var(--flame-red); background:rgba(255,77,48,0.12); padding:3px 8px; border-radius:6px;">Alterar</span>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="nav-drawer-menu-list">
+        <button type="button" class="nav-drawer-item highlight" onclick="openLoyaltyModal(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon" style="background:rgba(245,158,11,0.2); color:#FBBF24;">🏆</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FBBF24;">Clube Gourmet Fidelidade</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);" id="drawer-loyalty-sub">320 pts • 6 de 10 selos</div>
+          </div>
+        </button>
+
+        <button type="button" class="nav-drawer-item" onclick="openTableHostModal(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon">👑</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">Dono da Mesa & Amigos</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Gerenciar pedidos conectados</div>
+          </div>
+        </button>
+
+        <button type="button" class="nav-drawer-item" onclick="openRecentOrdersModal(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon">🕒</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">Meus Pedidos Recentes</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Histórico de visitas anteriores</div>
+          </div>
+        </button>
+
+        <button type="button" class="nav-drawer-item" onclick="toggleStorytellingFromDrawer(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon">📖</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;" id="drawer-story-mode-label">Modo Storytelling Gourmet</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">História dos pratos & harmonizações</div>
+          </div>
+        </button>
+
+        <button type="button" class="nav-drawer-item" onclick="copyWifiInfo(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon" style="background:rgba(59,130,246,0.2); color:#60A5FA;">📶</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">Wi-Fi da Casa</div>
+            <div style="font-size:0.68rem; color:#93C5FD;">Botanico_5G (Copiar Senha)</div>
+          </div>
+        </button>
+
+        <button type="button" class="nav-drawer-item" onclick="chamarGarcom(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon" style="background:rgba(255,107,53,0.2); color:#FB923C;">🔔</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">Chamar Atendente</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Solicitar garçom no salão</div>
+          </div>
+        </button>
+
+        <button type="button" class="nav-drawer-item" onclick="pedirConta(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon" style="background:rgba(16,185,129,0.2); color:#34D399;">🧾</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">Pedir a Conta & Pré-Conta</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Conferência, PIX e Maquininha</div>
+          </div>
+        </button>
+      </div>
+
+      <div class="nav-drawer-footer">
+        <div style="font-size:0.75rem; font-weight:700; color:#FFFFFF; margin-bottom:2px;">Desenvolvido por Nolei Phygital</div>
+        <div>Tecnologia NFC & Experiência Gastronômica</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <a href="/" class="btn-back" aria-label="Voltar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        </a>
+        <button type="button" class="btn-back" id="btn-open-nav-drawer" onclick="openNavDrawer()" aria-label="Menu Principal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
         <div>
           <div class="meta-title" id="top-restaurant-name">Botânico Bistrô</div>
           <div class="meta-sub">Cardápio Interativo • Comanda Digital</div>
@@ -1469,9 +1862,13 @@
       <div class="restaurant-hero-logo">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
       </div>
-      <div>
+      <div style="flex:1;">
         <h1 class="restaurant-hero-title">Botânico Bistrô & Bar</h1>
         <p class="restaurant-hero-desc">Gastronomia Contemporânea • Alta Coquetelaria</p>
+        <div class="geofence-validation-badge" id="space-validation-pill" title="Validação de Espaço Físico Autenticada">
+          <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#10B981; box-shadow:0 0 6px #10B981;"></span>
+          Espaço Bistrô Validado • Presença NFC Ativa
+        </div>
       </div>
     </div>
 
@@ -1506,6 +1903,9 @@
 
     <!-- Feature Navigation Pills (Acesso Rápido a Recursos da Mesa sem Poluição Visual) -->
     <div class="feature-nav-scroll">
+      <button type="button" class="feature-nav-pill" onclick="openNavDrawer()">
+        <span>🍔</span> Menu Completo
+      </button>
       <button type="button" class="feature-nav-pill" onclick="openTableHostModal()" id="pill-host-status">
         <span>👑</span> Dono da Mesa
       </button>
@@ -1520,19 +1920,43 @@
       </button>
     </div>
 
-    <!-- Live Shared Table Order Card (Comanda Coletiva em Tempo Real - Prioridade na Demo) -->
-    <div class="table-order-card">
+    <!-- Live Shared Table Order Card (Comanda Coletiva com Botão de Minimizar para focar no cardápio) -->
+    <div class="table-order-card" id="main-table-order-card">
       <div class="table-order-header">
         <div class="table-order-title">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           Comanda da <span id="comanda-table-name" style="margin-left:4px;">Mesa 04</span>
         </div>
-        <span class="badge-live-order" id="order-count-badge">0 itens</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge-live-order" id="order-count-badge">0 itens</span>
+          <button type="button" class="btn-toggle-collapse" id="btn-toggle-comanda-collapse" onclick="toggleComandaCollapse()" title="Minimizar / Expandir Comanda">
+            <svg id="comanda-collapse-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Collapsed Compact Banner (Visible when minimized) -->
+      <div class="collapsed-comanda-banner" onclick="toggleComandaCollapse()">
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="color:var(--emerald);">✓</span>
+          <span id="collapsed-comanda-summary">Comanda minimizada • Toque para ver pratos</span>
+        </div>
+        <span style="font-weight:700; color:var(--flame-red); font-size:0.75rem;">Expandir ▲</span>
       </div>
 
       <div class="order-items-list" id="order-items-list">
         <div class="empty-orders-text">Nenhum item pedido nesta mesa ainda. Escolha no cardápio abaixo.</div>
       </div>
+    </div>
+
+    <!-- Storytelling Gourmet Mode Switcher -->
+    <div class="storytelling-mode-toggle">
+      <button type="button" class="story-mode-btn active" id="btn-mode-classic" onclick="setMenuDisplayMode('classic')">
+        📋 Cardápio Clássico
+      </button>
+      <button type="button" class="story-mode-btn" id="btn-mode-story" onclick="setMenuDisplayMode('story')">
+        ✨ Storytelling Gourmet
+      </button>
     </div>
 
     <!-- Category Tabs -->
@@ -1842,25 +2266,35 @@
   <script src="../js/nolei-config.js"></script>
   <script src="../js/nolei-core.js"></script>
   <script>
-    // Initial / Synced Products from CRUD
+    // Initial / Synced Products from CRUD with Storytelling Gourmet Details
     const defaultDatabase = {
       entradas: [
         {
           id: "e1",
           name: "Bruschetta Caprese",
           priceVal: 28.90,
-          desc: "Pão rústico artesanal, tomates cereja confitados, muçarela de búfala e pesto de manjericão fresco.",
-          tags: ["Vegetariano"],
-          image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=400&q=80",
+          desc: "Pão rústico artesanal de fermentação natural (levain 48h), tomates cereja confitados em azeite extravirgem, muçarela de búfala fresca e pesto de manjericão genovês.",
+          story: "Inspirada nas tardes ensolaradas de Capri, nossa bruschetta une o frescor do manjericão orgânico cultivado em nossa horta interna à crocância dourada do pão de fermentação lenta.",
+          chefQuote: "O segredo está no confit lento a 70°C, preservando a doçura natural do tomate.",
+          ingredients: "Pão levain artesanal, Tomates cereja da serra, Pesto fresco, Muçarela de búfala da Campania, Flor de sal.",
+          pairing: "🍷 Vinho Pinot Grigio D.O.C ou Drink Aperol Spritz",
+          sensory: ["Crocante", "Cítrico & Fresco", "Aroma de Manjericão"],
+          tags: ["Vegetariano", "Mais Pedido"],
+          image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=600&q=80",
           active: true
         },
         {
           id: "e2",
           name: "Carpaccio Bovino Trufado",
           priceVal: 38.00,
-          desc: "Lâminas de filé mignon, azeite trufado, Grana Padano 24 meses e alcaparras crocantes.",
-          tags: ["Sem Glúten"],
-          image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80",
+          desc: "Lâminas ultrafinas de filé mignon curado, azeite de trufas brancas de Alba, lascas de Grana Padano 24 meses e alcaparras crocantes.",
+          story: "Criado originalmente no lendário Harry's Bar em Veneza, homenageando o pintor Vittore Carpaccio. Aqui ganha toque sensorial de trufas brancas selecionadas.",
+          chefQuote: "Corte milimétrico à mão preservando a maciez pura da carne angus certificada.",
+          ingredients: "Filé Mignon Angus, Azeite Trufado de Alba, Queijo Grana Padano D.O.P, Mostarda dijon artesanal.",
+          pairing: "🍷 Vinho Chianti Clássico Riserva ou Negroni Clássico",
+          sensory: ["Aroma Terroso Trufado", "Textura Aveludada", "Toque Salino"],
+          tags: ["Sem Glúten", "Gourmet"],
+          image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
           active: true
         }
       ],
@@ -1869,47 +2303,72 @@
           id: "p3",
           name: "Burger Botânico Artesanal",
           priceVal: 45.90,
-          desc: "Blend 180g angus, queijo gruyère derretido, cebola caramelizada e aioli de ervas no brioche.",
-          tags: ["Artesanal"],
-          image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80",
+          desc: "Blend nobre 180g de costela angus grelhada na brasa de macieira, queijo gruyère fundido, compota de cebola roxa caramelizada e aioli de ervas frescas no pão brioche amanteigado.",
+          story: "Nossa obra-prima artesanal: a intensidade defumada da brasa de lenha nobre combinada à untuosidade do queijo gruyère alpino e ao adocicado da cebola deglaçada em vinho tinto.",
+          chefQuote: "O fogo direto sela os sucos da carne garantindo suculência inigualável a cada mordida.",
+          ingredients: "Blend 180g Costela Angus, Queijo Gruyère Alpino, Pão Brioche Francês, Compota de Cebola ao Vinho.",
+          pairing: "🍺 Cerveja Artesanal IPA Lupulada ou Vinho Malbec Reserva",
+          sensory: ["Defumado na Brasa", "Suculento", "Agridoce Equilibrado"],
+          tags: ["Artesanal", "Destaque Chef"],
+          image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
           active: true
         },
         {
           id: "p1",
           name: "Risoto de Cogumelos Selvagens",
           priceVal: 58.90,
-          desc: "Arroz carnaroli com mix de shimeji, shiitake e cogumelos Paris com manteiga trufada.",
-          tags: ["Vegetariano"],
-          image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
+          desc: "Arroz carnaroli italiano com mix fresco de shimeji preto, shiitake e cogumelos Paris salteados em manteiga clarificada, finalizado com azeite de trufas e parmesão 24 meses.",
+          story: "Uma imersão aos bosques úmidos do Piemonte: grãos carnaroli cozidos lentamente em caldo de legumes tostados e vinho branco seco, absorvendo aromas terrosos profundos.",
+          chefQuote: "Mantecatura vigorosa ao final para criar a textura 'all'onda' perfeita.",
+          ingredients: "Arroz Carnaroli Acquerello, Shiitake & Shimeji frescos, Manteiga clarificada, Parmigiano Reggiano.",
+          pairing: "🍷 Vinho Pinot Noir da Borgonha ou Chardonnay Envelhecido em Carvalho",
+          sensory: ["Cremosidade Intensa", "Umami Pronunciado", "Notas Amadeiradas"],
+          tags: ["Vegetariano", "Clássico"],
+          image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=600&q=80",
           active: true
         },
         {
           id: "p2",
           name: "Salmão Grelhado na Brasa",
           priceVal: 72.00,
-          desc: "Posta de salmão com crosta de ervas finas, mousseline de mandioquinha e aspargos salteados.",
-          tags: ["Sem Glúten"],
-          image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80",
+          desc: "Posta alta de salmão fresco do Pacífico com crosta crocante de ervas finas e castanhas, acompanhado de mousseline aveludada de mandioquinha e aspargos verdes salteados.",
+          story: "Equilíbrio absoluto entre a riqueza ômega do salmão grelhado ao ponto rosado e a doçura sedosa da mandioquinha brasileira.",
+          chefQuote: "Pele estaladiça e centro macio que desfolha ao leve toque do garfo.",
+          ingredients: "Salmão fresco do Pacífico, Mandioquinha da terra, Aspargos verdes jovens, Castanha-de-caju tostada.",
+          pairing: "🍷 Vinho Sauvignon Blanc da Nova Zelândia ou Drink Gin Botânico",
+          sensory: ["Pele Crocante", "Maciez Delicada", "Toque Cítrico Herbal"],
+          tags: ["Sem Glúten", "Saudável"],
+          image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80",
           active: true
         }
       ],
       bebidas: [
         {
-          id: "b1",
-          name: "Limonada Siciliana com Hortelã",
-          priceVal: 18.90,
-          desc: "Limão siciliano natural prensado, água mineral gaseificada e folhas frescas de hortelã.",
-          tags: ["Sem Açúcar"],
-          image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80",
-          active: true
-        },
-        {
           id: "b2",
           name: "Gin Tônica Botânica",
           priceVal: 38.00,
-          desc: "Gin artesanal infusionado, tônica premium, zimbro, lâminas de pepino e ramo de alecrim tostado.",
-          tags: ["Coquetel"],
-          image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=400&q=80",
+          desc: "Gin artesanal nacional infusionado com botânicos da Mata Atlântica, água tônica premium, bagas de zimbro, lâminas de pepino japonês e ramo de alecrim fresco defumado à mesa.",
+          story: "Uma experiência multisensorial: o ramo de alecrim é maçaricado diante do cliente, liberando óleos essenciais que elevam as notas cítricas e botânicas do destilado.",
+          chefQuote: "A tônica entra suave pela colher bailarina para preservar a efervescência perfeita.",
+          ingredients: "Gin Artesanal London Dry, Tônica Indian Premium, Alecrim defumado, Bagas de Zimbro, Pepino.",
+          pairing: "Harmoniza perfeitamente com Entradas Leves, Bruschettas e Carpaccios.",
+          sensory: ["Efervescente", "Aromático & Defumado", "Refrescância Herbal"],
+          tags: ["Coquetel Autoral", "Assinatura"],
+          image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=600&q=80",
+          active: true
+        },
+        {
+          id: "b1",
+          name: "Limonada Siciliana com Hortelã",
+          priceVal: 18.90,
+          desc: "Limão siciliano natural colhido e prensado na hora, água mineral gaseificada da montanha e folhas frescas de hortelã orgânica maceradas.",
+          story: "Refrescância pura sem conservantes: cítrico vibrante que desperta o paladar.",
+          chefQuote: "Extração a frio para garantir zero amargor da casca.",
+          ingredients: "Limão Siciliano Fresco, Água com Gás da Fonte, Hortelã da Horta, Xarope Simples de Cana Orgânica.",
+          pairing: "Acompanhamento refrescante para qualquer momento da refeição.",
+          sensory: ["Ultra Refrescante", "Cítrico Vibrante", "Aroma Natural"],
+          tags: ["Sem Álcool", "Natural"],
+          image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
           active: true
         }
       ],
@@ -1918,9 +2377,14 @@
           id: "s1",
           name: "Petit Gâteau Chocolate Belga",
           priceVal: 32.00,
-          desc: "Bolo quente com recheio cremoso 70% cacau acompanhado de sorvete de baunilha Bourbon.",
-          tags: ["Sobremesa"],
-          image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80",
+          desc: "Bolo quente de chocolate belga Callebaut 70% cacau com centro cremoso e fluído, acompanhado de sorvete artesanal de baunilha Bourbon de Madagascar e tuile crocante.",
+          story: "O ápice da doçaria: contraste dramático entre o calor intenso do coração de chocolate líquido e o gelado perfumado da baunilha em fava Bourbon.",
+          chefQuote: "Exatamente 8 minutos e 30 segundos no forno a 210°C para o ponto fluido impecável.",
+          ingredients: "Chocolate Callebaut 70%, Manteiga de fazenda, Ovos caipiras, Favas de Baunilha Bourbon de Madagascar.",
+          pairing: "☕ Café Espresso Especial Microlote ou Vinho do Porto Tawny",
+          sensory: ["Coração Fluído", "Chocolate Intenso", "Contraste Quente & Frio"],
+          tags: ["Sobremesa Clássica", "Imperdível"],
+          image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80",
           active: true
         }
       ]
@@ -1932,6 +2396,15 @@
         try {
           const menuObj = JSON.parse(customStored);
           if (menuObj && (menuObj.entradas || menuObj.principais || menuObj.bebidas || menuObj.sobremesas)) {
+            // Merge defaults for missing storytelling fields
+            Object.keys(defaultDatabase).forEach(cat => {
+              if (menuObj[cat]) {
+                menuObj[cat] = menuObj[cat].map(item => {
+                  const def = (defaultDatabase[cat] || []).find(d => d.id === item.id);
+                  return def ? { ...def, ...item } : item;
+                });
+              }
+            });
             return menuObj;
           }
         } catch (e) {}
@@ -1951,11 +2424,81 @@
     `;
     document.getElementById('comanda-table-name').textContent = tableName.toUpperCase();
 
-    // User session
+    // User session & Auto-enrollment into Loyalty
     let currentUser = JSON.parse(localStorage.getItem('nolei_menu_user') || 'null');
     if (!currentUser) {
       currentUser = { name: "Lucas Silva", phone: "(11) 98765-4321" };
       localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+    }
+    // Automatically guarantee customer is in Loyalty Club
+    ensureLoyaltyUserRegistered(currentUser.name, currentUser.phone);
+
+    // Navigation Drawer Menu Controls
+    function openNavDrawer() {
+      const drawer = document.getElementById('demo-nav-drawer');
+      if (!drawer) return;
+      drawer.classList.add('open');
+      updateDrawerUI();
+    }
+
+    function closeNavDrawer(e) {
+      if (e && e.target && e.target.id !== 'demo-nav-drawer' && !e.target.hasAttribute('onclick')) return;
+      const drawer = document.getElementById('demo-nav-drawer');
+      if (drawer) drawer.classList.remove('open');
+    }
+
+    function updateDrawerUI() {
+      if (currentUser) {
+        const nameEl = document.getElementById('drawer-user-name');
+        const phoneEl = document.getElementById('drawer-user-phone');
+        const avatarEl = document.getElementById('drawer-user-avatar');
+        if (nameEl) nameEl.textContent = currentUser.name;
+        if (phoneEl) phoneEl.textContent = currentUser.phone;
+        if (avatarEl) avatarEl.textContent = currentUser.name.charAt(0).toUpperCase();
+
+        const loyalty = getLoyaltyData(currentUser.name);
+        const loyaltySub = document.getElementById('drawer-loyalty-sub');
+        if (loyaltySub && loyalty) {
+          loyaltySub.textContent = `${loyalty.points} pts • ${loyalty.stamps} de ${loyalty.totalStamps || 10} selos`;
+        }
+      }
+      const tableEl = document.getElementById('drawer-table-name');
+      if (tableEl) tableEl.textContent = `${tableName.toUpperCase()} • Atendimento Ativo`;
+    }
+
+    // Comanda Collapse / Minimize Logic
+    let isComandaCollapsed = false;
+    function toggleComandaCollapse() {
+      isComandaCollapsed = !isComandaCollapsed;
+      const card = document.getElementById('main-table-order-card');
+      const icon = document.getElementById('comanda-collapse-icon');
+      if (!card) return;
+
+      if (isComandaCollapsed) {
+        card.classList.add('is-collapsed');
+        if (icon) icon.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
+      } else {
+        card.classList.remove('is-collapsed');
+        if (icon) icon.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
+      }
+      updateTableOrdersUI();
+    }
+
+    // Storytelling Mode Toggle
+    let currentMenuDisplayMode = 'classic'; // 'classic' or 'story'
+    function setMenuDisplayMode(mode) {
+      currentMenuDisplayMode = mode;
+      const btnClassic = document.getElementById('btn-mode-classic');
+      const btnStory = document.getElementById('btn-mode-story');
+      if (btnClassic) btnClassic.classList.toggle('active', mode === 'classic');
+      if (btnStory) btnStory.classList.toggle('active', mode === 'story');
+      renderCategory(activeCategory);
+      showToast(mode === 'story' ? '✨ Modo Storytelling Gourmet Ativado!' : '📋 Modo Cardápio Clássico');
+    }
+
+    function toggleStorytellingFromDrawer() {
+      const nextMode = currentMenuDisplayMode === 'classic' ? 'story' : 'classic';
+      setMenuDisplayMode(nextMode);
     }
 
     // Table Host & Connected Members Configuration
@@ -1966,7 +2509,7 @@
         cfg = {
           hostName: "Lucas Silva",
           hostPhone: "(11) 98765-4321",
-          allowGuestsToOrder: true, // If true, anyone on table can order from their device. If false, only Host can order.
+          allowGuestsToOrder: true,
           members: [
             { name: "Lucas Silva", phone: "(11) 98765-4321", isHost: true, joinedAt: "14:10" },
             { name: "Camila Alves", phone: "(11) 98888-2233", isHost: false, joinedAt: "14:18" }
@@ -1992,12 +2535,6 @@
     function updateTableHostUI() {
       const cfg = getTableConfig();
       const isHost = isCurrentUserHost();
-      const bar = document.getElementById('table-host-bar');
-      const titleEl = document.getElementById('host-banner-title');
-      const statusEl = document.getElementById('host-banner-status');
-      const iconEl = document.getElementById('host-avatar-icon');
-      const triggerBtn = document.getElementById('btn-host-modal-trigger');
-
       const pillHost = document.getElementById('pill-host-status');
       if (pillHost) {
         if (isHost) {
@@ -2005,30 +2542,6 @@
         } else {
           pillHost.innerHTML = `<span>👥</span> Mesa de ${cfg.hostName}`;
         }
-      }
-
-      if (!bar) return;
-
-      if (isHost) {
-        bar.className = 'table-host-bar';
-        if (iconEl) iconEl.textContent = '👑';
-        if (titleEl) titleEl.textContent = `Você é o Dono da ${tableName.toUpperCase()}`;
-        if (statusEl) {
-          statusEl.textContent = cfg.allowGuestsToOrder 
-            ? '🔓 Pedidos liberados para todos na mesa' 
-            : '🔒 Somente você pode enviar pedidos da mesa';
-        }
-        if (triggerBtn) triggerBtn.innerHTML = `⚙️ Gerenciar (${(cfg.members || []).length})`;
-      } else {
-        bar.className = 'table-host-bar guest-mode';
-        if (iconEl) iconEl.textContent = '👥';
-        if (titleEl) titleEl.textContent = `Conectado na Mesa de ${cfg.hostName} 👑`;
-        if (statusEl) {
-          statusEl.textContent = cfg.allowGuestsToOrder 
-            ? '🔓 Você pode escolher e enviar pedidos' 
-            : '🔒 Aguardando liberação do titular para pedir';
-        }
-        if (triggerBtn) triggerBtn.innerHTML = `Mesa (${(cfg.members || []).length})`;
       }
     }
 
@@ -2126,22 +2639,28 @@
       
       const now = new Date();
       const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      const phone = "(11) 9" + Math.floor(10000000 + Math.random() * 90000000);
       
       cfg.members.push({
         name: nextFriend,
-        phone: "(11) 97777-8888",
+        phone: phone,
         isHost: false,
         joinedAt: timeStr
       });
       saveTableConfig(cfg);
+      
+      // Auto-enroll friend in Loyalty
+      ensureLoyaltyUserRegistered(nextFriend, phone);
+
       openTableHostModal();
-      dispatchNotification('abertura', 'Novo Participante Conectado', `${nextFriend} conectou-se à ${tableName.toUpperCase()}.`);
-      showToast(`"${nextFriend}" conectou-se à mesa!`);
+      dispatchNotification('acesso', 'Novo Participante Conectado', `${nextFriend} conectou-se à ${tableName.toUpperCase()}.`);
+      showToast(`"${nextFriend}" conectou-se à mesa e entrou no Clube Fidelidade!`);
     }
 
     function switchActiveProfile(name, phone) {
       currentUser = { name, phone };
       localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+      ensureLoyaltyUserRegistered(name, phone);
       updateUserUI();
       updateTableHostUI();
       closeTableHostModal();
@@ -2243,52 +2762,15 @@
       return history.slice(0, 5);
     }
 
-    function renderUserHistoryUI() {
-      const container = document.getElementById('user-history-container');
-      const listEl = document.getElementById('user-history-list');
-      const countEl = document.getElementById('user-history-count');
-      if (!container || !listEl) return;
-
-      if (!currentUser || !currentUser.name) {
-        container.style.display = 'none';
-        return;
-      }
-
-      const historyItems = getUserHistory(currentUser.name);
-      if (historyItems.length === 0) {
-        container.style.display = 'none';
-        return;
-      }
-
-      container.style.display = 'block';
-      if (countEl) countEl.textContent = `${historyItems.length} itens`;
-
-      listEl.innerHTML = historyItems.map(item => `
-        <div class="history-item-mini">
-          <div>
-            <div class="history-thumb-wrap">
-              <img src="${item.image}" alt="${item.name}" class="history-thumb-img" loading="lazy">
-              <span class="history-date-badge">${item.date || 'Visita anterior'}</span>
-            </div>
-            <div class="history-item-name" title="${item.name}">${item.name}</div>
-          </div>
-          <button class="btn-reorder-dish" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal})">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            Pedir Novamente
-          </button>
-        </div>
-      `).join('');
-    }
-
-    // VIP Loyalty Club Logic & Storage
-    function getLoyaltyData(userName) {
-      if (!userName) return null;
-      const keySnake = `nolei_loyalty_${userName.toLowerCase().replace(/\s+/g, '_')}`;
-      const keyRaw = `nolei_loyalty_${userName}`;
-      let data = JSON.parse(localStorage.getItem(keySnake) || localStorage.getItem(keyRaw) || 'null');
+    // Auto-Enrollment Helper for Loyalty Club
+    function ensureLoyaltyUserRegistered(name, phone) {
+      if (!name) return;
+      const keySnake = `nolei_loyalty_${name.toLowerCase().replace(/\s+/g, '_')}`;
+      let data = JSON.parse(localStorage.getItem(keySnake) || 'null');
       if (!data) {
         data = {
-          name: userName,
+          name: name,
+          phone: phone || "(11) 98765-4321",
           tier: "🥇 Nível Ouro VIP",
           points: 320,
           stamps: 6,
@@ -2298,12 +2780,23 @@
             { id: "rew_1", name: "Petit Gâteau Belga", cost: 100, claimed: false, icon: "🍰" },
             { id: "rew_2", name: "Gin Tônica Botânica", cost: 150, claimed: false, icon: "🍸" },
             { id: "rew_3", name: "Bruschetta Caprese", cost: 200, claimed: false, icon: "🥖" },
-            { id: "rew_4", name: "Salmão Grelhado na Brasa", cost: 300, claimed: false, icon: "🐟" },
-            { id: "rew_5", name: "Café Especial 250g em Grãos", cost: 400, claimed: false, icon: "☕" }
+            { id: "rew_4", name: "Salmão Grelhado na Brasa", cost: 300, claimed: false, icon: "🐟" }
           ]
         };
         localStorage.setItem(keySnake, JSON.stringify(data));
-        localStorage.setItem(keyRaw, JSON.stringify(data));
+        localStorage.setItem(`nolei_loyalty_${name}`, JSON.stringify(data));
+      }
+    }
+
+    // VIP Loyalty Club Logic & Storage
+    function getLoyaltyData(userName) {
+      if (!userName) return null;
+      const keySnake = `nolei_loyalty_${userName.toLowerCase().replace(/\s+/g, '_')}`;
+      const keyRaw = `nolei_loyalty_${userName}`;
+      let data = JSON.parse(localStorage.getItem(keySnake) || localStorage.getItem(keyRaw) || 'null');
+      if (!data) {
+        ensureLoyaltyUserRegistered(userName, currentUser ? currentUser.phone : null);
+        data = JSON.parse(localStorage.getItem(keySnake) || 'null');
       }
       return data;
     }
@@ -2318,22 +2811,11 @@
 
     function updateLoyaltyUI() {
       const banner = document.getElementById('loyalty-hero-banner');
-      if (!banner) return;
-
-      if (!currentUser || !currentUser.name) {
-        banner.style.display = 'none';
-        return;
-      }
+      if (!currentUser || !currentUser.name) return;
 
       const loyalty = getLoyaltyData(currentUser.name);
-      if (!loyalty) {
-        banner.style.display = 'none';
-        return;
-      }
+      if (!loyalty) return;
 
-      banner.style.display = 'flex';
-      const titleEl = document.getElementById('loyalty-vip-title');
-      const subEl = document.getElementById('loyalty-vip-sub');
       const tierEl = document.getElementById('vip-card-tier');
       const nameEl = document.getElementById('vip-card-name');
       const pointsEl = document.getElementById('vip-card-points');
@@ -2341,24 +2823,17 @@
       const stampsGrid = document.getElementById('vip-stamps-grid');
       const rewardsList = document.getElementById('vip-rewards-list');
 
-      const remainingStamps = Math.max(0, loyalty.totalStamps - loyalty.stamps);
-      if (titleEl) titleEl.textContent = `Clube Gourmet VIP: ${loyalty.stamps} / ${loyalty.totalStamps} Selos (${loyalty.points} pts)`;
-      if (subEl) {
-        subEl.textContent = remainingStamps === 0 
-          ? '🎉 Cartela completa! Resgate sua cortesia.'
-          : `Faltam ${remainingStamps} selos para o prêmio máximo da cartela`;
-      }
-
       if (tierEl) tierEl.textContent = loyalty.tier || '🥇 NÍVEL OURO VIP';
       if (nameEl) nameEl.textContent = currentUser.name;
       if (pointsEl) pointsEl.textContent = `${loyalty.points} pts`;
-      if (progressEl) progressEl.textContent = `${loyalty.stamps} de ${loyalty.totalStamps} carimbos`;
+      if (progressEl) progressEl.textContent = `${loyalty.stamps} de ${loyalty.totalStamps || 10} carimbos`;
 
       if (stampsGrid) {
         let gridHtml = '';
-        for (let i = 1; i <= loyalty.totalStamps; i++) {
+        const total = loyalty.totalStamps || 10;
+        for (let i = 1; i <= total; i++) {
           const isStamped = i <= loyalty.stamps;
-          const isFinal = i === loyalty.totalStamps;
+          const isFinal = i === total;
           gridHtml += `
             <div class="stamp-slot ${isStamped ? 'stamped' : ''} ${isFinal ? 'final-prize' : ''}">
               ${isStamped ? '★' : i}
@@ -2433,43 +2908,31 @@
 
     // UI Updates
     function updateUserUI() {
-      const nameEl = document.getElementById('user-display-name');
-      const subEl = document.getElementById('user-display-sub');
-      const avatarEl = document.getElementById('user-initial');
-      const triggerBtn = document.getElementById('btn-auth-trigger');
       const pillUserName = document.getElementById('pill-user-name');
       const pillLoyaltyPts = document.getElementById('pill-loyalty-pts');
 
       if (currentUser) {
-        if (nameEl) nameEl.textContent = currentUser.name;
-        if (subEl) subEl.textContent = `${currentUser.phone}`;
-        if (avatarEl) avatarEl.textContent = currentUser.name.charAt(0).toUpperCase();
-        if (triggerBtn) triggerBtn.textContent = 'Alterar';
         if (pillUserName) pillUserName.textContent = currentUser.name;
-
         const loyalty = getLoyaltyData(currentUser.name);
         if (pillLoyaltyPts && loyalty) {
           pillLoyaltyPts.textContent = `${loyalty.points} pts`;
         }
-      } else {
-        if (nameEl) nameEl.textContent = 'Não identificado';
-        if (subEl) subEl.textContent = 'Identifique-se para pedir na mesa';
-        if (avatarEl) avatarEl.textContent = '?';
-        if (triggerBtn) triggerBtn.textContent = 'Identificar';
-        if (pillUserName) pillUserName.textContent = 'Identificar';
       }
       updateLoyaltyUI();
+      updateDrawerUI();
     }
 
     function updateTableOrdersUI() {
       const listEl = document.getElementById('order-items-list');
       const countEl = document.getElementById('order-count-badge');
       const totalEl = document.getElementById('table-total-val');
+      const collapsedSummary = document.getElementById('collapsed-comanda-summary');
 
       if (tableOrders.length === 0) {
-        listEl.innerHTML = '<div class="empty-orders-text">Nenhum item pedido nesta mesa ainda.</div>';
+        listEl.innerHTML = '<div class="empty-orders-text">Nenhum item pedido nesta mesa ainda. Escolha no cardápio abaixo.</div>';
         countEl.textContent = '0 itens';
         totalEl.textContent = 'R$ 0,00';
+        if (collapsedSummary) collapsedSummary.textContent = 'Nenhum pedido na mesa ainda.';
         return;
       }
 
@@ -2531,8 +2994,12 @@
         `;
       }).join('');
 
+      const totalFormatted = `R$ ${total.toFixed(2).replace('.', ',')}`;
       countEl.textContent = `${activeCount} itens ativos (${tableOrders.length} total)`;
-      totalEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      totalEl.textContent = totalFormatted;
+      if (collapsedSummary) {
+        collapsedSummary.textContent = `${activeCount} itens na mesa (${totalFormatted}) • Toque para expandir`;
+      }
     }
 
     function cancelOrderItem(idx) {
@@ -2553,7 +3020,7 @@
       showToast(`"${item.name}" foi cancelado com sucesso.`);
     }
 
-    // Render Category
+    // Render Category (Classic vs Storytelling Gourmet)
     let activeCategory = 'entradas';
     function renderCategory(category) {
       activeCategory = category;
@@ -2566,37 +3033,107 @@
         return;
       }
 
-      container.innerHTML = items.map(item => {
-        const isAvailable = item.active !== false;
+      if (currentMenuDisplayMode === 'story') {
+        // STORYTELLING GOURMET VIEW
+        container.innerHTML = items.map(item => {
+          const isAvailable = item.active !== false;
+          const sensoryTags = (item.sensory || ["Artesanal", "Gourmet", "Exclusivo"]).map(s => `<span class="story-sensory-pill">${s}</span>`).join('');
 
-        return `
-          <div class="menu-item-card ${isAvailable ? '' : 'is-soldout'}">
-            <div class="item-image-box">
-              <img src="${item.image}" alt="${item.name}" class="item-image" loading="lazy">
-              ${isAvailable ? '' : '<span class="soldout-tag-overlay">Esgotado</span>'}
-            </div>
-            <div class="item-info">
-              <div>
-                <div class="item-header">
-                  <span class="item-name">${item.name}</span>
-                  <span class="item-price">R$ ${Number(item.priceVal).toFixed(2).replace('.', ',')}</span>
+          return `
+            <div class="story-dish-card ${isAvailable ? '' : 'is-soldout'}">
+              <div style="position:relative;">
+                <img src="${item.image}" alt="${item.name}" class="story-dish-hero-img" loading="lazy">
+                ${isAvailable ? '' : '<span class="soldout-tag-overlay" style="position:absolute; top:12px; left:12px;">Esgotado</span>'}
+                <div style="position:absolute; bottom:12px; left:12px; background:rgba(18,19,22,0.85); backdrop-filter:blur(6px); padding:4px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.15);">
+                  <span style="font-family:var(--font-heading); font-size:0.95rem; font-weight:800; color:var(--flame-red);">R$ ${Number(item.priceVal).toFixed(2).replace('.', ',')}</span>
                 </div>
-                <p class="item-desc">${item.desc}</p>
               </div>
-              <div class="item-footer-row">
-                <span class="badge-tag">${(item.tags && item.tags[0]) || 'Especial'}</span>
-                ${isAvailable 
-                  ? `<button class="btn-add-item" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal})">
-                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                       Pedir
-                     </button>`
-                  : `<button class="btn-add-item disabled" disabled>Esgotado</button>`
-                }
+
+              <div class="story-dish-body">
+                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
+                  <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#FFFFFF;">${item.name}</h3>
+                  <span class="badge-tag">${(item.tags && item.tags[0]) || 'Gourmet'}</span>
+                </div>
+
+                <p style="font-size:0.80rem; color:var(--text-muted); line-height:1.45; margin-bottom:8px;">
+                  ${item.desc}
+                </p>
+
+                ${item.story ? `
+                  <div class="story-concept-quote">
+                    “${item.story}”
+                    ${item.chefQuote ? `<div style="font-size:0.70rem; color:var(--flame-orange); font-weight:700; margin-top:4px;">— Nota do Chef: ${item.chefQuote}</div>` : ''}
+                  </div>
+                ` : ''}
+
+                ${item.ingredients ? `
+                  <div style="font-size:0.72rem; color:var(--text-dim); margin:6px 0;">
+                    <strong style="color:#FFFFFF;">🌿 Ingredientes:</strong> ${item.ingredients}
+                  </div>
+                ` : ''}
+
+                ${item.pairing ? `
+                  <div class="story-pairing-box">
+                    <span style="font-size:1.1rem;">🍷</span>
+                    <div>
+                      <strong style="display:block; color:#FFFFFF; font-size:0.75rem;">Harmonização do Sommelier:</strong>
+                      <span>${item.pairing}</span>
+                    </div>
+                  </div>
+                ` : ''}
+
+                <div class="story-sensory-tags">
+                  ${sensoryTags}
+                </div>
+
+                <div style="margin-top:14px; display:flex; justify-content:flex-end;">
+                  ${isAvailable 
+                    ? `<button class="btn-add-item" style="padding:8px 18px; font-size:0.82rem;" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal})">
+                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                         Pedir Este Prato
+                       </button>`
+                    : `<button class="btn-add-item disabled" disabled>Esgotado</button>`
+                  }
+                </div>
               </div>
             </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+
+      } else {
+        // CLASSIC MENU VIEW
+        container.innerHTML = items.map(item => {
+          const isAvailable = item.active !== false;
+
+          return `
+            <div class="menu-item-card ${isAvailable ? '' : 'is-soldout'}">
+              <div class="item-image-box">
+                <img src="${item.image}" alt="${item.name}" class="item-image" loading="lazy">
+                ${isAvailable ? '' : '<span class="soldout-tag-overlay">Esgotado</span>'}
+              </div>
+              <div class="item-info">
+                <div>
+                  <div class="item-header">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-price">R$ ${Number(item.priceVal).toFixed(2).replace('.', ',')}</span>
+                  </div>
+                  <p class="item-desc">${item.desc}</p>
+                </div>
+                <div class="item-footer-row">
+                  <span class="badge-tag">${(item.tags && item.tags[0]) || 'Especial'}</span>
+                  ${isAvailable 
+                    ? `<button class="btn-add-item" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal})">
+                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                         Pedir
+                       </button>`
+                    : `<button class="btn-add-item disabled" disabled>Esgotado</button>`
+                  }
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
     }
 
     function switchCategory(category, btn) {
@@ -2641,11 +3178,13 @@
         const notifObj = {
           id: "notif_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
           table: tableName,
-          type: type, // 'abertura', 'pedido', 'garcom', 'conta', 'fechamento'
+          type: type,
           title: title,
           desc: desc,
           time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
           timestamp: Date.now(),
+          customerName: currentUser ? currentUser.name : 'Lucas Silva',
+          customerPhone: currentUser ? currentUser.phone : '(11) 98765-4321',
           read: false
         };
         let notifs = JSON.parse(localStorage.getItem('nolei_notifications') || '[]');
@@ -2840,6 +3379,7 @@
       }
       currentUser = { name, phone };
       localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+      ensureLoyaltyUserRegistered(name, phone);
       updateUserUI();
       updateTableHostUI();
       closeAuthModal();
@@ -2921,3 +3461,4 @@
   </script>
 </body>
 </html>
+

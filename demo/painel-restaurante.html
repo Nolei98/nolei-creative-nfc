@@ -66,11 +66,29 @@
       --font-mono: 'JetBrains Mono', monospace;
     }
 
+    /* Thematic Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #121316;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #272A34;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 77, 48, 0.25);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--flame-red);
+    }
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      scrollbar-width: thin;
+      scrollbar-color: #272A34 #121316;
     }
 
     body {
@@ -86,6 +104,74 @@
       background-image: 
         radial-gradient(circle at 10% 20%, rgba(255, 77, 48, 0.03) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(255, 107, 53, 0.02) 0%, transparent 40%);
+    }
+
+    /* RBAC Badges */
+    .role-badge {
+      font-size: 0.70rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .role-badge.admin {
+      background: rgba(239, 68, 68, 0.18);
+      color: #F87171;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+    .role-badge.garcom {
+      background: rgba(245, 158, 11, 0.18);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .role-badge.cliente {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    /* Ranking Podium Cards */
+    .ranking-podium-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .ranking-podium-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: 14px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .ranking-podium-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .ranking-podium-card.rank-1 {
+      border-color: rgba(245, 158, 11, 0.5);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, #1C1E24 100%);
+    }
+
+    /* Customer Mini Profile Box */
+    .mini-profile-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px var(--flame-glow);
     }
 
     /* Master Layout */
@@ -1727,9 +1813,9 @@
           <span class="nav-text">Comandas</span>
         </button>
 
-        <button class="pos-nav-item" id="tab-btn-analytics" onclick="switchTab('analytics')" title="Gráficos & Inteligência de Negócio (Admin)">
+        <button class="pos-nav-item" id="tab-btn-analytics" onclick="switchTab('analytics')" title="Métricas & ROI Financeiro (Admin)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          <span class="nav-text">Gráficos</span>
+          <span class="nav-text">Métricas & ROI</span>
         </button>
 
         <button class="pos-nav-item" id="tab-btn-notifications" onclick="switchTab('notifications')" title="Central de Notificações">
@@ -1751,6 +1837,11 @@
         <button class="pos-nav-item" id="tab-btn-users" onclick="switchTab('users')" title="Clube Fidelidade & Clientes VIP">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
           <span class="nav-text">Fidelidade</span>
+        </button>
+
+        <button class="pos-nav-item" id="tab-btn-rbac" onclick="switchTab('rbac')" title="Gestão de Usuários & Cargos (RBAC)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="nav-text">Usuários</span>
         </button>
       </div>
 
@@ -2500,15 +2591,29 @@
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
             <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
               <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Membros VIP Cadastrados</div>
-              <div style="font-size:1.25rem; font-weight:800; color:#FFFFFF; margin-top:2px;" id="crm-total-members">4 Clientes</div>
+              <div style="font-size:1.25rem; font-weight:800; color:#FFFFFF; margin-top:2px;" id="crm-total-members">5 Clientes</div>
             </div>
             <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
               <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Pontos em Circulação</div>
-              <div style="font-size:1.25rem; font-weight:800; color:#F59E0B; margin-top:2px;" id="crm-total-points">1.150 pts</div>
+              <div style="font-size:1.25rem; font-weight:800; color:#F59E0B; margin-top:2px;" id="crm-total-points">1.770 pts</div>
             </div>
             <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
               <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Cortesias Resgatadas</div>
-              <div style="font-size:1.25rem; font-weight:800; color:#10B981; margin-top:2px;" id="crm-total-rewards">14 Prêmios</div>
+              <div style="font-size:1.25rem; font-weight:800; color:#10B981; margin-top:2px;" id="crm-total-rewards">18 Prêmios</div>
+            </div>
+          </div>
+
+          <!-- Ranking Top Clientes Mais Fiéis da Temporada -->
+          <div style="margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <h4 style="font-size:0.92rem; font-weight:700; color:#FFFFFF; display:flex; align-items:center; gap:6px;">
+                <span>🏆</span> Ranking de Clientes Mais Fiéis (Top VIP)
+              </h4>
+              <span style="font-size:0.70rem; color:var(--text-dim);">Classificação por Pontos & Selos</span>
+            </div>
+            
+            <div class="ranking-podium-grid" id="loyalty-podium-grid">
+              <!-- Dynamically populated top 3 ranking cards -->
             </div>
           </div>
 
@@ -2531,6 +2636,159 @@
           </div>
         </div>
       </section>
+
+      <!-- =========================================================
+           TAB 8: GESTÃO DE USUÁRIOS & CARGOS (RBAC UNIFICADO)
+           ========================================================= -->
+      <section id="sec-rbac" style="display:none;">
+        <div class="crud-box">
+          <div class="crud-header-row">
+            <div>
+              <h3 style="color:#FFFFFF; font-size:1.08rem; display:flex; align-items:center; gap:8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Gestão Unificada de Usuários & Cargos (RBAC)
+              </h3>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Controle de acessos, autenticação por PIN e permissões operacionais por Cargo (Admin, Garçom, Cliente).</p>
+            </div>
+            <button class="btn-flame-cta" onclick="openNewUserModal()">+ Novo Usuário</button>
+          </div>
+
+          <!-- RBAC Filter Pills -->
+          <div class="notif-filter-bar">
+            <button class="notif-filter-pill active" id="rbac-filter-all" onclick="filterRBACTab('all')">Todos os Usuários</button>
+            <button class="notif-filter-pill" id="rbac-filter-admin" onclick="filterRBACTab('ADMIN')">Administradores</button>
+            <button class="notif-filter-pill" id="rbac-filter-garcom" onclick="filterRBACTab('GARCOM')">Garçons & Salão</button>
+            <button class="notif-filter-pill" id="rbac-filter-cliente" onclick="filterRBACTab('CLIENTE')">Clientes</button>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Usuário</th>
+                  <th>Contato / WhatsApp</th>
+                  <th>Cargo / Papel</th>
+                  <th>PIN / Senha</th>
+                  <th>Permissões / Mesas</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="rbac-users-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Nolei Phygital -->
+      <footer style="text-align:center; padding:24px 16px 36px 16px; color:var(--text-dim); font-size:0.75rem; border-top:1px dashed rgba(255,255,255,0.08); margin-top:32px;">
+        <div>Desenvolvido por <strong style="color:#FFFFFF;">Nolei Phygital</strong> • Tecnologia NFC & Gestão Gastronômica</div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Modal Mini Perfil do Cliente no Dashboard -->
+  <div class="modal-overlay" id="modal-customer-profile" onclick="closeCustomerProfile(event)">
+    <div class="modal-card" style="max-width:480px;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="mini-profile-avatar" id="profile-modal-avatar">L</div>
+          <div>
+            <h3 id="profile-modal-name" style="font-size:1.15rem; color:#FFFFFF; margin:0;">Lucas Silva</h3>
+            <span class="role-badge cliente" id="profile-modal-role-badge">CLIENTE VIP</span>
+          </div>
+        </div>
+        <button onclick="closeCustomerProfile()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+
+      <!-- Quick Info Grid -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+        <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:10px; padding:10px 12px;">
+          <span style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">WhatsApp / Contato:</span>
+          <strong style="font-size:0.86rem; color:#FFFFFF; display:block; margin-top:2px;" id="profile-modal-phone">(11) 98765-4321</strong>
+        </div>
+        <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:10px; padding:10px 12px;">
+          <span style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">PIN / Senha de Acesso:</span>
+          <strong style="font-size:0.86rem; color:#F59E0B; display:block; margin-top:2px;" id="profile-modal-pin">•••• (4321)</strong>
+        </div>
+      </div>
+
+      <!-- Loyalty Card Highlights -->
+      <div style="background:linear-gradient(135deg, rgba(245,158,11,0.15) 0%, #1C1E24 100%); border:1px solid rgba(245,158,11,0.35); border-radius:12px; padding:12px 14px; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span style="font-size:0.70rem; font-weight:800; color:#FBBF24;" id="profile-modal-tier">🥇 NÍVEL OURO VIP</span>
+            <div style="font-size:1.15rem; font-weight:800; color:#FFFFFF; margin-top:2px;" id="profile-modal-points">320 pontos</div>
+          </div>
+          <div style="text-align:right;">
+            <span style="font-size:0.68rem; color:var(--text-dim);">Cartela Atual</span>
+            <strong style="font-size:0.95rem; color:#F59E0B; display:block;" id="profile-modal-stamps">6 / 10 Selos</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Past Orders / History (Max 5) -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:0.78rem; font-weight:700; color:#FFFFFF; margin-bottom:8px; display:flex; justify-content:space-between;">
+          <span>Histórico Recente de Compras & Pratos:</span>
+          <span style="color:var(--text-dim); font-size:0.70rem;" id="profile-modal-visits-count">6 visitas</span>
+        </div>
+        <div id="profile-modal-orders-list" style="display:flex; flex-direction:column; gap:6px; max-height:160px; overflow-y:auto;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px;">
+        <button class="btn-flame-cta" style="flex:1; justify-content:center;" onclick="closeCustomerProfile()">Concluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Cadastro/Edição de Usuários & Cargos (RBAC) -->
+  <div class="modal-overlay" id="modal-user-rbac" onclick="closeUserModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-rbac-title" style="font-size:1.15rem; color:#FFFFFF;">Cadastrar Usuário</h3>
+        <button onclick="closeUserModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+      <input type="hidden" id="edit-rbac-id">
+      <div class="form-group">
+        <label class="form-label">Nome Completo do Usuário:</label>
+        <input type="text" id="rbac-user-name" class="form-control" placeholder="Ex: Carlos Eduardo" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">WhatsApp / Login:</label>
+        <input type="tel" id="rbac-user-phone" class="form-control" placeholder="(11) 98765-4321" required>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="form-group">
+          <label class="form-label">Cargo / Papel:</label>
+          <select id="rbac-user-role" class="form-control" onchange="toggleRbacRoleSpecificFields(this.value)">
+            <option value="ADMIN">Administrador</option>
+            <option value="GARCOM">Garçom</option>
+            <option value="CLIENTE" selected>Cliente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">PIN / Senha Numérica:</label>
+          <input type="text" id="rbac-user-pin" class="form-control" placeholder="1234" value="1234" maxlength="6">
+        </div>
+      </div>
+      <div class="form-group" id="rbac-field-tables" style="display:none;">
+        <label class="form-label">Mesas Atribuídas (para Garçom):</label>
+        <input type="text" id="rbac-user-tables" class="form-control" placeholder="Ex: mesa 01, mesa 02, mesa 04" value="mesa 01, mesa 04">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status do Usuário:</label>
+        <select id="rbac-user-status" class="form-control">
+          <option value="Ativo" selected>Ativo</option>
+          <option value="Inativo">Inativo</option>
+        </select>
+      </div>
+      <button class="btn-flame-cta" style="width:100%; justify-content:center; margin-top:10px;" onclick="saveRBACUser()">Salvar Usuário</button>
+    </div>
+  </div>
 
       <!-- Footer Nolei Phygital -->
       <footer style="text-align:center; padding:24px 16px 36px 16px; color:var(--text-dim); font-size:0.75rem; border-top:1px dashed rgba(255,255,255,0.08); margin-top:32px;">
@@ -2749,6 +3007,8 @@
       document.getElementById('sec-products').style.display = tabId === 'products' ? 'block' : 'none';
       document.getElementById('sec-waiters').style.display = tabId === 'waiters' ? 'block' : 'none';
       document.getElementById('sec-users').style.display = tabId === 'users' ? 'block' : 'none';
+      const secRbac = document.getElementById('sec-rbac');
+      if (secRbac) secRbac.style.display = tabId === 'rbac' ? 'block' : 'none';
 
       if (tabId === 'pos') {
         renderPosMesaSelector();
@@ -2767,6 +3027,8 @@
         renderLoyaltyCRM();
       } else if (tabId === 'waiters') {
         renderWaiters();
+      } else if (tabId === 'rbac') {
+        renderRBACUsers();
       }
     }
 
@@ -2856,8 +3118,10 @@
 
       const tabWaiters = document.getElementById('tab-btn-waiters');
       const tabUsers = document.getElementById('tab-btn-users');
+      const tabRbac = document.getElementById('tab-btn-rbac');
       if (tabWaiters) tabWaiters.style.display = isAdmin ? 'flex' : 'none';
       if (tabUsers) tabUsers.style.display = isAdmin ? 'flex' : 'none';
+      if (tabRbac) tabRbac.style.display = isAdmin ? 'flex' : 'none';
 
       const btnAdminAdd = document.getElementById('btn-admin-add-product');
       if (btnAdminAdd) btnAdminAdd.style.display = isAdmin ? 'inline-flex' : 'none';
@@ -3367,8 +3631,15 @@
         return;
       }
 
+      function extractCustomerNameFromDesc(desc) {
+        if (!desc) return 'Lucas Silva';
+        const m = desc.match(/Cliente:\s*([^)]+)/i) || desc.match(/para\s+([A-Za-zÀ-ÿ\s]+)/i) || desc.match(/^([A-Za-zÀ-ÿ\s]+)\s+(recebeu|resgatou|pediu|iniciou)/i);
+        return m ? m[1].trim() : 'Lucas Silva';
+      }
+
       container.innerHTML = filtered.map(n => {
         const iconSvg = getNotifIconSvg(n.type);
+        const customerName = extractCustomerNameFromDesc(n.desc);
 
         return `
           <div class="notif-card-item type-${n.type} ${n.read ? '' : 'unread'}">
@@ -3386,7 +3657,10 @@
                 <div class="notif-time-text">Horário: ${n.time || 'Agora'}</div>
               </div>
             </div>
-            <div style="display:flex; gap:8px; align-items:center;">
+            <div style="display:flex; gap:6px; align-items:center;">
+              <button class="btn-print-action" style="font-size:0.72rem; padding:6px 10px;" onclick="openCustomerProfile('${customerName}')" title="Ver Mini Perfil do Cliente">
+                👤 Perfil
+              </button>
               <button class="btn-print-action" style="font-size:0.72rem; padding:6px 10px;" onclick="goToNotifTable('${n.table}')">
                 Abrir Mesa
               </button>
@@ -4210,6 +4484,41 @@
       if (totalPointsEl) totalPointsEl.textContent = `${totalPts.toLocaleString('pt-BR')} pts`;
       if (totalRewardsEl) totalRewardsEl.textContent = `18 Prêmios`;
 
+      // Render Top 3 Ranking Podium
+      const podiumGrid = document.getElementById('loyalty-podium-grid');
+      if (podiumGrid) {
+        const sorted = [...customers].sort((a, b) => (b.points || 0) - (a.points || 0));
+        const medals = ['🥇', '🥈', '🥉'];
+        const rankLabels = ['Top #1 VIP', 'Top #2 VIP', 'Top #3 VIP'];
+        const cardClasses = ['rank-1', 'rank-2', 'rank-3'];
+        
+        podiumGrid.innerHTML = sorted.slice(0, 3).map((c, idx) => `
+          <div class="ranking-podium-card ${cardClasses[idx]}">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="font-size:1.6rem;">${medals[idx]}</div>
+                <div>
+                  <strong style="color:#FFFFFF; font-size:0.92rem; display:block;">${c.name}</strong>
+                  <span style="font-size:0.70rem; color:var(--text-dim);">${c.tier}</span>
+                </div>
+              </div>
+              <span style="font-size:0.68rem; font-weight:800; background:#272A34; color:#F59E0B; padding:3px 8px; border-radius:6px;">
+                ${rankLabels[idx]}
+              </span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; border-top:1px dashed var(--border-dark); padding-top:8px;">
+              <div>
+                <div style="font-size:1.15rem; font-weight:800; color:#F59E0B;">${c.points || 0} pts</div>
+                <span style="font-size:0.68rem; color:var(--text-dim);">${c.stamps || 0}/10 Selos</span>
+              </div>
+              <button class="btn-print-action" style="font-size:0.72rem; padding:4px 8px;" onclick="openCustomerProfile('${c.name}')">
+                👤 Ver Perfil
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
       if (customers.length === 0) {
         tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-dim);">Nenhum cliente VIP cadastrado.</td></tr>`;
         return;
@@ -4231,7 +4540,7 @@
         return `
           <tr>
             <td>
-              <strong style="color:#FFFFFF; font-size:0.86rem;">${c.name}</strong>
+              <strong style="color:#FFFFFF; font-size:0.86rem; cursor:pointer;" onclick="openCustomerProfile('${c.name}')" title="Clique para ver Mini Perfil">${c.name}</strong>
             </td>
             <td style="color:var(--text-dim); font-size:0.78rem;">${c.phone || '(11) 98765-4321'}</td>
             <td>
@@ -4256,6 +4565,9 @@
             </td>
             <td style="text-align:right;">
               <div style="display:inline-flex; gap:6px; align-items:center;">
+                <button class="btn-print-action" style="font-size:0.72rem; padding:4px 8px;" onclick="openCustomerProfile('${c.name}')" title="Ver Mini Perfil Completo">
+                  👤 Perfil
+                </button>
                 <button class="btn-edit-action" style="background:#059669; border-color:#10B981; color:#FFF;" onclick="awardLoyaltyStamp('${c.name}', 1)" title="Adicionar +1 Selo na Visita">
                   +1 Selo
                 </button>
@@ -4275,6 +4587,266 @@
 
     function renderUsers() {
       renderLoyaltyCRM();
+    }
+
+    // =========================================================
+    // RBAC: GESTÃO UNIFICADA DE USUÁRIOS & CARGOS
+    // =========================================================
+    const defaultRBACUsers = [
+      { id: "u_admin", name: "Administrador Geral", phone: "(11) 99999-0000", role: "ADMIN", pin: "1234", status: "Ativo", permissions: "Acesso Total ao Sistema" },
+      { id: "u_w1", name: "Carlos Eduardo", phone: "(11) 98111-2233", role: "GARCOM", pin: "1001", status: "Ativo", tables: "mesa 01, mesa 02, mesa 03, mesa 04" },
+      { id: "u_w2", name: "Mariana Souza", phone: "(11) 98222-3344", role: "GARCOM", pin: "1002", status: "Ativo", tables: "mesa 05, mesa 06, mesa 07" },
+      { id: "u_w3", name: "Lucas Ferreira", phone: "(11) 98333-4455", role: "GARCOM", pin: "1003", status: "Ativo", tables: "mesa 08, mesa 09, mesa 10" },
+      { id: "u_c1", name: "Eduardo Camargo", phone: "(11) 95555-1234", role: "CLIENTE", pin: "1234", status: "Ativo", tier: "Diamante VIP", points: 820, stamps: 10 },
+      { id: "u_c2", name: "Beatriz Lima", phone: "(11) 98888-7777", role: "CLIENTE", pin: "7777", status: "Ativo", tier: "Ouro VIP", points: 450, stamps: 8 },
+      { id: "u_c3", name: "Lucas Silva", phone: "(11) 98765-4321", role: "CLIENTE", pin: "4321", status: "Ativo", tier: "Ouro VIP", points: 320, stamps: 6 },
+      { id: "u_c4", name: "Roberto Alves", phone: "(11) 97654-3210", role: "CLIENTE", pin: "3210", status: "Ativo", tier: "Prata VIP", points: 180, stamps: 4 },
+      { id: "u_c5", name: "Patrícia Mendes", phone: "(11) 96543-2109", role: "CLIENTE", pin: "2109", status: "Ativo", tier: "Bronze VIP", points: 90, stamps: 2 }
+    ];
+
+    let currentRbacFilter = 'all';
+
+    function getStoredRBACUsers() {
+      let list = JSON.parse(localStorage.getItem('nolei_users_rbac') || 'null');
+      if (!list) {
+        list = defaultRBACUsers;
+        localStorage.setItem('nolei_users_rbac', JSON.stringify(list));
+      }
+      return list;
+    }
+
+    function filterRBACTab(role) {
+      currentRbacFilter = role;
+      document.querySelectorAll('#sec-rbac .notif-filter-pill').forEach(p => p.classList.remove('active'));
+      const targetBtn = document.getElementById('rbac-filter-' + (role === 'all' ? 'all' : role.toLowerCase()));
+      if (targetBtn) targetBtn.classList.add('active');
+      renderRBACUsers();
+    }
+
+    function renderRBACUsers() {
+      const tbody = document.getElementById('rbac-users-table-body');
+      if (!tbody) return;
+      const users = getStoredRBACUsers();
+      let filtered = users;
+      if (currentRbacFilter !== 'all') {
+        filtered = users.filter(u => u.role === currentRbacFilter);
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-dim);">Nenhum usuário cadastrado neste cargo.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(u => {
+        const roleBadgeClass = u.role.toLowerCase();
+        const roleLabel = u.role === 'ADMIN' ? '👑 ADMIN' : u.role === 'GARCOM' ? '👔 GARÇOM' : '⭐ CLIENTE VIP';
+        const detailInfo = u.role === 'GARCOM' ? `Mesas: ${u.tables || 'mesa 01'}` : u.role === 'CLIENTE' ? `${u.tier || 'VIP'} • ${u.points || 0} pts` : (u.permissions || 'Acesso Geral');
+
+        return `
+          <tr>
+            <td>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="width:30px; height:30px; border-radius:50%; background:#272A34; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">
+                  ${(u.name || 'U').charAt(0).toUpperCase()}
+                </span>
+                <strong style="color:#FFFFFF; font-size:0.86rem; cursor:pointer;" onclick="${u.role === 'CLIENTE' ? `openCustomerProfile('${u.name}')` : ''}">${u.name}</strong>
+              </div>
+            </td>
+            <td style="color:var(--text-dim); font-size:0.78rem;">${u.phone || '(11) 98765-4321'}</td>
+            <td>
+              <span class="role-badge ${roleBadgeClass}">${roleLabel}</span>
+            </td>
+            <td>
+              <code style="background:#141518; padding:3px 6px; border-radius:4px; color:#F59E0B; font-size:0.75rem; border:1px solid var(--border-dark);">PIN: ${u.pin || '1234'}</code>
+            </td>
+            <td style="font-size:0.78rem; color:var(--text-muted);">${detailInfo}</td>
+            <td>
+              <span style="color:${u.status === 'Ativo' ? 'var(--emerald)' : '#F87171'}; font-weight:700; font-size:0.76rem;">● ${u.status || 'Ativo'}</span>
+            </td>
+            <td style="text-align:right;">
+              <button class="btn-edit-action" onclick="openEditUserModal('${u.id}')">Editar</button>
+              <button class="btn-del-action" onclick="deleteRBACUser('${u.id}')">Excluir</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function toggleRbacRoleSpecificFields(role) {
+      const fieldTables = document.getElementById('rbac-field-tables');
+      if (fieldTables) {
+        fieldTables.style.display = role === 'GARCOM' ? 'block' : 'none';
+      }
+    }
+
+    function openNewUserModal() {
+      document.getElementById('edit-rbac-id').value = '';
+      document.getElementById('modal-rbac-title').textContent = 'Cadastrar Novo Usuário';
+      document.getElementById('rbac-user-name').value = '';
+      document.getElementById('rbac-user-phone').value = '';
+      document.getElementById('rbac-user-role').value = 'CLIENTE';
+      document.getElementById('rbac-user-pin').value = '1234';
+      document.getElementById('rbac-user-tables').value = 'mesa 01, mesa 04';
+      document.getElementById('rbac-user-status').value = 'Ativo';
+      toggleRbacRoleSpecificFields('CLIENTE');
+      document.getElementById('modal-user-rbac').classList.add('open');
+      document.getElementById('modal-user-rbac').classList.add('show');
+    }
+
+    function openEditUserModal(id) {
+      const users = getStoredRBACUsers();
+      const u = users.find(x => x.id === id);
+      if (!u) return;
+      document.getElementById('edit-rbac-id').value = u.id;
+      document.getElementById('modal-rbac-title').textContent = 'Editar Usuário (' + u.name + ')';
+      document.getElementById('rbac-user-name').value = u.name;
+      document.getElementById('rbac-user-phone').value = u.phone || '';
+      document.getElementById('rbac-user-role').value = u.role || 'CLIENTE';
+      document.getElementById('rbac-user-pin').value = u.pin || '1234';
+      document.getElementById('rbac-user-tables').value = u.tables || 'mesa 01, mesa 04';
+      document.getElementById('rbac-user-status').value = u.status || 'Ativo';
+      toggleRbacRoleSpecificFields(u.role || 'CLIENTE');
+      document.getElementById('modal-user-rbac').classList.add('open');
+      document.getElementById('modal-user-rbac').classList.add('show');
+    }
+
+    function closeUserModal(e) {
+      if (e && e.target && e.target.id !== 'modal-user-rbac' && !e.target.hasAttribute('onclick')) return;
+      const modal = document.getElementById('modal-user-rbac');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.classList.remove('show');
+      }
+    }
+
+    function saveRBACUser() {
+      const id = document.getElementById('edit-rbac-id').value || 'u_' + Date.now();
+      const name = document.getElementById('rbac-user-name').value.trim();
+      const phone = document.getElementById('rbac-user-phone').value.trim();
+      const role = document.getElementById('rbac-user-role').value;
+      const pin = document.getElementById('rbac-user-pin').value.trim() || '1234';
+      const tables = document.getElementById('rbac-user-tables').value.trim();
+      const status = document.getElementById('rbac-user-status').value;
+
+      if (!name || !phone) {
+        alert('Preencha o nome e o WhatsApp do usuário.');
+        return;
+      }
+
+      let users = getStoredRBACUsers();
+      users = users.filter(u => u.id !== id);
+
+      const userObj = {
+        id,
+        name,
+        phone,
+        role,
+        pin,
+        status,
+        tables: role === 'GARCOM' ? tables : undefined,
+        permissions: role === 'ADMIN' ? 'Acesso Total ao Sistema' : undefined
+      };
+
+      if (role === 'CLIENTE') {
+        const custProfile = getCustomerLoyaltyProfile(name);
+        userObj.tier = custProfile.tier || 'Ouro VIP';
+        userObj.points = custProfile.points || 150;
+        userObj.stamps = custProfile.stamps || 3;
+      }
+
+      users.push(userObj);
+      localStorage.setItem('nolei_users_rbac', JSON.stringify(users));
+
+      // If garcom, sync to waiters list
+      if (role === 'GARCOM') {
+        let waiters = getStoredWaiters().filter(w => w.name !== name);
+        const parsedTables = tables.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
+        waiters.push({ id: 'w_' + id, name, phone, shift: 'Integral', tables: parsedTables, rating: 5.0, active: status === 'Ativo' });
+        localStorage.setItem('nolei_waiters', JSON.stringify(waiters));
+        initOperatorDropdown();
+        renderWaiters();
+      }
+
+      closeUserModal();
+      renderRBACUsers();
+      showToast(`Usuário "${name}" (${role}) salvo com sucesso!`);
+    }
+
+    function deleteRBACUser(id) {
+      if (!confirm('Deseja realmente remover este usuário do sistema?')) return;
+      let users = getStoredRBACUsers().filter(u => u.id !== id);
+      localStorage.setItem('nolei_users_rbac', JSON.stringify(users));
+      renderRBACUsers();
+      showToast('Usuário removido.');
+    }
+
+    // =========================================================
+    // MINI PERFIL DO CLIENTE NO DASHBOARD
+    // =========================================================
+    function openCustomerProfile(customerName) {
+      const profile = getCustomerLoyaltyProfile(customerName || 'Lucas Silva');
+      const modal = document.getElementById('modal-customer-profile');
+      if (!modal) return;
+
+      const avatar = document.getElementById('profile-modal-avatar');
+      const nameEl = document.getElementById('profile-modal-name');
+      const roleEl = document.getElementById('profile-modal-role-badge');
+      const phoneEl = document.getElementById('profile-modal-phone');
+      const pinEl = document.getElementById('profile-modal-pin');
+      const tierEl = document.getElementById('profile-modal-tier');
+      const pointsEl = document.getElementById('profile-modal-points');
+      const stampsEl = document.getElementById('profile-modal-stamps');
+      const visitsEl = document.getElementById('profile-modal-visits-count');
+      const ordersListEl = document.getElementById('profile-modal-orders-list');
+
+      if (avatar) avatar.textContent = (profile.name || 'C').charAt(0).toUpperCase();
+      if (nameEl) nameEl.textContent = profile.name;
+      if (roleEl) roleEl.textContent = `CLIENTE ${profile.tier ? profile.tier.toUpperCase() : 'VIP'}`;
+      if (phoneEl) phoneEl.textContent = profile.phone || '(11) 98765-4321';
+      
+      // Look up PIN from RBAC
+      const rbacUsers = getStoredRBACUsers();
+      const rbacU = rbacUsers.find(u => u.name.toLowerCase() === profile.name.toLowerCase());
+      const pin = rbacU ? rbacU.pin : (profile.pin || '4321');
+      if (pinEl) pinEl.textContent = `•••• (${pin})`;
+
+      if (tierEl) tierEl.textContent = `🏆 NÍVEL ${profile.tier ? profile.tier.toUpperCase() : 'OURO VIP'}`;
+      if (pointsEl) pointsEl.textContent = `${profile.points || 320} pontos`;
+      if (stampsEl) stampsEl.textContent = `${profile.stamps || 6} / 10 Selos`;
+      if (visitsEl) visitsEl.textContent = `${profile.visits || 6} visitas`;
+
+      // Max 5 past orders
+      const defaultOrders = [
+        { item: "Burger Botânico Artesanal", date: "Hoje (Mesa 04)", cat: "Prato Principal" },
+        { item: "Gin Tônica Botânica", date: "Hoje (Mesa 04)", cat: "Drink" },
+        { item: "Risoto de Funghi Porcini", date: "24/09/2026", cat: "Prato Principal" },
+        { item: "Petit Gâteau Belga", date: "18/09/2026", cat: "Sobremesa" },
+        { item: "Bruschetta Caprese", date: "10/09/2026", cat: "Entrada" }
+      ];
+
+      if (ordersListEl) {
+        ordersListEl.innerHTML = defaultOrders.map(o => `
+          <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:8px; padding:7px 10px; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem;">
+            <div>
+              <strong style="color:#FFFFFF; display:block;">${o.item}</strong>
+              <span style="color:var(--text-dim); font-size:0.68rem;">${o.cat}</span>
+            </div>
+            <span style="color:var(--text-muted); font-size:0.70rem;">${o.date}</span>
+          </div>
+        `).join('');
+      }
+
+      modal.classList.add('open');
+      modal.classList.add('show');
+    }
+
+    function closeCustomerProfile(e) {
+      if (e && e.target && e.target.id !== 'modal-customer-profile' && !e.target.hasAttribute('onclick')) return;
+      const modal = document.getElementById('modal-customer-profile');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.classList.remove('show');
+      }
     }
 
     // Global Search Handler
@@ -4563,6 +5135,7 @@
     renderProducts();
     renderWaiters();
     renderUsers();
+    renderRBACUsers();
     updateNotificationBadges();
 
     // Live Sync Polling

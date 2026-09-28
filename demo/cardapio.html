@@ -1897,11 +1897,11 @@
         Principais
       </button>
       <button class="category-tab" onclick="switchCategory('bebidas', this)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 22h8M12 11v11M5 3h14l-2 8a5 5 0 0 1-10 0L5 3z"/></svg>
         Bebidas
       </button>
       <button class="category-tab" onclick="switchCategory('sobremesas', this)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v3M20 10a8 8 0 1 1-16 0c0-3.3 2-6 5-7l3 3 3-3c3 1 5 3.7 5 7z"/><line x1="2" y1="18" x2="22" y2="18"/></svg>
         Sobremesas
       </button>
     </div>
@@ -2302,9 +2302,9 @@
         <div>
           <h3 class="modal-title" style="display:flex; align-items:center; gap:8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:#FBBF24;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
-            Clube Gourmet Fidelidade
+            Clube de Fidelidade
           </h3>
-          <p class="modal-sub">Acumule selos nas suas visitas e troque por cortesias no restaurante.</p>
+          <p class="modal-sub">Pontue a cada R$ gasto no restaurante e troque por pratos e cortesias especiais.</p>
         </div>
         <button onclick="closeLoyaltyModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
       </div>
@@ -2313,24 +2313,24 @@
       <div class="vip-card-box">
         <div class="vip-card-top">
           <div>
-            <span class="vip-tier-tag" id="vip-card-tier">NÍVEL OURO</span>
+            <span class="vip-tier-tag" id="vip-card-tier">OURO</span>
             <div style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-top:4px;" id="vip-card-name">Lucas Silva</div>
           </div>
           <div style="text-align:right;">
             <span style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Saldo de Pontos</span>
-            <div class="vip-points-big" id="vip-card-points">320 pts</div>
+            <div class="vip-points-big" id="vip-card-points">520 pts</div>
           </div>
         </div>
         <div style="font-size:0.72rem; color:#FBBF24; font-weight:600;">
-          Benefício Ativo: Sobremesa cortesia no aniversário + 10% cashback
+          Regra de Pontuação: R$ 1,00 gasto = 1 Ponto • Selos a cada R$ 50 consumidos
         </div>
       </div>
 
       <!-- 10 Stamps Digital Card -->
       <div style="margin-bottom:14px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <strong style="font-size:0.78rem; color:#FFFFFF;">Cartela de Selos da Temporada</strong>
-          <span style="font-size:0.72rem; color:#F59E0B; font-weight:700;" id="vip-stamps-progress">7 de 10 carimbos</span>
+          <strong style="font-size:0.78rem; color:#FFFFFF;">Cartela da Temporada (1 selo a cada R$ 50 gastos)</strong>
+          <span style="font-size:0.72rem; color:#F59E0B; font-weight:700;" id="vip-stamps-progress">10 de 10 selos</span>
         </div>
         <div class="stamps-grid-10" id="vip-stamps-grid">
           <!-- 10 stamp slots dynamically generated -->
@@ -2872,6 +2872,14 @@
     }
 
     // Auto-Enrollment Helper for Loyalty Club
+    function calculateTierBySpent(points) {
+      const pts = Number(points) || 0;
+      if (pts >= 1000) return 'Diamante';
+      if (pts >= 500) return 'Ouro';
+      if (pts >= 200) return 'Prata';
+      return 'Bronze';
+    }
+
     function ensureLoyaltyUserRegistered(name, phone) {
       if (!name) return;
       const keySnake = `nolei_loyalty_${name.toLowerCase().replace(/\s+/g, '_')}`;
@@ -2880,11 +2888,11 @@
         data = {
           name: name,
           phone: phone || "(11) 98765-4321",
-          tier: "Nível Ouro",
-          points: 320,
-          stamps: 6,
+          tier: "Ouro",
+          points: 520,
+          totalSpent: 520,
+          stamps: 10,
           totalStamps: 10,
-          visits: 6,
           rewards: [
             { id: "rew_1", name: "Petit Gâteau Belga", cost: 100, claimed: false },
             { id: "rew_2", name: "Gin Tônica Botânica", cost: 150, claimed: false },
@@ -2894,6 +2902,9 @@
         };
         localStorage.setItem(keySnake, JSON.stringify(data));
         localStorage.setItem(`nolei_loyalty_${name}`, JSON.stringify(data));
+      } else {
+        data.tier = calculateTierBySpent(data.points);
+        data.stamps = Math.min(10, Math.floor((data.points || 0) / 50));
       }
     }
 
@@ -2906,6 +2917,9 @@
       if (!data) {
         ensureLoyaltyUserRegistered(userName, currentUser ? currentUser.phone : null);
         data = JSON.parse(localStorage.getItem(keySnake) || 'null');
+      } else {
+        data.tier = calculateTierBySpent(data.points);
+        data.stamps = Math.min(10, Math.floor((data.points || 0) / 50));
       }
       return data;
     }
@@ -2913,6 +2927,10 @@
     function saveLoyaltyData(userName, data) {
       const keySnake = `nolei_loyalty_${userName.toLowerCase().replace(/\s+/g, '_')}`;
       const keyRaw = `nolei_loyalty_${userName}`;
+      if (data && data.points !== undefined) {
+        data.tier = calculateTierBySpent(data.points);
+        data.stamps = Math.min(10, Math.floor((data.points || 0) / 50));
+      }
       localStorage.setItem(keySnake, JSON.stringify(data));
       localStorage.setItem(keyRaw, JSON.stringify(data));
       updateLoyaltyUI();
@@ -2925,6 +2943,9 @@
       const loyalty = getLoyaltyData(currentUser.name);
       if (!loyalty) return;
 
+      const currentTier = calculateTierBySpent(loyalty.points);
+      const stampsCount = Math.min(10, Math.floor((loyalty.points || 0) / 50));
+
       const tierEl = document.getElementById('vip-card-tier');
       const nameEl = document.getElementById('vip-card-name');
       const pointsEl = document.getElementById('vip-card-points');
@@ -2932,10 +2953,10 @@
       const stampsGrid = document.getElementById('vip-stamps-grid');
       const rewardsList = document.getElementById('vip-rewards-list');
 
-      if (tierEl) tierEl.textContent = (loyalty.tier || 'NÍVEL OURO').replace(/ VIP/g, '').replace(/🥇 /g, '');
+      if (tierEl) tierEl.textContent = currentTier.toUpperCase();
       if (nameEl) nameEl.textContent = currentUser.name;
       if (pointsEl) pointsEl.textContent = `${loyalty.points} pts`;
-      if (progressEl) progressEl.textContent = `${loyalty.stamps} de ${loyalty.totalStamps || 10} carimbos`;
+      if (progressEl) progressEl.textContent = `${stampsCount} de 10 selos (${loyalty.points} pts acumulados)`;
 
       if (stampsGrid) {
         let gridHtml = '';
@@ -3688,8 +3709,8 @@
       const loyalty = getLoyaltyData(currentUser.name);
       const ptsEl = document.getElementById('settings-loyalty-pts');
       const tierEl = document.getElementById('settings-loyalty-tier');
-      if (ptsEl && loyalty) ptsEl.textContent = `${loyalty.points || 320} Pontos`;
-      if (tierEl && loyalty) tierEl.textContent = loyalty.tier ? loyalty.tier.replace(' VIP', '') : 'Nível Ouro';
+      if (ptsEl && loyalty) ptsEl.textContent = `${loyalty.points || 520} Pontos`;
+      if (tierEl && loyalty) tierEl.textContent = calculateTierBySpent(loyalty.points);
 
       modal.classList.add('open');
     }

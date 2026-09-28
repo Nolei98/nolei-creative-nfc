@@ -639,7 +639,8 @@
  transition: all 0.25s;
  }
 
- .modal-overlay.open {
+ .modal-overlay.open,
+ .modal-overlay.show {
  opacity: 1;
  visibility: visible;
  }
@@ -1761,7 +1762,10 @@
  renderTicketPreview();
  
  const modal = document.getElementById('modal-print-ticket');
- if (modal) modal.classList.add('show');
+ if (modal) {
+ modal.classList.add('open');
+ modal.classList.add('show');
+ }
  }
 
  function openPrintBillForAlert(tableName) {
@@ -1771,7 +1775,10 @@
  function closePrintTicketModal(e) {
  if (e && e.target && e.target.id !== 'modal-print-ticket' && !e.target.hasAttribute('onclick')) return;
  const modal = document.getElementById('modal-print-ticket');
- if (modal) modal.classList.remove('show');
+ if (modal) {
+ modal.classList.remove('open');
+ modal.classList.remove('show');
+ }
  }
 
  function setTicketMode(mode, shouldRerender = true) {

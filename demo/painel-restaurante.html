@@ -8,7 +8,7 @@
   <!-- Primary Meta Tags -->
   <title>Painel POS & Cozinha KDS — Nolei Gourmet | Restaurante Inteligente</title>
   <meta name="title" content="Painel POS & Cozinha KDS — Nolei Gourmet | Restaurante Inteligente">
-  <meta name="description" content="Terminal operacional gourmet: acompanhe pedidos de cardápio por mesa, comandas ativas de garçons, chamadas de salão e impressão térmica em tempo real.">
+  <meta name="description" content="Terminal operacional gourmet: acompanhe pedidos de cardápio por mesa, comandas ativas de garçons, chamadas de salão, notificações em tempo real e impressão térmica.">
   <meta name="keywords" content="painel cozinha restaurante, kds comanda digital, pos restaurante, chamados garcom, nolei creative">
   <meta name="author" content="Nolei Creative">
   <meta name="robots" content="index, follow">
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nolei-creative-nfc.vercel.app/demo/painel-restaurante.html">
   <meta property="og:title" content="Painel POS & Cozinha KDS — Nolei Gourmet">
-  <meta property="og:description" content="Terminal operacional gourmet com KDS, comanda térmica de 80mm/58mm e pedidos em tempo real.">
+  <meta property="og:description" content="Terminal operacional gourmet com KDS, notificações em tempo real, comanda térmica de 80mm/58mm e pedidos por aproximação.">
   <meta property="og:image" content="https://nolei-creative-nfc.vercel.app/assets/images/display-menu-acrilico.jpg?v=2">
  
   <!-- Google Fonts -->
@@ -120,7 +120,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 18px var(--flame-glow);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       color: #FFFFFF;
       text-decoration: none;
       transition: transform 0.2s;
@@ -167,7 +167,7 @@
     }
 
     .pos-nav-item .nav-text {
-      font-size: 0.62rem;
+      font-size: 0.60rem;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
@@ -182,6 +182,27 @@
       color: #FFFFFF;
       box-shadow: 0 4px 16px var(--flame-glow);
       border-color: transparent;
+    }
+
+    .nav-badge-count {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: var(--flame-red);
+      color: #FFFFFF;
+      font-size: 0.62rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      border: 2px solid var(--bg-sidebar);
+    }
+    .nav-badge-count.hidden {
+      display: none;
     }
 
     .pos-sidebar-bottom {
@@ -218,7 +239,7 @@
     .pos-search-wrapper {
       position: relative;
       flex: 1;
-      max-width: 480px;
+      max-width: 440px;
     }
 
     .pos-search-icon {
@@ -251,7 +272,53 @@
     .pos-header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+    }
+
+    /* Notification Bell Button */
+    .btn-top-bell {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-top-bell:hover {
+      background: #272A34;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .top-bell-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: var(--flame-red);
+      color: #FFFFFF;
+      font-size: 0.62rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-app);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      animation: bellPulse 2s infinite ease-in-out;
+    }
+    .top-bell-badge.hidden {
+      display: none;
+    }
+    @keyframes bellPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
     }
 
     .operator-capsule {
@@ -306,6 +373,24 @@
     .btn-flame-cta:hover {
       transform: translateY(-1px);
       box-shadow: 0 6px 18px rgba(255, 77, 48, 0.45);
+    }
+
+    /* Live Notification Feed Bar (Top Alert in KDS) */
+    .notif-live-banner {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.04) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .notif-live-banner:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.18) 0%, rgba(37, 99, 235, 0.08) 100%);
     }
 
     /* KPI Metrics Cards Row */
@@ -414,7 +499,7 @@
 
     .chart-svg-container {
       width: 100%;
-      height: 110px;
+      height: 105px;
       position: relative;
     }
 
@@ -718,13 +803,15 @@
       box-shadow: 0 4px 14px var(--flame-glow);
     }
     .mesa-pill-btn .table-dot-status {
-      width: 6px;
-      height: 6px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: var(--emerald);
+      background: var(--flame-red);
+      box-shadow: 0 0 6px rgba(255, 77, 48, 0.6);
     }
-    .mesa-pill-btn.empty .table-dot-status {
-      background: var(--text-dim);
+    .mesa-pill-btn.is-free .table-dot-status {
+      background: var(--emerald);
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
     }
 
     /* Left Column: Comanda da Mesa Ativa */
@@ -753,6 +840,26 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .comanda-status-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .comanda-status-pill.ocupada {
+      background: rgba(255, 77, 48, 0.15);
+      color: #FB923C;
+      border: 1px solid rgba(255, 77, 48, 0.3);
+    }
+    .comanda-status-pill.livre {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
     .comanda-waiter-info {
@@ -1051,6 +1158,145 @@
       cursor: not-allowed;
     }
 
+    /* =========================================================
+       TAB: CENTRAL DE NOTIFICAÇÕES
+       ========================================================= */
+    .notif-hub-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .notif-filter-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+    .notif-filter-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .notif-filter-pill.active {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 2px 10px var(--flame-glow);
+    }
+
+    .notif-card-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transition: all 0.2s;
+      border-left: 4px solid var(--blue);
+    }
+    .notif-card-item.unread {
+      background: #20232B;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .notif-card-item.type-abertura {
+      border-left-color: var(--emerald);
+    }
+    .notif-card-item.type-garcom {
+      border-left-color: var(--flame-red);
+    }
+    .notif-card-item.type-conta {
+      border-left-color: var(--amber);
+    }
+    .notif-card-item.type-pedido {
+      border-left-color: var(--blue);
+    }
+    .notif-card-item.type-fechamento {
+      border-left-color: #8B5CF6;
+    }
+
+    .notif-left-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .notif-type-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .notif-type-icon.abertura {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+    }
+    .notif-type-icon.garcom {
+      background: rgba(255, 77, 48, 0.15);
+      color: var(--flame-red);
+    }
+    .notif-type-icon.conta {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--amber);
+    }
+    .notif-type-icon.pedido {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--blue);
+    }
+    .notif-type-icon.fechamento {
+      background: rgba(139, 92, 246, 0.15);
+      color: #A78BFA;
+    }
+
+    .notif-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notif-table-tag {
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 800;
+      background: #141518;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-dark);
+      color: #FFFFFF;
+    }
+
+    .notif-main-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .notif-desc-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .notif-time-text {
+      font-size: 0.70rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
     /* CRUD Tables Management */
     .crud-box {
       background: var(--bg-card);
@@ -1303,7 +1549,7 @@
       }
     }
 
-    /* Responsive adjustments */
+    /* Responsive */
     @media (max-width: 1024px) {
       .pos-split-layout {
         grid-template-columns: 1fr;
@@ -1355,6 +1601,12 @@
           <span class="nav-text">Comandas</span>
         </button>
 
+        <button class="pos-nav-item" id="tab-btn-notifications" onclick="switchTab('notifications')" title="Central de Notificações">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="nav-text">Avisos</span>
+          <span class="nav-badge-count hidden" id="sidebar-notif-badge">0</span>
+        </button>
+
         <button class="pos-nav-item" id="tab-btn-products" onclick="switchTab('products')" title="Cardápio & Estoque">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
           <span class="nav-text">Cardápio</span>
@@ -1395,6 +1647,13 @@
         </div>
 
         <div class="pos-header-actions">
+          
+          <!-- Quick Notification Bell -->
+          <button class="btn-top-bell" id="btn-top-notifications" onclick="switchTab('notifications')" title="Ver Central de Notificações">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="top-bell-badge hidden" id="top-bell-badge">0</span>
+          </button>
+
           <div class="operator-capsule">
             <span class="operator-dot"></span>
             <select id="operator-select-dropdown" class="operator-select-dark" onchange="changeActiveOperator(this.value)">
@@ -1404,7 +1663,7 @@
 
           <button class="btn-flame-cta" id="btn-header-new-product" onclick="openNewProductModal()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            + Novo Prato
+            Novo Prato
           </button>
         </div>
       </div>
@@ -1414,6 +1673,20 @@
            ========================================================= -->
       <section id="sec-kds">
         
+        <!-- Live Notification Banner Ticker -->
+        <div class="notif-live-banner" onclick="switchTab('notifications')">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:1.1rem; color:#60A5FA;">🔔</span>
+            <div>
+              <strong style="color:#FFFFFF; font-size:0.82rem;" id="kds-notif-ticker-title">Central de Notificações do Salão</strong>
+              <div style="font-size:0.72rem; color:var(--text-muted);" id="kds-notif-ticker-desc">Nenhum novo aviso no momento.</div>
+            </div>
+          </div>
+          <span style="font-size:0.72rem; font-weight:700; color:#60A5FA; display:flex; align-items:center; gap:4px;">
+            Ver Todas &rarr;
+          </span>
+        </div>
+
         <!-- KPI Cards Row -->
         <div class="kpi-grid">
           <div class="kpi-card">
@@ -1432,9 +1705,9 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="16" y1="2" x2="16" y2="4"/></svg>
             </div>
             <div>
-              <div class="kpi-meta-label">Ocupação do Salão</div>
+              <div class="kpi-meta-label">Mesas Ocupadas</div>
               <div class="kpi-value-text" id="kpi-tables-occupancy">3 / 10 Mesas</div>
-              <div class="kpi-badge-trend">30% de capacidade</div>
+              <div class="kpi-badge-trend" id="kpi-tables-free-label">7 livres no salão</div>
             </div>
           </div>
 
@@ -1503,7 +1776,7 @@
         <div class="section-header-row">
           <h2 class="section-header-title">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Comandas em Preparo no Salão & KDS
+            Comandas em Andamento no Salão & KDS
           </h2>
           <span style="font-size:0.75rem; font-weight:700; color:var(--emerald);" id="badge-kds-count">3 Mesas Ativas</span>
         </div>
@@ -1521,9 +1794,9 @@
         <div class="section-header-row" style="margin-bottom:8px;">
           <h2 class="section-header-title">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            1. Selecione a Mesa para Lançar ou Fechar
+            1. Selecione a Mesa do Salão
           </h2>
-          <span style="font-size:0.74rem; color:var(--text-dim);">Clique na mesa para abrir sua comanda ao lado</span>
+          <span style="font-size:0.74rem; color:var(--text-dim);">Mesas verdes estão livres; laranjas estão em atendimento</span>
         </div>
 
         <div class="mesa-selector-bar" id="pos-mesa-selector-bar">
@@ -1538,7 +1811,7 @@
             <div class="comanda-header-box">
               <div class="comanda-active-title">
                 <span id="split-comanda-table-title">MESA 04</span>
-                <span style="font-size:0.74rem; font-weight:700; background:rgba(16,185,129,0.15); color:var(--emerald); padding:3px 8px; border-radius:6px; border:1px solid rgba(16,185,129,0.3);">
+                <span class="comanda-status-pill ocupada" id="split-comanda-status-pill">
                   Em Consumo
                 </span>
               </div>
@@ -1636,7 +1909,45 @@
       </section>
 
       <!-- =========================================================
-           TAB 3: CARDÁPIO, ESTOQUE & PREÇOS (CRUD + DISPONIBILIDADE)
+           TAB 3: CENTRAL DE NOTIFICAÇÕES (SESSÃO DE NOTIFICAÇÕES)
+           ========================================================= -->
+      <section id="sec-notifications" style="display:none;">
+        <div class="crud-box">
+          
+          <div class="crud-header-row">
+            <div>
+              <h3 style="color:#FFFFFF; font-size:1.05rem; display:flex; align-items:center; gap:8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                Central de Notificações & Eventos do Salão
+              </h3>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Acompanhe em tempo real: aberturas de mesa via NFC, chamados de garçom, pedidos de conta e encerramentos.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-print-action" onclick="markAllNotificationsAsRead()">Marcar Lidas</button>
+              <button class="btn-del-action" onclick="clearAllNotifications()">Limpar Histórico</button>
+            </div>
+          </div>
+
+          <!-- Notification Filters -->
+          <div class="notif-filter-bar">
+            <button class="notif-filter-pill active" id="notif-filter-all" onclick="filterNotificationsTab('all')">Todas</button>
+            <button class="notif-filter-pill" id="notif-filter-abertura" onclick="filterNotificationsTab('abertura')">Aberturas de Mesa</button>
+            <button class="notif-filter-pill" id="notif-filter-garcom" onclick="filterNotificationsTab('garcom')">Chamados de Garçom</button>
+            <button class="notif-filter-pill" id="notif-filter-conta" onclick="filterNotificationsTab('conta')">Pedidos de Conta</button>
+            <button class="notif-filter-pill" id="notif-filter-pedido" onclick="filterNotificationsTab('pedido')">Novos Pratos</button>
+            <button class="notif-filter-pill" id="notif-filter-fechamento" onclick="filterNotificationsTab('fechamento')">Mesas Liberadas</button>
+          </div>
+
+          <!-- Notifications Feed List -->
+          <div class="notif-hub-container" id="notif-hub-list">
+            <!-- Dynamically populated -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           TAB 4: CARDÁPIO, ESTOQUE & PREÇOS (CRUD + DISPONIBILIDADE)
            ========================================================= -->
       <section id="sec-products" style="display:none;">
         <div class="crud-box">
@@ -1666,7 +1977,7 @@
       </section>
 
       <!-- =========================================================
-           TAB 4: GARÇONS & ATENDIMENTO (CRUD ADMIN)
+           TAB 5: GARÇONS & ATENDIMENTO (CRUD ADMIN)
            ========================================================= -->
       <section id="sec-waiters" style="display:none;">
         <div class="crud-box">
@@ -1696,7 +2007,7 @@
       </section>
 
       <!-- =========================================================
-           TAB 5: HISTÓRICO DE CLIENTES DO SALÃO
+           TAB 6: HISTÓRICO DE CLIENTES DO SALÃO
            ========================================================= -->
       <section id="sec-users" style="display:none;">
         <div class="crud-box">
@@ -1880,6 +2191,7 @@
 
       document.getElementById('sec-kds').style.display = tabId === 'kds' ? 'block' : 'none';
       document.getElementById('sec-pos').style.display = tabId === 'pos' ? 'block' : 'none';
+      document.getElementById('sec-notifications').style.display = tabId === 'notifications' ? 'block' : 'none';
       document.getElementById('sec-products').style.display = tabId === 'products' ? 'block' : 'none';
       document.getElementById('sec-waiters').style.display = tabId === 'waiters' ? 'block' : 'none';
       document.getElementById('sec-users').style.display = tabId === 'users' ? 'block' : 'none';
@@ -1891,6 +2203,8 @@
       } else if (tabId === 'kds') {
         renderKDS();
         renderAlerts();
+      } else if (tabId === 'notifications') {
+        renderNotificationsHub();
       } else if (tabId === 'products') {
         renderProducts();
       }
@@ -1974,17 +2288,14 @@
     function applyOperatorPermissions() {
       const isAdmin = activeOperatorId === 'admin';
       
-      // Header New Product Button
       const btnHeaderNew = document.getElementById('btn-header-new-product');
       if (btnHeaderNew) btnHeaderNew.style.display = isAdmin ? 'inline-flex' : 'none';
 
-      // Waiters and Users Sidebar Tabs (Hidden for Waiters)
       const tabWaiters = document.getElementById('tab-btn-waiters');
       const tabUsers = document.getElementById('tab-btn-users');
       if (tabWaiters) tabWaiters.style.display = isAdmin ? 'flex' : 'none';
       if (tabUsers) tabUsers.style.display = isAdmin ? 'flex' : 'none';
 
-      // Admin Add Button inside Products Section
       const btnAdminAdd = document.getElementById('btn-admin-add-product');
       if (btnAdminAdd) btnAdminAdd.style.display = isAdmin ? 'inline-flex' : 'none';
     }
@@ -1997,6 +2308,7 @@
       renderPosMesaSelector();
       renderSplitComanda();
       renderProducts();
+      renderNotificationsHub();
       showToast(`Visão alterada: ${val === 'admin' ? 'Administrador Geral' : 'Garçom Selecionado'}`);
     }
 
@@ -2041,13 +2353,14 @@
     let currentPaperSize = '80'; // '80' or '58'
     let currentCatalogCategory = 'all';
     let currentCatalogSearch = '';
+    let currentNotifFilter = 'all';
 
     function getTableData(tableName) {
       let tableObj = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase());
       if (!tableObj) {
         tableObj = {
           table: tableName,
-          waiter: "Equipe Nolei",
+          waiter: getWaiterForTable(tableName),
           items: []
         };
         kdsTables.push(tableObj);
@@ -2063,15 +2376,26 @@
           `nolei_table_orders_${rawNum}`,
           `nolei_table_orders_${tableName.toLowerCase().replace(/\s+/g, '')}`
         ];
+        let found = false;
         for (const key of candidates) {
           const stored = JSON.parse(localStorage.getItem(key) || 'null');
-          if (stored && Array.isArray(stored) && stored.length > 0) {
+          if (stored && Array.isArray(stored)) {
             tableObj.items = stored;
+            found = true;
             break;
           }
         }
+        if (!found && !localStorage.getItem(`nolei_table_orders_${cleanNum}`)) {
+          // Keep existing or empty
+        }
       }
       return tableObj;
+    }
+
+    function getWaiterForTable(tableName) {
+      const waiters = getStoredWaiters();
+      const op = waiters.find(w => w.tables.includes(tableName.toLowerCase()));
+      return op ? op.name : "Equipe Nolei";
     }
 
     function selectPosTable(tableName) {
@@ -2102,10 +2426,12 @@
         const isActive = tName.toLowerCase() === currentTicketTableName.toLowerCase();
 
         return `
-          <button class="mesa-pill-btn ${isActive ? 'active' : ''} ${hasItems ? '' : 'empty'}" onclick="selectPosTable('${tName}')">
+          <button class="mesa-pill-btn ${isActive ? 'active' : ''} ${hasItems ? '' : 'is-free'}" onclick="selectPosTable('${tName}')">
             <span class="table-dot-status"></span>
             ${tName.toUpperCase()}
-            ${hasItems ? `<span style="font-size:0.68rem; opacity:0.85;">(${tObj.items.length})</span>` : ''}
+            <span style="font-size:0.68rem; opacity:0.85;">
+              ${hasItems ? `(${tObj.items.length})` : 'Livre'}
+            </span>
           </button>
         `;
       }).join('');
@@ -2114,6 +2440,7 @@
     // Render Split Comanda (Left Column)
     function renderSplitComanda() {
       const titleEl = document.getElementById('split-comanda-table-title');
+      const statusPill = document.getElementById('split-comanda-status-pill');
       const waiterEl = document.getElementById('split-comanda-waiter-name');
       const countEl = document.getElementById('split-comanda-items-count');
       const listEl = document.getElementById('split-comanda-items-list');
@@ -2124,7 +2451,15 @@
       if (!titleEl) return;
 
       const tObj = getTableData(currentTicketTableName);
+      const isOccupied = tObj.items && tObj.items.length > 0;
+
       titleEl.textContent = currentTicketTableName.toUpperCase();
+      
+      if (statusPill) {
+        statusPill.className = `comanda-status-pill ${isOccupied ? 'ocupada' : 'livre'}`;
+        statusPill.innerHTML = isOccupied ? 'Em Consumo' : 'Disponível / Livre';
+      }
+
       if (waiterEl) waiterEl.innerHTML = `
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Atendente: ${tObj.waiter} • Salão Principal
@@ -2142,12 +2477,12 @@
 
       if (!listEl) return;
 
-      if (!tObj.items || tObj.items.length === 0) {
+      if (!isOccupied) {
         listEl.innerHTML = `
-          <div style="text-align:center; padding:30px 10px; font-size:0.78rem; color:var(--text-dim);">
-            <div style="font-size:1.4rem; margin-bottom:6px;">🍽️</div>
-            Nenhum pedido ativo na ${currentTicketTableName.toUpperCase()}.<br>
-            Selecione pratos no catálogo ao lado para lançar.
+          <div style="text-align:center; padding:30px 14px; font-size:0.80rem; color:var(--text-dim); background:#141518; border-radius:10px; border:1px dashed var(--border-dark);">
+            <div style="font-size:1.6rem; margin-bottom:8px;">🟢</div>
+            <strong style="color:#FFFFFF; font-size:0.86rem; display:block; margin-bottom:4px;">${currentTicketTableName.toUpperCase()} está Livre & Disponível</strong>
+            Toque nos pratos do catálogo ao lado para abrir o atendimento e lançar o primeiro pedido.
           </div>
         `;
       } else {
@@ -2247,6 +2582,7 @@
 
     function quickAddItemToActiveTable(name, price) {
       const tableObj = getTableData(currentTicketTableName);
+      const wasEmpty = !tableObj.items || tableObj.items.length === 0;
       const now = new Date();
       const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
       
@@ -2263,10 +2599,228 @@
       if (cleanNum) {
         localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tableObj.items));
       }
+
+      if (wasEmpty) {
+        recordNotification('abertura', 'Mesa Aberta no Salão', `${currentTicketTableName.toUpperCase()} iniciou atendimento.`);
+      } else {
+        recordNotification('pedido', 'Item Adicionado na Mesa', `${currentTicketTableName.toUpperCase()} adicionou "${name}".`);
+      }
+
       renderSplitComanda();
       renderPosMesaSelector();
       renderKDS();
       showToast(`"${name}" adicionado à ${currentTicketTableName.toUpperCase()}`);
+    }
+
+    // =========================================================
+    // CENTRAL DE NOTIFICAÇÕES SYSTEM
+    // =========================================================
+    let lastKnownNotifCount = 0;
+
+    function getStoredNotifications() {
+      let notifs = JSON.parse(localStorage.getItem('nolei_notifications') || 'null');
+      if (!notifs) {
+        notifs = [
+          { id: "notif_1", table: "Mesa 04", type: "abertura", title: "Mesa Aberta via NFC", desc: "Mesa 04 iniciou atendimento (Cliente: Lucas Silva)", time: "14:10", timestamp: Date.now() - 600000, read: true },
+          { id: "notif_2", table: "Mesa 04", type: "pedido", title: "Novo Item Pedido", desc: "Mesa 04 pediu 'Burger Botânico Artesanal'", time: "14:15", timestamp: Date.now() - 400000, read: true },
+          { id: "notif_3", table: "Mesa 02", type: "garcom", title: "Chamado de Garçom", desc: "Mesa 02 solicitou atendimento de garçom", time: "14:22", timestamp: Date.now() - 200000, read: false },
+          { id: "notif_4", table: "Mesa 05", type: "conta", title: "Solicitação de Conta", desc: "Mesa 05 pediu pré-conta com PIX", time: "14:25", timestamp: Date.now() - 100000, read: false }
+        ];
+        localStorage.setItem('nolei_notifications', JSON.stringify(notifs));
+      }
+      return notifs;
+    }
+
+    function recordNotification(type, title, desc, tableName = currentTicketTableName) {
+      try {
+        const notifObj = {
+          id: "notif_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+          table: tableName,
+          type: type,
+          title: title,
+          desc: desc,
+          time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+          timestamp: Date.now(),
+          read: false
+        };
+        let notifs = JSON.parse(localStorage.getItem('nolei_notifications') || '[]');
+        notifs.unshift(notifObj);
+        if (notifs.length > 60) notifs = notifs.slice(0, 60);
+        localStorage.setItem('nolei_notifications', JSON.stringify(notifs));
+        updateNotificationBadges();
+        playChime();
+      } catch (e) {
+        console.error('Erro ao salvar notificação:', e);
+      }
+    }
+
+    function playChime() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+        osc.frequency.setValueAtTime(880, ctx.currentTime + 0.12); // A5
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.36);
+      } catch (e) {}
+    }
+
+    function filterNotificationsTab(type) {
+      currentNotifFilter = type;
+      document.querySelectorAll('.notif-filter-pill').forEach(p => p.classList.remove('active'));
+      const activePill = document.getElementById('notif-filter-' + type);
+      if (activePill) activePill.classList.add('active');
+      renderNotificationsHub();
+    }
+
+    function updateNotificationBadges() {
+      const notifs = getStoredNotifications();
+      const waiters = getStoredWaiters();
+      let filtered = notifs;
+
+      if (activeOperatorId !== 'admin') {
+        const op = waiters.find(w => w.id === activeOperatorId);
+        if (op) {
+          filtered = notifs.filter(n => op.tables.includes((n.table || '').toLowerCase()));
+        }
+      }
+
+      const unreadCount = filtered.filter(n => !n.read).length;
+
+      const sidebarBadge = document.getElementById('sidebar-notif-badge');
+      const topBadge = document.getElementById('top-bell-badge');
+      
+      if (sidebarBadge) {
+        sidebarBadge.textContent = unreadCount;
+        sidebarBadge.classList.toggle('hidden', unreadCount === 0);
+      }
+      if (topBadge) {
+        topBadge.textContent = unreadCount;
+        topBadge.classList.toggle('hidden', unreadCount === 0);
+      }
+
+      // Update KDS Ticker
+      const tickerTitle = document.getElementById('kds-notif-ticker-title');
+      const tickerDesc = document.getElementById('kds-notif-ticker-desc');
+      if (tickerTitle && tickerDesc && filtered.length > 0) {
+        const latest = filtered[0];
+        tickerTitle.textContent = `${latest.title} — ${latest.table.toUpperCase()} (${latest.time})`;
+        tickerDesc.textContent = latest.desc;
+      }
+    }
+
+    function renderNotificationsHub() {
+      const container = document.getElementById('notif-hub-list');
+      if (!container) return;
+
+      const notifs = getStoredNotifications();
+      const waiters = getStoredWaiters();
+      let filtered = notifs;
+
+      if (activeOperatorId !== 'admin') {
+        const op = waiters.find(w => w.id === activeOperatorId);
+        if (op) {
+          filtered = notifs.filter(n => op.tables.includes((n.table || '').toLowerCase()));
+        }
+      }
+
+      if (currentNotifFilter !== 'all') {
+        filtered = filtered.filter(n => n.type === currentNotifFilter);
+      }
+
+      updateNotificationBadges();
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:40px 10px; color:var(--text-dim); font-size:0.85rem;">
+            <div style="font-size:1.8rem; margin-bottom:8px;">🔔</div>
+            Nenhuma notificação registrada nesta categoria.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(n => {
+        const iconSvg = getNotifIconSvg(n.type);
+
+        return `
+          <div class="notif-card-item type-${n.type} ${n.read ? '' : 'unread'}">
+            <div class="notif-left-content">
+              <div class="notif-type-icon ${n.type}">
+                ${iconSvg}
+              </div>
+              <div>
+                <div class="notif-title-row">
+                  <span class="notif-table-tag">${(n.table || 'MESA').toUpperCase()}</span>
+                  <span class="notif-main-title">${n.title}</span>
+                  ${n.read ? '' : '<span style="font-size:0.65rem; font-weight:800; background:var(--flame-red); color:#FFFFFF; padding:2px 6px; border-radius:4px;">NOVO</span>'}
+                </div>
+                <div class="notif-desc-text">${n.desc}</div>
+                <div class="notif-time-text">Horário: ${n.time || 'Agora'}</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <button class="btn-print-action" style="font-size:0.72rem; padding:6px 10px;" onclick="goToNotifTable('${n.table}')">
+                Abrir Mesa
+              </button>
+              ${n.read ? '' : `
+                <button class="btn-print-action" style="font-size:0.72rem; padding:6px 8px;" onclick="markNotifAsRead('${n.id}')" title="Marcar como lida">
+                  ✓
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getNotifIconSvg(type) {
+      if (type === 'abertura') {
+        return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>';
+      } else if (type === 'garcom') {
+        return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>';
+      } else if (type === 'conta') {
+        return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
+      } else if (type === 'fechamento') {
+        return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+      }
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>';
+    }
+
+    function goToNotifTable(tableName) {
+      selectPosTable(tableName);
+      switchTab('pos');
+    }
+
+    function markNotifAsRead(id) {
+      let notifs = getStoredNotifications();
+      const target = notifs.find(n => n.id === id);
+      if (target) target.read = true;
+      localStorage.setItem('nolei_notifications', JSON.stringify(notifs));
+      renderNotificationsHub();
+    }
+
+    function markAllNotificationsAsRead() {
+      let notifs = getStoredNotifications();
+      notifs.forEach(n => n.read = true);
+      localStorage.setItem('nolei_notifications', JSON.stringify(notifs));
+      renderNotificationsHub();
+      showToast('Todas as notificações marcadas como lidas.');
+    }
+
+    function clearAllNotifications() {
+      if (!confirm('Deseja limpar todo o histórico de notificações?')) return;
+      localStorage.setItem('nolei_notifications', JSON.stringify([]));
+      renderNotificationsHub();
+      showToast('Histórico de notificações limpo.');
     }
 
     // Render KDS Tab
@@ -2275,16 +2829,18 @@
       if (!grid) return;
 
       const waiters = getStoredWaiters();
-      let activeCount = 0;
-      let totalDayRevenue = 3840.00;
+      let occupiedCount = 0;
 
       allTablesList.forEach(tName => {
         const tObj = getTableData(tName);
-        if (tObj.items && tObj.items.length > 0) activeCount++;
+        if (tObj.items && tObj.items.length > 0) occupiedCount++;
       });
 
+      const freeCount = allTablesList.length - occupiedCount;
       const occEl = document.getElementById('kpi-tables-occupancy');
-      if (occEl) occEl.textContent = `${activeCount} / 10 Mesas`;
+      const freeEl = document.getElementById('kpi-tables-free-label');
+      if (occEl) occEl.textContent = `${occupiedCount} / 10 Mesas`;
+      if (freeEl) freeEl.textContent = `${freeCount} livres no salão`;
 
       let filteredTables = kdsTables.filter(t => t.items && t.items.length > 0);
       if (activeOperatorId !== 'admin') {
@@ -2297,7 +2853,7 @@
       document.getElementById('badge-kds-count').textContent = `${filteredTables.length} Mesas em Andamento`;
 
       if (filteredTables.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-dim);">Nenhuma comanda ativa sob sua responsabilidade no momento.</div>';
+        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-dim); font-size:0.85rem;">Todas as mesas sob sua responsabilidade estão livres e disponíveis.</div>';
         return;
       }
 
@@ -2361,18 +2917,25 @@
     }
 
     function finishTable(tableName) {
-      if (!confirm(`Deseja realmente encerrar a comanda da ${tableName.toUpperCase()}?`)) return;
+      if (!confirm(`Deseja realmente encerrar a comanda da ${tableName.toUpperCase()}? A mesa ficará livre para nova abertura.`)) return;
       const cleanNum = tableName.replace(/\D/g, '');
       if (cleanNum) {
+        const rawNum = parseInt(cleanNum, 10);
         localStorage.removeItem(`nolei_table_orders_${cleanNum}`);
         localStorage.removeItem(`nolei_table_orders_mesa${cleanNum}`);
+        localStorage.removeItem(`nolei_table_orders_${rawNum}`);
+        localStorage.removeItem(`nolei_table_orders_${tableName.toLowerCase().replace(/\s+/g, '')}`);
       }
       const found = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase());
       if (found) found.items = [];
+
+      recordNotification('fechamento', 'Mesa Encerrada & Liberada', `${tableName.toUpperCase()} foi fechada e está disponível para ser aberta novamente.`, tableName);
+
       renderKDS();
       renderPosMesaSelector();
       renderSplitComanda();
-      showToast(`Comanda da ${tableName.toUpperCase()} encerrada com sucesso.`);
+      renderNotificationsHub();
+      showToast(`${tableName.toUpperCase()} encerrada com sucesso! Mesa livre.`);
     }
 
     // Render Alerts
@@ -2913,6 +3476,7 @@
     renderProducts();
     renderWaiters();
     renderUsers();
+    updateNotificationBadges();
 
     // Live Sync Polling
     setInterval(() => {
@@ -2920,6 +3484,10 @@
       renderAlerts();
       renderPosMesaSelector();
       renderSplitComanda();
+      updateNotificationBadges();
+      if (document.getElementById('sec-notifications').style.display !== 'none') {
+        renderNotificationsHub();
+      }
     }, 2000);
   </script>
 </body>

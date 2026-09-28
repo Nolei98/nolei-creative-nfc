@@ -1368,6 +1368,27 @@
       showToast(`"${name}" adicionado à comanda!`);
     }
 
+    function dispatchNotification(type, title, desc) {
+      try {
+        const notifObj = {
+          id: "notif_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+          table: tableName,
+          type: type, // 'abertura', 'pedido', 'garcom', 'conta', 'fechamento'
+          title: title,
+          desc: desc,
+          time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+          timestamp: Date.now(),
+          read: false
+        };
+        let notifs = JSON.parse(localStorage.getItem('nolei_notifications') || '[]');
+        notifs.unshift(notifObj);
+        if (notifs.length > 60) notifs = notifs.slice(0, 60);
+        localStorage.setItem('nolei_notifications', JSON.stringify(notifs));
+      } catch (e) {
+        console.error('Erro ao registrar notificacao:', e);
+      }
+    }
+
     // Call Waiter & Request Bill
     function chamarGarcom() {
       const alertObj = {
@@ -1380,6 +1401,8 @@
       alerts = alerts.filter(a => !(a.table.toLowerCase() === tableName.toLowerCase() && a.type === 'garcom'));
       alerts.push(alertObj);
       localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
+
+      dispatchNotification('garcom', 'Chamado de Garçom', `${tableName.toUpperCase()} solicitou atendimento imediato no salão.`);
 
       const btn = document.getElementById('btn-action-garcom');
       btn.classList.add('active-pinned');
@@ -1399,6 +1422,8 @@
       alerts.push(alertObj);
       localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
 
+      dispatchNotification('conta', 'Solicitação de Conta', `${tableName.toUpperCase()} pediu fechamento de conta e demonstrativo.`);
+
       const btn = document.getElementById('btn-action-conta');
       btn.classList.add('active-pinned');
       document.getElementById('btn-conta-label').innerHTML = '<span class="pulse-dot-pinned"></span> Conta Solicitada';
@@ -1410,7 +1435,28 @@
         showToast('Adicione ao menos um item ao cardápio antes de enviar.');
         return;
       }
+      dispatchNotification('pedido', 'Itens Confirmados na Mesa', `${tableName.toUpperCase()} confirmou o envio de ${tableOrders.length} itens para a cozinha.`);
       showToast('Pedidos confirmados e enviados para a cozinha!');
+    }
+
+    function addItemToTable(id, name, priceVal) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      const clientName = currentUser ? currentUser.name : 'Cliente da Mesa';
+
+      tableOrders.push({
+        id: id,
+        name: name,
+        priceVal: priceVal,
+        orderedBy: clientName,
+        time: timeStr,
+        status: "preparo"
+      });
+
+      syncOrdersToStorage(tableOrders);
+      updateTableOrdersUI();
+      dispatchNotification('pedido', 'Novo Item Pedido', `${tableName.toUpperCase()} pediu "${name}" (Por: ${clientName}).`);
+      showToast(`"${name}" adicionado à comanda!`);
     }
 
     // Modals
@@ -1431,6 +1477,7 @@
       localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
       updateUserUI();
       closeAuthModal();
+      dispatchNotification('abertura', 'Cliente Identificado', `${tableName.toUpperCase()} foi iniciada por ${name} (${phone}).`);
       showToast(`Bem-vindo, ${name}!`);
     }
 
@@ -1458,12 +1505,20 @@
       }, 3500);
     }
 
-    // Init
+    // Init Session
     updateUserUI();
     updateTableOrdersUI();
     renderCategory('entradas');
 
-    // Poll status from KDS
+    // Emit initial table open notification once per session
+    const sessionKey = `nolei_mesa_opened_${cleanMesaNum}`;
+    if (!sessionStorage.getItem(sessionKey)) {
+      sessionStorage.setItem(sessionKey, 'true');
+      const clientName = currentUser ? currentUser.name : 'Cliente Anônimo';
+      dispatchNotification('abertura', 'Mesa Aberta via NFC', `${tableName.toUpperCase()} iniciou atendimento (${clientName}).`);
+    }
+
+    // Poll status from KDS & detect when mesa is closed/finished
     setInterval(() => {
       const stored = localStorage.getItem(storageKey);
       if (stored) {
@@ -1471,6 +1526,13 @@
           tableOrders = JSON.parse(stored);
           updateTableOrdersUI();
         } catch (e) {}
+      } else {
+        // Table was reset/closed in POS
+        if (tableOrders.length > 0) {
+          tableOrders = [];
+          updateTableOrdersUI();
+          showToast('Esta mesa foi encerrada pelo restaurante e está livre para nova abertura.');
+        }
       }
     }, 2000);
   </script>

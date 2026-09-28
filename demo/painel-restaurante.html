@@ -751,6 +751,101 @@
  background: #FFFFFF;
  margin-top: auto;
  }
+
+ /* Thermal Ticket Preview & Print Styles */
+ .ticket-preview-box {
+ background: #FFFDF9;
+ border: 1px dashed #CBD5E1;
+ border-radius: 8px;
+ padding: 16px 14px;
+ font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+ font-size: 0.78rem;
+ color: #0F172A;
+ line-height: 1.4;
+ box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+ max-height: 380px;
+ overflow-y: auto;
+ margin-bottom: 16px;
+ transition: all 0.2s ease;
+ }
+ .ticket-preview-box.width-58 {
+ max-width: 280px;
+ margin-left: auto;
+ margin-right: auto;
+ font-size: 0.72rem;
+ }
+ .ticket-preview-box.width-80 {
+ max-width: 370px;
+ margin-left: auto;
+ margin-right: auto;
+ font-size: 0.78rem;
+ }
+ .btn-print-action {
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ font-family: var(--font-heading);
+ font-size: 0.76rem;
+ font-weight: 700;
+ padding: 7px 12px;
+ border-radius: 8px;
+ cursor: pointer;
+ border: 1px solid var(--border);
+ background: #FFFFFF;
+ color: #0F172A;
+ transition: all 0.15s;
+ text-decoration: none;
+ }
+ .btn-print-action:hover {
+ background: #0F172A;
+ color: #FFFFFF;
+ border-color: #0F172A;
+ }
+ .btn-print-action.primary {
+ background: var(--leaf-green);
+ color: #FFFFFF;
+ border-color: var(--leaf-green);
+ }
+ .btn-print-action.primary:hover {
+ background: #047857;
+ }
+
+ /* Physical Print Rules for Thermal Receipts */
+ #printable-ticket-area {
+ display: none;
+ }
+ @media print {
+ @page {
+ margin: 0;
+ size: auto;
+ }
+ body * {
+ visibility: hidden !important;
+ }
+ #printable-ticket-area,
+ #printable-ticket-area * {
+ visibility: visible !important;
+ display: block !important;
+ }
+ #printable-ticket-area {
+ position: absolute !important;
+ left: 0 !important;
+ top: 0 !important;
+ width: 76mm !important;
+ margin: 0 auto !important;
+ padding: 4mm 2mm !important;
+ font-family: 'Courier New', Courier, monospace !important;
+ font-size: 10pt !important;
+ line-height: 1.35 !important;
+ color: #000000 !important;
+ background: #FFFFFF !important;
+ }
+ #printable-ticket-area.size-58mm {
+ width: 50mm !important;
+ font-size: 8.5pt !important;
+ padding: 2mm 1mm !important;
+ }
+ }
  </style>
 </head>
 <body>
@@ -992,6 +1087,63 @@
  <button class="btn-add-primary" style="width:100%; justify-content:center;" onclick="saveWaiter()">Salvar Garçom</button>
  </div>
  </div>
+
+ <!-- Modal Impressão Térmica / Comanda / Pré-Conta -->
+ <div class="modal-overlay" id="modal-print-ticket" onclick="closePrintTicketModal(event)">
+ <div class="modal-card" style="max-width:540px;" onclick="event.stopPropagation()">
+ <div class="modal-header">
+ <div style="display:flex; align-items:center; gap:8px;">
+ <span style="font-size:1.3rem;">🖨️</span>
+ <div>
+ <h3 id="modal-ticket-title" style="margin:0; font-size:1.1rem;">Comanda Térmica</h3>
+ <div id="modal-ticket-subtitle" style="font-size:0.75rem; color:var(--text-muted);">Impressão para Cozinha, Bar ou Pré-Conta</div>
+ </div>
+ </div>
+ <button onclick="closePrintTicketModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+ </div>
+
+ <div style="margin-bottom:14px; display:flex; flex-direction:column; gap:10px;">
+ <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+ <div style="display:flex; gap:6px;">
+ <button type="button" class="tab-btn active" id="btn-mode-cozinha" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('cozinha')">🍳 Cozinha</button>
+ <button type="button" class="tab-btn" id="btn-mode-bar" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('bar')">🍹 Bar</button>
+ <button type="button" class="tab-btn" id="btn-mode-conta" style="padding:6px 12px; font-size:0.76rem;" onclick="setTicketMode('conta')">🧾 Pré-Conta</button>
+ </div>
+ <div style="display:flex; align-items:center; gap:6px;">
+ <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Bobina:</label>
+ <select id="ticket-paper-size" class="form-control" style="width:auto; padding:4px 8px; font-size:0.76rem; border-radius:6px;" onchange="updateTicketPaperSize(this.value)">
+ <option value="80">80mm (Balcão)</option>
+ <option value="58">58mm (Smart POS)</option>
+ </select>
+ </div>
+ </div>
+ </div>
+
+ <!-- Ticket Preview Card -->
+ <div class="ticket-preview-box width-80" id="ticket-preview-container">
+ <pre id="ticket-preview-text" style="margin:0; font-family:inherit; white-space:pre-wrap; word-break:break-word;"></pre>
+ </div>
+
+ <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:10px 12px; margin-bottom:16px; font-size:0.74rem; color:#475569; display:flex; gap:8px; align-items:flex-start;">
+ <span style="font-size:1rem;">💡</span>
+ <div>
+ <strong>Reaproveitamento de Maquininha:</strong> Compatível com maquininhas Android Smart POS (Stone, Cielo Lio, PagBank), impressoras térmicas ESC/POS (Epson, Elgin, Bematech) e mini-impressoras Bluetooth sem comprar novos aparelhos.
+ </div>
+ </div>
+
+ <div style="display:flex; justify-content:space-between; gap:10px;">
+ <button class="btn-print-action" type="button" onclick="copyTicketText()" style="flex:1; justify-content:center;">
+ 📋 Copiar Texto
+ </button>
+ <button class="btn-print-action primary" type="button" onclick="triggerTicketPrint()" style="flex:1.5; justify-content:center; font-size:0.85rem;">
+ 🖨️ Imprimir Agora
+ </button>
+ </div>
+ </div>
+ </div>
+
+ <!-- Hidden Area for Native Window.print Thermal Output -->
+ <div id="printable-ticket-area"></div>
 
  <!-- Toast -->
  <div class="toast-box" id="toast-box"></div>
@@ -1247,7 +1399,10 @@
  <div style="font-size:0.75rem; opacity:0.85;">Registrado: ${a.time || 'Agora'}</div>
  </div>
  </div>
+ <div style="display:flex; gap:8px; align-items:center;">
+ ${a.type === 'conta' ? `<button class="btn-resolve-alert" style="background:#059669; border-color:#059669;" onclick="openPrintBillForAlert('${a.table}')">🖨️ Pré-Conta</button>` : ''}
  <button class="btn-resolve-alert" onclick="resolveAlert('${a.id}')">Atender Chamado</button>
+ </div>
  </div>
  `).join('');
  }
@@ -1326,7 +1481,10 @@
  <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">Subtotal da Mesa:</div>
  <div class="table-total">R$ ${total.toFixed(2).replace('.', ',')}</div>
  </div>
+ <div style="display:flex; gap:8px; align-items:center;">
+ <button class="btn-print-action" type="button" onclick="openPrintTicketModal('${t.table}', 'cozinha')" title="Imprimir Cupom Térmico / Maquininha">🖨️ Comanda</button>
  <button class="btn-finish-table" onclick="finishTable('${t.table}')">Encerrar Mesa</button>
+ </div>
  </div>
  </div>
  `;
@@ -1586,6 +1744,269 @@
  const btn = document.getElementById('btn-scroll-top');
  if (btn) btn.classList.toggle('visible', window.scrollY > 300);
  });
+
+ // Thermal Ticket Printing & POS Logistics
+ let currentTicketTableName = 'Mesa 04';
+ let currentTicketMode = 'cozinha'; // 'cozinha', 'bar', 'conta'
+ let currentPaperSize = '80'; // '80' or '58'
+
+ function openPrintTicketModal(tableName, mode = 'cozinha') {
+ currentTicketTableName = tableName;
+ currentTicketMode = mode;
+ 
+ const sizeSelect = document.getElementById('ticket-paper-size');
+ if (sizeSelect) sizeSelect.value = currentPaperSize;
+
+ setTicketMode(mode, false);
+ renderTicketPreview();
+ 
+ const modal = document.getElementById('modal-print-ticket');
+ if (modal) modal.classList.add('show');
+ }
+
+ function openPrintBillForAlert(tableName) {
+ openPrintTicketModal(tableName, 'conta');
+ }
+
+ function closePrintTicketModal(e) {
+ if (e && e.target && e.target.id !== 'modal-print-ticket' && !e.target.hasAttribute('onclick')) return;
+ const modal = document.getElementById('modal-print-ticket');
+ if (modal) modal.classList.remove('show');
+ }
+
+ function setTicketMode(mode, shouldRerender = true) {
+ currentTicketMode = mode;
+ ['cozinha', 'bar', 'conta'].forEach(m => {
+ const btn = document.getElementById('btn-mode-' + m);
+ if (btn) btn.classList.toggle('active', m === mode);
+ });
+
+ const titleEl = document.getElementById('modal-ticket-title');
+ const subEl = document.getElementById('modal-ticket-subtitle');
+ if (mode === 'cozinha') {
+ if (titleEl) titleEl.textContent = `Comanda Cozinha - ${currentTicketTableName.toUpperCase()}`;
+ if (subEl) subEl.textContent = 'Ordem de Produção Térmica / Cozinha Quente & Fria';
+ } else if (mode === 'bar') {
+ if (titleEl) titleEl.textContent = `Comanda Bar & Drinks - ${currentTicketTableName.toUpperCase()}`;
+ if (subEl) subEl.textContent = 'Ordem de Preparo / Barman & Bebidas';
+ } else {
+ if (titleEl) titleEl.textContent = `Demonstrativo Pré-Conta - ${currentTicketTableName.toUpperCase()}`;
+ if (subEl) subEl.textContent = 'Extrato de Conferência de Mesa com Chave PIX';
+ }
+
+ if (shouldRerender) renderTicketPreview();
+ }
+
+ function updateTicketPaperSize(size) {
+ currentPaperSize = size;
+ const container = document.getElementById('ticket-preview-container');
+ if (container) {
+ container.classList.remove('width-80', 'width-58');
+ container.classList.add(size === '58' ? 'width-58' : 'width-80');
+ }
+ renderTicketPreview();
+ }
+
+ function centerText(text, width) {
+ if (!text) return '';
+ if (text.length >= width) return text.substring(0, width);
+ const leftPad = Math.floor((width - text.length) / 2);
+ return ' '.repeat(leftPad) + text;
+ }
+
+ function formatTwoCols(left, right, width) {
+ const l = String(left || '');
+ const r = String(right || '');
+ const spaceNeeded = width - l.length - r.length;
+ if (spaceNeeded <= 0) {
+ const trimmedLeft = l.substring(0, Math.max(0, width - r.length - 1));
+ return trimmedLeft + ' ' + r;
+ }
+ return l + ' '.repeat(spaceNeeded) + r;
+ }
+
+ function generateTicketText(tableName, mode, paperSize) {
+ const width = paperSize === '58' ? 32 : 48;
+ const sep = '='.repeat(width);
+ const lineSep = '-'.repeat(width);
+ const lines = [];
+
+ const tableObj = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase()) || {
+ table: tableName,
+ waiter: 'Equipe de Atendimento',
+ items: []
+ };
+
+ const cleanNum = tableName.replace(/\D/g, '');
+ if (cleanNum) {
+ const stored = JSON.parse(localStorage.getItem(`nolei_table_orders_${cleanNum}`) || 'null');
+ if (stored && Array.isArray(stored) && stored.length > 0) {
+ tableObj.items = stored;
+ }
+ }
+
+ const restName = (companyData && companyData.name) ? companyData.name.toUpperCase() : 'BOTÂNICO BISTRÔ & GASTRONOMIA';
+ const restAddress = (companyData && companyData.address) ? companyData.address : 'Av. Des. Moreira, 1701 - Aldeota';
+ const now = new Date();
+ const dateStr = now.toLocaleDateString('pt-BR');
+ const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+ lines.push(sep);
+ lines.push(centerText(restName, width));
+ if (paperSize === '80') {
+ lines.push(centerText(restAddress, width));
+ }
+ lines.push(sep);
+
+ if (mode === 'conta') {
+ lines.push(centerText('DEMONSTRATIVO DE CONSUMO', width));
+ lines.push(centerText('(CONFERENCIA DE MESA - NAO FISCAL)', width));
+ lines.push(lineSep);
+ lines.push(formatTwoCols(`MESA: ${tableName.toUpperCase()}`, `HORA: ${timeStr.substring(0,5)}`, width));
+ lines.push(formatTwoCols(`ATENDENTE: ${tableObj.waiter.toUpperCase()}`, `DATA: ${dateStr}`, width));
+ lines.push(lineSep);
+ lines.push(formatTwoCols('DESCRICAO / QTD', 'TOTAL (R$)', width));
+ lines.push(lineSep);
+
+ let subtotal = 0;
+ if (!tableObj.items || tableObj.items.length === 0) {
+ lines.push(centerText('(NENHUM CONSUMO REGISTRADO)', width));
+ } else {
+ const grouped = {};
+ tableObj.items.forEach(it => {
+ const name = it.name;
+ if (!grouped[name]) {
+ grouped[name] = { count: 0, price: it.priceVal || 0 };
+ }
+ grouped[name].count += 1;
+ subtotal += (it.priceVal || 0);
+ });
+
+ Object.keys(grouped).forEach(name => {
+ const g = grouped[name];
+ const itemTotal = (g.count * g.price).toFixed(2).replace('.', ',');
+ const label = `${g.count}x ${name}`;
+ lines.push(formatTwoCols(label, itemTotal, width));
+ });
+ }
+
+ const service10 = subtotal * 0.10;
+ const grandTotal = subtotal + service10;
+
+ lines.push(lineSep);
+ lines.push(formatTwoCols('SUBTOTAL CONSUMO:', `R$ ${subtotal.toFixed(2).replace('.', ',')}`, width));
+ lines.push(formatTwoCols('SERVICO SUGERIDO (10%):', `R$ ${service10.toFixed(2).replace('.', ',')}`, width));
+ lines.push(lineSep);
+ lines.push(formatTwoCols('TOTAL COM 10%:', `R$ ${grandTotal.toFixed(2).replace('.', ',')}`, width));
+ lines.push(formatTwoCols('TOTAL SEM 10%:', `R$ ${subtotal.toFixed(2).replace('.', ',')}`, width));
+ lines.push(lineSep);
+
+ lines.push(centerText('PAGAMENTO FACIL VIA PIX:', width));
+ lines.push(centerText('financeiro@botanicobistro.com.br', width));
+ lines.push(centerText('(Aceitamos Cartao, Debito, Pix e VR)', width));
+ lines.push(sep);
+ lines.push(centerText('Avalie no Google: sua nota 5 vale muito!', width));
+ lines.push(centerText('Obrigado pela visita e volte sempre!', width));
+ lines.push(sep);
+
+ } else {
+ const modeTitle = mode === 'bar' ? 'PEDIDO BAR / BEBIDAS' : 'PEDIDO COZINHA / PRODUCAO';
+ lines.push(centerText(modeTitle, width));
+ lines.push(lineSep);
+ lines.push(formatTwoCols(`MESA: ${tableName.toUpperCase()}`, `HORA: ${timeStr}`, width));
+ lines.push(formatTwoCols(`GARCOM: ${tableObj.waiter.toUpperCase()}`, `DATA: ${dateStr}`, width));
+ lines.push(lineSep);
+
+ let filteredItems = tableObj.items || [];
+ if (mode === 'bar') {
+ filteredItems = filteredItems.filter(it => {
+ const n = (it.name || '').toLowerCase();
+ return n.includes('gin') || n.includes('limonada') || n.includes('suco') || n.includes('cerveja') || n.includes('drink') || n.includes('agua') || n.includes('refri');
+ });
+ if (filteredItems.length === 0) {
+ filteredItems = tableObj.items || [];
+ }
+ } else {
+ const foodItems = filteredItems.filter(it => {
+ const n = (it.name || '').toLowerCase();
+ return !(n.includes('gin') || n.includes('limonada') || n.includes('suco') || n.includes('cerveja') || n.includes('drink') || n.includes('refri'));
+ });
+ if (foodItems.length > 0) filteredItems = foodItems;
+ }
+
+ if (filteredItems.length === 0) {
+ lines.push(centerText('(NENHUM ITEM PARA ESTE SETOR)', width));
+ } else {
+ filteredItems.forEach((it, idx) => {
+ const itemNum = `1x  ${it.name.toUpperCase()}`;
+ const priceStr = `R$ ${(it.priceVal || 0).toFixed(2).replace('.', ',')}`;
+ lines.push(formatTwoCols(itemNum, priceStr, width));
+ 
+ const clientMeta = `    Cli: ${it.orderedBy || 'Mesa'} • ${it.time || 'Recente'}`;
+ lines.push(clientMeta);
+ 
+ if (it.notes || it.obs) {
+ lines.push(`    >>> OBS: ${it.notes || it.obs}`);
+ } else if (idx % 2 === 0) {
+ lines.push(`    >>> OBS: Ponto da casa / sem cebola`);
+ }
+ lines.push('');
+ });
+ }
+
+ lines.push(lineSep);
+ lines.push(formatTwoCols(`ITENS: ${filteredItems.length}`, `VIA: ${(mode === 'bar' ? 'BAR' : 'COZINHA')}`, width));
+ lines.push(sep);
+ lines.push(centerText('SISTEMA NOLEI CREATIVE NFC', width));
+ lines.push(sep);
+ }
+
+ return lines.join('\n');
+ }
+
+ function renderTicketPreview() {
+ const textEl = document.getElementById('ticket-preview-text');
+ if (!textEl) return;
+ const ticketText = generateTicketText(currentTicketTableName, currentTicketMode, currentPaperSize);
+ textEl.textContent = ticketText;
+ }
+
+ function triggerTicketPrint() {
+ const printArea = document.getElementById('printable-ticket-area');
+ if (!printArea) return;
+ 
+ const ticketText = generateTicketText(currentTicketTableName, currentTicketMode, currentPaperSize);
+ printArea.className = currentPaperSize === '58' ? 'size-58mm' : '';
+ printArea.innerHTML = `<pre style="font-family:'Courier New', Courier, monospace; white-space:pre-wrap; margin:0; line-height:1.3; font-size:${currentPaperSize === '58' ? '8.5pt' : '10pt'};">${ticketText}</pre>`;
+ 
+ showToast(`Enviando comanda da ${currentTicketTableName.toUpperCase()} para a impressora...`);
+ setTimeout(() => {
+ window.print();
+ }, 150);
+ }
+
+ function copyTicketText() {
+ const ticketText = generateTicketText(currentTicketTableName, currentTicketMode, currentPaperSize);
+ if (navigator.clipboard && navigator.clipboard.writeText) {
+ navigator.clipboard.writeText(ticketText).then(() => {
+ showToast('Texto da comanda copiado para a área de transferência!');
+ }).catch(() => {
+ fallbackCopy(ticketText);
+ });
+ } else {
+ fallbackCopy(ticketText);
+ }
+ }
+
+ function fallbackCopy(text) {
+ const t = document.createElement('textarea');
+ t.value = text;
+ document.body.appendChild(t);
+ t.select();
+ document.execCommand('copy');
+ document.body.removeChild(t);
+ showToast('Texto da comanda copiado com sucesso!');
+ }
 
  // Live Sync Polling
  initOperatorDropdown();

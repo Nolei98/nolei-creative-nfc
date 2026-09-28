@@ -377,19 +377,15 @@
       <p class="brand-subtitle">Portal Unificado de Autenticação • Nolei Phygital</p>
     </div>
 
-    <!-- Role Picker Tabs -->
-    <div class="role-tabs-grid">
+    <!-- Role Picker Tabs (Equipe & Gestão) -->
+    <div class="role-tabs-grid" style="grid-template-columns: 1fr 1fr;">
       <button class="role-tab-btn active" data-role="ADMIN" onclick="selectRole('ADMIN')">
         <span class="tab-icon">👑</span>
-        <span>Admin</span>
+        <span>Administrador</span>
       </button>
       <button class="role-tab-btn" data-role="GARCOM" onclick="selectRole('GARCOM')">
         <span class="tab-icon">👔</span>
-        <span>Garçom</span>
-      </button>
-      <button class="role-tab-btn" data-role="CLIENTE" onclick="selectRole('CLIENTE')">
-        <span class="tab-icon">⭐</span>
-        <span>Cliente</span>
+        <span>Garçom / Salão</span>
       </button>
     </div>
 
@@ -398,7 +394,7 @@
       <div style="font-size:1.3rem;" id="role-info-icon">👑</div>
       <div>
         <strong id="role-info-title">Perfil de Administrador</strong>
-        <span id="role-info-desc">Controle financeiro, ROI, gestão de cardápio, estoque e cadastro de usuários RBAC.</span>
+        <span id="role-info-desc">Acesso total: métricas ROI, faturamento, estoque de cardápio e gestão RBAC.</span>
       </div>
     </div>
 
@@ -406,8 +402,8 @@
     <form id="login-form" onsubmit="handleLoginSubmit(event)">
       <div class="form-group">
         <label class="form-label">
-          <span>Identificação / WhatsApp</span>
-          <span class="hint" id="login-id-hint">Telefone ou Usuário</span>
+          <span>WhatsApp / Login do Colaborador</span>
+          <span class="hint" id="login-id-hint">Telefone cadastrado</span>
         </label>
         <div class="input-wrapper">
           <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -417,7 +413,7 @@
 
       <div class="form-group">
         <label class="form-label">
-          <span>PIN / Senha de Acesso</span>
+          <span>PIN / Senha Numérica</span>
           <span class="hint">4 a 6 dígitos</span>
         </label>
         <div class="input-wrapper">
@@ -436,12 +432,23 @@
     <div class="shortcuts-section">
       <div class="shortcuts-title">Atalhos Rápidos de Demonstração:</div>
       <div class="shortcuts-grid">
-        <button type="button" class="shortcut-chip" onclick="quickFill('ADMIN', '(11) 99999-0000', '1234')">👑 Admin Geral</button>
-        <button type="button" class="shortcut-chip" onclick="quickFill('GARCOM', '(11) 98111-2233', '1001')">👔 Garçom Carlos</button>
-        <button type="button" class="shortcut-chip" onclick="quickFill('GARCOM', '(11) 98222-3344', '1002')">👔 Garçom Mariana</button>
-        <button type="button" class="shortcut-chip" onclick="quickFill('CLIENTE', '(11) 98765-4321', '4321')">⭐ Cliente Lucas</button>
-        <button type="button" class="shortcut-chip" onclick="quickFill('CLIENTE', '(11) 95555-1234', '1234')">⭐ VIP Eduardo</button>
+        <button type="button" class="shortcut-chip" onclick="quickFill('ADMIN', '(11) 99999-0000', '1234')">👑 Admin Geral (1234)</button>
+        <button type="button" class="shortcut-chip" onclick="quickFill('GARCOM', '(11) 98111-2233', '1001')">👔 Garçom Carlos (1001)</button>
+        <button type="button" class="shortcut-chip" onclick="quickFill('GARCOM', '(11) 98222-3344', '1002')">👔 Garçom Mariana (1002)</button>
       </div>
+    </div>
+
+    <!-- Client NFC Access Box -->
+    <div style="background:#131419; border:1px solid var(--border-dark); border-radius:12px; padding:12px 14px; margin-top:16px; text-align:center;">
+      <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;">
+        📱 <strong>É um cliente no restaurante?</strong>
+      </div>
+      <div style="font-size:0.70rem; color:var(--text-dim); margin-bottom:10px;">
+        O acesso do cliente é feito ao aproximar o celular da tag NFC da sua mesa.
+      </div>
+      <a href="/demo/cardapio.html?source=nfc&mesa=04" class="shortcut-chip" style="display:inline-flex; align-items:center; gap:6px; background:var(--flame-gradient); color:#FFFFFF; border:none; text-decoration:none; padding:7px 14px; font-weight:700;">
+        <span>📡</span> Abrir Cardápio da Mesa 04 (Simulação NFC)
+      </a>
     </div>
 
   </div>
@@ -471,14 +478,6 @@
         defaultId: '(11) 98111-2233',
         defaultPin: '1001',
         btnText: 'Acessar Salão / Mesas'
-      },
-      CLIENTE: {
-        icon: '⭐',
-        title: 'Perfil do Cliente Gourmet',
-        desc: 'Comanda digital da mesa, histórico de pedidos e Clube Fidelidade VIP.',
-        defaultId: '(11) 98765-4321',
-        defaultPin: '4321',
-        btnText: 'Acessar Cardápio da Mesa'
       }
     };
 
@@ -489,6 +488,7 @@
       });
 
       const conf = roleConfig[role];
+      if (!conf) return;
       document.getElementById('role-info-icon').textContent = conf.icon;
       document.getElementById('role-info-title').textContent = conf.title;
       document.getElementById('role-info-desc').textContent = conf.desc;
@@ -523,10 +523,6 @@
           const waiterName = identifier.includes('98111') ? 'Carlos Eduardo' : identifier.includes('98222') ? 'Mariana Souza' : 'Lucas Ferreira';
           sessionStorage.setItem('nolei_session_user', JSON.stringify({ role: 'GARCOM', name: waiterName, phone: identifier }));
           window.location.href = '/demo/painel-restaurante.html';
-        } else {
-          const clientName = identifier.includes('95555') ? 'Eduardo Camargo' : 'Lucas Silva';
-          sessionStorage.setItem('nolei_session_user', JSON.stringify({ role: 'CLIENTE', name: clientName, phone: identifier }));
-          window.location.href = '/demo/cardapio.html?source=nfc&mesa=04';
         }
       }, 500);
     }

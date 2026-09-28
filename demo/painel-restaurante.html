@@ -1834,7 +1834,7 @@
           <span class="nav-text">Garçons</span>
         </button>
 
-        <button class="pos-nav-item" id="tab-btn-users" onclick="switchTab('users')" title="Clube Fidelidade & Clientes VIP">
+        <button class="pos-nav-item" id="tab-btn-users" onclick="switchTab('users')" title="Clube Fidelidade & Clientes">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
           <span class="nav-text">Fidelidade</span>
         </button>
@@ -1882,6 +1882,16 @@
               <option value="admin">Operador: Administrador Geral</option>
             </select>
           </div>
+
+          <button class="btn-print-action" onclick="openOperatorProfileModal()" title="Configurar Meus Dados Pessoais" style="padding:8px 12px; font-size:0.75rem; display:inline-flex; align-items:center; gap:5px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Meus Dados
+          </button>
+
+          <button class="btn-del-action" onclick="logoutOperator()" title="Sair do Sistema" style="padding:8px 12px; font-size:0.75rem; display:inline-flex; align-items:center; gap:5px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            Sair
+          </button>
 
           <button class="btn-flame-cta" id="btn-header-new-product" onclick="openNewProductModal()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -2499,7 +2509,7 @@
             <button class="notif-filter-pill" id="notif-filter-garcom" onclick="filterNotificationsTab('garcom')">Chamados Garçom</button>
             <button class="notif-filter-pill" id="notif-filter-conta" onclick="filterNotificationsTab('conta')">Pedidos de Conta</button>
             <button class="notif-filter-pill" id="notif-filter-pedido" onclick="filterNotificationsTab('pedido')">Novos Pratos</button>
-            <button class="notif-filter-pill" id="notif-filter-fidelidade" onclick="filterNotificationsTab('fidelidade')">Fidelidade VIP</button>
+            <button class="notif-filter-pill" id="notif-filter-fidelidade" onclick="filterNotificationsTab('fidelidade')">Clube Fidelidade</button>
             <button class="notif-filter-pill" id="notif-filter-fechamento" onclick="filterNotificationsTab('fechamento')">Mesas Liberadas</button>
           </div>
 
@@ -2572,7 +2582,7 @@
       </section>
 
       <!-- =========================================================
-           TAB 7: CLUBE FIDELIDADE GOURMET & CLIENTES VIP (CRM)
+           TAB 7: CLUBE FIDELIDADE GOURMET & CRM DE CLIENTES
            ========================================================= -->
       <section id="sec-users" style="display:none;">
         <div class="crud-box">
@@ -2580,17 +2590,17 @@
             <div>
               <h3 style="color:#FFFFFF; font-size:1.08rem; display:flex; align-items:center; gap:8px;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
-                Clube Gourmet Fidelidade & CRM de Clientes VIP
+                Clube Gourmet Fidelidade & CRM de Clientes
               </h3>
               <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Gestão de carimbos digitais, saldo de pontos, nível de fidelidade e histórico de visitas.</p>
             </div>
-            <button class="btn-flame-cta" onclick="openNewCustomerModal()">+ Novo Cliente VIP</button>
+            <button class="btn-flame-cta" onclick="openNewCustomerModal()">+ Novo Cliente</button>
           </div>
 
           <!-- Loyalty CRM Stats Row -->
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
             <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
-              <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Membros VIP Cadastrados</div>
+              <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Clientes Cadastrados</div>
               <div style="font-size:1.25rem; font-weight:800; color:#FFFFFF; margin-top:2px;" id="crm-total-members">5 Clientes</div>
             </div>
             <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
@@ -2607,7 +2617,7 @@
           <div style="margin-bottom:20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <h4 style="font-size:0.92rem; font-weight:700; color:#FFFFFF; display:flex; align-items:center; gap:6px;">
-                <span>🏆</span> Ranking de Clientes Mais Fiéis (Top VIP)
+                <span>🏆</span> Ranking de Clientes Mais Fiéis
               </h4>
               <span style="font-size:0.70rem; color:var(--text-dim);">Classificação por Pontos & Selos</span>
             </div>
@@ -2623,7 +2633,7 @@
                 <tr>
                   <th>Cliente</th>
                   <th>WhatsApp</th>
-                  <th>Nível VIP</th>
+                  <th>Nível</th>
                   <th>Cartela (10 Selos)</th>
                   <th>Saldo Pontos</th>
                   <th>Visitas</th>
@@ -2696,7 +2706,7 @@
           <div class="mini-profile-avatar" id="profile-modal-avatar">L</div>
           <div>
             <h3 id="profile-modal-name" style="font-size:1.15rem; color:#FFFFFF; margin:0;">Lucas Silva</h3>
-            <span class="role-badge cliente" id="profile-modal-role-badge">CLIENTE VIP</span>
+            <span class="role-badge cliente" id="profile-modal-role-badge">CLIENTE</span>
           </div>
         </div>
         <button onclick="closeCustomerProfile()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
@@ -2718,7 +2728,7 @@
       <div style="background:linear-gradient(135deg, rgba(245,158,11,0.15) 0%, #1C1E24 100%); border:1px solid rgba(245,158,11,0.35); border-radius:12px; padding:12px 14px; margin-bottom:14px;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <span style="font-size:0.70rem; font-weight:800; color:#FBBF24;" id="profile-modal-tier">🥇 NÍVEL OURO VIP</span>
+            <span style="font-size:0.70rem; font-weight:800; color:#FBBF24;" id="profile-modal-tier">🥇 NÍVEL OURO</span>
             <div style="font-size:1.15rem; font-weight:800; color:#FFFFFF; margin-top:2px;" id="profile-modal-points">320 pontos</div>
           </div>
           <div style="text-align:right;">
@@ -2790,12 +2800,29 @@
     </div>
   </div>
 
-      <!-- Footer Nolei Phygital -->
-      <footer style="text-align:center; padding:24px 16px 36px 16px; color:var(--text-dim); font-size:0.75rem; border-top:1px dashed rgba(255,255,255,0.08); margin-top:32px;">
-        <div>Desenvolvido por <strong style="color:#FFFFFF;">Nolei Phygital</strong> • Tecnologia NFC & Gestão Gastronômica</div>
-      </footer>
-
-    </main>
+  <!-- Modal Meus Dados Pessoais (Operador / Admin / Garçom) -->
+  <div class="modal-overlay" id="modal-operator-profile" onclick="closeOperatorProfileModal(event)">
+    <div class="modal-card" style="max-width:440px;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem; color:#FFFFFF; display:flex; align-items:center; gap:8px;">
+          <span>⚙️</span> Meus Dados Pessoais
+        </h3>
+        <button onclick="closeOperatorProfileModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nome:</label>
+        <input type="text" id="operator-profile-name" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">WhatsApp / Contato:</label>
+        <input type="tel" id="operator-profile-phone" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">PIN / Senha Numérica:</label>
+        <input type="password" id="operator-profile-pin" class="form-control" placeholder="••••" maxlength="6" required>
+      </div>
+      <button class="btn-flame-cta" style="width:100%; justify-content:center; margin-top:10px;" onclick="saveOperatorProfile()">Salvar Dados</button>
+    </div>
   </div>
 
   <!-- Modal Produto (CRUD) -->
@@ -2871,7 +2898,7 @@
   <div class="modal-overlay" id="modal-customer" onclick="closeCustomerModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h3 id="modal-customer-title" style="font-size:1.15rem; color:#FFFFFF;">Cadastrar Membro VIP</h3>
+        <h3 id="modal-customer-title" style="font-size:1.15rem; color:#FFFFFF;">Cadastrar Cliente</h3>
         <button onclick="closeCustomerModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
       </div>
       <input type="hidden" id="edit-customer-original-name">
@@ -2884,12 +2911,12 @@
         <input type="tel" id="customer-phone" class="form-control" placeholder="(11) 98765-4321">
       </div>
       <div class="form-group">
-        <label class="form-label">Nível de Fidelidade VIP:</label>
+        <label class="form-label">Nível de Fidelidade:</label>
         <select id="customer-tier" class="form-control">
-          <option value="Bronze VIP">🥉 Bronze VIP</option>
-          <option value="Prata VIP">🥈 Prata VIP</option>
-          <option value="Ouro VIP" selected>🥇 Ouro VIP</option>
-          <option value="Diamante VIP">💎 Diamante VIP</option>
+          <option value="Nível Bronze">🥉 Nível Bronze</option>
+          <option value="Nível Prata">🥈 Nível Prata</option>
+          <option value="Nível Ouro" selected>🥇 Nível Ouro</option>
+          <option value="Nível Diamante">💎 Nível Diamante</option>
         </select>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
@@ -2912,7 +2939,7 @@
           <input type="text" id="customer-last-table" class="form-control" placeholder="Mesa 04" value="Mesa 04">
         </div>
       </div>
-      <button class="btn-flame-cta" style="width:100%; justify-content:center; margin-top:10px;" onclick="saveLoyaltyCustomer()">Salvar Cliente VIP</button>
+      <button class="btn-flame-cta" style="width:100%; justify-content:center; margin-top:10px;" onclick="saveLoyaltyCustomer()">Salvar Cliente</button>
     </div>
   </div>
 
@@ -3125,6 +3152,86 @@
 
       const btnAdminAdd = document.getElementById('btn-admin-add-product');
       if (btnAdminAdd) btnAdminAdd.style.display = isAdmin ? 'inline-flex' : 'none';
+
+      // If operator is Garçom and currently viewing admin-only section, switch back to KDS
+      if (!isAdmin) {
+        const secAnalytics = document.getElementById('sec-analytics');
+        const secUsers = document.getElementById('sec-users');
+        const secRbac = document.getElementById('sec-rbac');
+        if (secAnalytics && secAnalytics.style.display !== 'none') switchTab('kds');
+        if (secUsers && secUsers.style.display !== 'none') switchTab('kds');
+        if (secRbac && secRbac.style.display !== 'none') switchTab('kds');
+      }
+    }
+
+    function openOperatorProfileModal() {
+      const users = getStoredRBACUsers();
+      let activeUser = null;
+      if (activeOperatorId === 'admin') {
+        activeUser = users.find(u => u.role === 'ADMIN') || { name: 'Administrador Geral', phone: '(11) 99999-0000', pin: '1234' };
+      } else {
+        const waiter = getStoredWaiters().find(w => w.id === activeOperatorId);
+        activeUser = users.find(u => u.name === (waiter ? waiter.name : '')) || { name: waiter ? waiter.name : 'Garçom', phone: waiter ? waiter.phone : '', pin: '1001' };
+      }
+
+      document.getElementById('operator-profile-name').value = activeUser.name || '';
+      document.getElementById('operator-profile-phone').value = activeUser.phone || '';
+      document.getElementById('operator-profile-pin').value = activeUser.pin || '1234';
+
+      const modal = document.getElementById('modal-operator-profile');
+      if (modal) {
+        modal.classList.add('open');
+        modal.classList.add('show');
+      }
+    }
+
+    function closeOperatorProfileModal(e) {
+      if (e && e.target && e.target.id !== 'modal-operator-profile' && !e.target.hasAttribute('onclick')) return;
+      const modal = document.getElementById('modal-operator-profile');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.classList.remove('show');
+      }
+    }
+
+    function saveOperatorProfile() {
+      const name = document.getElementById('operator-profile-name').value.trim();
+      const phone = document.getElementById('operator-profile-phone').value.trim();
+      const pin = document.getElementById('operator-profile-pin').value.trim();
+
+      if (!name || !phone) {
+        alert('Nome e WhatsApp são obrigatórios.');
+        return;
+      }
+
+      let users = getStoredRBACUsers();
+      let target = null;
+      if (activeOperatorId === 'admin') {
+        target = users.find(u => u.role === 'ADMIN');
+      } else {
+        const waiter = getStoredWaiters().find(w => w.id === activeOperatorId);
+        target = users.find(u => u.name === (waiter ? waiter.name : ''));
+      }
+
+      if (target) {
+        target.name = name;
+        target.phone = phone;
+        target.pin = pin;
+        localStorage.setItem('nolei_users_rbac', JSON.stringify(users));
+      }
+
+      closeOperatorProfileModal();
+      initOperatorDropdown();
+      showToast('Dados pessoais atualizados com sucesso!');
+    }
+
+    function logoutOperator() {
+      if (!confirm('Deseja realmente sair da sessão administrativa?')) return;
+      sessionStorage.clear();
+      showToast('Sessão finalizada. Redirecionando...');
+      setTimeout(() => {
+        window.location.href = '/demo/login.html';
+      }, 400);
     }
 
     function changeActiveOperator(val) {
@@ -4232,13 +4339,13 @@
     }
 
     // =========================================================
-    // CLUBE FIDELIDADE VIP CRM SYSTEM
+    // CLUBE FIDELIDADE GOURMET CRM SYSTEM
     // =========================================================
     const defaultLoyaltySeed = [
       {
         name: "Lucas Silva",
         phone: "(11) 98765-4321",
-        tier: "Ouro VIP",
+        tier: "Nível Ouro",
         stamps: 6,
         points: 320,
         visits: 6,
@@ -4248,7 +4355,7 @@
       {
         name: "Roberto Alves",
         phone: "(11) 97654-3210",
-        tier: "Prata VIP",
+        tier: "Nível Prata",
         stamps: 4,
         points: 180,
         visits: 4,
@@ -4258,7 +4365,7 @@
       {
         name: "Beatriz Lima",
         phone: "(11) 98888-7777",
-        tier: "Ouro VIP",
+        tier: "Nível Ouro",
         stamps: 8,
         points: 450,
         visits: 8,
@@ -4268,7 +4375,7 @@
       {
         name: "Patrícia Mendes",
         phone: "(11) 96543-2109",
-        tier: "Bronze VIP",
+        tier: "Nível Bronze",
         stamps: 2,
         points: 90,
         visits: 2,
@@ -4278,7 +4385,7 @@
       {
         name: "Eduardo Camargo",
         phone: "(11) 95555-1234",
-        tier: "Diamante VIP",
+        tier: "Nível Diamante",
         stamps: 10,
         points: 820,
         visits: 12,
@@ -4308,7 +4415,7 @@
             phone: "(11) 9" + Math.floor(10000000 + Math.random() * 90000000),
             stamps: 1,
             points: 50,
-            tier: "Bronze VIP",
+            tier: "Nível Bronze",
             visits: 1,
             lastTable: currentTicketTableName || "Mesa 04"
           };
@@ -4372,15 +4479,15 @@
       closeCustomerModal();
       renderLoyaltyCRM();
       renderSplitComanda();
-      showToast(`Cliente VIP "${name}" salvo com sucesso!`);
+      showToast(`Cliente "${name}" salvo com sucesso!`);
     }
 
     function openNewCustomerModal() {
       document.getElementById('edit-customer-original-name').value = '';
-      document.getElementById('modal-customer-title').textContent = 'Novo Cliente VIP (Clube Gourmet)';
+      document.getElementById('modal-customer-title').textContent = 'Novo Cliente (Clube Gourmet)';
       document.getElementById('customer-name').value = '';
       document.getElementById('customer-phone').value = '';
-      document.getElementById('customer-tier').value = 'Ouro VIP';
+      document.getElementById('customer-tier').value = 'Nível Ouro';
       document.getElementById('customer-stamps').value = '6';
       document.getElementById('customer-points').value = '320';
       document.getElementById('customer-visits').value = '6';
@@ -4391,10 +4498,10 @@
     function openEditCustomerModal(name) {
       const cust = getCustomerLoyaltyProfile(name);
       document.getElementById('edit-customer-original-name').value = cust.name;
-      document.getElementById('modal-customer-title').textContent = `Editar Membro VIP: ${cust.name}`;
+      document.getElementById('modal-customer-title').textContent = `Editar Cliente: ${cust.name}`;
       document.getElementById('customer-name').value = cust.name;
       document.getElementById('customer-phone').value = cust.phone || '';
-      document.getElementById('customer-tier').value = cust.tier || 'Ouro VIP';
+      document.getElementById('customer-tier').value = cust.tier || 'Nível Ouro';
       document.getElementById('customer-stamps').value = cust.stamps || 0;
       document.getElementById('customer-points').value = cust.points || 0;
       document.getElementById('customer-visits').value = cust.visits || 1;
@@ -4437,7 +4544,7 @@
       let list = getLoyaltyCustomers().map(c => c.name === name ? cust : c);
       localStorage.setItem('nolei_loyalty_crm_list', JSON.stringify(list));
 
-      recordNotification('fidelidade', 'Carimbo VIP Creditado', `${name} recebeu +${count} carimbo (${cust.stamps}/10) e +${count * 50} pts.`, currentTicketTableName);
+      recordNotification('fidelidade', 'Carimbo de Fidelidade', `${name} recebeu +${count} carimbo (${cust.stamps}/10) e +${count * 50} pts.`, currentTicketTableName);
 
       renderLoyaltyCRM();
       renderSplitComanda();
@@ -4459,7 +4566,7 @@
       let list = getLoyaltyCustomers().map(c => c.name === name ? cust : c);
       localStorage.setItem('nolei_loyalty_crm_list', JSON.stringify(list));
 
-      recordNotification('fidelidade', 'Resgate de Cartela VIP', `${name} resgatou prêmio de 10 selos no restaurante.`, currentTicketTableName);
+      recordNotification('fidelidade', 'Resgate de Cartela', `${name} resgatou prêmio de 10 selos no restaurante.`, currentTicketTableName);
 
       renderLoyaltyCRM();
       renderSplitComanda();
@@ -4489,7 +4596,7 @@
       if (podiumGrid) {
         const sorted = [...customers].sort((a, b) => (b.points || 0) - (a.points || 0));
         const medals = ['🥇', '🥈', '🥉'];
-        const rankLabels = ['Top #1 VIP', 'Top #2 VIP', 'Top #3 VIP'];
+        const rankLabels = ['Rank #1', 'Rank #2', 'Rank #3'];
         const cardClasses = ['rank-1', 'rank-2', 'rank-3'];
         
         podiumGrid.innerHTML = sorted.slice(0, 3).map((c, idx) => `
@@ -4499,7 +4606,7 @@
                 <div style="font-size:1.6rem;">${medals[idx]}</div>
                 <div>
                   <strong style="color:#FFFFFF; font-size:0.92rem; display:block;">${c.name}</strong>
-                  <span style="font-size:0.70rem; color:var(--text-dim);">${c.tier}</span>
+                  <span style="font-size:0.70rem; color:var(--text-dim);">${(c.tier || '').replace(' VIP', '')}</span>
                 </div>
               </div>
               <span style="font-size:0.68rem; font-weight:800; background:#272A34; color:#F59E0B; padding:3px 8px; border-radius:6px;">
@@ -4520,7 +4627,7 @@
       }
 
       if (customers.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-dim);">Nenhum cliente VIP cadastrado.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-dim);">Nenhum cliente cadastrado.</td></tr>`;
         return;
       }
 
@@ -4639,8 +4746,8 @@
 
       tbody.innerHTML = filtered.map(u => {
         const roleBadgeClass = u.role.toLowerCase();
-        const roleLabel = u.role === 'ADMIN' ? '👑 ADMIN' : u.role === 'GARCOM' ? '👔 GARÇOM' : '⭐ CLIENTE VIP';
-        const detailInfo = u.role === 'GARCOM' ? `Mesas: ${u.tables || 'mesa 01'}` : u.role === 'CLIENTE' ? `${u.tier || 'VIP'} • ${u.points || 0} pts` : (u.permissions || 'Acesso Geral');
+        const roleLabel = u.role === 'ADMIN' ? '👑 ADMIN' : u.role === 'GARCOM' ? '👔 GARÇOM' : '👤 CLIENTE';
+        const detailInfo = u.role === 'GARCOM' ? `Mesas: ${u.tables || 'mesa 01'}` : u.role === 'CLIENTE' ? `${(u.tier || 'Membro').replace(' VIP', '')} • ${u.points || 0} pts` : (u.permissions || 'Acesso Geral');
 
         return `
           <tr>
@@ -4801,7 +4908,7 @@
 
       if (avatar) avatar.textContent = (profile.name || 'C').charAt(0).toUpperCase();
       if (nameEl) nameEl.textContent = profile.name;
-      if (roleEl) roleEl.textContent = `CLIENTE ${profile.tier ? profile.tier.toUpperCase() : 'VIP'}`;
+      if (roleEl) roleEl.textContent = 'CLIENTE';
       if (phoneEl) phoneEl.textContent = profile.phone || '(11) 98765-4321';
       
       // Look up PIN from RBAC
@@ -4810,7 +4917,7 @@
       const pin = rbacU ? rbacU.pin : (profile.pin || '4321');
       if (pinEl) pinEl.textContent = `•••• (${pin})`;
 
-      if (tierEl) tierEl.textContent = `🏆 NÍVEL ${profile.tier ? profile.tier.toUpperCase() : 'OURO VIP'}`;
+      if (tierEl) tierEl.textContent = `🏆 ${(profile.tier ? profile.tier.toUpperCase() : 'NÍVEL OURO').replace(' VIP', '')}`;
       if (pointsEl) pointsEl.textContent = `${profile.points || 320} pontos`;
       if (stampsEl) stampsEl.textContent = `${profile.stamps || 6} / 10 Selos`;
       if (visitsEl) visitsEl.textContent = `${profile.visits || 6} visitas`;

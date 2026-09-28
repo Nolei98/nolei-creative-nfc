@@ -1819,11 +1819,19 @@
           </div>
         </button>
 
-        <button type="button" class="nav-drawer-item" onclick="pedirConta(); closeNavDrawer();">
-          <div class="nav-drawer-item-icon" style="background:rgba(16,185,129,0.2); color:#34D399;">🧾</div>
+        <button type="button" class="nav-drawer-item" onclick="openProfileSettingsModal(); closeNavDrawer();">
+          <div class="nav-drawer-item-icon" style="background:#272A34; color:#E2E8F0;">⚙️</div>
           <div>
-            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">Pedir a Conta & Pré-Conta</div>
-            <div style="font-size:0.68rem; color:var(--text-muted);">Conferência, PIX e Maquininha</div>
+            <div style="font-size:0.84rem; font-weight:700; color:#FFFFFF;">Configuração de Perfil</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Meus dados pessoais e senha PIN</div>
+          </div>
+        </button>
+
+        <button type="button" class="nav-drawer-item" onclick="logoutClientSession(); closeNavDrawer();" style="color:#F87171;">
+          <div class="nav-drawer-item-icon" style="background:rgba(239,68,68,0.15); color:#F87171;">🚪</div>
+          <div>
+            <div style="font-size:0.84rem; font-weight:700; color:#F87171;">Sair / Desconectar</div>
+            <div style="font-size:0.68rem; color:rgba(248,113,113,0.8);">Encerrar sessão nesta mesa</div>
           </div>
         </button>
       </div>
@@ -2008,21 +2016,118 @@
     </div>
   </div>
 
-  <!-- Modal de Identificação -->
+  <!-- NFC Gate Modal: Login ou Cadastrar ao aproximar da mesa -->
   <div class="modal-overlay" id="auth-modal" onclick="closeAuthModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <h3 class="modal-title">Identifique-se na Mesa</h3>
-      <p class="modal-sub">Seus pedidos serão registrados na comanda com o seu nome.</p>
+    <div class="modal-card" style="max-width:440px;" onclick="event.stopPropagation()">
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="width:48px; height:48px; border-radius:12px; background:var(--flame-gradient); color:#FFF; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 4px 16px var(--flame-glow); margin-bottom:8px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>
+        </div>
+        <h3 class="modal-title" style="font-size:1.25rem;">Acesso à <span id="nfc-gate-table-title">Mesa 04</span></h3>
+        <p class="modal-sub" style="margin-bottom:0;">Aproxime-se da gastronomia: entre com sua conta ou cadastre-se rapidamente.</p>
+      </div>
+
+      <!-- Tab Switcher: Entrar vs Cadastrar -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; background:#141518; padding:4px; border-radius:10px; border:1px solid var(--border-dark); margin-bottom:16px;">
+        <button type="button" id="tab-btn-auth-login" class="feature-nav-pill highlight" style="justify-content:center; padding:8px;" onclick="switchAuthTab('login')">
+          🔑 Já sou Cliente
+        </button>
+        <button type="button" id="tab-btn-auth-register" class="feature-nav-pill" style="justify-content:center; padding:8px;" onclick="switchAuthTab('register')">
+          ✨ Novo Cadastro
+        </button>
+      </div>
+
+      <!-- Form 1: Entrar -->
+      <div id="auth-tab-login-content">
+        <div class="form-group">
+          <label class="form-label">WhatsApp / Telefone:</label>
+          <input type="tel" id="login-phone-input" class="form-input" placeholder="(11) 98765-4321" value="(11) 98765-4321">
+        </div>
+        <div class="form-group">
+          <label class="form-label">PIN / Senha de Acesso (4 dígitos):</label>
+          <input type="password" id="login-pin-input" class="form-input" placeholder="••••" value="4321" maxlength="6">
+        </div>
+
+        <button type="button" class="btn-submit-auth" onclick="handleClientLoginSubmit()">
+          Entrar e Conectar à Mesa
+        </button>
+
+        <div style="margin-top:14px; border-top:1px dashed var(--border-dark); padding-top:10px;">
+          <span style="font-size:0.70rem; color:var(--text-dim); text-transform:uppercase; font-weight:700; display:block; margin-bottom:6px;">Contas Rápidas de Demonstração:</span>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <button type="button" class="btn-switch-user" style="font-size:0.70rem; padding:4px 8px;" onclick="quickClientLogin('Lucas Silva', '(11) 98765-4321', '4321')">Lucas Silva (4321)</button>
+            <button type="button" class="btn-switch-user" style="font-size:0.70rem; padding:4px 8px;" onclick="quickClientLogin('Eduardo Camargo', '(11) 95555-1234', '1234')">Eduardo C. (1234)</button>
+            <button type="button" class="btn-switch-user" style="font-size:0.70rem; padding:4px 8px;" onclick="quickClientLogin('Beatriz Lima', '(11) 98888-7777', '7777')">Beatriz L. (7777)</button>
+            <button type="button" class="btn-switch-user" style="font-size:0.70rem; padding:4px 8px;" onclick="quickClientLogin('Roberto Alves', '(11) 97654-3210', '3210')">Roberto A. (3210)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form 2: Cadastrar -->
+      <div id="auth-tab-register-content" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Seu Nome Completo:</label>
+          <input type="text" id="reg-name-input" class="form-input" placeholder="Ex: Lucas Silva">
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp (para receber pontos):</label>
+          <input type="tel" id="reg-phone-input" class="form-input" placeholder="(11) 98765-4321">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Criar PIN / Senha (4 dígitos):</label>
+          <input type="password" id="reg-pin-input" class="form-input" placeholder="Ex: 1234" maxlength="6" value="1234">
+        </div>
+
+        <button type="button" class="btn-submit-auth" onclick="handleClientRegisterSubmit()">
+          Criar Conta & Conectar à Mesa
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de Configuração de Perfil do Cliente -->
+  <div class="modal-overlay" id="modal-client-profile-settings" onclick="closeProfileSettingsModal(event)">
+    <div class="modal-card" style="max-width:440px;" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <div>
+          <h3 class="modal-title" style="display:flex; align-items:center; gap:8px;">
+            <span>⚙️</span> Meus Dados & Perfil
+          </h3>
+          <p class="modal-sub">Edite suas informações e senha de acesso.</p>
+        </div>
+        <button onclick="closeProfileSettingsModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
 
       <div class="form-group">
-        <label class="form-label">Seu Nome:</label>
-        <input type="text" id="reg-name" class="form-input" placeholder="Ex: Lucas Silva" value="Lucas Silva">
+        <label class="form-label">Nome Completo:</label>
+        <input type="text" id="edit-profile-name" class="form-input" required>
       </div>
+
       <div class="form-group">
-        <label class="form-label">WhatsApp (para confirmação):</label>
-        <input type="tel" id="reg-phone" class="form-input" placeholder="(11) 98765-4321" value="(11) 98765-4321">
+        <label class="form-label">WhatsApp / Contato:</label>
+        <input type="tel" id="edit-profile-phone" class="form-input" required>
       </div>
-      <button class="btn-submit-auth" onclick="handleSimpleAuth()">Confirmar Identificação</button>
+
+      <div class="form-group">
+        <label class="form-label">PIN / Senha de Acesso (4 dígitos):</label>
+        <input type="password" id="edit-profile-pin" class="form-input" placeholder="••••" maxlength="6">
+      </div>
+
+      <!-- Resumo Fidelidade do Cliente -->
+      <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:10px; padding:10px 12px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span style="font-size:0.68rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Clube Fidelidade</span>
+          <strong style="color:#F59E0B; font-size:0.90rem; display:block;" id="settings-loyalty-pts">320 Pontos</strong>
+        </div>
+        <span style="font-size:0.72rem; color:var(--emerald); font-weight:700;" id="settings-loyalty-tier">Nível Ouro</span>
+      </div>
+
+      <div style="display:flex; gap:8px;">
+        <button type="button" class="btn-submit-auth" onclick="saveClientProfileSettings()" style="flex:1;">
+          Salvar Dados
+        </button>
+      </div>
     </div>
   </div>
 
@@ -3363,28 +3468,183 @@
       showToast('Pedidos confirmados e enviados para a cozinha!');
     }
 
-    // Modals
+    // Modals & NFC Gate Authentication
+    function switchAuthTab(tab) {
+      const btnLogin = document.getElementById('tab-btn-auth-login');
+      const btnReg = document.getElementById('tab-btn-auth-register');
+      const loginContent = document.getElementById('auth-tab-login-content');
+      const regContent = document.getElementById('auth-tab-register-content');
+
+      if (tab === 'login') {
+        if (btnLogin) btnLogin.classList.add('highlight');
+        if (btnReg) btnReg.classList.remove('highlight');
+        if (loginContent) loginContent.style.display = 'block';
+        if (regContent) regContent.style.display = 'none';
+      } else {
+        if (btnReg) btnReg.classList.add('highlight');
+        if (btnLogin) btnLogin.classList.remove('highlight');
+        if (loginContent) loginContent.style.display = 'none';
+        if (regContent) regContent.style.display = 'block';
+      }
+    }
+
     function openAuthModal() {
+      const gateTitle = document.getElementById('nfc-gate-table-title');
+      if (gateTitle) gateTitle.textContent = tableName.toUpperCase();
       document.getElementById('auth-modal').classList.add('open');
     }
+
     function closeAuthModal(e) {
-      document.getElementById('auth-modal').classList.remove('open');
+      if (e && e.target && e.target.id !== 'auth-modal' && !e.target.hasAttribute('onclick')) return;
+      // If user is already set, allow closing. If not, require identification.
+      if (currentUser && currentUser.name) {
+        document.getElementById('auth-modal').classList.remove('open');
+      }
     }
-    function handleSimpleAuth() {
-      const name = (document.getElementById('reg-name').value || '').trim();
-      const phone = (document.getElementById('reg-phone').value || '').trim();
-      if (!name) {
-        alert('Por favor, digite seu nome.');
+
+    function handleClientLoginSubmit() {
+      const phone = (document.getElementById('login-phone-input').value || '').trim();
+      const pin = (document.getElementById('login-pin-input').value || '').trim();
+
+      if (!phone) {
+        alert('Informe seu WhatsApp ou Telefone.');
         return;
       }
-      currentUser = { name, phone };
+
+      // Check RBAC users database
+      const rbacList = JSON.parse(localStorage.getItem('nolei_users_rbac') || '[]');
+      const found = rbacList.find(u => u.phone === phone || u.phone.replace(/\D/g, '') === phone.replace(/\D/g, ''));
+      
+      const userName = found ? found.name : (phone.includes('98765') ? 'Lucas Silva' : phone.includes('95555') ? 'Eduardo Camargo' : phone.includes('98888') ? 'Beatriz Lima' : 'Cliente');
+      
+      currentUser = { name: userName, phone: phone, pin: pin || '1234' };
       localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+      sessionStorage.setItem('nolei_client_auth_done_' + cleanMesaNum, 'true');
+
+      ensureLoyaltyUserRegistered(userName, phone);
+      updateUserUI();
+      updateTableHostUI();
+      updateDrawerUI();
+      document.getElementById('auth-modal').classList.remove('open');
+
+      dispatchNotification('acesso', 'Acesso Conectado à Mesa', `${userName} entrou na ${tableName.toUpperCase()} via NFC.`);
+      showToast(`Bem-vindo(a) à ${tableName.toUpperCase()}, ${userName}!`);
+    }
+
+    function handleClientRegisterSubmit() {
+      const name = (document.getElementById('reg-name-input').value || '').trim();
+      const phone = (document.getElementById('reg-phone-input').value || '').trim();
+      const pin = (document.getElementById('reg-pin-input').value || '').trim() || '1234';
+
+      if (!name || !phone) {
+        alert('Preencha seu nome e WhatsApp para concluir o cadastro.');
+        return;
+      }
+
+      currentUser = { name, phone, pin };
+      localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+      sessionStorage.setItem('nolei_client_auth_done_' + cleanMesaNum, 'true');
+
+      // Register into RBAC
+      let rbacList = JSON.parse(localStorage.getItem('nolei_users_rbac') || '[]');
+      if (!rbacList.find(u => u.name.toLowerCase() === name.toLowerCase())) {
+        rbacList.push({
+          id: 'u_' + Date.now(),
+          name,
+          phone,
+          role: 'CLIENTE',
+          pin,
+          status: 'Ativo',
+          tier: 'Nível Bronze',
+          points: 50,
+          stamps: 1
+        });
+        localStorage.setItem('nolei_users_rbac', JSON.stringify(rbacList));
+      }
+
       ensureLoyaltyUserRegistered(name, phone);
       updateUserUI();
       updateTableHostUI();
-      closeAuthModal();
-      dispatchNotification('abertura', 'Cliente Identificado', `${tableName.toUpperCase()} foi iniciada por ${name} (${phone}).`);
-      showToast(`Bem-vindo, ${name}!`);
+      updateDrawerUI();
+      document.getElementById('auth-modal').classList.remove('open');
+
+      dispatchNotification('abertura', 'Novo Cadastro na Mesa', `${name} (${phone}) cadastrou-se e conectou à ${tableName.toUpperCase()}.`);
+      showToast(`Cadastro realizado com sucesso! Bem-vindo(a), ${name}!`);
+    }
+
+    function quickClientLogin(name, phone, pin) {
+      document.getElementById('login-phone-input').value = phone;
+      document.getElementById('login-pin-input').value = pin;
+      handleClientLoginSubmit();
+    }
+
+    // Client Profile Settings Modal
+    function openProfileSettingsModal() {
+      if (!currentUser) {
+        openAuthModal();
+        return;
+      }
+      const modal = document.getElementById('modal-client-profile-settings');
+      if (!modal) return;
+
+      document.getElementById('edit-profile-name').value = currentUser.name || '';
+      document.getElementById('edit-profile-phone').value = currentUser.phone || '';
+      document.getElementById('edit-profile-pin').value = currentUser.pin || '1234';
+
+      const loyalty = getLoyaltyData(currentUser.name);
+      const ptsEl = document.getElementById('settings-loyalty-pts');
+      const tierEl = document.getElementById('settings-loyalty-tier');
+      if (ptsEl && loyalty) ptsEl.textContent = `${loyalty.points || 320} Pontos`;
+      if (tierEl && loyalty) tierEl.textContent = loyalty.tier ? loyalty.tier.replace(' VIP', '') : 'Nível Ouro';
+
+      modal.classList.add('open');
+    }
+
+    function closeProfileSettingsModal(e) {
+      if (e && e.target && e.target.id !== 'modal-client-profile-settings' && !e.target.hasAttribute('onclick')) return;
+      const modal = document.getElementById('modal-client-profile-settings');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function saveClientProfileSettings() {
+      const name = (document.getElementById('edit-profile-name').value || '').trim();
+      const phone = (document.getElementById('edit-profile-phone').value || '').trim();
+      const pin = (document.getElementById('edit-profile-pin').value || '').trim();
+
+      if (!name || !phone) {
+        alert('Nome e WhatsApp são obrigatórios.');
+        return;
+      }
+
+      const oldName = currentUser ? currentUser.name : '';
+      currentUser = { name, phone, pin };
+      localStorage.setItem('nolei_menu_user', JSON.stringify(currentUser));
+
+      // Update RBAC
+      let rbacList = JSON.parse(localStorage.getItem('nolei_users_rbac') || '[]');
+      let userEntry = rbacList.find(u => u.name.toLowerCase() === oldName.toLowerCase() || u.name.toLowerCase() === name.toLowerCase());
+      if (userEntry) {
+        userEntry.name = name;
+        userEntry.phone = phone;
+        userEntry.pin = pin;
+        localStorage.setItem('nolei_users_rbac', JSON.stringify(rbacList));
+      }
+
+      updateUserUI();
+      updateTableHostUI();
+      updateDrawerUI();
+      closeProfileSettingsModal();
+      showToast('Dados do perfil atualizados com sucesso!');
+    }
+
+    function logoutClientSession() {
+      if (!confirm('Deseja realmente desconectar desta mesa?')) return;
+      localStorage.removeItem('nolei_menu_user');
+      sessionStorage.removeItem('nolei_client_auth_done_' + cleanMesaNum);
+      currentUser = null;
+      updateUserUI();
+      openAuthModal();
+      showToast('Sessão desconectada. Faça login para continuar.');
     }
 
     function openWaiterRatingModal() {
@@ -3416,6 +3676,16 @@
     updateTableHostUI();
     updateTableOrdersUI();
     renderCategory('entradas');
+
+    // NFC Trigger Gate: Open Login/Register Modal if arriving via NFC or first session
+    const isNfcSource = urlParams.get('source') === 'nfc';
+    const authAlreadyDone = sessionStorage.getItem('nolei_client_auth_done_' + cleanMesaNum);
+
+    if (isNfcSource || !authAlreadyDone) {
+      setTimeout(() => {
+        openAuthModal();
+      }, 400);
+    }
 
     // Requirement: Início de Atendimento inicia 1 única vez por ciclo da mesa. Acessos posteriores chamam-se 'Acesso'.
     const tableSessionStorageKey = `nolei_table_session_${cleanMesaNum}`;

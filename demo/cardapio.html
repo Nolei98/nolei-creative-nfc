@@ -398,6 +398,152 @@
       margin-bottom: 12px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
+    .user-info-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px var(--flame-glow);
+      flex-shrink: 0;
+    }
+    .user-text-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+    }
+    .user-text-sub {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .btn-switch-user {
+      background: #272A34;
+      border: 1px solid var(--border-dark);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 6px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-switch-user:hover {
+      background: #333742;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Menu de Recursos em Abas / Pills Rápidas (Organização da Demo) */
+    .feature-nav-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 16px;
+    }
+    .feature-nav-scroll::-webkit-scrollbar { display: none; }
+    .feature-nav-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 100px;
+      padding: 7px 13px;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .feature-nav-pill:hover {
+      background: #252832;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .feature-nav-pill.highlight {
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #FBBF24;
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    /* Google Reviews Card in Bill Modal */
+    .google-review-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.04) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .stars-interactive-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      font-size: 1.6rem;
+      color: #F59E0B;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    .star-btn {
+      transition: transform 0.15s;
+    }
+    .star-btn:hover {
+      transform: scale(1.25);
+    }
+    .btn-google-review-cta {
+      background: linear-gradient(135deg, #4285F4 0%, #1A73E8 100%);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      box-shadow: 0 4px 14px rgba(66, 133, 244, 0.35);
+      transition: transform 0.15s;
+    }
+    .btn-google-review-cta:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Footer Nolei Phygital */
+    .site-footer {
+      text-align: center;
+      padding: 30px 16px 90px 16px;
+      color: var(--text-dim);
+      font-size: 0.74rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      margin-top: 24px;
+    }
+    .site-footer strong {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+    .site-footer a {
+      color: var(--flame-red);
+      text-decoration: none;
+      font-weight: 700;
+    }
 
     /* Table Host & Connected Guests Bar */
     .table-host-bar {
@@ -1358,64 +1504,28 @@
       </button>
     </div>
 
-    <!-- Table Host & Multi-Device Connected Bar -->
-    <div class="table-host-bar" id="table-host-bar">
-      <div class="host-info-wrap">
-        <div class="host-crown-badge" id="host-avatar-icon">👑</div>
-        <div>
-          <div class="host-title-text" id="host-banner-title">Você é o Dono da Mesa 04</div>
-          <div class="host-status-sub" id="host-banner-status">🔓 Pedidos liberados para todos na mesa</div>
-        </div>
-      </div>
-      <button class="btn-manage-table-host" onclick="openTableHostModal()" id="btn-host-modal-trigger">
-        ⚙️ Gerenciar (1)
+    <!-- Feature Navigation Pills (Acesso Rápido a Recursos da Mesa sem Poluição Visual) -->
+    <div class="feature-nav-scroll">
+      <button type="button" class="feature-nav-pill" onclick="openTableHostModal()" id="pill-host-status">
+        <span>👑</span> Dono da Mesa
+      </button>
+      <button type="button" class="feature-nav-pill highlight" onclick="openLoyaltyModal()" id="pill-loyalty-status">
+        <span>🏆</span> Clube VIP <strong style="margin-left:2px;" id="pill-loyalty-pts">320 pts</strong>
+      </button>
+      <button type="button" class="feature-nav-pill" onclick="openRecentOrdersModal()">
+        <span>🕒</span> Pedidos Recentes
+      </button>
+      <button type="button" class="feature-nav-pill" onclick="openAuthModal()" id="pill-user-profile">
+        <span>👤</span> <span id="pill-user-name">Lucas Silva</span>
       </button>
     </div>
 
-    <!-- User Profile Bar -->
-    <div class="user-profile-bar" id="user-profile-bar">
-      <div class="user-info-left">
-        <div class="user-avatar-circle" id="user-initial">?</div>
-        <div>
-          <div class="user-text-label" id="user-display-name">Não identificado</div>
-          <div class="user-text-sub" id="user-display-sub">Identifique-se para pedir nesta mesa</div>
-        </div>
-      </div>
-      <button class="btn-switch-user" id="btn-auth-trigger" onclick="openAuthModal()">Identificar</button>
-    </div>
-
-    <!-- Customer Past Orders History (Últimas Visitas - Max 5 Itens, Sem Preço) -->
-    <div class="user-history-section" id="user-history-container" style="display:none;">
-      <div class="user-history-header">
-        <div class="user-history-title">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
-          Meus Pedidos Recentes (Últimas Visitas)
-        </div>
-        <span style="font-size:0.68rem; color:var(--text-dim); font-weight:700;" id="user-history-count">5 itens</span>
-      </div>
-      <div class="history-scroll-row" id="user-history-list">
-        <!-- Populated dynamically via JS without price -->
-      </div>
-    </div>
-
-    <!-- VIP Loyalty Club Banner -->
-    <div class="loyalty-hero-banner" onclick="openLoyaltyModal()" id="loyalty-hero-banner">
-      <div class="loyalty-banner-left">
-        <div class="loyalty-trophy-box">🏆</div>
-        <div>
-          <div class="loyalty-banner-title" id="loyalty-vip-title">Clube Gourmet VIP: 7 / 10 Selos</div>
-          <div class="loyalty-banner-sub" id="loyalty-vip-sub">Faltam 3 carimbos para 1 Prato Principal Cortesia</div>
-        </div>
-      </div>
-      <button type="button" class="btn-view-loyalty">Ver Cartela</button>
-    </div>
-
-    <!-- Live Shared Table Order Card -->
+    <!-- Live Shared Table Order Card (Comanda Coletiva em Tempo Real - Prioridade na Demo) -->
     <div class="table-order-card">
       <div class="table-order-header">
         <div class="table-order-title">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          Comanda Coletiva da <span id="comanda-table-name" style="margin-left:4px;">Mesa 04</span>
+          Comanda da <span id="comanda-table-name" style="margin-left:4px;">Mesa 04</span>
         </div>
         <span class="badge-live-order" id="order-count-badge">0 itens</span>
       </div>
@@ -1450,6 +1560,14 @@
       <!-- Injected via JavaScript -->
     </div>
 
+    <!-- Footer Nolei Phygital -->
+    <footer class="site-footer">
+      <div style="font-size:0.80rem; margin-bottom:4px;">
+        Desenvolvido por <strong>Nolei Phygital</strong>
+      </div>
+      <div>Tecnologia NFC & Experiência Gastronômica Interativa</div>
+    </footer>
+
   </main>
 
   <!-- Fixed Bottom Order Bar -->
@@ -1481,6 +1599,97 @@
         <input type="tel" id="reg-phone" class="form-input" placeholder="(11) 98765-4321" value="(11) 98765-4321">
       </div>
       <button class="btn-submit-auth" onclick="handleSimpleAuth()">Confirmar Identificação</button>
+    </div>
+  </div>
+
+  <!-- Modal de Pedidos Recentes / Últimas Visitas (Sem Preço) -->
+  <div class="modal-overlay" id="recent-orders-modal" onclick="closeRecentOrdersModal(event)">
+    <div class="modal-card" style="max-width:460px;" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <div>
+          <h3 class="modal-title" style="display:flex; align-items:center; gap:8px;">
+            <span>🕒</span> Meus Pedidos Recentes
+          </h3>
+          <p class="modal-sub">Seus pratos e bebidas favoritos pedidos em visitas anteriores.</p>
+        </div>
+        <button onclick="closeRecentOrdersModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+
+      <div id="modal-recent-orders-list" style="display:flex; flex-direction:column; gap:10px; max-height:360px; overflow-y:auto; margin-bottom:16px;">
+        <!-- Populated dynamically without prices -->
+      </div>
+
+      <button type="button" class="btn-submit-auth" onclick="closeRecentOrdersModal()">
+        Fechar
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de Fechamento de Conta & Avaliação Google -->
+  <div class="modal-overlay" id="bill-modal" onclick="closeBillModal(event)">
+    <div class="modal-card" style="max-width:480px;" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <div>
+          <h3 class="modal-title" style="display:flex; align-items:center; gap:8px;">
+            <span>🧾</span> Pré-Conta da Mesa
+          </h3>
+          <p class="modal-sub">Conferência de consumo e solicitação de fechamento.</p>
+        </div>
+        <button onclick="closeBillModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+
+      <!-- Resumo Financeiro -->
+      <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:14px; padding:14px; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.82rem; color:var(--text-muted);">
+          <span>Subtotal de Consumo:</span>
+          <strong style="color:#FFFFFF;" id="modal-bill-subtotal">R$ 0,00</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:0.82rem; color:var(--text-muted);">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span>Serviço Sugerido (10%):</span>
+            <input type="checkbox" id="bill-toggle-tip" checked onchange="toggleBillTip(this.checked)" style="accent-color:var(--flame-red); cursor:pointer;">
+          </div>
+          <strong style="color:#10B981;" id="modal-bill-tip">R$ 0,00</strong>
+        </div>
+        <div style="border-top:1px dashed var(--border-dark); padding-top:8px; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.92rem; font-weight:800; color:#FFFFFF;">Total a Pagar:</span>
+          <span style="font-size:1.3rem; font-weight:800; color:var(--flame-red);" id="modal-bill-total">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- Avaliação Google Maps Destaque -->
+      <div class="google-review-box">
+        <div style="display:flex; align-items:center; justify-content:center; gap:6px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg>
+          <strong style="color:#FFFFFF; font-size:0.86rem;">Gostou do Atendimento?</strong>
+        </div>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin:4px 0 0 0;">
+          Deixe sua nota 5 no Google e ganhe <strong>+50 pontos</strong> no Clube Fidelidade!
+        </p>
+        <div class="stars-interactive-row" id="google-stars-container">
+          <span class="star-btn" onclick="rateGoogleStars(1)">★</span>
+          <span class="star-btn" onclick="rateGoogleStars(2)">★</span>
+          <span class="star-btn" onclick="rateGoogleStars(3)">★</span>
+          <span class="star-btn" onclick="rateGoogleStars(4)">★</span>
+          <span class="star-btn" onclick="rateGoogleStars(5)">★</span>
+        </div>
+        <button type="button" class="btn-google-review-cta" onclick="openGoogleReviewLink()">
+          ★ Avaliar no Google (+50 pts VIP)
+        </button>
+      </div>
+
+      <!-- Pagamento PIX e Encerramento -->
+      <div style="background:#15161A; border:1px solid var(--border-dark); border-radius:10px; padding:10px 12px; margin-bottom:14px; font-size:0.74rem; color:var(--text-muted); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <strong style="color:#FFFFFF; display:block;">Chave PIX do Restaurante:</strong>
+          <span>financeiro@botanicobistro.com.br</span>
+        </div>
+        <button class="btn-switch-user" type="button" onclick="navigator.clipboard.writeText('financeiro@botanicobistro.com.br'); showToast('Chave PIX copiada!');">Copiar PIX</button>
+      </div>
+
+      <button class="btn-finalize-order" style="width:100%; border-radius:12px; padding:12px;" onclick="confirmBillRequest()">
+        Confirmar e Chamar Garçom com a Maquininha
+      </button>
     </div>
   </div>
 
@@ -1788,6 +1997,15 @@
       const statusEl = document.getElementById('host-banner-status');
       const iconEl = document.getElementById('host-avatar-icon');
       const triggerBtn = document.getElementById('btn-host-modal-trigger');
+
+      const pillHost = document.getElementById('pill-host-status');
+      if (pillHost) {
+        if (isHost) {
+          pillHost.innerHTML = `<span>👑</span> Dono da Mesa (${(cfg.members || []).length})`;
+        } else {
+          pillHost.innerHTML = `<span>👥</span> Mesa de ${cfg.hostName}`;
+        }
+      }
 
       if (!bar) return;
 
@@ -2219,19 +2437,27 @@
       const subEl = document.getElementById('user-display-sub');
       const avatarEl = document.getElementById('user-initial');
       const triggerBtn = document.getElementById('btn-auth-trigger');
+      const pillUserName = document.getElementById('pill-user-name');
+      const pillLoyaltyPts = document.getElementById('pill-loyalty-pts');
 
       if (currentUser) {
-        nameEl.textContent = currentUser.name;
-        subEl.textContent = `${currentUser.phone}`;
-        avatarEl.textContent = currentUser.name.charAt(0).toUpperCase();
-        triggerBtn.textContent = 'Alterar';
+        if (nameEl) nameEl.textContent = currentUser.name;
+        if (subEl) subEl.textContent = `${currentUser.phone}`;
+        if (avatarEl) avatarEl.textContent = currentUser.name.charAt(0).toUpperCase();
+        if (triggerBtn) triggerBtn.textContent = 'Alterar';
+        if (pillUserName) pillUserName.textContent = currentUser.name;
+
+        const loyalty = getLoyaltyData(currentUser.name);
+        if (pillLoyaltyPts && loyalty) {
+          pillLoyaltyPts.textContent = `${loyalty.points} pts`;
+        }
       } else {
-        nameEl.textContent = 'Não identificado';
-        subEl.textContent = 'Identifique-se para pedir na mesa';
-        avatarEl.textContent = '?';
-        triggerBtn.textContent = 'Identificar';
+        if (nameEl) nameEl.textContent = 'Não identificado';
+        if (subEl) subEl.textContent = 'Identifique-se para pedir na mesa';
+        if (avatarEl) avatarEl.textContent = '?';
+        if (triggerBtn) triggerBtn.textContent = 'Identificar';
+        if (pillUserName) pillUserName.textContent = 'Identificar';
       }
-      renderUserHistoryUI();
       updateLoyaltyUI();
     }
 
@@ -2431,7 +2657,139 @@
       }
     }
 
-    // Call Waiter & Request Bill
+    // Recent Orders Modal (Past Visits History - No Prices)
+    function openRecentOrdersModal() {
+      const listEl = document.getElementById('modal-recent-orders-list');
+      if (!listEl) return;
+      const historyItems = getUserHistory(currentUser ? currentUser.name : 'Lucas Silva');
+      
+      if (historyItems.length === 0) {
+        listEl.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-dim); font-size:0.82rem;">Nenhum pedido anterior encontrado.</div>`;
+      } else {
+        listEl.innerHTML = historyItems.map(item => `
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:10px 14px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <img src="${item.image}" alt="${item.name}" style="width:44px; height:44px; border-radius:8px; object-fit:cover;">
+              <div>
+                <strong style="color:#FFFFFF; font-size:0.84rem; display:block;">${item.name}</strong>
+                <span style="font-size:0.70rem; color:var(--text-dim);">${item.date || 'Visita anterior'}</span>
+              </div>
+            </div>
+            <button type="button" class="btn-add-item" style="padding:6px 10px; font-size:0.72rem;" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal}); closeRecentOrdersModal();">
+              + Pedir Novamente
+            </button>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('recent-orders-modal').classList.add('open');
+    }
+
+    function closeRecentOrdersModal(e) {
+      if (e && e.target && e.target.id !== 'recent-orders-modal' && !e.target.hasAttribute('onclick')) return;
+      document.getElementById('recent-orders-modal').classList.remove('open');
+    }
+
+    // Bill Modal & Google Review System
+    let billSubtotalCached = 0;
+    let billTipIncluded = true;
+
+    function pedirConta() {
+      openBillModal();
+    }
+
+    function openBillModal() {
+      let subtotal = 0;
+      (tableOrders || []).forEach(it => {
+        if (it.status !== 'cancelado') subtotal += (it.priceVal || 0);
+      });
+      billSubtotalCached = subtotal;
+
+      const subtotalEl = document.getElementById('modal-bill-subtotal');
+      const tipEl = document.getElementById('modal-bill-tip');
+      const totalEl = document.getElementById('modal-bill-total');
+      const toggleTip = document.getElementById('bill-toggle-tip');
+
+      if (toggleTip) toggleTip.checked = true;
+      billTipIncluded = true;
+
+      const tip = subtotal * 0.10;
+      const total = subtotal + tip;
+
+      if (subtotalEl) subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+      if (tipEl) tipEl.textContent = `R$ ${tip.toFixed(2).replace('.', ',')}`;
+      if (totalEl) totalEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+      document.getElementById('bill-modal').classList.add('open');
+    }
+
+    function closeBillModal(e) {
+      if (e && e.target && e.target.id !== 'bill-modal' && !e.target.hasAttribute('onclick')) return;
+      document.getElementById('bill-modal').classList.remove('open');
+    }
+
+    function toggleBillTip(checked) {
+      billTipIncluded = checked;
+      const tip = checked ? (billSubtotalCached * 0.10) : 0;
+      const grandTotal = billSubtotalCached + tip;
+
+      const tipEl = document.getElementById('modal-bill-tip');
+      const totalEl = document.getElementById('modal-bill-total');
+      if (tipEl) tipEl.textContent = `R$ ${tip.toFixed(2).replace('.', ',')}`;
+      if (totalEl) totalEl.textContent = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
+    }
+
+    let selectedGoogleStars = 5;
+    function rateGoogleStars(num) {
+      selectedGoogleStars = num;
+      const container = document.getElementById('google-stars-container');
+      if (!container) return;
+      const stars = container.querySelectorAll('.star-btn');
+      stars.forEach((s, idx) => {
+        s.style.color = idx < num ? '#F59E0B' : '#4B5563';
+      });
+      showToast(`Você selecionou ${num} estrelas! Toque no botão para enviar ao Google.`);
+    }
+
+    function openGoogleReviewLink() {
+      // Award +50 loyalty points bonus for Google Review
+      if (currentUser && currentUser.name) {
+        const loyalty = getLoyaltyData(currentUser.name);
+        loyalty.points = (loyalty.points || 0) + 50;
+        saveLoyaltyData(currentUser.name, loyalty);
+        dispatchNotification('fidelidade', 'Avaliação no Google Maps', `${currentUser.name} avaliou o restaurante no Google (5★) e ganhou +50 pts.`);
+      }
+
+      showToast('🌟 +50 Pontos creditados no seu Clube VIP pela avaliação no Google!', 'conta');
+      window.open('https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4', '_blank');
+    }
+
+    function confirmBillRequest() {
+      const alertObj = {
+        id: "alert_" + Date.now(),
+        table: tableName,
+        type: "conta",
+        time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+      };
+      let alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
+      alerts = alerts.filter(a => !(a.table.toLowerCase() === tableName.toLowerCase() && a.type === 'conta'));
+      alerts.push(alertObj);
+      localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
+
+      const totalFormatted = document.getElementById('modal-bill-total').textContent;
+      dispatchNotification('conta', 'Solicitação de Conta', `${tableName.toUpperCase()} pediu fechamento (${totalFormatted}) com máquina de cartão/PIX.`);
+
+      const btn = document.getElementById('btn-action-conta');
+      if (btn) {
+        btn.classList.add('active-pinned');
+        document.getElementById('btn-conta-label').innerHTML = '<span class="pulse-dot-pinned"></span> Conta Solicitada';
+      }
+
+      closeBillModal();
+      showToast('Conta solicitada com sucesso! O garçom trará a maquininha.', 'conta');
+    }
+
+    // Call Waiter
     function chamarGarcom() {
       const alertObj = {
         id: "alert_" + Date.now(),
@@ -2450,26 +2808,6 @@
       btn.classList.add('active-pinned');
       document.getElementById('btn-garcom-label').innerHTML = '<span class="pulse-dot-pinned"></span> Garçom a Caminho';
       showToast('Garçom chamado! Nossa equipe foi notificada.', 'garcom');
-    }
-
-    function pedirConta() {
-      const alertObj = {
-        id: "alert_" + Date.now(),
-        table: tableName,
-        type: "conta",
-        time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
-      };
-      let alerts = JSON.parse(localStorage.getItem('nolei_service_alerts') || '[]');
-      alerts = alerts.filter(a => !(a.table.toLowerCase() === tableName.toLowerCase() && a.type === 'conta'));
-      alerts.push(alertObj);
-      localStorage.setItem('nolei_service_alerts', JSON.stringify(alerts));
-
-      dispatchNotification('conta', 'Solicitação de Conta', `${tableName.toUpperCase()} pediu fechamento de conta e demonstrativo.`);
-
-      const btn = document.getElementById('btn-action-conta');
-      btn.classList.add('active-pinned');
-      document.getElementById('btn-conta-label').innerHTML = '<span class="pulse-dot-pinned"></span> Conta Solicitada';
-      showToast('Conta solicitada! O garçom trará a pré-conta.', 'conta');
     }
 
     function finalizeTableOrder() {

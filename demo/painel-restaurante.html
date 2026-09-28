@@ -688,6 +688,29 @@
       color: #34D399;
       border: 1px solid rgba(16, 185, 129, 0.3);
     }
+    .status-badge.cancelado {
+      background: rgba(239, 68, 68, 0.15);
+      color: #F87171;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .order-item-row.is-cancelled {
+      opacity: 0.6;
+    }
+    .order-item-row.is-cancelled .order-item-info strong {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .comanda-item-card.is-cancelled {
+      opacity: 0.55;
+      border-style: dashed;
+      background: #111215;
+    }
+    .comanda-item-card.is-cancelled .comanda-item-name {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
 
     .table-card-footer {
       padding: 12px 16px;
@@ -2931,11 +2954,17 @@
       `;
 
       let subtotal = 0;
-      (tObj.items || []).forEach(i => subtotal += (i.priceVal || 0));
+      let activeCount = 0;
+      (tObj.items || []).forEach(i => {
+        if (i.status !== 'cancelado') {
+          subtotal += (i.priceVal || 0);
+          activeCount++;
+        }
+      });
       const service10 = subtotal * 0.10;
       const grandTotal = subtotal + service10;
 
-      if (countEl) countEl.textContent = `${(tObj.items || []).length} itens`;
+      if (countEl) countEl.textContent = `${activeCount} itens ativos (${(tObj.items || []).length} total)`;
       if (subtotalEl) subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
       if (serviceEl) serviceEl.textContent = `R$ ${service10.toFixed(2).replace('.', ',')}`;
       if (totalEl) totalEl.textContent = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
@@ -2951,23 +2980,40 @@
           </div>
         `;
       } else {
-        listEl.innerHTML = tObj.items.map((it, idx) => `
-          <div class="comanda-item-card">
-            <div style="width:26px; height:26px; border-radius:6px; background:#141518; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--flame-red); flex-shrink:0;">
-              1x
+        listEl.innerHTML = tObj.items.map((it, idx) => {
+          const isCancelled = it.status === 'cancelado';
+          const isDelivered = it.status === 'entregue';
+          const badgeClass = isCancelled ? 'cancelado' : isDelivered ? 'entregue' : 'preparo';
+          const badgeText = isCancelled ? '✕ Cancelado' : isDelivered ? '✓ Entregue' : '⏳ Em Preparo';
+
+          return `
+            <div class="comanda-item-card ${isCancelled ? 'is-cancelled' : ''}">
+              <div style="width:26px; height:26px; border-radius:6px; background:#141518; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:${isCancelled ? '#64748B' : 'var(--flame-red)'}; flex-shrink:0;">
+                1x
+              </div>
+              <div class="comanda-item-details">
+                <div class="comanda-item-name">${it.name}</div>
+                <div class="comanda-item-sub">
+                  ${it.orderedBy || 'Mesa'} • ${it.time || '12:00'} ${it.notes ? '• ' + it.notes : ''}
+                </div>
+                <div style="margin-top:4px;">
+                  <button type="button" class="status-badge ${badgeClass}" style="cursor:pointer;" onclick="toggleItemStatus('${currentTicketTableName}', ${idx})" title="Clique para alternar: Em Preparo / Entregue / Cancelado">
+                    ${badgeText}
+                  </button>
+                </div>
+              </div>
+              <div class="comanda-item-price-box" style="text-align:right;">
+                <div class="comanda-item-price" style="${isCancelled ? 'text-decoration:line-through; opacity:0.5; color:#64748B;' : ''}">
+                  R$ ${(it.priceVal || 0).toFixed(2).replace('.', ',')}
+                </div>
+                ${isCancelled ? '<span style="font-size:0.65rem; color:#F87171; font-weight:700; display:block;">(Não Cobrado)</span>' : ''}
+              </div>
+              <button class="btn-item-remove" title="Excluir item definitivamente" onclick="removeItemFromActiveTable(${idx})">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
             </div>
-            <div class="comanda-item-details">
-              <div class="comanda-item-name">${it.name}</div>
-              <div class="comanda-item-sub">${it.orderedBy || 'Mesa'} • ${it.time || '12:00'} ${it.notes ? '• ' + it.notes : ''}</div>
-            </div>
-            <div class="comanda-item-price-box">
-              <div class="comanda-item-price">R$ ${(it.priceVal || 0).toFixed(2).replace('.', ',')}</div>
-            </div>
-            <button class="btn-item-remove" title="Remover da comanda" onclick="removeItemFromActiveTable(${idx})">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-          </div>
-        `).join('');
+          `;
+        }).join('');
       }
     }
 
@@ -3328,7 +3374,9 @@
 
       grid.innerHTML = filteredTables.map((t, tIdx) => {
         let total = 0;
-        t.items.forEach(i => total += (i.priceVal || 0));
+        t.items.forEach(i => {
+          if (i.status !== 'cancelado') total += (i.priceVal || 0);
+        });
         const isSelected = t.table.toLowerCase() === currentTicketTableName.toLowerCase();
 
         return `
@@ -3341,17 +3389,24 @@
               <span class="table-waiter-badge">${t.waiter}</span>
             </div>
             <div class="table-order-items">
-              ${t.items.map((item, iIdx) => `
-                <div class="order-item-row">
-                  <div class="order-item-info">
-                    <strong>${item.name}</strong>
-                    <span class="order-item-meta">${item.orderedBy || 'Cliente'} • ${item.time || '12:00'} ${item.notes ? '• ' + item.notes : ''}</span>
+              ${t.items.map((item, iIdx) => {
+                const isCancelled = item.status === 'cancelado';
+                const isDelivered = item.status === 'entregue';
+                const badgeClass = isCancelled ? 'cancelado' : isDelivered ? 'entregue' : 'preparo';
+                const badgeLabel = isCancelled ? '✕ Cancelado' : isDelivered ? '✓ Entregue' : '⏳ Em Preparo';
+
+                return `
+                  <div class="order-item-row ${isCancelled ? 'is-cancelled' : ''}">
+                    <div class="order-item-info">
+                      <strong>${item.name}</strong>
+                      <span class="order-item-meta">${item.orderedBy || 'Cliente'} • ${item.time || '12:00'} ${item.notes ? '• ' + item.notes : ''} ${isCancelled ? '• (Cancelado)' : ''}</span>
+                    </div>
+                    <button class="status-badge ${badgeClass}" title="Clique para alternar: Em Preparo / Entregue / Cancelado" onclick="event.stopPropagation(); toggleItemStatus('${t.table}', ${iIdx})">
+                      ${badgeLabel}
+                    </button>
                   </div>
-                  <button class="status-badge ${item.status || 'preparo'}" onclick="event.stopPropagation(); toggleItemStatus('${t.table}', ${iIdx})">
-                    ${item.status === 'entregue' ? '✓ Entregue' : '⏳ Em Preparo'}
-                  </button>
-                </div>
-              `).join('')}
+                `;
+              }).join('')}
             </div>
             <div class="table-card-footer">
               <div>
@@ -3375,14 +3430,26 @@
       const tableObj = getTableData(tableName);
       const item = tableObj.items[iIdx];
       if (!item) return;
-      item.status = item.status === 'entregue' ? 'preparo' : 'entregue';
+
+      // 3-state cycle: preparo -> entregue -> cancelado -> preparo
+      if (item.status === 'preparo' || !item.status) {
+        item.status = 'entregue';
+        showToast(`"${item.name}" marcado como ENTREGUE na mesa.`);
+      } else if (item.status === 'entregue') {
+        item.status = 'cancelado';
+        recordNotification('pedido', 'Item Cancelado na Mesa', `${tableName.toUpperCase()}: "${item.name}" foi cancelado.`, tableName);
+        showToast(`"${item.name}" foi marcado como CANCELADO.`);
+      } else {
+        item.status = 'preparo';
+        showToast(`"${item.name}" reativado: EM PREPARO.`);
+      }
+
       const cleanNum = tableName.replace(/\D/g, '');
       if (cleanNum) {
         localStorage.setItem(`nolei_table_orders_${cleanNum}`, JSON.stringify(tableObj.items));
       }
       renderKDS();
       renderSplitComanda();
-      showToast(`Status: ${item.status === 'entregue' ? 'Entregue na Mesa' : 'Em Preparo na Cozinha'}`);
     }
 
     function finishTable(tableName) {
@@ -4189,11 +4256,14 @@
         lines.push(lineSep);
 
         let subtotal = 0;
-        if (!tableObj.items || tableObj.items.length === 0) {
-          lines.push(centerText('(NENHUM CONSUMO REGISTRADO)', width));
+        const activeItems = (tableObj.items || []).filter(it => it.status !== 'cancelado');
+        const cancelledItems = (tableObj.items || []).filter(it => it.status === 'cancelado');
+
+        if (activeItems.length === 0) {
+          lines.push(centerText('(NENHUM CONSUMO ATIVO)', width));
         } else {
           const grouped = {};
-          tableObj.items.forEach(it => {
+          activeItems.forEach(it => {
             const name = it.name;
             if (!grouped[name]) {
               grouped[name] = { count: 0, price: it.priceVal || 0 };
@@ -4207,6 +4277,14 @@
             const itemTotal = (g.count * g.price).toFixed(2).replace('.', ',');
             const label = `${g.count}x ${name}`;
             lines.push(formatTwoCols(label, itemTotal, width));
+          });
+        }
+
+        if (cancelledItems.length > 0) {
+          lines.push(lineSep);
+          lines.push(centerText('* ITENS CANCELADOS (NAO COBRADOS) *', width));
+          cancelledItems.forEach(c => {
+            lines.push(formatTwoCols(`- ${c.name}`, 'R$ 0,00', width));
           });
         }
 

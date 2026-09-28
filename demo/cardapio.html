@@ -1263,6 +1263,27 @@
       background: #2563EB !important;
       box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45) !important;
     }
+
+    .order-item-row.is-cancelled {
+      opacity: 0.6;
+      border-left: 3px solid #64748B !important;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .btn-cancel-dish {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #F87171;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-cancel-dish:hover {
+      background: #EF4444;
+      color: #FFFFFF;
+    }
   </style>
 </head>
 <body>
@@ -2227,27 +2248,83 @@
       }
 
       let total = 0;
-      listEl.innerHTML = tableOrders.map(item => {
-        total += (item.priceVal || 0);
-        const isMine = currentUser && item.orderedBy === currentUser.name;
+      let activeCount = 0;
+      listEl.innerHTML = tableOrders.map((item, idx) => {
+        const isCancelled = item.status === 'cancelado';
         const isDelivered = item.status === 'entregue';
+        const isMine = currentUser && item.orderedBy === currentUser.name;
+        const isHost = isCurrentUserHost();
+
+        if (!isCancelled) {
+          total += (item.priceVal || 0);
+          activeCount++;
+        }
+
+        let statusBadgeHtml = '';
+        if (isCancelled) {
+          statusBadgeHtml = `
+            <span style="font-size:0.68rem; font-weight:700; color:#F87171; background:rgba(239,68,68,0.12); padding:2px 8px; border-radius:4px; border:1px solid rgba(239,68,68,0.25); display:inline-flex; align-items:center; gap:4px; margin-top:3px;">
+              ✕ Cancelado (Não Cobrado)
+            </span>
+          `;
+        } else if (isDelivered) {
+          statusBadgeHtml = `
+            <span style="font-size:0.68rem; font-weight:700; color:#34D399; margin-top:3px; display:inline-block;">
+              ✓ Entregue na Mesa
+            </span>
+          `;
+        } else {
+          statusBadgeHtml = `
+            <div style="display:flex; align-items:center; gap:8px; margin-top:3px;">
+              <span style="font-size:0.68rem; font-weight:700; color:#FBBF24;">
+                ⏳ Em Preparo na Cozinha
+              </span>
+              ${(isMine || isHost) ? `
+                <button type="button" class="btn-cancel-dish" onclick="cancelOrderItem(${idx})" title="Cancelar este item">
+                  Cancelar
+                </button>
+              ` : ''}
+            </div>
+          `;
+        }
 
         return `
-          <div class="order-item-row" style="${isMine ? 'border-left: 3px solid var(--flame-red);' : ''}">
+          <div class="order-item-row ${isCancelled ? 'is-cancelled' : ''}" style="${isMine && !isCancelled ? 'border-left: 3px solid var(--flame-red);' : ''}">
             <div>
-              <strong style="color:#FFFFFF;">${item.name}</strong>
+              <strong style="${isCancelled ? 'color:var(--text-muted); text-decoration:line-through;' : 'color:#FFFFFF;'}">${item.name}</strong>
               <span class="order-item-by">Por: <strong>${item.orderedBy}</strong> • às ${item.time || '12:00'}</span>
-              <span style="font-size:0.68rem; font-weight:700; color:${isDelivered ? '#34D399' : '#FBBF24'}; margin-top:3px; display:inline-block;">
-                ${isDelivered ? '✓ Entregue na Mesa' : '⏳ Em Preparo na Cozinha'}
-              </span>
+              ${statusBadgeHtml}
             </div>
-            <span class="order-item-price">R$ ${Number(item.priceVal || 0).toFixed(2).replace('.', ',')}</span>
+            <div style="text-align:right;">
+              <span class="order-item-price" style="${isCancelled ? 'text-decoration:line-through; opacity:0.5; color:#64748B;' : ''}">
+                R$ ${Number(item.priceVal || 0).toFixed(2).replace('.', ',')}
+              </span>
+              ${isCancelled ? '<span style="font-size:0.62rem; color:#F87171; font-weight:700; display:block;">Cancelado</span>' : ''}
+            </div>
           </div>
         `;
       }).join('');
 
-      countEl.textContent = `${tableOrders.length} itens pedidos`;
+      countEl.textContent = `${activeCount} itens ativos (${tableOrders.length} total)`;
       totalEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function cancelOrderItem(idx) {
+      const item = tableOrders[idx];
+      if (!item) return;
+      if (item.status === 'entregue') {
+        showToast('Itens já entregues na mesa não podem ser cancelados pelo cardápio. Solicite ao garçom.');
+        return;
+      }
+      if (!confirm(`Deseja realmente cancelar o pedido de "${item.name}"?`)) return;
+
+      item.status = 'cancelado';
+      syncOrdersToStorage(tableOrders);
+      updateTableOrdersUI();
+
+      const clientName = currentUser ? currentUser.name : 'Cliente da Mesa';
+      dispatchNotification('pedido', 'Item Cancelado pelo Cliente', `${tableName.toUpperCase()}: ${clientName} cancelou "${item.name}".`);
+      showToast(`"${item.name}" foi cancelado com sucesso.`);
     }
 
     // Render Category

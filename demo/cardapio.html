@@ -517,6 +517,304 @@
       transform: translateX(18px);
     }
 
+    /* Customer Past Visits Order History Box (Max 5 items, No Price) */
+    .user-history-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    .user-history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .user-history-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .history-scroll-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+    .history-scroll-row::-webkit-scrollbar {
+      height: 4px;
+    }
+    .history-scroll-row::-webkit-scrollbar-thumb {
+      background: #2D313E;
+      border-radius: 4px;
+    }
+    .history-item-mini {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 10px;
+      min-width: 170px;
+      max-width: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .history-item-mini:hover {
+      border-color: rgba(255, 77, 48, 0.4);
+      transform: translateY(-2px);
+    }
+    .history-thumb-wrap {
+      width: 100%;
+      height: 75px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      background: #272A34;
+      position: relative;
+    }
+    .history-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .history-date-badge {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      background: rgba(18, 19, 22, 0.85);
+      color: #94A3B8;
+      font-size: 0.60rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+    }
+    .history-item-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 30px;
+    }
+    .btn-reorder-dish {
+      background: rgba(255, 77, 48, 0.15);
+      border: 1px solid rgba(255, 77, 48, 0.35);
+      color: var(--flame-red);
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s;
+      width: 100%;
+    }
+    .btn-reorder-dish:hover {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 2px 10px var(--flame-glow);
+    }
+
+    /* VIP Loyalty Club & Stamps Styles */
+    .loyalty-hero-banner {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.05) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--radius-md);
+      padding: 11px 14px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .loyalty-hero-banner:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.1) 100%);
+    }
+    .loyalty-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .loyalty-trophy-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .loyalty-banner-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #FBBF24;
+      line-height: 1.2;
+    }
+    .loyalty-banner-sub {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .btn-view-loyalty {
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Loyalty Modal Elements */
+    .vip-card-box {
+      background: linear-gradient(135deg, #2A2117 0%, #171513 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .vip-card-box::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .vip-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .vip-tier-tag {
+      font-size: 0.70rem;
+      font-weight: 800;
+      color: #FBBF24;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .vip-points-big {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      line-height: 1;
+    }
+    .stamps-grid-10 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .stamp-slot {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      background: #191B21;
+      border: 1.5px dashed rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .stamp-slot.stamped {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.15) 100%);
+      border: 1.5px solid #F59E0B;
+      color: #FBBF24;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+    }
+    .stamp-slot.final-prize {
+      border-color: #10B981;
+      color: #34D399;
+    }
+    .stamp-slot.final-prize.stamped {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.2) 100%);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .rewards-list-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 240px;
+      overflow-y: auto;
+      margin-bottom: 14px;
+    }
+    .reward-item-row {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .btn-claim-reward {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #FFFFFF;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 0.70rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn-claim-reward:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+    }
+    .btn-claim-reward.locked {
+      background: #272A34;
+      color: var(--text-dim);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
     /* Shared Table Order Summary Box */
     .table-order-card {
       background: var(--bg-card);
@@ -1065,6 +1363,32 @@
       <button class="btn-switch-user" id="btn-auth-trigger" onclick="openAuthModal()">Identificar</button>
     </div>
 
+    <!-- Customer Past Orders History (Últimas Visitas - Max 5 Itens, Sem Preço) -->
+    <div class="user-history-section" id="user-history-container" style="display:none;">
+      <div class="user-history-header">
+        <div class="user-history-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+          Meus Pedidos Recentes (Últimas Visitas)
+        </div>
+        <span style="font-size:0.68rem; color:var(--text-dim); font-weight:700;" id="user-history-count">5 itens</span>
+      </div>
+      <div class="history-scroll-row" id="user-history-list">
+        <!-- Populated dynamically via JS without price -->
+      </div>
+    </div>
+
+    <!-- VIP Loyalty Club Banner -->
+    <div class="loyalty-hero-banner" onclick="openLoyaltyModal()" id="loyalty-hero-banner">
+      <div class="loyalty-banner-left">
+        <div class="loyalty-trophy-box">🏆</div>
+        <div>
+          <div class="loyalty-banner-title" id="loyalty-vip-title">Clube Gourmet VIP: 7 / 10 Selos</div>
+          <div class="loyalty-banner-sub" id="loyalty-vip-sub">Faltam 3 carimbos para 1 Prato Principal Cortesia</div>
+        </div>
+      </div>
+      <button type="button" class="btn-view-loyalty">Ver Cartela</button>
+    </div>
+
     <!-- Live Shared Table Order Card -->
     <div class="table-order-card">
       <div class="table-order-header">
@@ -1220,6 +1544,61 @@
 
       <button class="btn-submit-auth" onclick="submitWaiterRating()">
         Confirmar Avaliação
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal do Clube Fidelidade & Carimbos Digitais -->
+  <div class="modal-overlay" id="loyalty-modal" onclick="closeLoyaltyModal(event)">
+    <div class="modal-card" style="max-width:440px;" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+        <div>
+          <h3 class="modal-title" style="display:flex; align-items:center; gap:8px;">
+            <span>🏆</span> Clube Gourmet Fidelidade
+          </h3>
+          <p class="modal-sub">Acumule selos nas suas visitas e troque por cortesias no restaurante.</p>
+        </div>
+        <button onclick="closeLoyaltyModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+
+      <!-- VIP Card Display -->
+      <div class="vip-card-box">
+        <div class="vip-card-top">
+          <div>
+            <span class="vip-tier-tag" id="vip-card-tier">🥇 NÍVEL OURO VIP</span>
+            <div style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-top:4px;" id="vip-card-name">Lucas Silva</div>
+          </div>
+          <div style="text-align:right;">
+            <span style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Saldo de Pontos</span>
+            <div class="vip-points-big" id="vip-card-points">320 pts</div>
+          </div>
+        </div>
+        <div style="font-size:0.72rem; color:#FBBF24; font-weight:600;">
+          ✦ Benefício Ativo: Sobremesa cortesia no aniversário + 10% cashback
+        </div>
+      </div>
+
+      <!-- 10 Stamps Digital Card -->
+      <div style="margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <strong style="font-size:0.78rem; color:#FFFFFF;">Cartela de Selos da Temporada</strong>
+          <span style="font-size:0.72rem; color:#F59E0B; font-weight:700;" id="vip-stamps-progress">7 de 10 carimbos</span>
+        </div>
+        <div class="stamps-grid-10" id="vip-stamps-grid">
+          <!-- 10 stamp slots dynamically generated -->
+        </div>
+      </div>
+
+      <!-- Rewards Catalog for Direct Claim -->
+      <div style="margin-bottom:16px;">
+        <strong style="font-size:0.78rem; color:#FFFFFF; display:block; margin-bottom:8px;">Recompensas Disponíveis para Resgate na Mesa:</strong>
+        <div class="rewards-list-wrap" id="vip-rewards-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <button type="button" class="btn-submit-auth" onclick="closeLoyaltyModal()">
+        Concluir
       </button>
     </div>
   </div>
@@ -1577,6 +1956,242 @@
       }
     }
 
+    // User History Database (Max 5 items, No prices displayed to customer)
+    function getUserHistory(userName) {
+      if (!userName) return [];
+      const storageUserKey = `nolei_user_history_${userName.toLowerCase().replace(/\s+/g, '_')}`;
+      let history = JSON.parse(localStorage.getItem(storageUserKey) || 'null');
+      if (!history || !Array.isArray(history) || history.length === 0) {
+        history = [
+          {
+            id: "p3",
+            name: "Burger Botânico Artesanal",
+            priceVal: 45.90,
+            date: "Visita em 24/09",
+            image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80"
+          },
+          {
+            id: "e1",
+            name: "Bruschetta Caprese",
+            priceVal: 28.90,
+            date: "Visita em 18/09",
+            image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=400&q=80"
+          },
+          {
+            id: "p2",
+            name: "Salmão Grelhado na Brasa",
+            priceVal: 72.00,
+            date: "Visita em 10/09",
+            image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80"
+          },
+          {
+            id: "b2",
+            name: "Gin Tônica Botânica",
+            priceVal: 38.00,
+            date: "Visita em 02/09",
+            image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=400&q=80"
+          },
+          {
+            id: "s1",
+            name: "Petit Gâteau Chocolate Belga",
+            priceVal: 32.00,
+            date: "Visita em 25/08",
+            image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80"
+          }
+        ];
+        localStorage.setItem(storageUserKey, JSON.stringify(history.slice(0, 5)));
+      }
+      return history.slice(0, 5);
+    }
+
+    function renderUserHistoryUI() {
+      const container = document.getElementById('user-history-container');
+      const listEl = document.getElementById('user-history-list');
+      const countEl = document.getElementById('user-history-count');
+      if (!container || !listEl) return;
+
+      if (!currentUser || !currentUser.name) {
+        container.style.display = 'none';
+        return;
+      }
+
+      const historyItems = getUserHistory(currentUser.name);
+      if (historyItems.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+
+      container.style.display = 'block';
+      if (countEl) countEl.textContent = `${historyItems.length} itens`;
+
+      listEl.innerHTML = historyItems.map(item => `
+        <div class="history-item-mini">
+          <div>
+            <div class="history-thumb-wrap">
+              <img src="${item.image}" alt="${item.name}" class="history-thumb-img" loading="lazy">
+              <span class="history-date-badge">${item.date || 'Visita anterior'}</span>
+            </div>
+            <div class="history-item-name" title="${item.name}">${item.name}</div>
+          </div>
+          <button class="btn-reorder-dish" onclick="addItemToTable('${item.id}', '${item.name}', ${item.priceVal})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Pedir Novamente
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // VIP Loyalty Club Logic & Storage
+    function getLoyaltyData(userName) {
+      if (!userName) return null;
+      const keySnake = `nolei_loyalty_${userName.toLowerCase().replace(/\s+/g, '_')}`;
+      const keyRaw = `nolei_loyalty_${userName}`;
+      let data = JSON.parse(localStorage.getItem(keySnake) || localStorage.getItem(keyRaw) || 'null');
+      if (!data) {
+        data = {
+          name: userName,
+          tier: "🥇 Nível Ouro VIP",
+          points: 320,
+          stamps: 6,
+          totalStamps: 10,
+          visits: 6,
+          rewards: [
+            { id: "rew_1", name: "Petit Gâteau Belga", cost: 100, claimed: false, icon: "🍰" },
+            { id: "rew_2", name: "Gin Tônica Botânica", cost: 150, claimed: false, icon: "🍸" },
+            { id: "rew_3", name: "Bruschetta Caprese", cost: 200, claimed: false, icon: "🥖" },
+            { id: "rew_4", name: "Salmão Grelhado na Brasa", cost: 300, claimed: false, icon: "🐟" },
+            { id: "rew_5", name: "Café Especial 250g em Grãos", cost: 400, claimed: false, icon: "☕" }
+          ]
+        };
+        localStorage.setItem(keySnake, JSON.stringify(data));
+        localStorage.setItem(keyRaw, JSON.stringify(data));
+      }
+      return data;
+    }
+
+    function saveLoyaltyData(userName, data) {
+      const keySnake = `nolei_loyalty_${userName.toLowerCase().replace(/\s+/g, '_')}`;
+      const keyRaw = `nolei_loyalty_${userName}`;
+      localStorage.setItem(keySnake, JSON.stringify(data));
+      localStorage.setItem(keyRaw, JSON.stringify(data));
+      updateLoyaltyUI();
+    }
+
+    function updateLoyaltyUI() {
+      const banner = document.getElementById('loyalty-hero-banner');
+      if (!banner) return;
+
+      if (!currentUser || !currentUser.name) {
+        banner.style.display = 'none';
+        return;
+      }
+
+      const loyalty = getLoyaltyData(currentUser.name);
+      if (!loyalty) {
+        banner.style.display = 'none';
+        return;
+      }
+
+      banner.style.display = 'flex';
+      const titleEl = document.getElementById('loyalty-vip-title');
+      const subEl = document.getElementById('loyalty-vip-sub');
+      const tierEl = document.getElementById('vip-card-tier');
+      const nameEl = document.getElementById('vip-card-name');
+      const pointsEl = document.getElementById('vip-card-points');
+      const progressEl = document.getElementById('vip-stamps-progress');
+      const stampsGrid = document.getElementById('vip-stamps-grid');
+      const rewardsList = document.getElementById('vip-rewards-list');
+
+      const remainingStamps = Math.max(0, loyalty.totalStamps - loyalty.stamps);
+      if (titleEl) titleEl.textContent = `Clube Gourmet VIP: ${loyalty.stamps} / ${loyalty.totalStamps} Selos (${loyalty.points} pts)`;
+      if (subEl) {
+        subEl.textContent = remainingStamps === 0 
+          ? '🎉 Cartela completa! Resgate sua cortesia.'
+          : `Faltam ${remainingStamps} selos para o prêmio máximo da cartela`;
+      }
+
+      if (tierEl) tierEl.textContent = loyalty.tier || '🥇 NÍVEL OURO VIP';
+      if (nameEl) nameEl.textContent = currentUser.name;
+      if (pointsEl) pointsEl.textContent = `${loyalty.points} pts`;
+      if (progressEl) progressEl.textContent = `${loyalty.stamps} de ${loyalty.totalStamps} carimbos`;
+
+      if (stampsGrid) {
+        let gridHtml = '';
+        for (let i = 1; i <= loyalty.totalStamps; i++) {
+          const isStamped = i <= loyalty.stamps;
+          const isFinal = i === loyalty.totalStamps;
+          gridHtml += `
+            <div class="stamp-slot ${isStamped ? 'stamped' : ''} ${isFinal ? 'final-prize' : ''}">
+              ${isStamped ? '★' : i}
+              <span style="font-size:0.55rem; opacity:0.8;">${isFinal ? 'Prêmio' : 'Selo ' + i}</span>
+            </div>
+          `;
+        }
+        stampsGrid.innerHTML = gridHtml;
+      }
+
+      if (rewardsList) {
+        rewardsList.innerHTML = (loyalty.rewards || []).map(r => {
+          const canClaim = loyalty.points >= r.cost;
+          return `
+            <div class="reward-item-row">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.3rem;">${r.icon || '🎁'}</span>
+                <div>
+                  <strong style="font-size:0.80rem; color:#FFFFFF; display:block;">${r.name}</strong>
+                  <span style="font-size:0.68rem; color:#F59E0B; font-weight:700;">Custo: ${r.cost} pontos</span>
+                </div>
+              </div>
+              <button type="button" class="btn-claim-reward ${canClaim ? '' : 'locked'}" ${canClaim ? '' : 'disabled'} onclick="claimVipReward('${r.id}', '${r.name}', ${r.cost})">
+                ${canClaim ? 'Resgatar' : `Faltam ${r.cost - loyalty.points} pts`}
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function openLoyaltyModal() {
+      updateLoyaltyUI();
+      document.getElementById('loyalty-modal').classList.add('open');
+    }
+
+    function closeLoyaltyModal(e) {
+      if (e && e.target && e.target.id !== 'loyalty-modal' && !e.target.hasAttribute('onclick')) return;
+      document.getElementById('loyalty-modal').classList.remove('open');
+    }
+
+    function claimVipReward(rewardId, rewardName, cost) {
+      if (!currentUser) return;
+      const loyalty = getLoyaltyData(currentUser.name);
+      if (loyalty.points < cost) {
+        showToast('Pontos insuficientes para resgate.');
+        return;
+      }
+
+      loyalty.points -= cost;
+      saveLoyaltyData(currentUser.name, loyalty);
+
+      // Add courtesy dish to table order
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      tableOrders.push({
+        id: "rew_" + Date.now(),
+        name: `${rewardName} [CORTESIA CLUBE VIP]`,
+        priceVal: 0,
+        orderedBy: `${currentUser.name} (Resgate VIP)`,
+        time: timeStr,
+        status: "preparo"
+      });
+
+      syncOrdersToStorage(tableOrders);
+      updateTableOrdersUI();
+      closeLoyaltyModal();
+
+      dispatchNotification('fidelidade', 'Resgate de Cortesia VIP', `${tableName.toUpperCase()}: ${currentUser.name} resgatou "${rewardName}" (${cost} pts).`);
+      showToast(`🎉 Parabéns! "${rewardName}" adicionado à sua mesa como cortesia!`, 'conta');
+    }
+
     // UI Updates
     function updateUserUI() {
       const nameEl = document.getElementById('user-display-name');
@@ -1595,6 +2210,8 @@
         avatarEl.textContent = '?';
         triggerBtn.textContent = 'Identificar';
       }
+      renderUserHistoryUI();
+      updateLoyaltyUI();
     }
 
     function updateTableOrdersUI() {
@@ -1845,12 +2462,27 @@
     updateTableOrdersUI();
     renderCategory('entradas');
 
-    // Emit initial table open notification once per session
-    const sessionKey = `nolei_mesa_opened_${cleanMesaNum}`;
-    if (!sessionStorage.getItem(sessionKey)) {
-      sessionStorage.setItem(sessionKey, 'true');
-      const clientName = currentUser ? currentUser.name : 'Cliente Anônimo';
-      dispatchNotification('abertura', 'Mesa Aberta via NFC', `${tableName.toUpperCase()} iniciou atendimento (${clientName}).`);
+    // Requirement: Início de Atendimento inicia 1 única vez por ciclo da mesa. Acessos posteriores chamam-se 'Acesso'.
+    const tableSessionStorageKey = `nolei_table_session_${cleanMesaNum}`;
+    const activeTableSession = localStorage.getItem(tableSessionStorageKey);
+    const currentClientName = currentUser ? currentUser.name : 'Cliente Anônimo';
+
+    if (!activeTableSession) {
+      // 1ª ABERTURA DA MESA: Início de Atendimento Oficial
+      const sessionData = {
+        openedAt: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+        timestamp: Date.now(),
+        host: currentClientName
+      };
+      localStorage.setItem(tableSessionStorageKey, JSON.stringify(sessionData));
+      sessionStorage.setItem(`nolei_device_connected_${cleanMesaNum}`, 'true');
+      dispatchNotification('abertura', 'Início de Atendimento', `${tableName.toUpperCase()} iniciou atendimento (${currentClientName}).`);
+    } else {
+      // ATENDIMENTO JÁ EM ANDAMENTO: Registra como "Acesso à Mesa"
+      if (!sessionStorage.getItem(`nolei_device_connected_${cleanMesaNum}`)) {
+        sessionStorage.setItem(`nolei_device_connected_${cleanMesaNum}`, 'true');
+        dispatchNotification('acesso', 'Novo Acesso à Mesa', `${currentClientName} conectou-se à ${tableName.toUpperCase()} em andamento.`);
+      }
     }
 
     // Poll status from KDS & detect when mesa is closed/finished

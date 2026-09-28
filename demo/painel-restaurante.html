@@ -1411,6 +1411,109 @@
       color: #F87171;
     }
 
+    /* Analytics & BI Charts Styles */
+    .analytics-grid-2cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .analytics-chart-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    .period-filter-bar {
+      display: flex;
+      gap: 6px;
+      background: #141518;
+      border: 1px solid var(--border-dark);
+      padding: 4px;
+      border-radius: 10px;
+    }
+    .period-pill-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .period-pill-btn.active {
+      background: var(--flame-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px var(--flame-glow);
+    }
+    .bar-rank-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .bar-rank-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .bar-rank-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .bar-rank-track {
+      width: 100%;
+      height: 8px;
+      background: #272A34;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .bar-rank-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.6s ease;
+    }
+    .bar-rank-fill.flame { background: var(--flame-gradient); }
+    .bar-rank-fill.emerald { background: linear-gradient(90deg, #10B981, #34D399); }
+    .bar-rank-fill.amber { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
+    .bar-rank-fill.blue { background: linear-gradient(90deg, #3B82F6, #60A5FA); }
+    .bar-rank-fill.purple { background: linear-gradient(90deg, #8B5CF6, #A78BFA); }
+
+    .vip-badge-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.02em;
+    }
+    .vip-badge-tag.gold {
+      background: rgba(245, 158, 11, 0.18);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .vip-badge-tag.silver {
+      background: rgba(148, 163, 184, 0.18);
+      color: #CBD5E1;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+    .vip-badge-tag.bronze {
+      background: rgba(217, 119, 6, 0.18);
+      color: #FDBA74;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+
     /* Modals */
     .modal-overlay {
       position: fixed;
@@ -1601,6 +1704,11 @@
           <span class="nav-text">Comandas</span>
         </button>
 
+        <button class="pos-nav-item" id="tab-btn-analytics" onclick="switchTab('analytics')" title="Gráficos & Inteligência de Negócio (Admin)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span class="nav-text">Gráficos</span>
+        </button>
+
         <button class="pos-nav-item" id="tab-btn-notifications" onclick="switchTab('notifications')" title="Central de Notificações">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="nav-text">Avisos</span>
@@ -1617,9 +1725,9 @@
           <span class="nav-text">Garçons</span>
         </button>
 
-        <button class="pos-nav-item" id="tab-btn-users" onclick="switchTab('users')" title="Clientes Atendidos">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          <span class="nav-text">Clientes</span>
+        <button class="pos-nav-item" id="tab-btn-users" onclick="switchTab('users')" title="Clube Fidelidade & Clientes VIP">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+          <span class="nav-text">Fidelidade</span>
         </button>
       </div>
 
@@ -1909,7 +2017,247 @@
       </section>
 
       <!-- =========================================================
-           TAB 3: CENTRAL DE NOTIFICAÇÕES (SESSÃO DE NOTIFICAÇÕES)
+           TAB 3: RELATÓRIOS & GRÁFICOS DO ADMIN (BI EXECUTIVO)
+           ========================================================= -->
+      <section id="sec-analytics" style="display:none;">
+        <div class="crud-box" style="margin-bottom:20px;">
+          
+          <div class="crud-header-row">
+            <div>
+              <h3 style="color:#FFFFFF; font-size:1.08rem; display:flex; align-items:center; gap:8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Painel de Gráficos & Inteligência de Negócio (BI)
+              </h3>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Métricas consolidadas de faturamento, velocidade de cozinha, canais de venda e fidelidade.</p>
+            </div>
+
+            <!-- Period Filter -->
+            <div class="period-filter-bar">
+              <button class="period-pill-btn active" id="period-btn-today" onclick="changeAnalyticsPeriod('today')">Hoje</button>
+              <button class="period-pill-btn" id="period-btn-week" onclick="changeAnalyticsPeriod('week')">Últimos 7 Dias</button>
+              <button class="period-pill-btn" id="period-btn-month" onclick="changeAnalyticsPeriod('month')">Este Mês</button>
+            </div>
+          </div>
+
+          <!-- Executive KPIs Cards Row -->
+          <div class="kpi-grid" style="margin-bottom:20px;">
+            <div class="kpi-card">
+              <div class="kpi-icon-box flame">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div>
+                <div class="kpi-meta-label">Faturamento Período</div>
+                <div class="kpi-value-text" id="analytics-rev-val">R$ 4.280,00</div>
+                <div class="kpi-badge-trend">↑ +21.5% vs período ant.</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-box emerald">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="16" y1="2" x2="16" y2="4"/></svg>
+              </div>
+              <div>
+                <div class="kpi-meta-label">Ticket Médio por Mesa</div>
+                <div class="kpi-value-text" id="analytics-ticket-val">R$ 142,60</div>
+                <div class="kpi-badge-trend" style="color:var(--emerald);">R$ 47,50 / pessoa</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-box blue">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <div>
+                <div class="kpi-meta-label">Acessos NFC à Mesa</div>
+                <div class="kpi-value-text" id="analytics-nfc-val">342 Acessos</div>
+                <div class="kpi-badge-trend" style="color:#60A5FA;">78% taxa de adoção</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-box amber">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div class="kpi-meta-label">Tempo Médio de Mesa</div>
+                <div class="kpi-value-text" id="analytics-time-val">48 min</div>
+                <div class="kpi-badge-trend" style="color:var(--amber);">Giro de 2.2x / turno</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2-Column Analytics Charts Grid -->
+          <div class="analytics-grid-2cols">
+            
+            <!-- Chart 1: Revenue by Hour Slots -->
+            <div class="analytics-chart-box">
+              <div class="chart-header-row">
+                <div class="chart-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                  1. Picos de Movimento por Faixa de Horário
+                </div>
+                <span style="font-size:0.72rem; color:var(--text-dim); font-weight:600;" id="chart1-subtitle">Almoço vs Jantar</span>
+              </div>
+              <div class="chart-svg-container" style="height:140px;">
+                <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="chartGradHour" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#FF4D30" stop-opacity="0.4"/>
+                      <stop offset="100%" stop-color="#FF4D30" stop-opacity="0.0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M 0,105 Q 60,95 120,40 T 240,30 T 360,90 T 480,20 T 600,45 L 600,120 L 0,120 Z" fill="url(#chartGradHour)" />
+                  <path d="M 0,105 Q 60,95 120,40 T 240,30 T 360,90 T 480,20 T 600,45" fill="none" stroke="#FF4D30" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="180" cy="35" r="5" fill="#FFFFFF" stroke="#FF4D30" stroke-width="2.5"/>
+                  <circle cx="480" cy="20" r="5" fill="#FFFFFF" stroke="#FF4D30" stroke-width="2.5"/>
+                </svg>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.70rem; color:var(--text-dim); margin-top:8px; font-weight:700;">
+                <span>12:00 (Almoço)</span>
+                <span>13:30 (Pico R$ 1.120)</span>
+                <span>16:00 (Tarde)</span>
+                <span>19:30 (Início Jantar)</span>
+                <span>21:00 (Pico R$ 1.840)</span>
+                <span>23:00</span>
+              </div>
+            </div>
+
+            <!-- Chart 2: Top 5 Pratos Mais Vendidos -->
+            <div class="analytics-chart-box">
+              <div class="chart-header-row">
+                <div class="chart-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  2. Top 5 Pratos Mais Pedidos (Share %)
+                </div>
+                <span style="font-size:0.72rem; color:var(--emerald); font-weight:700;">Volume de Vendas</span>
+              </div>
+              
+              <div class="bar-rank-row" id="analytics-top-dishes">
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>1. Burger Botânico Artesanal</span>
+                    <span style="color:#F87171;">38% (148 pedidos)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill flame" style="width:38%;"></div></div>
+                </div>
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>2. Salmão Grelhado na Brasa</span>
+                    <span style="color:#34D399;">24% (94 pedidos)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill emerald" style="width:24%;"></div></div>
+                </div>
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>3. Risoto de Funghi Porcini</span>
+                    <span style="color:#FBBF24;">18% (70 pedidos)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill amber" style="width:18%;"></div></div>
+                </div>
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>4. Gin Tônica Botânica</span>
+                    <span style="color:#60A5FA;">12% (47 pedidos)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill blue" style="width:12%;"></div></div>
+                </div>
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>5. Bruschetta Caprese</span>
+                    <span style="color:#A78BFA;">8% (31 pedidos)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill purple" style="width:8%;"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chart 3: Adoção NFC vs Tradicional -->
+            <div class="analytics-chart-box">
+              <div class="chart-header-row">
+                <div class="chart-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+                  3. Canal de Entrada dos Pedidos
+                </div>
+                <span style="font-size:0.72rem; color:#60A5FA; font-weight:700;">Totem NFC vs Balcão</span>
+              </div>
+              
+              <div style="display:flex; align-items:center; justify-content:space-around; gap:20px; padding:10px 0;">
+                <div style="position:relative; width:110px; height:110px;">
+                  <svg viewBox="0 0 36 36" style="width:100%; height:100%; transform:rotate(-90deg);">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#272A34" stroke-width="3.8"/>
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#FF4D30" stroke-width="3.8" stroke-dasharray="78, 100"/>
+                  </svg>
+                  <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <span style="font-size:1.15rem; font-weight:800; color:#FFFFFF;">78%</span>
+                    <span style="font-size:0.55rem; color:var(--text-dim); text-transform:uppercase;">NFC</span>
+                  </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:8px; font-size:0.78rem;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="width:10px; height:10px; border-radius:50%; background:var(--flame-red);"></span>
+                    <strong style="color:#FFFFFF;">78% Cardápio Digital NFC</strong>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="width:10px; height:10px; border-radius:50%; background:#64748B;"></span>
+                    <span style="color:var(--text-muted);">22% Atendimento Manual Garçom</span>
+                  </div>
+                  <div style="font-size:0.70rem; color:var(--emerald); font-weight:600; margin-top:4px;">
+                    ⚡ Economia de 34 min por turno na equipe
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chart 4: Tempo Médio de Preparo por Setor -->
+            <div class="analytics-chart-box">
+              <div class="chart-header-row">
+                <div class="chart-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  4. Agilidade de Expedição por Setor
+                </div>
+                <span style="font-size:0.72rem; color:var(--amber); font-weight:700;">Meta: &lt; 15 min</span>
+              </div>
+              
+              <div class="bar-rank-row">
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>Cozinha Quente (Pratos Principais)</span>
+                    <span style="color:#34D399;">14 min (Dentro da Meta)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill emerald" style="width:70%;"></div></div>
+                </div>
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>Entradas & Petiscos</span>
+                    <span style="color:#34D399;">8 min (Excelente)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill emerald" style="width:40%;"></div></div>
+                </div>
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>Bar & Coquetelaria</span>
+                    <span style="color:#60A5FA;">3.5 min (Ultra Rápido)</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill blue" style="width:20%;"></div></div>
+                </div>
+                <div class="bar-rank-item">
+                  <div class="bar-rank-info">
+                    <span>Sobremesas & Cafés</span>
+                    <span style="color:#FBBF24;">5 min</span>
+                  </div>
+                  <div class="bar-rank-track"><div class="bar-rank-fill amber" style="width:28%;"></div></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           TAB 4: CENTRAL DE NOTIFICAÇÕES (SESSÃO DE NOTIFICAÇÕES)
            ========================================================= -->
       <section id="sec-notifications" style="display:none;">
         <div class="crud-box">
@@ -1920,7 +2268,7 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                 Central de Notificações & Eventos do Salão
               </h3>
-              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Acompanhe em tempo real: aberturas de mesa via NFC, chamados de garçom, pedidos de conta e encerramentos.</p>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Acompanhe em tempo real: inícios de atendimento, acessos conectados, chamados de garçom, pedidos de conta e fidelidade.</p>
             </div>
             <div style="display:flex; gap:8px;">
               <button class="btn-print-action" onclick="markAllNotificationsAsRead()">Marcar Lidas</button>
@@ -1931,10 +2279,12 @@
           <!-- Notification Filters -->
           <div class="notif-filter-bar">
             <button class="notif-filter-pill active" id="notif-filter-all" onclick="filterNotificationsTab('all')">Todas</button>
-            <button class="notif-filter-pill" id="notif-filter-abertura" onclick="filterNotificationsTab('abertura')">Aberturas de Mesa</button>
-            <button class="notif-filter-pill" id="notif-filter-garcom" onclick="filterNotificationsTab('garcom')">Chamados de Garçom</button>
+            <button class="notif-filter-pill" id="notif-filter-abertura" onclick="filterNotificationsTab('abertura')">Início Atendimento</button>
+            <button class="notif-filter-pill" id="notif-filter-acesso" onclick="filterNotificationsTab('acesso')">Acessos à Mesa</button>
+            <button class="notif-filter-pill" id="notif-filter-garcom" onclick="filterNotificationsTab('garcom')">Chamados Garçom</button>
             <button class="notif-filter-pill" id="notif-filter-conta" onclick="filterNotificationsTab('conta')">Pedidos de Conta</button>
             <button class="notif-filter-pill" id="notif-filter-pedido" onclick="filterNotificationsTab('pedido')">Novos Pratos</button>
+            <button class="notif-filter-pill" id="notif-filter-fidelidade" onclick="filterNotificationsTab('fidelidade')">Fidelidade VIP</button>
             <button class="notif-filter-pill" id="notif-filter-fechamento" onclick="filterNotificationsTab('fechamento')">Mesas Liberadas</button>
           </div>
 
@@ -1947,7 +2297,7 @@
       </section>
 
       <!-- =========================================================
-           TAB 4: CARDÁPIO, ESTOQUE & PREÇOS (CRUD + DISPONIBILIDADE)
+           TAB 5: CARDÁPIO, ESTOQUE & PREÇOS (CRUD + DISPONIBILIDADE)
            ========================================================= -->
       <section id="sec-products" style="display:none;">
         <div class="crud-box">
@@ -1977,7 +2327,7 @@
       </section>
 
       <!-- =========================================================
-           TAB 5: GARÇONS & ATENDIMENTO (CRUD ADMIN)
+           TAB 6: GARÇONS & ATENDIMENTO (CRUD ADMIN)
            ========================================================= -->
       <section id="sec-waiters" style="display:none;">
         <div class="crud-box">
@@ -2007,24 +2357,49 @@
       </section>
 
       <!-- =========================================================
-           TAB 6: HISTÓRICO DE CLIENTES DO SALÃO
+           TAB 7: CLUBE FIDELIDADE GOURMET & CLIENTES VIP (CRM)
            ========================================================= -->
       <section id="sec-users" style="display:none;">
         <div class="crud-box">
           <div class="crud-header-row">
             <div>
-              <h3 style="color:#FFFFFF; font-size:1.05rem;">Histórico de Clientes Atendidos via NFC</h3>
-              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Identificação por mesa e histórico de pedidos para fidelização.</p>
+              <h3 style="color:#FFFFFF; font-size:1.08rem; display:flex; align-items:center; gap:8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+                Clube Gourmet Fidelidade & CRM de Clientes VIP
+              </h3>
+              <p style="font-size:0.74rem; color:var(--text-dim); margin-top:2px;">Gestão de carimbos digitais, saldo de pontos, nível de fidelidade e histórico de visitas.</p>
+            </div>
+            <button class="btn-flame-cta" onclick="openNewCustomerModal()">+ Novo Cliente VIP</button>
+          </div>
+
+          <!-- Loyalty CRM Stats Row -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
+            <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
+              <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Membros VIP Cadastrados</div>
+              <div style="font-size:1.25rem; font-weight:800; color:#FFFFFF; margin-top:2px;" id="crm-total-members">4 Clientes</div>
+            </div>
+            <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
+              <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Pontos em Circulação</div>
+              <div style="font-size:1.25rem; font-weight:800; color:#F59E0B; margin-top:2px;" id="crm-total-points">1.150 pts</div>
+            </div>
+            <div style="background:var(--bg-card-inner); border:1px solid var(--border-dark); border-radius:12px; padding:12px 16px;">
+              <div style="font-size:0.68rem; color:var(--text-dim); font-weight:700; text-transform:uppercase;">Cortesias Resgatadas</div>
+              <div style="font-size:1.25rem; font-weight:800; color:#10B981; margin-top:2px;" id="crm-total-rewards">14 Prêmios</div>
             </div>
           </div>
+
           <div style="overflow-x:auto;">
             <table class="custom-table">
               <thead>
                 <tr>
                   <th>Cliente</th>
                   <th>WhatsApp</th>
+                  <th>Nível VIP</th>
+                  <th>Cartela (10 Selos)</th>
+                  <th>Saldo Pontos</th>
+                  <th>Visitas</th>
                   <th>Última Mesa</th>
-                  <th>Status</th>
+                  <th style="text-align:right;">Ações Operador</th>
                 </tr>
               </thead>
               <tbody id="users-table-body"></tbody>
@@ -2102,6 +2477,55 @@
         <input type="text" id="waiter-tables" class="form-control" placeholder="Ex: mesa 01, mesa 02, mesa 04" value="mesa 01, mesa 04">
       </div>
       <button class="btn-flame-cta" style="width:100%; justify-content:center; margin-top:10px;" onclick="saveWaiter()">Salvar Garçom</button>
+    </div>
+  </div>
+
+  <!-- Modal Cliente VIP / Fidelidade (CRM) -->
+  <div class="modal-overlay" id="modal-customer" onclick="closeCustomerModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-customer-title" style="font-size:1.15rem; color:#FFFFFF;">Cadastrar Membro VIP</h3>
+        <button onclick="closeCustomerModal()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-dim); line-height:1;">&times;</button>
+      </div>
+      <input type="hidden" id="edit-customer-original-name">
+      <div class="form-group">
+        <label class="form-label">Nome Completo do Cliente:</label>
+        <input type="text" id="customer-name" class="form-control" placeholder="Ex: Lucas Silva" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">WhatsApp:</label>
+        <input type="tel" id="customer-phone" class="form-control" placeholder="(11) 98765-4321">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nível de Fidelidade VIP:</label>
+        <select id="customer-tier" class="form-control">
+          <option value="Bronze VIP">🥉 Bronze VIP</option>
+          <option value="Prata VIP">🥈 Prata VIP</option>
+          <option value="Ouro VIP" selected>🥇 Ouro VIP</option>
+          <option value="Diamante VIP">💎 Diamante VIP</option>
+        </select>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="form-group">
+          <label class="form-label">Selos na Cartela (0 a 10):</label>
+          <input type="number" min="0" max="10" id="customer-stamps" class="form-control" value="6">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Saldo de Pontos:</label>
+          <input type="number" min="0" step="10" id="customer-points" class="form-control" value="320">
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="form-group">
+          <label class="form-label">Total de Visitas:</label>
+          <input type="number" min="1" id="customer-visits" class="form-control" value="6">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Última Mesa:</label>
+          <input type="text" id="customer-last-table" class="form-control" placeholder="Mesa 04" value="Mesa 04">
+        </div>
+      </div>
+      <button class="btn-flame-cta" style="width:100%; justify-content:center; margin-top:10px;" onclick="saveLoyaltyCustomer()">Salvar Cliente VIP</button>
     </div>
   </div>
 
@@ -2191,6 +2615,7 @@
 
       document.getElementById('sec-kds').style.display = tabId === 'kds' ? 'block' : 'none';
       document.getElementById('sec-pos').style.display = tabId === 'pos' ? 'block' : 'none';
+      document.getElementById('sec-analytics').style.display = tabId === 'analytics' ? 'block' : 'none';
       document.getElementById('sec-notifications').style.display = tabId === 'notifications' ? 'block' : 'none';
       document.getElementById('sec-products').style.display = tabId === 'products' ? 'block' : 'none';
       document.getElementById('sec-waiters').style.display = tabId === 'waiters' ? 'block' : 'none';
@@ -2203,10 +2628,16 @@
       } else if (tabId === 'kds') {
         renderKDS();
         renderAlerts();
+      } else if (tabId === 'analytics') {
+        renderAnalytics();
       } else if (tabId === 'notifications') {
         renderNotificationsHub();
       } else if (tabId === 'products') {
         renderProducts();
+      } else if (tabId === 'users') {
+        renderLoyaltyCRM();
+      } else if (tabId === 'waiters') {
+        renderWaiters();
       }
     }
 
@@ -2290,6 +2721,9 @@
       
       const btnHeaderNew = document.getElementById('btn-header-new-product');
       if (btnHeaderNew) btnHeaderNew.style.display = isAdmin ? 'inline-flex' : 'none';
+
+      const tabAnalytics = document.getElementById('tab-btn-analytics');
+      if (tabAnalytics) tabAnalytics.style.display = isAdmin ? 'flex' : 'none';
 
       const tabWaiters = document.getElementById('tab-btn-waiters');
       const tabUsers = document.getElementById('tab-btn-users');
@@ -2462,11 +2896,38 @@
 
       const cleanNum = currentTicketTableName.replace(/\D/g, '');
       const cfg = JSON.parse(localStorage.getItem(`nolei_table_config_${cleanNum}`) || 'null');
+      
+      // Check customer from session or items or cfg
+      let customerName = cfg ? cfg.hostName : null;
+      if (!customerName && isOccupied) {
+        const itemWithClient = tObj.items.find(i => i.orderedBy && i.orderedBy !== 'Mesa' && !i.orderedBy.includes('POS'));
+        if (itemWithClient) customerName = itemWithClient.orderedBy;
+      }
+      if (!customerName && currentTicketTableName.toLowerCase().includes('04')) {
+        customerName = 'Lucas Silva';
+      }
+
+      let vipBadgeHtml = '';
+      if (customerName) {
+        const loyalty = getCustomerLoyaltyProfile(customerName);
+        vipBadgeHtml = `
+          <div style="margin-top:6px; display:inline-flex; align-items:center; gap:8px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.35); padding:4px 10px; border-radius:8px; font-size:0.74rem;">
+            <span style="font-weight:700; color:#FBBF24;">${loyalty.tier}</span>
+            <span style="color:#FFFFFF; font-weight:600;">• ${loyalty.name}</span>
+            <span style="color:var(--text-dim);">(${loyalty.points} pts • ${loyalty.stamps}/10 selos)</span>
+            <button type="button" onclick="awardLoyaltyStamp('${loyalty.name}', 1)" style="background:var(--flame-gradient); border:none; color:#FFF; font-size:0.68rem; font-weight:700; padding:2px 8px; border-radius:5px; cursor:pointer; margin-left:4px;">+ 1 Selo Visita</button>
+          </div>
+        `;
+      }
+
       const hostInfo = cfg ? ` • Titular: ${cfg.hostName} 👑 (${(cfg.members || []).length} conectados)` : '';
 
       if (waiterEl) waiterEl.innerHTML = `
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Atendente: ${tObj.waiter}${hostInfo}
+        <div style="display:flex; align-items:center; gap:5px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Atendente: ${tObj.waiter}${hostInfo}
+        </div>
+        ${vipBadgeHtml}
       `;
 
       let subtotal = 0;
@@ -2789,10 +3250,14 @@
     function getNotifIconSvg(type) {
       if (type === 'abertura') {
         return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>';
+      } else if (type === 'acesso') {
+        return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
       } else if (type === 'garcom') {
         return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>';
       } else if (type === 'conta') {
         return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
+      } else if (type === 'fidelidade') {
+        return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
       } else if (type === 'fechamento') {
         return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
       }
@@ -2929,6 +3394,7 @@
         localStorage.removeItem(`nolei_table_orders_mesa${cleanNum}`);
         localStorage.removeItem(`nolei_table_orders_${rawNum}`);
         localStorage.removeItem(`nolei_table_orders_${tableName.toLowerCase().replace(/\s+/g, '')}`);
+        localStorage.removeItem(`nolei_table_session_${cleanNum}`); // Permite novo Início de Atendimento no próximo scan
       }
       const found = kdsTables.find(t => t.table.toLowerCase() === tableName.toLowerCase());
       if (found) found.items = [];
@@ -3184,25 +3650,424 @@
       showToast('Garçom removido com sucesso.');
     }
 
-    // Users History
-    function renderUsers() {
+    // =========================================================
+    // ANALYTICS & BI DASHBOARD SYSTEM
+    // =========================================================
+    let currentAnalyticsPeriod = 'today';
+
+    const analyticsDataSets = {
+      today: {
+        periodName: "Hoje (Turno Atual)",
+        revenue: "R$ 4.890,00",
+        revTrend: "+18% vs ontem",
+        ticket: "R$ 135,80",
+        ticketSub: "Média por mesa",
+        tables: "36",
+        tablesSub: "10 mesas no salão",
+        nfcAdoption: "78%",
+        nfcSub: "+12% esta semana",
+        hourlyPeak: [
+          { hour: "12h", count: 18, pct: 45 },
+          { hour: "13h", count: 32, pct: 80 },
+          { hour: "14h", count: 24, pct: 60 },
+          { hour: "19h", count: 28, pct: 70 },
+          { hour: "20h", count: 40, pct: 100 },
+          { hour: "21h", count: 35, pct: 88 },
+          { hour: "22h", count: 15, pct: 38 }
+        ]
+      },
+      week: {
+        periodName: "Últimos 7 Dias",
+        revenue: "R$ 38.450,00",
+        revTrend: "+24% vs semana anterior",
+        ticket: "R$ 142,50",
+        ticketSub: "Média por comanda",
+        tables: "270",
+        tablesSub: "Salão com 85% ocupação média",
+        nfcAdoption: "81%",
+        nfcSub: "Economia de 238 horas/mês",
+        hourlyPeak: [
+          { hour: "12h", count: 120, pct: 50 },
+          { hour: "13h", count: 210, pct: 85 },
+          { hour: "14h", count: 160, pct: 65 },
+          { hour: "19h", count: 195, pct: 78 },
+          { hour: "20h", count: 250, pct: 100 },
+          { hour: "21h", count: 220, pct: 88 },
+          { hour: "22h", count: 95, pct: 38 }
+        ]
+      },
+      month: {
+        periodName: "Este Mês (Acumulado)",
+        revenue: "R$ 164.800,00",
+        revTrend: "+31% de crescimento",
+        ticket: "R$ 148,20",
+        ticketSub: "Ticket médio otimizado",
+        tables: "1.112",
+        tablesSub: "Giro médio de 3.2x por mesa",
+        nfcAdoption: "79%",
+        nfcSub: "94% de satisfação NPS",
+        hourlyPeak: [
+          { hour: "12h", count: 520, pct: 52 },
+          { hour: "13h", count: 890, pct: 89 },
+          { hour: "14h", count: 680, pct: 68 },
+          { hour: "19h", count: 810, pct: 81 },
+          { hour: "20h", count: 1000, pct: 100 },
+          { hour: "21h", count: 910, pct: 91 },
+          { hour: "22h", count: 410, pct: 41 }
+        ]
+      }
+    };
+
+    function changeAnalyticsPeriod(period) {
+      currentAnalyticsPeriod = period;
+      ['today', 'week', 'month'].forEach(p => {
+        const btn = document.getElementById('btn-period-' + p);
+        if (btn) btn.classList.toggle('primary', p === period);
+      });
+      renderAnalytics();
+      showToast(`Visualizando métricas: ${analyticsDataSets[period].periodName}`);
+    }
+
+    function renderAnalytics() {
+      const data = analyticsDataSets[currentAnalyticsPeriod] || analyticsDataSets.today;
+      
+      const elRev = document.getElementById('kpi-rev-val');
+      const elRevTrend = document.getElementById('kpi-rev-trend');
+      const elTicket = document.getElementById('kpi-ticket-val');
+      const elTicketSub = document.getElementById('kpi-ticket-sub');
+      const elTables = document.getElementById('kpi-tables-val');
+      const elTablesSub = document.getElementById('kpi-tables-sub');
+      const elNfc = document.getElementById('kpi-nfc-val');
+      const elNfcSub = document.getElementById('kpi-nfc-sub');
+
+      if (elRev) elRev.textContent = data.revenue;
+      if (elRevTrend) elRevTrend.textContent = `↑ ${data.revTrend}`;
+      if (elTicket) elTicket.textContent = data.ticket;
+      if (elTicketSub) elTicketSub.textContent = data.ticketSub;
+      if (elTables) elTables.textContent = data.tables;
+      if (elTablesSub) elTablesSub.textContent = data.tablesSub;
+      if (elNfc) elNfc.textContent = data.nfcAdoption;
+      if (elNfcSub) elNfcSub.textContent = `↑ ${data.nfcSub}`;
+    }
+
+    // =========================================================
+    // CLUBE FIDELIDADE VIP CRM SYSTEM
+    // =========================================================
+    const defaultLoyaltySeed = [
+      {
+        name: "Lucas Silva",
+        phone: "(11) 98765-4321",
+        tier: "Ouro VIP",
+        stamps: 6,
+        points: 320,
+        visits: 6,
+        lastTable: "Mesa 04",
+        status: "Ativo"
+      },
+      {
+        name: "Roberto Alves",
+        phone: "(11) 97654-3210",
+        tier: "Prata VIP",
+        stamps: 4,
+        points: 180,
+        visits: 4,
+        lastTable: "Mesa 02",
+        status: "Ativo"
+      },
+      {
+        name: "Beatriz Lima",
+        phone: "(11) 98888-7777",
+        tier: "Ouro VIP",
+        stamps: 8,
+        points: 450,
+        visits: 8,
+        lastTable: "Mesa 05",
+        status: "Ativo"
+      },
+      {
+        name: "Patrícia Mendes",
+        phone: "(11) 96543-2109",
+        tier: "Bronze VIP",
+        stamps: 2,
+        points: 90,
+        visits: 2,
+        lastTable: "Mesa 07",
+        status: "Ativo"
+      },
+      {
+        name: "Eduardo Camargo",
+        phone: "(11) 95555-1234",
+        tier: "Diamante VIP",
+        stamps: 10,
+        points: 820,
+        visits: 12,
+        lastTable: "Mesa 01",
+        status: "Prêmio Pronto"
+      }
+    ];
+
+    function getCustomerLoyaltyProfile(userName) {
+      const cleanName = (userName || 'Cliente').trim();
+      let stored = JSON.parse(localStorage.getItem('nolei_loyalty_' + cleanName) || 'null');
+      if (!stored) {
+        const seed = defaultLoyaltySeed.find(s => s.name.toLowerCase() === cleanName.toLowerCase());
+        if (seed) {
+          stored = {
+            name: seed.name,
+            phone: seed.phone,
+            stamps: seed.stamps,
+            points: seed.points,
+            tier: seed.tier,
+            visits: seed.visits,
+            lastTable: seed.lastTable
+          };
+        } else {
+          stored = {
+            name: cleanName,
+            phone: "(11) 9" + Math.floor(10000000 + Math.random() * 90000000),
+            stamps: 1,
+            points: 50,
+            tier: "Bronze VIP",
+            visits: 1,
+            lastTable: currentTicketTableName || "Mesa 04"
+          };
+        }
+        localStorage.setItem('nolei_loyalty_' + cleanName, JSON.stringify(stored));
+      }
+      return stored;
+    }
+
+    function getLoyaltyCustomers() {
+      let list = JSON.parse(localStorage.getItem('nolei_loyalty_crm_list') || 'null');
+      if (!list) {
+        list = defaultLoyaltySeed;
+        localStorage.setItem('nolei_loyalty_crm_list', JSON.stringify(list));
+      }
+
+      // Check individual overrides in localStorage
+      return list.map(member => {
+        const local = JSON.parse(localStorage.getItem('nolei_loyalty_' + member.name) || 'null');
+        return local ? { ...member, ...local } : member;
+      });
+    }
+
+    function saveLoyaltyCustomer() {
+      const origName = document.getElementById('edit-customer-original-name').value;
+      const name = document.getElementById('customer-name').value.trim();
+      const phone = document.getElementById('customer-phone').value.trim() || '(11) 98765-4321';
+      const tier = document.getElementById('customer-tier').value;
+      const stamps = parseInt(document.getElementById('customer-stamps').value, 10) || 0;
+      const points = parseInt(document.getElementById('customer-points').value, 10) || 0;
+      const visits = parseInt(document.getElementById('customer-visits').value, 10) || 1;
+      const lastTable = document.getElementById('customer-last-table').value.trim() || 'Mesa 04';
+
+      if (!name) {
+        alert('Por favor, digite o nome do cliente.');
+        return;
+      }
+
+      const custObj = {
+        name,
+        phone,
+        tier,
+        stamps: Math.min(10, Math.max(0, stamps)),
+        points: Math.max(0, points),
+        visits: Math.max(1, visits),
+        lastTable
+      };
+
+      // Save customer direct record
+      localStorage.setItem('nolei_loyalty_' + name, JSON.stringify(custObj));
+
+      let list = getLoyaltyCustomers();
+      if (origName) {
+        list = list.filter(c => c.name !== origName && c.name !== name);
+      } else {
+        list = list.filter(c => c.name !== name);
+      }
+      list.unshift(custObj);
+      localStorage.setItem('nolei_loyalty_crm_list', JSON.stringify(list));
+
+      closeCustomerModal();
+      renderLoyaltyCRM();
+      renderSplitComanda();
+      showToast(`Cliente VIP "${name}" salvo com sucesso!`);
+    }
+
+    function openNewCustomerModal() {
+      document.getElementById('edit-customer-original-name').value = '';
+      document.getElementById('modal-customer-title').textContent = 'Novo Cliente VIP (Clube Gourmet)';
+      document.getElementById('customer-name').value = '';
+      document.getElementById('customer-phone').value = '';
+      document.getElementById('customer-tier').value = 'Ouro VIP';
+      document.getElementById('customer-stamps').value = '6';
+      document.getElementById('customer-points').value = '320';
+      document.getElementById('customer-visits').value = '6';
+      document.getElementById('customer-last-table').value = currentTicketTableName || 'Mesa 04';
+      document.getElementById('modal-customer').classList.add('open');
+    }
+
+    function openEditCustomerModal(name) {
+      const cust = getCustomerLoyaltyProfile(name);
+      document.getElementById('edit-customer-original-name').value = cust.name;
+      document.getElementById('modal-customer-title').textContent = `Editar Membro VIP: ${cust.name}`;
+      document.getElementById('customer-name').value = cust.name;
+      document.getElementById('customer-phone').value = cust.phone || '';
+      document.getElementById('customer-tier').value = cust.tier || 'Ouro VIP';
+      document.getElementById('customer-stamps').value = cust.stamps || 0;
+      document.getElementById('customer-points').value = cust.points || 0;
+      document.getElementById('customer-visits').value = cust.visits || 1;
+      document.getElementById('customer-last-table').value = cust.lastTable || 'Mesa 04';
+      document.getElementById('modal-customer').classList.add('open');
+    }
+
+    function closeCustomerModal() {
+      document.getElementById('modal-customer').classList.remove('open');
+    }
+
+    function deleteLoyaltyCustomer(name) {
+      if (!confirm(`Deseja remover "${name}" do Clube Fidelidade?`)) return;
+      let list = getLoyaltyCustomers().filter(c => c.name !== name);
+      localStorage.setItem('nolei_loyalty_crm_list', JSON.stringify(list));
+      localStorage.removeItem('nolei_loyalty_' + name);
+      renderLoyaltyCRM();
+      renderSplitComanda();
+      showToast(`Cliente "${name}" removido do Clube.`);
+    }
+
+    function awardLoyaltyStamp(name, count = 1) {
+      const cust = getCustomerLoyaltyProfile(name);
+      let newStamps = (cust.stamps || 0) + count;
+      let newPoints = (cust.points || 0) + (count * 50);
+      let completedCard = false;
+
+      if (newStamps >= 10) {
+        completedCard = true;
+      }
+
+      cust.stamps = Math.min(10, newStamps);
+      cust.points = newPoints;
+      cust.visits = (cust.visits || 1) + 1;
+      cust.lastTable = currentTicketTableName || cust.lastTable;
+
+      localStorage.setItem('nolei_loyalty_' + name, JSON.stringify(cust));
+
+      // Update CRM list
+      let list = getLoyaltyCustomers().map(c => c.name === name ? cust : c);
+      localStorage.setItem('nolei_loyalty_crm_list', JSON.stringify(list));
+
+      recordNotification('fidelidade', 'Carimbo VIP Creditado', `${name} recebeu +${count} carimbo (${cust.stamps}/10) e +${count * 50} pts.`, currentTicketTableName);
+
+      renderLoyaltyCRM();
+      renderSplitComanda();
+
+      if (completedCard) {
+        showToast(`🎉 PARABÉNS! ${name} completou a cartela de 10 selos!`);
+      } else {
+        showToast(`+${count} Selo creditado para ${name}! (Total: ${cust.stamps}/10)`);
+      }
+    }
+
+    function resetLoyaltyStamps(name) {
+      if (!confirm(`Confirmar resgate da cartela completa de ${name}? Os 10 selos serão reiniciados para nova rodada.`)) return;
+      const cust = getCustomerLoyaltyProfile(name);
+      cust.stamps = 0;
+      cust.points = Math.max(0, (cust.points || 0) - 250);
+      localStorage.setItem('nolei_loyalty_' + name, JSON.stringify(cust));
+
+      let list = getLoyaltyCustomers().map(c => c.name === name ? cust : c);
+      localStorage.setItem('nolei_loyalty_crm_list', JSON.stringify(list));
+
+      recordNotification('fidelidade', 'Resgate de Cartela VIP', `${name} resgatou prêmio de 10 selos no restaurante.`, currentTicketTableName);
+
+      renderLoyaltyCRM();
+      renderSplitComanda();
+      showToast(`Cartela de ${name} resgatada e reiniciada com sucesso!`);
+    }
+
+    function renderLoyaltyCRM() {
       const tbody = document.getElementById('users-table-body');
       if (!tbody) return;
-      const users = [
-        { name: "Lucas Silva", phone: "(11) 98765-4321", table: "Mesa 04", status: "Em Atendimento" },
-        { name: "Roberto Alves", phone: "(11) 97654-3210", table: "Mesa 02", status: "Em Atendimento" },
-        { name: "Beatriz Lima", phone: "(11) 98888-7777", table: "Mesa 05", status: "Conta Solicitada" },
-        { name: "Patrícia Mendes", phone: "(11) 96543-2109", table: "Mesa 07", status: "Finalizado" }
-      ];
 
-      tbody.innerHTML = users.map(u => `
-        <tr>
-          <td><strong style="color:#FFFFFF;">${u.name}</strong></td>
-          <td style="color:var(--text-dim);">${u.phone}</td>
-          <td><span style="font-weight:700; color:var(--flame-red);">${u.table}</span></td>
-          <td><span style="font-size:0.72rem; font-weight:700; background:#272A34; padding:3px 8px; border-radius:6px; color:#FFFFFF;">${u.status}</span></td>
-        </tr>
-      `).join('');
+      const customers = getLoyaltyCustomers();
+
+      // Update summary cards
+      let totalPts = 0;
+      customers.forEach(c => totalPts += (c.points || 0));
+
+      const totalMembersEl = document.getElementById('crm-total-members');
+      const totalPointsEl = document.getElementById('crm-total-points');
+      const totalRewardsEl = document.getElementById('crm-total-rewards');
+
+      if (totalMembersEl) totalMembersEl.textContent = `${customers.length} Clientes`;
+      if (totalPointsEl) totalPointsEl.textContent = `${totalPts.toLocaleString('pt-BR')} pts`;
+      if (totalRewardsEl) totalRewardsEl.textContent = `18 Prêmios`;
+
+      if (customers.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-dim);">Nenhum cliente VIP cadastrado.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = customers.map(c => {
+        const stampsCount = c.stamps || 0;
+        let stampsDots = '';
+        for (let i = 1; i <= 10; i++) {
+          const filled = i <= stampsCount;
+          stampsDots += `<span style="display:inline-flex; width:12px; height:12px; border-radius:50%; background:${filled ? 'var(--flame-gradient)' : '#272A34'}; border:1px solid ${filled ? '#F97316' : '#3F4452'};" title="Selo ${i}"></span>`;
+        }
+
+        const tierBadgeColor = c.tier.includes('Diamante') ? 'background:linear-gradient(135deg, #60A5FA, #9333EA); color:#FFF;'
+          : c.tier.includes('Ouro') ? 'background:linear-gradient(135deg, #F59E0B, #D97706); color:#FFF;'
+          : c.tier.includes('Prata') ? 'background:linear-gradient(135deg, #94A3B8, #64748B); color:#FFF;'
+          : 'background:#272A34; color:#E2E8F0;';
+
+        return `
+          <tr>
+            <td>
+              <strong style="color:#FFFFFF; font-size:0.86rem;">${c.name}</strong>
+            </td>
+            <td style="color:var(--text-dim); font-size:0.78rem;">${c.phone || '(11) 98765-4321'}</td>
+            <td>
+              <span style="font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:6px; ${tierBadgeColor}">
+                ${c.tier}
+              </span>
+            </td>
+            <td>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <div style="display:flex; gap:3px;">${stampsDots}</div>
+                <strong style="font-size:0.74rem; color:#F59E0B; margin-left:5px;">${stampsCount}/10</strong>
+              </div>
+            </td>
+            <td>
+              <strong style="color:#F59E0B; font-size:0.86rem;">${c.points || 0} pts</strong>
+            </td>
+            <td>
+              <span style="color:#E2E8F0; font-size:0.80rem;">${c.visits || 1} visitas</span>
+            </td>
+            <td>
+              <span style="font-weight:700; color:var(--flame-red); font-size:0.78rem;">${c.lastTable || 'Mesa 04'}</span>
+            </td>
+            <td style="text-align:right;">
+              <div style="display:inline-flex; gap:6px; align-items:center;">
+                <button class="btn-edit-action" style="background:#059669; border-color:#10B981; color:#FFF;" onclick="awardLoyaltyStamp('${c.name}', 1)" title="Adicionar +1 Selo na Visita">
+                  +1 Selo
+                </button>
+                ${stampsCount >= 10 ? `
+                  <button class="btn-edit-action" style="background:var(--flame-gradient); color:#FFF;" onclick="resetLoyaltyStamps('${c.name}')" title="Resgatar Cartela Completa">
+                    🎁 Resgatar
+                  </button>
+                ` : ''}
+                <button class="btn-edit-action" onclick="openEditCustomerModal('${c.name}')">Editar</button>
+                <button class="btn-del-action" onclick="deleteLoyaltyCustomer('${c.name}')">Excluir</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderUsers() {
+      renderLoyaltyCRM();
     }
 
     // Global Search Handler

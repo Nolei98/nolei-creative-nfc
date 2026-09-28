@@ -2367,6 +2367,7 @@
           id: "e1",
           name: "Bruschetta Caprese",
           priceVal: 28.90,
+          stock: 20,
           desc: "Pão rústico artesanal de fermentação natural (levain 48h), tomates cereja confitados em azeite extravirgem, muçarela de búfala fresca e pesto de manjericão genovês.",
           story: "Inspirada nas tardes ensolaradas de Capri, nossa bruschetta une o frescor do manjericão orgânico cultivado em nossa horta interna à crocância dourada do pão de fermentação lenta.",
           chefQuote: "O segredo está no confit lento a 70°C, preservando a doçura natural do tomate.",
@@ -2381,6 +2382,7 @@
           id: "e2",
           name: "Carpaccio Bovino Trufado",
           priceVal: 38.00,
+          stock: 12,
           desc: "Lâminas ultrafinas de filé mignon curado, azeite de trufas brancas de Alba, lascas de Grana Padano 24 meses e alcaparras crocantes.",
           story: "Criado originalmente no lendário Harry's Bar em Veneza, homenageando o pintor Vittore Carpaccio. Aqui ganha toque sensorial de trufas brancas selecionadas.",
           chefQuote: "Corte milimétrico à mão preservando a maciez pura da carne angus certificada.",
@@ -2397,6 +2399,7 @@
           id: "p3",
           name: "Burger Botânico Artesanal",
           priceVal: 45.90,
+          stock: 15,
           desc: "Blend nobre 180g de costela angus grelhada na brasa de macieira, queijo gruyère fundido, compota de cebola roxa caramelizada e aioli de ervas frescas no pão brioche amanteigado.",
           story: "Nossa obra-prima artesanal: a intensidade defumada da brasa de lenha nobre combinada à untuosidade do queijo gruyère alpino e ao adocicado da cebola deglaçada em vinho tinto.",
           chefQuote: "O fogo direto sela os sucos da carne garantindo suculência inigualável a cada mordida.",
@@ -2411,6 +2414,7 @@
           id: "p1",
           name: "Risoto de Cogumelos Selvagens",
           priceVal: 58.90,
+          stock: 10,
           desc: "Arroz carnaroli italiano com mix fresco de shimeji preto, shiitake e cogumelos Paris salteados em manteiga clarificada, finalizado com azeite de trufas e parmesão 24 meses.",
           story: "Uma imersão aos bosques úmidos do Piemonte: grãos carnaroli cozidos lentamente em caldo de legumes tostados e vinho branco seco, absorvendo aromas terrosos profundos.",
           chefQuote: "Mantecatura vigorosa ao final para criar a textura 'all'onda' perfeita.",
@@ -2425,6 +2429,7 @@
           id: "p2",
           name: "Salmão Grelhado na Brasa",
           priceVal: 72.00,
+          stock: 8,
           desc: "Posta alta de salmão fresco do Pacífico com crosta crocante de ervas finas e castanhas, acompanhado de mousseline aveludada de mandioquinha e aspargos verdes salteados.",
           story: "Equilíbrio absoluto entre a riqueza ômega do salmão grelhado ao ponto rosado e a doçura sedosa da mandioquinha brasileira.",
           chefQuote: "Pele estaladiça e centro macio que desfolha ao leve toque do garfo.",
@@ -2441,6 +2446,7 @@
           id: "b2",
           name: "Gin Tônica Botânica",
           priceVal: 38.00,
+          stock: 25,
           desc: "Gin artesanal nacional infusionado com botânicos da Mata Atlântica, água tônica premium, bagas de zimbro, lâminas de pepino japonês e ramo de alecrim fresco defumado à mesa.",
           story: "Uma experiência multisensorial: o ramo de alecrim é maçaricado diante do cliente, liberando óleos essenciais que elevam as notas cítricas e botânicas do destilado.",
           chefQuote: "A tônica entra suave pela colher bailarina para preservar a efervescência perfeita.",
@@ -2455,6 +2461,7 @@
           id: "b1",
           name: "Limonada Siciliana com Hortelã",
           priceVal: 18.90,
+          stock: 30,
           desc: "Limão siciliano natural colhido e prensado na hora, água mineral gaseificada da montanha e folhas frescas de hortelã orgânica maceradas.",
           story: "Refrescância pura sem conservantes: cítrico vibrante que desperta o paladar.",
           chefQuote: "Extração a frio para garantir zero amargor da casca.",
@@ -2471,6 +2478,7 @@
           id: "s1",
           name: "Petit Gâteau Chocolate Belga",
           priceVal: 32.00,
+          stock: 12,
           desc: "Bolo quente de chocolate belga Callebaut 70% cacau com centro cremoso e fluído, acompanhado de sorvete artesanal de baunilha Bourbon de Madagascar e tuile crocante.",
           story: "O ápice da doçaria: contraste dramático entre o calor intenso do coração de chocolate líquido e o gelado perfumado da baunilha em fava Bourbon.",
           chefQuote: "Exatamente 8 minutos e 30 segundos no forno a 210°C para o ponto fluido impecável.",
@@ -3254,8 +3262,12 @@
       if (currentMenuDisplayMode === 'story') {
         // STORYTELLING GOURMET VIEW
         container.innerHTML = items.map(item => {
-          const isAvailable = item.active !== false;
+          const stockVal = typeof item.stock === 'number' ? item.stock : 15;
+          const isAvailable = item.active !== false && stockVal > 0;
           const sensoryTags = (item.sensory || ["Artesanal", "Gourmet", "Exclusivo"]).map(s => `<span class="story-sensory-pill">${s}</span>`).join('');
+          const stockBadge = stockVal > 0 
+            ? (stockVal <= 5 ? `<span class="badge-tag" style="background:rgba(245,158,11,0.18); color:#FBBF24; border:1px solid rgba(245,158,11,0.35); font-size:0.68rem;">⚡ Restam ${stockVal}</span>` : `<span class="badge-tag" style="background:rgba(16,185,129,0.12); color:#34D399; border:1px solid rgba(16,185,129,0.25); font-size:0.68rem;">${stockVal} disponíveis</span>`)
+            : `<span class="badge-tag" style="background:rgba(239,68,68,0.18); color:#F87171; font-size:0.68rem;">Esgotado</span>`;
 
           return `
             <div class="story-dish-card ${isAvailable ? '' : 'is-soldout'}">
@@ -3268,9 +3280,12 @@
               </div>
 
               <div class="story-dish-body">
-                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:6px;">
                   <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#FFFFFF;">${item.name}</h3>
-                  <span class="badge-tag">${(item.tags && item.tags[0]) || 'Gourmet'}</span>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    ${stockBadge}
+                    <span class="badge-tag">${(item.tags && item.tags[0]) || 'Gourmet'}</span>
+                  </div>
                 </div>
 
                 <p style="font-size:0.80rem; color:var(--text-muted); line-height:1.45; margin-bottom:8px;">
@@ -3323,7 +3338,11 @@
       } else {
         // CLASSIC MENU VIEW
         container.innerHTML = items.map(item => {
-          const isAvailable = item.active !== false;
+          const stockVal = typeof item.stock === 'number' ? item.stock : 15;
+          const isAvailable = item.active !== false && stockVal > 0;
+          const stockBadge = stockVal > 0 
+            ? (stockVal <= 5 ? `<span class="badge-tag" style="background:rgba(245,158,11,0.18); color:#FBBF24; border:1px solid rgba(245,158,11,0.35); font-size:0.68rem;">⚡ ${stockVal} restam</span>` : `<span class="badge-tag" style="background:rgba(16,185,129,0.12); color:#34D399; border:1px solid rgba(16,185,129,0.25); font-size:0.68rem;">${stockVal} disp.</span>`)
+            : `<span class="badge-tag" style="background:rgba(239,68,68,0.18); color:#F87171; font-size:0.68rem;">Esgotado</span>`;
 
           return `
             <div class="menu-item-card ${isAvailable ? '' : 'is-soldout'}">
@@ -3340,7 +3359,10 @@
                   <p class="item-desc">${item.desc}</p>
                 </div>
                 <div class="item-footer-row">
-                  <span class="badge-tag">${(item.tags && item.tags[0]) || 'Especial'}</span>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    ${stockBadge}
+                    <span class="badge-tag">${(item.tags && item.tags[0]) || 'Especial'}</span>
+                  </div>
                   ${isAvailable 
                     ? `<button class="btn-add-item" onclick="addItemToTable('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.priceVal})">
                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -3362,7 +3384,7 @@
       renderCategory(category);
     }
 
-    // Add Item with Host & Guest Permission Checks
+    // Add Item with Host & Guest Permission Checks & Stock Auto-Deduction
     function addItemToTable(id, name, priceVal) {
       const cfg = getTableConfig();
       const isHost = isCurrentUserHost();
@@ -3372,6 +3394,35 @@
         showToast(`Apenas o titular da mesa (${cfg.hostName}) pode enviar pedidos no momento.`);
         openTableHostModal();
         return;
+      }
+
+      // Verify and Decrement Stock in Database
+      const db = getMenuDatabase();
+      let foundItem = null;
+      let foundCat = null;
+      Object.keys(db).forEach(cat => {
+        (db[cat] || []).forEach(item => {
+          if (item.id === id || item.name.toLowerCase() === name.toLowerCase()) {
+            foundItem = item;
+            foundCat = cat;
+          }
+        });
+      });
+
+      if (foundItem) {
+        const curStock = typeof foundItem.stock === 'number' ? foundItem.stock : 15;
+        if (curStock <= 0 || foundItem.active === false) {
+          showToast(`Desculpe, "${name}" acabou de esgotar no estoque!`, 'conta');
+          renderCategory(activeCategory);
+          return;
+        }
+
+        foundItem.stock = Math.max(0, curStock - 1);
+        if (foundItem.stock === 0) {
+          foundItem.active = false;
+        }
+        localStorage.setItem('nolei_menu_custom', JSON.stringify(db));
+        renderCategory(activeCategory);
       }
 
       const now = new Date();

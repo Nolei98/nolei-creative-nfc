@@ -265,26 +265,12 @@
 
     <!-- Top Navigation Bar -->
     <header class="w-full px-5 sm:px-10 lg:px-16 pt-6 pb-2">
-      <div class="max-w-7xl mx-auto flex items-center justify-between">
-        
-        <!-- Academic Context Tag -->
-        <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-white/40 dark:bg-black/30 backdrop-blur-md text-[11px] font-bold tracking-wider uppercase text-[#475569] dark:text-[#CBD5E1]">
-          <span class="w-2 h-2 rounded-full bg-[#0D9488] animate-pulse"></span>
-          <span>Engenharia de Software Comercial</span>
-        </div>
-
-        <!-- Academic & Context Indicators -->
-        <div class="flex items-center gap-3">
-          <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] border border-[#0055FF]/20 text-[11px] font-black tracking-widest uppercase">
-            <span>GROUP 4</span>
-          </div>
-
-          <!-- Dark/Light Theme Toggle -->
-          <button id="themeToggleBtn" type="button" aria-label="Alternar Tema" class="w-10 h-10 rounded-full flex items-center justify-center border border-black/10 dark:border-white/15 bg-white/40 dark:bg-white/10 backdrop-blur-md text-[#0F172A] dark:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer">
-            <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
-            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
-          </button>
-        </div>
+      <div class="max-w-7xl mx-auto flex items-center justify-end">
+        <!-- Dark/Light Theme Toggle -->
+        <button id="themeToggleBtn" type="button" aria-label="Alternar Tema" class="w-10 h-10 rounded-full flex items-center justify-center border border-black/10 dark:border-white/15 bg-white/40 dark:bg-white/10 backdrop-blur-md text-[#0F172A] dark:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+        </button>
       </div>
     </header>
 
@@ -294,23 +280,27 @@
       <!-- HERO HEADER / INTRO -->
       <section class="w-full text-center max-w-4xl mx-auto mb-10 sm:mb-14">
         
-        <!-- LOGO DA JALA UNIVERSITY CENTRALIZADA -->
-        <div class="flex justify-center items-center mb-6">
-          <div class="px-6 py-3 rounded-2xl bg-white/70 dark:bg-white/95 backdrop-blur-md border border-white/80 dark:border-white/40 shadow-sm transition-transform duration-300 hover:scale-[1.02]">
+        <!-- LOGO DA JALA UNIVERSITY CENTRALIZADA (AUMENTADA) -->
+        <div class="flex justify-center items-center mb-8">
+          <div class="px-8 py-4 sm:px-10 sm:py-5 rounded-3xl bg-white/80 dark:bg-white/95 backdrop-blur-md border border-white/80 dark:border-white/40 shadow-md transition-transform duration-300 hover:scale-[1.02]">
             <img
               src="jala-university-logo.png"
               alt="Jala University Logo"
-              class="h-10 sm:h-12 w-auto object-contain"
+              class="h-16 sm:h-20 md:h-24 w-auto object-contain"
             />
           </div>
         </div>
 
-        <!-- Micro-selo Editorial com Nome do Curso -->
-        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/50 dark:bg-black/40 border border-white/80 dark:border-white/10 shadow-sm backdrop-blur-md mb-6">
-          <span class="text-[10px] font-black tracking-[0.25em] uppercase text-[#0055FF] dark:text-[#60A5FA]">
+        <!-- Micro-selo Editorial com GROUP 4 & Nome do Curso -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-2 rounded-full bg-white/50 dark:bg-black/40 border border-white/80 dark:border-white/10 shadow-sm backdrop-blur-md mb-6">
+          <span class="px-2.5 py-0.5 rounded-full bg-[#0055FF]/15 text-[#0055FF] dark:text-[#60A5FA] text-[10.5px] font-black tracking-widest uppercase">
+            GROUP 4
+          </span>
+          <span class="text-black/20 dark:text-white/20">•</span>
+          <span class="text-[10px] font-black tracking-[0.25em] uppercase text-[#0F172A] dark:text-[#CBD5E1]">
             ENGENHARIA DE SOFTWARE COMERCIAL
           </span>
-          <span class="text-black/20 dark:text-white/20">|</span>
+          <span class="text-black/20 dark:text-white/20">•</span>
           <span class="text-[10px] font-extrabold tracking-[0.18em] uppercase text-[#475569] dark:text-[#94A3B8]">
             VÍDEO DE ~16 MINUTOS
           </span>
@@ -323,7 +313,7 @@
 
         <!-- Project Subtitle -->
         <p class="text-[16px] sm:text-[19px] font-medium leading-relaxed text-[#475569] dark:text-[#94A3B8] max-w-2xl mx-auto">
-          Apresentação e Defesa Técnica da <strong class="text-[#0F172A] dark:text-white font-semibold">Entrega Parcial do Projeto CIS</strong> (Customer Information System) com alternância prática de telas entre os 4 integrantes.
+          Apresentação e Defesa Técnica da <strong class="text-[#0F172A] dark:text-white font-semibold">Entrega Parcial do Projeto CIS</strong> (Customer Information System) conduzida pela equipe <strong class="inline-flex items-center px-2 py-0.5 rounded-md bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] font-black text-[13px] tracking-wider uppercase align-baseline">Group 4</strong> com alternância prática de telas entre os 4 integrantes.
         </p>
 
         <!-- Equipe Badges (Gabriel = A, João = B, Maria = C, Bruna = D) -->
@@ -939,8 +929,6 @@
     <footer class="w-full border-t border-black/10 dark:border-white/10 py-8 px-6 text-center text-[12px] text-[#64748B] dark:text-[#94A3B8]">
       <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2">
-          <span class="font-bold text-[#0F172A] dark:text-white">Jala University</span>
-          <span>•</span>
           <span>Engenharia de Software Comercial — DS3 • Group 4</span>
         </div>
         <div>

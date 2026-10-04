@@ -117,11 +117,83 @@
         linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     }
 
-    /* Spectrum Gradient */
+    /* Spectrum Gradient with Subtle Shimmer */
+    @keyframes shimmerFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .spectrum-text {
-      background: linear-gradient(to right, #0055FF, #0D9488, #6D28D9);
+      background: linear-gradient(135deg, #0055FF 0%, #0D9488 40%, #6D28D9 80%, #0055FF 100%);
+      background-size: 250% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: shimmerFlow 8s ease infinite;
+    }
+
+    /* Video Breathing Aura Animation */
+    @keyframes auraPulse {
+      0% { transform: scale(0.97); opacity: 0.45; filter: blur(30px); }
+      50% { transform: scale(1.02); opacity: 0.85; filter: blur(42px); }
+      100% { transform: scale(0.97); opacity: 0.45; filter: blur(30px); }
+    }
+
+    .video-aura {
+      position: absolute;
+      inset: -14px;
+      border-radius: 40px;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 85, 255, 0.28) 0%, rgba(13, 148, 136, 0.2) 50%, transparent 75%);
+      z-index: 0;
+      pointer-events: none;
+      animation: auraPulse 6s ease-in-out infinite alternate;
+    }
+
+    .dark .video-aura {
+      background: radial-gradient(circle at 50% 50%, rgba(0, 85, 255, 0.42) 0%, rgba(109, 40, 217, 0.32) 50%, transparent 75%);
+    }
+
+    /* Scroll Reveal & Micro-Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Interactive Card Hover Lift */
+    .card-hover {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 42px -12px rgba(0, 85, 255, 0.15);
+      border-color: rgba(0, 85, 255, 0.35);
+    }
+
+    /* Horizontal scrollbar hide utility */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Timeline card smooth transitions */
+    .timeline-card {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, opacity 0.25s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateX(4px);
+      border-color: rgba(0, 85, 255, 0.3);
     }
 
     /* Liquid Glass Buttons */
@@ -278,21 +350,28 @@
     <main class="flex-1 max-w-6xl w-full mx-auto px-5 sm:px-8 lg:px-10 py-6 sm:py-10 flex flex-col items-center">
       
       <!-- HERO HEADER / INTRO -->
-      <section class="w-full text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+      <section class="w-full text-center max-w-4xl mx-auto mb-10 sm:mb-14 reveal active">
         
-        <!-- LOGO DA JALA UNIVERSITY CENTRALIZADA (AUMENTADA) -->
+        <!-- LOGO DA JALA UNIVERSITY CENTRALIZADA (FUNDO 100% TRANSPARENTE) -->
         <div class="flex justify-center items-center mb-8">
-          <div class="px-8 py-4 sm:px-10 sm:py-5 rounded-3xl bg-white/80 dark:bg-white/95 backdrop-blur-md border border-white/80 dark:border-white/40 shadow-md transition-transform duration-300 hover:scale-[1.02]">
+          <div class="transition-transform duration-300 hover:scale-105 cursor-pointer">
+            <!-- Modo Claro (Transparente original) -->
             <img
               src="jala-university-logo.png"
               alt="Jala University Logo"
-              class="h-16 sm:h-20 md:h-24 w-auto object-contain"
+              class="h-16 sm:h-20 md:h-24 w-auto object-contain block dark:hidden drop-shadow-sm"
+            />
+            <!-- Modo Escuro (Transparente com 'Jala' branco perfeitamente legível) -->
+            <img
+              src="jala-university-logo-white.png"
+              alt="Jala University Logo"
+              class="h-16 sm:h-20 md:h-24 w-auto object-contain hidden dark:block drop-shadow-[0_4px_24px_rgba(0,85,255,0.35)]"
             />
           </div>
         </div>
 
         <!-- Micro-selo Editorial com GROUP 4 & Nome do Curso -->
-        <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-2 rounded-full bg-white/50 dark:bg-black/40 border border-white/80 dark:border-white/10 shadow-sm backdrop-blur-md mb-6">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-2 rounded-full bg-white/50 dark:bg-black/40 border border-white/80 dark:border-white/10 shadow-sm backdrop-blur-md mb-6 transition-all hover:scale-[1.02]">
           <span class="px-2.5 py-0.5 rounded-full bg-[#0055FF]/15 text-[#0055FF] dark:text-[#60A5FA] text-[10.5px] font-black tracking-widest uppercase">
             GROUP 4
           </span>
@@ -320,7 +399,7 @@
         <div class="mt-8 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
           
           <!-- Gabriel Viegas = Integrante A -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
             <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#0055FF] to-[#0D9488] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
               GV
             </span>
@@ -331,7 +410,7 @@
           </div>
 
           <!-- João Rodrigues = Integrante B -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
             <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#0D9488] to-[#6D28D9] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
               JR
             </span>
@@ -342,7 +421,7 @@
           </div>
 
           <!-- Maria Beatriz = Integrante C -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
             <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#6D28D9] to-[#EC4899] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
               MB
             </span>
@@ -353,7 +432,7 @@
           </div>
 
           <!-- Bruna Monteiro = Integrante D -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
             <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#EC4899] to-[#F59E0B] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
               BM
             </span>
@@ -369,16 +448,16 @@
       <!-- ===================================================================
            CENTRAL VIDEO SECTION WITH LIQUID GLASS FRAME
            =================================================================== -->
-      <section class="w-full max-w-4xl mx-auto flex flex-col items-center mb-16">
+      <section class="w-full max-w-4xl mx-auto flex flex-col items-center mb-16 reveal">
         
         <!-- Video Wrapper Card -->
         <div class="w-full relative group">
           
-          <!-- Outer Ambient Glow -->
-          <div class="absolute -inset-1.5 rounded-[32px] bg-gradient-to-r from-[#0055FF]/25 via-[#0D9488]/20 to-[#6D28D9]/25 blur-xl opacity-75 pointer-events-none"></div>
+          <!-- Outer Ambient Glow Animation -->
+          <div class="video-aura"></div>
 
           <!-- Video Glass Panel Frame -->
-          <div class="relative w-full rounded-[28px] glass-panel p-3 sm:p-5 shadow-2xl border border-white/70 dark:border-white/10 overflow-hidden">
+          <div class="relative z-10 w-full rounded-[28px] glass-panel p-3 sm:p-5 shadow-2xl border border-white/70 dark:border-white/10 overflow-hidden card-hover">
             
             <!-- Video Header Bar (Sem botão público de trocar link) -->
             <div class="flex items-center justify-between pb-3 px-2 text-[11px] font-bold text-[#475569] dark:text-[#94A3B8]">
@@ -476,10 +555,10 @@
       <!-- ===================================================================
            BREVE DESCRIÇÃO & ESCOPO DO ROTEIRO
            =================================================================== -->
-      <section class="w-full max-w-5xl mx-auto mb-16">
+      <section class="w-full max-w-5xl mx-auto mb-16 reveal">
         
         <div class="text-center mb-8">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-[10px] font-black uppercase tracking-[0.25em] text-[#0F172A] dark:text-white mb-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-[10px] font-black uppercase tracking-[0.25em] text-[#0F172A] dark:text-white mb-2 transition-transform hover:scale-105">
             [ ESTRUTURAÇÃO DO EXAME ]
           </div>
           <h2 class="text-[clamp(24px,3.8vw,40px)] font-black tracking-tighter text-[#0F172A] dark:text-white uppercase font-display">
@@ -494,8 +573,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           
           <!-- Pilar 1: users-cli -->
-          <div class="glass-panel p-6 rounded-[24px] relative overflow-hidden transition-all duration-300 hover:-translate-y-1">
-            <div class="w-12 h-12 rounded-2xl bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] flex items-center justify-center mb-4">
+          <div class="glass-panel p-6 rounded-[24px] relative overflow-hidden card-hover reveal transition-all duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
               <i data-lucide="terminal" class="w-6 h-6"></i>
             </div>
             <span class="text-[10px] font-black tracking-[0.2em] uppercase text-[#0055FF] dark:text-[#60A5FA] block mb-1">
@@ -516,8 +595,8 @@
           </div>
 
           <!-- Pilar 2: users-api Swagger -->
-          <div class="glass-panel p-6 rounded-[24px] relative overflow-hidden transition-all duration-300 hover:-translate-y-1">
-            <div class="w-12 h-12 rounded-2xl bg-[#0D9488]/10 text-[#0D9488] dark:text-[#2DD4BF] flex items-center justify-center mb-4">
+          <div class="glass-panel p-6 rounded-[24px] relative overflow-hidden card-hover reveal transition-all duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-[#0D9488]/10 text-[#0D9488] dark:text-[#2DD4BF] flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
               <i data-lucide="file-code-2" class="w-6 h-6"></i>
             </div>
             <span class="text-[10px] font-black tracking-[0.2em] uppercase text-[#0D9488] dark:text-[#2DD4BF] block mb-1">
@@ -538,8 +617,8 @@
           </div>
 
           <!-- Pilar 3: users-api Core -->
-          <div class="glass-panel p-6 rounded-[24px] relative overflow-hidden transition-all duration-300 hover:-translate-y-1">
-            <div class="w-12 h-12 rounded-2xl bg-[#6D28D9]/10 text-[#6D28D9] dark:text-[#A78BFA] flex items-center justify-center mb-4">
+          <div class="glass-panel p-6 rounded-[24px] relative overflow-hidden card-hover reveal transition-all duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-[#6D28D9]/10 text-[#6D28D9] dark:text-[#A78BFA] flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
               <i data-lucide="server" class="w-6 h-6"></i>
             </div>
             <span class="text-[10px] font-black tracking-[0.2em] uppercase text-[#6D28D9] dark:text-[#A78BFA] block mb-1">
@@ -722,9 +801,9 @@
         <!-- =================================================================
              CRONOGRAMA DO VÍDEO (EM ORDEM, SEM HORÁRIOS)
              ================================================================= -->
-        <div class="glass-panel p-6 sm:p-8 rounded-[28px]">
+        <div class="glass-panel p-6 sm:p-8 rounded-[28px] reveal card-hover">
           
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
             <div>
               <span class="text-[10px] font-black uppercase tracking-[0.25em] text-[#0055FF] dark:text-[#60A5FA]">
                 SEQUÊNCIA DE APRESENTAÇÃO
@@ -734,13 +813,15 @@
               </h3>
             </div>
             
-            <!-- Filtro Interativo por Integrante -->
-            <div class="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-[11px] font-bold">
-              <button onclick="filterTimeline('all')" class="timeline-tab-btn px-2.5 py-1 rounded-lg bg-white dark:bg-black/60 shadow-sm text-[#0F172A] dark:text-white" data-target="all">Todos</button>
-              <button onclick="filterTimeline('A')" class="timeline-tab-btn px-2.5 py-1 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A]" data-target="A">Gabriel (A)</button>
-              <button onclick="filterTimeline('B')" class="timeline-tab-btn px-2.5 py-1 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A]" data-target="B">João (B)</button>
-              <button onclick="filterTimeline('C')" class="timeline-tab-btn px-2.5 py-1 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A]" data-target="C">Maria B. (C)</button>
-              <button onclick="filterTimeline('D')" class="timeline-tab-btn px-2.5 py-1 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A]" data-target="D">Bruna (D)</button>
+            <!-- Filtro Interativo por Integrante (TODOS NA MESMA LINHA + RESPONSIVO MOBILE) -->
+            <div class="w-full lg:w-auto overflow-x-auto no-scrollbar py-1">
+              <div class="flex flex-nowrap items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-[10.5px] sm:text-[11px] font-bold shrink-0 min-w-max">
+                <button onclick="filterTimeline('all')" class="timeline-tab-btn px-2.5 sm:px-3 py-1.5 rounded-lg bg-white dark:bg-black/60 shadow-sm text-[#0F172A] dark:text-white shrink-0 whitespace-nowrap transition-all duration-200 cursor-pointer" data-target="all">Todos</button>
+                <button onclick="filterTimeline('A')" class="timeline-tab-btn px-2.5 sm:px-3 py-1.5 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white shrink-0 whitespace-nowrap transition-all duration-200 cursor-pointer" data-target="A">Gabriel (A)</button>
+                <button onclick="filterTimeline('B')" class="timeline-tab-btn px-2.5 sm:px-3 py-1.5 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white shrink-0 whitespace-nowrap transition-all duration-200 cursor-pointer" data-target="B">João (B)</button>
+                <button onclick="filterTimeline('C')" class="timeline-tab-btn px-2.5 sm:px-3 py-1.5 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white shrink-0 whitespace-nowrap transition-all duration-200 cursor-pointer" data-target="C">Maria B. (C)</button>
+                <button onclick="filterTimeline('D')" class="timeline-tab-btn px-2.5 sm:px-3 py-1.5 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white shrink-0 whitespace-nowrap transition-all duration-200 cursor-pointer" data-target="D">Bruna (D)</button>
+              </div>
             </div>
           </div>
 
@@ -1078,9 +1159,9 @@
 
       buttons.forEach(btn => {
         if (btn.getAttribute('data-target') === member) {
-          btn.className = "timeline-tab-btn px-2.5 py-1 rounded-lg bg-white dark:bg-black/60 shadow-sm text-[#0F172A] dark:text-white";
+          btn.className = "timeline-tab-btn px-2.5 sm:px-3 py-1.5 rounded-lg bg-white dark:bg-black/60 shadow-sm text-[#0F172A] dark:text-white shrink-0 whitespace-nowrap transition-all duration-200 cursor-pointer";
         } else {
-          btn.className = "timeline-tab-btn px-2.5 py-1 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A]";
+          btn.className = "timeline-tab-btn px-2.5 sm:px-3 py-1.5 rounded-lg text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white shrink-0 whitespace-nowrap transition-all duration-200 cursor-pointer";
         }
       });
 
@@ -1088,12 +1169,39 @@
         const members = card.getAttribute('data-members') || '';
         if (member === 'all' || members.includes(member)) {
           card.style.display = 'flex';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
         } else {
           card.style.display = 'none';
         }
       });
     }
     window.filterTimeline = filterTimeline;
+
+    // 6. Scroll Reveal Observer for Divs, Titles and Cards
+    (function initScrollReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal').forEach((el, index) => {
+        // If element is already in the viewport upon initial load, reveal immediately
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          el.classList.add('active');
+        } else {
+          observer.observe(el);
+        }
+      });
+    })();
   </script>
 </body>
 </html>

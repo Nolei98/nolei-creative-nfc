@@ -89,6 +89,12 @@
       --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.02) 72%, rgba(255, 255, 255, 0) 100%);
     }
 
+    html {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
+
     body {
       background-color: var(--canvas-bg);
       font-family: var(--font-sans);
@@ -96,6 +102,9 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+      position: relative;
       transition: background-color 0.5s ease;
     }
 
@@ -134,19 +143,26 @@
 
     /* Video Breathing Aura Animation */
     @keyframes auraPulse {
-      0% { transform: scale(0.97); opacity: 0.45; filter: blur(30px); }
-      50% { transform: scale(1.02); opacity: 0.85; filter: blur(42px); }
-      100% { transform: scale(0.97); opacity: 0.45; filter: blur(30px); }
+      0% { transform: scale(0.97); opacity: 0.45; filter: blur(24px); }
+      50% { transform: scale(1.02); opacity: 0.85; filter: blur(34px); }
+      100% { transform: scale(0.97); opacity: 0.45; filter: blur(24px); }
     }
 
     .video-aura {
       position: absolute;
-      inset: -14px;
-      border-radius: 40px;
+      inset: -4px;
+      border-radius: 32px;
       background: radial-gradient(circle at 50% 50%, rgba(0, 85, 255, 0.28) 0%, rgba(13, 148, 136, 0.2) 50%, transparent 75%);
       z-index: 0;
       pointer-events: none;
       animation: auraPulse 6s ease-in-out infinite alternate;
+    }
+
+    @media (min-width: 640px) {
+      .video-aura {
+        inset: -14px;
+        border-radius: 40px;
+      }
     }
 
     .dark .video-aura {
@@ -347,7 +363,7 @@
     </header>
 
     <!-- Main Container -->
-    <main class="flex-1 max-w-6xl w-full mx-auto px-5 sm:px-8 lg:px-10 py-6 sm:py-10 flex flex-col items-center">
+    <main class="flex-1 max-w-6xl w-full mx-auto px-3.5 sm:px-8 lg:px-10 py-6 sm:py-10 flex flex-col items-center overflow-x-hidden">
       
       <!-- HERO HEADER / INTRO -->
       <section class="w-full text-center max-w-4xl mx-auto mb-10 sm:mb-14 reveal active">
@@ -359,48 +375,48 @@
             <img
               src="jala-university-logo.png"
               alt="Jala University Logo"
-              class="h-16 sm:h-20 md:h-24 w-auto object-contain block dark:hidden drop-shadow-sm"
+              class="h-14 sm:h-20 md:h-24 w-auto object-contain block dark:hidden drop-shadow-sm max-w-[85vw]"
             />
             <!-- Modo Escuro (Transparente com 'Jala' branco perfeitamente legível) -->
             <img
               src="jala-university-logo-white.png"
               alt="Jala University Logo"
-              class="h-16 sm:h-20 md:h-24 w-auto object-contain hidden dark:block drop-shadow-[0_4px_24px_rgba(0,85,255,0.35)]"
+              class="h-14 sm:h-20 md:h-24 w-auto object-contain hidden dark:block drop-shadow-[0_4px_24px_rgba(0,85,255,0.35)] max-w-[85vw]"
             />
           </div>
         </div>
 
         <!-- Micro-selo Editorial com GROUP 4 & Nome do Curso -->
-        <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-2 rounded-full bg-white/50 dark:bg-black/40 border border-white/80 dark:border-white/10 shadow-sm backdrop-blur-md mb-6 transition-all hover:scale-[1.02]">
-          <span class="px-2.5 py-0.5 rounded-full bg-[#0055FF]/15 text-[#0055FF] dark:text-[#60A5FA] text-[10.5px] font-black tracking-widest uppercase">
+        <div class="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full bg-white/50 dark:bg-black/40 border border-white/80 dark:border-white/10 shadow-sm backdrop-blur-md mb-6 max-w-full text-center">
+          <span class="px-2 sm:px-2.5 py-0.5 rounded-full bg-[#0055FF]/15 text-[#0055FF] dark:text-[#60A5FA] text-[10px] sm:text-[10.5px] font-black tracking-wider uppercase shrink-0">
             GROUP 4
           </span>
-          <span class="text-black/20 dark:text-white/20">•</span>
-          <span class="text-[10px] font-black tracking-[0.25em] uppercase text-[#0F172A] dark:text-[#CBD5E1]">
+          <span class="text-black/20 dark:text-white/20 hidden sm:inline">•</span>
+          <span class="text-[9.5px] sm:text-[10px] font-black tracking-normal sm:tracking-[0.18em] uppercase text-[#0F172A] dark:text-[#CBD5E1] break-words text-center px-1">
             ENGENHARIA DE SOFTWARE COMERCIAL
           </span>
-          <span class="text-black/20 dark:text-white/20">•</span>
-          <span class="text-[10px] font-extrabold tracking-[0.18em] uppercase text-[#475569] dark:text-[#94A3B8]">
+          <span class="text-black/20 dark:text-white/20 hidden sm:inline">•</span>
+          <span class="text-[9.5px] sm:text-[10px] font-extrabold tracking-normal sm:tracking-[0.15em] uppercase text-[#475569] dark:text-[#94A3B8] shrink-0">
             VÍDEO DE ~16 MINUTOS
           </span>
         </div>
 
         <!-- Main Title -->
-        <h1 class="text-[clamp(28px,5vw,56px)] font-black tracking-tighter leading-[1.05] text-[#0F172A] dark:text-white uppercase mb-5 font-display">
-          Desenvolvimento de Software <span class="spectrum-text">III</span>
+        <h1 class="text-[clamp(24px,5.5vw,56px)] font-black tracking-tight leading-[1.1] text-[#0F172A] dark:text-white uppercase mb-5 font-display break-words max-w-full px-1">
+          Desenvolvimento de Software <span class="spectrum-text inline-block">III</span>
         </h1>
 
         <!-- Project Subtitle -->
-        <p class="text-[16px] sm:text-[19px] font-medium leading-relaxed text-[#475569] dark:text-[#94A3B8] max-w-2xl mx-auto">
-          Apresentação e Defesa Técnica da <strong class="text-[#0F172A] dark:text-white font-semibold">Entrega Parcial do Projeto CIS</strong> (Customer Information System) conduzida pela equipe <strong class="inline-flex items-center px-2 py-0.5 rounded-md bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] font-black text-[13px] tracking-wider uppercase align-baseline">Group 4</strong> com alternância prática de telas entre os 4 integrantes.
+        <p class="text-[15px] sm:text-[19px] font-medium leading-relaxed text-[#475569] dark:text-[#94A3B8] max-w-2xl mx-auto break-words px-2">
+          Apresentação e Defesa Técnica da <strong class="text-[#0F172A] dark:text-white font-semibold">Entrega Parcial do Projeto CIS</strong> (Customer Information System) conduzida pela equipe <strong class="inline-flex items-center px-2 py-0.5 rounded-md bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] font-black text-[12px] sm:text-[13px] tracking-wider uppercase align-baseline">Group 4</strong> com alternância prática de telas entre os 4 integrantes.
         </p>
 
         <!-- Equipe Badges (Gabriel = A, João = B, Maria = C, Bruna = D) -->
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 max-w-full">
           
           <!-- Gabriel Viegas = Integrante A -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
-            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#0055FF] to-[#0D9488] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
+          <div class="flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 rounded-2xl glass-panel card-hover transition-transform max-w-full">
+            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#0055FF] to-[#0D9488] text-white flex items-center justify-center text-[11px] font-black shadow-sm shrink-0">
               GV
             </span>
             <div class="text-left">
@@ -410,8 +426,8 @@
           </div>
 
           <!-- João Rodrigues = Integrante B -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
-            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#0D9488] to-[#6D28D9] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
+          <div class="flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 rounded-2xl glass-panel card-hover transition-transform max-w-full">
+            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#0D9488] to-[#6D28D9] text-white flex items-center justify-center text-[11px] font-black shadow-sm shrink-0">
               JR
             </span>
             <div class="text-left">
@@ -421,8 +437,8 @@
           </div>
 
           <!-- Maria Beatriz = Integrante C -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
-            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#6D28D9] to-[#EC4899] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
+          <div class="flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 rounded-2xl glass-panel card-hover transition-transform max-w-full">
+            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#6D28D9] to-[#EC4899] text-white flex items-center justify-center text-[11px] font-black shadow-sm shrink-0">
               MB
             </span>
             <div class="text-left">
@@ -432,8 +448,8 @@
           </div>
 
           <!-- Bruna Monteiro = Integrante D -->
-          <div class="flex items-center gap-2.5 px-4 py-2 rounded-2xl glass-panel card-hover transition-transform">
-            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#EC4899] to-[#F59E0B] text-white flex items-center justify-center text-[11px] font-black shadow-sm">
+          <div class="flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 rounded-2xl glass-panel card-hover transition-transform max-w-full">
+            <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#EC4899] to-[#F59E0B] text-white flex items-center justify-center text-[11px] font-black shadow-sm shrink-0">
               BM
             </span>
             <div class="text-left">
@@ -489,14 +505,21 @@
             </div>
 
             <!-- Video Footer Status -->
-            <div class="pt-3 px-2 flex flex-wrap items-center justify-between text-[11px] text-[#64748B] dark:text-[#94A3B8] gap-2">
-              <span class="flex items-center gap-1.5">
-                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#0D9488]"></i>
-                Roteiro oficial seguido com alternância entre os 4 integrantes e minuto final cobrindo a Epic 6
+            <div class="pt-3 px-2 flex flex-wrap items-center justify-between text-[11px] text-[#64748B] dark:text-[#94A3B8] gap-3">
+              <span class="flex items-center gap-1.5 break-words min-w-0 flex-1">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#0D9488] shrink-0"></i>
+                <span>Roteiro com alternância entre os 4 integrantes e minuto final cobrindo a Epic 6</span>
               </span>
-              <span class="text-[10.5px] text-[#64748B] dark:text-[#94A3B8]">
-                Entrega via Canvas & GitLab
-              </span>
+              <div class="flex flex-wrap items-center gap-2 shrink-0">
+                <a href="capa-video-ds3.jpg" target="_blank" download="capa-video-ds3.jpg" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] hover:bg-[#0055FF]/20 font-bold transition-colors cursor-pointer text-[10.5px]">
+                  <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                  <span>Baixar Capa (3D)</span>
+                </a>
+                <a href="capa-oficial-ds3.png" target="_blank" download="capa-oficial-ds3.png" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-teal-500/10 text-[#0D9488] dark:text-[#2DD4BF] hover:bg-teal-500/20 font-bold transition-colors cursor-pointer text-[10.5px]">
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                  <span>Baixar Capa Oficial (1080p)</span>
+                </a>
+              </div>
             </div>
 
           </div>
@@ -508,7 +531,7 @@
              1. GitLab • Group 4
              2. Wiki do Projeto
              ================================================================= -->
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full max-w-2xl px-2">
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-6 w-full max-w-2xl px-2">
           
           <!-- Botão 1: Group-4 do GitLab -->
           <a
@@ -516,7 +539,7 @@
             href="https://gitlab.com/jala-university1/cohort-6/PT.CO.CSSD-232.GA.T2.26.M2/SB/group-4"
             target="_blank"
             rel="noopener noreferrer"
-            class="lg-base inline-flex items-center justify-center h-[54px] px-8 text-[16px] sm:text-[17px] whitespace-nowrap shrink-0 group cursor-pointer shadow-lg"
+            class="lg-base inline-flex items-center justify-center h-[52px] sm:h-[54px] w-full sm:w-auto px-6 sm:px-8 text-[15px] sm:text-[17px] whitespace-nowrap group cursor-pointer shadow-lg"
           >
             <span class="flex items-center gap-2.5 whitespace-nowrap">
               <!-- GitLab Official Icon SVG -->
@@ -534,7 +557,7 @@
             href="https://gitlab.com/groups/jala-university1/cohort-6/PT.CO.CSSD-232.GA.T2.26.M2/SB/group-4/-/wikis/home"
             target="_blank"
             rel="noopener noreferrer"
-            class="lg-base inline-flex items-center justify-center h-[54px] px-8 text-[16px] sm:text-[17px] whitespace-nowrap shrink-0 group cursor-pointer shadow-lg"
+            class="lg-base inline-flex items-center justify-center h-[52px] sm:h-[54px] w-full sm:w-auto px-6 sm:px-8 text-[15px] sm:text-[17px] whitespace-nowrap group cursor-pointer shadow-lg"
           >
             <span class="flex items-center gap-2.5 whitespace-nowrap">
               <!-- Book / Wiki Icon -->
@@ -643,7 +666,7 @@
         <!-- =================================================================
              DIVISÃO DETALHADA DAS TAREFAS POR INTEGRANTE
              ================================================================= -->
-        <div class="glass-panel p-6 sm:p-8 rounded-[28px] mb-12">
+        <div class="glass-panel p-4 sm:p-8 rounded-[22px] sm:rounded-[28px] mb-12 max-w-full overflow-hidden">
           
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-black/10 dark:border-white/10 pb-5">
             <div>
@@ -663,133 +686,133 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             
             <!-- Integrante A: Gabriel Viegas -->
-            <div class="p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#0055FF]/40 transition-colors">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#0055FF]/40 transition-colors max-w-full overflow-hidden">
               <div class="flex items-center gap-3 mb-3">
-                <span class="w-8 h-8 rounded-xl bg-[#0055FF]/10 text-[#0055FF] flex items-center justify-center font-black text-sm">
+                <span class="w-8 h-8 rounded-xl bg-[#0055FF]/10 text-[#0055FF] flex items-center justify-center font-black text-sm shrink-0">
                   A
                 </span>
-                <div>
-                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight">Gabriel Viegas</h4>
-                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8]">Integrante A • Fundações & CI/CD</span>
+                <div class="min-w-0 flex-1">
+                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight break-words">Gabriel Viegas</h4>
+                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8] break-words">Integrante A • Fundações & CI/CD</span>
                 </div>
               </div>
               <ul class="text-[13px] text-[#334155] dark:text-[#CBD5E1] space-y-2">
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0055FF] shrink-0 mt-0.5"></i>
-                  <span><strong>Abertura do vídeo:</strong> introdução e apresentação inicial da equipe.</span>
+                  <span class="break-words"><strong>Abertura do vídeo:</strong> introdução e apresentação inicial da equipe.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0055FF] shrink-0 mt-0.5"></i>
-                  <span><strong>4Ps aplicados:</strong> Pessoas, Processos, Produto e Projeto.</span>
+                  <span class="break-words"><strong>4Ps aplicados:</strong> Pessoas, Processos, Produto e Projeto.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0055FF] shrink-0 mt-0.5"></i>
-                  <span><strong>Metodologia de trabalho:</strong> fluxo e estruturação de engenharia.</span>
+                  <span class="break-words"><strong>Metodologia de trabalho:</strong> fluxo e estruturação de engenharia.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0055FF] shrink-0 mt-0.5"></i>
-                  <span><strong>Fase 1, PoCs/Spikes:</strong> Pipeline de CI e relatório de cobertura de código.</span>
+                  <span class="break-words"><strong>Fase 1, PoCs/Spikes:</strong> Pipeline de CI e relatório de cobertura de código.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0055FF] shrink-0 mt-0.5"></i>
-                  <span><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-cli GET/POST</code> e <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-api GET</code>.</span>
+                  <span class="break-words"><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-cli GET/POST</code> e <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-api GET</code>.</span>
                 </li>
               </ul>
             </div>
 
             <!-- Integrante B: João Rodrigues -->
-            <div class="p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#0D9488]/40 transition-colors">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#0D9488]/40 transition-colors max-w-full overflow-hidden">
               <div class="flex items-center gap-3 mb-3">
-                <span class="w-8 h-8 rounded-xl bg-[#0D9488]/10 text-[#0D9488] flex items-center justify-center font-black text-sm">
+                <span class="w-8 h-8 rounded-xl bg-[#0D9488]/10 text-[#0D9488] flex items-center justify-center font-black text-sm shrink-0">
                   B
                 </span>
-                <div>
-                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight">João Rodrigues</h4>
-                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8]">Integrante B • Gestão Ágil, Métricas & Épico 6</span>
+                <div class="min-w-0 flex-1">
+                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight break-words">João Rodrigues</h4>
+                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8] break-words">Integrante B • Gestão Ágil, Métricas & Épico 6</span>
                 </div>
               </div>
               <ul class="text-[13px] text-[#334155] dark:text-[#CBD5E1] space-y-2">
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5"></i>
-                  <span><strong>Framework Agile/Scrum:</strong> rituais, papéis e cadência das sprints.</span>
+                  <span class="break-words"><strong>Framework Agile/Scrum:</strong> rituais, papéis e cadência das sprints.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5"></i>
-                  <span><strong>Critérios de Qualidade:</strong> DoR (Definition of Ready) e DoD (Definition of Done).</span>
+                  <span class="break-words"><strong>Critérios de Qualidade:</strong> DoR (Definition of Ready) e DoD (Definition of Done).</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5"></i>
-                  <span><strong>Progresso & Métricas:</strong> Roadmap, Story Points, burn-down charts e pontos queimados vs pendentes.</span>
+                  <span class="break-words"><strong>Progresso & Métricas:</strong> Roadmap, Story Points, burn-down charts e pontos queimados vs pendentes.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5"></i>
-                  <span><strong>Apresentação da Épico 6:</strong> Minuto final cobrindo a fase de testes e homologação do projeto.</span>
+                  <span class="break-words"><strong>Apresentação da Épico 6:</strong> Minuto final cobrindo a fase de testes e homologação do projeto.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5"></i>
-                  <span><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-cli PUT/DELETE</code>, <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-api Swagger GET/POST</code> e <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-api POST</code>.</span>
+                  <span class="break-words"><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-cli PUT/DELETE</code>, <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-api Swagger GET/POST</code> e <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-api POST</code>.</span>
                 </li>
               </ul>
             </div>
 
             <!-- Integrante C: Maria Beatriz -->
-            <div class="p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#6D28D9]/40 transition-colors">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#6D28D9]/40 transition-colors max-w-full overflow-hidden">
               <div class="flex items-center gap-3 mb-3">
-                <span class="w-8 h-8 rounded-xl bg-[#6D28D9]/10 text-[#6D28D9] flex items-center justify-center font-black text-sm">
+                <span class="w-8 h-8 rounded-xl bg-[#6D28D9]/10 text-[#6D28D9] flex items-center justify-center font-black text-sm shrink-0">
                   C
                 </span>
-                <div>
-                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight">Maria Beatriz</h4>
-                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8]">Integrante C • Versionamento & Arquitetura C4</span>
+                <div class="min-w-0 flex-1">
+                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight break-words">Maria Beatriz</h4>
+                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8] break-words">Integrante C • Versionamento & Arquitetura C4</span>
                 </div>
               </div>
               <ul class="text-[13px] text-[#334155] dark:text-[#CBD5E1] space-y-2">
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#6D28D9] shrink-0 mt-0.5"></i>
-                  <span><strong>Modelo de Ramificação:</strong> Git flow, convenções de branches e regras de merge requests.</span>
+                  <span class="break-words"><strong>Modelo de Ramificação:</strong> Git flow, convenções de branches e regras de merge requests.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#6D28D9] shrink-0 mt-0.5"></i>
-                  <span><strong>Estrutura do Backlog:</strong> épicos, histórias de usuário e gestão de issues habituais.</span>
+                  <span class="break-words"><strong>Estrutura do Backlog:</strong> épicos, histórias de usuário e gestão de issues habituais.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#6D28D9] shrink-0 mt-0.5"></i>
-                  <span><strong>Diagramas Arquitetônicos:</strong> C4 Model (C4 Context e C4 Container) e Diagramas de Sequência.</span>
+                  <span class="break-words"><strong>Diagramas Arquitetônicos:</strong> C4 Model (C4 Context e C4 Container) e Diagramas de Sequência.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#6D28D9] shrink-0 mt-0.5"></i>
-                  <span><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-api PUT</code> executado ao vivo com análise do retorno.</span>
+                  <span class="break-words"><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-api PUT</code> executado ao vivo com análise do retorno.</span>
                 </li>
               </ul>
             </div>
 
             <!-- Integrante D: Bruna Monteiro -->
-            <div class="p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#EC4899]/40 transition-colors">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/10 hover:border-[#EC4899]/40 transition-colors max-w-full overflow-hidden">
               <div class="flex items-center gap-3 mb-3">
-                <span class="w-8 h-8 rounded-xl bg-[#EC4899]/10 text-[#EC4899] flex items-center justify-center font-black text-sm">
+                <span class="w-8 h-8 rounded-xl bg-[#EC4899]/10 text-[#EC4899] flex items-center justify-center font-black text-sm shrink-0">
                   D
                 </span>
-                <div>
-                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight">Bruna Monteiro</h4>
-                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8]">Integrante D • Qualidade, Swagger & Modelagem</span>
+                <div class="min-w-0 flex-1">
+                  <h4 class="text-[16px] font-black text-[#0F172A] dark:text-white leading-tight break-words">Bruna Monteiro</h4>
+                  <span class="text-[11px] font-bold text-[#475569] dark:text-[#94A3B8] break-words">Integrante D • Qualidade, Swagger & Modelagem</span>
                 </div>
               </div>
               <ul class="text-[13px] text-[#334155] dark:text-[#CBD5E1] space-y-2">
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#EC4899] shrink-0 mt-0.5"></i>
-                  <span><strong>Qualidade do Produto:</strong> boas práticas de engenharia de software e padrões de código.</span>
+                  <span class="break-words"><strong>Qualidade do Produto:</strong> boas práticas de engenharia de software e padrões de código.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#EC4899] shrink-0 mt-0.5"></i>
-                  <span><strong>Documentação:</strong> centralização de conhecimento e documentação viva na Wiki.</span>
+                  <span class="break-words"><strong>Documentação:</strong> centralização de conhecimento e documentação viva na Wiki.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#EC4899] shrink-0 mt-0.5"></i>
-                  <span><strong>Modelagem de Domínio:</strong> Diagramas de Casos de Uso e Diagramas de Classes UML.</span>
+                  <span class="break-words"><strong>Modelagem de Domínio:</strong> Diagramas de Casos de Uso e Diagramas de Classes UML.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <i data-lucide="check" class="w-4 h-4 text-[#EC4899] shrink-0 mt-0.5"></i>
-                  <span><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-api Swagger PUT/DELETE</code> e <code class="bg-black/5 dark:bg-white/10 px-1 rounded">users-api DELETE</code>.</span>
+                  <span class="break-words"><strong>Demonstração Prática:</strong> <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-api Swagger PUT/DELETE</code> e <code class="bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded break-all text-[11px] font-mono inline">users-api DELETE</code>.</span>
                 </li>
               </ul>
             </div>
@@ -829,172 +852,172 @@
           <div class="space-y-3 font-sans text-[13.5px]">
 
             <!-- Bloco 1 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all A B C D">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-blue-500/10 text-[#0055FF] dark:text-[#60A5FA] shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all A B C D">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-blue-500/10 text-[#0055FF] dark:text-[#60A5FA] shrink-0 mt-0.5 sm:mt-0">
                   1º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Abertura e Apresentações</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Cada integrante se apresenta (nome e função no projeto) e esclarece o objetivo do exame.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Abertura e Apresentações</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Cada integrante se apresenta (nome e função no projeto) e esclarece o objetivo do exame.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-black/5 dark:bg-white/10 text-[#475569] dark:text-[#CBD5E1]">Todos</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">Tela Inicial / GitLab</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">Tela Inicial / GitLab</span>
               </div>
             </div>
 
             <!-- Bloco 2 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all A B C D">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-teal-500/10 text-[#0D9488] dark:text-[#2DD4BF] shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all A B C D">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-teal-500/10 text-[#0D9488] dark:text-[#2DD4BF] shrink-0 mt-0.5 sm:mt-0">
                   2º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Metodologia, Gestão e Qualidade</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">4Ps aplicados, Scrum, DoR, DoD, modelo de ramificação, estrutura do backlog, tarefas habituais, regras de merge e documentação.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Metodologia, Gestão e Qualidade</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">4Ps aplicados, Scrum, DoR, DoD, modelo de ramificação, estrutura do backlog, tarefas habituais, regras de merge e documentação.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-teal-500/10 text-[#0D9488]">A, B, C, D</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">GitLab aberto</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">GitLab aberto</span>
               </div>
             </div>
 
             <!-- Bloco 3 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all C D">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-purple-500/10 text-[#6D28D9] dark:text-[#A78BFA] shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all C D">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-purple-500/10 text-[#6D28D9] dark:text-[#A78BFA] shrink-0 mt-0.5 sm:mt-0">
                   3º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Diagramas e Arquitetura</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Diagramas de Casos de Uso, C4 Context, C4 Container, Classes e Sequência.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Diagramas e Arquitetura</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Diagramas de Casos de Uso, C4 Context, C4 Container, Classes e Sequência.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-purple-500/10 text-[#6D28D9]">Maria B. (C) e Bruna (D)</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">GitLab / Ferramenta de Diagramas</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">GitLab / Diagramas</span>
               </div>
             </div>
 
             <!-- Bloco 4 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all B">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all B">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5 sm:mt-0">
                   4º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Progresso, Roadmap e Métricas</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Progresso atual, Roadmap, story points, burn-downs das sprints anteriores e métricas de pontos queimados vs pendentes.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Progresso, Roadmap e Métricas</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Progresso atual, Roadmap, story points, burn-downs das sprints anteriores e métricas de pontos queimados vs pendentes.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-indigo-500/10 text-indigo-600">João Rodrigues (B)</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">GitLab / Boards / Planilhas</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">GitLab / Boards / Métricas</span>
               </div>
             </div>
 
             <!-- Bloco 5 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all A">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-blue-500/10 text-[#0055FF] dark:text-[#60A5FA] shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all A">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-blue-500/10 text-[#0055FF] dark:text-[#60A5FA] shrink-0 mt-0.5 sm:mt-0">
                   5º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Fase 1, PoCs/Spikes, CI e Cobertura</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Demonstração da Fase 1 do Projeto Final, validação de PoCs/Spikes, pipeline de Integração Contínua e cobertura de código.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Fase 1, PoCs/Spikes, CI e Cobertura</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Demonstração da Fase 1 do Projeto Final, validação de PoCs/Spikes, pipeline de Integração Contínua e cobertura de código.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-blue-500/10 text-[#0055FF]">Gabriel Viegas (A)</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">Pipeline CI / Relatório Cobertura</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">Pipeline CI / Cobertura</span>
               </div>
             </div>
 
             <!-- Bloco 6 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all A B">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all A B">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5 sm:mt-0">
                   6º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Demonstração: users-cli</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Explicação breve da aplicação CLI. Gabriel (A) demonstra GET e POST; João (B) demonstra PUT e DELETE.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Demonstração: users-cli</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Explicação breve da aplicação CLI. Gabriel (A) demonstra GET e POST; João (B) demonstra PUT e DELETE.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-emerald-500/10 text-emerald-600">Gabriel (A) e João (B)</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">users-cli rodando</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">users-cli rodando</span>
               </div>
             </div>
 
             <!-- Bloco 7 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all B D">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all B D">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5 sm:mt-0">
                   7º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Demonstração: users-api Swagger</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Explicação breve da documentação e endpoints no Swagger. João (B) demonstra GET e POST; Bruna (D) demonstra PUT e DELETE.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Demonstração: users-api Swagger</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Explicação breve da documentação e endpoints no Swagger. João (B) demonstra GET e POST; Bruna (D) demonstra PUT e DELETE.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-cyan-500/10 text-cyan-600">João (B) e Bruna (D)</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">users-api Swagger aberto</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">users-api Swagger</span>
               </div>
             </div>
 
             <!-- Bloco 8 -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all A B C D">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all A B C D">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5 sm:mt-0">
                   8º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Demonstração: users-api</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Problema de negócio que a API resolve. Gabriel (GET), João (POST), Maria Beatriz (PUT) e Bruna (DELETE).</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Demonstração: users-api</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Problema de negócio que a API resolve. Gabriel (GET), João (POST), Maria Beatriz (PUT) e Bruna (DELETE).</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-purple-500/10 text-purple-600">Todos (A, B, C, D)</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">users-api rodando</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">users-api rodando</span>
               </div>
             </div>
 
             <!-- Bloco 9: Epic 6 (João Rodrigues) -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all B">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all B">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5 sm:mt-0">
                   9º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Apresentação da Épico 6 (Epic 6)</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Fase de testes de mercado, homologação e abordagem bilateral do projeto (minuto final dedicado).</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Apresentação da Épico 6 (Epic 6)</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Fase de testes de mercado, homologação e abordagem bilateral do projeto (minuto final dedicado).</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-amber-500/10 text-amber-600">João Rodrigues (B)</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">Backlog / Epic 6 no GitLab</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">GitLab / Epic 6</span>
               </div>
             </div>
 
             <!-- Bloco 10: Conclusão -->
-            <div class="timeline-card p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 transition-all" data-members="all A B C D">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 shrink-0">
+            <div class="timeline-card p-3.5 sm:p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/60 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all max-w-full overflow-hidden" data-members="all A B C D">
+              <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                <span class="font-mono text-[12px] font-black px-2.5 py-1 rounded-lg bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 shrink-0 mt-0.5 sm:mt-0">
                   10º Bloco
                 </span>
-                <div>
-                  <h4 class="font-bold text-[#0F172A] dark:text-white">Conclusão e Encerramento</h4>
-                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8]">Reforço dos aprendizados consolidados, links do GitLab e envio do vídeo no Canvas. Agradecimentos.</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-[#0F172A] dark:text-white break-words">Conclusão e Encerramento</h4>
+                  <p class="text-[12px] text-[#64748B] dark:text-[#94A3B8] break-words">Reforço dos aprendizados consolidados, links do GitLab e envio do vídeo no Canvas. Agradecimentos.</p>
                 </div>
               </div>
-              <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto shrink-0 max-w-full">
                 <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-black/5 dark:bg-white/10 text-[#475569] dark:text-[#CBD5E1]">Todos</span>
-                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8]">Tela Final</span>
+                <span class="text-[11px] font-mono text-[#64748B] dark:text-[#94A3B8] break-words">Tela Final</span>
               </div>
             </div>
 
@@ -1007,12 +1030,12 @@
     </main>
 
     <!-- Footer -->
-    <footer class="w-full border-t border-black/10 dark:border-white/10 py-8 px-6 text-center text-[12px] text-[#64748B] dark:text-[#94A3B8]">
-      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-2">
+    <footer class="w-full border-t border-black/10 dark:border-white/10 py-8 px-4 sm:px-6 text-center text-[12px] text-[#64748B] dark:text-[#94A3B8] max-w-full overflow-hidden">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div class="flex items-center justify-center sm:justify-start gap-2 break-words max-w-full">
           <span>Engenharia de Software Comercial — DS3 • Group 4</span>
         </div>
-        <div>
+        <div class="text-center sm:text-right break-words max-w-full">
           <span>Gabriel Viegas (A) • João Rodrigues (B) • Maria Beatriz (C) • Bruna Monteiro (D)</span>
         </div>
       </div>

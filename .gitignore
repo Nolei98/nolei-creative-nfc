@@ -1,3 +1,5 @@
 .vercel
 .temp
 supabase/.temp/
+*.mp4
+

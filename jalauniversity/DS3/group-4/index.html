@@ -475,33 +475,40 @@
           <!-- Video Glass Panel Frame -->
           <div class="relative z-10 w-full rounded-[28px] glass-panel p-3 sm:p-5 shadow-2xl border border-white/70 dark:border-white/10 overflow-hidden card-hover">
             
-            <!-- Video Header Bar (Sem botão público de trocar link) -->
+            <!-- Video Header Bar -->
             <div class="flex items-center justify-between pb-3 px-2 text-[11px] font-bold text-[#475569] dark:text-[#94A3B8]">
               <div class="flex items-center gap-2">
                 <span class="flex h-2.5 w-2.5 relative">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                 </span>
                 <span class="tracking-wider uppercase font-black text-[#0F172A] dark:text-white">Gravação Oficial do Exame</span>
                 <span class="text-black/30 dark:text-white/30">•</span>
-                <span class="hidden sm:inline">~16 Minutos (com Épico 6)</span>
+                <span class="hidden sm:inline">~32 Minutos (Apresentação Completa + Épico 6)</span>
               </div>
 
               <div class="font-mono text-[10px] uppercase tracking-wider bg-black/5 dark:bg-white/5 px-2.5 py-0.5 rounded text-[#475569] dark:text-[#94A3B8]">
-                1080p FHD
+                1080p FHD • MP4
               </div>
             </div>
 
-            <!-- YouTube Iframe Embed Responsive 16:9 -->
-            <div class="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black shadow-inner">
-              <iframe
-                id="mainYoutubeIframe"
-                class="w-full h-full object-cover"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
-                title="Vídeo do Exame Parcial DS3 - Group 4"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
+            <!-- Native HTML5 Video Player Responsive 16:9 -->
+            <div class="relative w-full aspect-video rounded-[20px] overflow-hidden bg-black shadow-inner flex items-center justify-center">
+              <video
+                id="mainVideoPlayer"
+                class="w-full h-full object-contain bg-black"
+                controls
+                playsinline
+                preload="metadata"
+                poster="capa-oficial-ds3.png"
+              >
+                <source src="exame_parcial.mp4" type="video/mp4">
+                <source src="exame_final.mp4" type="video/mp4">
+                <p class="text-white text-xs p-4 text-center">
+                  Seu navegador não suporta a tag de vídeo HTML5.
+                  <a href="exame_parcial.mp4" class="underline text-blue-400 font-bold ml-1" download>Clique aqui para baixar o vídeo</a>.
+                </p>
+              </video>
             </div>
 
             <!-- Video Footer Status -->
@@ -511,13 +518,17 @@
                 <span>Roteiro com alternância entre os 4 integrantes e minuto final cobrindo a Epic 6</span>
               </span>
               <div class="flex flex-wrap items-center gap-2 shrink-0">
+                <a href="exame_parcial.mp4" download="exame_parcial.mp4" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 font-bold transition-colors cursor-pointer text-[10.5px]">
+                  <i data-lucide="film" class="w-3.5 h-3.5"></i>
+                  <span>Baixar Vídeo</span>
+                </a>
                 <a href="capa-video-ds3.jpg" target="_blank" download="capa-video-ds3.jpg" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#0055FF]/10 text-[#0055FF] dark:text-[#60A5FA] hover:bg-[#0055FF]/20 font-bold transition-colors cursor-pointer text-[10.5px]">
                   <i data-lucide="image" class="w-3.5 h-3.5"></i>
-                  <span>Baixar Capa (3D)</span>
+                  <span>Capa 3D</span>
                 </a>
                 <a href="capa-oficial-ds3.png" target="_blank" download="capa-oficial-ds3.png" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-teal-500/10 text-[#0D9488] dark:text-[#2DD4BF] hover:bg-teal-500/20 font-bold transition-colors cursor-pointer text-[10.5px]">
                   <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                  <span>Baixar Capa Oficial (1080p)</span>
+                  <span>Capa Oficial (1080p)</span>
                 </a>
               </div>
             </div>
